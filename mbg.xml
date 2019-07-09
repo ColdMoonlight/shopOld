@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!-- 配置数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ShopTemplate" userId="root"
+			password="root">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 指定javaBean生成的位置 -->
+		<javaModelGenerator targetPackage="com.atguigu.bean"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--指定sql映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 指定dao接口生成的位置，mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.atguigu.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		
+		<!-- megalook table指定每个表的生成策略 
+		<table tableName="tb_mlback_admin" domainObjectName="MlbackAdmin"></table>
+		<table tableName="tb_mlback_category" domainObjectName="MlbackCategory"></table>
+		<table tableName="tb_mlback_product" domainObjectName="MlbackProduct"></table>
+		<table tableName="tb_mlback_product_sku" domainObjectName="MlbackProductSku"></table>
+		<table tableName="tb_mlback_coupon" domainObjectName="MlbackCoupon"></table>
+		<table tableName="tb_mlback_productImg" domainObjectName="MlbackProductImg"></table>
+		<table tableName="tb_mlback_areafreight" domainObjectName="MlbackAreafreight"></table>
+		<table tableName="tb_mlback_footnav" domainObjectName="MlbackFootNav"></table>
+		<table tableName="tb_mlback_email" domainObjectName="MlbackEmail"></table>
+		<table tableName="tb_mlback_showArea" domainObjectName="MlbackShowArea"></table>-->
+		
+		<!--
+		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>
+		<table tableName="tb_mlfront_userTemporary" domainObjectName="MlfrontUserTemporary"></table>
+		<table tableName="tb_mlfront_cart" domainObjectName="MlfrontCart"></table>
+		<table tableName="tb_mlfront_cartItem" domainObjectName="MlfrontCartItem"></table>
+		<table tableName="tb_mlfront_orderItem" domainObjectName="MlfrontOrderItem"></table>
+		<table tableName="tb_mlfront_order" domainObjectName="MlfrontOrder"></table>
+		<table tableName="tb_mlfront_address" domainObjectName="MlfrontAddress"></table>
+		<table tableName="tb_mlfront_payInfo" domainObjectName="MlfrontPayInfo"></table>
+		<table tableName="tb_mlfront_review" domainObjectName="MlfrontReview"></table>-->
+	</context>
+</generatorConfiguration>

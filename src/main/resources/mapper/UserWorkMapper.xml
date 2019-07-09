@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.UserWorkMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.UserWork">
+    <id column="userwork_id" jdbcType="INTEGER" property="userworkId" />
+    <result column="userwork_groupdisplay_id" jdbcType="INTEGER" property="userworkGroupdisplayId" />
+    <result column="userwork_udid" jdbcType="VARCHAR" property="userworkUdid" />
+    <result column="userwork_idfa" jdbcType="VARCHAR" property="userworkIdfa" />
+    <result column="userwork_createtime" jdbcType="VARCHAR" property="userworkCreatetime" />
+    <result column="userwork_uploadtime" jdbcType="VARCHAR" property="userworkUploadtime" />
+    <result column="userwork_state" jdbcType="VARCHAR" property="userworkState" />
+    <result column="userwork_price" jdbcType="VARCHAR" property="userworkPrice" />
+    <result column="userwork_spareone" jdbcType="INTEGER" property="userworkSpareone" />
+    <result column="userwork_sparetwo" jdbcType="INTEGER" property="userworkSparetwo" />
+    <result column="userwork_starttime" jdbcType="VARCHAR" property="userworkStarttime" />
+    <result column="userwork_receivetime" jdbcType="VARCHAR" property="userworkReceivetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    userwork_id, userwork_groupdisplay_id, userwork_udid, userwork_idfa, userwork_createtime, 
+    userwork_uploadtime, userwork_state, userwork_price, userwork_spareone, userwork_sparetwo, 
+    userwork_starttime, userwork_receivetime
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.UserWorkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_user_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user_work
+    where userwork_id = #{userworkId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_user_work
+    where userwork_id = #{userworkId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.UserWorkExample">
+    delete from tb_user_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.UserWork">
+    insert into tb_user_work (userwork_id, userwork_groupdisplay_id, 
+      userwork_udid, userwork_idfa, userwork_createtime, 
+      userwork_uploadtime, userwork_state, userwork_price, 
+      userwork_spareone, userwork_sparetwo, userwork_starttime, 
+      userwork_receivetime)
+    values (#{userworkId,jdbcType=INTEGER}, #{userworkGroupdisplayId,jdbcType=INTEGER}, 
+      #{userworkUdid,jdbcType=VARCHAR}, #{userworkIdfa,jdbcType=VARCHAR}, #{userworkCreatetime,jdbcType=VARCHAR}, 
+      #{userworkUploadtime,jdbcType=VARCHAR}, #{userworkState,jdbcType=VARCHAR}, #{userworkPrice,jdbcType=VARCHAR}, 
+      #{userworkSpareone,jdbcType=INTEGER}, #{userworkSparetwo,jdbcType=INTEGER}, #{userworkStarttime,jdbcType=VARCHAR}, 
+      #{userworkReceivetime,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.UserWorkExample" resultType="java.lang.Long">
+    select count(*) from tb_user_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_user_work
+    <set>
+      <if test="record.userworkId != null">
+        userwork_id = #{record.userworkId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userworkGroupdisplayId != null">
+        userwork_groupdisplay_id = #{record.userworkGroupdisplayId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userworkUdid != null">
+        userwork_udid = #{record.userworkUdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkIdfa != null">
+        userwork_idfa = #{record.userworkIdfa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkCreatetime != null">
+        userwork_createtime = #{record.userworkCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkUploadtime != null">
+        userwork_uploadtime = #{record.userworkUploadtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkState != null">
+        userwork_state = #{record.userworkState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkPrice != null">
+        userwork_price = #{record.userworkPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkSpareone != null">
+        userwork_spareone = #{record.userworkSpareone,jdbcType=INTEGER},
+      </if>
+      <if test="record.userworkSparetwo != null">
+        userwork_sparetwo = #{record.userworkSparetwo,jdbcType=INTEGER},
+      </if>
+      <if test="record.userworkStarttime != null">
+        userwork_starttime = #{record.userworkStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userworkReceivetime != null">
+        userwork_receivetime = #{record.userworkReceivetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_user_work
+    set userwork_id = #{record.userworkId,jdbcType=INTEGER},
+      userwork_groupdisplay_id = #{record.userworkGroupdisplayId,jdbcType=INTEGER},
+      userwork_udid = #{record.userworkUdid,jdbcType=VARCHAR},
+      userwork_idfa = #{record.userworkIdfa,jdbcType=VARCHAR},
+      userwork_createtime = #{record.userworkCreatetime,jdbcType=VARCHAR},
+      userwork_uploadtime = #{record.userworkUploadtime,jdbcType=VARCHAR},
+      userwork_state = #{record.userworkState,jdbcType=VARCHAR},
+      userwork_price = #{record.userworkPrice,jdbcType=VARCHAR},
+      userwork_spareone = #{record.userworkSpareone,jdbcType=INTEGER},
+      userwork_sparetwo = #{record.userworkSparetwo,jdbcType=INTEGER},
+      userwork_starttime = #{record.userworkStarttime,jdbcType=VARCHAR},
+      userwork_receivetime = #{record.userworkReceivetime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.UserWork">
+    update tb_user_work
+    set userwork_groupdisplay_id = #{userworkGroupdisplayId,jdbcType=INTEGER},
+      userwork_udid = #{userworkUdid,jdbcType=VARCHAR},
+      userwork_idfa = #{userworkIdfa,jdbcType=VARCHAR},
+      userwork_createtime = #{userworkCreatetime,jdbcType=VARCHAR},
+      userwork_uploadtime = #{userworkUploadtime,jdbcType=VARCHAR},
+      userwork_state = #{userworkState,jdbcType=VARCHAR},
+      userwork_price = #{userworkPrice,jdbcType=VARCHAR},
+      userwork_spareone = #{userworkSpareone,jdbcType=INTEGER},
+      userwork_sparetwo = #{userworkSparetwo,jdbcType=INTEGER},
+      userwork_starttime = #{userworkStarttime,jdbcType=VARCHAR},
+      userwork_receivetime = #{userworkReceivetime,jdbcType=VARCHAR}
+    where userwork_id = #{userworkId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  <!-- 账户新增zsh insert -->
+  
+  
+  <!-- 账户用户任务zsh insert -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.UserWork">
+    insert into tb_user_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userworkId != null">
+        userwork_id,
+      </if>
+      <if test="userworkGroupdisplayId != null">
+        userwork_groupdisplay_id,
+      </if>
+      <if test="userworkUdid != null">
+        userwork_udid,
+      </if>
+      <if test="userworkIdfa != null">
+        userwork_idfa,
+      </if>
+      <if test="userworkCreatetime != null">
+        userwork_createtime,
+      </if>
+      <if test="userworkUploadtime != null">
+        userwork_uploadtime,
+      </if>
+      <if test="userworkState != null">
+        userwork_state,
+      </if>
+      <if test="userworkPrice != null">
+        userwork_price,
+      </if>
+      <if test="userworkSpareone != null">
+        userwork_spareone,
+      </if>
+      <if test="userworkSparetwo != null">
+        userwork_sparetwo,
+      </if>
+      <if test="userworkStarttime != null">
+        userwork_starttime,
+      </if>
+      <if test="userworkReceivetime != null">
+        userwork_receivetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userworkId != null">
+        #{userworkId,jdbcType=INTEGER},
+      </if>
+      <if test="userworkGroupdisplayId != null">
+        #{userworkGroupdisplayId,jdbcType=INTEGER},
+      </if>
+      <if test="userworkUdid != null">
+        #{userworkUdid,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkIdfa != null">
+        #{userworkIdfa,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkCreatetime != null">
+        #{userworkCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkUploadtime != null">
+        #{userworkUploadtime,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkState != null">
+        #{userworkState,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkPrice != null">
+        #{userworkPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkSpareone != null">
+        #{userworkSpareone,jdbcType=INTEGER},
+      </if>
+      <if test="userworkSparetwo != null">
+        #{userworkSparetwo,jdbcType=INTEGER},
+      </if>
+      <if test="userworkStarttime != null">
+        #{userworkStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkReceivetime != null">
+        #{userworkReceivetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 账户查询zsh getSome -->
+  <select id="getUserWorkByConditions" parameterType="com.atguigu.bean.UserWork" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_user_work
+    <trim prefix="where" suffixOverrides="and">
+      <if test="userworkId != null">
+        userwork_id = #{userworkId,jdbcType=INTEGER} and
+      </if>
+      <if test="userworkGroupdisplayId != null">
+        userwork_groupdisplay_id = #{userworkGroupdisplayId,jdbcType=INTEGER} and
+      </if>
+      <if test="userworkUdid != null">
+        userwork_udid = #{userworkUdid,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkIdfa != null">
+        userwork_idfa = #{userworkIdfa,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkCreatetime != null">
+        userwork_createtime = #{userworkCreatetime,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkUploadtime != null">
+        userwork_uploadtime = #{userworkUploadtime,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkState != null">
+        userwork_state = #{userworkState,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkPrice != null">
+        userwork_price = #{userworkPrice,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkSpareone != null">
+        userwork_spareone = #{userworkSpareone,jdbcType=INTEGER}and
+      </if>
+      <if test="userworkSparetwo != null">
+        userwork_sparetwo = #{userworkSparetwo,jdbcType=INTEGER}and
+      </if>
+      <if test="userworkStarttime != null">
+        userwork_starttime = #{userworkStarttime,jdbcType=VARCHAR}and
+      </if>
+      <if test="userworkReceivetime != null">
+        userwork_receivetime = #{userworkReceivetime,jdbcType=VARCHAR}and
+      </if>
+    </trim>
+  </select>
+  <!-- 账户更新zsh update -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.UserWork">
+    update tb_user_work
+    <set>
+      <if test="userworkGroupdisplayId != null">
+        userwork_groupdisplay_id = #{userworkGroupdisplayId,jdbcType=INTEGER},
+      </if>
+      <if test="userworkUdid != null">
+        userwork_udid = #{userworkUdid,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkIdfa != null">
+        userwork_idfa = #{userworkIdfa,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkCreatetime != null">
+        userwork_createtime = #{userworkCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkUploadtime != null">
+        userwork_uploadtime = #{userworkUploadtime,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkState != null">
+        userwork_state = #{userworkState,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkPrice != null">
+        userwork_price = #{userworkPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkSpareone != null">
+        userwork_spareone = #{userworkSpareone,jdbcType=INTEGER},
+      </if>
+      <if test="userworkSparetwo != null">
+        userwork_sparetwo = #{userworkSparetwo,jdbcType=INTEGER},
+      </if>
+      <if test="userworkStarttime != null">
+        userwork_starttime = #{userworkStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="userworkReceivetime != null">
+        userwork_receivetime = #{userworkReceivetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userwork_id = #{userworkId,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

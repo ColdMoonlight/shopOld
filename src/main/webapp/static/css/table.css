@@ -1,0 +1,100 @@
+/* table.css by lzb */
+.table-box {
+    height: 100%;
+    padding: 20px;
+}
+
+.table-box .op {
+    width: 100%;
+    padding: 0 20px;
+    background-color: #f5f5f5;
+}
+
+.op .right-box {
+    float: right;
+}
+
+.op .pagination {
+    margin: 0;
+    vertical-align: middle;
+}
+
+.op a.btn {
+	vertical-align: middle;
+}
+
+.op i {
+	margin-right: .5em;
+}
+
+#add {
+    margin-left: 80px;
+}
+
+.op .dropdown-menu {
+    right: 0;
+    left: initial;
+}
+
+.table-content {
+    width: 100%;
+    overflow: auto;
+    padding-top: 40px;
+}
+
+.table-box .table {
+    margin-top: 10px;
+    background: #fff;
+    border: 1px solid #cdcdcd;
+}
+
+.table-box .table thead>tr>th:first-child, .table-box .table tbody>tr>th {
+    border-right: 1px solid #cdcdcd;
+}
+
+.table-box .table tbody>tr>th, .table-box .table tbody>tr>td {
+    vertical-align: middle;
+}
+
+
+/* category form*/
+.table-box form {
+	margin-top: 40px;
+}
+
+.table-box .tab-content {
+	padding: 0 20px;
+}
+
+.table-box .tab-pane {
+    padding: 30px 0;
+}
+
+/* modal */
+
+.modal-title {
+    text-align: center;
+}
+
+.modal-body .form-group .form-radio {
+    padding-top: 6px;
+    vertical-align: middle;
+}
+
+.modal-body .form-group .form-radio input+input {
+    margin-left: 12px;
+}
+
+.coupon-status {
+	display: flex;
+	align-items: center;
+}
+
+.coupon-status>input {
+	width: 60px;
+	outline: none;
+}
+
+.coupon-status>input:focus {
+	box-shadow: none;
+}

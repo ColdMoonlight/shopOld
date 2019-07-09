@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.MoneyOutMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.MoneyOut">
+    <id column="moneyout_id" jdbcType="INTEGER" property="moneyoutId" />
+    <result column="moneyout_accountid" jdbcType="INTEGER" property="moneyoutAccountid" />
+    <result column="moneyout_udid" jdbcType="VARCHAR" property="moneyoutUdid" />
+    <result column="moneyout_price_once" jdbcType="VARCHAR" property="moneyoutPriceOnce" />
+    <result column="moneyout_applybegintime" jdbcType="VARCHAR" property="moneyoutApplybegintime" />
+    <result column="moneyout_applyendtime" jdbcType="VARCHAR" property="moneyoutApplyendtime" />
+    <result column="moneyout_apply_state" jdbcType="VARCHAR" property="moneyoutApplyState" />
+    <result column="moneyout_spareone" jdbcType="INTEGER" property="moneyoutSpareone" />
+    <result column="moneyout_sparetwo" jdbcType="INTEGER" property="moneyoutSparetwo" />
+    <result column="moneyout_outing" jdbcType="VARCHAR" property="moneyoutOuting" />
+    <result column="moneyout_sparefour" jdbcType="VARCHAR" property="moneyoutSparefour" />
+    <result column="moneyout_alipayname" jdbcType="VARCHAR" property="moneyoutAlipayname" />
+    <result column="moneyout_alipaypeople" jdbcType="VARCHAR" property="moneyoutAlipaypeople" />
+    <result column="moneyout_adminName" jdbcType="VARCHAR" property="moneyoutAdminName" />
+    <result column="moneyout_operater" jdbcType="VARCHAR" property="moneyoutOperater" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    moneyout_id, moneyout_accountid, moneyout_udid, moneyout_price_once, moneyout_applybegintime, 
+    moneyout_applyendtime, moneyout_apply_state, moneyout_spareone, moneyout_sparetwo, 
+    moneyout_outing, moneyout_sparefour, moneyout_alipayname, moneyout_alipaypeople, moneyout_adminName, moneyout_operater
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.MoneyOutExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_moneyout
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_moneyout
+    where moneyout_id = #{moneyoutId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_moneyout
+    where moneyout_id = #{moneyoutId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.MoneyOutExample">
+    delete from tb_moneyout
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.MoneyOut">
+    insert into tb_moneyout (moneyout_id, moneyout_accountid, moneyout_udid, 
+      moneyout_price_once, moneyout_applybegintime, 
+      moneyout_applyendtime, moneyout_apply_state, 
+      moneyout_spareone, moneyout_sparetwo, moneyout_outing, 
+      moneyout_sparefour, moneyout_alipayname, moneyout_alipaypeople, moneyout_adminName, moneyout_operater)
+    values (#{moneyoutId,jdbcType=INTEGER}, #{moneyoutAccountid,jdbcType=INTEGER}, #{moneyoutUdid,jdbcType=VARCHAR}, 
+      #{moneyoutPriceOnce,jdbcType=VARCHAR}, #{moneyoutApplybegintime,jdbcType=VARCHAR}, 
+      #{moneyoutApplyendtime,jdbcType=VARCHAR}, #{moneyoutApplyState,jdbcType=VARCHAR}, 
+      #{moneyoutSpareone,jdbcType=INTEGER}, #{moneyoutSparetwo,jdbcType=INTEGER}, #{moneyoutOuting,jdbcType=VARCHAR}, 
+      #{moneyoutSparefour,jdbcType=VARCHAR}, #{moneyoutAlipayname,jdbcType=VARCHAR}, #{moneyoutAlipaypeople,jdbcType=VARCHAR}, #{moneyoutAdminName,jdbcType=VARCHAR}, #{moneyoutOperater,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.MoneyOutExample" resultType="java.lang.Long">
+    select count(*) from tb_moneyout
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_moneyout
+    <set>
+      <if test="record.moneyoutId != null">
+        moneyout_id = #{record.moneyoutId,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyoutAccountid != null">
+        moneyout_accountid = #{record.moneyoutAccountid,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyoutUdid != null">
+        moneyout_udid = #{record.moneyoutUdid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneyoutPriceOnce != null">
+        moneyout_price_once = #{record.moneyoutPriceOnce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneyoutApplybegintime != null">
+        moneyout_applybegintime = #{record.moneyoutApplybegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneyoutApplyendtime != null">
+        moneyout_applyendtime = #{record.moneyoutApplyendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneyoutApplyState != null">
+        moneyout_apply_state = #{record.moneyoutApplyState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneyoutSpareone != null">
+        moneyout_spareone = #{record.moneyoutSpareone,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyoutSparetwo != null">
+        moneyout_sparetwo = #{record.moneyoutSparetwo,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyoutOuting != null">
+        moneyout_outing = #{record.moneyoutOuting,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moneyoutSparefour != null">
+        moneyout_sparefour = #{record.moneyoutSparefour,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_moneyout
+    set moneyout_id = #{record.moneyoutId,jdbcType=INTEGER},
+      moneyout_accountid = #{record.moneyoutAccountid,jdbcType=INTEGER},
+      moneyout_udid = #{record.moneyoutUdid,jdbcType=VARCHAR},
+      moneyout_price_once = #{record.moneyoutPriceOnce,jdbcType=VARCHAR},
+      moneyout_applybegintime = #{record.moneyoutApplybegintime,jdbcType=VARCHAR},
+      moneyout_applyendtime = #{record.moneyoutApplyendtime,jdbcType=VARCHAR},
+      moneyout_apply_state = #{record.moneyoutApplyState,jdbcType=VARCHAR},
+      moneyout_spareone = #{record.moneyoutSpareone,jdbcType=INTEGER},
+      moneyout_sparetwo = #{record.moneyoutSparetwo,jdbcType=INTEGER},
+      moneyout_outing = #{record.moneyoutOuting,jdbcType=VARCHAR},
+      moneyout_sparefour = #{record.moneyoutSparefour,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MoneyOut">
+    update tb_moneyout
+    set moneyout_accountid = #{moneyoutAccountid,jdbcType=INTEGER},
+      moneyout_udid = #{moneyoutUdid,jdbcType=VARCHAR},
+      moneyout_price_once = #{moneyoutPriceOnce,jdbcType=VARCHAR},
+      moneyout_applybegintime = #{moneyoutApplybegintime,jdbcType=VARCHAR},
+      moneyout_applyendtime = #{moneyoutApplyendtime,jdbcType=VARCHAR},
+      moneyout_apply_state = #{moneyoutApplyState,jdbcType=VARCHAR},
+      moneyout_spareone = #{moneyoutSpareone,jdbcType=INTEGER},
+      moneyout_sparetwo = #{moneyoutSparetwo,jdbcType=INTEGER},
+      moneyout_outing = #{moneyoutOuting,jdbcType=VARCHAR},
+      moneyout_sparefour = #{moneyoutSparefour,jdbcType=VARCHAR},
+      moneyout_alipayname = #{moneyoutAlipayname,jdbcType=VARCHAR},
+      moneyout_alipaypeople = #{moneyoutAlipaypeople,jdbcType=VARCHAR},
+      moneyout_adminName = #{moneyoutAdminName,jdbcType=VARCHAR},
+      moneyout_operater = #{moneyoutOperater,jdbcType=VARCHAR}
+    where moneyout_id = #{moneyoutId,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <!-- 提现申请zsh insert -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.MoneyOut">
+    insert into tb_moneyout
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="moneyoutId != null">
+        moneyout_id,
+      </if>
+      <if test="moneyoutAccountid != null">
+        moneyout_accountid,
+      </if>
+      <if test="moneyoutUdid != null">
+        moneyout_udid,
+      </if>
+      <if test="moneyoutPriceOnce != null">
+        moneyout_price_once,
+      </if>
+      <if test="moneyoutApplybegintime != null">
+        moneyout_applybegintime,
+      </if>
+      <if test="moneyoutApplyendtime != null">
+        moneyout_applyendtime,
+      </if>
+      <if test="moneyoutApplyState != null">
+        moneyout_apply_state,
+      </if>
+      <if test="moneyoutSpareone != null">
+        moneyout_spareone,
+      </if>
+      <if test="moneyoutSparetwo != null">
+        moneyout_sparetwo,
+      </if>
+      <if test="moneyoutOuting != null">
+        moneyout_outing,
+      </if>
+      <if test="moneyoutSparefour != null">
+        moneyout_sparefour,
+      </if>
+      <if test="moneyoutAlipayname != null">
+        moneyout_alipayname,
+      </if>
+      <if test="moneyoutAlipaypeople != null">
+        moneyout_alipaypeople,
+      </if>
+      <if test="moneyoutAdminName != null">
+        moneyout_adminName,
+      </if>
+       <if test="moneyoutOperater != null">
+        moneyout_operater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="moneyoutId != null">
+        #{moneyoutId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutAccountid != null">
+        #{moneyoutAccountid,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutUdid != null">
+        #{moneyoutUdid,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutPriceOnce != null">
+        #{moneyoutPriceOnce,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutApplybegintime != null">
+        #{moneyoutApplybegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutApplyendtime != null">
+        #{moneyoutApplyendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutApplyState != null">
+        #{moneyoutApplyState,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutSpareone != null">
+        #{moneyoutSpareone,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutSparetwo != null">
+        #{moneyoutSparetwo,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutOuting != null">
+        #{moneyoutOuting,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutSparefour != null">
+        #{moneyoutSparefour,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutAlipayname != null">
+        #{moneyoutAlipayname,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutAlipaypeople != null">
+        #{moneyoutAlipaypeople,jdbcType=VARCHAR},
+      </if>     
+      <if test="moneyoutAdminName != null">
+        #{moneyoutAdminName,jdbcType=VARCHAR},
+      </if>
+       <if test="moneyoutOperater != null">
+        #{moneyoutOperater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- 提现明细查询zsh getSome -->
+  <select id="getMoneyOutByConditions" parameterType="com.atguigu.bean.MoneyOut" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_moneyout
+    <trim prefix="where" suffixOverrides="and">
+      <if test="moneyoutId != null">
+        moneyout_id = #{moneyoutId,jdbcType=INTEGER} and
+      </if>
+      <if test="moneyoutAccountid != null">
+        moneyout_accountid = #{moneyoutAccountid,jdbcType=INTEGER}and
+      </if>
+      <if test="moneyoutUdid != null">
+        moneyout_udid = #{moneyoutUdid,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutPriceOnce != null">
+        moneyout_price_once = #{moneyoutPriceOnce,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutApplybegintime != null">
+        moneyout_applybegintime = #{moneyoutApplybegintime,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutApplyendtime != null">
+        moneyout_applyendtime = #{moneyoutApplyendtime,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutApplyState != null">
+        moneyout_apply_state = #{moneyoutApplyState,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutSpareone != null">
+        moneyout_spareone = #{moneyoutSpareone,jdbcType=INTEGER}and
+      </if>
+      <if test="moneyoutSparetwo != null">
+        moneyout_sparetwo = #{moneyoutSparetwo,jdbcType=INTEGER}and
+      </if>
+      <if test="moneyoutOuting != null">
+        moneyout_outing = #{moneyoutOuting,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutSparefour != null">
+        moneyout_sparefour = #{moneyoutSparefour,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutAlipayname != null">
+        moneyout_alipayname = #{moneyoutAlipayname,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutAlipaypeople != null">
+        moneyout_alipaypeople = #{moneyoutAlipaypeople,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutAdminName != null">
+        moneyout_adminName = #{moneyoutAdminName,jdbcType=VARCHAR}and
+      </if>
+      <if test="moneyoutOperater != null">
+        moneyout_operater = #{moneyoutOperater,jdbcType=VARCHAR}and
+      </if>
+    </trim>
+    ORDER BY moneyout_applybegintime desc
+    </select>
+    <!-- 修改本条查询zsh update -->
+    <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MoneyOut">
+    update tb_moneyout
+    <set>
+      <if test="moneyoutAccountid != null">
+        moneyout_accountid = #{moneyoutAccountid,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutUdid != null">
+        moneyout_udid = #{moneyoutUdid,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutPriceOnce != null">
+        moneyout_price_once = #{moneyoutPriceOnce,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutApplybegintime != null">
+        moneyout_applybegintime = #{moneyoutApplybegintime,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutApplyendtime != null">
+        moneyout_applyendtime = #{moneyoutApplyendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutApplyState != null">
+        moneyout_apply_state = #{moneyoutApplyState,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutSpareone != null">
+        moneyout_spareone = #{moneyoutSpareone,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutSparetwo != null">
+        moneyout_sparetwo = #{moneyoutSparetwo,jdbcType=INTEGER},
+      </if>
+      <if test="moneyoutOuting != null">
+        moneyout_outing = #{moneyoutOuting,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutSparefour != null">
+        moneyout_sparefour = #{moneyoutSparefour,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutAlipayname != null">
+        moneyout_alipayname = #{moneyoutAlipayname,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutAlipaypeople != null">
+        moneyout_alipaypeople = #{moneyoutAlipaypeople,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutAdminName != null">
+        moneyout_adminName = #{moneyoutAdminName,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyoutOperater != null">
+        moneyout_operater = #{moneyoutOperater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where moneyout_id = #{moneyoutId,jdbcType=INTEGER}
+  </update>
+</mapper>

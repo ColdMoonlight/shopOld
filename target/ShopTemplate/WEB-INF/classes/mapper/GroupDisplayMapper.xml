@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.GroupDisplayMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.GroupDisplay">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_source" jdbcType="VARCHAR" property="groupSource" />
+    <result column="group_task_name" jdbcType="VARCHAR" property="groupTaskName" />
+    <result column="group_allnum" jdbcType="INTEGER" property="groupAllnum" />
+    <result column="group_nownum" jdbcType="INTEGER" property="groupNownum" />
+    <result column="group_appstoreid" jdbcType="VARCHAR" property="groupAppstoreid" />
+    <result column="group_appIdTh" jdbcType="VARCHAR" property="groupAppIdTh" />
+    <result column="group_pimageurl" jdbcType="VARCHAR" property="groupPimageurl" />
+    <result column="group_prioritys" jdbcType="INTEGER" property="groupPrioritys" />
+    <result column="group_howdownload" jdbcType="VARCHAR" property="groupHowdownload" />
+    <result column="group_downloadurl" jdbcType="VARCHAR" property="groupDownloadurl" />
+    <result column="group_createtime" jdbcType="VARCHAR" property="groupCreatetime" />
+    <result column="group_starttime" jdbcType="VARCHAR" property="groupStarttime" />
+    <result column="group_updatetime" jdbcType="VARCHAR" property="groupUpdatetime" />
+    <result column="group_people" jdbcType="VARCHAR" property="groupPeople" />
+    <result column="group_inprice" jdbcType="VARCHAR" property="groupInprice" />
+    <result column="group_outprice" jdbcType="VARCHAR" property="groupOutprice" />
+    <result column="group_reqexplain" jdbcType="VARCHAR" property="groupReqexplain" />
+    <result column="group_bundleId" jdbcType="VARCHAR" property="groupBundleId" />
+    <result column="group_state" jdbcType="INTEGER" property="groupState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    group_id, group_source, group_task_name, group_allnum, group_nownum, group_appstoreid, group_appIdTh, 
+    group_pimageurl, group_prioritys, group_howdownload, group_downloadurl, group_createtime, 
+    group_starttime, group_updatetime, group_people, group_inprice, group_outprice, group_reqexplain, group_bundleId, group_state
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.GroupDisplayExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_group_display
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_group_display
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.GroupDisplayExample">
+    delete from tb_group_display
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.GroupDisplay">
+    insert into tb_group_display (group_id, group_source, group_task_name, 
+      group_allnum, group_nownum, group_appstoreid, group_appIdTh, 
+      group_pimageurl, group_prioritys, group_howdownload, 
+      group_downloadurl, group_createtime, group_starttime, group_updatetime, 
+      group_people, group_inprice, group_outprice, group_reqexplain, group_bundleId, 
+      group_state)
+    values (#{groupId,jdbcType=INTEGER}, #{groupSource,jdbcType=VARCHAR}, #{groupTaskName,jdbcType=VARCHAR}, 
+      #{groupAllnum,jdbcType=INTEGER}, #{groupNownum,jdbcType=INTEGER}, #{groupAppstoreid,jdbcType=VARCHAR}, #{groupAppIdTh,jdbcType=VARCHAR}, 
+      #{groupPimageurl,jdbcType=VARCHAR}, #{groupPrioritys,jdbcType=INTEGER}, #{groupHowdownload,jdbcType=VARCHAR}, 
+      #{groupDownloadurl,jdbcType=VARCHAR}, #{groupCreatetime,jdbcType=VARCHAR}, #{groupStarttime,jdbcType=VARCHAR}, #{groupUpdatetime,jdbcType=VARCHAR}, 
+      #{groupPeople,jdbcType=VARCHAR}, #{groupInprice,jdbcType=VARCHAR}, #{groupOutprice,jdbcType=VARCHAR}, #{groupReqexplain,jdbcType=VARCHAR}, #{groupBundleId,jdbcType=VARCHAR}, 
+      #{groupState,jdbcType=INTEGER})
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.GroupDisplayExample" resultType="java.lang.Long">
+    select count(*) from tb_group_display
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_group_display
+    <set>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupSource != null">
+        group_source = #{record.groupSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupTaskName != null">
+        group_task_name = #{record.groupTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupAllnum != null">
+        group_allnum = #{record.groupAllnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupNownum != null">
+        group_nownum = #{record.groupNownum,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupAppstoreid != null">
+        group_appstoreid = #{record.groupAppstoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupAppIdTh != null">
+        group_appIdTh = #{record.groupAppIdTh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupPimageurl != null">
+        group_pimageurl = #{record.groupPimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupPrioritys != null">
+        group_prioritys = #{record.groupPrioritys,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupHowdownload != null">
+        group_howdownload = #{record.groupHowdownload,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupDownloadurl != null">
+        group_downloadurl = #{record.groupDownloadurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupCreatetime != null">
+        group_createtime = #{record.groupCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupStarttime != null">
+        group_starttime = #{record.groupStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupUpdatetime != null">
+        group_updatetime = #{record.groupUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupPeople != null">
+        group_people = #{record.groupPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupInprice != null">
+        group_inprice = #{record.groupInprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupOutprice != null">
+        group_outprice = #{record.groupOutprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupReqexplain != null">
+        group_reqexplain = #{record.groupReqexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupBundleId != null">
+        group_bundleId = #{record.groupBundleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupState != null">
+        group_state = #{record.groupState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_group_display
+    set group_id = #{record.groupId,jdbcType=INTEGER},
+      group_source = #{record.groupSource,jdbcType=VARCHAR},
+      group_task_name = #{record.groupTaskName,jdbcType=VARCHAR},
+      group_allnum = #{record.groupAllnum,jdbcType=INTEGER},
+      group_nownum = #{record.groupNownum,jdbcType=INTEGER},
+      group_appstoreid = #{record.groupAppstoreid,jdbcType=VARCHAR},
+      group_appIdTh = #{record.groupAppIdTh,jdbcType=VARCHAR},
+      group_pimageurl = #{record.groupPimageurl,jdbcType=VARCHAR},
+      group_prioritys = #{record.groupPrioritys,jdbcType=INTEGER},
+      group_howdownload = #{record.groupHowdownload,jdbcType=VARCHAR},
+      group_downloadurl = #{record.groupDownloadurl,jdbcType=VARCHAR},
+      group_createtime = #{record.groupCreatetime,jdbcType=VARCHAR},
+      group_starttime = #{record.groupStarttime,jdbcType=VARCHAR},
+      group_updatetime = #{record.groupUpdatetime,jdbcType=VARCHAR},
+      group_people = #{record.groupPeople,jdbcType=VARCHAR},
+      group_inprice = #{record.groupInprice,jdbcType=VARCHAR},
+      group_outprice = #{record.groupOutprice,jdbcType=VARCHAR},
+      group_reqexplain = #{record.groupReqexplain,jdbcType=VARCHAR},
+      group_bundleId = #{record.groupBundleId,jdbcType=VARCHAR},
+      group_state = #{record.groupState,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.GroupDisplay">
+    update tb_group_display
+    set group_source = #{groupSource,jdbcType=VARCHAR},
+      group_task_name = #{groupTaskName,jdbcType=VARCHAR},
+      group_allnum = #{groupAllnum,jdbcType=INTEGER},
+      group_nownum = #{groupNownum,jdbcType=INTEGER},
+      group_appstoreid = #{groupAppstoreid,jdbcType=VARCHAR},
+      group_appIdTh = #{groupAppIdTh,jdbcType=VARCHAR},
+      group_pimageurl = #{groupPimageurl,jdbcType=VARCHAR},
+      group_prioritys = #{groupPrioritys,jdbcType=INTEGER},
+      group_howdownload = #{groupHowdownload,jdbcType=VARCHAR},
+      group_downloadurl = #{groupDownloadurl,jdbcType=VARCHAR},
+      group_createtime = #{groupCreatetime,jdbcType=VARCHAR},
+      group_starttime = #{groupStarttime,jdbcType=VARCHAR},
+      group_updatetime = #{groupUpdatetime,jdbcType=VARCHAR},
+      group_people = #{groupPeople,jdbcType=VARCHAR},
+      group_inprice = #{groupInprice,jdbcType=VARCHAR},
+      group_outprice = #{groupOutprice,jdbcType=VARCHAR},
+      group_reqexplain = #{groupReqexplain,jdbcType=VARCHAR},
+      group_bundleId = #{groupBundleId,jdbcType=VARCHAR},
+      group_state = #{groupState,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <!-- 任务信息发布zsh insert -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.GroupDisplay">
+    insert into tb_group_display
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupSource != null">
+        group_source,
+      </if>
+      <if test="groupTaskName != null">
+        group_task_name,
+      </if>
+      <if test="groupAllnum != null">
+        group_allnum,
+      </if>
+      <if test="groupNownum != null">
+        group_nownum,
+      </if>
+      <if test="groupAppstoreid != null">
+        group_appstoreid,
+      </if>
+      <if test="groupAppIdTh != null">
+        group_appIdTh,
+      </if>
+      <if test="groupPimageurl != null">
+        group_pimageurl,
+      </if>
+      <if test="groupPrioritys != null">
+        group_prioritys,
+      </if>
+      <if test="groupHowdownload != null">
+        group_howdownload,
+      </if>
+      <if test="groupDownloadurl != null">
+        group_downloadurl,
+      </if>
+      <if test="groupCreatetime != null">
+        group_createtime,
+      </if>
+      <if test="groupStarttime != null">
+        group_starttime,
+      </if>
+      <if test="groupUpdatetime != null">
+        group_updatetime,
+      </if>
+      <if test="groupPeople != null">
+        group_people,
+      </if>
+      <if test="groupInprice != null">
+        group_inprice,
+      </if>
+      <if test="groupOutprice != null">
+        group_outprice,
+      </if>
+      <if test="groupReqexplain != null">
+        group_reqexplain,
+      </if>
+      <if test="groupBundleId != null">
+        group_bundleId,
+      </if>
+      <if test="groupState != null">
+        group_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupSource != null">
+        #{groupSource,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTaskName != null">
+        #{groupTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupAllnum != null">
+        #{groupAllnum,jdbcType=INTEGER},
+      </if>
+      <if test="groupNownum != null">
+        #{groupNownum,jdbcType=INTEGER},
+      </if>
+      <if test="groupAppstoreid != null">
+        #{groupAppstoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupAppIdTh != null">
+        #{groupAppIdTh,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPimageurl != null">
+        #{groupPimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPrioritys != null">
+        #{groupPrioritys,jdbcType=INTEGER},
+      </if>
+      <if test="groupHowdownload != null">
+        #{groupHowdownload,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDownloadurl != null">
+        #{groupDownloadurl,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreatetime != null">
+        #{groupCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupStarttime != null">
+        #{groupStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupUpdatetime != null">
+        #{groupUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPeople != null">
+        #{groupPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="groupInprice != null">
+        #{groupInprice,jdbcType=VARCHAR},
+      </if>
+      <if test="groupOutprice != null">
+        #{groupOutprice,jdbcType=VARCHAR},
+      </if>
+      <if test="groupReqexplain != null">
+        #{groupReqexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="groupBundleId != null">
+        #{groupBundleId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupState != null">
+        #{groupState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <!-- 任务信息修改zsh update -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.GroupDisplay">
+    update tb_group_display
+    <set>
+      <if test="groupSource != null">
+        group_source = #{groupSource,jdbcType=VARCHAR},
+      </if>
+      <if test="groupTaskName != null">
+        group_task_name = #{groupTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupAllnum != null">
+        group_allnum = #{groupAllnum,jdbcType=INTEGER},
+      </if>
+      <if test="groupNownum != null">
+        group_nownum = #{groupNownum,jdbcType=INTEGER},
+      </if>
+      <if test="groupAppstoreid != null">
+        group_appstoreid = #{groupAppstoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupAppIdTh != null">
+        group_appIdTh = #{groupAppIdTh,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPimageurl != null">
+        group_pimageurl = #{groupPimageurl,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPrioritys != null">
+        group_prioritys = #{groupPrioritys,jdbcType=INTEGER},
+      </if>
+      <if test="groupHowdownload != null">
+        group_howdownload = #{groupHowdownload,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDownloadurl != null">
+        group_downloadurl = #{groupDownloadurl,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreatetime != null">
+        group_createtime = #{groupCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupStarttime != null">
+        group_starttime = #{groupStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupUpdatetime != null">
+        group_updatetime = #{groupUpdatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPeople != null">
+        group_people = #{groupPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="groupInprice != null">
+        group_inprice = #{groupInprice,jdbcType=VARCHAR},
+      </if>
+      <if test="groupOutprice != null">
+        group_outprice = #{groupOutprice,jdbcType=VARCHAR},
+      </if>
+      <if test="groupReqexplain != null">
+        group_reqexplain = #{groupReqexplain,jdbcType=VARCHAR},
+      </if>
+      <if test="groupBundleId != null">
+        group_bundleId = #{groupBundleId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupState != null">
+        group_state = #{groupState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <!-- 任务信息修改zsh delete -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_group_display
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <!-- 任务信息查询全部zsh getAll -->
+  <select id="getGroupDisplayAll" parameterType="com.atguigu.bean.GroupDisplay" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_group_display order by group_id desc
+  </select>
+  <!-- 任务信息条件查询zsh getSome -->
+  <select id="getGroupDisplayByConditions" parameterType="com.atguigu.bean.GroupDisplay" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_group_display
+    <trim prefix="where" suffixOverrides="and">
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=INTEGER}and
+      </if>
+      <if test="groupSource != null">
+        group_source = #{groupSource,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupTaskName != null">
+        group_task_name = #{groupTaskName,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupAllnum != null">
+        group_allnum = #{groupAllnum,jdbcType=INTEGER}and
+      </if>
+      <if test="groupNownum != null">
+        group_nownum = #{groupNownum,jdbcType=INTEGER}and
+      </if>
+      <if test="groupAppstoreid != null">
+        group_appstoreid = #{groupAppstoreid,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupAppIdTh != null">
+        group_appIdTh = #{groupAppIdTh,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupPimageurl != null">
+        group_pimageurl = #{groupPimageurl,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupPrioritys != null">
+        group_prioritys = #{groupPrioritys,jdbcType=INTEGER}and
+      </if>
+      <if test="groupHowdownload != null">
+        group_howdownload = #{groupHowdownload,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupDownloadurl != null">
+        group_downloadurl = #{groupDownloadurl,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupCreatetime != null">
+        group_createtime = #{groupCreatetime,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupStarttime != null">
+        group_starttime = #{groupStarttime,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupUpdatetime != null">
+        group_updatetime = #{groupUpdatetime,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupPeople != null">
+        group_people = #{groupPeople,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupInprice != null">
+        group_inprice = #{groupInprice,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupOutprice != null">
+        group_outprice = #{groupOutprice,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupReqexplain != null">
+        group_reqexplain = #{groupReqexplain,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupBundleId != null">
+        group_bundleId = #{groupBundleId,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupState != null">
+        group_state = #{groupState,jdbcType=INTEGER}and
+      </if>
+    </trim>
+  </select>
+  
+  <!-- 任务信息条件查询,排序zsh getSome -->
+  <select id="getGroupDisplayByConditionsORderBy" parameterType="com.atguigu.bean.GroupDisplay" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_group_display 
+    <trim prefix="where" suffixOverrides="and">
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=INTEGER}and
+      </if>
+      <if test="groupSource != null">
+        group_source = #{groupSource,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupTaskName != null">
+        group_task_name = #{groupTaskName,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupAllnum != null">
+        group_allnum = #{groupAllnum,jdbcType=INTEGER}and
+      </if>
+      <if test="groupNownum != null">
+        group_nownum = #{groupNownum,jdbcType=INTEGER}and
+      </if>
+      <if test="groupAppstoreid != null">
+        group_appstoreid = #{groupAppstoreid,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupAppIdTh != null">
+        group_appIdTh = #{groupAppIdTh,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupPimageurl != null">
+        group_pimageurl = #{groupPimageurl,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupPrioritys != null">
+        group_prioritys = #{groupPrioritys,jdbcType=INTEGER}and
+      </if>
+      <if test="groupHowdownload != null">
+        group_howdownload = #{groupHowdownload,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupDownloadurl != null">
+        group_downloadurl = #{groupDownloadurl,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupCreatetime != null">
+        group_createtime = #{groupCreatetime,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupStarttime != null">
+        group_starttime = #{groupStarttime,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupUpdatetime != null">
+        group_updatetime = #{groupUpdatetime,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupPeople != null">
+        group_people = #{groupPeople,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupInprice != null">
+        group_inprice = #{groupInprice,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupOutprice != null">
+        group_outprice = #{groupOutprice,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupReqexplain != null">
+        group_reqexplain = #{groupReqexplain,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupBundleId != null">
+        group_bundleId = #{groupBundleId,jdbcType=VARCHAR}and
+      </if>
+      <if test="groupState != null">
+        group_state = #{groupState,jdbcType=INTEGER}and
+      </if>
+    </trim>
+    ORDER BY group_prioritys desc , group_createtime desc
+  </select>
+</mapper>
