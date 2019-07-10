@@ -188,7 +188,7 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 48px;
+  height: 64px;/* 头部顶高加高 */
   margin: 0 10px;
 }
 
@@ -599,7 +599,7 @@ a:focus {
 	margin-left: .25em;
   	font-size: 14px;
     text-decoration: line-through;
-    color:#333；
+    color:#333锛�
 }
 
 .product-to-cart {
@@ -1191,7 +1191,7 @@ a:focus {
 
 .cart-item>input:checked::after,
 .checkbox:checked::after {
-  content: '✓';
+  content: '鉁�';
   position: absolute;
   top: 0;
   left: 0;

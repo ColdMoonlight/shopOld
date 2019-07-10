@@ -4,3 +4,4 @@ src/test/*
 src/main/webapp/page/*
 
 .project
+/target/
