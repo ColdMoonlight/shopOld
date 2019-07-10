@@ -125,6 +125,12 @@ html,body {
 	padding-left: .5em;
 }
 
+/* button */
+.btn>.glyphicon {
+	margin-right: .5em;
+}
+
+
 /* editor */
 .editor {
 	width:100%;
