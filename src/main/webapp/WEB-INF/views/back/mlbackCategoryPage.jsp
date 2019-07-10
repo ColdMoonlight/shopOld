@@ -15,15 +15,6 @@
 <link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 <link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
 <link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
-<style>
-   #page_info_area{
-    height:74px;
-    padding-top:26px;
-  }
-  #page_nav_area{
-   height:74px;
-  }
-</style>
 </head>
 <body>
 <div class="container">
@@ -46,22 +37,18 @@
 	                    <table class="table table-striped table-hover" id="task_table">
 	                        <thead>
 	                            <tr>
-	                            	<th>id</th>
+	                            		<th>id</th>
 	                                <th>分类图</th>
-	                            	<th>类名</th>
+	                            		<th>类名</th>
 	                                <th>父节点</th>
 	                                <th>父节点名称</th>
 	                                <th>显示状态（required）</th>
-	                                <!--
-	                                <th>SEO短路径</th>  -->
 	                                <th>本类的位置顺序</th>
 	                                <th>本类路径描述</th>
 	                                <th>操作</th>
 	                            </tr>
 	                        </thead>
-	                        <tbody>
-	                        	
-	                        </tbody>
+	                        <tbody> </tbody>
 	                    </table>
 	                </div>
 	                <!-- 显示分页信息 -->

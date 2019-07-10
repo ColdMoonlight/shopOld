@@ -15,15 +15,6 @@
 <link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 <link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
 <link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
-<style>
-   #page_info_area{
-    height:74px;
-    padding-top:26px;
-  }
-  #page_nav_area{
-   height:74px;
-  }
-</style>
 </head>
 <body>
 <div class="container">
@@ -46,9 +37,9 @@
 	                    <table class="table table-striped table-hover" id="task_table">
 	                        <thead>
 	                            <tr>
-	                            	<th>id</th>
+	                            		<th>id</th>
 	                                <th>订单id</th>
-	                            	<th>支付方式</th>
+	                            		<th>支付方式</th>
 	                                <th>支付金额</th>
 	                                <th>支付状态</th>
 	                                <th>支付发起时间</th>
@@ -56,20 +47,16 @@
 	                                <th>操作</th>
 	                            </tr>
 	                        </thead>
-	                        <tbody>
-	                        	
-	                        </tbody>
+	                        <tbody> </tbody>
 	                    </table>
 	                </div>
 	                <!-- 显示分页信息 -->
-					<div class="row">
-						<!--分页文字信息  -->
-						<div class="col-md-6" id="page_info_area"></div>
-						<!-- 分页条信息 -->
-						<div class="col-md-6" id="page_nav_area">
-							
-						</div>
-					</div>
+									<div class="row">
+										<!--分页文字信息  -->
+										<div class="col-md-6 col-sm-6" id="page_info_area"></div>
+										<!-- 分页条信息 -->
+										<div class="col-md-6 col-sm-6" id="page_nav_area"></div>
+									</div>
 	            </div>
 	        </div>
 	    </div>

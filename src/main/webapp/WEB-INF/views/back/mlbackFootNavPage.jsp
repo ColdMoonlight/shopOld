@@ -19,15 +19,7 @@
 <link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/codemirror.min.css" />
 <link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/monokai.min.css">
 <link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/summernote.css">
-<style>
-   #page_info_area{
-    height:74px;
-    padding-top:26px;
-  }
-  #page_nav_area{
-   height:74px;
-  }
-  
+<style>  
   tr>td:nth-of-type(2),
   tr>th:nth-of-type(2) {
   	max-width: 160px;
@@ -70,12 +62,12 @@
 	                    </table>
 	                </div>
 	                <!-- 显示分页信息 -->
-								<div class="row">
-									<!--分页文字信息  -->
-									<div class="col-md-6" id="page_info_area"></div>
-									<!-- 分页条信息 -->
-									<div class="col-md-6" id="page_nav_area"> </div>
-								</div>
+									<div class="row">
+										<!--分页文字信息  -->
+										<div class="col-md-6 col-sm-6" id="page_info_area"></div>
+										<!-- 分页条信息 -->
+										<div class="col-md-6 col-sm-6" id="page_nav_area"> </div>
+									</div>
 	            </div>
 	        </div>
 	    </div>
