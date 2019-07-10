@@ -27,6 +27,11 @@
   #page_nav_area{
    height:74px;
   }
+  
+  tr>td:nth-of-type(2),
+  tr>th:nth-of-type(2) {
+  	max-width: 160px;
+  }
 </style>
 </head>
 <body>
@@ -50,31 +55,27 @@
 	                    <table class="table table-striped table-hover" id="task_table">
 	                        <thead>
 	                            <tr>
-	                            	<th>id</th>
+	                            	  <th>id</th>
 	                                <th>导航标题</th>
 	                                <th>导航-Lie</th>
-	                            	<th>导航-Hang</th>
-	                            	<th>是否展示</th>
-	                            	<th>是否clickIn</th>
+	                            		<th>导航-Hang</th>
+	                            		<th>是否展示</th>
+	                            		<th>是否clickIn</th>
 	                                <th>导航创建时间</th>
 	                                <th>导航更新时间</th>
 	                                <th>操作</th>
 	                            </tr>
 	                        </thead>
-	                        <tbody>
-	                        	
-	                        </tbody>
+	                        <tbody> </tbody>
 	                    </table>
 	                </div>
 	                <!-- 显示分页信息 -->
-					<div class="row">
-						<!--分页文字信息  -->
-						<div class="col-md-6" id="page_info_area"></div>
-						<!-- 分页条信息 -->
-						<div class="col-md-6" id="page_nav_area">
-							
-						</div>
-					</div>
+								<div class="row">
+									<!--分页文字信息  -->
+									<div class="col-md-6" id="page_info_area"></div>
+									<!-- 分页条信息 -->
+									<div class="col-md-6" id="page_nav_area"> </div>
+								</div>
 	            </div>
 	        </div>
 	    </div>
