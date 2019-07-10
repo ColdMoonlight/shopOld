@@ -29,7 +29,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-	 min-width: 360px;
+	 		min-width: 360px;
       transform: translate(-50%, -50%);
       -moz-transform: translate(-50%, -50%);
       -webkit-transform: translate(-50%, -50%);
@@ -56,10 +56,10 @@
 </head>
 <body>
 <div class="col-sm-4 login-box">
-	<form class="form-horizontal">
-	<!-- username -->
-		<div class="form-group">
-        	<label for="username" class="col-sm-3 control-label">用户名:</label>
+		<form class="form-horizontal">
+				<!-- username -->
+				<div class="form-group">
+        		<label for="username" class="col-sm-3 control-label">用户名:</label>
             <div class="col-sm-9">
             	<input class="form-control" id="username" name="username" placeholder="请输入用户名"></input>
                 <p class="info info-username">用户名格式不正确，请检查后重新输入！</p>
@@ -77,10 +77,11 @@
          <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
                 <button id="submit" class="btn btn-primary col-sm-3">登录</button>
-			</div>
-		</div>
-	</form>
-</div>
+						</div>
+					</div>
+			</form>
+	</div>
+	
 <script>
 	// submit
 	$(function() {
