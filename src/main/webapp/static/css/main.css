@@ -409,6 +409,7 @@ html,body {
 
 .categoryProducts {
 	height: auto;
+  min-height: 80px;
 }
 
 .ship-box .save {
