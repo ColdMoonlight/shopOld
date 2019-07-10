@@ -66,6 +66,15 @@
     padding: 30px 0;
 }
 
+@media (max-width: 1000px) {
+	td>.btn {
+		display: block;
+	}
+	td>.btn+.btn {
+		margin-top: .5em;
+	}
+}
+
 /* modal */
 
 .modal-title {
