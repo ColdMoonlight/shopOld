@@ -9,52 +9,50 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
 %>
 <!-- web路径：
-不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
-以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
+		不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
+		以/开始的相对路径，找资源，以服务器的路径为标准(http://localhost:3306)；需要加上项目名
 		http://localhost:3306/crud
  -->
 <script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="${APP_PATH }/static/js/jquery/jquery.min.js"></script>
 <link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="${APP_PATH }/static/bootstrap-notify/bootstrap-notify.min.js"></script>
 <style>
 	html,body {
-         position: relative;
-         width:100%;
-         height: 100%;
-         padding: 0;
-         margin: 0;
-         background-color: white;
-     }
+      position: relative;
+      width:100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      background-color: white;
+  }
 
-     .login-box {          
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         -moz-transform: translate(-50%, -50%);
-         -webkit-transform: translate(-50%, -50%);
-         -ms-transform: translate(-50%, -50%);
-         padding: 46px 42px 20px 0;
-         background-color: #afd1f3;
-         border-radius: 4px; 
-     }
+  .login-box {          
+      position: absolute;
+      top: 50%;
+      left: 50%;
+	 min-width: 360px;
+      transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      padding: 46px 42px 20px 0;
+      background-color: #afd1f3;
+      border-radius: 4px; 
+  }
 
-     .login-box .form-group {
-         position: relative;
-         padding-bottom: 12px;
-     }
-     .info {
-         position: absolute;
-         left: 0;
-         bottom: -30px;
-         display: none;
-         padding-left: 20px;
-         font-size: 12px;
-         color: #ff0000;
-     }
-    </style>
+  .login-box .form-group {
+      position: relative;
+      padding-bottom: 12px;
+  }
+  .info {
+      position: absolute;
+      left: 0;
+      bottom: -30px;
+      display: none;
+      padding-left: 20px;
+      font-size: 12px;
+      color: #ff0000;
+  }
+ </style>
 </head>
 <body>
 <div class="col-sm-4 login-box">
@@ -86,14 +84,6 @@
 <script>
 	// submit
 	$(function() {
-	    /* function alert(content) {
-	        var strTemplate = '<div class="alert alert-warning alert-dismissible fade in" role="alert">' +
-	            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>' +
-	            content +'</div>';
-	        
-	        $(document.body).append($(strTemplate))
-	    } */
-	
 	    function checkUsername(data) {
 	        return !(new RegExp('[A-Za-z0-9]{5,8}', 'ig')).test(data)
 	    }
@@ -151,8 +141,7 @@
 	                    }
 	                },
 	                error: function(message) {
-	                    // alert('提交数据失败')
-	                    var notify = $.notify('<strong>Warning!</strong> 提交数据失败', { allow_dismiss: false });
+	                    alert('提交数据失败');
 	                }
 	            })
 	        }
