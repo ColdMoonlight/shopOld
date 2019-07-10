@@ -3,7 +3,4 @@ target/*
 src/test/*
 src/main/webapp/page/*
 
-mbg.xml
-pom.xml
-.classpath
 .project
