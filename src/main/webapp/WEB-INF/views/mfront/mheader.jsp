@@ -3,9 +3,7 @@
 <html>
 
 <head>
-  <%
-	pageContext.setAttribute("APP_PATH", request.getContextPath());
-%>
+  <% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
   <link rel="stylesheet" href="${APP_PATH }/static/m/css/main.css">
   <script src="${APP_PATH }/static/m/js/zepto.min.js"></script>
 </head>
