@@ -12,7 +12,6 @@
 			http://localhost:3306/crud
 	-->
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/jquery/jquery.min.js"></script>
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-notify/bootstrap-notify.min.js"></script>

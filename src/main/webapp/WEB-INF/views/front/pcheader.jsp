@@ -1300,8 +1300,8 @@
 		</div>
 	</div>
 </header>
-<script src="${APP_PATH }/static/pc/external/jquery/jquery.min.js"></script>
-<script src="${APP_PATH }/static/pc/external/bootstrap/js/bootstrap.min.js"></script>
+<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
+<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script>
 var categoryActiveNum = 1;
 function renderErrorMsg(parent, msg) {
