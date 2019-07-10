@@ -13,6 +13,12 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
+	<style>
+		tr>td,
+		th>td {
+			min-width: 100px;
+		}
+	</style>
 </head>
 
 <body>
@@ -21,14 +27,14 @@
 		<div class="main-body">
 			<div class="main-box">
 				<div class="header">
-					<h2>购物车列表页面</h2>
+					<h2>购物车列表</h2>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>购物车列表页面</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>购物车列表</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">

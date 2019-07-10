@@ -17,6 +17,12 @@
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/codemirror.min.css" />
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/monokai.min.css">
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/summernote.css">
+	<style>
+		tr>td:nth-of-type(3),
+		th>td:nth-of-type(3) {
+			max-width: 100px;
+		}
+	</style>
 </head>
 
 <body>

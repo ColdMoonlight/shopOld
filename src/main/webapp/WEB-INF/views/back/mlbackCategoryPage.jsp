@@ -13,6 +13,12 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
+	<style>
+		tr>td:nth-last-of-type(2),
+		th>td:nth-last-of-type(2) {
+			max-width: 100px;
+		}
+	</style>
 </head>
 
 <body>
@@ -38,13 +44,13 @@
 								<thead>
 									<tr>
 										<th>id</th>
-										<th>分类图</th>
+										<th>图片</th>
 										<th>类名</th>
 										<th>父节点</th>
 										<th>父节点名称</th>
-										<th>显示状态（required）</th>
-										<th>本类的位置顺序</th>
-										<th>本类路径描述</th>
+										<th>状态</th>
+										<th>位置</th>
+										<th>路径描述</th>
 										<th>操作</th>
 									</tr>
 								</thead>
