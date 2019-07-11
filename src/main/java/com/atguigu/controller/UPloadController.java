@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.atguigu.bean.GroupDisplay;
+import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
@@ -39,6 +40,7 @@ import com.atguigu.bean.UserWork;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.GroupDisplayService;
+import com.atguigu.service.MlbackActShowProService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductImgService;
@@ -70,6 +72,9 @@ public class UPloadController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlbackActShowProService mlbackActShowProService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -484,6 +489,113 @@ public class UPloadController {
 		//mlbackCategory.setCategoryImgurl(returnReaUrl);
 		
 		mlbackShowAreaService.updateByPrimaryKeySelective(mlbackShowArea);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	
+	/**
+	 * 1.1	useOn	0505
+	 * uploadShowAreaPcImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadActShowProWapImg")
+	@ResponseBody
+	public Msg uploadActShowProWapImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/actShowPro/";
+		//存储图片
+		String returnUrl = UpImgUtils.keepActShowProWapFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String ActshowproIdstr = aa[1];
+		
+		int ActshowproIdsInt = Integer.parseInt(ActshowproIdstr);
+		
+		System.out.println("ActshowproIdstr:"+ActshowproIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlbackActShowPro mlbackActShowPro = new MlbackActShowPro();
+		
+		mlbackActShowPro.setActshowproId(ActshowproIdsInt);
+		//win环境下
+		mlbackActShowPro.setActshowproImgwapurl(returnReaUrlAll);
+		//linux环境下
+		//mlbackCategory.setCategoryImgurl(returnReaUrl);
+		
+		mlbackActShowProService.updateByPrimaryKeySelective(mlbackActShowPro);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	/**
+	 * 1.1	useOn	0505
+	 * uploadShowAreaPcImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadActShowProPcImg")
+	@ResponseBody
+	public Msg uploadActShowProPcImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/actShowPro/";
+		//存储图片
+		String returnUrl = UpImgUtils.keepActShowProPcFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String ActshowproIdstr = aa[1];
+		
+		int ActshowproIdsInt = Integer.parseInt(ActshowproIdstr);
+		
+		System.out.println("ActshowproIdstr:"+ActshowproIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlbackActShowPro mlbackActShowPro = new MlbackActShowPro();
+		
+		mlbackActShowPro.setActshowproId(ActshowproIdsInt);
+		//win环境下
+		mlbackActShowPro.setActshowproImgpcurl(returnReaUrlAll);
+		
+		mlbackActShowProService.updateByPrimaryKeySelective(mlbackActShowPro);
 		
 		System.out.println("returnReaUrl:"+returnReaUrl);
 		

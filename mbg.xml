@@ -47,7 +47,8 @@
 		<table tableName="tb_mlback_areafreight" domainObjectName="MlbackAreafreight"></table>
 		<table tableName="tb_mlback_footnav" domainObjectName="MlbackFootNav"></table>
 		<table tableName="tb_mlback_email" domainObjectName="MlbackEmail"></table>
-		<table tableName="tb_mlback_showArea" domainObjectName="MlbackShowArea"></table>-->
+		<table tableName="tb_mlback_showArea" domainObjectName="MlbackShowArea"></table>
+		<table tableName="tb_mlback_actShowPro" domainObjectName="MlbackActShowPro"></table>-->
 		
 		<!--
 		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>

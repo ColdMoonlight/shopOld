@@ -41,7 +41,9 @@
       </a>
     </div>
     <!-- product intro -->
-    <div class="banner">
+    <div id="showPro">
+    </div>
+    <%-- <div class="banner">
       <a href="#" alt="">
         <img src="${APP_PATH }/static/m/img/firstpage/3.jpg" alt="">
       </a>
@@ -63,7 +65,7 @@
       <a href="#" alt="">
         <img src="${APP_PATH }/static/m/img/firstpage/6.jpg" alt="">
       </a>
-    </div>
+    </div> --%>
     <div class="product-banner1 banner"></div>
     <div class="product-list1 product-list"> </div>
     <div class="product-banner2 banner"></div>
@@ -77,6 +79,34 @@
   <jsp:include page="mfooter.jsp"></jsp:include>
 
   <script>
+  
+  
+  function rednerProductActShowPro(parent, data) {
+      var html = '';
+      for (var i = 0; i < data.length; i += 1) {
+        html += '<div class="banner">' +
+          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
+          '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+          '</a>' +
+          '</div>';
+      }
+      parent.html(html);
+    }
+    var productFirstList = $('#showPro');
+    $.ajax({
+      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
+      data: "actshowproActnum=" + 1,
+      type: "POST",
+      success: function (data) {
+        console.log("mlbackActShowProList");
+        if (data.code === 100) {
+          console.log(data.extend.mlbackActShowProList);
+          rednerProductActShowPro(productFirstList, data.extend.mlbackActShowProList)
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      }
+    });
     /*------------------三块产品+所属分类banner---------
      * 查回来的结果产品list，如下展示（就咱们现在写好的样子）
      */
@@ -148,20 +178,6 @@
     /*---------------block2 banner2--------*/
 
     $.ajax({
-      /* url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
-      data: "categoryId=" + 57,
-      type: "POST",
-      success: function (data) {
-        if (data.code === 100) {
-          // console.log(data.extend.mlbackCategoryOne);
-          var category = data.extend.mlbackCategoryOne;
-          // categoryName categoryImgurl
-          $('.product-banner2.banner').html('<img src="' + category.categoryImgurl +
-            '" alt=" + category.categoryName + ">');
-        } else {
-          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
-        }
-      } */
       url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
       data: "showareaNumth=" + 2,
       type: "POST",

@@ -52,5 +52,7 @@ public interface MlbackProductMapper {
     List<MlbackProduct> selectMlbackProductByLable(MlbackProduct example);
     
     List<MlbackProduct> selectMlbackProductByProductCategoryid (MlbackProduct example);
+
+	List<MlbackProduct> selectMlbackProductByStatus(MlbackProduct mlbackProduct);
     
 }

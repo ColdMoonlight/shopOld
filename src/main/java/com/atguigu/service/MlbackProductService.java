@@ -100,7 +100,6 @@ public class MlbackProductService {
 	}
 	
 	
-	
 	/**
 	 * @author Shinelon
 	 * @param 
@@ -116,6 +115,12 @@ public class MlbackProductService {
 	public List<MlbackProduct> selectMlbackProductByProductCategoryid(MlbackProduct mlbackProduct) {
 		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByProductCategoryid(mlbackProduct);
+		return mlbackProductList;
+	}
+	
+	public List<MlbackProduct> selectMlbackProductByStatus(MlbackProduct mlbackProduct) {
+		// TODO Auto-generated method stub
+		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByStatus(mlbackProduct);
 		return mlbackProductList;
 	}
 	

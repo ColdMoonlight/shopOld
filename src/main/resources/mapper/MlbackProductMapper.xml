@@ -638,4 +638,12 @@
     </if>
      order by product_haveSaleNum desc
   </select>
+  
+  <!-- select	ByStatus使用中 -->
+  <select id="selectMlbackProductByStatus" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
+    select 
+	product_id, product_name,  product_status
+ 	from tb_mlback_product
+    where product_status = #{productStatus,jdbcType=INTEGER} order by product_id desc
+  </select>
 </mapper>

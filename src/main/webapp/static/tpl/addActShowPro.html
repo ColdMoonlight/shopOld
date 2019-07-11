@@ -1,0 +1,89 @@
+<div class="op">
+    <a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>产品分类列表</a>
+    <button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
+</div>
+<form class="form-horizontal">
+	<ul id="categoryTab" class="nav nav-tabs">
+		<li class="active"><a href="#general" data-toggle="tab">基本</a></li>
+		<li><a href="#pic" data-toggle="tab">图片</a></li>
+	</ul>
+	<div id="categoryTabContent" class="tab-content">
+		<input type="text" style="display: none;" placeholder="actshowproId" name="actshowproId">
+		<div class="tab-pane fade in active" id="general">
+		 	<div class="form-group">
+	            <label for="actshowproName" class="col-sm-2 control-label">活动品name:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="actshowproName" name="actshowproName">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="actshowproActnum" class="col-sm-2 control-label">活动组名:</label>
+	             <div class="col-sm-10">
+			  	    <select name="actshowproActnum" class="form-control">
+					  <option value ="1" selected="selected">首页主推</option>
+					  <option value ="2">第2活动</option>
+					  <option value ="3">第3活动</option>
+					  <option value ="4">第4活动</option>
+					  <option value ="5">第5活动</option>
+					  <option value ="6">第6活动</option>
+					  <option value ="7">第7活动</option>
+					  <option value ="8">第8活动</option>
+					  <option value ="9">第9活动</option>
+					  <option value ="10">第10活动</option>
+					</select>
+	             </div>
+	        </div>
+	        
+	        <div class="form-group">
+	             <label for="actshowproProid" class="col-sm-2 control-label">产品名字:</label>
+	             <div class="col-sm-10">
+	                 <select id="actshowproProid" name="actshowproProid" class="form-control"></select>
+	             </div>
+	         </div>
+	         <!-- <div class="form-group">
+	            <label for="actshowproProname" class="col-sm-2 control-label">产品名字:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="actshowproProname" name="actshowproProname">
+	            </div>
+	        </div> -->
+	         <div class="form-group">
+	             <label for="actshowproStatus" class="col-sm-2 control-label">上架状态:</label>
+	             <div class="col-sm-10">
+	                 <select name="actshowproStatus" class="form-control">
+					  <option value ="0" selected="selected">不上架</option>
+					  <option value ="1">已上架</option>
+					</select>
+	             </div>
+	         </div>
+	         <div class="form-group">
+	             <label for="actshowproOrderth" class="col-sm-2 control-label">活动品同级别编号:</label>
+	             <div class="col-sm-10">
+			  	    <select name="actshowproOrderth" class="form-control">
+					  <option value ="1" selected="selected">1</option>
+					  <option value ="2">2</option>
+					  <option value ="3">3</option>
+					  <option value ="4">4</option>
+					  <option value ="5">5</option>
+					  <option value ="6">6</option>
+					  <option value ="7">7</option>
+					  <option value ="8">8</option>
+					  <option value ="9">9</option>
+					  <option value ="10">10</option>
+					</select>
+	             </div>
+	         </div>
+		</div>
+		<div class="tab-pane fade" id="pic">
+			<h2>分类图片：</h2>
+		    <div>
+		    	 <div class="upload-img-btn img">
+		            <input class="uploadImg" type="file" name="file" id="file1">
+		        </div>
+		        <div class="upload-img-btn img2">
+		            <input class="uploadImg" type="file" name="file" id="file2">
+		        </div>
+		    </div>
+		</div>
+		
+	</div>             
+</form>

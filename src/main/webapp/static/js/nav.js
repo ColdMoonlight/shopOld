@@ -38,7 +38,13 @@ var aside_data = [
 				url: '/ShopTemplate/MlbackShowArea/toMlbackShowAreaPage',
 				name:'展区列表',
 				icon: "glyphicon-stats"
+			},
+			{
+				url: '/ShopTemplate/MlbackActShowPro/toMlbackActShowProPage',
+				name:'活动品列表',
+				icon: "glyphicon-stats"
 			}
+			
 		]
 	},
 	{

@@ -527,6 +527,28 @@ public class MlbackProductController {
 		}
 	} 
 	
+	/**
+	 * 9.0	UseNow	0527
+	 * 通过，类id,productColor,查询满足条件的全部产品
+	 * @param productCategoryid,productColor
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackProductAllList",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getMlbackProductAllList(HttpServletResponse rep,HttpServletRequest res){
+		
+		MlbackProduct mlbackProductReq = new MlbackProduct();
+		
+		mlbackProductReq.setProductStatus(1);//'已上架' : '未上架'
+		//接受信息
+		List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
+		
+		mlbackProductResList =mlbackProductService.selectMlbackProductByStatus(mlbackProductReq);
+		return Msg.success().add("resMsg", "查看上架状态的下的全部产品")
+					.add("mlbackProductResList", mlbackProductResList);
+		
+	} 
+	
 	
 	/**7.0
 	 * @author Shinelon
