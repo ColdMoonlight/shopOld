@@ -81,5 +81,16 @@ public class MlbackShowAreaService {
 		List<MlbackShowArea>  mlbackShowAreaList = mlbackShowAreaMapper.selectMlbackShowAreaById(mlbackShowArea);
 		return mlbackShowAreaList;
 	}
+	/**5
+	 * @author Shinelon
+	 * @param 
+	 * @exception 查看全部用户信息
+	 * 
+	 * */
+
+	public List<MlbackShowArea> selectMlbackShowAreaByNumthAndStatus(MlbackShowArea mlbackShowArea) {
+		List<MlbackShowArea>  mlbackShowAreaList = mlbackShowAreaMapper.selectMlbackShowAreaByNumthAndStatus(mlbackShowArea);
+		return mlbackShowAreaList;
+	}
 	
 }

@@ -33,5 +33,7 @@ public interface MlbackShowAreaMapper {
     List<MlbackShowArea> selectMlbackShowAreaById(MlbackShowArea example);
     //查询全部登陆用户00
 	List<MlbackShowArea> selectMlbackShowAreaGetAll();
+
+	List<MlbackShowArea> selectMlbackShowAreaByNumthAndStatus(MlbackShowArea mlbackShowArea);
     
 }

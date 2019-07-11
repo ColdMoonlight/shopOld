@@ -411,8 +411,8 @@ public class MlbackProductController {
 		//mlbackProductReq.setProductStatus(productStatus);
 		List<MlbackProduct> mlbackProductResList  = new ArrayList<MlbackProduct>();
 		List<MlbackProduct> mlbackProductResLimitList =mlbackProductService.selectMlbackProductByLable(mlbackProductReq);
-		if(mlbackProductResLimitList.size()>7){
-			for(int i=0;i<8;i++){
+		if(mlbackProductResLimitList.size()>19){
+			for(int i=0;i<20;i++){
 				mlbackProductResList.add(mlbackProductResLimitList.get(i));
 			}
 		}else{

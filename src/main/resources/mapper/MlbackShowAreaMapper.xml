@@ -269,6 +269,11 @@
     from tb_mlback_showarea 
     where showArea_id = #{showareaId,jdbcType=INTEGER}
   </select>
+  <select id="selectMlbackShowAreaByNumthAndStatus" parameterType="com.atguigu.bean.MlbackShowArea" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_showarea 
+    where showArea_numth = #{showareaNumth,jdbcType=INTEGER} and showArea_status = #{showareaStatus,jdbcType=INTEGER}
+  </select>
   <!-- selectAll使用中 -->
   <select id="selectMlbackShowAreaGetAll" parameterType="com.atguigu.bean.MlbackShowArea" resultMap="BaseResultMap">
     select *

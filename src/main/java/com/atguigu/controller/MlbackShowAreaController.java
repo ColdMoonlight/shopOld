@@ -132,4 +132,30 @@ public class MlbackShowAreaController {
 					.add("mlbackShowAreaOne", mlbackShowAreaOne);
 	}
 	
+	/**
+	 * 6.0	useOn	0505
+	 * 查看单条详情
+	 * @param getOneMlbackShowAreaDetail
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackShowAreaOne",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackShowAreaOne(@RequestParam(value = "showareaNumth") Integer showareaNumth){
+		
+		//接受showareaId
+		MlbackShowArea mlbackShowAreaReq = new MlbackShowArea();
+		mlbackShowAreaReq.setShowareaNumth(showareaNumth);
+		mlbackShowAreaReq.setShowareaStatus(1);//使用中
+		//查询本条
+		List<MlbackShowArea> mlbackShowAreaResList =mlbackShowAreaService.selectMlbackShowAreaByNumthAndStatus(mlbackShowAreaReq);
+		MlbackShowArea mlbackShowAreaOne = new MlbackShowArea();
+		if(mlbackShowAreaResList.size()>0){
+			mlbackShowAreaOne =mlbackShowAreaResList.get(0);
+		}else{
+			mlbackShowAreaOne = null;
+		}
+		return Msg.success().add("resMsg", "查看单条mlbackShowAreaOne的详情细节完毕")
+					.add("mlbackShowAreaOne", mlbackShowAreaOne);
+	}
+	
 }

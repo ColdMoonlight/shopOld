@@ -70,6 +70,8 @@
     <div class="product-list2 product-list"> </div>
     <div class="product-banner3 banner"></div>
     <div class="product-list3 product-list"> </div>
+    <div class="product-banner4 banner"></div>
+    <div class="product-list4 product-list"> </div>
   </div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
@@ -82,16 +84,16 @@
     /*---------------block1 banner1--------*/
 
     $.ajax({
-      url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
-      data: "categoryId=" + 57,
+      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
+      data: "showareaNumth=" + 1,
       type: "POST",
       success: function (data) {
         if (data.code === 100) {
           // console.log(data.extend.mlbackCategoryOne);
-          var category = data.extend.mlbackCategoryOne;
+          var showArea = data.extend.mlbackShowAreaOne;
           // categoryName categoryImgurl
-          $('.product-banner1.banner').html('<img src="' + category.categoryImgurl +
-            '" alt=" + category.categoryName + ">');
+          $('.product-banner1.banner').html('<img src="' + showArea.showareaImgurl +
+            '" alt=" + showArea.showareaName + ">');
         } else {
           renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
         }
@@ -146,7 +148,7 @@
     /*---------------block2 banner2--------*/
 
     $.ajax({
-      url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
+      /* url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
       data: "categoryId=" + 57,
       type: "POST",
       success: function (data) {
@@ -156,6 +158,20 @@
           // categoryName categoryImgurl
           $('.product-banner2.banner').html('<img src="' + category.categoryImgurl +
             '" alt=" + category.categoryName + ">');
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      } */
+      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
+      data: "showareaNumth=" + 2,
+      type: "POST",
+      success: function (data) {
+        if (data.code === 100) {
+          // console.log(data.extend.mlbackCategoryOne);
+          var showArea = data.extend.mlbackShowAreaOne;
+          // categoryName categoryImgurl
+          $('.product-banner2.banner').html('<img src="' + showArea.showareaImgurl +
+            '" alt=" + showArea.showareaName + ">');
         } else {
           renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
         }
@@ -210,7 +226,7 @@
 
     /*---------------block3 banner3--------*/
     $.ajax({
-      url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
+      /* url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
       data: "categoryId=" + 57,
       type: "POST",
       success: function (data) {
@@ -220,6 +236,20 @@
           // categoryName categoryImgurl
           $('.product-banner3.banner').html('<img src="' + category.categoryImgurl +
             '" alt=" + category.categoryName + ">');
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      } */
+      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
+      data: "showareaNumth=" + 3,
+      type: "POST",
+      success: function (data) {
+        if (data.code === 100) {
+          // console.log(data.extend.mlbackCategoryOne);
+          var showArea = data.extend.mlbackShowAreaOne;
+          // categoryName categoryImgurl
+          $('.product-banner3.banner').html('<img src="' + showArea.showareaImgurl +
+            '" alt=" + showArea.showareaName + ">');
         } else {
           renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
         }
@@ -272,22 +302,71 @@
         }
       }
     });
+    /*---------------block4 banner4--------*/
+    $.ajax({
+      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
+      data: "showareaNumth=" + 4,
+      type: "POST",
+      success: function (data) {
+        if (data.code === 100) {
+          // console.log(data.extend.mlbackCategoryOne);
+          var showArea = data.extend.mlbackShowAreaOne;
+          // categoryName categoryImgurl
+          $('.product-banner4.banner').html('<img src="' + showArea.showareaImgurl +
+            '" alt=" + showArea.showareaName + ">');
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      }
+    });
 
+    /*------block4 rednerProduct4----------*/
+    function rednerProduct4(parent, data) {
+      var html = '';
+      for (var i = 0; i < data.length; i += 1) {
+        html += '<div class="product-item">' +
+          '<div class="product-img">' +
+          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' +
+          '<img src="' + data[i].productMainimgurl + '" alt="">' +
+          '</a>' +
+          '</div>' +
+          '<div class="product-desc">' +
+          '<div class="product-title">' + data[i].productName + '</div>' +
+          '<div class="product-type"></div>' +
+          '<div class="product-data">' +
+          '<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+          '<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+          ' Review(s)</span>' +
+          '</div>' +
+          '<div class="product-price">' +
+          '<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+            .productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+          '<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+          '</span>' +
+          '<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+      }
 
-    //首页三块推销
-    //1.0
-
-    /* 获取banner横幅(该category的图片)，传一个死值
-
-    MlbackCategory/getOneMlbackCategoryDetail
-
-    categoryId
-
-    获取该category下的所有产品
-
-    /MlbackProduct/getMlbackProductByparentCategoryIdList
-
-    data:"productCategoryid="+41 */
+      parent.html(html);
+    }
+    var productList4 = $('.product-list4');
+    $.ajax({
+      url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
+      data: "productLable=" + 4,
+      type: "POST",
+      success: function (data) {
+        // console.log(productList)
+        if (data.code === 100) {
+          console.log("productList4");
+          rednerProduct4(productList4, data.extend.mlbackProductResList)
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      }
+    });
+    
   </script>
 </body>
 
