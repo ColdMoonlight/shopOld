@@ -18,9 +18,11 @@
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
-      <div class="logo">
-        <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
-      </div>
+      <a href="${APP_PATH}/index/isMobileOrPc">
+	      <div class="logo">
+	        <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
+	      </div>
+      </a>
       <span class="icon cart"><span class="num hide">0</span></span>
       <span class="icon search"></span>
     </div>

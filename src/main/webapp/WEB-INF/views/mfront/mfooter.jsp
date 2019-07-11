@@ -3,7 +3,7 @@
 <html>
 
 <head>
-  <% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>%>
+  <% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 </head>
 
 <body>
