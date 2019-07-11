@@ -31,41 +31,18 @@
     <!-- sale -->
     <div class="banner">
       <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/1.jpg" alt="">
+        <img src="${APP_PATH }/static/m/img/firstpage/first1.jpg" alt="">
       </a>
     </div>
     <!-- count date -->
     <div class="banner">
       <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/2.jpg" alt="">
+        <img src="${APP_PATH }/static/m/img/firstpage/first2.jpg" alt="">
       </a>
     </div>
     <!-- product intro -->
-    <div id="showPro">
-    </div>
-    <%-- <div class="banner">
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/3.jpg" alt="">
-      </a>
-    </div>
-    <!-- product intro -->
-    <div class="banner">
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/4.jpg" alt="">
-      </a>
-    </div>
-    <!-- product intro  -->
-    <div class="banner">
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/5.jpg" alt="">
-      </a>
-    </div>
-    <!-- product intro  -->
-    <div class="banner">
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/6.jpg" alt="">
-      </a>
-    </div> --%>
+    <div id="showPro"></div>
+    <!-- product show -->
     <div class="product-banner1 banner"></div>
     <div class="product-list1 product-list"> </div>
     <div class="product-banner2 banner"></div>
@@ -79,8 +56,6 @@
   <jsp:include page="mfooter.jsp"></jsp:include>
 
   <script>
-  
-  
   function rednerProductActShowPro(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
