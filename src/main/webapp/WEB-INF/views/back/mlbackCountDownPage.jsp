@@ -14,6 +14,8 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
+	<!-- 时间插件 -->
+    
 </head>
 
 <body>
@@ -62,8 +64,8 @@
 		</div>
 	</div>
 
-	<script src="${APP_PATH }/static/js/moment.min.js"></script>
-	<script src="${APP_PATH }/static/js/daterangepicker.js"></script>
+	<%-- <script src="${APP_PATH }/static/js/moment.min.js"></script>
+	<script src="${APP_PATH }/static/js/daterangepicker.js"></script> --%>
 	<script src="${APP_PATH }/static/js/sidenav.js"></script>
 	<script src="${APP_PATH }/static/js/nav.js"></script>
 	<script type="text/javascript">
@@ -279,5 +281,4 @@
 		});
 	</script>
 </body>
-
 </html>

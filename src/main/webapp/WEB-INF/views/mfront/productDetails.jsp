@@ -343,9 +343,106 @@
 				});
 			}
 
-			$('.buy-now').on('click', function () {
+			/* $('.buy-now').on('click', function () {
 				window.location.href = '${APP_PATH}/MlbackCart/toCartList';
-			})
+			}) */
+			$('.buy-now').on('click', function() {
+				// console.log(dataPrice)
+				var skuData = getSkuData($('.product-d-length'));
+				var reqData = {};
+				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductName = dataPrice.productName;
+				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
+				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
+				reqData.cartitemProductActoff = dataPrice.productActoffid;
+				reqData.cartitemProductskuIdstr = skuData.id.join(',');
+				reqData.cartitemProductskuIdnamestr = skuData.idName.join(',');
+				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
+				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
+				reqData.cartitemProductNumber = productNum.val();
+				// console.log(data);
+				
+				// name, id, price
+				function getSkuData(els) {
+					var data = {
+							itemName: [],
+							id:[],
+							idName: [],
+							price: []
+					};
+					els.each(function(i, item) {
+						data.itemName.push($(item).find('.price-item.active').text());
+						data.id.push($(item).data('id'));
+						data.idName.push($(item).data('name'));
+						data.price.push($(item).find('.price-item.active').data('price'));
+					});
+					
+					return data;
+				}
+				
+				var flag = false
+				
+				// console.log(skuCheckData);
+				flag = checkSku(skuCheckData);
+				// console.log(flag)
+				if (flag) generateOrderNow(reqData);
+				
+			});
+			
+			function generateOrderNow(reqData) {
+				// console.log(reqData)
+				$.ajax({
+					  url: '${APP_PATH}/MlbackCart/toBuyNow',
+					  data: JSON.stringify(reqData),
+					  type:"POST",
+					  dataType: 'JSON',
+					  contentType: 'application/json',
+					  success: function(data) {
+						var resData = JSON.parse(data);
+					    if(resData.code === 100) {
+					    	// console.log(resData)
+					    	// cartText.text(parseInt(cartText.text()) + 1);
+					    	window.location.href='${APP_PATH}/MlbackCart/toCheakOut';
+					    }
+					  },
+					  error: function(data) {
+						  cartText.text(num);
+					  }
+				});
+			}
+			
+			
+			
+			/*---------------countDownAreaProDetail--------*/
+		    function rednerCountDownAreaOne(parent, data) {
+		        var html = '';
+		            html += '<div class="countDownAreaBanner">' +
+		            		'<span>'+data.countdownTitle+'</span></br>'+
+		            		'<span>'+data.countdownStarttime+'</span></br>'+
+		            		'<span>'+data.countdownEndtime+'</span></br>'+
+		            		'<span>'+data.countdownDescription+'</span></br>'+
+		            		'</div>';
+		        parent.html(html);
+		      }
+		      var countDownAreaOne = $('#countDownAreaProDetail');
+		      $.ajax({
+		        url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
+		        data: "countdownId=" + 1,
+		        type: "POST",
+		        success: function (data) {
+		          console.log("mlbackCountDownOne");
+		          if (data.code === 100) {
+		            console.log(data.extend.mlbackCountDownOne);
+		            if(data.extend.mlbackCountDownOne==null){
+		            	console.log("mlbackCountDownOne为null");
+		            }else{
+		            	rednerCountDownAreaOne(countDownAreaOne, data.extend.mlbackCountDownOne)
+		            }
+		          } else {
+		            renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+		          }
+		        }
+		      });
 		});
 	</script>
 </body>

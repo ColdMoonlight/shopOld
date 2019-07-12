@@ -80,13 +80,13 @@ public class MlbackCountDownController {
 		String nowTime = DateUtil.strTime14s();
 		mlbackCountDown.setCountdownMotifytime(nowTime);
 		if(countdownId==null){
-			//无id，insert
+			//无id,insert
 			mlbackCountDown.setCountdownCreatetime(nowTime);
 			int intResult = mlbackCountDownService.insertSelective(mlbackCountDown);
 			System.out.println(intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
-			//有id，update
+			//有id,update
 			int intResult = mlbackCountDownService.updateByPrimaryKeySelective(mlbackCountDown);
 			System.out.println(intResult);
 			return Msg.success().add("resMsg", "更新成功");

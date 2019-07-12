@@ -30,12 +30,6 @@
 	<div class="main">
 		<div class="condition select">
 			<select class="select-item select-category" data-type="category"></select>
-			<select class="select-item select-color" data-type="color">
-				<option value="">all color</option>
-				<option value="white">white</option>
-				<option value="blue">blue</option>
-				<option value="black">black</option>
-			</select>
 		</div>
 		<div class="product-list"></div>
 	</div>
@@ -49,8 +43,7 @@
 
 		//default codition
 		getProductList({
-			"productCategoryid": cidA[1],
-			"productColor": null
+			"productCategoryid": cidA[1]
 		});
 
 		/* category condition */
@@ -66,8 +59,7 @@
 							$(item).on('change', function () {
 								//console.log($('.select-category').val(), $('.select-color').val());
 								getProductList({
-									"productCategoryid": $('.select-category').val() || cidA[1],
-									"productColor": $('.select-color').val()
+									"productCategoryid": $('.select-category').val() || cidA[1]
 								});
 							})
 
@@ -82,7 +74,7 @@
 		/* product list for category */
 		function getProductList(data) {
 			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByproductColorAndCategoryIdList',
+				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
 				data: JSON.stringify(data),
 				dataType: "JSON",
 				contentType: 'application/json',

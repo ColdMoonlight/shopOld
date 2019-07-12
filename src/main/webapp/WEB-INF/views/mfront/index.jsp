@@ -40,6 +40,9 @@
         <img src="${APP_PATH }/static/m/img/firstpage/first2.jpg" alt="">
       </a>
     </div>
+    <!-- countDownArea date -->
+    <div id="countDownArea">
+    </div>
     <!-- product intro -->
     <div id="showPro"></div>
     <!-- product show -->
@@ -82,12 +85,40 @@
         }
       }
     });
-    /*------------------三块产品+所属分类banner---------
-     * 查回来的结果产品list，如下展示（就咱们现在写好的样子）
-     */
-
+    
+    /*---------------countDownArea--------*/
+    function rednerCountDownAreaOne(parent, data) {
+        var html = '';
+//        for (var i = 0; i < data.length; i += 1) {
+          html += '<div class="countDownAreaBanner">' +
+            '<span>'+data.countdownTitle+'</span></br>'+
+            '<span>'+data.countdownStarttime+'</span></br>'+
+            '<span>'+data.countdownEndtime+'</span></br>'+
+            '<span>'+data.countdownDescription+'</span></br>'+
+            '</div>';
+//        }
+        parent.html(html);
+      }
+      var countDownAreaOne = $('#countDownArea');
+      $.ajax({
+        url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
+        data: "countdownId=" + 1,
+        type: "POST",
+        success: function (data) {
+          console.log("mlbackCountDownOne");
+          if (data.code === 100) {
+            console.log(data.extend.mlbackCountDownOne);
+            if(data.extend.mlbackCountDownOne==null){
+            	console.log("mlbackCountDownOne为null");
+            }else{
+            	rednerCountDownAreaOne(countDownAreaOne, data.extend.mlbackCountDownOne)
+            }
+          } else {
+            renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+          }
+        }
+      });
     /*---------------block1 banner1--------*/
-
     $.ajax({
       url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
       data: "showareaNumth=" + 1,
@@ -358,6 +389,9 @@
       }
     });
     
+    
+    
+    countDownArea
   </script>
 </body>
 
