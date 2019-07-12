@@ -103,7 +103,7 @@
 	      format: 'd : h : m : S',
 	      themeClass: 'dark',
 	      interval: 1000,
-	      state: true,
+	      state: false,
 	    });
     }
     var countDownArea = $('#countdown-area');

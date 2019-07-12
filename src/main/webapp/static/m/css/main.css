@@ -1911,7 +1911,7 @@ a:focus {
   position: absolute;
   top: -13px;
   left: 0;
-  display: none;
+  display: inline-block;
   padding: 6px 12px;
   font: 14px/14px '';
   color: #fff;
