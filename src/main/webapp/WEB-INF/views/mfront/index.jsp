@@ -41,8 +41,7 @@
       </a>
     </div>
     <!-- countDownArea date -->
-    <div id="countDownArea">
-    </div>
+    <div id="countdown-area"> </div>
     <!-- product intro -->
     <div id="showPro"></div>
     <!-- product show -->
@@ -57,9 +56,9 @@
   </div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
-
+  <script src="${APP_PATH }/static/js/countdown.min.js"></script>
   <script>
-  function rednerProductActShowPro(parent, data) {
+    function rednerProductActShowPro(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="banner">' +
@@ -76,7 +75,7 @@
       data: "actshowproActnum=" + 1,
       type: "POST",
       success: function (data) {
-        console.log("mlbackActShowProList");
+        // console.log("mlbackActShowProList");
         if (data.code === 100) {
           console.log(data.extend.mlbackActShowProList);
           rednerProductActShowPro(productFirstList, data.extend.mlbackActShowProList)
@@ -88,36 +87,44 @@
     
     /*---------------countDownArea--------*/
     function rednerCountDownAreaOne(parent, data) {
-        var html = '';
-//        for (var i = 0; i < data.length; i += 1) {
-          html += '<div class="countDownAreaBanner">' +
-            '<span>'+data.countdownTitle+'</span></br>'+
-            '<span>'+data.countdownStarttime+'</span></br>'+
-            '<span>'+data.countdownEndtime+'</span></br>'+
-            '<span>'+data.countdownDescription+'</span></br>'+
-            '</div>';
-//        }
-        parent.html(html);
-      }
-      var countDownAreaOne = $('#countDownArea');
-      $.ajax({
-        url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
-        data: "countdownId=" + 1,
-        type: "POST",
-        success: function (data) {
-          console.log("mlbackCountDownOne");
-          if (data.code === 100) {
-            console.log(data.extend.mlbackCountDownOne);
-            if(data.extend.mlbackCountDownOne==null){
-            	console.log("mlbackCountDownOne为null");
-            }else{
-            	rednerCountDownAreaOne(countDownAreaOne, data.extend.mlbackCountDownOne)
-            }
-          } else {
-            renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+      var html = '';
+      html += '<div class="title">'+data.countdownTitle+'</div>'+
+        '<div class="body"></div>'+
+        '<div class="desc">'+ data.countdownDescription +'</div>';
+
+      parent.html(html);
+      var countdown = new countDown('#countdown-area .body', {
+	      start: {
+	        time: data.countdownStarttime
+	      },
+	      end: {
+	        time: data.countdownEndtime
+	      },
+	      format: 'd : h : m : S',
+	      themeClass: 'dark',
+	      interval: 1000,
+	      state: true,
+	    });
+    }
+    var countDownArea = $('#countdown-area');
+    $.ajax({
+      url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
+      data: "countdownId=" + 1,
+      type: "POST",
+      success: function (data) {
+        // console.log("mlbackCountDownOne");
+        if (data.code === 100) {
+          // console.log(data.extend.mlbackCountDownOne);
+          if(data.extend.mlbackCountDownOne==null){
+          	// console.log("mlbackCountDownOne为null");
+          }else{
+          	rednerCountDownAreaOne(countDownArea, data.extend.mlbackCountDownOne)
           }
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
         }
-      });
+      }
+    });
     /*---------------block1 banner1--------*/
     $.ajax({
       url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
@@ -388,10 +395,6 @@
         }
       }
     });
-    
-    
-    
-    countDownArea
   </script>
 </body>
 
