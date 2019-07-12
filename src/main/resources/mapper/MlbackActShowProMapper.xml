@@ -333,7 +333,7 @@
     select *
     from tb_mlback_actshowpro 
     where actShowPro_actNum = #{actshowproActnum,jdbcType=INTEGER} and actShowPro_status = #{actshowproStatus,jdbcType=INTEGER}
-    order by actShowPro_orderth desc
+    order by actShowPro_orderth
   </select>
   
 </mapper>
