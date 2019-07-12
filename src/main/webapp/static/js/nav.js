@@ -31,7 +31,7 @@ var aside_data = [
 	},
 	{
 		url: 'javascript:;',
-		name:'展区管理',
+		name:'营销管理',
 		icon: "glyphicon-chevron-right",
 		children: [
 			{
@@ -41,7 +41,12 @@ var aside_data = [
 			},
 			{
 				url: '/ShopTemplate/MlbackActShowPro/toMlbackActShowProPage',
-				name:'活动品列表',
+				name:'活动品管理',
+				icon: "glyphicon-stats"
+			},
+			{
+				url: '/ShopTemplate/MlbackCountDown/toMlbackCountDownPage',
+				name:'倒计时管理',
 				icon: "glyphicon-stats"
 			}
 			

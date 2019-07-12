@@ -22,14 +22,14 @@
 		<div class="main-body">
 			<div class="main-box">
 				<div class="header">
-					<h2>区域运费价格列表</h2>
+					<h2>倒计时列表</h2>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>区域运费价格列表</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>倒计时列表</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
 									class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
@@ -39,9 +39,10 @@
 								<thead>
 									<tr>
 										<th>id</th>
-										<th>地区名称英文</th>
-										<th>地区名称中文</th>
-										<th>运费价格</th>
+										<th>倒计时活动</th>
+										<th>startTime</th>
+										<th>endTime</th>
+										<th>修改时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -81,7 +82,7 @@
 
 		function to_page(pn) {
 			$.ajax({
-				url: "${APP_PATH}/MlbackAreafreight/getMlbackAreafreightByPage",
+				url: "${APP_PATH}/MlbackCountDown/getMlbackCountDownByPage",
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
@@ -101,27 +102,29 @@
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
 			$.each(task, function (index, item) {
+				
+				var countdownId = $("<td></td>").append(item.countdownId);
+				var countdownTitle = $("<td></td>").append(item.countdownTitle);
 
-				var areafreightId = $("<td></td>").append(item.areafreightId);
-				var areafreightCountryEnglish = $("<td></td>").append(item.areafreightCountryEnglish);
-
-				var areafreightCountry = $("<td></td>").append(item.areafreightCountry);
-				var areafreightPrice = $("<td></td>").append(parseFloat(item.areafreightPrice));
+				var countdownStarttime = $("<td></td>").append(item.countdownStarttime);
+				var countdownEndtime = $("<td></td>").append(item.countdownEndtime);
+				var countdownMotifytime = $("<td></td>").append(item.countdownMotifytime);
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//为编辑按钮添加一个分类id
-				editBtn.attr("edit-id", item.areafreightId);
+				editBtn.attr("edit-id", item.countdownId);
 				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
 				//为删除按钮添加一个分类id
-				delBtn.attr("del-id", item.areafreightId);
+				delBtn.attr("del-id", item.countdownId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
 				//append方法执行完成以后还是返回原来的元素
-				$("<tr></tr>").append(areafreightId)
-					.append(areafreightCountryEnglish)
-					.append(areafreightCountry)
-					.append(areafreightPrice)
+				$("<tr></tr>").append(countdownId)
+					.append(countdownTitle)
+					.append(countdownStarttime)
+					.append(countdownEndtime)
+					.append(countdownMotifytime)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -200,35 +203,36 @@
 		//新建任務
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
-			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html.html');
+			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html');
 		});
 		//编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
-			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html.html');
+			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html');
 			// fetch data
 			data = {
-				"areafreightId": $(this).attr('edit-id')
+				"countdownId": $(this).attr('edit-id')
 			};
 			$.ajax({
-				url: "${APP_PATH}/MlbackAreafreight/getOneMlbackAreafreightDetail",
+				url: "${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail",
 				data: data,
 				type: "POST",
 				success: function (result) {
 					if (result.code == 100) {
-						obj = result.extend.mlbackAreafreightOne;
+						obj = result.extend.mlbackCountDownOne;
 						tianchong(obj);
 					} else {
 						alert("联系管理员");
 					}
 				}
 			});
-
 			function tianchong(data) {
-				$(":input[name='areafreightId']").val(data.areafreightId);
-				$(":input[name='areafreightCountryEnglish']").val(data.areafreightCountryEnglish);
-				$(":input[name='areafreightCountry']").val(data.areafreightCountry);
-				$(":input[name='areafreightPrice']").val(data.areafreightPrice);
+				$(":input[name='countdownId']").val(data.countdownId);
+				$(":input[name='countdownTitle']").val(data.countdownTitle);
+				$(":input[name='countdownDescription']").val(data.countdownDescription);
+				$(":input[name='countdownStarttime']").val(data.countdownStarttime);
+				$(":input[name='countdownEndtime']").val(data.countdownEndtime);
+				$(":input[name='countdownMotifytime']").val(data.countdownMotifytime);
 			}
 		});
 		// 新建/编辑 保存
@@ -241,7 +245,7 @@
 			}, {}));
 			console.log(data);
 			$.ajax({
-				url: "${APP_PATH}/MlbackAreafreight/save",
+				url: "${APP_PATH}/MlbackCountDown/save",
 				data: data,
 				dataType: "json",
 				contentType: 'application/json',
@@ -249,7 +253,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('新建/修改成功！');
-						window.location.href = "${APP_PATH}/MlbackAreafreight/toMlbackAreafreightPage";
+						window.location.href = "${APP_PATH}/MlbackCountDown/toMlbackCountDownPage";
 					}
 				}
 			});
@@ -257,10 +261,10 @@
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
-				areafreightId: $(this).attr('del-id')
+					countdownId: $(this).attr('del-id')
 			};
 			$.ajax({
-				url: "${APP_PATH}/MlbackAreafreight/delete",
+				url: "${APP_PATH}/MlbackCountDown/delete",
 				data: JSON.stringify(data),
 				dataType: "json",
 				contentType: 'application/json',
