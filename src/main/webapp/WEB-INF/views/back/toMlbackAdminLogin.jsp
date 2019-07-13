@@ -4,7 +4,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Insert title here</title>
+	<title>Hair Admin</title>
+	<meta name="viewport"	content="width=device-width">
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<!-- web路径：
 			不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题。
@@ -33,7 +34,7 @@
 			-moz-transform: translate(-50%, -50%);
 			-webkit-transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);
-			padding: 46px 42px 20px 0;
+			padding: 30px 20px 0 20px;
 			background-color: #afd1f3;
 			border-radius: 4px;
 		}
