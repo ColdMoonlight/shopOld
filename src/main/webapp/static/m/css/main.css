@@ -1882,6 +1882,7 @@ a:focus {
   padding: 1em .5em 1.25em .5em;
   font: 30px/30px '';
   color: #fff;
+  text-align: center;
   border-radius: .25em;
   background: -webkit-linear-gradient(top, #999 , #000);
   background: -moz-linear-gradient(bottom, #999, #000);
@@ -1897,7 +1898,6 @@ a:focus {
   width: 100%;
   font-size: 14px;
   font-weight: bold;
-  text-align: center;
 }
 
 .dark .separator {

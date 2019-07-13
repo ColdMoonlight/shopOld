@@ -100,7 +100,7 @@
 	      end: {
 	        time: data.countdownEndtime
 	      },
-	      format: 'd : h : m : S',
+	      format: 'DD : HH : MM : SS',
 	      themeClass: 'dark',
 	      interval: 1000,
 	      state: false,

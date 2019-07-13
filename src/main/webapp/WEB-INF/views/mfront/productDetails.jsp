@@ -32,11 +32,11 @@
 	<div class="main">
 		<!-- <input type="hidden" value="${productId}" id="productId"/> -->
 		<div class="product-details"> </div>
-
 	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+  <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
@@ -410,39 +410,47 @@
 					  }
 				});
 			}
-			
-			
-			
-			/*---------------countDownAreaProDetail--------*/
-		    function rednerCountDownAreaOne(parent, data) {
-		        var html = '';
-		            html += '<div class="countDownAreaBanner">' +
-		            		'<span>'+data.countdownTitle+'</span></br>'+
-		            		'<span>'+data.countdownStarttime+'</span></br>'+
-		            		'<span>'+data.countdownEndtime+'</span></br>'+
-		            		'<span>'+data.countdownDescription+'</span></br>'+
-		            		'</div>';
-		        parent.html(html);
-		      }
-		      var countDownAreaOne = $('#countDownAreaProDetail');
-		      $.ajax({
-		        url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
-		        data: "countdownId=" + 1,
-		        type: "POST",
-		        success: function (data) {
-		          console.log("mlbackCountDownOne");
-		          if (data.code === 100) {
-		            console.log(data.extend.mlbackCountDownOne);
-		            if(data.extend.mlbackCountDownOne==null){
-		            	console.log("mlbackCountDownOne为null");
-		            }else{
-		            	rednerCountDownAreaOne(countDownAreaOne, data.extend.mlbackCountDownOne)
-		            }
-		          } else {
-		            renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
-		          }
-		        }
-		      });
+	
+			/*---------------countDownArea--------*/
+			function rednerCountDownAreaOne(parent, data) {
+	      var html = '';
+	      html += '<div class="title">'+data.countdownTitle+'</div>'+
+	        '<div class="body"></div>'+
+	        '<div class="desc">'+ data.countdownDescription +'</div>';
+	
+	      parent.html(html);
+	      var countdown = new countDown('#countdown-area .body', {
+		      start: {
+		        time: data.countdownStarttime
+		      },
+		      end: {
+		        time: data.countdownEndtime
+		      },
+		      format: 'DD : HH : MM : SS',
+		      themeClass: 'dark',
+		      interval: 1000,
+		      state: false,
+		    });
+	    }
+	    var countDownArea = $('#countdown-area');
+	    $.ajax({
+	      url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
+	      data: "countdownId=" + 1,
+	      type: "POST",
+	      success: function (data) {
+	        // console.log("mlbackCountDownOne");
+	        if (data.code === 100) {
+	          // console.log(data.extend.mlbackCountDownOne);
+	          if(data.extend.mlbackCountDownOne==null){
+	          	// console.log("mlbackCountDownOne为null");
+	          }else{
+	          	rednerCountDownAreaOne(countDownArea, data.extend.mlbackCountDownOne)
+	          }
+	        } else {
+	          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+	        }
+	      }
+	    });
 		});
 	</script>
 </body>
