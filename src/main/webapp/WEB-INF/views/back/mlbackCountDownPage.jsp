@@ -204,43 +204,43 @@
 		});
 		//编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
+			var editId = $(this).attr('edit-id');
 			// tab tpl
-			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html');
-			// fetch data
-			data = {
-				"countdownId": $(this).attr('edit-id')
-			};
-			$.ajax({
-				url: "${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail",
-				data: data,
-				type: "POST",
-				success: function (result) {
-					if (result.code == 100) {
-						obj = result.extend.mlbackCountDownOne;
-						tianchong(obj);
-					} else {
-						alert("联系管理员");
+			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html', function() {
+				// fetch data
+				$.ajax({
+					url: "${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail",
+					data: {"countdownId": editId},
+					type: "POST",
+					success: function (result) {
+						if (result.code == 100) {
+							obj = result.extend.mlbackCountDownOne;
+							tianchong(obj);
+						} else {
+							alert("联系管理员");
+						}
 					}
-				}
+				});
 			});
-			function tianchong(data) {
-				$(":input[name='countdownId']").val(data.countdownId);
-				$(":input[name='countdownTitle']").val(data.countdownTitle);
-				$(":input[name='countdownDescription']").val(data.countdownDescription);
-				$(":input[name='countdownStarttime']").val(data.countdownStarttime);
-				$(":input[name='countdownEndtime']").val(data.countdownEndtime);
-				$(":input[name='countdownMotifytime']").val(data.countdownMotifytime);
-			}
 		});
+		/* 倒计时填充  */
+		function tianchong(data) {
+			$(":input[name='countdownId']").val(data.countdownId);
+			$(":input[name='countdownTitle']").val(data.countdownTitle);
+			$(":input[name='countdownDescription']").val(data.countdownDescription);
+			$(":input[name='countdownStarttime']").val(data.countdownStarttime);
+			$(":input[name='countdownEndtime']").val(data.countdownEndtime);
+			$(":input[name='countdownMotifytime']").val(data.countdownMotifytime);
+		}
 		// 新建/编辑 保存
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
 			data = JSON.stringify(data.reduce(function (obj, item) {
-				console.log(obj);
+				// console.log(obj);
 				obj[item.name] = item.value;
 				return obj
 			}, {}));
-			console.log(data);
+			// console.log(data);
 			$.ajax({
 				url: "${APP_PATH}/MlbackCountDown/save",
 				data: data,
@@ -257,9 +257,7 @@
 		});
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
-			var data = {
-					countdownId: $(this).attr('del-id')
-			};
+			var data = { countdownId: $(this).attr('del-id')};
 			$.ajax({
 				url: "${APP_PATH}/MlbackCountDown/delete",
 				data: JSON.stringify(data),
