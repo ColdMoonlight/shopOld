@@ -14,7 +14,8 @@ $(function () {
     // between:数字：30，string:month/year
     between: false,
     hide:function(){},
-    show:function(){}
+    show:function(){},
+    appendTo: '.main-box'
   };
 
   var API = {
@@ -383,7 +384,6 @@ $(function () {
 
   $.extend(Year.prototype, {
     init: function () {
-
     },
     event: function () {
       // 点击选择年

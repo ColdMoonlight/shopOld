@@ -11,7 +11,7 @@
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
-	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/js/datepicker/jquery.datetimepicker.min.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
 	<style>
 		tr>td:nth-last-of-type(2),
@@ -74,8 +74,7 @@
 		</div>
 	</div>
 
-	<script src="${APP_PATH }/static/js/moment.min.js"></script>
-	<script src="${APP_PATH }/static/js/daterangepicker.js"></script>
+	<script src="${APP_PATH }/static/js/datepicker/jquery.datetimepicker.min.js"></script>
 	<script src="${APP_PATH }/static/js/sidenav.js"></script>
 	<script src="${APP_PATH }/static/js/nav.js"></script>
 	<script type="text/javascript">

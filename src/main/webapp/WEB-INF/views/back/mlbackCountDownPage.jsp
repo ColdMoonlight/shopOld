@@ -11,9 +11,8 @@
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
-	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
-	<!-- 时间插件 --> 
+	<link rel="stylesheet" href="${APP_PATH }/static/js/datepicker/datepicker.css">
 </head>
 
 <body>
@@ -62,17 +61,18 @@
 		</div>
 	</div>
 
-	<%-- <script src="${APP_PATH }/static/js/moment.min.js"></script>
-	<script src="${APP_PATH }/static/js/daterangepicker.js"></script> --%>
 	<script src="${APP_PATH }/static/js/sidenav.js"></script>
 	<script src="${APP_PATH }/static/js/nav.js"></script>
+	<script src="${APP_PATH }/static/js/datepicker/moment.min.js"></script>
+	<script src="${APP_PATH }/static/js/datepicker/datepicker.js"></script>
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 	<script type="text/javascript">
-		var totalRecord, currentPage, editid;
+		var totalRecord, currentPage, itemid;
+		var timeFormat = 'YYYY-MM-DD HH:mm:ss';
 		var count = 1;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		$(function () {
@@ -200,11 +200,16 @@
 		//新建任務
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
-			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html');
+			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html', function() {
+				$('.countdown').datePicker({
+					format: timeFormat,
+					isRange: true
+				});
+			});
 		});
 		//编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
-			var editId = $(this).attr('edit-id');
+			editId = $(this).attr('edit-id');
 			// tab tpl
 			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html', function() {
 				// fetch data
@@ -212,6 +217,7 @@
 					url: "${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail",
 					data: {"countdownId": editId},
 					type: "POST",
+					async: false,
 					success: function (result) {
 						if (result.code == 100) {
 							obj = result.extend.mlbackCountDownOne;
@@ -220,6 +226,10 @@
 							alert("联系管理员");
 						}
 					}
+				});
+				$('.countdown').datePicker({
+					format: timeFormat,
+					isRange: true
 				});
 			});
 		});
@@ -257,10 +267,10 @@
 		});
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
-			var data = { countdownId: $(this).attr('del-id')};
+			itemid = $(this).attr('del-id');
 			$.ajax({
 				url: "${APP_PATH}/MlbackCountDown/delete",
-				data: JSON.stringify(data),
+				data: JSON.stringify( { countdownId: itemid}),
 				dataType: "json",
 				contentType: 'application/json',
 				type: "post",

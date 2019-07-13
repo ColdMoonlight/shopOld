@@ -14,7 +14,7 @@
 <script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 <link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
-  <link rel="stylesheet" href="${APP_PATH }/static/js/datepicker/css/datepicker.css">
+  <link rel="stylesheet" href="${APP_PATH }/static/js/datepicker/datepicker.css">
 </head>
 <body>
 <div class="container">
@@ -90,8 +90,8 @@
 </div>
 <script src="${APP_PATH }/static/js/sidenav.js"></script>
 <script src="${APP_PATH }/static/js/nav.js"></script>
-<script src="${APP_PATH }/static/js/datepicker/js/plugins/moment.min.js"></script>
-<script src="${APP_PATH }/static/js/datepicker/js/datepicker.all.js"></script>
+<script src="${APP_PATH }/static/js/datepicker/moment.min.js"></script>
+<script src="${APP_PATH }/static/js/datepicker/datepicker.js"></script>
 <script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
 <script type="text/javascript">
 	var adminAccname='${sessionScope.AdminUser.adminAccname}'; 
@@ -161,7 +161,7 @@
 	       time: '00:00:00,'
 	     }],
 	     hide: function (type) {
-	       console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
+	       // console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
 	     }
 	   })
    })
