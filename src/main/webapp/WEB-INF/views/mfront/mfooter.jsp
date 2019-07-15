@@ -118,7 +118,7 @@
                 footerData[key].children.push({
                   "name": fData[key2].footnavName,
                   "icon": "",
-                  "link": "/ShopTemplate/MlbackFootNav/toMlfrontFootNavPage?block=" + block + "&id=" + fData[
+                  "link": "${APP_PATH}/MlbackFootNav/toMlfrontFootNavPage?block=" + block + "&id=" + fData[	
                     key2].footnavId
                 })
               } else {
