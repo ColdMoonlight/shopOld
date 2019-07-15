@@ -227,6 +227,11 @@ a:focus {
   transform: scale(.8)
 }
 
+/* main */
+.main {
+	min-height: 360px;
+}
+
 /* footer */
 .footer {
   background-color: #f8f8f8;
@@ -496,9 +501,10 @@ a:focus {
 }
 .product__details-banner,
 .product__details-banner img {
-	width:100%;
+	display: inline-block;
+	width: 100%;
 	height: auto;
-	max-height: 414px;
+	min-height: 414px;
 	overflow: hidden;
 }
 
@@ -1121,13 +1127,18 @@ a:focus {
 }
 /* cart list */
 .cart-title {
+	width: 100%;
+	height: auto;
+}
+
+.cart-status {
 	position:relative;
 	width: 100%;
 	padding: .5em .25em;
 	text-align: center;
 }
 
-.cart-title .dot {
+.cart-status .dot {
 	position: absolute;
 	top:0;
 	right:0;

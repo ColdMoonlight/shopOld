@@ -29,18 +29,19 @@
 
 	<!-- main -->
 	<div class="main cart-box">
-
-		<!-- purechase step -->
-		<img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_cart.jpg">
-
-		<div class="cart-title">
-			Shopping List
-			<span class="icon dot"></span>
+		<div class="cart-title hide">
+			<img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_cart.jpg">
+			<div class="cart-status">
+				Shopping List
+				<span class="icon dot"></span>
+			</div>
 		</div>
+		<!-- purechase step -->
+		
 		<div class="cart-list">
 
 		</div>
-		<div class="cart-footer">
+		<div class="cart-footer hide">
 			<span class="show-t-price"></span>
 			<div class="op">
 				<a href="${APP_PATH}/index/isMobileOrPc" class="btn add-product">Continue To Add</a>
@@ -224,8 +225,11 @@
 							// console.log(data);
 							var resData = data.extend.mlfrontCartItemListRes;
 							if (resData.length > 0) {
-								renderProdcutList(cartList, resData)
-								toProductDetails()
+								$('.cart-title').removeClass('hide');
+								renderProdcutList(cartList, resData);
+								$('.cart-footer').removeClass('hide');
+								// for all cart-product bind event of going product-details
+								toProductDetails();
 							} else {
 								renderProductNone(cartBox);
 							}
