@@ -50,14 +50,14 @@
 
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
-  <script src="${APP_PATH }/static/common/intersectionobser.js"></script>
+ <%--  <script src="${APP_PATH }/static/common/intersectionobserver.js"></script> --%>
   <script>
     function rednerProductActShowPro(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="banner">' +
           '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
-          	'<img src="${APP_PATH }/static/img/position.png" data-src="' + data[i].actshowproImgwapurl + '" alt="">' +
+          	'<img /* src="${APP_PATH }/static/img/position.png" data- */src="' + data[i].actshowproImgwapurl + '" alt="">' +
           '</a>' +
           '</div>';
       }
