@@ -97,8 +97,16 @@
 	      format: 'DD : HH : MM : SS',
 	      themeClass: 'dark',
 	      interval: 1000,
-	      state: false,
+	      stateText: {
+    	    before: 'Start of distance activity:',
+    	    progress: 'End of distance activity:',
+    	    after: 'The activity is over:',
+	    	}
 	    });
+      
+      if (countdown && countdown.state === 'after') {
+    	  $('#countdown-area').addClass('hide')
+      }
     }
     var countDownArea = $('#countdown-area');
     $.ajax({
@@ -199,7 +207,7 @@
            }
          }
        });
-    }    
+    }
   </script>
 </body>
 
