@@ -167,7 +167,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
-						// console.log(productData)
+						console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
 						prodcutDpriceText.attr('data-price', productData.productOriginalprice);
@@ -178,6 +178,22 @@
 
 						repeatCalPrice();
 
+					} else {
+						renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+					}
+				}
+			});
+			 $.ajax({
+				url: '${APP_PATH}/MlfrontReview/getMlfrontReviewListByPId',
+				data: {
+					"productId": pidA[1]
+				},
+				type: "POST",
+				success: function (data) {
+					if (data.code === 100) {
+						var productData = data.extend.mlfrontReviewResList;
+						console.log("MlfrontReview/getMlfrontReviewListByPId");
+						console.log(data.extend)
 					} else {
 						renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
 					}
@@ -255,18 +271,6 @@
 			}
 
 			// add-to-cart
-			/*
-    private Integer cartitemProductId;
-    private String cartitemProductName;
-    private BigDecimal cartitemProductOriginalprice;
-    private String cartitemProductMainimgurl;
-    private Integer cartitemProductActoff;
-    private String cartitemProductskuIdstr;
-    private String cartitemProductskuIdnamestr;
-    private String cartitemProductskuNamestr;
-    private String cartitemProductskuMoneystr;
-    private Integer cartitemProductNumber;
-	*/
 			$('.add-to-cart').on('click', function () {
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
@@ -452,6 +456,9 @@
 	      }
 	    });
 		});
+		
+		
+		
 	</script>
 </body>
 

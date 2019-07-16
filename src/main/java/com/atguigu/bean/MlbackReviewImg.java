@@ -70,4 +70,29 @@ public class MlbackReviewImg {
     public void setReviewimgMotifytime(String reviewimgMotifytime) {
         this.reviewimgMotifytime = reviewimgMotifytime == null ? null : reviewimgMotifytime.trim();
     }
+
+	public MlbackReviewImg(Integer reviewimgId, String reviewimgName, String reviewimgUrl, Integer reviewId,
+			Integer reviewimgSortOrder, String reviewimgCreatetime, String reviewimgMotifytime) {
+		super();
+		this.reviewimgId = reviewimgId;
+		this.reviewimgName = reviewimgName;
+		this.reviewimgUrl = reviewimgUrl;
+		this.reviewId = reviewId;
+		this.reviewimgSortOrder = reviewimgSortOrder;
+		this.reviewimgCreatetime = reviewimgCreatetime;
+		this.reviewimgMotifytime = reviewimgMotifytime;
+	}
+
+	public MlbackReviewImg() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "MlbackReviewImg [reviewimgId=" + reviewimgId + ", reviewimgName=" + reviewimgName + ", reviewimgUrl="
+				+ reviewimgUrl + ", reviewId=" + reviewId + ", reviewimgSortOrder=" + reviewimgSortOrder
+				+ ", reviewimgCreatetime=" + reviewimgCreatetime + ", reviewimgMotifytime=" + reviewimgMotifytime + "]";
+	}
+    
 }

@@ -332,7 +332,7 @@
 				getProductDown();
 				// init
 				initOtherInfo(reviewId)
-				initImgList(reviewId);
+				initImgList(reviewId);//附图文件
 
 				// boot upload img
 				$('#upload-img-main').on("change", upload);
@@ -343,14 +343,7 @@
 					})
 				});
 				$('#upload-img-fu1').on("change", uploadfu);
-				// option
-				/* $('.add-item').each(function (i, item) {
-					$(item).on('click', function () {
-						var table = $(this).parent().parent().parent().parent().find('tbody');
-						addHairStyle(table, {})
-					});
-				}); */
-				//saveOption(productId);
+
 			});
 		});
 
@@ -363,15 +356,15 @@
 		// fetch data about imgs-list
 		function initImgList(id) {
 			$.ajax({
-				url: "${APP_PATH}/MlbackProductImg/getMlbackProductImgListByProductId",
+				url: "${APP_PATH}/MlbackReviewImg/getMlbackReviewImgListByReviewId",
 				data: {
-					"productId": id
+					"reviewId": id
 				},
 				type: "POST",
 				success: function (result) {
 					if (result.code == 100) {
 						// render data
-						tianchongImg(result.extend.mbackProductImgResList);
+						tianchongImg(result.extend.mlbackReviewImgResList);
 					} else {
 						alert("联系管理员");
 					}
@@ -444,7 +437,7 @@
 			// console.log(data);
 			var elImgs = $('.sub-img').find('.upload-img-btn');
 			for (var i = 0; i < data.length; i += 1) {
-				$(elImgs[data[i].productimgSortOrder - 1]).css("background-image", "url(" + data[i].productimgUrl + ")");
+				$(elImgs[data[i].reviewimgSortOrder - 1]).css("background-image", "url(" + data[i].reviewimgUrl + ")");
 			}
 
 			// productimgUrl  productimgSortOrder
@@ -457,15 +450,15 @@
 			var obj = new FormData();
 			obj.append('file', $(this)[0].files[0]);
 			// console.log($(this)[0].files[0])
-			var productIdUP = $(":input[name='productId']").val();
-			if (productIdUP == null) {
+			var reviewIdUP = $(":input[name='reviewId']").val();
+			if (reviewIdUP == null) {
 				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
 				// console.log("productIdUP:"+productIdUP);
 				alert("请先输入产品名，保存后从编辑进入");
 			} else {
-				obj.append('productId', productIdUP);
+				obj.append('reviewId', reviewIdUP);
 				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadProductImg",
+					url: "${APP_PATH}/UpImg/uploadReviewUImg",
 					type: "post",
 					dataType: "json",
 					cache: false,
@@ -477,45 +470,12 @@
 						// console.log(data);
 						var returl = data.extend.uploadUrl;
 						$(self).parent().css({
-							"background-image": "url(" + '${APP_PATH }/static/img/product/' + returl + ")"
+							"background-image": "url(" + '${APP_PATH }/static/img/ReviewUImg/' + returl + ")"
 						});
 					}
 				});
 			}
 
-		}
-		// upload img 1-1
-		function uploadMainFu() {
-			var self = this;
-			//实例化一个FormData
-			var obj = new FormData();
-			obj.append('file', $(this)[0].files[0]);
-			// console.log($(this)[0].files[0])
-			var productIdUP = $(":input[name='productId']").val();
-			if (productIdUP == null) {
-				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
-				// console.log("productIdUP:"+productIdUP);
-				alert("请先输入产品名，保存后从编辑进入");
-			} else {
-				obj.append('productId', productIdUP);
-				$.ajax({
-					url: "${APP_PATH}/UpImg/toUploadProductFuImg",
-					type: "post",
-					dataType: "json",
-					cache: false,
-					data: obj,
-					processData: false, // 不处理数据
-					contentType: false, // 不设置内容类型
-					success: function (data) {
-						//设置背景为我们选择的图片
-						// console.log(data);
-						var returl = data.extend.uploadUrl;
-						$(self).parent().css({
-							"background-image": "url(" + '${APP_PATH }/static/img/product/' + returl + ")"
-						});
-					}
-				});
-			}
 		}
 
 		// upload img 1-2
@@ -526,16 +486,16 @@
 			var obj = new FormData();
 			obj.append('file', item[0].files[0]);
 			// console.log($(this)[0].files[0])
-			var productIdUP = $(":input[name='productId']").val();
-			if (productIdUP == null) {
+			var reviewIdUP = $(":input[name='reviewId']").val();
+			if (reviewIdUP == null) {
 				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
 				// console.log("productIdUP:"+productIdUP);
 				alert("请先输入产品名，保存后从编辑进入");
 			} else {
-				obj.append('productId', productIdUP);
+				obj.append('reviewId', reviewIdUP);
 				obj.append('sort', index);
 				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadProductAllImg",
+					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
 					type: "post",
 					dataType: "json",
 					cache: false,
@@ -547,94 +507,14 @@
 						// console.log(data);
 						var returl = data.extend.uploadUrl;
 						item.parent().css({
-							"background-image": "url(" + '${APP_PATH }/static/img/productAll/' + returl + ")"
+							"background-image": "url(" + '${APP_PATH }/static/img/reviewAllImg/' + returl + ")"
 						});
 					}
 				});
 			}
 
 		}
-
-		/* option */
-		function addHairStyle(parent, data) {
-			var tr = $('<tr/>');
-			var trHtml = '';
-			trHtml += '<td>' +
-				'<input class="form-control" data-id="productskuNameDetails" type="text" value="' + (data.productskuNameDetails ?
-					data.productskuNameDetails : '') + '">' +
-				'</td>' +
-				'<td>' +
-				'<input class="form-control" data-id="productskuStockDetails" type="text" value="' + (data
-					.productskuStockDetails ? data.productskuStockDetails : '') + '">' +
-				'</td>' +
-				'<td>' +
-				'<input class="form-control" data-id="productskuMoneyDetails" type="text" value="' + (data
-					.productskuMoneyDetails ? data.productskuMoneyDetails : '') + '">' +
-				'</td>' +
-				'<td><a class="btn btn-danger" onclick="removeHairStyle(event)"><i class="glyphicon glyphicon-minus"></i></a></td>';
-
-			parent.append(tr.html(trHtml));
-		}
-
-		function removeHairStyle(e) {
-			var target = e.target;
-			var tr = null;
-			if (target.nodeName === 'I') {
-				tr = $(target).parent().parent().parent();
-			}
-
-			if (target.nodeName === 'A') {
-				tr = $(target).parent().parent();
-			}
-			tr.remove();
-
-			/*  $.ajax({}) */
-		}
-
-		// option save
-		function saveOption(productId) {
-			$('#option').find('.btn.save').each(function (i, item) {
-				$(item).on('click', function () {
-					var productskuName = $(this).data('name');
-					var tData = [];
-					var productskuStatus = $(this).parent().find('.productskuStatus').val();
-					var productskuId = $(this).parent().find('.productskuId').val() || null;
-					var trs = $(this).parent().find('tbody tr');
-					trs.each(function (i, item) {
-						var inputs = $(item).find('input');
-						var obj = {};
-						for (var i = 0; i < inputs.length; i += 1) {
-							obj[$(inputs[i]).data('id')] = $(inputs[i]).val()
-						}
-						tData.push(obj);
-					});
-					var nData = tData.reduce(function (obj, item) {
-						for (var key in item) {
-							obj[key] = obj[key] ? obj[key] + ',' + item[key] : item[key];
-						}
-						return obj;
-					}, {});
-					nData.productId = productId;
-					nData.productskuId = productskuId;
-					nData.productskuName = productskuName;
-					nData.productskuStatus = productskuStatus;
-					console.log(nData);
-					$.ajax({
-						url: "${APP_PATH}/MlbackProductSku/save",
-						data: JSON.stringify(nData),
-						type: "POST",
-						dataType: "json",
-						contentType: 'application/json',
-						success: function (result) {
-							if (result.code == 100) {
-								alert('MlbackProductSku 保存成功！')
-								window.location.href = "${APP_PATH}/MlbackProduct/toMlbackProductPage";
-							} else {}
-						}
-					});
-				});
-			});
-		}
+		
 	</script>
 </body>
 

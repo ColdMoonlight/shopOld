@@ -33,7 +33,9 @@ import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductImg;
+import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.MlbackShowArea;
+import com.atguigu.bean.MlfrontReview;
 import com.atguigu.bean.Msg;
 import com.atguigu.bean.SysUser;
 import com.atguigu.bean.UserWork;
@@ -45,7 +47,9 @@ import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductImgService;
 import com.atguigu.service.MlbackProductService;
+import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlbackShowAreaService;
+import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.service.SysUserService;
 import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
@@ -75,6 +79,12 @@ public class UPloadController {
 	
 	@Autowired
 	MlbackActShowProService mlbackActShowProService;
+	
+	@Autowired
+	MlfrontReviewService mlfrontReviewService;
+	
+	@Autowired
+	MlbackReviewImgService mlbackReviewImgService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -389,7 +399,7 @@ public class UPloadController {
 	
 	
 	/**
-	 * 1.0	useOn	0505
+	 * 4.1	useOn	0505
 	 * toUploadShowAreaImg
 	 * @param jsp
 	 * @return 
@@ -443,7 +453,7 @@ public class UPloadController {
 	}
 	
 	/**
-	 * 1.1	useOn	0505
+	 * 4.2	useOn	0505
 	 * uploadShowAreaPcImg
 	 * @param jsp
 	 * @return 
@@ -498,7 +508,7 @@ public class UPloadController {
 	
 	
 	/**
-	 * 1.1	useOn	0505
+	 * 5.1	useOn	0505
 	 * uploadShowAreaPcImg
 	 * @param jsp
 	 * @return 
@@ -552,7 +562,7 @@ public class UPloadController {
 	}
 	
 	/**
-	 * 1.1	useOn	0505
+	 * 5.2	useOn	0505
 	 * uploadShowAreaPcImg
 	 * @param jsp
 	 * @return 
@@ -603,4 +613,135 @@ public class UPloadController {
 		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
 	}
 	
+	
+	
+	
+	/**
+	 * 6.1	useOn	0505
+	 * to分类uploadReviewUImg列表页面
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadReviewUImg")
+	@ResponseBody
+	public Msg uploadReviewUImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/ReviewUImg/";
+		//存储ReviewU的客户头像图片
+		String returnUrl = UpImgUtils.keepReviewUImgFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String ReviewIdstr = aa[1];
+		
+		int ReviewIdInt = Integer.parseInt(ReviewIdstr);
+		
+		System.out.println("ReviewIdInt:"+ReviewIdInt);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlfrontReview mlfrontReview = new MlfrontReview();
+		
+		mlfrontReview.setReviewId(ReviewIdInt);
+		
+		mlfrontReview.setReviewUimgurl(returnReaUrlAll);
+		
+		mlfrontReviewService.updateByPrimaryKeySelective(mlfrontReview);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	/**
+	 * 6.2	useOn	0522
+	 * 上传，产品的6张图，存入图片详情表
+	 * @param url
+	 * @return 
+	 * */
+	@RequestMapping("/uploadReviewAllImg")
+	@ResponseBody
+	public Msg uploadReviewAllImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        
+        String realPathStr = res.getSession().getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+res.getServerPort()+contextPathStr+"/";
+        System.out.println("basePathStr:"+basePathStr);
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/reviewAllImg/";
+		//存储Review评论图的客户头像图片
+		String returnUrl = UpImgUtils.keepReviewAllImgFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String ReviewIdstr = aa[1];
+		String reviewimgSortOrderIdstr = aa[2];
+		
+		int ReviewIdInt = Integer.parseInt(ReviewIdstr);
+		
+		int reviewimgSortOrderIdInt = Integer.parseInt(reviewimgSortOrderIdstr);
+		
+		System.out.println("ReviewIdstr:"+ReviewIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		//查询文件是否在
+		MlbackReviewImg mlbackReviewImgIf = new MlbackReviewImg();
+		
+		mlbackReviewImgIf.setReviewId(ReviewIdInt);
+		mlbackReviewImgIf.setReviewimgSortOrder(reviewimgSortOrderIdInt);
+		
+		List<MlbackReviewImg> mlbackReviewImgIfList = mlbackReviewImgService.selectMlbackReviewImgByRIdAndImgSort(mlbackReviewImgIf);
+		MlbackReviewImg mlbackReviewImgImg = new MlbackReviewImg();
+		
+		mlbackReviewImgImg.setReviewId(ReviewIdInt);
+		
+		mlbackReviewImgImg.setReviewimgUrl(returnReaUrlAll);
+		
+		mlbackReviewImgImg.setReviewimgSortOrder(reviewimgSortOrderIdInt);
+		
+		mlbackReviewImgImg.setReviewimgName(returnReaUrl);
+		
+		String nowTime = DateUtil.strTime14s();
+		mlbackReviewImgImg.setReviewimgMotifytime(nowTime);
+		
+		if(mlbackReviewImgIfList.size()>0){
+			//取出id
+			int rImgId = mlbackReviewImgIfList.get(0).getReviewimgId();
+			
+			mlbackReviewImgImg.setReviewimgId(rImgId);;
+			
+			mlbackReviewImgService.updateByPrimaryKeySelective(mlbackReviewImgImg);
+			
+			//存在update
+		}else{
+			mlbackReviewImgImg.setReviewimgCreatetime(nowTime);
+			//存在insert
+			mlbackReviewImgService.insertSelective(mlbackReviewImgImg);
+		}
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
 }
