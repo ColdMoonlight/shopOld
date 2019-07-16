@@ -1,5 +1,6 @@
 package com.atguigu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.MlfrontReview;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
+import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.utils.DateUtil;
 
@@ -30,6 +33,9 @@ public class MlfrontReviewController {
 		
 	@Autowired
 	MlfrontReviewService mlfrontReviewService;
+	
+	@Autowired
+	MlbackReviewImgService mlbackReviewImgService;
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
@@ -142,6 +148,44 @@ public class MlfrontReviewController {
 		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewAll();
 		return Msg.success().add("resMsg", "查看list完毕")
 					.add("mlfrontReviewResList", mlfrontReviewResList);
+	}
+	
+	/**
+	 * 6.0	useOn	0505
+	 * 查看单条MlfrontReview的详情细节
+	 * @param MlfrontReview
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlfrontReviewListByPId",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlfrontReviewListByPId(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId){
+		//接受信息
+		
+		MlfrontReview mlfrontReview = new MlfrontReview();
+		mlfrontReview.setReviewPid(productId);
+		mlfrontReview.setReviewStatus(1);
+		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(mlfrontReview);
+		MlbackReviewImg mlbackReviewImg = new MlbackReviewImg();
+		
+		List<MlbackReviewImg>  mlbackReviewImgList = new ArrayList<MlbackReviewImg>();
+		List<List<String>> imgUrlStrListst = new ArrayList<List<String>>();
+		
+		for(MlfrontReview mlfrontReviewOne:mlfrontReviewResList){
+			Integer reviewId = mlfrontReviewOne.getReviewId();
+			mlbackReviewImg.setReviewId(reviewId);
+			mlbackReviewImgList =  mlbackReviewImgService.selectMlbackReviewImgByReviewId(reviewId);
+			
+			String reviewimgUrl ="";
+			
+			List<String> imgUrlOneList = new ArrayList<String>();
+			for(MlbackReviewImg mlbackReviewImgOne:mlbackReviewImgList){
+				reviewimgUrl = mlbackReviewImgOne.getReviewimgUrl();
+				imgUrlOneList.add(reviewimgUrl);
+			}
+			imgUrlStrListst.add(imgUrlOneList);
+		}
+		return Msg.success().add("resMsg", "查看list完毕")
+					.add("mlfrontReviewResList", mlfrontReviewResList).add("imgUrlStrListst", imgUrlStrListst);
 	}
 	
 }

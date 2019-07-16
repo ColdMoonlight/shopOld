@@ -72,5 +72,15 @@ public class MlfrontReviewService {
 		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectMlfrontReviewGetAll();
 		return MlfrontReviewList;
 	}
+	/**5
+	 * @author Shinelon
+	 * @param MlfrontReview
+	 * @exception 查看全部的地址信息
+	 * 
+	 * */
+	public List<MlfrontReview> selectMlfrontReviewListByPId(MlfrontReview mlfrontReview) {
+		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectMlfrontReviewListByPId(mlfrontReview);
+		return MlfrontReviewList;
+	}
 	
 }

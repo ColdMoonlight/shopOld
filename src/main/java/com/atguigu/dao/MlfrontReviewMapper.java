@@ -34,4 +34,6 @@ public interface MlfrontReviewMapper {
     List<MlfrontReview> selectMlfrontReviewById(MlfrontReview example);
     //查询全部
     List<MlfrontReview> selectMlfrontReviewGetAll();
+    //查询一个产品下的全部review
+	List<MlfrontReview> selectMlfrontReviewListByPId(MlfrontReview mlfrontReview);
 }
