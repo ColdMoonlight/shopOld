@@ -1863,6 +1863,10 @@ a:focus {
   align-items: center;
 }
 
+#countdown-area.hide {
+	display: none;
+}
+
 #countdown-area .title {
   padding: 1em;
   font: 16px/16px '';

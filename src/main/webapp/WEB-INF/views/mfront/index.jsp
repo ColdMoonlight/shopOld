@@ -103,9 +103,9 @@
     	    after: 'The activity is over:',
 	    	}
 	    });
-      
+
       if (countdown && countdown.state === 'after') {
-    	  $('#countdown-area').addClass('hide')
+    	  $('#countdown-area').addClass('hide');
       }
     }
     var countDownArea = $('#countdown-area');
