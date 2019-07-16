@@ -187,6 +187,7 @@
          url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
          data: "productLable=" + blockList[i].product,
          type: "POST",
+         async: false,
          success: function (data) {
            // console.log(productList1)
            if (data.code === 100) {
