@@ -51,11 +51,11 @@
 										<th>评论客户</th>
 										<th>客户头像</th>
 										<th>产品id</th>
-										<th>产品名称</th>
+										<!-- <th>产品名称</th> -->
 										<th>评论时间</th>
 										<th>评论状态</th>
 										<th>审核时间</th>
-										<th>评论图片数</th>
+										<!-- <th>评论图片数</th> -->
 										<th>评分星级</th>
 										<th>操作</th>
 									</tr>
@@ -147,11 +147,11 @@
 					.append(reviewUname)
 					.append(reviewUimgurl)
 					.append(reviewPid)
-					.append(reviewPname)
+					/* .append(reviewPname) */
 					.append(reviewCreatetime)
 					.append(reviewStatus)
 					.append(reviewMotifytime)
-					.append(reviewImgidstr)
+					/* .append(reviewImgidstr) */
 					.append(reviewProstarnum)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
