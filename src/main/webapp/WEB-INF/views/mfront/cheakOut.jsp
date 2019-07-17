@@ -762,8 +762,8 @@
 				"addressinfoId": addressId,
 			};
 
-			// console.log(reqData)
-			//console.log(checkAddress())
+			console.log(reqData)
+			console.log(checkAddress())
 			if (checkAddress()) {
 				$.ajax({
 					url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
@@ -797,6 +797,7 @@
 				type: 'post',
 				async: false,
 				success: function (data) {
+					console.log("/MlfrontAddress/getOneMlfrontAddressDetailByUinfo");
 					console.log(data)
 					var resData = data.extend;
 					//console.log(resData.mlfrontAddressOne)
@@ -804,6 +805,11 @@
 						flag = true;
 					} else {
 						falg = false;
+						var addressBox = $('.address');;
+						console.log(addressBox);
+						if(addressBox!=null){
+							flag = true;
+						}
 					}
 				}
 			});
