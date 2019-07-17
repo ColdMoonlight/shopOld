@@ -113,11 +113,14 @@ public class PaypalController {
             
             if(payment.getState().equals("approved")){
                 return "mfront/paySuccess";
+            }else{
+            	return "mfront/payFail";
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            return "mfront/payFail";
         }
-        return "redirect:/";
+       // return "redirect:/";
     }
     
     private void sendResultEmail(HttpSession session) {
