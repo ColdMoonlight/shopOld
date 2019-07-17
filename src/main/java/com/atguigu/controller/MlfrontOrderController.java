@@ -42,6 +42,7 @@ import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.EmailUtils;
 
 
 @Controller
@@ -243,6 +244,8 @@ public class MlfrontOrderController {
 		MlfrontPayInfo mlfrontPayInfoResOne = mlfrontPayInfoResList.get(0);
 		Integer payinfoId = mlfrontPayInfoResOne.getPayinfoId();
 		session.setAttribute("payinfoId", payinfoId);
+		
+		session.setAttribute("sendAddressinfoId", payAddressinfoId);
 		//4.0传入orderid,查询其中的orderItemID，、找到cartID 找到cartid,移除购物车中的
 		Integer IsUpdate = updateCart(mlfrontOrder);
 		//5.0发起支付
@@ -563,7 +566,6 @@ public class MlfrontOrderController {
 		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidAndStatus(mlfrontOrder);
 		PageInfo page = new PageInfo(mlfrontOrderList, PagNum);
 		return Msg.success().add("pageInfo", page);
-//		}
 	}
 	
 	/**
@@ -600,12 +602,15 @@ public class MlfrontOrderController {
 	public Msg updateOrderDetail(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
 
 		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
+		
+//		Integer addressId = (Integer) session.getAttribute("sendAddressinfoId");
 		//Integer Uid = loginUser.getUserId();
 		Integer orderId = mlfrontOrder.getOrderId();
 		String orderLogisticsname =mlfrontOrder.getOrderLogisticsname();	//物流名字
 		String orderLogisticsnumber =  mlfrontOrder.getOrderLogisticsnumber();//物流单号
 		
 		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		MlfrontOrder mlfrontOrderReq2 = new MlfrontOrder();
 		mlfrontOrderReq.setOrderId(orderId);
 		mlfrontOrderReq.setOrderLogisticsname(orderLogisticsname);
 		mlfrontOrderReq.setOrderLogisticsnumber(orderLogisticsnumber);
@@ -613,7 +618,37 @@ public class MlfrontOrderController {
 		mlfrontOrderReq.setOrderStatus(3);
 		mlfrontOrderReq.setOrderSendtime(nowTime);
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		
+		//通过orderId查询文件
+		mlfrontOrderReq2.setOrderId(orderId);
+		List<MlfrontOrder> mlfrontOrderResList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq2);
+		MlfrontOrder mlfrontOrderRes = mlfrontOrderResList.get(0);
+		Integer addressId = mlfrontOrderRes.getAddressinfoId();
+		
+		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber);
+		
 		return Msg.success().add("Msg", "更新成功");
-//		}
+	}
+
+
+	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber) {
+		
+		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
+		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
+		mlfrontAddressReq.setAddressId(addressId);
+		List<MlfrontAddress> mlfrontAddressResList = mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
+		mlfrontAddressRes = mlfrontAddressResList.get(0);
+		System.out.println(mlfrontAddressRes.toString());
+		String userEmail = mlfrontAddressRes.getAddressEmail();
+		
+		try {
+			//测试方法
+			String getToEmail = userEmail;
+			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
+			EmailUtils.readyEmailRegister(getToEmail, Message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

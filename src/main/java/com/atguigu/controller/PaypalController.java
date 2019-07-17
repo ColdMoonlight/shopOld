@@ -17,13 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontPayInfo;
+import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.ToPaypalInfo;
 import com.atguigu.enumC.PaypalPaymentIntent;
 import com.atguigu.enumC.PaypalPaymentMethod;
+import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.service.PaypalService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.EmailUtils;
 import com.atguigu.utils.URLUtils;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -48,6 +51,9 @@ public class PaypalController {
     
     @Autowired
 	MlfrontOrderService mlfrontOrderService;
+    
+    @Autowired
+    MlfrontAddressService mlfrontAddressService;
 
     /**1.0
      * 组装参数,发起真实的支付
@@ -99,7 +105,12 @@ public class PaypalController {
             
             toUpdatePayInfoSuccess(session,payerId,paymentId);
             
+            sendResultEmail(session);
+            
             System.out.println(payment.toJSON());
+            
+            
+            
             if(payment.getState().equals("approved")){
                 return "mfront/paySuccess";
             }
@@ -109,7 +120,35 @@ public class PaypalController {
         return "redirect:/";
     }
     
-    private void toUpdatePayInfoSuccess(HttpSession session, String payerId, String paymentId) {
+    private void sendResultEmail(HttpSession session) {
+    	try {
+    		//从payID，查oid，
+    		
+    		MlfrontUser loginUser =(MlfrontUser) session.getAttribute("loginUser");
+    		
+    		Integer addressId = (Integer) session.getAttribute("sendAddressinfoId");
+    				
+    		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
+    		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
+    		mlfrontAddressReq.setAddressId(addressId);
+    		
+    		List<MlfrontAddress> mlfrontAddressResList = mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
+    		
+    		mlfrontAddressRes = mlfrontAddressResList.get(0);
+    		System.out.println(mlfrontAddressRes.toString());
+    		String userEmail = mlfrontAddressRes.getAddressEmail();
+    		
+			//测试方法
+			String getToEmail = userEmail;
+			String Message = "pay Success</br>,已收到您的付款,会尽快给您安排发货,注意留意发货通知.祝您购物愉快";
+			EmailUtils.readyEmailPaySuccess(getToEmail, Message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void toUpdatePayInfoSuccess(HttpSession session, String payerId, String paymentId) {
     	
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
     	//修改支付单状态
