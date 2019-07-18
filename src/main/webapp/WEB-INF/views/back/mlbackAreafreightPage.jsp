@@ -200,12 +200,12 @@
 		//新建任務
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
-			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html.html');
+			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html');
 		});
 		//编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
-			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html.html');
+			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html');
 			// fetch data
 			data = {
 				"areafreightId": $(this).attr('edit-id')
