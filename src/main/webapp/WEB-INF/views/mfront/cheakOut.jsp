@@ -469,6 +469,7 @@
 				resDataMoney = data.extend.areafreightMoney;
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
+				console.log(data)
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
 					renderAddressDetail(addressBox, resDataAddress);
@@ -787,7 +788,6 @@
 			} else {
 				alert('请填写收货地址')
 			}
-
 		})
 
 		function checkAddress() {
@@ -797,7 +797,7 @@
 				type: 'post',
 				async: false,
 				success: function (data) {
-					console.log(data)
+					// console.log(data)
 					var resData = data.extend;
 					//console.log(resData.mlfrontAddressOne)
 					if (resData.mlfrontAddressOne) {
