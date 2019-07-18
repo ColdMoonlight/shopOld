@@ -41,6 +41,8 @@ public class PaypalService {
         transaction.setAmount(amount);
 
         List<Transaction> transactions = new ArrayList<>();
+        
+        //这里加点东西
         transactions.add(transaction);
 
         Payer payer = new Payer();

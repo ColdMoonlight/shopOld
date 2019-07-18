@@ -118,6 +118,7 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            System.out.println(e.getMessage());
             return "mfront/payFail";
         }
        // return "redirect:/";
