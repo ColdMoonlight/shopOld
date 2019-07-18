@@ -147,7 +147,12 @@ public class MlfrontUserController {
 			mlfrontUserreq.setUserCouponidstr("1,2,3");
 			int intResult = mlfrontUserService.insertSelective(mlfrontUserreq);
 			System.out.println(intResult);
-			session.setAttribute("loginUser", mlfrontUserreq);
+			//用账号把它查回来
+			MlfrontUser mlfrontUserInAfterreq = new MlfrontUser();
+			mlfrontUserInAfterreq.setUserEmail(userEmail);
+			List<MlfrontUser> mlfrontUserInafterList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserInAfterreq);
+			MlfrontUser mlfrontUserafterIn =mlfrontUserInafterList.get(0);
+			session.setAttribute("loginUser", mlfrontUserafterIn);
 			registerYes = 1;
 			try {
 				//测试方法
