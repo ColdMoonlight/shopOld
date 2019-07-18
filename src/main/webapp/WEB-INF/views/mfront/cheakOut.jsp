@@ -691,7 +691,7 @@
 				couponCode = counponDataList[id].couponCode;
 				couponId = counponDataList[id].couponId;
 			} else {
-				targetEl[0].checked = false;
+				targetEl[0].checked = false;   
 				priceInfo.text("Cann't use this Coupon!")
 				totalPriceText.text('$' + (totalPrice).toFixed(2));
 			}
@@ -762,10 +762,22 @@
 				"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
 				"addressinfoId": addressId,
 			};
+			
+			
+			var reqDataUp = {
+					"orderId": orderId,
+					"orderOrderitemidstr": orderItemArr.join(','),
+					"orderCouponId": couponId,
+					"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+					"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+					"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+					"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+					"addressinfoId": addressId,
+				};
 
-			// console.log(reqData)
-			//console.log(checkAddress())
-			if (checkAddress()) {
+			console.log(reqDataUp)
+			console.log(checkAddress(reqDataUp))
+			if (checkAddress(reqDataUp)) {
 				$.ajax({
 					url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 					data: JSON.stringify(reqData),
@@ -790,20 +802,32 @@
 			}
 		})
 
-		function checkAddress() {
+		function checkAddress(reqDataUp) {
 			var flag = false;
 			$.ajax({
 				url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
 				type: 'post',
 				async: false,
 				success: function (data) {
-					// console.log(data)
+					console.log("/MlfrontAddress/getOneMlfrontAddressDetailByUinfo");
+					console.log(data)
 					var resData = data.extend;
 					//console.log(resData.mlfrontAddressOne)
 					if (resData.mlfrontAddressOne) {
 						flag = true;
 					} else {
 						falg = false;
+						/* var addressBox = $('.address');;
+						console.log(addressBox);
+						if(addressBox!=null){
+							flag = true;
+						} */
+						
+						var addressinfoIdss = reqDataUp.addressinfoId;
+						console.log("addressinfoIdss:"+addressinfoIdss);
+						if(addressinfoIdss!=null){
+							flag = true;
+						}
 					}
 				}
 			});

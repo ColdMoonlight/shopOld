@@ -140,4 +140,43 @@ public class MlfrontAddress {
     public void setAddressMotifytime(String addressMotifytime) {
         this.addressMotifytime = addressMotifytime == null ? null : addressMotifytime.trim();
     }
+    
+	public MlfrontAddress() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public MlfrontAddress(Integer addressId, Integer addressUid, String addressIp, String addressEmail,
+			String addressTelephone, String addressUserfirstname, String addressUserlastname, String addressCountry,
+			String addressProvince, String addressCity, String addressDetail, String addressPost,
+			String addressCreatetime, String addressMotifytime) {
+		super();
+		this.addressId = addressId;
+		this.addressUid = addressUid;
+		this.addressIp = addressIp;
+		this.addressEmail = addressEmail;
+		this.addressTelephone = addressTelephone;
+		this.addressUserfirstname = addressUserfirstname;
+		this.addressUserlastname = addressUserlastname;
+		this.addressCountry = addressCountry;
+		this.addressProvince = addressProvince;
+		this.addressCity = addressCity;
+		this.addressDetail = addressDetail;
+		this.addressPost = addressPost;
+		this.addressCreatetime = addressCreatetime;
+		this.addressMotifytime = addressMotifytime;
+	}
+
+	@Override
+	public String toString() {
+		return "MlfrontAddress [addressId=" + addressId + ", addressUid=" + addressUid + ", addressIp=" + addressIp
+				+ ", addressEmail=" + addressEmail + ", addressTelephone=" + addressTelephone
+				+ ", addressUserfirstname=" + addressUserfirstname + ", addressUserlastname=" + addressUserlastname
+				+ ", addressCountry=" + addressCountry + ", addressProvince=" + addressProvince + ", addressCity="
+				+ addressCity + ", addressDetail=" + addressDetail + ", addressPost=" + addressPost
+				+ ", addressCreatetime=" + addressCreatetime + ", addressMotifytime=" + addressMotifytime + "]";
+	}
+    
+    
+    
 }
