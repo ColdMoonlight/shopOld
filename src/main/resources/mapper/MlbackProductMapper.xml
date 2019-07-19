@@ -18,6 +18,7 @@
     <result column="product_admin_id" jdbcType="INTEGER" property="productAdminId" />
     <result column="product_admin_operatorName" jdbcType="VARCHAR" property="productAdminOperatorname" />
     <result column="product_lable" jdbcType="INTEGER" property="productLable" />
+    <result column="product_firsth" jdbcType="INTEGER" property="productFirsth" />
     <result column="product_actoffId" jdbcType="INTEGER" property="productActoffid" />
     <result column="product_actoffOff" jdbcType="INTEGER" property="productActoffoff" />
     <result column="product_reviewNum" jdbcType="INTEGER" property="productReviewnum" />
@@ -88,7 +89,7 @@
   <sql id="Base_Column_List">
     product_id, product_name, product_color, product_seo, product_categoryId, product_mainimgurl, product_originalPrice, 
     product_haveSaleNum, product_status, product_createTime, product_motifyTime, product_admin_id, 
-    product_admin_operatorName, product_lable, product_actoffId, product_actoffOff, product_reviewNum,
+    product_admin_operatorName, product_lable, product_firsth, product_actoffId, product_actoffOff, product_reviewNum,
     product_category_idsStr,product_category_namesStr
   </sql>
   <sql id="Blob_Column_List">
@@ -144,13 +145,13 @@
       product_categoryId, product_mainimgurl, product_originalPrice, 
       product_haveSaleNum, product_status, product_createTime, 
       product_motifyTime, product_admin_id, product_admin_operatorName, 
-      product_lable, product_actoffId, product_actoffOff, 
+      product_lable, product_firsth, product_actoffId, product_actoffOff, 
       product_reviewNum, product_desc,product_category_idsStr,product_category_namesStr)
     values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productSeo,jdbcType=VARCHAR}, 
       #{productCategoryid,jdbcType=INTEGER}, #{productMainimgurl,jdbcType=VARCHAR}, #{productOriginalprice,jdbcType=DECIMAL}, 
       #{productHavesalenum,jdbcType=INTEGER}, #{productStatus,jdbcType=INTEGER}, #{productCreatetime,jdbcType=VARCHAR}, 
       #{productMotifytime,jdbcType=VARCHAR}, #{productAdminId,jdbcType=INTEGER}, #{productAdminOperatorname,jdbcType=VARCHAR}, 
-      #{productLable,jdbcType=INTEGER}, #{productActoffid,jdbcType=INTEGER}, #{productActoffoff,jdbcType=INTEGER}, 
+      #{productLable,jdbcType=INTEGER}, #{productFirsth,jdbcType=INTEGER}, #{productActoffid,jdbcType=INTEGER}, #{productActoffoff,jdbcType=INTEGER}, 
       #{productReviewnum,jdbcType=INTEGER}, #{productDesc,jdbcType=LONGVARCHAR}, 
       #{productCategoryIdsStr,jdbcType=VARCHAR}, #{productCategoryNamesStr,jdbcType=VARCHAR})
   </insert>
@@ -203,6 +204,9 @@
       <if test="record.productLable != null">
         product_lable = #{record.productLable,jdbcType=INTEGER},
       </if>
+      <if test="record.productFirsth != null">
+        product_firsth = #{record.productFirsth,jdbcType=INTEGER},
+      </if>
       <if test="record.productActoffid != null">
         product_actoffId = #{record.productActoffid,jdbcType=INTEGER},
       </if>
@@ -241,6 +245,7 @@
       product_admin_id = #{record.productAdminId,jdbcType=INTEGER},
       product_admin_operatorName = #{record.productAdminOperatorname,jdbcType=VARCHAR},
       product_lable = #{record.productLable,jdbcType=INTEGER},
+      product_firsth = #{record.productFirsth,jdbcType=INTEGER},
       product_actoffId = #{record.productActoffid,jdbcType=INTEGER},
       product_actoffOff = #{record.productActoffoff,jdbcType=INTEGER},
       product_reviewNum = #{record.productReviewnum,jdbcType=INTEGER},
@@ -266,6 +271,7 @@
       product_admin_id = #{record.productAdminId,jdbcType=INTEGER},
       product_admin_operatorName = #{record.productAdminOperatorname,jdbcType=VARCHAR},
       product_lable = #{record.productLable,jdbcType=INTEGER},
+      product_firsth = #{record.productFirsth,jdbcType=INTEGER},
       product_actoffId = #{record.productActoffid,jdbcType=INTEGER},
       product_actoffOff = #{record.productActoffoff,jdbcType=INTEGER},
       product_reviewNum = #{record.productReviewnum,jdbcType=INTEGER},
@@ -290,6 +296,7 @@
       product_admin_id = #{productAdminId,jdbcType=INTEGER},
       product_admin_operatorName = #{productAdminOperatorname,jdbcType=VARCHAR},
       product_lable = #{productLable,jdbcType=INTEGER},
+      product_firsth = #{productFirsth,jdbcType=INTEGER},
       product_actoffId = #{productActoffid,jdbcType=INTEGER},
       product_actoffOff = #{productActoffoff,jdbcType=INTEGER},
       product_reviewNum = #{productReviewnum,jdbcType=INTEGER},
@@ -312,6 +319,7 @@
       product_admin_id = #{productAdminId,jdbcType=INTEGER},
       product_admin_operatorName = #{productAdminOperatorname,jdbcType=VARCHAR},
       product_lable = #{productLable,jdbcType=INTEGER},
+      product_firsth = #{productFirsth,jdbcType=INTEGER},
       product_actoffId = #{productActoffid,jdbcType=INTEGER},
       product_actoffOff = #{productActoffoff,jdbcType=INTEGER},
       product_reviewNum = #{productReviewnum,jdbcType=INTEGER},
@@ -370,6 +378,9 @@
       <if test="productLable != null">
         product_lable = #{productLable,jdbcType=INTEGER},
       </if>
+      <if test="productFirsth != null">
+        product_firsth = #{productFirsth,jdbcType=INTEGER},
+      </if>
       <if test="productActoffid != null">
         product_actoffId = #{productActoffid,jdbcType=INTEGER},
       </if>
@@ -398,7 +409,7 @@
   <!-- selectAll使用中 -->
   <select id="selectMlbackProductGetAll" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
     select *
-    from tb_mlback_product order by product_id desc
+    from tb_mlback_product order by product_lable ,product_firsth desc,product_id desc 
   </select>
   <!-- insert使用中 -->
   <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackProduct">
@@ -451,6 +462,9 @@
       </if>
       <if test="productLable != null">
         product_lable,
+      </if>
+      <if test="productFirsth != null">
+        product_firsth,
       </if>
       <if test="productActoffid != null">
         product_actoffId,
@@ -519,6 +533,9 @@
       </if>
       <if test="productLable != null">
         #{productLable,jdbcType=INTEGER},
+      </if>
+      <if test="productFirsth != null">
+        #{productFirsth,jdbcType=INTEGER},
       </if>
       <if test="productActoffid != null">
         #{productActoffid,jdbcType=INTEGER},
@@ -590,6 +607,9 @@
       <if test="productLable != null">
         product_lable = #{productLable,jdbcType=INTEGER},
       </if>
+      <if test="productFirsth != null">
+        product_firsth = #{productFirsth,jdbcType=INTEGER},
+      </if>
       <if test="productActoffid != null">
         product_actoffId = #{productActoffid,jdbcType=INTEGER},
       </if>
@@ -626,7 +646,7 @@
   <!-- select使用中 -->
   <select id="selectMlbackProductByLable" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
     select * from tb_mlback_product
-    where product_lable = #{productLable,jdbcType=INTEGER} order by product_haveSaleNum desc
+    where product_lable = #{productLable,jdbcType=INTEGER} order by product_firsth ,product_haveSaleNum desc
   </select>
   
   <!-- select使用中 -->
