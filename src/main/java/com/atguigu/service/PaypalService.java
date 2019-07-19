@@ -32,6 +32,11 @@ public class PaypalService {
             String description, 
             String cancelUrl, 
             String successUrl) throws PayPalRESTException{
+		
+//		*APIContext，RequestID是自动生成的，调用setMaskRequestID（true）
+//		*将重写RequestID getter以返回空值
+		apiContext.setMaskRequestId(true);
+		
         Amount amount = new Amount();
         amount.setCurrency(currency);
         amount.setTotal(String.format("%.2f", total));
