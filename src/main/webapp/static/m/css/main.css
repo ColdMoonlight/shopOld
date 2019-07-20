@@ -1029,6 +1029,83 @@ a:focus {
   background-color: #ff186e;
 }
 
+/* reviw box */
+.review-box {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99999;
+	background-color: #fff;
+}
+
+.review-box-title {
+	display: flex;
+	justify-content: space-between;
+	padding: .25em;
+	border-bottom: 1px solid #cdcdcd;
+}
+
+.review-box-title>span {
+	padding: .5em .75em;
+	font: 14px/14px inherit;
+	cursor: pointer;
+}
+
+.review-box-content {
+	padding: .5em;
+}
+
+.review-box-content .review-details {
+	display: block;
+	width: 100%;
+	min-height: 60px;
+	padding: .5em;
+	border-radius: 6px;
+	border: 1px solid #cdcdcd;
+}
+
+.review-box-content .review-star {
+	padding: .5em;
+}
+
+.review-box-content .review-star>.star {
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
+}
+
+.reviews-img-list>img,
+.reviews-img-list>.review-img-add {
+	display: inline-block;
+	width: 60px;
+	heigh: 60px;
+	margin-left: 8px;
+}
+
+.reviews-img-list>.review-img-add {
+	position: relative;
+	margin-top: 8px;
+	border: 1px solid #ccc;
+}
+
+.reviews-img-list>.review-img-add>input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+}
+
+.reviews-img-list>.review-img-add>.icon {
+	width: 60px;
+	height: 60px;
+	background-size: 50px 50px;
+}
+
+/* review-list  */
 .review-item {
   padding: 1em 0;
   border-top: 1px solid #cdcdcd;
