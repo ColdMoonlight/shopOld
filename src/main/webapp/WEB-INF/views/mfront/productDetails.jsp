@@ -53,7 +53,7 @@
 			var productDlengthList = $('.product-d-length').find('.list');
 			var prodcutDpriceText = $('.product-d-price .price-text');
 			var descriptionBox = $('.group-details.description');
-			var reviewBox = $('.group-details review');
+			var reviewBox = $('.group-details.reviews-info');
 
 			var add = $('#product-num-add');
 			var sub = $('#product-num-sub');
@@ -172,10 +172,8 @@
 						prodcutDtitle.text(productData.productName);
 						prodcutDpriceText.attr('data-price', productData.productOriginalprice);
 						prodcutDpriceText.attr('data-discount', productData.productActoffoff);
-						calPrice(productData.productOriginalprice, (productData.productOriginalprice * productData
-							.productActoffoff / 100).toFixed(2));
+						calPrice(productData.productOriginalprice, (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2));
 						descriptionBox.html(productData.productDesc);
-
 						repeatCalPrice();
 
 					} else {
@@ -191,14 +189,52 @@
 				type: "POST",
 				success: function (data) {
 					if (data.code === 100) {
-						var productData = data.extend.mlfrontReviewResList;
-						console.log("MlfrontReview/getMlfrontReviewListByPId");
-						console.log(data.extend)
+						var reviewTextData = data.extend.mlfrontReviewResList;
+						var reviewImgData = data.extend.imgUrlStrListst;
+						console.log(data.extend);
+						renderReviewList(reviewBox.find('.review-list'), reviewTextData, reviewImgData);
 					} else {
-						renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+						renderErrorMsg(productDetailsBox, '未获取到产品评论相关的数据');
 					}
 				}
 			});
+
+			// render reiew list
+			function renderReviewList(parent, text, img) {
+				var html = '';
+				for(var i=0, len = img.length; i<len; i++) {
+					html += '<li class="review-item" data-reviewid="'+ text[i].reviewId +'">' +
+						 '<div class="review-title">' +
+		           '<img src="'+ text[i].reviewUimgurl +'" alt="">' +
+		           '<div class="review-data">' +
+		             '<div class="review-d-author">AUTHOR: '+ text[i].reviewUname +'</div>' +
+		             '<div class="review-d-rank">';
+		             		for(var j=0; j<5; j++) {
+		             			if (j < text[i].reviewProstarnum) {
+		             				html += '<i class="icon star active"></i>';
+		             			} else {
+		             				html += '<i class="icon star"></i>';
+		             			}
+		             		}
+		             html += '</div>' +
+		           		'</div>' +
+		           	'<div class="review-date">'+ text[i].reviewCreatetime +'</div>' +
+		         '</div>' +
+		         '<div class="review-imgs">';
+		          var imgLen = img[i].length <= 5 ? img[i].length : 5;
+		         	for (var k=0; k<imgLen; k++) {
+		         		html += '<img src="'+ img[i][k] +'">';
+		         	}
+		         html += '</div>' +
+             '<div class="review-content">' +
+	             '<div class="review-text">'+ text[i].reviewDetailstr +'</div>' +
+	             /* '<span class="review-more">more<i class="icon bottom"></i></span>' + */
+	           '</div>' +
+	         '</li>';
+				}
+				parent.html(html);
+			}
+			
 			// manipulate dom
 			$('.list-group')
 				.find('.list-group-item')
@@ -456,9 +492,6 @@
 	      }
 	    });
 		});
-		
-		
-		
 	</script>
 </body>
 

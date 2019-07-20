@@ -131,6 +131,10 @@ a:focus {
 }
 
 .icon.star {
+  background-image: url(../img/index/i_star2.png);
+}
+
+.icon.star.active {
   background-image: url(../img/index/i_star.png);
 }
 
@@ -1026,18 +1030,27 @@ a:focus {
 }
 
 .review-item {
+  padding: 1em 0;
+}
+
+.review-item+.review-item {
+  border-top: 1px solid #cdcdcd;
+}
+
+.review-title {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 1em;
 }
 
-.review-item>img {
-  width: 90px;
-  height: 90px;
+.review-title>img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
-.review-data {
+.review-title .review-data {
   margin-left: 1em;
+  flex-grow: 1;
 }
 
 .review-data .review-d-author {
@@ -1049,11 +1062,23 @@ a:focus {
   height: 18px;
 }
 
+.review-imgs {
+	margin-top: .6em;
+}
+
+.review-imgs>img {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+}
+
+.review-imgs>img+img {
+	margin-left: 8px;
+}
 .review-content {
   position: relative;
-  flex-grow: 1;
-  padding-bottom: 2em;
-  margin-top: 1em;
+  /* padding-bottom: 2em; */
+  margin-top: .6em;
 }
 
 .review-text {
