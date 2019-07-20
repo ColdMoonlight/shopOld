@@ -233,7 +233,7 @@ public class MlfrontReviewController {
 		}
 		
 		for(int i=StartIndex;i<EndIndex;i++){
-			MlfrontReview mlfrontReviewOne = mlfrontReviewResListPage.get(StartIndex);
+			MlfrontReview mlfrontReviewOne = mlfrontReviewResListPage.get(i);
 			mlfrontReviewResreturn.add(mlfrontReviewOne);
 			Integer reviewId = mlfrontReviewOne.getReviewId();
 			mlbackReviewImg.setReviewId(reviewId);
