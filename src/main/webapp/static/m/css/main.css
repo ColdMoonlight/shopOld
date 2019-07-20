@@ -131,6 +131,10 @@ a:focus {
 }
 
 .icon.star {
+  background-image: url(../img/index/i_star2.png);
+}
+
+.icon.star.active {
   background-image: url(../img/index/i_star.png);
 }
 
@@ -449,7 +453,7 @@ a:focus {
 
 .category .sub-category-product {
   width: 96px;
-  height: 96px;
+  height: auto;
   margin-top: 12px;
   margin-left: 12px;
 }
@@ -460,7 +464,7 @@ a:focus {
 
 .category .sub-category-product .product-img {
   width: 100%;
-  height: 100%;
+  height: 96px;
   overflow: hidden;
   border: 1px solid #ccc;
   border-radius: 2px;
@@ -1026,18 +1030,27 @@ a:focus {
 }
 
 .review-item {
+  padding: 1em 0;
+}
+
+.review-item+.review-item {
+  border-top: 1px solid #cdcdcd;
+}
+
+.review-title {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 1em;
 }
 
-.review-item>img {
-  width: 90px;
-  height: 90px;
+.review-title>img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
 }
 
-.review-data {
+.review-title .review-data {
   margin-left: 1em;
+  flex-grow: 1;
 }
 
 .review-data .review-d-author {
@@ -1049,11 +1062,23 @@ a:focus {
   height: 18px;
 }
 
+.review-imgs {
+	margin-top: .6em;
+}
+
+.review-imgs>img {
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+}
+
+.review-imgs>img+img {
+	margin-left: 8px;
+}
 .review-content {
   position: relative;
-  flex-grow: 1;
-  padding-bottom: 2em;
-  margin-top: 1em;
+  /* padding-bottom: 2em; */
+  margin-top: .6em;
 }
 
 .review-text {
@@ -1534,12 +1559,13 @@ a:focus {
 }
 
 .coupons .input-group>input {
-	min-width: 120px;
+  min-width: 160px;
+  padding: .25em 1em;
 	border-left-color:#ccc;
 }
 
 .coupons .input-group>span {
-	padding: 0 .5em;
+	padding: 0.25em .75em;
 }
 
 .coupons .coupon-error {
@@ -1861,6 +1887,10 @@ a:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#countdown-area.hide {
+	display: none;
 }
 
 #countdown-area .title {

@@ -469,6 +469,7 @@
 				resDataMoney = data.extend.areafreightMoney;
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
+				console.log(data)
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
 					renderAddressDetail(addressBox, resDataAddress);
@@ -690,7 +691,7 @@
 				couponCode = counponDataList[id].couponCode;
 				couponId = counponDataList[id].couponId;
 			} else {
-				targetEl[0].checked = false;
+				targetEl[0].checked = false;   
 				priceInfo.text("Cann't use this Coupon!")
 				totalPriceText.text('$' + (totalPrice).toFixed(2));
 			}
@@ -799,7 +800,6 @@
 			} else {
 				alert('请填写收货地址')
 			}
-
 		})
 
 		function checkAddress(reqDataUp) {

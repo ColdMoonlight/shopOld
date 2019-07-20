@@ -92,10 +92,7 @@
 	<script type="text/javascript">
 		var totalRecord, currentPage, editid;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
-		$(function () {
-			//去首页
-			to_page(1);
-		});
+		to_page(1);
 
 		function to_page(pn) {
 			$.ajax({
@@ -141,17 +138,14 @@
 				//为删除按钮添加一个自定义的属性来表示当前删除的productId
 				delBtn.attr("del-id", item.reviewId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
-				//var delBtn = 
 				//append方法执行完成以后还是返回原来的元素
 				$("<tr></tr>").append(reviewId)
 					.append(reviewUname)
 					.append(reviewUimgurl)
 					.append(reviewPid)
-					/* .append(reviewPname) */
 					.append(reviewCreatetime)
 					.append(reviewStatus)
 					.append(reviewMotifytime)
-					/* .append(reviewImgidstr) */
 					.append(reviewProstarnum)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
@@ -160,9 +154,11 @@
 		//解析显示分页信息
 		function build_page_info(result) {
 			$("#page_info_area").empty();
-			$("#page_info_area").append("当前" + result.extend.pageInfo.pageNum + "页,总" +
-				result.extend.pageInfo.pages + "页,总" +
-				result.extend.pageInfo.total + "条记录");
+			$("#page_info_area").append(
+					"当前" + result.extend.pageInfo.pageNum + "页,总" +
+					result.extend.pageInfo.pages + "页,总" +
+					result.extend.pageInfo.total + "条记录"
+			);
 			totalRecord = result.extend.pageInfo.total;
 			currentPage = result.extend.pageInfo.pageNum;
 		}
@@ -244,14 +240,6 @@
 							theme: 'monokai'
 						}
 					}); */
-					// option
-					/* $('.add-item').each(function (i, item) {
-						$(item).on('click', function () {
-							var table = $(this).parent().parent().parent().parent().find('tbody');
-							addHairStyle(table, {})
-						})
-					});
-					saveOption(null); */
 				})
 		});
 		//新建编辑任務提交按钮
@@ -296,9 +284,9 @@
 				}
 			});
 		});
-		// fetch all category infos
-		var productData;
 
+		// fetch all product infos
+		var productData;
 		function getProductDown() {
 			$.ajax({
 				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
@@ -307,7 +295,6 @@
 				success: function (result) {
 					if (result.code == 100) {
 						function setCategoryDescSelect(el, data) {
-							/* var html = '<option value="999">---none---</option>'; */
 							var html = '';
 							for (var i = 0; i < data.length; i += 1) {
 								html += '<option value="' + data[i].productId + '">' + data[i].productId +" "+ data[i].productName + '</option>';
@@ -328,7 +315,7 @@
 			var reviewId = parseInt($(this).attr('edit-id'))
 			// tab tpl
 			$('.table-box').load('${APP_PATH}/static/tpl/addReview.html', function () {
-				// 获取分类列表
+				// 获取产品列表
 				getProductDown();
 				// init
 				initOtherInfo(reviewId)
@@ -336,24 +323,16 @@
 
 				// boot upload img
 				$('#upload-img-main').on("change", upload);
-				//$('#upload-img-mainFu').on("change", uploadMainFu);
 				$('.upload-img-fu').each(function (i, item) {
 					$(item).on("change", function () {
 						uploadfu($(this), i + 1);
 					})
 				});
 				$('#upload-img-fu1').on("change", uploadfu);
-
 			});
 		});
 
-		
-
-		function boxCancel(e) {
-			$(e.target).parents('.check-box').addClass('hide');
-		}
-
-		// fetch data about imgs-list
+		// fetch data about review imgs
 		function initImgList(id) {
 			$.ajax({
 				url: "${APP_PATH}/MlbackReviewImg/getMlbackReviewImgListByReviewId",
@@ -372,8 +351,7 @@
 			});
 		}
 
-
-		// fetch data about other
+		// fetch data about reivew
 		function initOtherInfo(id) {
 			$.ajax({
 				url: "${APP_PATH}/MlfrontReview/getOneMlfrontReviewDetailById",
@@ -422,9 +400,6 @@
 			if (data.reviewUimgurl && data.reviewUimgurl.length) {
 				$("#upload-img-main").parent().css("background-image", "url(" + data.reviewUimgurl + ")");
 			}
-			/* if (data.productMainFuimgurl && data.productMainFuimgurl.length) {
-				$("#upload-img-mainFu").parent().css("background-image", "url(" + data.productMainFuimgurl + ")");
-			} */
 			//$(":input[name='productMainimgurl']").val(data.productMainimgurl);
 			$(":input[name='reviewDetailstr']").val(data.reviewDetailstr);
 			$(":input[name='reviewImgidstr']").val(data.reviewImgidstr);
@@ -439,8 +414,6 @@
 			for (var i = 0; i < data.length; i += 1) {
 				$(elImgs[data[i].reviewimgSortOrder - 1]).css("background-image", "url(" + data[i].reviewimgUrl + ")");
 			}
-
-			// productimgUrl  productimgSortOrder
 		}
 
 		// upload img 
@@ -475,7 +448,6 @@
 					}
 				});
 			}
-
 		}
 
 		// upload img 1-2
@@ -512,7 +484,6 @@
 					}
 				});
 			}
-
 		}
 		
 	</script>
