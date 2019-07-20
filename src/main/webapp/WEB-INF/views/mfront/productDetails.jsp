@@ -202,7 +202,7 @@
 			 /*
 		      review汇总接口  
 		      Integer productId;
-		      return 
+		      return StartNumList各个星级评论数		allReviewNum评论总数
 		      */
 		       $.ajax({
 		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
@@ -212,7 +212,7 @@
 		        type: "POST",
 		        success: function (data) {
 		          if (data.code === 100) {
-		            var productData = data.extend.mlfrontReviewResList;
+		            var productData = data.extend;
 		            console.log("MlfrontReview/getMlfrontReviewCount");
 		            console.log(data.extend)
 		          } else {
@@ -224,7 +224,7 @@
 		      review分页接口
 		      Integer productId;//产品ID
 		      Integer pn;//页数
-		      return
+		      return	分页信息(pageInfo),5条评论内容(mlfrontReviewResreturn)，5条评论中的图片(imgUrlStrListst)
 		      */
 		      $.ajax({
 		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage',
