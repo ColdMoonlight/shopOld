@@ -151,7 +151,7 @@ public class MlbackActShowProController {
 	
 	/**
 	 * 5.0	UseNow	0505
-	 * 查看单条类目的详情细节
+	 * 查看首页活动品区域的顺序
 	 * @param MlbackActShowPro
 	 * @return 
 	 */
@@ -163,7 +163,10 @@ public class MlbackActShowProController {
 		mlbackActShowProReq.setActshowproStatus(1);
 		mlbackActShowProReq.setActshowproActnum(actshowproActnum);
 		//查询本条
-		List<MlbackActShowPro> mlbackActShowProList =mlbackActShowProService.selectMlbackActShowProGetAll();
+//		List<MlbackActShowPro> mlbackActShowProList =mlbackActShowProService.selectMlbackActShowProGetAll();
+//		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
+//					.add("mlbackActShowProList", mlbackActShowProList);
+		List<MlbackActShowPro> mlbackActShowProList =mlbackActShowProService.selectMlbackActShowProByActnum(mlbackActShowProReq);
 		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 					.add("mlbackActShowProList", mlbackActShowProList);
 	}

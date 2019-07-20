@@ -328,7 +328,7 @@
     from tb_mlback_actshowpro order by actShowPro_id desc
   </select>
   
-   <!-- selectMlbackActShowProGetAll -->
+   <!-- selectMlbackActShowProByActnum -->
   <select id="selectMlbackActShowProByActnum" parameterType="com.atguigu.bean.MlbackActShowPro" resultMap="BaseResultMap">
     select *
     from tb_mlback_actshowpro 

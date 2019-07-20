@@ -79,8 +79,8 @@ public class MlbackActShowProService {
 	 * @exception 查看全部用户信息
 	 * 
 	 * */
-	public List<MlbackActShowPro> selectMlbackActShowProByActnum(MlbackActShowPro mlbackActShowPro) {
-		List<MlbackActShowPro>  MlbackActShowProList = mlbackActShowProMapper.selectMlbackActShowProByActnum(mlbackActShowPro);
+	public List<MlbackActShowPro> selectMlbackActShowProByActnum(MlbackActShowPro mlbackActShowProReq) {
+		List<MlbackActShowPro>  MlbackActShowProList = mlbackActShowProMapper.selectMlbackActShowProByActnum(mlbackActShowProReq);
 		return MlbackActShowProList;
 	}
 

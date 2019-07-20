@@ -34,7 +34,9 @@ public class MlbackProduct {
     private String productAdminOperatorname;
 
     private Integer productLable;
-
+    
+    private Integer productFirsth;
+    
     private Integer productActoffid;
 
     private Integer productActoffoff;
@@ -175,8 +177,16 @@ public class MlbackProduct {
     public void setProductLable(Integer productLable) {
         this.productLable = productLable;
     }
+    
+    public Integer getProductFirsth() {
+		return productFirsth;
+	}
 
-    public Integer getProductActoffid() {
+	public void setProductFirsth(Integer productFirsth) {
+		this.productFirsth = productFirsth;
+	}
+
+	public Integer getProductActoffid() {
         return productActoffid;
     }
 
@@ -226,7 +236,6 @@ public class MlbackProduct {
 
 	@Override
     public String toString() {
-    	// TODO Auto-generated method stub
     	return super.toString();
     }
 }

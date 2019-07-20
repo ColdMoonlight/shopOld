@@ -54,6 +54,7 @@
 										<th>历史销量</th>
 										<th>上架状态</th>
 										<th>标签</th>
+										<th>同级别位置</th>
 										<th>折扣</th>
 										<th>评论num</th>
 										<th>操作</th>
@@ -102,7 +103,7 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					//console.log(result);
+					console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -151,6 +152,7 @@
 				var productHavesalenum = $("<td></td>").append(item.productHavesalenum);
 				var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
 				var productLable = $("<td></td>").append(productLablestate);
+				var productFirsth = $("<td></td>").append(item.productFirsth);
 				/* var productActoffid = $("<td></td>").append(item.productActoffid); */
 				var productActoffoff = $("<td></td>").append(item.productActoffoff);
 				var productReviewnum = $("<td></td>").append(item.productReviewnum);
@@ -175,6 +177,7 @@
 					.append(productHavesalenum)
 					.append(productStatus)
 					.append(productLable)
+					.append(productFirsth)
 					.append(productActoffoff)
 					.append(productReviewnum)
 					.append(btnTd)
@@ -285,7 +288,7 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			//console.log(reqData)
+			console.log(reqData)
 			//alert(data.productDesc);
 			$.ajax({
 				url: "${APP_PATH}/MlbackProduct/save",
@@ -556,6 +559,7 @@
 			$(":input[name='productHavesalenum']").val(parseFloat(data.productHavesalenum));
 			$(":input[name='productStatus']").val(data.productStatus);
 			$(":input[name='productLable']").val(data.productLable);
+			$(":input[name='productFirsth']").val(data.productFirsth);
 			$(":input[name='productActoffid']").val(data.productActoffid);
 			$(":input[name='productActoffoff']").val(data.productActoffoff);
 			$(":input[name='productReviewnum']").val(data.productReviewnum);
