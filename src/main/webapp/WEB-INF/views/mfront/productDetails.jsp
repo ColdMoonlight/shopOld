@@ -198,6 +198,52 @@
 					}
 				}
 			});
+			 
+			 /*
+		      review汇总接口  
+		      Integer productId;
+		      return 
+		      */
+		       $.ajax({
+		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
+		        data: {
+		          "productId": pidA[1]
+		        },
+		        type: "POST",
+		        success: function (data) {
+		          if (data.code === 100) {
+		            var productData = data.extend.mlfrontReviewResList;
+		            console.log("MlfrontReview/getMlfrontReviewCount");
+		            console.log(data.extend)
+		          } else {
+		            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+		          }
+		        }
+		      });
+		      /*
+		      review分页接口
+		      Integer productId;//产品ID
+		      Integer pn;//页数
+		      return
+		      */
+		      $.ajax({
+		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage',
+		        data: {
+		          "productId": pidA[1],
+		          "pn": 1
+		        },
+		        type: "POST",
+		        success: function (data) {
+		          if (data.code === 100) {
+		            var productData = data.extend;
+		            console.log("MlfrontReview/getMlfrontReviewByProductIdAndPage");
+		            console.log(data.extend)
+		          } else {
+		            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+		          }
+		        }
+		      }); 
+			 
 
 			// render reiew list
 			function renderReviewList(parent, text, img) {

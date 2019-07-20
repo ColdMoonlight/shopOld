@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.Vo.StartNum;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.MlfrontReview;
@@ -69,11 +70,15 @@ public class MlfrontReviewController {
 			int PagNum = 20;
 			PageHelper.startPage(pn, PagNum);
 			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewAll();
+			
 			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
 			return Msg.success().add("pageInfo", page);
 //		}
 	}
 	
+	
+
+
 	/**3.0	useOn	0505
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
@@ -186,6 +191,126 @@ public class MlfrontReviewController {
 		}
 		return Msg.success().add("resMsg", "查看list完毕")
 					.add("mlfrontReviewResList", mlfrontReviewResList).add("imgUrlStrListst", imgUrlStrListst);
+	}
+	
+	/**7.0	useOn	0505
+	 * review的分页接口
+	 * @param pn
+	 * @return
+	 */
+	@RequestMapping(value="/getMlfrontReviewByProductIdAndPage",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlfrontReviewByProductIdAndPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "productId") Integer productId,HttpSession session) {
+		
+		//接受信息
+		//查询该ID下的评论
+		MlfrontReview mlfrontReview = new MlfrontReview();
+		mlfrontReview.setReviewPid(productId);
+		mlfrontReview.setReviewStatus(1);
+		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(mlfrontReview);
+		List<MlfrontReview> mlfrontReviewResListPage = new ArrayList<MlfrontReview>();
+		
+		List<MlfrontReview> mlfrontReviewResreturn = new ArrayList<MlfrontReview>();
+		
+		//分页数据获取完毕
+		int PagNum = 5;
+		PageHelper.startPage(pn, PagNum);
+		PageInfo page = new PageInfo(mlfrontReviewResList, PagNum);
+		
+		//从中获取本次展示的5条信息
+		mlfrontReviewResListPage = page.getList();
+		MlbackReviewImg mlbackReviewImg = new MlbackReviewImg();
+		List<MlbackReviewImg>  mlbackReviewImgList = new ArrayList<MlbackReviewImg>();
+		List<List<String>> imgUrlStrListst = new ArrayList<List<String>>();
+		//开始对5条信息进行遍历，获取每条的详情照片
+		Integer StartIndex = (pn-1)*PagNum;
+		Integer lengthAll = mlfrontReviewResListPage.size();
+		Integer EndIndex = 0;
+		if(StartIndex+5>lengthAll){
+			EndIndex = lengthAll;
+		}else{
+			EndIndex = StartIndex+5;
+		}
+		
+		for(int i=StartIndex;i<EndIndex;i++){
+			MlfrontReview mlfrontReviewOne = mlfrontReviewResListPage.get(StartIndex);
+			mlfrontReviewResreturn.add(mlfrontReviewOne);
+			Integer reviewId = mlfrontReviewOne.getReviewId();
+			mlbackReviewImg.setReviewId(reviewId);
+			mlbackReviewImgList =  mlbackReviewImgService.selectMlbackReviewImgByReviewId(reviewId);
+			
+			String reviewimgUrl ="";
+			List<String> imgUrlOneList = new ArrayList<String>();
+			for(MlbackReviewImg mlbackReviewImgOne:mlbackReviewImgList){
+				reviewimgUrl = mlbackReviewImgOne.getReviewimgUrl();
+				imgUrlOneList.add(reviewimgUrl);
+			}
+			imgUrlStrListst.add(imgUrlOneList);
+		}
+		//return 分页信息pageInfo,5条评论内容，5条评论中的图片
+		return Msg.success().add("pageInfo", page).add("mlfrontReviewResreturn", mlfrontReviewResreturn).add("imgUrlStrListst", imgUrlStrListst);
+	}
+	
+	/**8.0	useOn	0505
+	 * review的汇总接口
+	 * @param pn
+	 * @return
+	 */
+	@RequestMapping(value="/getMlfrontReviewCount",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlfrontReviewCount(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId){
+		//封装参数
+		MlfrontReview mlfrontReview = new MlfrontReview();
+		mlfrontReview.setReviewPid(productId);
+		mlfrontReview.setReviewStatus(1);
+		//封装完毕
+		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(mlfrontReview);
+		//评论总数
+		Integer allReviewNum = mlfrontReviewResList.size();
+		//各个星级评论数	
+		List<StartNum> StartNumList =  staryStartDetail(mlfrontReviewResList);
+		return Msg.success().add("StartNumList", StartNumList).add("allReviewNum", allReviewNum);
+//		}
+	}
+	
+	/**8.1	useOn	0505
+	 * 分类StartNum
+	 * @param pn
+	 * @return
+	 */
+	private List<StartNum> staryStartDetail(List<MlfrontReview> mlfrontReviewList) {
+		List<StartNum> startNumList = new ArrayList<StartNum>();
+		StartNum StartNumOne = new StartNum(1,0);
+		StartNum StartNumTwo = new StartNum(2,0);
+		StartNum StartNumThree = new StartNum(3,0);
+		StartNum StartNumFour = new StartNum(4,0);
+		StartNum StartNumFive = new StartNum(5,0);
+		for(MlfrontReview mlfrontReview :mlfrontReviewList){
+			Integer starnum = mlfrontReview.getReviewProstarnum();//这个是产品评分
+			Integer temp = 0;
+			if(starnum==1){
+				temp = StartNumOne.getStartCount();
+				StartNumOne.setStartCount(temp+1);
+			}else if(starnum==2){
+				temp = StartNumTwo.getStartCount();
+				StartNumTwo.setStartCount(temp+1);
+			}else if(starnum==3){
+				temp = StartNumThree.getStartCount();
+				StartNumThree.setStartCount(temp+1);
+			}else if(starnum==4){
+				temp = StartNumFour.getStartCount();
+				StartNumFour.setStartCount(temp+1);
+			}else if(starnum==5){
+				temp = StartNumFive.getStartCount();
+				StartNumFive.setStartCount(temp+1);
+			}
+		}
+		startNumList.add(StartNumOne);
+		startNumList.add(StartNumTwo);
+		startNumList.add(StartNumThree);
+		startNumList.add(StartNumFour);
+		startNumList.add(StartNumFive);
+		return startNumList;
 	}
 	
 }
