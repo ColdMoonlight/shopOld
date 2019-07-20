@@ -181,7 +181,7 @@
 					}
 				}
 			});
-			 $.ajax({
+			$.ajax({
 				url: '${APP_PATH}/MlfrontReview/getMlfrontReviewListByPId',
 				data: {
 					"productId": pidA[1]
@@ -191,59 +191,62 @@
 					if (data.code === 100) {
 						var reviewTextData = data.extend.mlfrontReviewResList;
 						var reviewImgData = data.extend.imgUrlStrListst;
-						console.log(data.extend);
-						renderReviewList(reviewBox.find('.review-list'), reviewTextData, reviewImgData);
+						//console.log(data.extend);
+						// renderReviewList(reviewBox.find('.review-list'), reviewTextData, reviewImgData);
+						to_page(1);
 					} else {
 						renderErrorMsg(productDetailsBox, '未获取到产品评论相关的数据');
 					}
 				}
 			});
 			 
-			 /*
-		      review汇总接口  
-		      Integer productId;
-		      return StartNumList各个星级评论数		allReviewNum评论总数
-		      */
-		       $.ajax({
-		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
-		        data: {
-		          "productId": pidA[1]
-		        },
-		        type: "POST",
-		        success: function (data) {
-		          if (data.code === 100) {
-		            var productData = data.extend;
-		            console.log("MlfrontReview/getMlfrontReviewCount");
-		            console.log(data.extend)
-		          } else {
-		            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
-		          }
-		        }
-		      });
-		      /*
-		      review分页接口
-		      Integer productId;//产品ID
-		      Integer pn;//页数
-		      return	分页信息(pageInfo),5条评论内容(mlfrontReviewResreturn)，5条评论中的图片(imgUrlStrListst)
-		      */
-		      $.ajax({
-		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage',
-		        data: {
-		          "productId": pidA[1],
-		          "pn": 1
-		        },
-		        type: "POST",
-		        success: function (data) {
-		          if (data.code === 100) {
-		            var productData = data.extend;
-		            console.log("MlfrontReview/getMlfrontReviewByProductIdAndPage");
-		            console.log(data.extend)
-		          } else {
-		            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
-		          }
-		        }
-		      }); 
-			 
+			/*
+      review汇总接口  
+      Integer productId;
+      return StartNumList各个星级评论数		allReviewNum评论总数
+      */
+      $.ajax({
+        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
+        data: {
+          "productId": pidA[1]
+        },
+        type: "POST",
+        success: function (data) {
+          if (data.code === 100) {
+            var productData = data.extend;
+            console.log("MlfrontReview/getMlfrontReviewCount");
+            console.log(data.extend)
+          } else {
+            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+          }
+        }
+      });
+      /*
+      review分页接口
+      Integer productId;//产品ID
+      Integer pn;//页数
+      return	分页信息(pageInfo),5条评论内容(mlfrontReviewResreturn)，5条评论中的图片(imgUrlStrListst)
+      */			
+      function to_page(pn, type) {
+	  		$.ajax({
+	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
+	  			data: {
+ 	          "productId": pidA[1],
+ 	          "pn": 1
+ 	        },
+	  			type: "POST",
+	  			success: function (result) {
+	  				// console.log(result);
+	  				var reviewTextData = result.extend.mlfrontReviewResreturn;
+	  				var reviewImgData = result.extend.imgUrlStrListst;
+	  				var pageInfo = result.extend.pageInfo;
+	  				// 列表数据
+	  				renderReviewList(reviewBox.find('.review-list'), reviewTextData, reviewImgData);
+	  				// 解析显示分页条数据
+	  				render_page_nav(reviewBox.find('.page-info-area'), pageInfo);
+	  			}
+	  		});
+	  	}
 
 			// render reiew list
 			function renderReviewList(parent, text, img) {
@@ -281,6 +284,59 @@
 				parent.html(html);
 			}
 			
+			// render page nav
+			function render_page_nav(parent, pageInfo) {
+				//page_nav_area
+				parent.empty();
+				var ul = $("<ul></ul>").addClass("pagination");
+
+				//构建元素
+				var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+				var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+				if (pageInfo.hasPreviousPage == false) {
+					firstPageLi.addClass("disabled");
+					prePageLi.addClass("disabled");
+				} else {
+					//为元素添加点击翻页的事件
+					firstPageLi.click(function () {
+						to_page(1);
+					});
+					prePageLi.click(function () {
+						to_page(pageInfo.pageNum - 1);
+					});
+				}
+
+				var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+				var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+				if (pageInfo.hasNextPage == false) {
+					nextPageLi.addClass("disabled");
+					lastPageLi.addClass("disabled");
+				} else {
+					nextPageLi.click(function () {
+						to_page(pageInfo.pageNum + 1);
+					});
+					lastPageLi.click(function () {
+						to_page(pageInfo.pages);
+					});
+				}
+
+				//添加首页和前一页 的提示
+				ul.append(firstPageLi).append(prePageLi);
+				//1,2，3遍历给ul中添加页码提示
+				$.each(pageInfo.navigatepageNums, function (index, item) {
+
+					var numLi = $("<li></li>").append($("<a></a>").append(item));
+					if (pageInfo.pageNum == item) {
+						numLi.addClass("active");
+					}
+					numLi.click(function () {
+						to_page(item);
+					});
+					ul.append(numLi);
+				});
+				//添加下一页和末页 的提示
+				ul.append(nextPageLi).append(lastPageLi).appendTo(parent);
+			}
 			// manipulate dom
 			$('.list-group')
 				.find('.list-group-item')

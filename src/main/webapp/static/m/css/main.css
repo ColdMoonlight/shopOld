@@ -1031,10 +1031,11 @@ a:focus {
 
 .review-item {
   padding: 1em 0;
+  border-top: 1px solid #cdcdcd;
 }
 
-.review-item+.review-item {
-  border-top: 1px solid #cdcdcd;
+.review-item:nth-last-of-type(1) {
+  border-bottom: 1px solid #cdcdcd;
 }
 
 .review-title {
@@ -1787,14 +1788,27 @@ a:focus {
  	display: inline-block;
  	padding: .5em;
  	border: 1px solid #ccc;
- 	border-raidus: 3px;
+ 	border-radius: 3px;
  	font: 14px/14px '';
- 	backgorund-color: #fff;
- }
+ 	background-color: #fff;
+}
+
+.pagination li.active {
+	background-color: #ff1671;
+	border-color: #f1671;
+}
+
+.pagination li.active a {
+	color: #fff;
+}
+
+.pagination li.disabled {
+	cursor: not-allowed;
+}
  
- .pagination li+li {
- 	margin-left: .25em;
- }
+.pagination li+li {
+	margin-left: .25em;
+}
  
  /* order list  */
  .order-info .order-list {
