@@ -68,6 +68,7 @@
 						<input type="file">
 						<i class="icon plus"></i>
 					</div>
+					<div class="reviews-img-box"></div>
 				</div>
 			</div>
 		</div>
@@ -230,37 +231,43 @@
       $.ajax({
         url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
         data: {
-          "productId": pidA[1]
+          "productId": pidA[1],
         },
         type: "POST",
         success: function (data) {
           if (data.code === 100) {
             var productData = data.extend;
-            console.log("MlfrontReview/getMlfrontReviewCount");
-            console.log(data.extend)
+            // console.log("MlfrontReview/getMlfrontReviewCount");
+            // console.log(data.extend)
+            var staticData = data.extend.StartNumList; 
+            var reviewTotal = data.extend.allReviewNum;
+            var reviewStatics = $(".reviews-statics");
+            
+            function renderProgress(parent, num, total) {
+            	var html = '';
+            	html += '<div class="progress">' +
+            			'<div class="progress-inner" style="width: '+ ((num / total).toFixed(2) * 100) +'%"></div>' +
+            		'</div>' +
+            		'<div class="data">('+ num +')</div>';
+            		
+            	parent.append($(html));
+            }
+            var dataMap = {}
+            for (var i=0, len = staticData.length; i<len; i+=1) {
+            	dataMap[staticData[i].startNum] = staticData[i].startCount;
+            }
+            $('.reivew-toal-num').find('.data').html(reviewTotal);
+            renderProgress($('.review-statics-item.five'), dataMap[5], reviewTotal);
+            renderProgress($('.review-statics-item.four'), dataMap[4], reviewTotal);
+            renderProgress($('.review-statics-item.three'), dataMap[3], reviewTotal);
+            renderProgress($('.review-statics-item.two'), dataMap[2], reviewTotal);
+            renderProgress($('.review-statics-item.one'), dataMap[1], reviewTotal);
+            
           } else {
             renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
           }
         }
       });
-
-			/* $.ajax({
-				url: '${APP_PATH}/MlfrontReview/getMlfrontReviewListByPId',
-				data: {
-					"productId": pidA[1]
-				},
-				type: "POST",
-				success: function (data) {
-					if (data.code === 100) {
-						var reviewTextData = data.extend.mlfrontReviewResList;
-						var reviewImgData = data.extend.imgUrlStrListst;
-						//console.log(data.extend);
-						renderReviewList(reviewBox.find('.review-list'), reviewTextData, reviewImgData);
-					} else {
-						renderErrorMsg(productDetailsBox, '未获取到产品评论相关的数据');
-					}
-				}
-			}); */
 	
 			to_page(1);
       /*
@@ -274,7 +281,7 @@
 	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
 	  			data: {
  	          "productId": pidA[1],
- 	          "pn": 1
+ 	          "pn": pn
  	        },
 	  			type: "POST",
 	  			success: function (result) {
@@ -301,7 +308,7 @@
 				for(var i=0, len=img.length; i<len; i++) {
 					html += '<li class="review-item" data-reviewid="'+ text[i].reviewId +'">' +
 						 '<div class="review-title">' +
-		           '<img src="'+ text[i].reviewUimgurl +'" alt="">' +
+		           '<div class="img"><img src="'+ text[i].reviewUimgurl +'" alt=""></div>' +
 		           '<div class="review-data">' +
 		             '<div class="review-d-author">AUTHOR: '+ text[i].reviewUname +'</div>' +
 		             '<div class="review-d-rank">';
@@ -421,7 +428,8 @@
 					async: false,
 					success: function (result) {
 						if (result.code == 100) {
-							console.log(result)
+							//console.log(result)
+							window.location.href = window.location.href;
 						} else {
 							alert('系统错误，请联系管理员！');
 						}
@@ -762,6 +770,7 @@
 				obj.append('file', file.files[0]);
 				obj.append('reviewId', reviewId);
 				obj.append('sort', imgCount + 1);
+				console.log(imgCount)
 				$.ajax({
 					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
 					type: "post",
@@ -773,14 +782,9 @@
 					success: function (data) {
 						if (data.code === 100) {
 							var returl = data.extend.uploadUrl;
-							var img = $('<img src="'+ returl +'">');
-							parent.append(img);
+							var img = $('<img src="${APP_PATH }/static/img/reviewAllImg/'+ returl +'">');
+							parent.find('.reviews-img-box').append(img);
 							imgCount++;
-							/*这是在后台review买家秀上传图片的样子*/
-							/* var returl = data.extend.uploadUrl;
-							item.parent().css({
-								"background-image": "url(" + '${APP_PATH }/static/img/reviewAllImg/' + returl + ")"
-							}); */
 						}
 					}
 				});
