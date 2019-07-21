@@ -594,6 +594,169 @@
 	      }
 	    });
 		});
+		
+		
+		/****************************以下是所需介绍***************************************************/
+		
+		/**
+		
+			格式
+			url: "${APP_PATH}/MlfrontReview/saveNew",
+			data: JSON.stringify(reqData),
+			dataType: "json",
+			contentType: 'application/json',
+			type: "POST",
+			
+			参数	private Integer reviewPid;
+			
+			return mlfrontReviewOne(这里面有reviewId)
+		
+		*/
+		//点击write a review		可用下面格式的代码改成
+		$(document).on('click', '#tasksubmit', function () {
+			var data = $('form').serializeArray();
+			reqData = data.reduce(function (obj, item) {
+				obj[item.name] = item.value;
+				return obj
+			}, {});
+			//console.log(reqData)
+			//alert(data.productDesc);
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/saveNew",
+				data: JSON.stringify(reqData),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						alert('操作成功！');
+						window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewPage";
+					}
+				}
+			});
+		});
+			
+		/*************************************************************************************/	
+		
+		/**
+		private Integer reviewId;	//页面已经有了，带回来即可
+	    private String reviewUname;	//存放uName
+	    private String reviewPname; //存放uEmail
+	    private String reviewDetailstr;	//存放评论详情
+	    private Integer reviewProstarnum;	//存放打分
+		*/
+		//提交评论--新建编辑任務提交按钮
+		$(document).on('click', '#tasksubmit', function () {
+			var data = $('form').serializeArray();
+			reqData = data.reduce(function (obj, item) {
+				obj[item.name] = item.value;
+				return obj
+			}, {});
+			//console.log(reqData)
+			//alert(data.productDesc);
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/save",
+				data: JSON.stringify(reqData),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						alert('操作成功！');
+						window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewPage";
+					}
+				}
+			});
+		});	
+			
+		/*************************************************************************************/		
+		// 取消评论--删除该条（id）分类信息
+		$("#task_table").on("click", ".btn-danger", function () {
+			var data = {
+				reviewId: $(this).attr('del-id')
+			};
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/delete",
+				data: JSON.stringify(data),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "post",
+				success: function (result) {
+					if (result.code == 100) {
+						alert('删除成功！');
+						to_page(1);
+					}
+				}
+			});
+		});
+		
+		/************************传买家秀图片的方法*********************************************/
+		
+		/**这是你在addreview.html页面的样式代码*/
+		/* <div>
+			  <div class="upload-img-btn">
+			     <input class="uploadImg upload-img-fu" type="file" >
+			  </div>
+			  <div class="upload-img-btn">
+			     <input class="uploadImg upload-img-fu" type="file" >
+			  </div>
+			  <div class="upload-img-btn">
+			     <input class="uploadImg upload-img-fu" type="file" >
+			  </div>
+		  </div>
+		  <div>
+			  <div class="upload-img-btn">
+			     <input class="uploadImg upload-img-fu" type="file" >
+			  </div>
+			  <div class="upload-img-btn">
+			     <input class="uploadImg upload-img-fu" type="file" >
+			  </div>
+		  </div> */
+		
+		/**这是你在addreview.html页面的js代码*/
+		$('.upload-img-fu').each(function (i, item) {
+			$(item).on("change", function () {
+				uploadfu($(this), i + 1);
+			})
+		});
+		  /**这是具体上传的js代码*/
+		// upload img 1-2
+		function uploadfu(item, index) {
+			var self = this;
+			// console.log(self)
+			//实例化一个FormData
+			var obj = new FormData();
+			obj.append('file', item[0].files[0]);
+			// console.log($(this)[0].files[0])
+			var reviewIdUP = $(":input[name='reviewId']").val();
+			if (reviewIdUP == null) {
+				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
+				// console.log("productIdUP:"+productIdUP);
+				alert("请先输入产品名，保存后从编辑进入");
+			} else {
+				obj.append('reviewId', reviewIdUP);
+				obj.append('sort', index);
+				$.ajax({
+					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
+					type: "post",
+					dataType: "json",
+					cache: false,
+					data: obj,
+					processData: false, // 不处理数据
+					contentType: false, // 不设置内容类型
+					success: function (data) {
+						//设置背景为我们选择的图片
+						// console.log(data);
+						var returl = data.extend.uploadUrl;
+						item.parent().css({
+							"background-image": "url(" + '${APP_PATH }/static/img/reviewAllImg/' + returl + ")"
+						});
+					}
+				});
+			}
+		}
+		
+		
 	</script>
 </body>
 
