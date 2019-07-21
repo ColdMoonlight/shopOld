@@ -338,7 +338,7 @@ public class MlfrontReviewController {
 		//查回来插入的这一条
 		MlfrontReview MlfrontReviewReq = new MlfrontReview();
 		MlfrontReviewReq.setReviewPid(Pid);
-		MlfrontReviewReq.setReviewStatus(1);
+		MlfrontReviewReq.setReviewStatus(0);
 		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(MlfrontReviewReq);
 		MlfrontReview mlfrontReviewOne = mlfrontReviewResList.get(0);
 		//查回来插入的这一条，返回前台
