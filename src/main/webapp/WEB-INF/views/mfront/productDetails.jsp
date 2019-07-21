@@ -39,24 +39,35 @@
 			<span class="review-ok">发布</span>
 		</div>
 		<div class="review-box-content">
-			<h3>NAME</h3>
-			<input type="text" name="username" placeholder="Enter your name (public)">
-			<h3>EMAIL</h3>
-			<input type="text" name="usereamil" placeholder="Enter your eamil (priate)">
-			<h3>RANTING</h3>
-			<div class="review-star" data-star="0">
-				<i class="icon star" data-id="1"></i>
-				<i class="icon star" data-id="2"></i>
-				<i class="icon star" data-id="3"></i>
-				<i class="icon star" data-id="4"></i>
-				<i class="icon star" data-id="5"></i>
+			<div class="review-box-item">
+				<div class="name">NAME</div>
+				<input type="text" name="username" placeholder="Enter your name (public)">
 			</div>
-			<h3>REVIEW</h3>
-			<textarea class="review-details" placeholder="Write your comments here"></textarea>
-			<div class="reviews-img-list">
-				<div class="review-img-add">
-					<input type="file">
-					<i class="icon plus"></i>
+			<div class="review-box-item">
+				<div class="name">EMAIL</div>
+				<input type="text" name="usereamil" placeholder="Enter your eamil (priate)">
+			</div>
+			<div class="review-box-item">
+				<div class="name">RANTING</div>
+				<div class="review-star" data-star="0">
+					<i class="icon star" data-id="1"></i>
+					<i class="icon star" data-id="2"></i>
+					<i class="icon star" data-id="3"></i>
+					<i class="icon star" data-id="4"></i>
+					<i class="icon star" data-id="5"></i>
+				</div>
+			</div>
+			<div class="review-box-item">
+				<div class="name">REVIEW</div>
+				<textarea class="review-details" placeholder="Write your comments here"></textarea>
+			</div>
+			<div class="review-box-item">
+				<div class="name">PICTURE (optional)</div>
+				<div class="reviews-img-list">
+					<div class="review-img-add">
+						<input type="file">
+						<i class="icon plus"></i>
+					</div>
 				</div>
 			</div>
 		</div>

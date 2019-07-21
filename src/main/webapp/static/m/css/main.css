@@ -1057,6 +1057,22 @@ a:focus {
 	padding: .5em;
 }
 
+.review-box-item {
+	margin-bottom: .5em;
+}
+
+.review-box-item .name {
+	margin-bottom: .5em;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.review-box-item>input {
+	display: block;
+	border: 1px solid #ccc;
+	padding: .25em .5em;
+}
+
 .review-box-content .review-details {
 	display: block;
 	width: 100%;
