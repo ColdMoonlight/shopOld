@@ -39,6 +39,11 @@
 			<span class="review-ok">发布</span>
 		</div>
 		<div class="review-box-content">
+			<h3>NAME</h3>
+			<input type="text" name="username" placeholder="Enter your name (public)">
+			<h3>EMAIL</h3>
+			<input type="text" name="usereamil" placeholder="Enter your eamil (priate)">
+			<h3>RANTING</h3>
 			<div class="review-star" data-star="0">
 				<i class="icon star" data-id="1"></i>
 				<i class="icon star" data-id="2"></i>
@@ -46,10 +51,11 @@
 				<i class="icon star" data-id="4"></i>
 				<i class="icon star" data-id="5"></i>
 			</div>
-			<textarea class="review-details"></textarea>
+			<h3>REVIEW</h3>
+			<textarea class="review-details" placeholder="Write your comments here"></textarea>
 			<div class="reviews-img-list">
 				<div class="review-img-add">
-					<input type="file" value="评论图片">
+					<input type="file">
 					<i class="icon plus"></i>
 				</div>
 			</div>
@@ -60,7 +66,8 @@
 
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
-	
+		var imgCount = 0;
+		var reviewId = null;
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
 			//接到产品id，查询本id产品的详情
@@ -315,6 +322,7 @@
 			
 			// render page nav
 			function render_page_nav(parent, pageInfo) {
+				console.log(pageInfo)
 				//page_nav_area
 				parent.empty();
 				var ul = $("<ul></ul>").addClass("pagination");
@@ -368,11 +376,46 @@
 			}
 			// write a reivew
 			$('.write-review').on('click', function() {
+				$.ajax({
+					url: "${APP_PATH}/MlfrontReview/saveNew",
+					data: JSON.stringify({
+						reviewPid: pidA[1],
+					}),
+					dataType: "json",
+					contentType: 'application/json',
+					type: "POST",
+					async: false,
+					success: function (result) {
+						if (result.code == 100) {
+							reviewId = result.extend.mlfrontReviewOne.reviewId;
+						} else {
+							alert('系统错误，请联系管理员！');
+						}
+					}
+				});
 				$('.review-box').removeClass('hide');
 			});
 			// close review box
 			$('.review-cancel').on('click', function() {
 				$('.review-box').addClass('hide');
+				$.ajax({
+					url: "${APP_PATH}/MlfrontReview/saveNew",
+					data: JSON.stringify({
+						reviewPid: pidA[1],
+						reviewID: reviewId,
+					}),
+					dataType: "json",
+					contentType: 'application/json',
+					type: "POST",
+					async: false,
+					success: function (result) {
+						if (result.code == 100) {
+							console.log(result)
+						} else {
+							alert('系统错误，请联系管理员！');
+						}
+					}
+				});
 			});
 			// select star reank
 			$('.review-star .star').forEach(function(item){
@@ -384,18 +427,29 @@
 				})
 			});
 			// add reivew imgs
-			var imgCount = 0;
 			$('.review-img-add').on('click', function() {
 				if (imgCount > 5) {
 					alert('最多上传5张评论图片');
 				} else {
-					uploadfu($(this).parent(), $(this).find('input')[0].files[0], );
+					uploadfu($(this).parent(), $(this).find('input')[0]);
 				}
 			})
 			// save a reivew
 			$('.review-ok').on('click', function() {
 				var details = $('.review-details').val().trim();
 				var starNum = parseInt($('.review-star').data('star'), 10);
+				var username = $('input[name="username"]').val().trim();
+				var email = $('input[name="usereamil"]').val();
+				if (username.length < 1) {
+					alert('请输入username');
+					return;
+				}
+				
+				if (email.length < 1) {
+					alert('请输入email');
+					return;
+				}
+				
 				if (starNum < 1) {
 					alert('请打分');
 					return;
@@ -407,8 +461,9 @@
 				}
 				// review reqData
 				var reqData = {
-						reviewId: null,
-						reviewUname: 'nick name',
+						reviewId: reviewId,
+						reviewUname: username,
+						reviewPname: email,
 						reviewPid: pidA[1],
 						reviewDetailstr: details,
 						reviewProstarnum: starNum
@@ -689,27 +744,31 @@
 	    });
 		});
 		
-		function uploadfu(parent, file, id) {
-			var self = this;
+		function uploadfu(parent, file) {
 			//实例化一个FormData
 			var obj = new FormData();
-			obj.append('file', file);
-			obj.append('reviewId', id);
-			obj.append('sort', imgCount);
-			$.ajax({
-				url: "${APP_PATH}/UpImg/uploadReviewAllImg",
-				type: "post",
-				dataType: "json",
-				data: obj,
-				success: function (data) {
-					if (data.code === 100) {
-						var returl = data.extend.uploadUrl;
-						var img = $('<img src="'+ returl +'">');
-						parent.append(img);
-						imgCount++;
+			obj.append('reviewId', reviewId);
+			obj.append('sort', imgCount + 1);
+			$(file).on('change', function() {
+				obj.append('file', file.files[0]);
+				$.ajax({
+					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
+					type: "post",
+					dataType: "json",
+					cache: false,
+					data: obj,
+					processData: false, // 不处理数据
+					contentType: false, // 不设置内容类型
+					success: function (data) {
+						if (data.code === 100) {
+							var returl = data.extend.uploadUrl;
+							var img = $('<img src="'+ returl +'">');
+							parent.append(img);
+							imgCount++;
+						}
 					}
-				}
-			});
+				});
+			})
 		}
 	</script>
 </body>
