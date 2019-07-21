@@ -332,7 +332,7 @@ public class MlfrontReviewController {
 		String nowTime = DateUtil.strTime14s();
 		mlfrontReview.setReviewMotifytime(nowTime);
 		mlfrontReview.setReviewCreatetime(nowTime);
-		mlfrontReview.setReviewStatus(1);
+		mlfrontReview.setReviewStatus(0);//0待审核状态1审核完毕
 		//插入本条null的reviewid
 		int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
 		//查回来插入的这一条

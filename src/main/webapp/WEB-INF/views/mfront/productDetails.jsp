@@ -409,12 +409,12 @@
 			// close review box
 			$('.review-cancel').on('click', function() {
 				$('.review-box').addClass('hide');
+				var data = {
+						reviewId: reviewId
+					};
 				$.ajax({
-					url: "${APP_PATH}/MlfrontReview/saveNew",
-					data: JSON.stringify({
-						reviewPid: pidA[1],
-						reviewID: reviewId,
-					}),
+					url: "${APP_PATH}/MlfrontReview/delete",
+					data: JSON.stringify(data),
 					dataType: "json",
 					contentType: 'application/json',
 					type: "POST",
