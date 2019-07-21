@@ -313,4 +313,37 @@ public class MlfrontReviewController {
 		return startNumList;
 	}
 	
+	
+	
+	/**3.0	useOn	0505
+	 * MlfrontReview	insert
+	 * @param MlfrontReview
+	 */
+	@RequestMapping(value="/saveNew",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg saveNewSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlfrontReview mlfrontReview){
+		
+		Integer Pid = mlfrontReview.getReviewPid();
+		//接受参数信息
+		System.out.println("mlfrontReview:"+mlfrontReview);
+		//取出id
+		System.out.println(1);
+		Integer reviewId = mlfrontReview.getReviewId();
+		String nowTime = DateUtil.strTime14s();
+		mlfrontReview.setReviewMotifytime(nowTime);
+		mlfrontReview.setReviewCreatetime(nowTime);
+		mlfrontReview.setReviewStatus(1);
+		//插入本条null的reviewid
+		int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
+		//查回来插入的这一条
+		MlfrontReview MlfrontReviewReq = new MlfrontReview();
+		MlfrontReviewReq.setReviewPid(Pid);
+		MlfrontReviewReq.setReviewStatus(1);
+		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(MlfrontReviewReq);
+		MlfrontReview mlfrontReviewOne = mlfrontReviewResList.get(0);
+		//查回来插入的这一条，返回前台
+		return Msg.success().add("resMsg", "插入成功").add("mlfrontReviewOne", mlfrontReviewOne);
+		
+	}
+	
 }
