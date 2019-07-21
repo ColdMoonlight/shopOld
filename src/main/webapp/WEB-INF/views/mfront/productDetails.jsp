@@ -758,10 +758,10 @@
 		function uploadfu(parent, file) {
 			//实例化一个FormData
 			var obj = new FormData();
-			obj.append('reviewId', reviewId);
-			obj.append('sort', imgCount + 1);
 			$(file).on('change', function() {
 				obj.append('file', file.files[0]);
+				obj.append('reviewId', reviewId);
+				obj.append('sort', imgCount + 1);
 				$.ajax({
 					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
 					type: "post",
@@ -776,6 +776,11 @@
 							var img = $('<img src="'+ returl +'">');
 							parent.append(img);
 							imgCount++;
+							/*这是在后台review买家秀上传图片的样子*/
+							/* var returl = data.extend.uploadUrl;
+							item.parent().css({
+								"background-image": "url(" + '${APP_PATH }/static/img/reviewAllImg/' + returl + ")"
+							}); */
 						}
 					}
 				});
