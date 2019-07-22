@@ -266,6 +266,9 @@
     from tb_mlback_reviewimg 
     where reviewImg_id = #{reviewimgId,jdbcType=INTEGER} and reviewImg_sort_order = #{reviewimgSortOrder,jdbcType=INTEGER}
   </select>
-  	
-  
+  <!-- selectMlbackReviewImgByRIdAndImgSort -->
+  <delete id="deleteByreviewId" parameterType="java.lang.Integer">
+    delete from tb_mlback_reviewimg
+    where review_id = #{reviewId,jdbcType=INTEGER}
+  </delete>
 </mapper>
