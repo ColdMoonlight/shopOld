@@ -12,6 +12,7 @@
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
 	<!-- <link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css"> -->
+	<link rel="stylesheet" href="${APP_PATH }/static/js/datepicker/datepicker.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
 	<!-- summernote css -->
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/codemirror.min.css" />
@@ -54,7 +55,6 @@
 										<!-- <th>产品名称</th> -->
 										<th>评论时间</th>
 										<th>评论状态</th>
-										<th>审核时间</th>
 										<!-- <th>评论图片数</th> -->
 										<th>评分星级</th>
 										<th>操作</th>
@@ -84,6 +84,9 @@
 	<script type="text/javascript" src="${APP_PATH }/static/js/summernote/xml.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/summernote/summernote.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/js/session.js"></script>
+	
+	<script src="${APP_PATH }/static/js/datepicker/moment.min.js"></script>
+	<script src="${APP_PATH }/static/js/datepicker/datepicker.js"></script>
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
@@ -91,6 +94,7 @@
 	</script>
 	<script type="text/javascript">
 		var totalRecord, currentPage, editid;
+		var timeFormat = 'YYYY-MM-DD HH:mm:ss';
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		to_page(1);
 
@@ -125,7 +129,6 @@
 				var reviewPname = $("<td></td>").append(item.reviewPname);
 				var reviewCreatetime = $("<td></td>").append(item.reviewCreatetime);
 				var reviewStatus = $("<td></td>").append((item.reviewStatus ? '已生效' : '未生效'));
-				var reviewMotifytime = $("<td></td>").append(item.reviewMotifytime);
 				var reviewImgidstr = $("<td></td>").append(item.reviewImgidstr);
 				var reviewProstarnum = $("<td></td>").append(item.reviewProstarnum);
 
@@ -145,7 +148,6 @@
 					.append(reviewPid)
 					.append(reviewCreatetime)
 					.append(reviewStatus)
-					.append(reviewMotifytime)
 					.append(reviewProstarnum)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
@@ -240,6 +242,10 @@
 							theme: 'monokai'
 						}
 					}); */
+					$('.countdown').datePicker({
+						format: timeFormat,
+						isRange: true
+					});
 				})
 		});
 		//新建编辑任務提交按钮
@@ -381,6 +387,10 @@
 						alert("联系管理员");
 					}
 				}
+			});
+			$('.countdown').datePicker({
+				format: timeFormat,
+				isRange: true
 			});
 		}
 
