@@ -78,7 +78,7 @@
 
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
-		var imgCount = 0;
+		var imgCount = 1;
 		var reviewId = null;
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
@@ -766,10 +766,11 @@
 		function uploadfu(parent, file) {
 			//实例化一个FormData
 			var obj = new FormData();
+			$(file).off('change').val('');
 			$(file).on('change', function() {
 				obj.append('file', file.files[0]);
 				obj.append('reviewId', reviewId);
-				obj.append('sort', imgCount + 1);
+				obj.append('sort', imgCount);
 				console.log(imgCount)
 				$.ajax({
 					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
