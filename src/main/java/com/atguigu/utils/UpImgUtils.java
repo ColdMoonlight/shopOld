@@ -1318,9 +1318,9 @@ public class UpImgUtils {
              //设置保存上传文件的路径，我们好保存到temp中
              String realPath = request.getServletContext().getRealPath("/") + "temp";
              
-//             String toTargetPath =request.getServletContext().getRealPath("/") +"static\\img\\productAll";
+             String toTargetPath =request.getServletContext().getRealPath("/") +"static\\img\\productAll";
              
-             String toTargetPath =request.getServletContext().getRealPath("/") +"static/img/reviewAllImg";//linux状态下
+//             String toTargetPath =request.getServletContext().getRealPath("/") +"static/img/reviewAllImg";//linux状态下
              
              System.out.println("文件保存路径:"+toTargetPath);
              
