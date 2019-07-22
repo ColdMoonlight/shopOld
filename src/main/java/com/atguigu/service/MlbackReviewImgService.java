@@ -96,4 +96,16 @@ public class MlbackReviewImgService {
 		return MlbackReviewImgList;
 	}
 	
+	/**
+	 * @author Shinelon
+	 * @param MlbackReviewImg
+	 * @exception 删除本条MlbackReviewImg
+	 * 
+	 * */
+	public int deleteByreviewId(int reviewId) {
+		// TODO Auto-generated method stub
+		int  intReslut = mlbackReviewImgMapper.deleteByreviewId(reviewId);
+		return intReslut;
+	}
+	
 }
