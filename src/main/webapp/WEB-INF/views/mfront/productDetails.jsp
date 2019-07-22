@@ -416,25 +416,7 @@
 			// close review box
 			$('.review-cancel').on('click', function() {
 				$('.review-box').addClass('hide');
-				var data = {
-						reviewId: reviewId
-					};
-				$.ajax({
-					url: "${APP_PATH}/MlfrontReview/deleteNew",
-					data: JSON.stringify(data),
-					dataType: "json",
-					contentType: 'application/json',
-					type: "POST",
-					async: false,
-					success: function (result) {
-						if (result.code == 100) {
-							//console.log(result)
-							window.location.href = window.location.href;
-						} else {
-							alert('系统错误，请联系管理员！');
-						}
-					}
-				});
+				deleteReview();
 			});
 			// select star reank
 			$('.review-star .star').forEach(function(item){
@@ -762,6 +744,34 @@
 	      }
 	    });
 		});
+		function deleteReview() {
+			var data = {
+				reviewId: reviewId
+			};
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/deleteNew",
+				data: JSON.stringify(data),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "POST",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						//console.log(result)
+						reviewId = null;
+						window.location.href = window.location.href;
+					} else {
+						alert('系统错误，请联系管理员！');
+					}
+				}
+			});
+		}
+		
+		$(window).on('beforeunload', function() {
+			if (reviewId) {
+				deleteReview();
+			}
+		});
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData
@@ -771,7 +781,6 @@
 				obj.append('file', file.files[0]);
 				obj.append('reviewId', reviewId);
 				obj.append('sort', imgCount);
-				console.log(imgCount)
 				$.ajax({
 					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
 					type: "post",
