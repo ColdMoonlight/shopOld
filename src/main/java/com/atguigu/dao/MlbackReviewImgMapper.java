@@ -35,4 +35,6 @@ public interface MlbackReviewImgMapper {
 	List<MlbackReviewImg> selectMlbackReviewImgByReviewId(Integer reviewimgId);
 	//查询本条图片否存在
 	List<MlbackReviewImg> selectMlbackReviewImgByRIdAndImgSort(MlbackReviewImg example);
+
+	int deleteByreviewId(int reviewId);
 }

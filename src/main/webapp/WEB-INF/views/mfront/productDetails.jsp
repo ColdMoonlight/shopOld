@@ -420,7 +420,7 @@
 						reviewId: reviewId
 					};
 				$.ajax({
-					url: "${APP_PATH}/MlfrontReview/delete",
+					url: "${APP_PATH}/MlfrontReview/deleteNew",
 					data: JSON.stringify(data),
 					dataType: "json",
 					contentType: 'application/json',

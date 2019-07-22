@@ -315,7 +315,7 @@ public class MlfrontReviewController {
 	
 	
 	
-	/**3.0	useOn	0505
+	/**9.0	useOn	0505
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
 	 */
@@ -344,6 +344,24 @@ public class MlfrontReviewController {
 		//查回来插入的这一条，返回前台
 		return Msg.success().add("resMsg", "插入成功").add("mlfrontReviewOne", mlfrontReviewOne);
 		
+	}
+	
+	
+	/**10.0	useOn	0505
+	 * MlfrontReview	delete
+	 * @param id
+	 */
+	@RequestMapping(value="/deleteNew",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg deleteNew(@RequestBody MlfrontReview mlfrontReview){
+		//接收id信息,删除本条主评论
+		Integer reviewId = mlfrontReview.getReviewId();
+		int intResult = mlfrontReviewService.deleteByPrimaryKey(reviewId);
+		System.out.println(intResult);
+		
+		mlbackReviewImgService.deleteByreviewId(reviewId);
+		
+		return Msg.success().add("resMsg", "delete success");
 	}
 	
 }
