@@ -9,8 +9,9 @@
 <body>
   <!-- footer -->
   <div class="footer">
+		<div class="footer-logo"></div>
     <div class="container">
-      <div class="news_letter">
+      <!-- <div class="news_letter">
         <span>NEWS LETTER</span>
         <div class="form-group">
           <input type="text">
@@ -24,10 +25,9 @@
         <a href="#"><i class="icon s3"></i></a>
         <a href="#"><i class="icon s4"></i></a>
         <a href="#"><i class="icon s5"></i></a>
-      </div>
-      <div class="nav">
-
-      </div>
+      </div> -->
+      
+      <div class="nav"></div>
     </div>
   </div>
   <script src="${APP_PATH }/static/m/js/sidenav.js"></script>
