@@ -350,11 +350,11 @@
   <!-- selectMlfrontReviewGetAll -->
   <select id="selectMlfrontReviewGetAll" parameterType="com.atguigu.bean.MlfrontReview" resultMap="BaseResultMap">
     select *
-    from tb_mlfront_review order by review_id desc,review_motifyTime desc
+    from tb_mlfront_review order by review_pid desc,review_createTime desc,review_id desc
   </select>
   <!-- selectMlfrontReviewListByPId -->
   <select id="selectMlfrontReviewListByPId" parameterType="com.atguigu.bean.MlfrontReview" resultMap="BaseResultMap">
     select *
-    from tb_mlfront_review where review_pid = #{reviewPid,jdbcType=INTEGER} and review_status = #{reviewStatus,jdbcType=INTEGER} order by review_id desc,review_motifyTime desc
+    from tb_mlfront_review where review_pid = #{reviewPid,jdbcType=INTEGER} and review_status = #{reviewStatus,jdbcType=INTEGER} order by review_id desc,review_createTime desc
   </select>
 </mapper>
