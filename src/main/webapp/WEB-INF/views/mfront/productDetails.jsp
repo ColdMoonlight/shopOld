@@ -78,7 +78,7 @@
 
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
-		var imgCount = 0;
+		var imgCount = 1;
 		var reviewId = null;
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
@@ -416,25 +416,7 @@
 			// close review box
 			$('.review-cancel').on('click', function() {
 				$('.review-box').addClass('hide');
-				var data = {
-						reviewId: reviewId
-					};
-				$.ajax({
-					url: "${APP_PATH}/MlfrontReview/deleteNew",
-					data: JSON.stringify(data),
-					dataType: "json",
-					contentType: 'application/json',
-					type: "POST",
-					async: false,
-					success: function (result) {
-						if (result.code == 100) {
-							//console.log(result)
-							window.location.href = window.location.href;
-						} else {
-							alert('系统错误，请联系管理员！');
-						}
-					}
-				});
+				deleteReview();
 			});
 			// select star reank
 			$('.review-star .star').forEach(function(item){
@@ -762,15 +744,43 @@
 	      }
 	    });
 		});
+		function deleteReview() {
+			var data = {
+				reviewId: reviewId
+			};
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/deleteNew",
+				data: JSON.stringify(data),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "POST",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						//console.log(result)
+						reviewId = null;
+						window.location.href = window.location.href;
+					} else {
+						alert('系统错误，请联系管理员！');
+					}
+				}
+			});
+		}
+		
+		$(window).on('beforeunload', function() {
+			if (reviewId) {
+				deleteReview();
+			}
+		});
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData
 			var obj = new FormData();
+			$(file).off('change').val('');
 			$(file).on('change', function() {
 				obj.append('file', file.files[0]);
 				obj.append('reviewId', reviewId);
-				obj.append('sort', imgCount + 1);
-				console.log(imgCount)
+				obj.append('sort', imgCount);
 				$.ajax({
 					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
 					type: "post",
