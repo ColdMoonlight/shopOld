@@ -229,19 +229,7 @@
 				function () {
 					// 设置归属类
 					getProductDown();
-					// productDesc
-					/* summernote = $('.summer-note').summernote({
-						disableDragAndDrop: true,
-						height: 300,
-						emptyPara: '',
-						codemirror: {
-							// codemirror options
-							mode: 'text/html',
-							htmlMode: true,
-							lineNumbers: true,
-							theme: 'monokai'
-						}
-					}); */
+					
 					$('.countdown').datePicker({
 						format: timeFormat,
 						isRange: true
@@ -255,8 +243,6 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			//console.log(reqData)
-			//alert(data.productDesc);
 			$.ajax({
 				url: "${APP_PATH}/MlfrontReview/save",
 				data: JSON.stringify(reqData),
@@ -371,18 +357,6 @@
 						// console.log(obj)
 						// render data
 						tianchong(obj);
-
-						// boot editor for productDesc
-						/* summernote = $('.summer-note').summernote({
-							height: 300,
-							codemirror: {
-								// codemirror options
-								mode: 'text/html',
-								htmlMode: true,
-								lineNumbers: true,
-								theme: 'monokai'
-							}
-						}); */
 					} else {
 						alert("联系管理员");
 					}
@@ -410,7 +384,6 @@
 			if (data.reviewUimgurl && data.reviewUimgurl.length) {
 				$("#upload-img-main").parent().css("background-image", "url(" + data.reviewUimgurl + ")");
 			}
-			//$(":input[name='productMainimgurl']").val(data.productMainimgurl);
 			$(":input[name='reviewDetailstr']").val(data.reviewDetailstr);
 			$(":input[name='reviewImgidstr']").val(data.reviewImgidstr);
 			$(":input[name='reviewProstarnum']").val(data.reviewProstarnum);
