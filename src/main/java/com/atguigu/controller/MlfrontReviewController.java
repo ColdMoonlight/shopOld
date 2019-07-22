@@ -95,7 +95,6 @@ public class MlfrontReviewController {
 		mlfrontReview.setReviewMotifytime(nowTime);
 		if(reviewId==null){
 			//无id，insert
-			mlfrontReview.setReviewCreatetime(nowTime);
 			int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
 			System.out.println(intResult);
 			return Msg.success().add("resMsg", "插入成功");
