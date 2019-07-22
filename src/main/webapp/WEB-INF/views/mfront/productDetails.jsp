@@ -245,18 +245,29 @@
             
             function renderProgress(parent, num, total) {
             	var html = '';
+            	var percent = ((num / total).toFixed(2) * 100);
             	html += '<div class="progress">' +
-            			'<div class="progress-inner" style="width: '+ ((num / total).toFixed(2) * 100) +'%"></div>' +
+            			'<div class="progress-inner" style="width: '+ percent +'%"></div>' +
             		'</div>' +
-            		'<div class="data">('+ num +')</div>';
+            		'<div class="data">'+ percent +'%</div>';
             		
             	parent.append($(html));
             }
-            var dataMap = {}
+            var dataMap = {};
+            var toalStar = 0;
             for (var i=0, len = staticData.length; i<len; i+=1) {
+            	toalStar += staticData[i].startNum * staticData[i].startCount;
             	dataMap[staticData[i].startNum] = staticData[i].startCount;
             }
+            var avgStar = Math.round(toalStar/reviewTotal);
+            /* var avgStar =(toalStar/reviewTotal).toFixed(1); */
             $('.reivew-toal-num').find('.data').html(reviewTotal);
+            $('.reviews-data .stars').find('.star').each(function(index, item) {
+            	if (index < avgStar) {
+            		$(item).addClass('active');
+            	}
+            })
+            
             renderProgress($('.review-statics-item.five'), dataMap[5], reviewTotal);
             renderProgress($('.review-statics-item.four'), dataMap[4], reviewTotal);
             renderProgress($('.review-statics-item.three'), dataMap[3], reviewTotal);
