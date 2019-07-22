@@ -861,15 +861,27 @@ a:focus {
   font-weight:500;
 }
 
-.price-text{line-height:2.5em; text-indent: 1.5em;}
+.price-text{
+	line-height:2.5em; text-indent: 1.5em;
+}
 
-.product-d-op .btn.btn-default {
+/* .product-d-op .btn.btn-default {
   color: #ff186e;
 }
 
 .product-d-op .btn.btn-pink {
   color: #fff;
   background-color: #ff186e;
+} */
+
+.product-d-op .btn {
+  border-radius: unset;
+  border-color: #000;
+}
+
+.product-d-op .btn.btn-black {
+  color: #fff;
+  background-color: #000;
 }
 
 .product-d-op .btn+.btn {
