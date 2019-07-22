@@ -25,7 +25,6 @@
 </head>
 
 <body>
-
 	<jsp:include page="mheader.jsp"></jsp:include>
 
 	<!-- main -->
@@ -33,11 +32,54 @@
 		<!-- <input type="hidden" value="${productId}" id="productId"/> -->
 		<div class="product-details"> </div>
 	</div>
+	
+	<div class="review-box hide">
+		<div class="review-box-title">
+			<span class="review-cancel">取消</span>
+			<span class="review-ok">发布</span>
+		</div>
+		<div class="review-box-content">
+			<div class="review-box-item">
+				<div class="name">NAME</div>
+				<input type="text" name="username" placeholder="Enter your name (public)">
+			</div>
+			<div class="review-box-item">
+				<div class="name">EMAIL</div>
+				<input type="text" name="usereamil" placeholder="Enter your eamil (priate)">
+			</div>
+			<div class="review-box-item">
+				<div class="name">RANTING</div>
+				<div class="review-star" data-star="0">
+					<i class="icon star" data-id="1"></i>
+					<i class="icon star" data-id="2"></i>
+					<i class="icon star" data-id="3"></i>
+					<i class="icon star" data-id="4"></i>
+					<i class="icon star" data-id="5"></i>
+				</div>
+			</div>
+			<div class="review-box-item">
+				<div class="name">REVIEW</div>
+				<textarea class="review-details" placeholder="Write your comments here"></textarea>
+			</div>
+			<div class="review-box-item">
+				<div class="name">PICTURE (optional)</div>
+				<div class="reviews-img-list">
+					<div class="review-img-add">
+						<input type="file">
+						<i class="icon plus"></i>
+					</div>
+					<div class="reviews-img-box"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
+		var imgCount = 0;
+		var reviewId = null;
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
 			//接到产品id，查询本id产品的详情
@@ -167,7 +209,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
-						console.log(productData)
+						// console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
 						prodcutDpriceText.attr('data-price', productData.productOriginalprice);
@@ -181,77 +223,92 @@
 					}
 				}
 			});
-			 $.ajax({
-				url: '${APP_PATH}/MlfrontReview/getMlfrontReviewListByPId',
-				data: {
-					"productId": pidA[1]
-				},
-				type: "POST",
-				success: function (data) {
-					if (data.code === 100) {
-						var reviewTextData = data.extend.mlfrontReviewResList;
-						var reviewImgData = data.extend.imgUrlStrListst;
-						console.log(data.extend);
-						renderReviewList(reviewBox.find('.review-list'), reviewTextData, reviewImgData);
-					} else {
-						renderErrorMsg(productDetailsBox, '未获取到产品评论相关的数据');
-					}
-				}
-			});
-			 
-			 /*
-		      review汇总接口  
-		      Integer productId;
-		      return StartNumList各个星级评论数		allReviewNum评论总数
-		      */
-		       $.ajax({
-		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
-		        data: {
-		          "productId": pidA[1]
-		        },
-		        type: "POST",
-		        success: function (data) {
-		          if (data.code === 100) {
-		            var productData = data.extend;
-		            console.log("MlfrontReview/getMlfrontReviewCount");
-		            console.log(data.extend)
-		          } else {
-		            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
-		          }
-		        }
-		      });
-		      /*
-		      review分页接口
-		      Integer productId;//产品ID
-		      Integer pn;//页数
-		      return	分页信息(pageInfo),5条评论内容(mlfrontReviewResreturn)，5条评论中的图片(imgUrlStrListst)
-		      */
-		      $.ajax({
-		        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage',
-		        data: {
-		          "productId": pidA[1],
-		          "pn": 1
-		        },
-		        type: "POST",
-		        success: function (data) {
-		          if (data.code === 100) {
-		            var productData = data.extend;
-		            console.log("MlfrontReview/getMlfrontReviewByProductIdAndPage");
-		            console.log(data.extend)
-		          } else {
-		            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
-		          }
-		        }
-		      }); 
-			 
+			/*
+      review汇总接口  
+      Integer productId;
+      return StartNumList各个星级评论数		allReviewNum评论总数
+      */
+      $.ajax({
+        url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
+        data: {
+          "productId": pidA[1],
+        },
+        type: "POST",
+        success: function (data) {
+          if (data.code === 100) {
+            var productData = data.extend;
+            // console.log("MlfrontReview/getMlfrontReviewCount");
+            // console.log(data.extend)
+            var staticData = data.extend.StartNumList; 
+            var reviewTotal = data.extend.allReviewNum;
+            var reviewStatics = $(".reviews-statics");
+            
+            function renderProgress(parent, num, total) {
+            	var html = '';
+            	html += '<div class="progress">' +
+            			'<div class="progress-inner" style="width: '+ ((num / total).toFixed(2) * 100) +'%"></div>' +
+            		'</div>' +
+            		'<div class="data">('+ num +')</div>';
+            		
+            	parent.append($(html));
+            }
+            var dataMap = {}
+            for (var i=0, len = staticData.length; i<len; i+=1) {
+            	dataMap[staticData[i].startNum] = staticData[i].startCount;
+            }
+            $('.reivew-toal-num').find('.data').html(reviewTotal);
+            renderProgress($('.review-statics-item.five'), dataMap[5], reviewTotal);
+            renderProgress($('.review-statics-item.four'), dataMap[4], reviewTotal);
+            renderProgress($('.review-statics-item.three'), dataMap[3], reviewTotal);
+            renderProgress($('.review-statics-item.two'), dataMap[2], reviewTotal);
+            renderProgress($('.review-statics-item.one'), dataMap[1], reviewTotal);
+            
+          } else {
+            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+          }
+        }
+      });
+	
+			to_page(1);
+      /*
+      review分页接口
+      Integer productId;//产品ID
+      Integer pn;//页数
+      return	分页信息(pageInfo),5条评论内容(mlfrontReviewResreturn)，5条评论中的图片(imgUrlStrListst)
+      */			
+      function to_page(pn, type) {
+	  		$.ajax({
+	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
+	  			data: {
+ 	          "productId": pidA[1],
+ 	          "pn": pn
+ 	        },
+	  			type: "POST",
+	  			success: function (result) {
+	  				// console.log(result);
+	  				var reviewTextData = result.extend.mlfrontReviewResreturn;
+	  				var reviewImgData = result.extend.imgUrlStrListst;
+	  				var pageInfo = result.extend.pageInfo;
+						var reviewBoxList = reviewBox.find('.review-list');
+						var pageArea = reviewBox.find('.page-info-area');
+						if (reviewImgData.length > 0) {
+							renderReviewList(reviewBoxList, reviewTextData, reviewImgData);
+							pageArea.removeClass('hide');
+			  			render_page_nav(pageArea, pageInfo);
+						} else {
+							reviewBoxList.html('<p>暂无评论信息</p>');
+						}
+	  			}
+	  		});
+	  	}
 
 			// render reiew list
 			function renderReviewList(parent, text, img) {
 				var html = '';
-				for(var i=0, len = img.length; i<len; i++) {
+				for(var i=0, len=img.length; i<len; i++) {
 					html += '<li class="review-item" data-reviewid="'+ text[i].reviewId +'">' +
 						 '<div class="review-title">' +
-		           '<img src="'+ text[i].reviewUimgurl +'" alt="">' +
+		           '<div class="img"><img src="'+ text[i].reviewUimgurl +'" alt=""></div>' +
 		           '<div class="review-data">' +
 		             '<div class="review-d-author">AUTHOR: '+ text[i].reviewUname +'</div>' +
 		             '<div class="review-d-rank">';
@@ -280,6 +337,173 @@
 				}
 				parent.html(html);
 			}
+			
+			// render page nav
+			function render_page_nav(parent, pageInfo) {
+				console.log(pageInfo)
+				//page_nav_area
+				parent.empty();
+				var ul = $("<ul></ul>").addClass("pagination");
+
+				//构建元素
+				var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+				var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+				if (pageInfo.hasPreviousPage == false) {
+					firstPageLi.addClass("disabled");
+					prePageLi.addClass("disabled");
+				} else {
+					//为元素添加点击翻页的事件
+					firstPageLi.click(function () {
+						to_page(1);
+					});
+					prePageLi.click(function () {
+						to_page(pageInfo.pageNum - 1);
+					});
+				}
+
+				var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+				var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+				if (pageInfo.hasNextPage == false) {
+					nextPageLi.addClass("disabled");
+					lastPageLi.addClass("disabled");
+				} else {
+					nextPageLi.click(function () {
+						to_page(pageInfo.pageNum + 1);
+					});
+					lastPageLi.click(function () {
+						to_page(pageInfo.pages);
+					});
+				}
+
+				//添加首页和前一页 的提示
+				ul.append(firstPageLi).append(prePageLi);
+				//1,2，3遍历给ul中添加页码提示
+				$.each(pageInfo.navigatepageNums, function (index, item) {
+
+					var numLi = $("<li></li>").append($("<a></a>").append(item));
+					if (pageInfo.pageNum == item) {
+						numLi.addClass("active");
+					}
+					numLi.click(function () {
+						to_page(item);
+					});
+					ul.append(numLi);
+				});
+				//添加下一页和末页 的提示
+				ul.append(nextPageLi).append(lastPageLi).appendTo(parent);
+			}
+			// write a reivew
+			$('.write-review').on('click', function() {
+				$.ajax({
+					url: "${APP_PATH}/MlfrontReview/saveNew",
+					data: JSON.stringify({
+						reviewPid: pidA[1],
+					}),
+					dataType: "json",
+					contentType: 'application/json',
+					type: "POST",
+					async: false,
+					success: function (result) {
+						if (result.code == 100) {
+							reviewId = result.extend.mlfrontReviewOne.reviewId;
+						} else {
+							alert('系统错误，请联系管理员！');
+						}
+					}
+				});
+				$('.review-box').removeClass('hide');
+			});
+			// close review box
+			$('.review-cancel').on('click', function() {
+				$('.review-box').addClass('hide');
+				var data = {
+						reviewId: reviewId
+					};
+				$.ajax({
+					url: "${APP_PATH}/MlfrontReview/delete",
+					data: JSON.stringify(data),
+					dataType: "json",
+					contentType: 'application/json',
+					type: "POST",
+					async: false,
+					success: function (result) {
+						if (result.code == 100) {
+							//console.log(result)
+							window.location.href = window.location.href;
+						} else {
+							alert('系统错误，请联系管理员！');
+						}
+					}
+				});
+			});
+			// select star reank
+			$('.review-star .star').forEach(function(item){
+				var parent = $(item).parent();
+				$(item).on('click', function() {
+					parent.find('.star').removeClass('active');
+					$(this).addClass('active').prevAll('.star').addClass('active');
+					parent.attr('data-star', $(this).data('id'));
+				})
+			});
+			// add reivew imgs
+			$('.review-img-add').on('click', function() {
+				if (imgCount > 5) {
+					alert('最多上传5张评论图片');
+				} else {
+					uploadfu($(this).parent(), $(this).find('input')[0]);
+				}
+			})
+			// save a reivew
+			$('.review-ok').on('click', function() {
+				var details = $('.review-details').val().trim();
+				var starNum = parseInt($('.review-star').data('star'), 10);
+				var username = $('input[name="username"]').val().trim();
+				var email = $('input[name="usereamil"]').val();
+				if (username.length < 1) {
+					alert('请输入username');
+					return;
+				}
+				
+				if (email.length < 1) {
+					alert('请输入email');
+					return;
+				}
+				
+				if (starNum < 1) {
+					alert('请打分');
+					return;
+				}
+				
+				if (details.length < 1) {
+					alert('评论内容不能为空');
+					return;
+				}
+				// review reqData
+				var reqData = {
+						reviewId: reviewId,
+						reviewUname: username,
+						reviewPname: email,
+						reviewPid: pidA[1],
+						reviewDetailstr: details,
+						reviewProstarnum: starNum
+				}
+				$.ajax({
+					url: "${APP_PATH}/MlfrontReview/save",
+					data: JSON.stringify(reqData),
+					dataType: "json",
+					contentType: 'application/json',
+					type: "POST",
+					async: false,
+					success: function (result) {
+						if (result.code == 100) {
+							alert('操作成功。新添加评论信息，需要平台审核通过后方能展示！');
+							window.location.href = window.location.href;
+						} else {
+							alert('操作失败！');
+						}
+					}
+				});
+			});
 			
 			// manipulate dom
 			$('.list-group')
@@ -538,6 +762,34 @@
 	      }
 	    });
 		});
+		
+		function uploadfu(parent, file) {
+			//实例化一个FormData
+			var obj = new FormData();
+			$(file).on('change', function() {
+				obj.append('file', file.files[0]);
+				obj.append('reviewId', reviewId);
+				obj.append('sort', imgCount + 1);
+				console.log(imgCount)
+				$.ajax({
+					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
+					type: "post",
+					dataType: "json",
+					cache: false,
+					data: obj,
+					processData: false, // 不处理数据
+					contentType: false, // 不设置内容类型
+					success: function (data) {
+						if (data.code === 100) {
+							var returl = data.extend.uploadUrl;
+							var img = $('<img src="${APP_PATH }/static/img/reviewAllImg/'+ returl +'">');
+							parent.find('.reviews-img-box').append(img);
+							imgCount++;
+						}
+					}
+				});
+			})
+		}
 	</script>
 </body>
 

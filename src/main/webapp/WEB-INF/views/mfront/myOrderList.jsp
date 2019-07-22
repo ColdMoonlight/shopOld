@@ -83,11 +83,9 @@
 						return item.orderStatus === parseInt(type);
 					});
 				}
-				//1、列表数据
+				// 列表数据
 				renderContainer(containerBox, orderList, orderItemList);
-				//2、解析并显示分页信息
-				build_page_info(pageInfo);
-				//3、解析显示分页条数据
+				// 解析显示分页条数据
 				build_page_nav(pageInfo);
 			}
 		});
@@ -166,12 +164,6 @@
 			'.order-item').data('orderid');
 	}
 
-	//解析显示分页信息
-	function build_page_info(pageInfo) {
-		pageArea
-			.empty()
-			.append("当前" + pageInfo.pageNum + "页,总" + pageInfo.pages + "页, 总" + pageInfo.total + "条记录");
-	}
 	//解析显示分页条，点击分页要能去下一页....
 	function build_page_nav(pageInfo) {
 		//page_nav_area
