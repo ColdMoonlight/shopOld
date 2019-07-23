@@ -35,8 +35,8 @@
 	
 	<div class="review-box hide">
 		<div class="review-box-title">
-			<span class="review-cancel">取消</span>
-			<span class="review-ok">发布</span>
+			<span class="review-cancel">cancel</span>
+			<span class="review-ok">publish</span>
 		</div>
 		<div class="review-box-content">
 			<div class="review-box-item">
@@ -129,7 +129,7 @@
 							}
 						})
 					} else {
-						renderErrorMsg(swiper, '未获取到相关图片的数据');
+						renderErrorMsg(swiper, 'No data for the relevant image was obtained');
 					}
 				}
 			});
@@ -220,7 +220,7 @@
 						repeatCalPrice();
 
 					} else {
-						renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+						renderErrorMsg(productDetailsBox, 'No product-related data was obtained');
 					}
 				}
 			});
@@ -280,7 +280,7 @@
             renderProgress($('.review-statics-item.one'), dataMap[1], reviewTotal);
             
           } else {
-            renderErrorMsg(productDetailsBox, '未获取到产品相关的数据');
+            renderErrorMsg(productDetailsBox, 'No product-related data was obtained');
           }
         }
       });
@@ -459,12 +459,13 @@
 				var starNum = parseInt($('.review-star').data('star'), 10);
 				var username = $('input[name="username"]').val().trim();
 				var email = $('input[name="usereamil"]').val();
+				var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (username.length < 1) {
 					alert('请输入username');
 					return;
 				}
 				
-				if (email.length < 1) {
+				if (!pattern.test(email)) {
 					alert('请输入email');
 					return;
 				}
