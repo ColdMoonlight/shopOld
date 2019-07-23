@@ -1052,13 +1052,12 @@ a:focus {
 }
 /* review */
 .write-review {
-  width: 200px;
   padding: 1em 0;
   font: 14px/14px '';
   color: #fff;
   text-align: center;
   vertical-align: middle;
-  background-color: #ff186e;
+  background-color: #000;
 }
 
 /* reviw box */
