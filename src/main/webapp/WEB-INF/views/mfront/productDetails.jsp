@@ -334,16 +334,18 @@
 		           		'</div>' +
 		           	'<div class="review-date">'+ text[i].reviewCreatetime +'</div>' +
 		         '</div>' +
+		         '<div class="review-content">' +
+	             '<div class="review-text">'+ text[i].reviewDetailstr +'</div>' +
+	           	'</div>' +
 		         '<div class="review-imgs">';
 		          var imgLen = img[i].length <= 5 ? img[i].length : 5;
 		         	for (var k=0; k<imgLen; k++) {
 		         		html += '<img src="'+ img[i][k] +'">';
 		         	}
 		         html += '</div>' +
-             '<div class="review-content">' +
+             /* '<div class="review-content">' +
 	             '<div class="review-text">'+ text[i].reviewDetailstr +'</div>' +
-	             /* '<span class="review-more">more<i class="icon bottom"></i></span>' + */
-	           '</div>' +
+	           '</div>' + */
 	         '</li>';
 				}
 				parent.html(html);

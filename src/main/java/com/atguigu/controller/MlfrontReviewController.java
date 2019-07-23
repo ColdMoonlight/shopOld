@@ -97,14 +97,12 @@ public class MlfrontReviewController {
 		
 		//获取用户名,判断头像图片()
 		String reviewUname = mlfrontReview.getReviewUname();
-		if(reviewUname==""){
-			String uimgurl = GetUImgUrlByUnameEmpt(res,reviewUname);
-			mlfrontReview.setReviewUimgurl(uimgurl);
-		}else{
-			String uimgurl = GetUImgUrlByUname(res,reviewUname);
-			mlfrontReview.setReviewUimgurl(uimgurl);
-			System.out.println("uimgurl:"+uimgurl);
-		}
+		mlfrontReview.setReviewUname("Megelook Customer");
+		reviewUname =mlfrontReview.getReviewUname();
+		
+		String uimgurl = GetUImgUrlByUname(res,reviewUname);
+		mlfrontReview.setReviewUimgurl(uimgurl);
+		System.out.println("uimgurl:"+uimgurl);
 		//判断时间信息
 		String ReviewCreatetime = mlfrontReview.getReviewCreatetime();
 		if(ReviewCreatetime ==""){
@@ -206,31 +204,6 @@ public class MlfrontReviewController {
 		}else if(firstNameUp.equals("Z")){
 			returnReaUrl="Z.png";
 		}
-		String returnReaUrlAll = pathBig+path+returnReaUrl;
-		return returnReaUrlAll;
-	}
-	
-	/**3.2	useOn	0505
-	 * MlfrontReview	GetUImgUrlByUnameEmpt
-	 * @param MlfrontReview
-	 */
-	private String GetUImgUrlByUnameEmpt(HttpServletRequest res,String reviewUname) {
-		
-		String contextPathStr = res.getContextPath();    
-        System.out.println("contextPathStr:"+contextPathStr);
-        
-        String realPathStr = res.getSession().getServletContext().getRealPath("/");    
-        System.out.println("realPathStr:"+realPathStr);
-        
-        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+res.getServerPort()+contextPathStr+"/";
-        System.out.println("basePathStr:"+basePathStr);
-		
-		String pathBig = basePathStr;
-		
-		String path="static/img/ReviewUImg/";
-		
-		String returnReaUrl="A.png";
-		
 		String returnReaUrlAll = pathBig+path+returnReaUrl;
 		return returnReaUrlAll;
 	}
