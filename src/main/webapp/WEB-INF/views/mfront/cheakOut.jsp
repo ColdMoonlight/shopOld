@@ -67,7 +67,7 @@
 					<li class="list-group-item">
 						<div class="group-title"><span>Buyer messages</span> <i class="icon right"></i></div>
 						<div class="group-details customer-message">
-							<textarea placeholder="买家留言"></textarea>
+							<textarea placeholder="Buyer message"></textarea>
 						</div>
 					</li>
 				</div>
@@ -644,7 +644,7 @@
 			var html = '';
 			if (userType === 0) {
 				html = '<div class="input-group">' +
-					'<input type="text" name="productNum" class="form-control" value="" placeholder="请输入优惠码">' +
+					'<input type="text" name="productNum" class="form-control" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
 					'</div><div class="coupon-error"></div>';
 			}
@@ -726,12 +726,12 @@
 							totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
 							couponId = resData.couponId;
 							couponCode = couponCode2;
-							renderErrorMsg(couponErrorBox, resData.couponName + '，已使用！')
+							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 						} else {
-							renderErrorMsg(couponErrorBox, resData.couponName + '，无法使用！')
+							renderErrorMsg(couponErrorBox, resData.couponName + '，Unusable!')
 						}
 					} else {
-						renderErrorMsg(couponErrorBox, '优惠券不存在！')
+						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 					}
 				}
 			})

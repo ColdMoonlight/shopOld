@@ -67,7 +67,7 @@
 					})
 
 				} else {
-					renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+					renderErrorMsg(prodcutBox, 'No product-related data was obtained');
 				}
 			}
 		});
@@ -85,12 +85,12 @@
 					if (data.code === 100) {
 						rednerProduct(productList, data.extend.mlbackProductResList);
 					} else {
-						renderErrorMsg(productList, '未获取到产品相关的数据');
+						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
 				},
 				error: function (error) {
 					if (error.status === 400) {
-						renderErrorMsg(productList, '不存在相关产品，页面将在3s后跳转至首页！');
+						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
 						setTimeout(function () {
 							window.location.href = "${APP_PATH}/index/isMobileOrPc";
 						}, 3000);
@@ -135,7 +135,7 @@
 
 				parent.html(html);
 			} else {
-				renderErrorMsg(parent, '相关产品分类的产品已下架！');
+				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
 			}
 		}
 

@@ -53,10 +53,11 @@
 				if (resData.length) {
 					renderCoupon(box, resData);
 				} else {
-					renderErrorMsg(box, '没有相关的优惠券！')
+					renderErrorMsg(box, '没有相关的优惠券！');
+					renderErrorMsg(box, 'There are no coupons!');
 				}
 			} else {
-				alert('系统错误')
+				alert('系统错误');
 			}
 		}
 	})
@@ -68,7 +69,8 @@
 				'<div class="coupon-text">' +
 				'<div class="price">$' + data[i].couponPrice + '</div>' +
 				'<div class="name">' + data[i].couponName + '</div>' +
-				'<div class="date">' + (data[i].couponStatus ? '可以使用' : '已失效') + '</div>' +
+				// '<div class="date">' + (data[i].couponStatus ? '可以使用' : '已失效') + '</div>' +
+				'<div class="date">' + (data[i].couponStatus ? 'You can use' : 'Has the failure') + '</div>' +
 				'</div>' +
 				'<span>' + data[i].couponCode + '</span>' +
 				'</div>';

@@ -312,7 +312,8 @@
 							pageArea.removeClass('hide');
 			  				render_page_nav(pageArea, pageInfo);
 						} else {
-							reviewBoxList.html('<p>暂无评论信息</p>');
+							// renderErrorMsg(reviewBoxList, '暂无评论信息, 请添加');
+							renderErrorMsg(reviewBoxList, 'No comment information, please add.');
 						}
 	  			}
 	  		});
@@ -363,7 +364,7 @@
 				var ul = $("<ul></ul>").addClass("pagination");
 
 				//构建元素
-				var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "javascript:;"));
+				var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
 				var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
 				if (pageInfo.hasPreviousPage == false) {
 					firstPageLi.addClass("disabled");
@@ -379,7 +380,7 @@
 				}
 
 				var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
-				var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "javascript:;"));
+				var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
 				if (pageInfo.hasNextPage == false) {
 					nextPageLi.addClass("disabled");
 					lastPageLi.addClass("disabled");
@@ -756,7 +757,8 @@
 	          	rednerCountDownAreaOne(countDownArea, data.extend.mlbackCountDownOne)
 	          }
 	        } else {
-	          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+	          // renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+	          renderErrorMsg(productBox, 'No product-related data was obtained.');
 	        }
 	      }
 	    });

@@ -139,14 +139,16 @@
 						'</div>';
 				}
 				html += '</div>' +
-					'<div class="order-item-footer">共计' + len + '件商品，合计 $ ' + data[key].orderMoney + '</div>' +
+					// '<div class="order-item-footer">共计' + len + '件商品，合计 $ ' + data[key].orderMoney + '</div>' +
+					'<div class="order-item-footer">Total' + len + 'goods，total $ ' + data[key].orderMoney + '$</div>' +
 					'</div>';
 			}
 
 			parent.html(html);
 			pageArea.removeClass('hide');
 		} else {
-			renderErrorMsg(containerBox, '没有任何订单');
+			// renderErrorMsg(containerBox, '没有任何订单');
+			renderErrorMsg(containerBox, 'No orders');
 			pageArea.addClass('hide');
 		}
 	}
@@ -163,7 +165,7 @@
 		var ul = $("<ul></ul>").addClass("pagination");
 
 		//构建元素
-		var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "javascript:;"));
+		var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
 		var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
 		if (pageInfo.hasPreviousPage == false) {
 			firstPageLi.addClass("disabled");
@@ -179,7 +181,7 @@
 		}
 
 		var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
-		var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "javascript:;"));
+		var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
 		if (pageInfo.hasNextPage == false) {
 			nextPageLi.addClass("disabled");
 			lastPageLi.addClass("disabled");

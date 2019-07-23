@@ -30,7 +30,7 @@
 
 	<!-- main -->
 	<div class="main person-info">
-		<div class="form-op"><span class="edit-save" data-flag="0">编辑</span></div>
+		<div class="form-op"><span class="edit-save" data-flag="0">edit</span></div>
 		<div class="form">
 			<input class="userid" name="userId" type="hidden" />
 			<div class="input-group">
@@ -142,17 +142,17 @@ ${APP_PATH }/MlfrontUser/update
 
 	function tianchong(data) {
 		$(".userid").val(data.userId);
-		$(".input.userEmail").text(data.userEmail ? data.userEmail : '请添加');
-		$(".input.userPassword").text(data.userPassword ? data.userPassword : '请添加');
-		$(".input.userTelephone").text(data.userTelephone ? data.userTelephone : '请添加');
-		$(".input.userAddressCountry").text(data.userAddressCountry ? data.userAddressCountry : '请添加');
-		$(".input.userAddressProvince").text(data.userAddressProvince ? data.userAddressProvince : '请添加');
-		$(".input.userAddressCity").text(data.userAddressCity ? data.userAddressCity : '请添加');
-		$(".input.userAddressStreetaddress").text(data.userAddressStreetaddress ? data.userAddressStreetaddress : '请添加');
-		$(".input.userAddressPostalcode").text(data.userAddressPostalcode ? data.userAddressPostalcode : '请添加');
-		$(".input.userFirstname").text(data.userFirstname ? data.userFirstname : '请添加');
-		$(".input.userLastname").text(data.userLastname ? data.userLastname : '请添加');
-		$(".input.userPoint").text(data.userPoint ? data.userPoint : '请添加');
+		$(".input.userEmail").text(data.userEmail ? data.userEmail : 'Please add');
+		$(".input.userPassword").text(data.userPassword ? data.userPassword : 'Please add');
+		$(".input.userTelephone").text(data.userTelephone ? data.userTelephone : 'Please add');
+		$(".input.userAddressCountry").text(data.userAddressCountry ? data.userAddressCountry : 'Please add');
+		$(".input.userAddressProvince").text(data.userAddressProvince ? data.userAddressProvince : 'Please add');
+		$(".input.userAddressCity").text(data.userAddressCity ? data.userAddressCity : 'Please add');
+		$(".input.userAddressStreetaddress").text(data.userAddressStreetaddress ? data.userAddressStreetaddress : 'Please add');
+		$(".input.userAddressPostalcode").text(data.userAddressPostalcode ? data.userAddressPostalcode : 'Please add');
+		$(".input.userFirstname").text(data.userFirstname ? data.userFirstname : 'Please add');
+		$(".input.userLastname").text(data.userLastname ? data.userLastname : 'Please add');
+		$(".input.userPoint").text(data.userPoint ? data.userPoint : 'Please add');
 	}
 
 	var editSave = $('.edit-save');
@@ -160,7 +160,7 @@ ${APP_PATH }/MlfrontUser/update
 	editSave.on('click', function () {
 		var flag = parseInt($(this).data('flag'));
 		if (!flag) {
-			$(this).attr('data-flag', 1).text('保存');
+			$(this).attr('data-flag', 1).text('save it');
 			$('.input').each(function (i, item) {
 				$(item).attr('contenteditable', true);
 			});
@@ -168,21 +168,21 @@ ${APP_PATH }/MlfrontUser/update
 		} else {
 			var reqData = {
 				userId: parseInt($(".userid").val()),
-				userEmail: $(".input.userEmail").text() === "请添加" ? null : $(".input.userEmail").text(),
-				userPassword: $(".input.userPassword").text() === "请添加" ? null : $(".input.userPassword").text(),
-				userTelephone: $(".input.userTelephone").text() === "请添加" ? null : $(".input.userTelephone").text(),
-				userAddressCountry: $(".input.userAddressCountry").text() === "请添加" ? null : $(".input.userAddressCountry")
+				userEmail: $(".input.userEmail").text() === "Please add" ? null : $(".input.userEmail").text(),
+				userPassword: $(".input.userPassword").text() === "Please add" ? null : $(".input.userPassword").text(),
+				userTelephone: $(".input.userTelephone").text() === "Please add" ? null : $(".input.userTelephone").text(),
+				userAddressCountry: $(".input.userAddressCountry").text() === "Please add" ? null : $(".input.userAddressCountry")
 					.text(),
-				userAddressProvince: $(".input.userAddressProvince").text() === "请添加" ? null : $(
+				userAddressProvince: $(".input.userAddressProvince").text() === "Please add" ? null : $(
 					".input.userAddressProvince").text(),
-				userAddressCity: $(".input.userAddressCity").text() === "请添加" ? null : $(".input.userAddressCity").text(),
-				userAddressStreetaddress: $(".input.userAddressStreetaddress").text() === "请添加" ? null : $(
+				userAddressCity: $(".input.userAddressCity").text() === "Please add" ? null : $(".input.userAddressCity").text(),
+				userAddressStreetaddress: $(".input.userAddressStreetaddress").text() === "Please add" ? null : $(
 					".input.userAddressStreetaddress").text(),
-				userAddressPostalcode: $(".input.userAddressPostalcode").text() === "请添加" ? null : $(
+				userAddressPostalcode: $(".input.userAddressPostalcode").text() === "Please add" ? null : $(
 					".input.userAddressPostalcode").text(),
-				userFirstname: $(".input.userFirstname").text() === "请添加" ? null : $(".input.userFirstname").text(),
-				userLastname: $(".input.userLastname").text() === "请添加" ? null : $(".input.userLastname").text(),
-				userPoint: $(".input.userPoint").text() === "请添加" ? null : parseInt($(".input.userPoint").text())
+				userFirstname: $(".input.userFirstname").text() === "Please add" ? null : $(".input.userFirstname").text(),
+				userLastname: $(".input.userLastname").text() === "Please add" ? null : $(".input.userLastname").text(),
+				userPoint: $(".input.userPoint").text() === "Please add" ? null : parseInt($(".input.userPoint").text())
 			}
 			// console.table(reqData)
 			// save
@@ -197,7 +197,7 @@ ${APP_PATH }/MlfrontUser/update
 					if (data.code === 100) {
 						alert(data.extend.resMsg);
 
-						$(this).attr('data-flag', 0).text('编辑');
+						$(this).attr('data-flag', 0).text('edit');
 						$('.input').each(function (i, item) {
 							$(item).removeAttr('contenteditable');
 						});
@@ -214,7 +214,7 @@ ${APP_PATH }/MlfrontUser/update
 			$(this).attr('contenteditable', true);
 			$(this).focus();
 			if (!flag) {
-				editSave.attr('data-flag', 1).text('保存');
+				editSave.attr('data-flag', 1).text('save it');
 			}
 		})
 	});

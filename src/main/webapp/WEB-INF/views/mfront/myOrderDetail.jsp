@@ -143,14 +143,13 @@ param:　orderId
 
 			parent.html(html);
 		} else {
-			renderErrorMsg(containerBox, '没有任何订单');
+			renderErrorMsg(containerBox, 'No orders.');
 		}
 	}
 
 	function renderOrderinfo(parent, data) {
 		var html = '';
 		html = '<div><span>支付方式：</span><span>' + data.orderPayPlate + '</span></div>' +
-			//'<div><span>付款交易码：</span><span>'+ data.payinfoPlatformserialcode +'</span></div>' +
 			'<div><span>创建时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 			'<div><span>发货时间：</span><span>' + (data.orderSendtime ? data.orderSendtime : "未发货") + '</span></div>' +
 			'<div><span>支付时间：</span><span>' + data.orderPaytime + '</span></div>';

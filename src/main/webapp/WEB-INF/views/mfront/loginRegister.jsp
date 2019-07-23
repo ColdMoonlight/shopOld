@@ -53,11 +53,11 @@
 				<form id="register">
 					<div class="input-group">
 						<label for="userEmail">e-mail</label>
-						<input type="email" name="userEmail" placeholder="eamil" required>
+						<input type="email" name="userEmail" placeholder="please input eamil" required>
 					</div>
 					<div class="input-group">
 						<label for="userPassword">password</label>
-						<input type="password" name="userPassword" placeholder="password 至少六位">
+						<input type="password" name="userPassword" placeholder="password at least six figures">
 					</div>
 				</form>
 
@@ -121,7 +121,7 @@
 				}
 			})
 		} else {
-			alert('email 或 password 格式不正确！');
+			alert('email or password format incorrect!');
 		}
 	})
 
@@ -154,7 +154,7 @@
 				}
 			})
 		} else {
-			alert('email 或 password 格式不正确！');
+			alert('email or password format incorrect!');
 		}
 	})
 

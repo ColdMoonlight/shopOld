@@ -78,7 +78,7 @@
     var iPerson = $('.icon.person');
 
     function renderErrorMsg(parent, msg) {
-      parent.html('<p>' + msg + '</p>');
+      parent.html('<p class="without-data">' + msg + '</p>');
     }
 
     function toNumber(val) {

@@ -35,7 +35,7 @@
 		<div class="person-info">
 			<img src="" alt="" class="person-info-img">
 			<div class="person-info-name" id="UHello_zsh">login in</div>
-			<a href="javascript:;" class="btn signout">注销</a>
+			<a href="javascript:;" class="btn signout">sign out</a>
 		</div>
 
 		<div class="integral-details">

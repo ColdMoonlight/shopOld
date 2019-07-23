@@ -354,6 +354,15 @@ a:focus {
 }
 .chow_fcopy span{ color:#ff1671;}
 
+/* without data info */
+.without-data {
+	padding: 36px;
+	text-align: center;
+	font-style: italic;
+	font-size: 14px;
+	color: #ff1671;
+}
+
 /* category */
 .category {
   position: fixed;

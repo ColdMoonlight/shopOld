@@ -94,16 +94,17 @@
         }
 
         if (param && resData[param.block]) {
-          var html = '';
+          var elMain = $('.main');
           if (resData.isNav === 0) {
-            html = '没获取到相关数据';
+        	  renderErrorMsg(elMain, '没获取到相关数据');
           }
           if (resData.isNav === 1) {
             var article = getArticle(resData[param.block], param.id);
-            html = '<div class="article-title">' + article.footnavName + '</div>' +
+            var html = '<div class="article-title">' + article.footnavName + '</div>' +
               '<div class="article-content">' + article.footnavDesc + '</div>';
+
+            elMain.html(html);
           }
-          $('.main').html(html);
         }
 
         if (resData.isNav === 1) {
