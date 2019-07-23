@@ -614,59 +614,6 @@ public class UPloadController {
 	}
 	
 	
-	
-	
-	/**
-	 * 6.1	useOn	0505
-	 * to分类uploadReviewUImg列表页面
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping("/uploadReviewUImg")
-	@ResponseBody
-	public Msg uploadReviewUImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
-		
-		String contextPathStr = res.getContextPath();    
-        System.out.println("contextPathStr:"+contextPathStr);
-        String realPathStr = res.getSession().
-                        getServletContext().getRealPath("/");    
-        System.out.println("realPathStr:"+realPathStr);
-        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
-        		res.getServerPort()+contextPathStr+"/";
-        
-        System.out.println("basePathStr:"+basePathStr);
-		
-		
-		String pathBig = basePathStr;
-		
-		String path="static/img/ReviewUImg/";
-		//存储ReviewU的客户头像图片
-		String returnUrl = UpImgUtils.keepReviewUImgFile(res);
-		
-		String[] aa = returnUrl.split("%");
-		String returnReaUrl =aa[0];
-		String ReviewIdstr = aa[1];
-		
-		int ReviewIdInt = Integer.parseInt(ReviewIdstr);
-		
-		System.out.println("ReviewIdInt:"+ReviewIdInt);
-		
-		String returnReaUrlAll = pathBig+path+returnReaUrl;
-		
-		MlfrontReview mlfrontReview = new MlfrontReview();
-		
-		mlfrontReview.setReviewId(ReviewIdInt);
-		
-		mlfrontReview.setReviewUimgurl(returnReaUrlAll);
-		
-		mlfrontReviewService.updateByPrimaryKeySelective(mlfrontReview);
-		
-		System.out.println("returnReaUrl:"+returnReaUrl);
-		
-		//把文件存储的url存到数据库中
-		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
-	}
-	
 	/**
 	 * 6.2	useOn	0522
 	 * 上传，产品的6张图，存入图片详情表
