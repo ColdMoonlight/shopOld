@@ -1161,6 +1161,14 @@ a:focus {
 	background-size: 50px 50px;
 }
 
+.reviews-img-box {
+	margin-top: 1em;
+}
+
+.reviews-img-box>img {
+	border: 1px solid #ccc;
+}
+
 /* review statics */
 .reviews-title {
 	font-size: 16px;

@@ -466,7 +466,7 @@
 				}
 				
 				if (!pattern.test(email)) {
-					alert('请输入email');
+					alert('请输入正确格式的email');
 					return;
 				}
 				
