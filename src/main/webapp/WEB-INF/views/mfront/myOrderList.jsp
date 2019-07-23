@@ -46,12 +46,6 @@
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
-	/**orderList展开展示每条的
-第一行，id,创建时间，订单状态，
-	orderItemlist遍历详情(这堆先空着，我一会写)
-		几个商品，订单总价
-*/
-
 	// 0未支付1已支付2,支付失败3,已发货;
 
 	var mainBox = $(".main .tab-content");
@@ -63,10 +57,8 @@
 		2: '支付失败',
 		3: '已发货',
 	}
-	$(function () {
-		//去首页
-		to_page(1);
-	});
+	//去首页
+	to_page(1);
 
 	function to_page(pn, type) {
 		$.ajax({
@@ -86,7 +78,7 @@
 				// 列表数据
 				renderContainer(containerBox, orderList, orderItemList);
 				// 解析显示分页条数据
-				build_page_nav(pageInfo);
+				render_page_nav(pageInfo);
 			}
 		});
 	}
@@ -165,7 +157,7 @@
 	}
 
 	//解析显示分页条，点击分页要能去下一页....
-	function build_page_nav(pageInfo) {
+	function render_page_nav(pageInfo) {
 		//page_nav_area
 		pageArea.empty();
 		var ul = $("<ul></ul>").addClass("pagination");
