@@ -646,7 +646,7 @@
 				html = '<div class="input-group">' +
 					'<input type="text" name="productNum" class="form-control" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
-					'</div><div class="coupon-error"></div>';
+					'</div><div class="coupon-error">Enter coupon code to get a discount!</div>';
 			}
 
 			/* MlbackCoupon/getOneMlbackCouponDetailByUId
