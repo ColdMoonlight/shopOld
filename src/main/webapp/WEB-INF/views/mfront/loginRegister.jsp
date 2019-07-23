@@ -43,11 +43,11 @@
 					</div>
 					<div class="input-group">
 						<label for="userPassword">password</label>
-						<input type="password" name="userPassword" placeholder="password 至少六位">
+						<input type="password" name="userPassword" placeholder="password at least six figures">
 					</div>
 				</form>
 
-				<a href="javascript:;" class="btn btn-pink sigin"> sigin </a>
+				<a href="javascript:;" class="btn btn-pink sigin"> SIGIN </a>
 			</div>
 			<div class="tab-pane register">
 				<form id="register">
@@ -61,7 +61,7 @@
 					</div>
 				</form>
 
-				<a href="javascript:;" class="btn btn-pink register"> register </a>
+				<a href="javascript:;" class="btn btn-pink register"> REGISTER </a>
 			</div>
 		</div>
 	</div>
