@@ -76,6 +76,7 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+  <script src="${APP_PATH }/static/js/relativetime.min.js"></script>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
 		var imgCount = 1;
@@ -332,7 +333,7 @@
 		             html += '</div>' +
 		             	'<div class="review-d-author">'+ text[i].reviewUname +'</div>' +
 		           		'</div>' +
-		           	'<div class="review-date">'+ text[i].reviewCreatetime +'</div>' +
+		           	'<div class="review-date">'+ (new RelativeTIime({date: text[i].reviewCreatetime}).output) +'</div>' +
 		         '</div>' +
 		         '<div class="review-content">' +
 	             '<div class="review-text">'+ text[i].reviewDetailstr +'</div>' +
