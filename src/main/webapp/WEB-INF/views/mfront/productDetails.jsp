@@ -354,7 +354,6 @@
 			
 			// render page nav
 			function render_page_nav(parent, pageInfo) {
-				console.log(pageInfo)
 				//page_nav_area
 				parent.empty();
 				var ul = $("<ul></ul>").addClass("pagination");
