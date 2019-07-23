@@ -314,7 +314,7 @@
 				initImgList(reviewId);//附图文件
 
 				// boot upload img
-				$('#upload-img-main').on("change", upload);
+				/* $('#upload-img-main').on("change", upload); */ //头像图不再上传，从名字的第一个字母生成
 				$('.upload-img-fu').each(function (i, item) {
 					$(item).on("change", function () {
 						uploadfu($(this), i + 1);
