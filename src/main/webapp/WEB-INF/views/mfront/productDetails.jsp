@@ -321,7 +321,6 @@
 						 '<div class="review-title">' +
 		           '<div class="img"><img src="'+ text[i].reviewUimgurl +'" alt=""></div>' +
 		           '<div class="review-data">' +
-		             '<div class="review-d-author">AUTHOR: '+ text[i].reviewUname +'</div>' +
 		             '<div class="review-d-rank">';
 		             		for(var j=0; j<5; j++) {
 		             			if (j < text[i].reviewProstarnum) {
@@ -331,6 +330,7 @@
 		             			}
 		             		}
 		             html += '</div>' +
+		             	'<div class="review-d-author">'+ text[i].reviewUname +'</div>' +
 		           		'</div>' +
 		           	'<div class="review-date">'+ text[i].reviewCreatetime +'</div>' +
 		         '</div>' +
