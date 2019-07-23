@@ -83,6 +83,7 @@ public class MlfrontReviewController {
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
 	 */
+	@SuppressWarnings("unused")
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlfrontReview mlfrontReview){
@@ -93,6 +94,26 @@ public class MlfrontReviewController {
 		Integer reviewId = mlfrontReview.getReviewId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontReview.setReviewMotifytime(nowTime);
+		
+		//获取用户名,判断头像图片()
+		String reviewUname = mlfrontReview.getReviewUname();
+		if(reviewUname==""){
+			String uimgurl = GetUImgUrlByUnameEmpt(res,reviewUname);
+			mlfrontReview.setReviewUimgurl(uimgurl);
+		}else{
+			String uimgurl = GetUImgUrlByUname(res,reviewUname);
+			mlfrontReview.setReviewUimgurl(uimgurl);
+			System.out.println("uimgurl:"+uimgurl);
+		}
+		//判断时间信息
+		String ReviewCreatetime = mlfrontReview.getReviewCreatetime();
+		if(ReviewCreatetime ==""){
+			mlfrontReview.setReviewCreatetime(nowTime);
+		}
+		String ReviewConfirmtime = mlfrontReview.getReviewConfirmtime();
+		if(ReviewConfirmtime==""){
+			mlfrontReview.setReviewConfirmtime(nowTime);
+		}
 		if(reviewId==null){
 			//无id，insert
 			int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
@@ -107,6 +128,114 @@ public class MlfrontReviewController {
 		}		
 	}
 	
+
+
+	/**3.1	useOn	0505
+	 * MlfrontReview	GetUImgUrlByUname
+	 * @param MlfrontReview
+	 */
+	private String GetUImgUrlByUname(HttpServletRequest res,String reviewUname) {
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        
+        String realPathStr = res.getSession().getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+res.getServerPort()+contextPathStr+"/";
+        System.out.println("basePathStr:"+basePathStr);
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/ReviewUImg/";
+		
+		String returnReaUrl = "";
+		
+		String firstName = reviewUname.substring(0, 1);
+		String firstNameUp = firstName.toUpperCase();
+		if(firstNameUp.equals("A")){
+			returnReaUrl="A.png";
+		}else if(firstNameUp.equals("B")){
+			returnReaUrl="B.png";
+		}else if(firstNameUp.equals("C")){
+			returnReaUrl="C.png";
+		}else if(firstNameUp.equals("D")){
+			returnReaUrl="D.png";
+		}else if(firstNameUp.equals("E")){
+			returnReaUrl="E.png";
+		}else if(firstNameUp.equals("F")){
+			returnReaUrl="F.png";
+		}else if(firstNameUp.equals("G")){
+			returnReaUrl="G.png";
+		}else if(firstNameUp.equals("H")){
+			returnReaUrl="H.png";
+		}else if(firstNameUp.equals("I")){
+			returnReaUrl="I.png";
+		}else if(firstNameUp.equals("J")){
+			returnReaUrl="J.png";
+		}else if(firstNameUp.equals("K")){
+			returnReaUrl="K.png";
+		}else if(firstNameUp.equals("L")){
+			returnReaUrl="L.png";
+		}else if(firstNameUp.equals("M")){
+			returnReaUrl="M.png";
+		}else if(firstNameUp.equals("N")){
+			returnReaUrl="N.png";
+		}else if(firstNameUp.equals("O")){
+			returnReaUrl="O.png";
+		}else if(firstNameUp.equals("P")){
+			returnReaUrl="P.png";
+		}else if(firstNameUp.equals("Q")){
+			returnReaUrl="Q.png";
+		}else if(firstNameUp.equals("R")){
+			returnReaUrl="R.png";
+		}else if(firstNameUp.equals("S")){
+			returnReaUrl="S.png";
+		}else if(firstNameUp.equals("T")){
+			returnReaUrl="T.png";
+		}else if(firstNameUp.equals("U")){
+			returnReaUrl="U.png";
+		}else if(firstNameUp.equals("V")){
+			returnReaUrl="V.png";
+		}else if(firstNameUp.equals("W")){
+			returnReaUrl="W.png";
+		}else if(firstNameUp.equals("X")){
+			returnReaUrl="X.png";
+		}else if(firstNameUp.equals("Y")){
+			returnReaUrl="Y.png";
+		}else if(firstNameUp.equals("Z")){
+			returnReaUrl="Z.png";
+		}
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		return returnReaUrlAll;
+	}
+	
+	/**3.2	useOn	0505
+	 * MlfrontReview	GetUImgUrlByUnameEmpt
+	 * @param MlfrontReview
+	 */
+	private String GetUImgUrlByUnameEmpt(HttpServletRequest res,String reviewUname) {
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        
+        String realPathStr = res.getSession().getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+res.getServerPort()+contextPathStr+"/";
+        System.out.println("basePathStr:"+basePathStr);
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/ReviewUImg/";
+		
+		String returnReaUrl="A.png";
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		return returnReaUrlAll;
+	}
+
+
 	/**4.0	useOn	0505
 	 * MlfrontReview	delete
 	 * @param id
