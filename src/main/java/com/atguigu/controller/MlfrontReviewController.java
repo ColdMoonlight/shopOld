@@ -335,7 +335,6 @@ public class MlfrontReviewController {
 		MlfrontReview mlfrontReview = new MlfrontReview();
 		mlfrontReview.setReviewPid(productId);
 		mlfrontReview.setReviewStatus(1);
-		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(mlfrontReview);
 		List<MlfrontReview> mlfrontReviewResListPage = new ArrayList<MlfrontReview>();
 		
 		List<MlfrontReview> mlfrontReviewResreturn = new ArrayList<MlfrontReview>();
@@ -343,6 +342,7 @@ public class MlfrontReviewController {
 		//分页数据获取完毕
 		int PagNum = 5;
 		PageHelper.startPage(pn, PagNum);
+		List<MlfrontReview> mlfrontReviewResList =mlfrontReviewService.selectMlfrontReviewListByPId(mlfrontReview);
 		PageInfo page = new PageInfo(mlfrontReviewResList, PagNum);
 		
 		//从中获取本次展示的5条信息
@@ -360,7 +360,7 @@ public class MlfrontReviewController {
 			EndIndex = StartIndex+5;
 		}
 		
-		for(int i=StartIndex;i<EndIndex;i++){
+		for(int i=0;i<EndIndex;i++){
 			MlfrontReview mlfrontReviewOne = mlfrontReviewResListPage.get(i);
 			mlfrontReviewResreturn.add(mlfrontReviewOne);
 			Integer reviewId = mlfrontReviewOne.getReviewId();

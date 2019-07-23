@@ -280,20 +280,20 @@
         }
       });
 	
-			to_page(1);
+	 to_page(1);
       /*
       review分页接口
       Integer productId;//产品ID
       Integer pn;//页数
       return	分页信息(pageInfo),5条评论内容(mlfrontReviewResreturn)，5条评论中的图片(imgUrlStrListst)
       */			
-      function to_page(pn, type) {
-	  		$.ajax({
+      function to_page(pn) {
+    	  $.ajax({
 	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
 	  			data: {
- 	          "productId": pidA[1],
- 	          "pn": pn
- 	        },
+ 	          			"productId": pidA[1],
+ 	          			"pn": pn
+ 	        		  },
 	  			type: "POST",
 	  			success: function (result) {
 	  				// console.log(result);
@@ -305,7 +305,7 @@
 						if (reviewImgData.length > 0) {
 							renderReviewList(reviewBoxList, reviewTextData, reviewImgData);
 							pageArea.removeClass('hide');
-			  			render_page_nav(pageArea, pageInfo);
+			  				render_page_nav(pageArea, pageInfo);
 						} else {
 							reviewBoxList.html('<p>暂无评论信息</p>');
 						}
