@@ -246,7 +246,7 @@
             
             function renderProgress(parent, num, total) {
             	var html = '';
-            	var percent = ((num / total).toFixed(2) * 100);
+            	var percent = (num * 100 / total || 0).toFixed(2);
             	html += '<div class="progress">' +
             			'<div class="progress-inner" style="width: '+ percent +'%"></div>' +
             		'</div>' +
@@ -256,20 +256,24 @@
             }
             var dataMap = {};
             var toalStar = 0;
-            for (var i=0, len = staticData.length; i<len; i+=1) {
-            	toalStar += staticData[i].startNum * staticData[i].startCount;
-            	dataMap[staticData[i].startNum] = staticData[i].startCount;
+            if (reviewTotal > 0) {
+            	for (var i=0, len = staticData.length; i<len; i+=1) {
+              	toalStar += staticData[i].startNum * staticData[i].startCount;
+              	dataMap[staticData[i].startNum] = staticData[i].startCount;
+              }
+     
+              var avgStar = Math.round(toalStar/reviewTotal);
+              $('.reviews-data .stars').find('.star').each(function(index, item) {
+              	if (index < avgStar) {
+              		$(item).addClass('active');
+              	}
+              });
             }
-            var avgStar = Math.round(toalStar/reviewTotal);
+            
             /* var avgStar =(toalStar/reviewTotal).toFixed(1); */
             $('.reivew-toal-num').find('.data').html(reviewTotal);
-            $('.reviews-data .stars').find('.star').each(function(index, item) {
-            	if (index < avgStar) {
-            		$(item).addClass('active');
-            	}
-            })
-            
-            renderProgress($('.review-statics-item.five'), dataMap[5], reviewTotal);
+
+            renderProgress($('.review-statics-item.five'), dataMap[5] , reviewTotal);
             renderProgress($('.review-statics-item.four'), dataMap[4], reviewTotal);
             renderProgress($('.review-statics-item.three'), dataMap[3], reviewTotal);
             renderProgress($('.review-statics-item.two'), dataMap[2], reviewTotal);
