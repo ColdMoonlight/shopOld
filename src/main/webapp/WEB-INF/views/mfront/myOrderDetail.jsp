@@ -59,7 +59,7 @@ param:　orderId
 		type: "POST",
 		data: reqData,
 		success: function (data) {
-			console.log(data)
+			// console.log(data)
 			var resDataAddress = data.extend.addressInfo;
 			var resDataOrder = data.extend.mlfrontOrderOne;
 			var resDataOrderItem = data.extend.mlfrontOrderItemList;

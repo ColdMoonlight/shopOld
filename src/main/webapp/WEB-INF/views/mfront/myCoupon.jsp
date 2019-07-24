@@ -49,7 +49,7 @@
 			if (data.code === 100) {
 				var userType = data.userType;
 				var resData = data.extend.mlbackCouponReturnList;
-				console.table(resData)
+				// console.table(resData)
 				if (resData.length) {
 					renderCoupon(box, resData);
 				} else {

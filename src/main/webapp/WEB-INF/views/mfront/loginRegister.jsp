@@ -111,17 +111,21 @@
 					// console.log(data);
 					var resData = data.extend;
 					if (resData.loginYes === 0) {
-						alert(resData.resMsg)
+						renderSysMsg(resData.resMsg);
 					}
 
 					if (resData.loginYes === 1) {
-						alert(resData.resMsg)
-						window.location.href = "${APP_PATH}/index/isMobileOrPc";
+						renderSysMsg(resData.resMsg);
+						setInterval(function() {
+							if (sysFlag) {
+								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
+							}
+						}, 1000);
 					}
 				}
 			})
 		} else {
-			alert('email or password format incorrect!');
+			renderSysMsg('email or password format incorrect!');
 		}
 	})
 
@@ -144,17 +148,21 @@
 					// console.log(data);
 					var resData = data.extend;
 					if (resData.registerYes === 0) {
-						alert(resData.resMsg)
+						renderSysMsg(resData.resMsg)
 					}
 
 					if (resData.registerYes === 1) {
-						alert(resData.resMsg)
-						window.location.href = "${APP_PATH}/index/isMobileOrPc";
+						renderSysMsg(resData.resMsg);
+						setInterval(function() {
+							if (sysFlag) {
+								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
+							}
+						}, 1000);
 					}
 				}
 			})
 		} else {
-			alert('email or password format incorrect!');
+			renderSysMsg('email or password format incorrect!');
 		}
 	})
 

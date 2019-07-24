@@ -498,9 +498,11 @@
 					success: function (result) {
 						if (result.code == 100) {
 							renderSysMsg('操作成功。新添加评论信息，需要平台审核通过后方能展示！');
-							if (sysFlag) {
-								window.location.href = window.location.href;
-							}
+							setInterval(function() {
+								if (sysFlag) {
+									window.location.href = window.location.href;
+								}
+							}, 1000);
 						} else {
 							renderSysMsg('操作失败！');
 						}
@@ -766,6 +768,7 @@
 	      }
 	    });
 		});
+
 		function deleteReview() {
 			var data = {
 				reviewId: reviewId
@@ -789,11 +792,11 @@
 			});
 		}
 		
-		/* $(window).on('beforeunload', function() {
+		$(window).on('beforeunload', function() {
 			if (reviewId) {
 				deleteReview();
 			}
-		}); */
+		});
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData
