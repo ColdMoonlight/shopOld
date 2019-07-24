@@ -97,8 +97,10 @@ public class MlfrontReviewController {
 		
 		//获取用户名,判断头像图片()
 		String reviewUname = mlfrontReview.getReviewUname();
-		mlfrontReview.setReviewUname("Megelook Customer");
-		reviewUname =mlfrontReview.getReviewUname();
+		if(reviewUname==""){
+			mlfrontReview.setReviewUname("Megelook Customer");
+			reviewUname =mlfrontReview.getReviewUname();
+		}
 		
 		String uimgurl = GetUImgUrlByUname(res,reviewUname);
 		mlfrontReview.setReviewUimgurl(uimgurl);
