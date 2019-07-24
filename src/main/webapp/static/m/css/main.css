@@ -1201,7 +1201,7 @@ a:focus {
 
 .review-statics-item .progress-inner {
 	height: 100%;
-	background-color: #ff1671;
+	background-color: #FDDA05;
 }
 
 .review-statics-item .data {
@@ -1243,6 +1243,7 @@ a:focus {
 
 .review-data .review-d-author {
   font-size: 14px;
+  font-weight: bolder;
 }
 
 .review-data .icon {
