@@ -49,7 +49,7 @@
 			</div>
 			<div class="review-box-item">
 				<div class="name">RANTING</div>
-				<div class="review-star" data-star="0">
+				<div class="stars-list review-star" data-star="0">
 					<i class="icon star" data-id="1"></i>
 					<i class="icon star" data-id="2"></i>
 					<i class="icon star" data-id="3"></i>
@@ -263,9 +263,9 @@
               }
      
               var avgStar = Math.round(toalStar/reviewTotal);
-              $('.reviews-data .stars').find('.star').each(function(index, item) {
+              $('.reviews-data .stars-list').find('.icon').each(function(index, item) {
               	if (index < avgStar) {
-              		$(item).addClass('active');
+              		$(item).removeClass('star').addClass('star2');
               	}
               });
             }
@@ -327,10 +327,10 @@
 						 '<div class="review-title">' +
 		           '<div class="img"><img src="'+ text[i].reviewUimgurl +'" alt=""></div>' +
 		           '<div class="review-data">' +
-		             '<div class="review-d-rank">';
+		             '<div class="stars-list review-d-rank">';
 		             		for(var j=0; j<5; j++) {
 		             			if (j < text[i].reviewProstarnum) {
-		             				html += '<i class="icon star active"></i>';
+		             				html += '<i class="icon star2"></i>';
 		             			} else {
 		             				html += '<i class="icon star"></i>';
 		             			}
@@ -437,11 +437,11 @@
 				deleteReview();
 			});
 			// select star reank
-			$('.review-star .star').forEach(function(item){
+			$('.review-star .icon').forEach(function(item){
 				var parent = $(item).parent();
 				$(item).on('click', function() {
-					parent.find('.star').removeClass('active');
-					$(this).addClass('active').prevAll('.star').addClass('active');
+					parent.find('.icon').removeClass('star2');
+					$(this).removeClass('star').addClass('star2').prevAll('.icon').removeClass('star').addClass('star2');
 					parent.attr('data-star', $(this).data('id'));
 				})
 			});
