@@ -98,11 +98,11 @@
 			url: "${APP_PATH }/MlfrontUser/exit",
 			type: 'POST',
 			success: function (data) {
-				console.log(data);
+				// console.log(data);
 				var resData = data.extend;
 
 				if (resData.exitInt === 0) {
-					alert(resData.resMsg)
+					// console.log(resData.resMsg)
 					window.location.href = "${APP_PATH }/MlfrontUser/toLoginRegisterPage";
 				}
 			}
