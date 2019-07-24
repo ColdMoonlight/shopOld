@@ -48,11 +48,11 @@
 				<div class="list-group">
 					<li class="list-group-item">
 						<div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span><i
-								class="icon bottom"></i></div>
+								class="icon right"></i></div>
 						<div class="group-details coupons"></div>
 					</li>
 					<li class="list-group-item">
-						<div class="group-title"><span>PAYMENT METHOD</span> <i class="icon right"></i></div>
+						<div class="group-title"><span>PAYMENT METHOD</span> <i class="icon bottom"></i></div>
 						<div class="group-details pay-method active">
 							<div class="coupon-item">
 								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox">
