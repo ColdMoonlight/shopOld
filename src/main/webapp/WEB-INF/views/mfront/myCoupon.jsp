@@ -57,7 +57,7 @@
 					renderErrorMsg(box, 'There are no coupons!');
 				}
 			} else {
-				alert('系统错误');
+				renderSysMsg('系统错误');
 			}
 		}
 	})
