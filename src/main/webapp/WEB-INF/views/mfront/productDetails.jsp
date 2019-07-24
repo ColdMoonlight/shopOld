@@ -440,7 +440,7 @@
 			$('.review-star .icon').forEach(function(item){
 				var parent = $(item).parent();
 				$(item).on('click', function() {
-					parent.find('.icon').removeClass('star2');
+					parent.find('.icon').removeClass('star2').addClass('star');
 					$(this).removeClass('star').addClass('star2').prevAll('.icon').removeClass('star').addClass('star2');
 					parent.attr('data-star', $(this).data('id'));
 				})

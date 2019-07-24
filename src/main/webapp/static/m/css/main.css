@@ -1124,6 +1124,7 @@ a:focus {
 /* star list */
 .stars-list {
 	display: flex;
+	align-items: center;
 }
 
 .stars-list .icon {
@@ -1139,7 +1140,6 @@ a:focus {
 .review-box-item .name {
 	margin-bottom: .5em;
 	font-size: 16px;
-	font-weight: bold;
 }
 
 .review-box-item>input {
@@ -1161,7 +1161,7 @@ a:focus {
 	padding: .5em;
 }
 
-.review-box .review-star>.star {
+.review-box .review-star>.icon {
 	width: 26px;
 	height: 26px;
 	cursor: pointer;
