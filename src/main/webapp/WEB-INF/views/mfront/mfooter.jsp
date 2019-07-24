@@ -90,7 +90,7 @@
         // console.log(data);
         var resData = data.extend;
         if (resData.isNav === 0) {
-          alert('没获取到相关数据')
+        	renderSysMsg('没获取到相关数据')
         }
 
         if (param && resData[param.block]) {

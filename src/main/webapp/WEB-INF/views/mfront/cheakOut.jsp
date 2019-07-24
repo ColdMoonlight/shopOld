@@ -82,10 +82,13 @@
 			</div>
 		</div>
 	</div>
-	<!-- address modal -->
-	<div class="address-modal">
-		<i class="icon close"></i>
-		<div class="address-box">
+	<!-- address box -->
+	<div class="win-box address-box hide">
+		<div class="win-box-title">
+			<span class="cancel">cancel</span>
+			<span class="save">save it</span>
+		</div>
+		<div class="win-box-content">
 			<form action="">
 				<!-- address id -->
 				<input type="hidden" class="address-id" name="addressId">
@@ -403,7 +406,6 @@
 						<input type="text" name="addressProvince" class="form-control">
 					</div>
 				</div>
-				<div class="form-group save"><a href="javascript:;" class="btn btn-pink cart-submit">save it</a></div>
 			</form>
 		</div>
 	</div>
@@ -469,7 +471,7 @@
 				resDataMoney = data.extend.areafreightMoney;
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
-				console.log(data)
+				// console.log(data)
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
 					renderAddressDetail(addressBox, resDataAddress);
@@ -481,17 +483,17 @@
 				}
 				totalPriceText.text('$' + (resDataMoney + totalPrice));
 				$('.address-trigger').on('click', function () {
-					$('.address-modal').show()
+					$('.address-box').show();
 				});
 			}
 		})
 
-		$('.address-modal .close').on('click', function () {
-			$('.address-modal').hide()
+		$('.address-box .cancel').on('click', function () {
+			$('.address-box').hide();
 		})
 
-		$('.address-modal .cart-submit').on('click', function () {
-			var formData = $('.address-modal form').serializeArray();
+		$('.address-box .save').on('click', function () {
+			var formData = $('.address-box form').serializeArray();
 			var reqData = formData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
@@ -520,9 +522,9 @@
 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
 					totalPriceText.text('$' + totalPrice);
 					renderAddressDetail(addressBox, reqData);
-					$('.address-modal').hide()
+					$('.address-box').hide();
 					$('.address-trigger').on('click', function () {
-						$('.address-modal').show()
+						$('.address-box').show();
 					});
 				}
 			})
@@ -787,18 +789,11 @@
 					success: function (data) {
 						var resData = JSON.parse(data).extend;
 						// console.log(data)
-						/* if(resData.isSuccess === 0) {
-							alert('success!')
-							window.location.href='${APP_PATH}/MlfrontPayInfo/toMlfrontPayInfoSuccess';
-						} else {
-							alert('fail!')
-							window.location.href='${APP_PATH}/MlfrontPayInfo/toMlfrontPayInfofail';
-						} */
 						window.location.href = '${APP_PATH }/paypal/pay';
 					}
 				})
 			} else {
-				alert('请填写收货地址')
+				renderSysMsg('请填写收货地址')
 			}
 		})
 
@@ -809,20 +804,14 @@
 				type: 'post',
 				async: false,
 				success: function (data) {
-					console.log("/MlfrontAddress/getOneMlfrontAddressDetailByUinfo");
-					console.log(data)
+					// console.log("/MlfrontAddress/getOneMlfrontAddressDetailByUinfo");
+					// console.log(data)
 					var resData = data.extend;
 					//console.log(resData.mlfrontAddressOne)
 					if (resData.mlfrontAddressOne) {
 						flag = true;
 					} else {
-						falg = false;
-						/* var addressBox = $('.address');;
-						console.log(addressBox);
-						if(addressBox!=null){
-							flag = true;
-						} */
-						
+						falg = false;						
 						var addressinfoIdss = reqDataUp.addressinfoId;
 						console.log("addressinfoIdss:"+addressinfoIdss);
 						if(addressinfoIdss!=null){
@@ -845,7 +834,7 @@
 					var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 					if (!pattern.test(data[key])) {
 						flag = !flag;
-						alert('邮件地址格式不正确');
+						renderSysMsg('邮件地址格式不正确');
 						break;
 					}
 				} else if (key === "addressId") {
@@ -854,7 +843,7 @@
 					if (data[key].trim().length < 1) {
 						flag = !flag;
 
-						alert('带星号的必填字段不能为空，请核对后再提交');
+						renderSysMsg('带星号的必填字段不能为空，请核对后再提交');
 						break;
 					}
 				}

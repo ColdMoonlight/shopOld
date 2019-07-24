@@ -58,7 +58,7 @@
         html += '<div class="banner">' +
           '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
 //          	'<img /* src="${APP_PATH }/static/img/position.png" data- */src="' + data[i].actshowproImgwapurl + '" alt="">' +
-		'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
           '</a>' +
           '</div>';
       }

@@ -195,7 +195,7 @@ ${APP_PATH }/MlfrontUser/update
 				success: function (data) {
 					// console.log(data);
 					if (data.code === 100) {
-						alert(data.extend.resMsg);
+						// console.log(data.extend.resMsg);
 
 						$(this).attr('data-flag', 0).text('edit');
 						$('.input').each(function (i, item) {

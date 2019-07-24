@@ -207,7 +207,7 @@
 					}
 				})
 			} else {
-				alert('请选择最终要购买的产品！')
+				renderSysMsg('请选择最终要购买的产品！')
 			}
 		}
 		$('.btn.calc-price').on('click', function () {
@@ -306,12 +306,16 @@
 						if (resData.isDelSuccess === 0) {
 							//0，删除失败。alert（resMsg），刷新
 							//全是错误情况，直接刷新
-							alert('系统异常，请稍后重试')
-							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+							renderSysMsg('系统异常，请稍后重试');
+							if (sysFlag) {
+								window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+							}
 						}
 					} else {
-						alert('系统异常，请稍后重试');
-						window.location.href = '${APP_PATH}/MlbackCart/toCartList'
+						renderSysMsg('系统异常，请稍后重试');
+						if (sysFlag) {
+							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+						}
 					}
 				}
 			})

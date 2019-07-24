@@ -33,12 +33,12 @@
 		<div class="product-details"> </div>
 	</div>
 	
-	<div class="review-box hide">
-		<div class="review-box-title">
+	<div class="win-box review-box hide">
+		<div class="win-box-title">
 			<span class="review-cancel">cancel</span>
 			<span class="review-ok">publish</span>
 		</div>
-		<div class="review-box-content">
+		<div class="win-box-content">
 			<div class="review-box-item">
 				<div class="name">NAME</div>
 				<input type="text" name="username" placeholder="Enter your name (public)">
@@ -425,7 +425,7 @@
 						if (result.code == 100) {
 							reviewId = result.extend.mlfrontReviewOne.reviewId;
 						} else {
-							alert('系统错误，请联系管理员！');
+							renderSysMsg('系统错误，请联系管理员！');
 						}
 					}
 				});
@@ -448,7 +448,7 @@
 			// add reivew imgs
 			$('.review-img-add').on('click', function() {
 				if (imgCount > 5) {
-					alert('最多上传5张评论图片');
+					renderSysMsg('最多上传5张评论图片');
 				} else {
 					uploadfu($(this).parent(), $(this).find('input')[0]);
 				}
@@ -461,22 +461,22 @@
 				var email = $('input[name="usereamil"]').val();
 				var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (username.length < 1) {
-					alert('请输入username');
+					renderSysMsg('请输入username');
 					return;
 				}
 				
 				if (!pattern.test(email)) {
-					alert('请输入正确格式的email');
+					renderSysMsg('请输入正确格式的email');
 					return;
 				}
 				
 				if (starNum < 1) {
-					alert('请打分');
+					renderSysMsg('请打分');
 					return;
 				}
 				
 				if (details.length < 1) {
-					alert('评论内容不能为空');
+					renderSysMsg('评论内容不能为空');
 					return;
 				}
 				// review reqData
@@ -497,10 +497,12 @@
 					async: false,
 					success: function (result) {
 						if (result.code == 100) {
-							alert('操作成功。新添加评论信息，需要平台审核通过后方能展示！');
-							window.location.href = window.location.href;
+							renderSysMsg('操作成功。新添加评论信息，需要平台审核通过后方能展示！');
+							if (sysFlag) {
+								window.location.href = window.location.href;
+							}
 						} else {
-							alert('操作失败！');
+							renderSysMsg('操作失败！');
 						}
 					}
 				});
@@ -624,7 +626,7 @@
 			function checkSku(skuCheckData) {
 				for (var i in skuCheckData) {
 					if (skuCheckData[i] === null) {
-						alert('请选择产品属性 ' + i);
+						renderSysMsg('请选择产品属性 ' + i);
 						return false;
 					}
 				}
@@ -781,7 +783,7 @@
 						reviewId = null;
 						window.location.href = window.location.href;
 					} else {
-						alert('系统错误，请联系管理员！');
+						renderSysMsg('系统错误，请联系管理员！');
 					}
 				}
 			});
