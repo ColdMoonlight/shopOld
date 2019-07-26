@@ -183,7 +183,9 @@ public class PaypalController {
 		mlfrontOrderResOne.setOrderPaytime(nowTime);
 		//执行更新
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderResOne);
-		
+		//将付款成功的参数successPayinfoId,successOrderId放入session中
+		session.setAttribute("successPayinfoId", payinfoId);
+		session.setAttribute("successOrderId", orderId);
 	}
 
 	/**2.0
