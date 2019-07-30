@@ -81,6 +81,10 @@
       obj[arr[0]] = arr[1];
       return obj;
     }, {}) : null;
+    
+
+    
+    
 
     $.ajax({
       url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAll',
@@ -147,6 +151,59 @@
       return article;
       // console.log(article)
     }
+    
+    
+    
+    /**
+    
+    	接口如下：${APP_PATH}/MlbackFootNav/getMlfrontFootNavAllSimple
+    	参数：无
+    	请求：post
+    	
+    	return 除了没有详情(富文本)，参数都有
+    	
+    	
+    	
+    	
+    	然后，点击名字，调用接口${APP_PATH}/MlbackFootNav/toMlfrontFootNavPage?footnavId=6
+    			跳转页面，带参数。
+    
+    */
+    
+    
+    
+    
+    
+	$.ajax({
+		url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAllSimple',
+	    type: 'post',
+	    async: false,
+		success: function (data) {
+			if (data.code === 100) {
+				var resData = data.extend;
+		        if (resData.isNav === 0) {
+		        	renderSysMsg('没获取到相关数据')
+		        }
+		        
+		        if (param && resData[param.block]) {
+		            var elMain = $('.main');
+		            if (resData.isNav === 0) {
+		          	  renderErrorMsg(elMain, '没获取到相关数据');
+		            }
+		            
+		          }
+		        
+		        windows.location.href="${APP_PATH}/MlbackFootNav/toMlfrontFootNavPage?footnavId=6";
+				console.log("********************");
+				console.log(data.extend);
+				console.log("********************");
+			} else {
+				console.log("********else********");
+			}
+		}
+	});
+    
+    
   </script>
 </body>
 

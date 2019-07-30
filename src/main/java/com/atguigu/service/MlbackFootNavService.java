@@ -108,5 +108,10 @@ public class MlbackFootNavService {
 		List<MlbackFootNav>  mlbackAreafreightList = mlbackFootNavMapper.selectMlbackFootNavAllIfShow(mlbackFootNav);
 		return mlbackAreafreightList;
 	}
+
+	public List<MlbackFootNav> selectMlbackFootNavAllSimpleIfShow(MlbackFootNav mlbackFootNav) {
+		List<MlbackFootNav>  mlbackAreafreightList = mlbackFootNavMapper.selectMlbackFootNavAllSimpleIfShow(mlbackFootNav);
+		return mlbackAreafreightList;
+	}
 	
 }

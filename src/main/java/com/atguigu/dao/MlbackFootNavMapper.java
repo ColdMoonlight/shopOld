@@ -44,5 +44,8 @@ public interface MlbackFootNavMapper {
 	List<MlbackFootNav> selectMlbackFootNavGetAll();
 
 	List<MlbackFootNav> selectMlbackFootNavAllIfShow(MlbackFootNav mlbackFootNav);
+
+	//简单查询底部导航
+	List<MlbackFootNav> selectMlbackFootNavAllSimpleIfShow(MlbackFootNav mlbackFootNav);
     
 }

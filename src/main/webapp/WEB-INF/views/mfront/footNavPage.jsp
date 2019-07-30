@@ -32,6 +32,36 @@
   <div class="main article"></div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
+  
+  <script type="text/javascript">
+		var footnavId = '${sessionScope.footnavId}';
+		console.log("footnavId:" + footnavId);
+  </script>
+  <script>
+  
+  /**
+  	到页面以后，从sessionzhonghuoqu
+  
+  */
+  var footnavIdA = window.location.href.split('?')[1].split('=');
+  
+  /* details of banner */
+	$.ajax({
+		url: '${APP_PATH}/MlbackFootNav/getOneMlbackFootNavOneAllDetail',
+		data: {
+			"footnavId": footnavIdA
+		},
+		type: "POST",
+		success: function (data) {
+			if (data.code === 100) {
+				console.log(data.extend);
+			} else {
+				console.log("****else*****");
+			}
+		}
+	});
+  
+  </script>
 </body>
 
 </html>
