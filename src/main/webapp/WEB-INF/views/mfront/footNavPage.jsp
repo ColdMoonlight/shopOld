@@ -33,34 +33,29 @@
 
   <jsp:include page="mfooter.jsp"></jsp:include>
   
-  <script type="text/javascript">
+ 	<script type="text/javascript">
 		var footnavId = '${sessionScope.footnavId}';
-		console.log("footnavId:" + footnavId);
-  </script>
-  <script>
-  
-  /**
-  	到页面以后，从sessionzhonghuoqu
-  
-  */
-  var footnavIdA = window.location.href.split('?')[1].split('=');
-  
-  /* details of banner */
-	$.ajax({
-		url: '${APP_PATH}/MlbackFootNav/getOneMlbackFootNavOneAllDetail',
-		data: {
-			"footnavId": footnavIdA
-		},
-		type: "POST",
-		success: function (data) {
-			if (data.code === 100) {
-				console.log(data.extend);
-			} else {
-				console.log("****else*****");
+		// console.log("footnavId:" + footnavId)
+	  
+	  /* details of banner */
+		$.ajax({
+			url: '${APP_PATH}/MlbackFootNav/getOneMlbackFootNavOneAllDetail',
+			data: {"footnavId": footnavId},
+			type: "POST",
+			success: function (data) {
+				if (data.code === 100) {
+					var resData = data.extend.MlbackFootNavOne;
+					// console.log(resData);
+          var elMain = $('.main');
+          var html = '<div class="article-title">' + resData.footnavName + '</div>' +
+            '<div class="article-content">' + resData.footnavDesc + '</div>';
+
+          elMain.html(html);
+				} else {
+					renderErrorMsg(elMain, '没获取到相关数据');
+				}
 			}
-		}
-	});
-  
+		});
   </script>
 </body>
 
