@@ -485,8 +485,10 @@ public class MlbackProductController {
 	 			proIdInt = Integer.parseInt(proIdStr);
 	 		 	mlbackProductReq.setProductId(proIdInt);
 	 		 	mlbackProductList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
-	 		 	mlbackProductResOne = mlbackProductList.get(0);
-	 		 	mlbackProductResList.add(mlbackProductResOne);
+	 		 	if(mlbackProductList.size()>0){
+	 		 		mlbackProductResOne = mlbackProductList.get(0);
+	 		 		mlbackProductResList.add(mlbackProductResOne);
+	 		 	}
 	 		}
 	 	}
 		return Msg.success().add("resMsg", "查看该母category下的全部产品")

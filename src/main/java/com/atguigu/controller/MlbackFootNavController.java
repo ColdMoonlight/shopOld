@@ -235,16 +235,6 @@ public class MlbackFootNavController {
 		return "mfront/footNavPage";
 	}
 	
-//	@RequestMapping(value="/tomProductDetailPage",method=RequestMethod.GET)
-//	public String tomProductDetailPage(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId) throws Exception{
-//		//接收传递进来的参数
-//		Integer productIdReq = productId;
-//		//放回响应域中
-//		res.setAttribute("productId", productIdReq);
-//		//返回视图
-//		return "mfront/productDetails";
-//	}
-	
 	/**
 	 * 9.0	UseNow	0505
 	 * 前台查看list		查看foot全部的接口类目的详情细节
