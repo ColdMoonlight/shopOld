@@ -47,7 +47,7 @@
 					</div>
 				</form>
 
-				<a href="javascript:;" class="btn btn-pink sigin"> SIGIN </a>
+				<a href="javascript:;" class="btn btn-black sigin"> SIGIN </a>
 			</div>
 			<div class="tab-pane register">
 				<form id="register">
@@ -61,7 +61,7 @@
 					</div>
 				</form>
 
-				<a href="javascript:;" class="btn btn-pink register"> REGISTER </a>
+				<a href="javascript:;" class="btn btn-black register"> REGISTER </a>
 			</div>
 		</div>
 	</div>

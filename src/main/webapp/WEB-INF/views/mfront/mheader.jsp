@@ -42,7 +42,7 @@
 <body>
   <!-- info -->
   <div class="info">
-    <p class="container">Get Free Pro Flate Iron Over $199</p>
+    <p class="container" style="text-align: center;">Free Shipping World Wide.</p>
   </div>
   <!--header  -->
   <div class="header bd-b">
