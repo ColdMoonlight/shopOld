@@ -31,6 +31,11 @@
           for (var dd in data[d].children) {
             childBox.append(createItem(data[d].children[dd]));
           }
+          
+          if (data[d].name === 'Client_Service_Support') {
+        	  item.find('.icon').removeClass('plus').addClass('sub');
+        	  childBox.addClass('show').css('display', 'block');
+          }
           item.append(childBox);
         }
         box.append(item);

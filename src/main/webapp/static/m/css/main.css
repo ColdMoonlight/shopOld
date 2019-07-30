@@ -788,6 +788,13 @@ a:focus {
   border: none;
 }
 
+.btn-black {
+  color: #000;
+  background-color: #fff;
+  border-color: #000;
+  border-radius: unset;
+}
+
 .btn-gray {
   color: #fff;
   background-color: #ccc;
@@ -816,12 +823,13 @@ a:focus {
 }
 
 .product-d-title {
-  font: 15px/28px '';
+	padding: 1em 0;
+  font: 16px/18px '';
+  font-family: inherit;
   font-weight: bold;
-  txt-align: center;
+  text-align: center;
   color: #333;
   border-top: 1px solid #ccc;
-  font-family: inherit;
 }
 
 .product-d-count,
@@ -924,15 +932,6 @@ a:focus {
 .price-text{
 	line-height:2.5em; text-indent: 1.5em;
 }
-
-/* .product-d-op .btn.btn-default {
-  color: #ff186e;
-}
-
-.product-d-op .btn.btn-pink {
-  color: #fff;
-  background-color: #ff186e;
-} */
 
 .product-d-op .btn {
   border-radius: unset;

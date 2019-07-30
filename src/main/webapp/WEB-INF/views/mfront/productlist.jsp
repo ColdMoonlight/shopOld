@@ -52,8 +52,9 @@
 			type: "GET",
 			success: function (data) {
 				if (data.code === 100) {
-					// console.log(data.extend);
-					renderCondition($('.select-item.select-category'), data.extend.mlbackCategorydownEr)
+					var resData = data.extend.mlbackCategorydownEr;
+					console.log(resData);
+					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
 							$(item).on('change', function () {
