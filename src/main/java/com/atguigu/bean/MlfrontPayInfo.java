@@ -112,4 +112,36 @@ public class MlfrontPayInfo {
     public void setPayinfoMotifytime(String payinfoMotifytime) {
         this.payinfoMotifytime = payinfoMotifytime == null ? null : payinfoMotifytime.trim();
     }
+
+	public MlfrontPayInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public MlfrontPayInfo(Integer payinfoId, Integer payinfoUid, String payinfoIp, Integer payinfoOid,
+			String payinfoPlatform, String payinfoPlatformserialcode, BigDecimal payinfoMoney, Integer payinfoStatus,
+			String payinfoReason, String payinfoCreatetime, String payinfoMotifytime) {
+		super();
+		this.payinfoId = payinfoId;
+		this.payinfoUid = payinfoUid;
+		this.payinfoIp = payinfoIp;
+		this.payinfoOid = payinfoOid;
+		this.payinfoPlatform = payinfoPlatform;
+		this.payinfoPlatformserialcode = payinfoPlatformserialcode;
+		this.payinfoMoney = payinfoMoney;
+		this.payinfoStatus = payinfoStatus;
+		this.payinfoReason = payinfoReason;
+		this.payinfoCreatetime = payinfoCreatetime;
+		this.payinfoMotifytime = payinfoMotifytime;
+	}
+
+	@Override
+	public String toString() {
+		return "MlfrontPayInfo [payinfoId=" + payinfoId + ", payinfoUid=" + payinfoUid + ", payinfoIp=" + payinfoIp
+				+ ", payinfoOid=" + payinfoOid + ", payinfoPlatform=" + payinfoPlatform + ", payinfoPlatformserialcode="
+				+ payinfoPlatformserialcode + ", payinfoMoney=" + payinfoMoney + ", payinfoStatus=" + payinfoStatus
+				+ ", payinfoReason=" + payinfoReason + ", payinfoCreatetime=" + payinfoCreatetime
+				+ ", payinfoMotifytime=" + payinfoMotifytime + "]";
+	}
+    
 }
