@@ -301,52 +301,5 @@ public class MlbackCategoryController {
 					.add("mlbackCategorydownList", mlbackCategorydownList).add("mlbackCategorydownEr", mlbackCategorydownEr);
 	}
 	
-	/**7.0
-	 * @author Shinelon
-	 * @exception 导出单一发布任务执行明细
-	 * @param MlbackCategory
-	 * @return 
-	 * */
-//	@ResponseBody
-//	@RequestMapping("/exportFile")
-//	public String exportFile(HttpServletRequest request,HttpServletResponse response) throws IOException {
-//		response.reset(); 
-//		// 接收请求相应
-//	    //准备请求头参数
-//		String authstatus =request.getParameter("authStatus");
-//		String userworkGroupdisplayId =request.getParameter("userworkGroupdisplayId");
-//		int authStatus =Integer.parseInt(authstatus);
-//		int userworkGroupdisplayIdId =Integer.parseInt(userworkGroupdisplayId);
-//		Date date =new Date();
-//		SimpleDateFormat sdf =new SimpleDateFormat("yyyyMMddHHmmss");
-//		String time =sdf.format(date);
-//		response.setHeader("Content-Disposition", "attachment;filename=File" + time +".xlsx");
-//		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-//		response.setHeader("Pragma", "no-cache");
-//		response.setHeader("Cache-Control", "no-cache");
-//		response.setDateHeader("Expires", 0);
-//	    XSSFWorkbook workbook = null;
-//	    try {
-//	    	UserWork userWork= new UserWork();
-//	    	userWork.setUserworkGroupdisplayId(userworkGroupdisplayIdId);
-//	    	if(authStatus==1) {	    		
-//	    		List<UserWork> UserWorkList = userWorkService.getUserWorkByConditions(userWork);
-//	            workbook = ExcelUtils.exportContactsGroupDisplay(UserWorkList);
-//	        }
-//	        OutputStream output;
-//	        try {
-//	        	output = response.getOutputStream();
-//	            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
-//	            bufferedOutPut.flush();
-//	            workbook.write(bufferedOutPut);
-//	            bufferedOutPut.close();
-//	            } catch (Exception e) {
-//	                e.printStackTrace();
-//	            }
-//	        } catch (Exception e1) {
-//	            e1.printStackTrace();
-//	        }
-//	        return null;
-//	}
 	
 }
