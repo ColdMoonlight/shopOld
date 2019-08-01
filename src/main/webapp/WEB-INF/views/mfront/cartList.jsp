@@ -306,13 +306,13 @@
 						if (resData.isDelSuccess === 0) {
 							//0，删除失败。alert（resMsg），刷新
 							//全是错误情况，直接刷新
-							renderSysMsg('系统异常，请稍后重试');
+							renderSysMsg('The system is abnormal, please try again later');
 							if (sysFlag) {
 								window.location.href = '${APP_PATH}/MlbackCart/toCartList';
 							}
 						}
 					} else {
-						renderSysMsg('系统异常，请稍后重试');
+						renderSysMsg('The system is abnormal, please try again later');
 						if (sysFlag) {
 							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
 						}

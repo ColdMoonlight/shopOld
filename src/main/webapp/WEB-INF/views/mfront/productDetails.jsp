@@ -429,7 +429,7 @@
 						if (result.code == 100) {
 							reviewId = result.extend.mlfrontReviewOne.reviewId;
 						} else {
-							renderSysMsg('系统错误，请联系管理员！');
+							renderSysMsg('System error, please contact the administrator！');
 						}
 					}
 				});
@@ -452,7 +452,7 @@
 			// add reivew imgs
 			$('.review-img-add').on('click', function() {
 				if (imgCount > 5) {
-					renderSysMsg('最多上传5张评论图片');
+					renderSysMsg('Upload up to 5 review images');
 				} else {
 					uploadfu($(this).parent(), $(this).find('input')[0]);
 				}
@@ -465,22 +465,22 @@
 				var email = $('input[name="usereamil"]').val();
 				var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (username.length < 1) {
-					renderSysMsg('请输入username');
+					renderSysMsg('Please enter user name');
 					return;
 				}
 				
 				if (!pattern.test(email)) {
-					renderSysMsg('请输入正确格式的email');
+					renderSysMsg('Please enter the correct email address');
 					return;
 				}
 				
 				if (starNum < 1) {
-					renderSysMsg('请打分');
+					renderSysMsg('Please Rating');
 					return;
 				}
 				
 				if (details.length < 1) {
-					renderSysMsg('评论内容不能为空');
+					renderSysMsg('Comment content cannot be empty');
 					return;
 				}
 				// review reqData
@@ -501,14 +501,14 @@
 					async: false,
 					success: function (result) {
 						if (result.code == 100) {
-							renderSysMsg('操作成功。新添加评论信息，需要平台审核通过后方能展示！');
+							renderSysMsg('Successful operation. New comment information needs to be reviewed before it can be displayed.！');
 							setInterval(function() {
 								if (sysFlag) {
 									window.location.href = window.location.href;
 								}
 							}, 1000);
 						} else {
-							renderSysMsg('操作失败！');
+							renderSysMsg('Operation Failed！');
 						}
 					}
 				});
@@ -632,7 +632,7 @@
 			function checkSku(skuCheckData) {
 				for (var i in skuCheckData) {
 					if (skuCheckData[i] === null) {
-						renderSysMsg('请选择产品属性 ' + i);
+						renderSysMsg('Please select product attributes' + i);
 						return false;
 					}
 				}

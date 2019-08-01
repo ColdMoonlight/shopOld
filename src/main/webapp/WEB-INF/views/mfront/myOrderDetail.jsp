@@ -35,7 +35,7 @@
 		<div class="order-list"></div>
 
 		<div class="order-data">
-			<div class="title">订单时间</div>
+			<div class="title">Order Time</div>
 			<div class="body"></div>
 		</div>
 	</div>
@@ -133,10 +133,10 @@ param:　orderId
 				}
 				html += '</div>' +
 					'<div class="order-item-footer">' +
-					'<div class="order-i-i"><span>订单总价</span><span>$ ' + (parseFloat(data[key].orderMoney) + parseFloat(data[key]
+					'<div class="order-i-i"><span>Total Amount</span><span>$ ' + (parseFloat(data[key].orderMoney) + parseFloat(data[key]
 						.orderCouponPrice)) + '<span></div>' +
-					'<div class="order-i-i"><span>优惠券</span><span>-$ ' + data[key].orderCouponPrice + '<span></div>' +
-					'<div class="order-i-i"><span>实际付款</span><span>$ ' + data[key].orderMoney + '<span></div>' +
+					'<div class="order-i-i"><span>Coupon</span><span>-$ ' + data[key].orderCouponPrice + '<span></div>' +
+					'<div class="order-i-i"><span>Actual payment</span><span>$ ' + data[key].orderMoney + '<span></div>' +
 					'</div>' +
 					'</div>';
 			}
@@ -149,10 +149,10 @@ param:　orderId
 
 	function renderOrderinfo(parent, data) {
 		var html = '';
-		html = '<div><span>支付方式：</span><span>' + data.orderPayPlate + '</span></div>' +
-			'<div><span>创建时间：</span><span>' + data.orderCreatetime + '</span></div>' +
-			'<div><span>发货时间：</span><span>' + (data.orderSendtime ? data.orderSendtime : "未发货") + '</span></div>' +
-			'<div><span>支付时间：</span><span>' + data.orderPaytime + '</span></div>';
+		html = '<div><span>Payment_Method：</span><span>' + data.orderPayPlate + '</span></div>' +
+			'<div><span>Creation_Time：</span><span>' + data.orderCreatetime + '</span></div>' +
+			'<div><span>Shipping Time：</span><span>' + (data.orderSendtime ? data.orderSendtime : "Unfilled") + '</span></div>' +
+			'<div><span>Payment time：</span><span>' + data.orderPaytime + '</span></div>';
 		parent.html(html);
 	}
 </script>

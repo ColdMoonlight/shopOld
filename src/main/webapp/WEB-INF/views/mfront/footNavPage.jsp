@@ -52,7 +52,7 @@
 
           elMain.html(html);
 				} else {
-					renderErrorMsg(elMain, '没获取到相关数据');
+					renderErrorMsg(elMain, 'Did not get relevant data');
 				}
 			}
 		});

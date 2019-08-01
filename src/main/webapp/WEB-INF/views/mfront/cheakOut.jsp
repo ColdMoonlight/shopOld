@@ -493,6 +493,7 @@
 		})
 
 		$('.address-box .save').on('click', function () {
+			//fbq('track', 'AddPaymentInfo');//追踪'添加支付信息'事件		facebook广告插件可以注释掉，但不要删除
 			var formData = $('.address-box form').serializeArray();
 			var reqData = formData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
@@ -780,6 +781,7 @@
 			console.log(reqDataUp)
 			console.log(checkAddress(reqDataUp))
 			if (checkAddress(reqDataUp)) {
+				//fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 				$.ajax({
 					url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 					data: JSON.stringify(reqData),
@@ -793,7 +795,7 @@
 					}
 				})
 			} else {
-				renderSysMsg('请填写收货地址')
+				renderSysMsg('Please fill in the shipping address')
 			}
 		})
 
@@ -834,7 +836,7 @@
 					var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 					if (!pattern.test(data[key])) {
 						flag = !flag;
-						renderSysMsg('邮件地址格式不正确');
+						renderSysMsg('Email address format is incorrect');
 						break;
 					}
 				} else if (key === "addressId") {
@@ -843,7 +845,7 @@
 					if (data[key].trim().length < 1) {
 						flag = !flag;
 
-						renderSysMsg('带星号的必填字段不能为空，请核对后再提交');
+						renderSysMsg('Required fields with an asterisk cannot be empty. Please check before submitting');
 						break;
 					}
 				}

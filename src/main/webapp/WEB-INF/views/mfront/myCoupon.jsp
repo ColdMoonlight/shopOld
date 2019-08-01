@@ -53,11 +53,11 @@
 				if (resData.length) {
 					renderCoupon(box, resData);
 				} else {
-					renderErrorMsg(box, '没有相关的优惠券！');
+					renderErrorMsg(box, 'No relevant coupons！');
 					renderErrorMsg(box, 'There are no coupons!');
 				}
 			} else {
-				renderSysMsg('系统错误');
+				renderSysMsg('System error');
 			}
 		}
 	})
@@ -65,11 +65,10 @@
 	function renderCoupon(parent, data) {
 		var html = ''
 		for (var i = 0, len = data.length; i < len; i += 1) {
-			html += '<div class="coupon-item" title="需要拷贝优惠码">' +
+			html += '<div class="coupon-item" title="Need to copy the coupon code">' +
 				'<div class="coupon-text">' +
 				'<div class="price">$' + data[i].couponPrice + '</div>' +
 				'<div class="name">' + data[i].couponName + '</div>' +
-				// '<div class="date">' + (data[i].couponStatus ? '可以使用' : '已失效') + '</div>' +
 				'<div class="date">' + (data[i].couponStatus ? 'You can use' : 'Has the failure') + '</div>' +
 				'</div>' +
 				'<span>' + data[i].couponCode + '</span>' +
