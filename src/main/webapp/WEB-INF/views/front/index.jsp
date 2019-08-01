@@ -1,210 +1,220 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
-<%
+  <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
  %>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 </head>
+
 <body>
 
-<jsp:include page="pcheader.jsp"></jsp:include>
-<!-- banner -->
+  <jsp:include page="pcheader.jsp"></jsp:include>
 
-<!--限时促销-->
-<div class="index_row container">
-    <div class="product_banner product_banner1 m_t_20"></div>
-    <div class="product_list product_list1">
-       <div class="row tt-layout-product-item"></div>
-    </div>
-</div>
-
-
-<div class="index_row m_t_20 container">
-    <div class="product_banner product_banner2 m_t_20"></div>
-    <div class="product_list product_list2">
-       <div class="row tt-layout-product-item"></div>
-    </div>
-</div>
-<!-- ins -->
-<div class="instagram-feed-area text-center">
-    <div class="instagram-content-header">
-        <h3><span>@Megalook</span> shop on Instagram</h3>
-        <em>Follow us on instagram</em>
-    </div>
-
-    <div class="instagram-feed-thumb">
-        <div id="instafeed" class="instagram-carousel" data-userid="6665768655"
-            data-accesstoken="6665768655.1677ed0.313e6c96807c45d8900b4f680650dee5">
-        </div>
-    </div>
-
-</div>
-
-<jsp:include page="pcfooter.jsp"></jsp:include>
-<%-- 
-<script src="${APP_PATH }/static/pc/js/flickerplate.min.js" type="text/javascript"></script> --%>
-<script>
-/* banner */
-var productBox = $('.product_list1').find('.tt-layout-product-item');
-$.ajax({
-  url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
-  data:"categoryId="+41,
-  type:"POST",
-  success: function(data) {
-    if(data.code === 100) {
-      // console.log(data.extend.mlbackCategoryOne);
-      var category = data.extend.mlbackCategoryOne;
-      // categoryName categoryImgurl
-      var  html = '';
-      $('.product_banner1').html('<img src="' + category.categoryImgurl + '" alt=" + category.categoryName + ">');
-    } else {
-      renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+	<!-- main -->
+  <div class="main">
+  	<div class="container">
+	    <!-- sale -->
+	    <div class="banner">
+	      <a href="#" alt="">
+	        <img src="${APP_PATH }/static/m/img/firstpage/first1.jpg" alt="">
+	      </a>
+	    </div>
+	    <!-- count date -->
+	    <div class="banner">
+	      <a href="#" alt="">
+	        <img src="${APP_PATH }/static/m/img/firstpage/first2.jpg" alt="">
+	      </a>
+	    </div>
+	    <!-- countDownArea date -->
+	    <div id="countdown-area"> </div>
+	    <!-- product intro -->
+	    <div class="hot-product-title">
+	    	<h3>Hot Selling</h3>
+	    </div>
+	    <div id="hot-product" class="swiper-container">
+			   <div class="swiper-wrapper"></div>
+			   <div class="swiper-pagination"></div>
+			</div>
+	    <!-- product show -->
+	    <div id="product-block"></div>
+  	</div>
+  </div>
+  
+  <jsp:include page="pcfooter.jsp"></jsp:include>
+ 	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
+	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
+  <script>
+    function renderHotProduct(parent, data) {
+      var html = '';
+      for (var i=0, len=data.length; i < len; i += 1) {
+				html += '<div class="swiper-slide">' +
+	          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
+								'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+						'</a>' +
+					'</div>';
+			}
+      parent.html(html);
     }
-  }
-});
- /*------block1 rednerProduct1----------*/
-function rednerProduct1(parent, data) {
-  var html='';
-  for(var i=0; i<data.length; i+=1) {
-		html += '<div class="col-6 col-md-4 col-lg-3">' +
-			'<div class="tt-product thumbprod-center">' +
-				'<div class="tt-image-box">' +
-					'<a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>' +
-					'<a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>' +
-					'<a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>' +
-					'<a href="${APP_PATH}/MlbackProduct/tomProductDetailPagePC?productId=' + data[i].productId +'">' +
-						'<span class="tt-img"><img src="' + data[i].productMainimgurl + '" alt=""></span>' +
-						'<span class="tt-img-roll-over"><img src="' + data[i].productMainFuimgurl + '" alt=""></span>' +
-					'</a>' +
-				'</div>' +
-				'<div class="tt-description">' +
-					'<div class="tt-row">' +
-						'<ul class="tt-add-info">' +
-							'<li><a href="#">' + data[i].productCategoryname + '</a></li>' +
-						'</ul>' +
-						'<div class="tt-rating">';
-						for(var j=0; j<5; j+=1) {
-							html+= '<i class="icon-star"></i>';
+		/* xxxx */
+    $.ajax({
+      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
+      data: "actshowproActnum=" + 1,
+      type: "POST",
+      success: function (data) {
+        // console.log("mlbackActShowProList");
+        if (data.code === 100) {
+        	var resData = data.extend.mlbackActShowProList;
+          // console.log(resData);
+          renderHotProduct($('#hot-product .swiper-wrapper'), resData);
+          new Swiper('#hot-product', {
+        	  slidesPerView: 4,
+            spaceBetween: 10,
+            freeMode: true,
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true
 						}
-			html+=     '</div>' +
-					'</div>' +
-					'<h2 class="tt-title"><a href="${APP_PATH}/MlbackProduct/tomProductDetailPagePC?productId=' + data[i].productId +'">' + data[i].productName + '</a></h2>' +
-					'<div class="tt-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i].productOriginalprice*data[i].productActoffoff/100).toFixed(2) : 0) + '</div>' +
-					'<div class="tt-reviews">'+ data[i].productReviewnum +' Reviews</div>' +
-					'<div class="tt-product-inside-hover">' +
-						'<div class="tt-row-btn">' +
-							'<a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>' +
-						'</div>' +
-						'<div class="tt-row-btn">' +
-							'<a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>' +
-							'<a href="#" class="tt-btn-wishlist"></a>' +
-							'<a href="#" class="tt-btn-compare"></a>' +
-						'</div>' +
-					'</div>' +
-				'</div>' +
-			'</div>' +
-		'</div>';
-  }
+					})
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      }
+    });
+    
+    /*---------------countDownArea--------*/
+    function rednerCountDownAreaOne(parent, data) {
+      var html = '';
+      html += '<div class="title">'+data.countdownTitle+'</div>'+
+        '<div class="body"></div>'+
+        '<div class="desc">'+ data.countdownDescription +'</div>';
 
-  parent.html(html);
-}
+      parent.html(html);
+      var countdown = new countDown('#countdown-area .body', {
+	      start: {
+	        time: data.countdownStarttime
+	      },
+	      end: {
+	        time: data.countdownEndtime
+	      },
+	      format: 'DD : HH : MM : SS',
+	      themeClass: 'dark',
+	      interval: 1000,
+	      stateText: {
+    	    before: 'Start of distance activity:',
+    	    progress: 'End of distance activity:',
+    	    after: 'The activity is over:',
+	    	}
+	    });
 
-$.ajax({
-  url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdList',
-  data:"productCategoryid="+41,
-  type:"POST",
-  success: function(data) {
-    // console.log(productList1)
-    if(data.code === 100) {
-      // console.log(data.extend.mlbackProductResList);
-      rednerProduct1(productBox, data.extend.mlbackProductResList)
-    } else {
-      renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+      if (countdown && countdown.state === 'after') {
+    	  $('#countdown-area').addClass('hide');
+      }
     }
-  }
-});
+    var countDownArea = $('#countdown-area');
+    $.ajax({
+      url: '${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail',
+      data: "countdownId=" + 1,
+      type: "POST",
+      success: function (data) {
+        // console.log("mlbackCountDownOne");
+        if (data.code === 100) {
+          // console.log(data.extend.mlbackCountDownOne);
+          if(data.extend.mlbackCountDownOne==null){
+          	// console.log("mlbackCountDownOne为null");
+          }else{
+          	rednerCountDownAreaOne(countDownArea, data.extend.mlbackCountDownOne)
+          }
+        } else {
+          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+        }
+      }
+    });
 
-/*---------------block2 banner2--------*/
-$.ajax({
-  url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail',
-  data:"categoryId="+41,
-  type:"POST",
-  success: function(data) {
-    if(data.code === 100) {
-      // console.log(data.extend.mlbackCategoryOne);
-      var category = data.extend.mlbackCategoryOne;
-      // categoryName categoryImgurl
-      var  html = '';
-      $('.product_banner2').html('<img src="' + category.categoryImgurl + '" alt=" + category.categoryName + ">');
-    } else {
-      renderErrorMsg(prodcutBox2, '未获取到产品相关的数据');
-    }
-  }
-});
-/*------rblock2 ednerProduct2----------*/
-function rednerProduct2(parent, data) {
-  var html='';
-  for(var i=0; i<data.length; i+=1) {
-	  html += '<div class="col-6 col-md-4 col-lg-3">' +
-		'<div class="tt-product thumbprod-center">' +
-			'<div class="tt-image-box">' +
-				'<a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>' +
-				'<a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>' +
-				'<a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a>' +
-				'<a href="${APP_PATH}/MlbackProduct/tomProductDetailPagePC?productId=' + data[i].productId +'">' +
-					'<span class="tt-img"><img src="' + data[i].productMainimgurl + '" alt=""></span>' +
-					'<span class="tt-img-roll-over"><img src="' + data[i].productMainFuimgurl + '" alt=""></span>' +
-				'</a>' +
-			'</div>' +
-			'<div class="tt-description">' +
-				'<div class="tt-row">' +
-					'<ul class="tt-add-info">' +
-						'<li><a href="#">' + data[i].productCategoryname + '</a></li>' +
-					'</ul>' +
-					'<div class="tt-rating">';
-					for(var j=0; j<5; j+=1) {
-						html+= '<i class="icon-star"></i>';
-					}
-		html+=     '</div>' +
-				'</div>' +
-				'<h2 class="tt-title"><a href="${APP_PATH}/MlbackProduct/tomProductDetailPagePC?productId=' + data[i].productId +'">' + data[i].productName + '</a></h2>' +
-				'<div class="tt-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i].productOriginalprice*data[i].productActoffoff/100).toFixed(2) : 0) + '</div>' +
-				'<div class="tt-reviews">'+ data[i].productReviewnum +' Reviews</div>' +
-				'<div class="tt-product-inside-hover">' +
-					'<div class="tt-row-btn">' +
-						'<a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>' +
-					'</div>' +
-					'<div class="tt-row-btn">' +
-						'<a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>' +
-						'<a href="#" class="tt-btn-wishlist"></a>' +
-						'<a href="#" class="tt-btn-compare"></a>' +
-					'</div>' +
-				'</div>' +
-			'</div>' +
-		'</div>' +
-	'</div>';
-  }
+    /*------rednerProduct----------*/
+    function rednerProduct(data) {
+      var html = '';
+      for (var i = 0; i < data.length; i += 1) {
+        html += '<div class="product-item col-lg-3">' +
+          '<div class="product-img">' +
+          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' +
+          '<img src="' + data[i].productMainimgurl + '" alt="">' +
+          '</a>' +
+          '</div>' +
+          '<div class="product-desc">' +
+          '<div class="product-title">' + data[i].productName + '</div>' +
+          '<div class="product-type"></div>' +
+          '<div class="product-data">' +
+          '<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+          '<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+          ' Review(s)</span>' +
+          '</div>' +
+          '<div class="product-price">' +
+          '<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+            .productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+          '<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+          '</span>' +
+          '<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
+      }
 
-  parent.html(html);
-}
-var productBox2 = $('.product_list2').find('.tt-layout-product-item');
-$.ajax({
-  url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdList',
-  data:"productCategoryid="+41,
-  type:"POST",
-  success: function(data) {
-    // console.log(productList2)
-    if(data.code === 100) {
-      // console.log(data.extend.mlbackProductResList);
-      rednerProduct2(productBox2, data.extend.mlbackProductResList)
-    } else {
-      renderErrorMsg(prodcutBox2, '未获取到产品相关的数据');
+      return $('<div class="product-list"></div>').html(html);
     }
-  }
-});
-</script>
+    /*------rednerBanner----------*/
+    function renderBanner(data) {
+    	return $('<div class="banner"></div>').html('<img src="' + data.showareaImgurl + '" alt=" + data.showareaName + ">');
+    }
+    
+		var blockList = [
+ 		  { banner: 1, product: 1},
+ 		  { banner: 2, product: 2},
+ 		  { banner: 3, product: 3},
+ 		  { banner: 4, product: 4}
+ 		];
+    /*---------------product block--------*/
+    for (var i=0, len=blockList.length; i<len; i+=1) {
+    	var productBlock = $('#product-block');
+    	// banner
+   	 	$.ajax({
+ 	      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
+ 	      data: "showareaNumth=" + blockList[i].banner,
+ 	      type: "POST",
+ 	      async: false,
+ 	      success: function (data) {
+ 	        if (data.code === 100) {
+ 	          var bannerData = data.extend.mlbackShowAreaOne;
+ 	          // console.log(bannerData);
+ 	          // categoryName categoryImgurl;
+ 	          productBlock.append(renderBanner(bannerData))
+ 	        } else {
+ 	          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+ 	        }
+ 	      }
+ 	    });
+    	// product
+   	 	$.ajax({
+         url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
+         data: "productLable=" + blockList[i].product,
+         type: "POST",
+         async: false,
+         success: function (data) {
+           // console.log(productList1)
+           if (data.code === 100) {
+             var productData = data.extend.mlbackProductResList;
+             // console.log(productData);
+             productBlock.append(rednerProduct(productData));
+           } else {
+             renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+           }
+         }
+       });
+    }
+  </script>
 </body>
+
 </html>
