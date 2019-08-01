@@ -129,7 +129,7 @@ public class MlbackProductController {
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
 //		}else{
-			int PagNum = 20;
+			int PagNum = 90;
 			PageHelper.startPage(pn, PagNum);
 			List<MlbackProduct> mlbackProductList = mlbackProductService.selectMlbackProductGetAll();
 			PageInfo page = new PageInfo(mlbackProductList, PagNum);
@@ -235,7 +235,7 @@ public class MlbackProductController {
 				mlbackCategoryReq.setCategoryId(categoryIdInt);
 				mlbackCategoryList = mlbackCategoryService.selectMlbackCategory(mlbackCategoryReq);
 				mlbackCategoryRes = mlbackCategoryList.get(0);
-				categoryProductIdsStr = mlbackCategoryRes.getCategoryProductIds();
+ 				categoryProductIdsStr = mlbackCategoryRes.getCategoryProductIds();
 				categoryproductNamesStr = mlbackCategoryRes.getCategoryProductNames();
 				//把productId,填充再每个查回来的categort中的proidStr拼上
 				if(categoryProductIdsStr==null||categoryProductIdsStr.length()==0){
@@ -244,9 +244,12 @@ public class MlbackProductController {
 					categoryproductNamesStr=productName;
 				}else{
 					//如果产品类下已经有数据
+					
+					int ifHave = cheakifHave(categoryProductIdsStr,inproductIdStr);
+					
 					//先判断是否包含本次
-					int ifHave = categoryProductIdsStr.indexOf(inproductIdStr);
-					if(ifHave!=-1){
+					//int ifHave = categoryProductIdsStr.indexOf(inproductIdStr);
+					if(ifHave>0){
 						//只要test.indexOf('This')返回的值不是-1说明test字符串中包含字符串'This',相反如果包含返回的值必定是-1"
 						//如果包含，跳过
 						continue;
@@ -266,6 +269,22 @@ public class MlbackProductController {
 	}
 
 	
+	private int cheakifHave(String categoryProductIdsStr, String inproductIdStr) {
+		
+		int num = 0;
+		String arrStr [] = categoryProductIdsStr.split(",");
+		String nowPidStr = "";
+		for(int i=0;i<arrStr.length;i++){
+			nowPidStr =arrStr[i];
+			if(nowPidStr.equals(inproductIdStr)){
+				//有相同的，所以num增加
+				num++;
+				break;//找到，跳出
+			}
+		}
+		return num;
+	}
+
 	//清理每条的新产品信息
 	private void ProductCategoryIdsStrUpdateOld(Integer productId,String categoryIdsStrNew) {
 		// TODO Auto-generated method stub

@@ -408,8 +408,10 @@
   </select>
   <!-- selectAll使用中 -->
   <select id="selectMlbackProductGetAll" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
-    select *
-    from tb_mlback_product order by product_lable ,product_firsth,product_id desc 
+   <!-- select *
+    from tb_mlback_product order by product_lable ,product_firsth,product_id desc -->
+     select *
+    from tb_mlback_product order by product_name
   </select>
   <!-- insert使用中 -->
   <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackProduct">
