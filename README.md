@@ -20,3 +20,5 @@ pc 端进入开发测试阶段，暂不上测试服务器
 		}
 	}
 ```
+首页的大轮播图片 5张，在这个文件夹里
+ShopTemplate\src\main\webapp\static\pcImg
