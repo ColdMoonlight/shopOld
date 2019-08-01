@@ -112,22 +112,14 @@
 				type: "POST",
 				success: function (data) {
 					if (data.code === 100) {
-						var html = '';
-						var imgs = data.extend.mbackProductImgResList;
-						for (var i = 0; i < imgs.length; i += 1) {
-							html += '<div class="swiper-slide">' +
-								'<img src="' + imgs[i].productimgUrl + '" alt="' + imgs[i].productimgName + '">' +
-								'</div>';
-						}
-
-						swiper.html(html);
-
+						var resData = data.extend.mbackProductImgResList;
+						renderProductDetailsBanner(swiper, resData);
 						new Swiper('.product__details-banner', {
 							pagination: {
 								el: '.swiper-pagination',
 								clickable: true
 							}
-						})
+						});
 					} else {
 						renderErrorMsg(swiper, 'No data for the relevant image was obtained');
 					}
@@ -156,6 +148,18 @@
 					}
 				}
 			});
+			
+			function renderProductDetailsBanner(parent, data) {
+				var html = '';
+				
+				for (var i=0, len=data.length; i < len; i += 1) {
+						html += '<div class="swiper-slide">' +
+						'<img src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
+						'</div>';
+				}
+
+				swiper.html(html);
+			}
 
 			function triggerCondition(parent) {
 				parent.find('.product-d-length').each(function (i, item) {
