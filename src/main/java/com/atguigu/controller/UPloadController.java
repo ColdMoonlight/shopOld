@@ -301,14 +301,6 @@ public class UPloadController {
 		
 		mlbackProduct.setproductMainFuimgurl(returnReaUrlAll);
 		
-//		MlbackCategory mlbackCategory = new MlbackCategory();
-//		
-//		mlbackCategory.setCategoryId(CategoryIdInt);
-//		//win环境下
-//		mlbackCategory.setCategoryImgurl(returnReaUrlAll);
-		//linux环境下
-		//mlbackCategory.setCategoryImgurl(returnReaUrl);
-		
 		mlbackProductService.updateMainFuImgById(mlbackProduct);
 		
 		System.out.println("returnReaUrl:"+returnReaUrl);
