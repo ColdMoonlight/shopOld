@@ -19,7 +19,7 @@
   <meta id="WV.Meta.Share.Disabled" value="true">
   <!-- uc 字体放大-->
   <meta name="wap-font-scale" content="no">
-  <meta name="aplus-touch" content="1">
+  <meta name="aplus-touch" content="1"> 
 </head>
 
 <body>
@@ -43,21 +43,19 @@
     <!-- countDownArea date -->
     <div id="countdown-area"> </div>
     <!-- product intro -->
-    <div id="showPro"></div>
+    <div id="hot-product"></div>
     <!-- product show -->
     <div id="product-block"></div>
   </div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
- <%--  <script src="${APP_PATH }/static/common/intersectionobserver.js"></script> --%>
   <script>
-    function rednerProductActShowPro(parent, data) {
+    function rednerHotProduct(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="banner">' +
           '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
-//          	'<img /* src="${APP_PATH }/static/img/position.png" data- */src="' + data[i].actshowproImgwapurl + '" alt="">' +
 							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
           '</a>' +
           '</div>';
@@ -70,10 +68,10 @@
       data: "actshowproActnum=" + 1,
       type: "POST",
       success: function (data) {
-        // console.log("mlbackActShowProList");
         if (data.code === 100) {
-          // console.log(data.extend.mlbackActShowProList);
-          rednerProductActShowPro($('#showPro'), data.extend.mlbackActShowProList)
+        	var resData = data.extend.mlbackActShowProList;
+          // console.log(resData);
+          rednerHotProduct($('#hot-product'), resData)
         } else {
           renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
         }
@@ -117,11 +115,12 @@
       success: function (data) {
         // console.log("mlbackCountDownOne");
         if (data.code === 100) {
-          // console.log(data.extend.mlbackCountDownOne);
+        	var resData = data.extend.mlbackCountDownOne;
+          // console.log(resData);
           if(data.extend.mlbackCountDownOne==null){
           	// console.log("mlbackCountDownOne为null");
           }else{
-          	rednerCountDownAreaOne(countDownArea, data.extend.mlbackCountDownOne)
+          	rednerCountDownAreaOne(countDownArea,resData)
           }
         } else {
           renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
@@ -182,10 +181,10 @@
  	      async: false,
  	      success: function (data) {
  	        if (data.code === 100) {
- 	          var bannerData = data.extend.mlbackShowAreaOne;
- 	          // console.log(bannerData);
+ 	          var resData = data.extend.mlbackShowAreaOne;
+ 	          // console.log(resData);
  	          // categoryName categoryImgurl;
- 	          productBlock.append(renderBanner(bannerData))
+ 	          productBlock.append(renderBanner(resData))
  	        } else {
  	          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
  	        }
@@ -200,9 +199,9 @@
          success: function (data) {
            // console.log(productList1)
            if (data.code === 100) {
-             var productData = data.extend.mlbackProductResList;
-             // console.log(productData);
-             productBlock.append(rednerProduct(productData));
+             var resData = data.extend.mlbackProductResList;
+             // console.log(resData);
+             productBlock.append(rednerProduct(resData));
            } else {
              renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
            }
