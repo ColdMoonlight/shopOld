@@ -2,6 +2,21 @@
 
 ## 工作进度
 
-2019/7/10 pm back 代码格式化，fix table & pagination style
+pc 端进入开发测试阶段，暂不上测试服务器
 
-2019/7/10 am 清洗本地和远程仓库数据
+注：发布到服务器时，注意修改 '/java/com/atguigu/controller/indexController.java'代码如下：
+
+```
+@RequestMapping("/isMobileOrPc")
+	public static String  isMobileOrPc(HttpServletResponse reponse,HttpServletRequest request){
+		String requestHeader = request.getHeader("user-agent");
+		if(isMobileDevice(requestHeader)){
+			System.out.println("使用手机浏览器");
+			return "mfront/index";
+		}else{
+			System.out.println("使用web浏览器");
+-			return "front/index";//真实PC首页
++			return "front/index2";//首页维修中图片
+		}
+	}
+```
