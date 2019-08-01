@@ -29,7 +29,7 @@
 
 	<!-- main -->
 	<div class="main cart-box">
-		<div class="cart-title hide">
+		<div class="cart-title" style="display: none">
 			<img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_cart.jpg">
 			<div class="cart-status">
 				Shopping List
@@ -41,7 +41,7 @@
 		<div class="cart-list">
 
 		</div>
-		<div class="cart-footer hide">
+		<div class="cart-footer" style="display: none">
 			<span class="show-t-price"></span>
 			<div class="op">
 				<a href="${APP_PATH}/index/isMobileOrPc" class="btn add-product">Continue To Add</a>
@@ -225,9 +225,9 @@
 							// console.log(data);
 							var resData = data.extend.mlfrontCartItemListRes;
 							if (resData.length > 0) {
-								$('.cart-title').removeClass('hide');
+								$('.cart-title').show();
 								renderProdcutList(cartList, resData);
-								$('.cart-footer').removeClass('hide');
+								$('.cart-footer').show();
 								// for all cart-product bind event of going product-details
 								toProductDetails();
 							} else {
