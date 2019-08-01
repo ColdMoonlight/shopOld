@@ -276,15 +276,16 @@ public class MlfrontPayInfoController {
 		
 		//从session中取出,付款成功的参数successPayinfoId,successOrderId
 		Integer successOrderId =(Integer) session.getAttribute("successOrderId");
-
-		//封装参数MlfrontOrder，查回本条Order信息数据
-		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
-		mlfrontOrderReq.setOrderId(successOrderId);
-		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq);
-		MlfrontOrder mlfrontOrderOne = mlfrontOrderList.get(0);
-		
-		return Msg.success().add("resMsg", "更新成功").add("mlfrontOrderOne", mlfrontOrderOne);
-	
+		if(successOrderId==null){
+			return Msg.success().add("resMsg", "返回成功").add("mlfrontOrderOne", null);
+		}else{
+			//封装参数MlfrontOrder，查回本条Order信息数据
+			MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+			mlfrontOrderReq.setOrderId(successOrderId);
+			List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq);
+			MlfrontOrder mlfrontOrderOne = mlfrontOrderList.get(0);
+			return Msg.success().add("resMsg", "更新成功").add("mlfrontOrderOne", mlfrontOrderOne);
+		}
 	}
 	
 }
