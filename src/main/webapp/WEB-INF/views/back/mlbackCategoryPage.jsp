@@ -386,11 +386,24 @@
 			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/category/' + url;
 			img.src = url;
 			img.onload = function () {
-				console.log(img.width)
-				el.css({
-					'width': img.width + 'px',
-					'backgroundImage': 'url(' + url + ')'
-				});
+				var winW = $('#categoryTabContent').width();
+				var imgW = img.width;
+				var imgH = img.height;
+				if (imgW >= winW) {
+					el.css({
+						'width': '100%',
+						'height': Math.floor(img.height * $('#categoryTabContent').width() / img.width) + 'px',
+						'backgroundImage': 'url(' + url + ')',
+						'backgroundSize': '100%'
+					});
+				} else {
+					el.css({
+						'width': imgW + 'px',
+						'height': imgH + 'px',
+						'backgroundImage': 'url(' + url + ')',
+						'backgroundSize': '100%'
+					});
+				}
 			}
 		}
 
