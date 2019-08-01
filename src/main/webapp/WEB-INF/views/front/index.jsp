@@ -7,50 +7,56 @@
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
  %>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 </head>
 
 <body>
 
   <jsp:include page="pcheader.jsp"></jsp:include>
 
-<!-- main -->
+	<!-- main -->
   <div class="main">
-    <!-- sale -->
-    <div class="banner">
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/first1.jpg" alt="">
-      </a>
-    </div>
-    <!-- count date -->
-    <div class="banner">
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/first2.jpg" alt="">
-      </a>
-    </div>
-    <!-- countDownArea date -->
-    <div id="countdown-area"> </div>
-    <!-- product intro -->
-    <div id="showPro"></div>
-    <!-- product show -->
-    <div id="product-block">
-    	<div class="container"></div>
-    </div>
+  	<div class="container">
+	    <!-- sale -->
+	    <div class="banner">
+	      <a href="#" alt="">
+	        <img src="${APP_PATH }/static/m/img/firstpage/first1.jpg" alt="">
+	      </a>
+	    </div>
+	    <!-- count date -->
+	    <div class="banner">
+	      <a href="#" alt="">
+	        <img src="${APP_PATH }/static/m/img/firstpage/first2.jpg" alt="">
+	      </a>
+	    </div>
+	    <!-- countDownArea date -->
+	    <div id="countdown-area"> </div>
+	    <!-- product intro -->
+	    <div class="hot-product-title">
+	    	<h3>Hot Selling</h3>
+	    </div>
+	    <div id="hot-product" class="swiper-container">
+			   <div class="swiper-wrapper"></div>
+			   <div class="swiper-pagination"></div>
+			</div>
+	    <!-- product show -->
+	    <div id="product-block"></div>
+  	</div>
   </div>
   
   <jsp:include page="pcfooter.jsp"></jsp:include>
  	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
- <%--  <script src="${APP_PATH }/static/common/intersectionobserver.js"></script> --%>
+	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <script>
-    function rednerProductActShowPro(parent, data) {
+    function renderHotProduct(parent, data) {
       var html = '';
-      for (var i = 0; i < data.length; i += 1) {
-        html += '<div class="banner">' +
-          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
-//          	'<img /* src="${APP_PATH }/static/img/position.png" data- */src="' + data[i].actshowproImgwapurl + '" alt="">' +
-							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-          '</a>' +
-          '</div>';
-      }
+      for (var i=0, len=data.length; i < len; i += 1) {
+				html += '<div class="swiper-slide">' +
+	          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
+								'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+						'</a>' +
+					'</div>';
+			}
       parent.html(html);
     }
 		/* xxxx */
@@ -61,8 +67,18 @@
       success: function (data) {
         // console.log("mlbackActShowProList");
         if (data.code === 100) {
-          // console.log(data.extend.mlbackActShowProList);
-          rednerProductActShowPro($('#showPro'), data.extend.mlbackActShowProList)
+        	var resData = data.extend.mlbackActShowProList;
+          // console.log(resData);
+          renderHotProduct($('#hot-product .swiper-wrapper'), resData);
+          new Swiper('#hot-product', {
+        	  slidesPerView: 4,
+            spaceBetween: 10,
+            freeMode: true,
+						pagination: {
+							el: '.swiper-pagination',
+							clickable: true
+						}
+					})
         } else {
           renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
         }
@@ -162,7 +178,7 @@
  		];
     /*---------------product block--------*/
     for (var i=0, len=blockList.length; i<len; i+=1) {
-    	var productBlock = $('#product-block .container');
+    	var productBlock = $('#product-block');
     	// banner
    	 	$.ajax({
  	      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',

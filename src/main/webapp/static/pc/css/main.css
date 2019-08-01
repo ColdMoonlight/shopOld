@@ -162,6 +162,48 @@ header .tt-account .tt-dropdown-menu {
 	bottom:-8px;
 }
 
+.hot-product-title {
+	padding: 20px 0;
+	text-align: center;
+}
+.hot-product-title h3 {
+	position: relative;
+	display: inline-block;
+	rgba(35, 35, 35, 1);
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(35, 35, 35, 1);
+}
+.hot-product-title h3:after {
+  content: '';
+  position: absolute;
+  top: 1.4em;
+  left: 50%;
+  display: inline-block;
+  width: 100px;
+  height: 1px;
+  margin-left: -50px;
+  background: rgba(109, 118, 125, 1);
+}
+
+#hot-product .swiper-slide>a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#hot-product .swiper-slide img {
+	width: 100%;
+	height: auto;
+	-webkit-transition: all 1s;
+	transition: transform 1s;
+}
+
+#hot-product .swiper-slide>a:hover>img {
+	-webkit-transform: scale(1.2);
+	transform: scale(1.2);
+}
 
 #product-block {
 	margin-bottom: 20px;
