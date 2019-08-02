@@ -112,13 +112,13 @@ public class MlfrontUserController {
 				System.out.println("密码正确,登陆成功");
 				session.setAttribute("loginUser", mlfrontUserres);
 				loginYes = 1;
-				return Msg.success().add("resMsg", "登陆成功").add("loginYes", loginYes);
+				return Msg.success().add("resMsg", "Successfully").add("loginYes", loginYes);
 			}else{
 				System.out.println("密码错误,登陆失败");
-				return Msg.success().add("resMsg", "密码错误").add("loginYes", loginYes);
+				return Msg.success().add("resMsg", "PassWord Error").add("loginYes", loginYes);
 			}
 		}else{
-			return Msg.success().add("resMsg", "账号不存在").add("loginYes", loginYes);
+			return Msg.success().add("resMsg", "Account does not exist").add("loginYes", loginYes);
 		}
 	}
 	
@@ -139,7 +139,7 @@ public class MlfrontUserController {
 		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
 		if(mlfrontUserList.size()>0){
 			//此账号邮箱已经注册，返回即可
-			return Msg.success().add("resMsg", "注册失败，邮箱已被注册").add("registerYes", registerYes);//0的话取出resMsg
+			return Msg.success().add("resMsg", "Registration failed, the email has been registered").add("registerYes", registerYes);//0的话取出resMsg
 		}else{
 			//此账号邮箱未注册，继续封装参数,插入即可
 			mlfrontUserreq.setUserPassword(userPassword);
@@ -163,7 +163,7 @@ public class MlfrontUserController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return Msg.success().add("resMsg", "注册成功").add("registerYes", registerYes);//1的话,成功
+			return Msg.success().add("resMsg", "Registration Success").add("registerYes", registerYes);//1的话,成功
 		}
 	}
 	
@@ -183,7 +183,7 @@ public class MlfrontUserController {
 			session.removeAttribute("loginUser");
 			exitInt = 0; 
 		}
-		return Msg.success().add("resMsg", "注销成功").add("exitInt", exitInt);//1的话,成功
+		return Msg.success().add("resMsg", "Sign Out").add("exitInt", exitInt);//1的话,成功
 	}
 	
 	/**6.0	UseNow	0515
