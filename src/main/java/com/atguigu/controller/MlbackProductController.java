@@ -506,7 +506,10 @@ public class MlbackProductController {
 	 		 	mlbackProductList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
 	 		 	if(mlbackProductList.size()>0){
 	 		 		mlbackProductResOne = mlbackProductList.get(0);
-	 		 		mlbackProductResList.add(mlbackProductResOne);
+	 		 		Integer proStatus = mlbackProductResOne.getProductStatus();
+	 		 		if(proStatus==1){	//0不上架	1上架
+	 		 			mlbackProductResList.add(mlbackProductResOne);
+	 		 		}
 	 		 	}
 	 		}
 	 	}
