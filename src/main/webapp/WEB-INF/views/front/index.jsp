@@ -17,17 +17,10 @@
 	<!-- main -->
   <div class="main">
   	<div class="container">
-	    <!-- sale -->
-	    <div class="banner">
-	      <a href="#" alt="">
-	        <img src="${APP_PATH }/static/m/img/firstpage/first1.jpg" alt="">
-	      </a>
-	    </div>
-	    <!-- count date -->
-	    <div class="banner">
-	      <a href="#" alt="">
-	        <img src="${APP_PATH }/static/m/img/firstpage/first2.jpg" alt="">
-	      </a>
+  		<!-- banner -->
+	    <div id="banner" class="swiper-container">
+	      <div class="swiper-wrapper"></div>
+			  <div class="swiper-pagination"></div>
 	    </div>
 	    <!-- countDownArea date -->
 	    <div id="countdown-area"> </div>
@@ -48,6 +41,60 @@
  	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <script>
+  	/* banner */
+  	var slideData = [
+       {
+    	   title: '',
+    	   link: 'javascript:;',
+    	   path: '${APP_PATH }/static/pc/slide/pc_firsr01.jpg'
+       },
+       {
+    	   title: '',
+    	   link: 'javascript:;',
+    	   path: '${APP_PATH }/static/pc/slide/pc_firsr02.jpg'
+       },
+       {
+    	   title: '',
+    	   link: 'javascript:;',
+    	   path: '${APP_PATH }/static/pc/slide/pc_firsr03.jpg'
+       },
+       {
+    	   title: '',
+    	   link: 'javascript:;',
+    	   path: '${APP_PATH }/static/pc/slide/pc_firsr04.jpg'
+       },
+       {
+    	   title: '',
+    	   link: 'javascript:;',
+    	   path: '${APP_PATH }/static/pc/slide/pc_firsr05.jpg'
+       }
+  	];
+
+  	function renderSlide(parent, data) {
+  		var html = '';
+  		console.log(11111)
+  		for (var i=0, len=data.length; i<len; i+=1) {
+  			html += '<div class="swiper-slide">' +
+				  '<a href="' + data[i].link + '">' +
+							'<img src="' + data[i].path + '" alt="">' +
+					'</a>' +
+				'</div>';
+  		}
+  		parent.html(html);
+  	}
+  	
+  	renderSlide($('#banner .swiper-wrapper'), slideData);
+  	new Swiper('#banner', {
+      freeMode: true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true
+			},
+			autoplay: {
+		    delay: 3000,
+		  },
+  	});
+  	
     function renderHotProduct(parent, data) {
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
