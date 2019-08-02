@@ -88,7 +88,7 @@
     /*---------------countDownArea--------*/
     function rednerCountDownAreaOne(parent, data) {
       var html = '';
-      html += '<div class="title">'+data.countdownTitle+'</div>'+
+      html += '<h3 class="title">'+ data.countdownTitle +'</h3>'+
         '<div class="body"></div>'+
         '<div class="desc">'+ data.countdownDescription +'</div>';
 
