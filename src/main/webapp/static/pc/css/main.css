@@ -293,3 +293,13 @@ header .tt-account .tt-dropdown-menu {
   /* background-color: yellowgreen;
   border-radius: 3px; */
 }
+
+#buyer-show {
+	width: 100%;
+	height: 800px;
+}
+
+#buyer-show>img {
+	width: 100%;
+	height: 100%;
+}
