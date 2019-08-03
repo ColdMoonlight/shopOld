@@ -219,7 +219,7 @@
     /*------rednerBanner----------*/
     function renderBanner(data) {
     	//把showareaImgurl字段		换成		showArea_imgpcurl	
-    	return $('<div class="banner"></div>').html('<img src="' + data.showareaImgurl + '" alt=" + data.showareaName + ">');
+    	return $('<div class="banner"></div>').html('<img src="' + data.showareaImgpcurl + '" alt=" + data.showareaName + ">');
     }
     
 		var blockList = [
