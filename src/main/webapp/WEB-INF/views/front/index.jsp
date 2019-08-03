@@ -22,6 +22,8 @@
 	      <div class="swiper-wrapper"></div>
 			  <div class="swiper-pagination"></div>
 	    </div>
+	    <!-- discount -->
+	    <img class="discount" src="${APP_PATH }/static/pc/discount.jpg" />
 	    <!-- countDownArea date -->
 	    <div id="countdown-area"> </div>
 	    <!-- product intro -->
