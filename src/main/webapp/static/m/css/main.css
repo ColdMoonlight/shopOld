@@ -375,12 +375,20 @@ a:focus {
   background-color: rgba(0, 0, 0, .25);
 }
 
-.category .icon.close2 {
+.category>.icon.close {
   position: absolute;
   top: 16px;
   left: 10px;
-  background-size: 32px 32px;
+  font-size: 32px;
+  color: #fff;
   cursor: pointer;
+ 	-webkit-transition: transform .6s;
+ 	transition: transform .6s;
+}
+
+.category>.icon.close:hover {
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
 }
 
 .category .main-category,
@@ -443,7 +451,14 @@ a:focus {
 }
 
 .category .sub-category .close {
-  background-size: 32px 32px;
+ 	font-size: 24px;
+ 	-webkit-transition: transform .6s;
+ 	transition: transform .6s;
+}
+
+.category .sub-category .close:hover {
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
 }
 
 .category .sub-category .body {

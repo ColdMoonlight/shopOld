@@ -79,7 +79,7 @@
     </div>
   </div>
   <div class="category">
-    <i class="icon close2"></i>
+    <i class="icon close close2"></i>
     <ul class="main-category bd-b"></ul>
     <div class="product-box bd-l bd-b">
       <div class="sub-category">
