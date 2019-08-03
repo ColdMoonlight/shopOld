@@ -45,6 +45,33 @@ header .tt-account .tt-dropdown-menu {
 	height: 300px;
 }
 
+.tt-desctop-menu ul li {
+   padding: 0 20px;
+}
+
+.tt-desctop-menu .tt-megamenu-submenu.tt-sub-img {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tt-desctop-menu ul.tt-sub-img li {
+	marginb-right: 10px;
+	margin-bottom: 10px;
+}
+
+.tt-desctop-menu ul.tt-sub-img li>a {
+	display: flex;
+	align-items: center;
+}
+
+.tt-megamenu-submenu li>a>img {
+	width: 60px;
+	height: 60px;
+	margin-right: 16px;
+	border: 1px solid #ccc;
+	box-shadow: 1px 1px 2px #ccc;
+}
+
 .tt-footer-logo {
 	padding-top: 55px;
   text-align: center;
