@@ -103,7 +103,7 @@
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
 				html += '<div class="swiper-slide">' +
-	          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
+	          '<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].actshowproProid + '">' +
 								'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 						'</a>' +
 					'</div>';
@@ -191,7 +191,7 @@
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="product-item col-lg-3">' +
           '<div class="product-img">' +
-          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' +
+          '<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].productId + '">' +
           '<img src="' + data[i].productMainimgurl + '" alt="">' +
           '</a>' +
           '</div>' +
