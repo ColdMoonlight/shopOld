@@ -70,6 +70,23 @@ public class MlbackCategoryController {
 	}
 	
 	
+	/**
+	 * 1.1	UseNow	0505
+	 * 前台移动端获取详情页面mfront/Categorylists
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/toPproductlist",method=RequestMethod.GET)
+	public String toPCproductlist(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "categoryId") Integer categoryId) throws Exception{
+		//接收传递进来的参数
+		Integer categoryIdReq = categoryId;
+		//放回响应域中
+		res.setAttribute("categoryId", categoryIdReq);
+		//返回视图
+		return "front/pcproductlist";
+	}
+	
+	
 	/**2.0	UseNow	0505
 	 * 分类MlbackCategory列表分页list数据
 	 * @param pn
