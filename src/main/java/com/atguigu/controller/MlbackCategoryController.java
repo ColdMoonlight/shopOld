@@ -71,12 +71,12 @@ public class MlbackCategoryController {
 	
 	
 	/**
-	 * 1.1	UseNow	0505
-	 * 前台移动端获取详情页面mfront/Categorylists
+	 * 1.2	UseNow	0505
+	 * 前台PC端获取分类页面MlbackCategory/toPproductlist
 	 * @param jsp
 	 * @return 
 	 * */
-	@RequestMapping(value="/toPproductlist",method=RequestMethod.GET)
+	@RequestMapping(value="/topcproductlist",method=RequestMethod.GET)
 	public String toPCproductlist(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "categoryId") Integer categoryId) throws Exception{
 		//接收传递进来的参数
 		Integer categoryIdReq = categoryId;

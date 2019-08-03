@@ -394,7 +394,7 @@
 				if (data[i].list && data[i].list.length) {
 					html += '<ul class="tt-megamenu-submenu">';
 					for (var j = 0; j < data[i].list.length; j += 1) {
-						html += '<li><a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].list[j].categoryId +
+						html += '<li><a href="${APP_PATH}/MlbackCategory/topcproductlist?categoryId=' + data[i].list[j].categoryId +
 							'">' + data[i].list[j].categoryName + '</a></li>';
 					}
 					html += '</ul>';
