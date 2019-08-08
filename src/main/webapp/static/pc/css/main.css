@@ -34,6 +34,7 @@ header .tt-account .tt-dropdown-menu {
 
 .tt-desctop-menu {
 	position: relative;
+
 }
 
 .tt-desctop-menu .tt-dropdown-menu {
@@ -143,9 +144,9 @@ header .tt-account .tt-dropdown-menu {
   font: 13px/13px '';
   font-weight: bold;
   color: #333333;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  word-wrap:break-word;
+  text-overflow: initial;
+  overflow: visible;
   font-family: inherit;
 }
 

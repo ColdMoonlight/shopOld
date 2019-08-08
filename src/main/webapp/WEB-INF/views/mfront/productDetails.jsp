@@ -22,6 +22,27 @@
 	<meta name="aplus-touch" content="1">
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
+	
+	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
+	<script>
+	  !function(f,b,e,v,n,t,s)
+	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	  n.queue=[];t=b.createElement(e);t.async=!0;
+	  t.src=v;s=b.getElementsByTagName(e)[0];
+	  s.parentNode.insertBefore(t,s)}(window, document,'script',
+	  'https://connect.facebook.net/en_US/fbevents.js');
+	  fbq('init', '667403967094866');
+	  fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!-- End Facebook Pixel Code -->
+	
+	<script>
+  		fbq('track', 'ViewContent');
+	</script>
+	<!-- Facebook Pixel Code end -->
 </head>
 
 <body>
@@ -587,6 +608,7 @@
 
 			// add-to-cart
 			$('.add-to-cart').on('click', function () {
+				fbq('track', 'AddToCart');//追踪'添加购物车'事件		facebook广告插件可以注释掉，但不要删除
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
@@ -681,6 +703,7 @@
 				reqData.cartitemProductNumber = productNum.val();
 				// console.log(data);
 				
+				fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
 				// name, id, price
 				function getSkuData(els) {
 					var data = {
