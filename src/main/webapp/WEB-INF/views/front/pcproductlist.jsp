@@ -115,7 +115,7 @@
 				for (var i = 0; i < data.length; i += 1) {
 					html += '<div class="product-item">' +
 						'<div class="product-img">' +
-						'<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' +
+						'<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].productId + '">' +
 						'<img src="' + data[i].productMainimgurl + '" alt="">' +
 						'</a>' +
 						'</div>' +
