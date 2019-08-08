@@ -82,7 +82,6 @@
 
   	function renderSlide(parent, data) {
   		var html = '';
-  		console.log(11111)
   		for (var i=0, len=data.length; i<len; i+=1) {
   			html += '<div class="swiper-slide">' +
 				  '<a href="' + data[i].link + '">' +
