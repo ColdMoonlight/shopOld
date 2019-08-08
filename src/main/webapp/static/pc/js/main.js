@@ -1,4 +1,3 @@
-//更多精品Bootstrap模板请访问：http://www.bootstrapmb.com
 (function ($) {
   "use strict";
 
@@ -298,11 +297,6 @@
     };
 
     if ($ttDesctopMenu.length > 0) {
-      $('.tt-megamenu-submenu li a').each(function () {
-        if ($(this).find('img').length) {
-          $(this).closest('ul').addClass('tt-sub-img');
-        }
-      });
 
       $ttDesctopMenu.find('.dropdown-menu').each(function () {
         if ($(this).length) {

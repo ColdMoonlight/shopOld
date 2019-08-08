@@ -169,10 +169,10 @@
 					var resData = data.extend;
 					if (resData.registerYes === 0) {
 						renderSysMsg(resData.resMsg)
-						fbq('track', 'CompleteRegistration');
 					}
 
 					if (resData.registerYes === 1) {
+						fbq('track', 'CompleteRegistration');//追踪'注册'事件		facebook广告插件可以注释掉，但不要删除
 						renderSysMsg(resData.resMsg);
 						setInterval(function() {
 							if (sysFlag) {
