@@ -57,6 +57,10 @@ git push --set-upstream origin lzb
 
 ![审核通过图示](./tip/pass.png)
 
+审核拒绝，如下图所示：
+
+![审核拒绝图示](./tip/reject.png)
+
 最后，点击` Merge Pull Request`按钮即可
 
 注：审核通过后，审核人员也可以合并代码，但不要这么做。坚持“谁请求，谁合并”的原则。
