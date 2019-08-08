@@ -49,22 +49,22 @@ header .tt-account .tt-dropdown-menu {
    padding: 0 20px;
 }
 
-.tt-desctop-menu .tt-megamenu-submenu.tt-sub-img {
+.tt-desctop-menu .tt-megamenu-submenu {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.tt-desctop-menu ul.tt-sub-img li {
+.tt-desctop-menu .tt-megamenu-submenu li {
 	marginb-right: 10px;
 	margin-bottom: 10px;
 }
 
-.tt-desctop-menu ul.tt-sub-img li>a {
+.tt-desctop-menu .tt-megamenu-submenu li>a {
 	display: flex;
 	align-items: center;
 }
 
-.tt-megamenu-submenu li>a>img {
+.tt-desctop-menu .tt-megamenu-submenu li>a>img {
 	width: 60px;
 	height: 60px;
 	margin-right: 16px;
