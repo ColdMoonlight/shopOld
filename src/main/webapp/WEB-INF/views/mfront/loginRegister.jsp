@@ -169,10 +169,10 @@
 					var resData = data.extend;
 					if (resData.registerYes === 0) {
 						renderSysMsg(resData.resMsg)
-						fbq('track', 'CompleteRegistration');
 					}
 
 					if (resData.registerYes === 1) {
+						fbq('track', 'CompleteRegistration');
 						renderSysMsg(resData.resMsg);
 						setInterval(function() {
 							if (sysFlag) {
