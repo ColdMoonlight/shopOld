@@ -55,7 +55,7 @@ git push --set-upstream origin lzb
 
 若审核通过，如下图所示：
 
-![审核和通过图示](./pass.png)
+![审核通过图示](./tip/pass.png)
 
 最后，点击` Merge Pull Request`按钮即可
 
