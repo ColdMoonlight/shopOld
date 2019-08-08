@@ -9,6 +9,7 @@
 	<link rel="shortcut icon" href="${APP_PATH }/static/pc/img/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/theme.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/main.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/new.css">
 </head>
 
 <body>
@@ -375,7 +376,10 @@
 	</header>
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	 
+	
 	<script>
+		
 		var categoryActiveNum = 1;
 
 		function renderErrorMsg(parent, msg) {
@@ -394,7 +398,7 @@
 				if (data[i].list && data[i].list.length) {
 					html += '<ul class="tt-megamenu-submenu">';
 					for (var j = 0; j < data[i].list.length; j += 1) {
-						html += '<li class="col-sm-6">' +
+						html += '<li class="col-sm-6 listfl6">' +
 						'<a href="${APP_PATH}/MlbackCategory/topcproductlist?categoryId='+ data[i].list[j].categoryId +'">' +
 								'<img src="'+ data[i].list[j].categoryImgurl +'" />' +
 								'<span>'+ data[i].list[j].categoryName +'</span>' + 

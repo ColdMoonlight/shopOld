@@ -11336,9 +11336,9 @@ header .container-fluid {
     align-items: center; }
     .tt-desctop-menu nav > ul > li.dropdown > a {
       font-family: "Hind", sans-serif;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.1;
-      font-weight: 400;
+      font-weight: 600;
       letter-spacing: 0.04em;
       padding: 17px 12px 16px;
       display: -ms-inline-flexbox;

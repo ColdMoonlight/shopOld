@@ -28,10 +28,14 @@
 
 	<!-- main -->
 	<div class="main">
-		<div class="condition select">
-			<select class="select-item select-category" data-type="category"></select>
+		<div class="container">
+			<div class="condition select list_homeselect">
+				<div class="slect_po">
+					<select class="select-item select-category" data-type="category"></select>
+				</div>
+			</div>
+			<div class="product-list product-list_home"></div>
 		</div>
-		<div class="product-list"></div>
 	</div>
 
 	<jsp:include page="pcfooter.jsp"></jsp:include>
@@ -53,7 +57,7 @@
 			success: function (data) {
 				if (data.code === 100) {
 					var resData = data.extend.mlbackCategorydownEr;
-					console.log(resData);
+					//console.log(resData);
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
@@ -82,7 +86,7 @@
 				type: "POST",
 				success: function (data) {
 					// console.log(data)
-					var data = JSON.parse(data);
+					// var data = JSON.parse(data);
 					if (data.code === 100) {
 						rednerProduct(productList, data.extend.mlbackProductResList);
 					} else {
@@ -157,7 +161,7 @@
 		}
 	</script>
 	<!--  这是一个聊天交流的工具 -->
-  	//<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
 
 </html>

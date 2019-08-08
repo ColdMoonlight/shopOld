@@ -20,6 +20,7 @@
 	<!-- uc 字体放大-->
 	<meta name="wap-font-scale" content="no">
 	<meta name="aplus-touch" content="1">
+	
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 </head>
@@ -29,8 +30,10 @@
 
 	<!-- main -->
 	<div class="main">
-		<!-- <input type="hidden" value="${productId}" id="productId"/> -->
-		<div class="product-details"> </div>
+		<div class="container">
+			<!-- <input type="hidden" value="${productId}" id="productId"/> -->
+			<div class="product-details"> </div>
+		</div>
 	</div>
 	
 	<div class="win-box review-box hide">
@@ -194,10 +197,10 @@
 				html += '<div class="list">';
 				for (var i = 0; i < len; i += 1) {
 					if (i === 0) {
-						html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
+						html += '<span class="price-item" data-price="' + (data.productskuMoneyDetails[i]) + '">' + data
 							.productskuNameDetails[i] + '</span>'
 					} else {
-						html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
+						html += '<span class="price-item" data-price="' + (data.productskuMoneyDetails[i]) + '">' + data
 							.productskuNameDetails[i] + '</span>'
 					}
 				}
@@ -441,7 +444,7 @@
 				deleteReview();
 			});
 			// select star reank
-			$('.review-star .icon').forEach(function(item){
+			$('.review-star .icon').each(function(item){
 				var parent = $(item).parent();
 				$(item).on('click', function() {
 					parent.find('.icon').removeClass('star2').addClass('star');
@@ -515,9 +518,7 @@
 			});
 			
 			// manipulate dom
-			$('.list-group')
-				.find('.list-group-item')
-				.each(function (i, item) {
+			$('.list-group').find('.list-group-item').each(function (i, item) {
 					var details = $(item).find(".group-details");
 					$(item).find('.group-title').on('click', function () {
 						if (details.hasClass('active')) {
