@@ -52,10 +52,10 @@
 	var containerBox = mainBox.find(".order-list");
 	var pageArea = mainBox.find(".page-info-area");
 	var orderStatus = {
-		0: '未支付',
-		1: '已支付',
-		2: '支付失败',
-		3: '已发货',
+		0: 'Unpaid',
+		1: 'Paid',
+		2: 'Payment failed',
+		3: 'Shipped',
 	}
 	//去首页
 	to_page(1);
@@ -139,7 +139,6 @@
 						'</div>';
 				}
 				html += '</div>' +
-					// '<div class="order-item-footer">共计' + len + '件商品，合计 $ ' + data[key].orderMoney + '</div>' +
 					'<div class="order-item-footer">Total' + len + 'goods，total $ ' + data[key].orderMoney + '$</div>' +
 					'</div>';
 			}

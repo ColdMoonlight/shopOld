@@ -186,7 +186,7 @@
           renderMainCategory(mainCategory, categoryData);
           mainCategoryTrigger();
         } else {
-          renderErrorMsg(prodcutBox, '未获取到目录相关的数据');
+          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
         }
       }
     })
