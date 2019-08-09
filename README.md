@@ -53,6 +53,10 @@ git push --set-upstream origin lzb
 
 ![图示](./tip/review-process.png)
 
+![图示2](./tip/review-process-2.png)
+
+注：两种方式均可
+
 若审核通过，如下图所示：
 
 ![审核通过图示](./tip/pass.png)
@@ -60,6 +64,8 @@ git push --set-upstream origin lzb
 审核拒绝，如下图所示：
 
 ![审核拒绝图示](./tip/reject.png)
+
+注：被拒绝后，根据拒绝提供的注释，然后修改代码，随后编译，提交代码，然后，直接通知审核人员审核代码，不必建立二次请求。
 
 最后，点击` Merge Pull Request`按钮即可
 
