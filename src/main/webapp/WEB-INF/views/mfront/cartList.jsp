@@ -59,14 +59,16 @@
 		</div>
 		<!-- purechase step -->
 		
-		<div class="cart-list">
+		<div class="cart-list"></div>
 
-		</div>
 		<div class="cart-footer" style="display: none">
-			<span class="show-t-price"></span>
+			<div class="show-t-price">
+				<span class="show-t-price-text">SUBTOTAL</span>
+				<span class="show-t-price-num"></span>
+			</div>
 			<div class="op">
-				<a href="${APP_PATH}/index/isMobileOrPc" class="btn add-product">Continue To Add</a>
-				<a href="javascript:;" class="btn calc-price">calculate Price</a>
+				<a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-default add-product">Continue Shopping</a>
+				<a href="javascript:;" class="btn btn-black calc-price">Checkout</a>
 			</div>
 		</div>
 	</div>
@@ -76,13 +78,16 @@
 	<script>
 		var cartBox = $('.main.cart-box');
 		var cartList = $('.cart-list');
-
+		var cartObj = JSON.parse(window.window.localStorage.getItem('cartlist')) || {};
+		var subTotal = $('.show-t-price-num');
+		getTotalPrice();
 		function renderProdcutList(parent, data) {
 			// console.log(data);
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
+				var hasStorageItem = cartObj[data[i].cartitemId];
 				html += '<div class="cart-item bd-b">' +
-					'<input onclick="event.stopPropagation();" class="checkbox" type="checkbox" data-cartitemid="' + data[i]
+					'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
 					'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
@@ -97,17 +102,17 @@
 					html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
 						': ' + skuNameArr[j] + '</div>';
 				}
+				var dataPrice = getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
+				.cartitemProductActoff);
 				html += '</div>' +
 					'</div>' +
 					'<div class="num" data-cartitemid="' + data[i].cartitemId + '" data-cartid="' + data[i].cartitemCartId +
 					'" data-productname="' + data[i].cartitemProductName + '">' +
-					'<span class="price">$' + (getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
-						.cartitemProductActoff).current) + '</span>' +
-					'<span class="original">$' + (getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
-						.cartitemProductActoff).origin) + '</span>' +
+					'<span class="price">$' + (dataPrice.current) + '</span>' +
+					'<span class="original">$' + (dataPrice.origin) + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-					'<input type="text" name="cart-product-num" class="form-control" value="' + data[i].cartitemProductNumber +
+					'<input type="text" name="cart-product-num" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
 					'">' +
 					'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
@@ -132,16 +137,26 @@
 
 		function addNum(e) {
 			e.stopPropagation();
-			var productNum = $(e.target).parent().parent().find('input');
+			var item  = $(e.target);
+			var checkbox = item.parent().parent().find('.checkbox');
+			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			productNumText += 1;
 			productNum.val(productNumText);
-			updateCartItemNum($(e.target), productNumText);
+			updateCartItemNum(item, productNumText);
+			
+			if(checkbox.is(':checked')) {
+				cartObj[checkbox.data('cartitemid')] = productNum;
+				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+				getTotalPrice();
+			}
 		}
 
 		function subNum(e) {
 			e.stopPropagation();
-			var productNum = $(e.target).parent().parent().find('input');
+			var item  = $(e.target);
+			var checkbox = item.parent().parent().find('.checkbox');
+			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			if (productNumText <= 1) {
 				productNumText = 1;
@@ -150,7 +165,13 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 			}
-			updateCartItemNum($(e.target), productNumText);
+			updateCartItemNum(item, productNumText);
+			
+			if(checkbox.is(':checked')) {
+				cartObj[checkbox.data('cartitemid')] = productNum;
+				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+				getTotalPrice();
+			}
 		}
 
 		/* private Integer cartitemId;
@@ -176,7 +197,7 @@
 					console.info('success')
 				},
 				error: function () {
-					alert('add fail')
+					renderSysMsg('add product fail.')
 				}
 			})
 		}
@@ -192,6 +213,16 @@
 				origin: parseFloat(singlePrice).toFixed(2),
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
 			}
+		}
+		
+		function getTotalPrice() {
+			var total = 0;
+			for (var i in cartObj) {
+				total += cartObj[i].num * cartObj[i].price;
+				console.log(cartObj[i].num, cartObj[i].price)
+			}
+			
+			subTotal.text('$ ' + total);
 		}
 
 		function calcTotalPrice() {
@@ -228,7 +259,7 @@
 					}
 				})
 			} else {
-				renderSysMsg('请选择最终要购买的产品！')
+				renderSysMsg('Please select the final product to buy!');
 			}
 		}
 		$('.btn.calc-price').on('click', function () {
@@ -270,6 +301,22 @@
 				})
 			}, true)
 		}
+		
+		function selectCartItem(e) {
+			e.stopPropagation();
+			var item = $(e.target);
+			var cartItemId = item.data('cartitemid');
+			if(item.is(':checked') && !cartObj[cartItemId]) {
+				cartObj[cartItemId] = {
+						num: parseInt(item.parent().find('input[type=text]').val().trim(), 10),
+						price: (+item.parent().find('.price').text().trim().substring(1))
+				}
+			} else {
+				delete cartObj[cartItemId];
+			}
+			window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+			getTotalPrice();
+		}
 		/**
 		 *     private Integer cartitemId;
 		 *		private Integer cartitemCartId;
@@ -280,9 +327,9 @@
 		var cartNum = parseInt(cartText.text());
 
 		function deleteCartItem(e) {
-
 			e.stopPropagation();
 			var el = $(e.target);
+			var cartitemid = el.parent().data('cartitemid');
 
 			// 只需要传递这一个参数就可以了。cartitemId
 			/* var reqData = { // 测试数据
@@ -292,7 +339,7 @@
 
 			var reqData = {
 				//cartitemCartId: el.data('cartid'),
-				cartitemId: el.parent().data('cartitemid')
+				cartitemId: cartitemid
 			}
 
 
@@ -322,7 +369,10 @@
 							//取出isDelSuccess字段
 							//1，删除成功。  不alert，刷新 
 							//alert('删除成功')
+							delete cartObj[cartitemid];
+							window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+							
 						}
 
 						if (resData.isDelSuccess === 0) {
