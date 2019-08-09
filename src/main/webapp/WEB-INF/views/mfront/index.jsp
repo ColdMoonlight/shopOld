@@ -80,7 +80,6 @@
           '</a>' +
           '</div>';
       }
-      
       parent.html(html);
     }
 		/* xxxx */
