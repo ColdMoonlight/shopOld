@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Hair Admin</title>
+	<title>登录</title>
 	<meta name="viewport"	content="width=device-width">
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<!-- web路径：
