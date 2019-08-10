@@ -72,15 +72,14 @@
 		type: "POST",
 		success: function (data) {
 			// console.log(data)
-			
 			var mlfrontOrderOne = data.extend.mlfrontOrderOne;
 			var orderMoney = mlfrontOrderOne.orderMoney;
-			console.log(mlfrontOrderOne);
-			console.log("orderMoney:"+orderMoney);
+			// console.log(mlfrontOrderOne);
+			// console.log("orderMoney:"+orderMoney);
 			
-			console.log("fbq111111");
+			// console.log("fbq111111");
 			fbq('track', 'Purchase', {value:orderMoney,currency:'USD'});//追踪'购买'事件		facebook广告插件可以注释掉，但不要删除
-			console.log("fbq222222");
+			// console.log("fbq222222");
 			$(".order-id").val(mlfrontOrderOne.orderId);
 			
 		}

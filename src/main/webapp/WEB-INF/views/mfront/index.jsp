@@ -79,6 +79,11 @@
 							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
           '</a>' +
           '</div>';
+        /* html += '<div class="banner">'
+        '<a href="${APP_PATH}/MlbackProduct/172.html">' +
+							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+        '</a>' +
+        '</div>';  */
       }
       parent.html(html);
     }
@@ -93,7 +98,7 @@
           // console.log(resData);
           rednerHotProduct($('#hot-product'), resData)
         } else {
-          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
         }
       }
     });
@@ -143,7 +148,7 @@
           	rednerCountDownAreaOne(countDownArea,resData)
           }
         } else {
-          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
         }
       }
     });
@@ -206,7 +211,7 @@
  	          // categoryName categoryImgurl;
  	          productBlock.append(renderBanner(resData))
  	        } else {
- 	          renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+ 	          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
  	        }
  	      }
  	    });
@@ -223,7 +228,7 @@
              // console.log(resData);
              productBlock.append(rednerProduct(resData));
            } else {
-             renderErrorMsg(prodcutBox, '未获取到产品相关的数据');
+             renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
            }
          }
        });
