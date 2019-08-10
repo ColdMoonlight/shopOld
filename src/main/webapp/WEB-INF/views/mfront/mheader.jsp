@@ -86,8 +86,8 @@
     var categoryActiveNum = 1;
     var iCart = $('.icon.cart');
     var iPerson = $('.icon.person');
-		var mask = $('<div class="mask"></div>');
-		var sysFlag = 0;
+	var mask = $('<div class="mask"></div>');
+	var sysFlag = 0;
 
     function renderErrorMsg(parent, msg) {
       parent.html('<p class="without-data">' + msg + '</p>');
