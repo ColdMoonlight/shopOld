@@ -32,7 +32,7 @@
 	<div class="main">
 		<div class="container">
 			<!-- <input type="hidden" value="${productId}" id="productId"/> -->
-			<div class="product-details"> </div>
+			<div class="product-details clearfix"> </div>
 		</div>
 	</div>
 	
@@ -85,7 +85,7 @@
 		var imgCount = 1;
 		var reviewId = null;
 		/* load tpl for detail of product */
-		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
+		$('.product-details').load('${APP_PATH}/static/tpl/pcproductDetail.html', function () {
 			//接到产品id，查询本id产品的详情
 			var pidA = window.location.href.split('?')[1].split('=');
 			var dataPrice = null;
@@ -518,18 +518,29 @@
 			});
 			
 			// manipulate dom
-			$('.list-group').find('.list-group-item').each(function (i, item) {
-					var details = $(item).find(".group-details");
-					$(item).find('.group-title').on('click', function () {
-						if (details.hasClass('active')) {
-							details.removeClass('active').hide();
-							$(this).find('.icon').removeClass('bottom').addClass('right');
-						} else {
-							details.addClass('active').show();
-							$(this).find('.icon').removeClass('right').addClass('bottom');
-						}
-					})
-				});
+			// $('.list-group').find('.list-group-item').each(function (i, item) {
+			// 		var details = $(item).find(".group-details");
+			// 		$(item).find('.group-title').on('click', function () {
+			// 			if (details.hasClass('active')) {
+			// 				details.removeClass('active').hide();
+			// 				$(this).find('.icon').removeClass('bottom').addClass('right');
+			// 			} else {
+			// 				details.addClass('active').show();
+			// 				$(this).find('.icon').removeClass('right').addClass('bottom');
+			// 			}
+			// 		})
+			// 	});
+			
+		$(".descript_cont").find(".group-details:first").css("display","block");
+		$(".list-group li").each(function(j){
+			$(this).click(function(){
+				$(".list-group li.list-group-item").removeClass("active");
+				$(this).addClass("active");
+				$(".group-details").hide();
+				$(".group-details:eq("+j+")").show();
+			});
+		});
+			
 
 			$('.review-list').find('.review-more').each(function (i, item) {
 				$(item).on('click', function () {
@@ -633,7 +644,7 @@
 			function checkSku(skuCheckData) {
 				for (var i in skuCheckData) {
 					if (skuCheckData[i] === null) {
-						renderSysMsg('Please select product attributes' + i);
+						renderSysMsg('Please select product attributes ' + i);
 						return false;
 					}
 				}
@@ -650,11 +661,13 @@
 					dataType: 'JSON',
 					contentType: 'application/json',
 					success: function (data) {
-						var resData = JSON.parse(data);
-						if (resData.code === 100) {
+						console.log(data);
+						//var resData = JSON.parse(data);
+						var resData =data.code;
+						if (resData === 100) {
 							// console.log(resData)
 							// cartText.text(parseInt(cartText.text()) + 1);
-							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
 						}
 					},
 					error: function (data) {

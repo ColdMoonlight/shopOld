@@ -654,7 +654,7 @@
 			function checkSku(skuCheckData) {
 				for (var i in skuCheckData) {
 					if (skuCheckData[i] === null) {
-						renderSysMsg('Please select product attributes' + i);
+						renderSysMsg('Please select product attributes  ' + i);
 						return false;
 					}
 				}

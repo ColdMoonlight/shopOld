@@ -182,9 +182,14 @@
 					</div>
 					<!-- /tt-search -->
 					<!-- tt-logo -->
+					<a href="${APP_PATH}/index/isMobileOrPc">
 					<div class="tt-logo">
-						<img src="${APP_PATH }/static/m/img/index/logo.png" alt="megalook">
+						   <div class="logo">
+							 <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
+						   </div>
+						<!-- <img src="${APP_PATH }/static/m/img/index/logo.png" alt="megalook"> -->
 					</div>
+					 </a>
 					<!-- /tt-logo -->
 					<!-- tt-cart -->
 					<div class="tt-desctop-parent-cart tt-parent-box">
@@ -381,10 +386,33 @@
 	<script>
 		
 		var categoryActiveNum = 1;
-
+		var iCart = $('.icon.cart');
+		var iPerson = $('.icon.person');
+		var mask = $('<div class="mask"></div>');
+		var sysFlag = 0;
+		
+		
 		function renderErrorMsg(parent, msg) {
 			parent.html('<p>' + msg + '</p>');
 		}
+			function renderSysMsg(msg) {
+				var elBox = $('<div class="pcmodal sys-box" style="display: block;"></div>');
+				
+				var html = '<div class="sys-title">' +
+					'<span class="icon close"></span>' +
+				'</div>' +
+				'<div class="sys-body"><p>'+ msg +'</p></div>';
+			 
+				$(document.body).append(elBox.html(html));
+				$(document.body).append(mask)
+				
+				$('.sys-box .close').on('click', function() {
+					$('.sys-box').remove();
+					$('.mask').remove();
+					sysFlag = !sysFlag;
+				});
+			}
+
 
 		function renderMainCategory(parent, data) {
 			var html = '';
@@ -452,6 +480,36 @@
 				}
 			}
 		})
+		
+		// cart icon default number
+		var cartText = iCart.find('.num');
+		var num = window.localStorage.getItem('productNum') || 0;
+		
+		$.ajax({
+		  url: '${APP_PATH}/MlbackCart/getCartProductNumber',
+		  type: 'POST',
+		  success: function (data) {
+		    cartText.text(parseInt(data.extend.number) || 0);
+		  }
+		})
+		
+		
+		iCart.on('click', function () {
+		  window.location.href = "${APP_PATH }/MlbackCart/toCartList";
+		})
+		
+		
+		iPerson.on('click', function () {
+		  if ($(this).hasClass('active')) {
+		    window.location.href = "${APP_PATH }/MlfrontUser/toUserCenter";
+		  } else {
+		    window.location.href = "${APP_PATH }/MlfrontUser/toLoginRegisterPage";
+		  }
+		})
+		
+		/* check user is login or not  */
+		
+		
 	</script>
 </body>
 
