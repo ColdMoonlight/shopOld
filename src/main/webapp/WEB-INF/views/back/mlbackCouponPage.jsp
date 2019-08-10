@@ -14,9 +14,9 @@
 </head>
 <body>
 <div class="container">
-	<div class="aside-bar"></div>
+	<div class="aside-bar nicescroll"></div>
 	<div class="main-body">
-	    <div class="main-box">
+	    <div class="main-box nicescroll">
 	        <div class="header">
 	            <h2>优惠券列表</h2>
 	            <span class="user" id="UEmailSession">*</span>
@@ -58,6 +58,7 @@
 	</div>
 </div>
 
+<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 <script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
 
@@ -71,6 +72,15 @@
 <script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 <script type="text/javascript">
+	$('.nicescroll').each(function(i, item) {
+		$(item).niceScroll({
+			cursorcolor: "rgba(0,0,0,.3)",
+			cursorwidth: "4px",
+			cursorborder: "none",
+			horizrailenabled: false,
+			enablekeyboard: false,
+		}).resize()
+	});
 	var totalRecord,currentPage,editid;
 	var count = 1;
 	//1、页面加载完成以后，直接去发送ajax请求,要到分页数据

@@ -26,9 +26,9 @@
 
 <body>
 	<div class="container">
-		<div class="aside-bar"></div>
+		<div class="aside-bar nicescroll"></div>
 		<div class="main-body">
-			<div class="main-box">
+			<div class="main-box nicescroll">
 				<div class="header">
 					<h2>产品列表</h2>
 					<span class="user" id="UEmailSession">*</span>
@@ -38,8 +38,7 @@
 						<!-- operator -->
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品列表</a>
-							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
-									class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
@@ -75,6 +74,7 @@
 		</div>
 	</div>
 
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
 
@@ -88,6 +88,15 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
+		$('.nicescroll').each(function(i, item) {
+			$(item).niceScroll({
+				cursorcolor: "rgba(0,0,0,.3)",
+				cursorwidth: "4px",
+				cursorborder: "none",
+				horizrailenabled: false,
+				enablekeyboard: false,
+	    }).resize()
+		});
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);

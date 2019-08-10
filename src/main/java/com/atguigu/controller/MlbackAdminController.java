@@ -43,7 +43,7 @@ public class MlbackAdminController {
 		System.out.println("进入toindex");
 		System.out.println("toindex");
 	
-		return "back/toMlbackAdminLogin";
+		return "back/mlbackAdminLogin";
 	}
 	
 	/**

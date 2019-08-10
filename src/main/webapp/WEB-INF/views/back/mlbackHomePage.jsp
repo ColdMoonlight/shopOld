@@ -16,9 +16,9 @@
 
 <body>
 	<div class="container">
-		<div class="aside-bar"></div>
+		<div class="aside-bar nicescroll"></div>
 		<div class="main-body">
-			<div class="main-box">
+			<div class="main-box nicescroll">
 				<div class="header">
 					<h2>控制台</h2>
 					<span class="user" id="UEmailSession">*</span>
@@ -86,17 +86,31 @@
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<script src="${APP_PATH }/static/back/js/nav.js"></script>
+
 	<script src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
 	<script src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script>
+
 	<script src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 	<script type="text/javascript">
+		$('.nicescroll').each(function(i, item) {
+			$(item).niceScroll({
+				cursorcolor: "rgba(0,0,0,.3)",
+				cursorwidth: "4px",
+				cursorborder: "none",
+				horizrailenabled: false,
+				enablekeyboard: false,
+	    }).resize()
+		});
 		var targetInput = $('.c-datepicker-date-editor');
 		var date = new Date();
 		var minDate = moment()
