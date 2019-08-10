@@ -79,6 +79,11 @@
 							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
           '</a>' +
           '</div>';
+        /* html += '<div class="banner">'
+        '<a href="${APP_PATH}/MlbackProduct/172.html">' +
+							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+        '</a>' +
+        '</div>';  */
       }
       parent.html(html);
     }
