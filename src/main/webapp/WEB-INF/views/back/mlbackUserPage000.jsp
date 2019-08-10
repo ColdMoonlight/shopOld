@@ -9,10 +9,9 @@
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
-	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
-	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
+	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
 </head>
 
 <body>
@@ -63,50 +62,11 @@
 		</div>
 	</div>
 
-	<script src="${APP_PATH }/static/js/moment.min.js"></script>
-	<script src="${APP_PATH }/static/js/daterangepicker.js"></script>
-	<script src="${APP_PATH }/static/js/sidenav.js"></script>
-	<script src="${APP_PATH }/static/js/nav.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
+	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/daterangepicker.js"></script> --%>
 
-	</script>
-	<!-- <script>
-	$(function() {
-	       //定义locale汉化插件
-        var locale = {
-            "format": 'YYYY-MM-DD HH:mm:ss',
-            "separator": "",
-            "applyLabel": "确定",
-            "cancelLabel": "取消",
-            "fromLabel": "起始时间",
-            "toLabel": "结束时间'",
-            "customRangeLabel": "自定义",
-            "weekLabel": "W",
-            "daysOfWeek": ["日", "一", "二", "三", "四", "五", "六"],
-            "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-            "firstDay": 1
-        };
-        //初始化显示当前时间
-        $('#startTime').val(moment(new Date()).format('YYYY-MM-DD HH:mm:ss'));
-		$('#startTime').daterangepicker(
-	            {
-	                singleDatePicker: true,
-	                showDropdowns: false,
-	                autoUpdateInput: true,
-	                timePicker24Hour : true,
-	                timePicker : true,
-	                drops:'up',
-	                'locale': locale,
-	            },
-	            function (start, end) {
-	               // $('#startTime').val(start.format('YYYY-MM-DD'));
-	            }
-	       );
-	    $('#add-modal').on('show.bs.modal', function (event) {
-	        var button = $(event.relatedTarget)
-	        var modal = $(this)
-	    })
-	})
-</script> -->
 	<script type="text/javascript">
 		var totalRecord, currentPage, editid;
 		var count = 1;
