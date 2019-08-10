@@ -1,7 +1,3 @@
-/**
- * author:丘耀帆
- * github:https://github.com/qiuyaofan
- */
 $(function () {
   /*==============BEGIN API============*/
   var defaultOptions = {
@@ -1327,7 +1323,7 @@ $(function () {
 
   /*==============BEGIN PICKER============*/
 
-  // 点击body关闭
+  // 点击'.main-box'关闭
   $('.main-box').on('click.datePicker', function () {
     $('.c-datepicker-picker').each(function (i, panel) {
       var _this = $(panel).data('picker');
@@ -2236,12 +2232,25 @@ $(function () {
   });
   // 设置日期选择框位置
   function setContainerPos(_this) {
-    var offset = _this.$target.offset();
-    var height = _this.$target.outerHeight();
-    _this.pickerObject.$container.css({
-      top: offset.top + height,
-      left: offset.left
-    });
+	var el = _this.$target[0];
+	var offsetTop = el.offsetTop;
+    var rect = el.getBoundingClientRect();
+    while (!el.offsetParent.classList.contains('main-box')) {
+    	el = el.offsetParent;
+    	offsetTop += el.offsetTop;
+    }
+    if (rect.right + rect.width > $(window).width()) {
+    	_this.pickerObject.$container.css({
+			top: offsetTop + rect.height,
+			right: $(window).width() - rect.right
+	    });
+    } else {
+    	_this.pickerObject.$container.css({
+			top: offsetTop + rect.height,
+			left: rect.left - $('.main-box')[0].getBoundingClientRect().left
+	    });
+    }
+    
   }
   function fillTime(_this, $time) {
     // 修复满足格式但不完全符合的time格式修正

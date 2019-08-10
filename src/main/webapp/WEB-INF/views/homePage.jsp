@@ -35,7 +35,7 @@
 					<div class="model" data-type="pie">
 						<div class="model-h">
 							<span class="model-name">各项指标</span>
-							<div class="c-datepicker-date-editor J-datepicker-range mt10">
+							<div class="c-datepicker-date-editor">
 								<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
 								<input placeholder="开始日期" name="" value="" class="c-datepicker-data-input">
 								<span class="c-datepicker-range-separator">-</span>
@@ -97,7 +97,7 @@
 		$("#UEmailSession").html(adminAccname);
 	</script>
 	<script type="text/javascript">
-		var targetInput = $('.J-datepicker-range');
+		var targetInput = $('.c-datepicker-date-editor');
 		var date = new Date();
 		var minDate = moment()
 			.set({

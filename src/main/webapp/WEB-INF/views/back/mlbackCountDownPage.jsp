@@ -203,9 +203,10 @@
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
 			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html', function() {
-				$('.countdown').datePicker({
-					format: timeFormat,
-					isRange: true
+				$('.countdown').find('input').each(function(i, item) {
+					$(item).datePicker({
+						isRange: true
+					});
 				});
 			});
 		});
