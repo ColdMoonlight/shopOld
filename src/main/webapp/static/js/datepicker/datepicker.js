@@ -208,12 +208,12 @@ $(function () {
       outer.style.height = "150px";
       outer.style.overflow = "hidden";
       outer.appendChild(inner);
-      document.body.appendChild(outer);
+      document.querySelector('.main-box').appendChild(outer);
       var w1 = inner.offsetWidth;
       outer.style.overflow = 'scroll';
       var w2 = inner.offsetWidth;
       if (w1 == w2) w2 = outer.clientWidth;
-      document.body.removeChild(outer);
+      document.querySelector('.main-box').removeChild(outer);
       var barWidth = w1 - w2;
       if (barWidth === 0) {
         barWidth = 15;
@@ -1328,7 +1328,7 @@ $(function () {
   /*==============BEGIN PICKER============*/
 
   // 点击body关闭
-  $('body').on('click.datePicker', function () {
+  $('.main-box').on('click.datePicker', function () {
     $('.c-datepicker-picker').each(function (i, panel) {
       var _this = $(panel).data('picker');
       if ($(panel).css('display') === 'block') {
@@ -1551,7 +1551,7 @@ $(function () {
       }
 
       var $datePickerHtml = $(renderTpl.replace(/{{table}}/g, table).replace(/{{year}}/g, dataFormat.year).replace(/{{month}}/g, dataFormat.month).replace('{{sidebar}}', sidebar).replace('{{hasTime}}', hasTime).replace('{{hasSidebar}}', hasSidebar));
-      $('body').append($datePickerHtml);
+      $('.main-box').append($datePickerHtml);
       this.$container = $datePickerHtml;
       this.$container.data('picker', this);
       // 没有十分秒
@@ -1854,7 +1854,7 @@ $(function () {
         sidebar = rederSidebar(this);
       }
       var $datePickerHtml = $(RANGEPICKERMAINTPL.replace(/{{table}}/g, table).replace(/{{year}}/g, dataFormat[0].year).replace(/{{month}}/g, dataFormat[0].month).replace(/{{yearEnd}}/g, dataFormat[1].year).replace(/{{monthEnd}}/g, dataFormat[1].month).replace('{{sidebar}}', sidebar).replace('{{hasTime}}', hasTime).replace('{{hasSidebar}}', hasSidebar));
-      $('body').append($datePickerHtml);
+      $('.main-box').append($datePickerHtml);
       this.$container = $datePickerHtml;
       this.$container.data('picker', this);
       // 没有十分秒
