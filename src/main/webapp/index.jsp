@@ -24,7 +24,6 @@
 		window.location.href="${APP_PATH}/index/isMobileOrPc";
 		//启动index页面，调用接口判断请求来源
 	}) 
-	
 </script>
 </body>
 </html>

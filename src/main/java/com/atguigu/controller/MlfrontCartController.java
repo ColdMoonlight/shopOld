@@ -55,9 +55,21 @@ public class MlfrontCartController {
 	 * @return 
 	 * */
 	@RequestMapping("/toCheakOut")
-	public String tologin() throws Exception{
+	public String toCheakOut() throws Exception{
 	
 		return "mfront/cheakOut";
+	}
+	
+	/**
+	 * 1.1	useOn	0505
+	 * 前台移动端解算页面mfront/cheakOut
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/topcCheakOut")
+	public String topcCheakOut() throws Exception{
+	
+		return "front/pccheakOut";
 	}
 	
 	/**
@@ -360,6 +372,17 @@ public class MlfrontCartController {
 	@RequestMapping("/toCartList")
 	public String toCartList() throws Exception{
 		return "mfront/cartList";
+	}
+	
+	/**
+	 * 4.1	useOn	0505
+	 * 前台移动端解算页面mfront/cheakOut
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/topcCartList")
+	public String topcCartList() throws Exception{
+		return "front/pccartList";
 	}
 	
 	/**5.0	useOn	0505
