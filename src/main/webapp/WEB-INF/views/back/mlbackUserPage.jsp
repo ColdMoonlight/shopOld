@@ -65,7 +65,7 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
 	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/daterangepicker.js"></script> --%>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);

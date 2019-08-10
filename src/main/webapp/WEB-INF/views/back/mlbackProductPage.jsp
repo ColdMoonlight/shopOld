@@ -8,7 +8,7 @@
 	<title>Insert title here</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-	<linkrel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
 	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
@@ -85,7 +85,7 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/session.js"></script>
 	
 	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/daterangepicker.js"></script> --%>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';

@@ -80,7 +80,7 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/summernote.min.js"></script>
 
 	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/daterangepicker.js"></script> --%>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';

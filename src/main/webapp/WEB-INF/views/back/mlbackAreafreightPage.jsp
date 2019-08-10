@@ -70,7 +70,7 @@
 	</script>
 
 	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/daterangepicker.js"></script> --%>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		var totalRecord, currentPage, editid;

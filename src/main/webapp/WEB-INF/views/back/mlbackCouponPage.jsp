@@ -58,8 +58,8 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="${APP_PATH }/static/js/back/sidenav.js"></script>
-<script type="text/javascript" src="${APP_PATH }/static/js/back/nav.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
 
 <script type="text/javascript" type="text/javascript">
 	var adminAccname='${sessionScope.AdminUser.adminAccname}'; 
@@ -67,8 +67,8 @@
 	$("#UEmailSession").html(adminAccname);
 </script>
 
-<%-- <script type="text/javascript" src="${APP_PATH }/static/js/back/moment.min.js"></script>
-<script type="text/javascript" src="${APP_PATH }/static/js/back/daterangepicker.js"></script> --%>
+<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
+<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 <script type="text/javascript">
 	var totalRecord,currentPage,editid;
