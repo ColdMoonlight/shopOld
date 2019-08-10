@@ -10,9 +10,9 @@
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
-	<link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css">
-	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/daterangepicker.css">
 </head>
 
 <body>
@@ -61,10 +61,10 @@
 		</div>
 	</div>
 
-	<script src="${APP_PATH }/static/js/moment.min.js"></script>
-	<script src="${APP_PATH }/static/js/daterangepicker.js"></script>
-	<script src="${APP_PATH }/static/js/sidenav.js"></script>
-	<script src="${APP_PATH }/static/js/nav.js"></script>
+	<script src="${APP_PATH }/static/back/js/moment.min.js"></script>
+	<script src="${APP_PATH }/static/back/js/daterangepicker.js"></script>
+	<script src="${APP_PATH }/static/back/js/sidenav.js"></script>
+	<script src="${APP_PATH }/static/back/js/nav.js"></script>
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
