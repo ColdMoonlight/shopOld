@@ -53,8 +53,7 @@
 				if (resData.length) {
 					renderCoupon(box, resData);
 				} else {
-					renderErrorMsg(box, 'No relevant coupons！');
-					renderErrorMsg(box, 'There are no coupons!');
+					renderErrorMsg(box, 'No relevant coupons!');
 				}
 			} else {
 				renderSysMsg('System error');
