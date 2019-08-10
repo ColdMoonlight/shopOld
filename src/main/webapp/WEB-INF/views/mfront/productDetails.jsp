@@ -450,7 +450,7 @@
 						if (result.code == 100) {
 							reviewId = result.extend.mlfrontReviewOne.reviewId;
 						} else {
-							renderSysMsg('System error, please contact the administrator！');
+							renderSysMsg('System error, please contact the administrator!');
 						}
 					}
 				});
@@ -813,7 +813,7 @@
 						reviewId = null;
 						window.location.href = window.location.href;
 					} else {
-						renderSysMsg('系统错误，请联系管理员！');
+						renderSysMsg('System error, please contact administrator!');
 					}
 				}
 			});
