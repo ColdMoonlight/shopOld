@@ -82,6 +82,7 @@
   </div>
   
 
+
   <script>
     var categoryActiveNum = 1;
     var iCart = $('.icon.cart');
