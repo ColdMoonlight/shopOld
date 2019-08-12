@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Hair Admin</title>
+	<title>登录</title>
 	<meta name="viewport"	content="width=device-width">
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<!-- web路径：
@@ -13,7 +13,7 @@
 			http://localhost:3306/crud
 	 -->
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<style>
 		html,
 		body {
@@ -84,7 +84,7 @@
 		</form>
 	</div>
 
-	<script>
+	<script type="text/javascript">
 		// submit
 		$(function () {
 			function checkUsername(data) {

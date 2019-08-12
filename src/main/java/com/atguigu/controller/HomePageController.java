@@ -37,7 +37,7 @@ public class HomePageController {
 		
 //		System.out.println("进入toHomePage");
 	
-		return "homePage";
+		return "back/mlbackHomePage";
 	}
 	
 	

@@ -5,18 +5,17 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Insert title here</title>
+	<title>产品管理</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
-	<!-- <link rel="stylesheet" href="${APP_PATH }/static/css/daterangepicker.css"> -->
-	<link rel="stylesheet" href="${APP_PATH }/static/css/table.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
+	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
 	<!-- summernote css -->
-	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/codemirror.min.css" />
-	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/monokai.min.css">
-	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/js/summernote/summernote.css">
+	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/codemirror.min.css" />
+	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/monokai.min.css">
+	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/summernote.css">
 	<style>
 		tr>td:nth-of-type(3),
 		th>td:nth-of-type(3) {
@@ -27,9 +26,9 @@
 
 <body>
 	<div class="container">
-		<div class="aside-bar"></div>
+		<div class="aside-bar nicescroll"></div>
 		<div class="main-body">
-			<div class="main-box">
+			<div class="main-box nicescroll">
 				<div class="header">
 					<h2>产品列表</h2>
 					<span class="user" id="UEmailSession">*</span>
@@ -39,8 +38,7 @@
 						<!-- operator -->
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品列表</a>
-							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
-									class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
@@ -76,15 +74,29 @@
 		</div>
 	</div>
 
-	<script src="${APP_PATH }/static/js/moment.min.js"></script>
-	<script src="${APP_PATH }/static/js/daterangepicker.js"></script>
-	<script src="${APP_PATH }/static/js/sidenav.js"></script>
-	<script src="${APP_PATH }/static/js/nav.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/summernote/codemirror.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/summernote/xml.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/summernote/summernote.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/js/session.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
+
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/codemirror.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/xml.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/summernote.min.js"></script>
+
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/session.js"></script>
+	
+	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
+
 	<script type="text/javascript">
+		$('.nicescroll').each(function(i, item) {
+			$(item).niceScroll({
+				cursorcolor: "rgba(0,0,0,.3)",
+				cursorwidth: "4px",
+				cursorborder: "none",
+				horizrailenabled: false,
+				enablekeyboard: false,
+	    }).resize()
+		});
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
