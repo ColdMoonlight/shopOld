@@ -82,9 +82,21 @@
 	<script>
 		var cartBox = $('.main.cart-box');
 		var cartList = $('.cart-list');
-		var cartObj = JSON.parse(window.window.localStorage.getItem('cartlist')) || {};
+		var cartObj = {};
 		var subTotal = $('.show-t-price-num');
-		getTotalPrice();
+		var numTotal = $('.show-t-num-num');
+		
+		function clearData(data) {
+			var targetObj = JSON.parse(window.window.localStorage.getItem('cartlist'));
+			if (targetObj === {}) {} else {
+				for (var key in data) {
+					if (targetObj[data[key].cartitemId]) {
+						cartObj[data[key].cartitemId] = targetObj[data[key].cartitemId]
+					}
+				}
+			}
+		}
+
 		function renderProdcutList(parent, data) {
 			// console.log(data);
 			var html = '';
@@ -142,24 +154,25 @@
 		function addNum(e) {
 			e.stopPropagation();
 			var item  = $(e.target);
-			var checkbox = item.parent().parent().find('.checkbox');
+			var checkbox = item.parents('.cart-item').find('.checkbox');
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			productNumText += 1;
 			productNum.val(productNumText);
-			updateCartItemNum(item, productNumText);
-			
+
 			if(checkbox.is(':checked')) {
-				cartObj[checkbox.data('cartitemid')] = productNum;
+				cartObj[checkbox.data('cartitemid')].num = productNumText;
 				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 				getTotalPrice();
 			}
+
+			updateCartItemNum(item, productNumText);
 		}
 
 		function subNum(e) {
 			e.stopPropagation();
 			var item  = $(e.target);
-			var checkbox = item.parent().parent().find('.checkbox');
+			var checkbox = item.parents('.cart-item').find('.checkbox');
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			if (productNumText <= 1) {
@@ -169,13 +182,14 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 			}
-			updateCartItemNum(item, productNumText);
 			
 			if(checkbox.is(':checked')) {
-				cartObj[checkbox.data('cartitemid')] = productNum;
+				cartObj[checkbox.data('cartitemid')].num = productNumText;
 				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 				getTotalPrice();
 			}
+			
+			updateCartItemNum(item, productNumText);
 		}
 
 		/* private Integer cartitemId;
@@ -220,13 +234,14 @@
 		}
 		
 		function getTotalPrice() {
-			var total = 0;
+			var price = 0;
+			var num = 0;
 			for (var i in cartObj) {
-				total += cartObj[i].num * cartObj[i].price;
-				console.log(cartObj[i].num, cartObj[i].price)
+				price += cartObj[i].num * cartObj[i].price;
+				num += cartObj[i].num;
 			}
-			
-			subTotal.text('$ ' + total);
+			numTotal.text(num)
+			subTotal.text('$ ' + price);
 		}
 
 		function calcTotalPrice() {
@@ -282,9 +297,14 @@
 							// console.log(data);
 							var resData = data.extend.mlfrontCartItemListRes;
 							if (resData.length > 0) {
+								// clearData
+								clearData(resData);
+								// render cartlist
 								$('.cart-title').show();
 								renderProdcutList(cartList, resData);
 								$('.cart-footer').show();
+								// init subtotal
+								getTotalPrice();
 								// for all cart-product bind event of going product-details
 								toProductDetails();
 							} else {
