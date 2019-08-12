@@ -87,7 +87,7 @@
 		var numTotal = $('.show-t-num-num');
 		
 		function clearData(data) {
-			var targetObj = JSON.parse(window.window.localStorage.getItem('cartlist'));
+			var targetObj = JSON.parse(window.window.localStorage.getItem('cartlist')) || {};
 			if (targetObj === {}) {} else {
 				for (var key in data) {
 					if (targetObj[data[key].cartitemId]) {
