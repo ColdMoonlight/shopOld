@@ -84,6 +84,7 @@
 		var cartList = $('.cart-list');
 		var cartObj = {};
 		var subTotal = $('.show-t-price-num');
+		var numTotal = $('.show-t-num-num');
 		
 		function clearData(data) {
 			var targetObj = JSON.parse(window.window.localStorage.getItem('cartlist'));
@@ -233,12 +234,14 @@
 		}
 		
 		function getTotalPrice() {
-			var total = 0;
+			var price = 0;
+			var num = 0;
 			for (var i in cartObj) {
-				total += cartObj[i].num * cartObj[i].price;
+				price += cartObj[i].num * cartObj[i].price;
+				num += cartObj[i].num;
 			}
-			
-			subTotal.text('$ ' + total);
+			numTotal.text(num)
+			subTotal.text('$ ' + price);
 		}
 
 		function calcTotalPrice() {
