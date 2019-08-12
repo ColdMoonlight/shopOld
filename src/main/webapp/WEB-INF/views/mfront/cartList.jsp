@@ -237,7 +237,7 @@
 			var price = 0;
 			var num = 0;
 			for (var i in cartObj) {
-				price += cartObj[i].num * cartObj[i].price;
+				price = (parseFloat(price) + cartObj[i].num * cartObj[i].price).toFixed(2);
 				num += cartObj[i].num;
 			}
 			numTotal.text(num)
