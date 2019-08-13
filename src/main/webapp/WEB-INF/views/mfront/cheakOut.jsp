@@ -463,7 +463,7 @@
 	<script>
 		var totalPrice = 0;
 		var resDataMoney = 0; // 邮费
-		var totalPriceText = $('.total-price').find('.text');
+		// var totalPriceText = $('.total-price').find('.text');
 		var subtotalPriceText = $('.cal-price-item.c-subtotal').find('.cal-price-num');
 		var prototalPriceText = $('.cal-price-item.c-prototal').find('.cal-price-num');
 		var shippingPriceText = $('.cal-price-item.c-shipping').find('.cal-price-num');
@@ -522,9 +522,9 @@
 					$('.shipping').find('span').text('Please add the shipping address first');
 					shippingPriceText.text('$' + 0)
 				}
-				totalPriceText.text('$' + (resDataMoney + totalPrice));
+				// totalPriceText.text('$' + (resDataMoney + totalPrice));
 
-				subtotalPriceText.text('$' + (resDataMoney + totalPrice));
+				subtotalPriceText.text('$' + (resDataMoney + totalPrice).toFixed(2));
 				$('.address-trigger').on('click', function () {
 					$('.address-box').show();
 				});
@@ -555,15 +555,16 @@
 					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
 					addressId = resDataAddress.addressId;
 					// console.log(addressId)
-					totalPrice -= resDataMoney;
+					totalPrice = (totalPrice - resDataMoney).toFixed(2);
 					resDataMoney = JSON.parse(data).extend.areafreightMoney;
-					totalPrice += resDataMoney;
+					console.log(totalPrice, resDataMoney)
+					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
 					var addressBox = $('.address');
 					$('.address-id').val(resDataAddress.addressId);
 
 					// console.log(resDataMoney)
 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
-					totalPriceText.text('$' + totalPrice);
+					// totalPriceText.text('$' + totalPrice);
 					
 					shippingPriceText.text('$' + resDataMoney);
 					subtotalPriceText.text('$' + totalPrice);
@@ -626,8 +627,8 @@
 
 				// console.log(typeof totalPrice)
 				var allPriceObj = calAllProductPrice(resData);
-				totalPrice = allPriceObj.allSubtotalPrice + resDataMoney;
-				totalPriceText.text('$' + totalPrice);
+				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoney).toFixed(2);
+				// totalPriceText.text('$' + totalPrice);
 
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice));
 				subtotalPriceText.text('$' + totalPrice);
@@ -741,11 +742,11 @@
 			var targetEl = $(e.target);
 			var id = targetEl.data('couponid');
 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-			if (totalPrice >= counponDataList[id].couponPriceBaseline) {
+			if (parseFloat(totalPrice).toFixed >= counponDataList[id].couponPriceBaseline) {
 				// console.log(totalPrice, resData.couponPrice)
 				var couponPrice = counponDataList[id].couponPrice;
 				priceInfo.text('-$' + couponPrice);
-				totalPriceText.text('$' + (totalPrice - couponPrice).toFixed(2));
+				// totalPriceText.text('$' + (totalPrice - couponPrice).toFixed(2));
 				
 				couponPriceText.text('-$' + couponPrice);
 				subtotalPriceText.text('$' + (totalPrice - couponPrice).toFixed(2));
@@ -755,10 +756,10 @@
 			} else {
 				targetEl[0].checked = false;   
 				priceInfo.text("Cann't use this Coupon!");
-				totalPriceText.text('$' + (totalPrice).toFixed(2));
+				// totalPriceText.text('$' + (totalPrice).toFixed(2));
 				
 				couponPriceText.text('-$' + 0);
-				subtotalPriceText.text('$' + (totalPrice).toFixed(2));
+				subtotalPriceText.text('$' + totalPrice);
 			}
 		}
 
@@ -788,7 +789,7 @@
 						// console.log(totalPrice, totalPrice - resData.couponPriceBaseline)
 						if (totalPrice >= resData.couponPriceBaseline) {
 							// console.log(totalPrice, resData.couponPrice)
-							totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
+							// totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
 							
 							couponPriceText.text('-$' + resData.couponPrice);
 							subtotalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));

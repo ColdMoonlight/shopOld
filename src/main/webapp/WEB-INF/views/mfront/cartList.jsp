@@ -102,7 +102,7 @@
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				var hasStorageItem = cartObj[data[i].cartitemId];
-				html += '<div class="cart-item bd-b">' +
+				html += '<div class="cart-item bd-b bd-t">' +
 					'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
 					'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
