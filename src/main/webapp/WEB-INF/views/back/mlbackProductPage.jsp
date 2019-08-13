@@ -11,7 +11,9 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
+
 	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
+
 	<!-- summernote css -->
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/codemirror.min.css" />
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/monokai.min.css">
@@ -342,7 +344,6 @@
 			$.ajax({
 				url: "${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail",
 				type: "GET",
-				async: false,
 				success: function (result) {
 					if (result.code == 100) {
 						function setCategoryDescSelect(el, data) {
@@ -400,6 +401,14 @@
 							'<a class="btn btn-primary" onclick="categorySave(event)">确定</a>' +
 							'</div>';
 						checkBox.html(html).appendTo($(document.body));
+
+						$('.check-container').niceScroll({
+							cursorcolor: "rgba(0,0,0,.3)",
+							cursorwidth: "4px",
+							cursorborder: "none",
+							horizrailenabled: false,
+							enablekeyboard: false,
+				    });
 					}
 					checkBox.removeClass('hide');
 				});
@@ -555,8 +564,7 @@
 			$(":input[name='productCategoryid']").val(data.productCategoryid);
 			$(":input[name='productCategoryIdsStr']").val(data.productCategoryIdsStr);
 			$(":input[name='productCategoryNamesStr']").val(data.productCategoryNamesStr);
-			$(".product-cate-text").html((data.productCategoryNamesStr ? data.productCategoryNamesStr.split(',').join('\n') :
-				'无'));
+			$(".product-cate-text").html((data.productCategoryNamesStr ? data.productCategoryNamesStr.split(',').join('\n') : '无'));
 			if (data.productCategoryIdsStr && data.productCategoryIdsStr.length) {
 				productCategoryIdArr = data.productCategoryIdsStr.split(',');
 			}
@@ -571,7 +579,9 @@
 			$(":input[name='productHavesalenum']").val(parseFloat(data.productHavesalenum));
 			$(":input[name='productStatus']").val(data.productStatus);
 			$(":input[name='productLable']").val(data.productLable);
-			$(":input[name='productFirsth']").val(data.productFirsth);
+			if (data.productFirsth) {
+				$(":input[name='productFirsth']").val(data.productFirsth);
+			}
 			$(":input[name='productActoffid']").val(data.productActoffid);
 			$(":input[name='productActoffoff']").val(data.productActoffoff);
 			$(":input[name='productReviewnum']").val(data.productReviewnum);

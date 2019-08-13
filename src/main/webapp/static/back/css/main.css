@@ -356,7 +356,7 @@ html,body {
  .check-container {
  	min-width: 500px;
  	min-height: 200px;
- 	max-height: 800px;
+ 	max-height: calc(100vh - 200px);
  	overflow-y: scroll;
  }
  
