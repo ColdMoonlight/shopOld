@@ -247,11 +247,11 @@
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
 			data = JSON.stringify(data.reduce(function (obj, item) {
-				console.log(obj);
+				// console.log(obj);
 				obj[item.name] = item.value;
 				return obj
 			}, {}));
-			console.log(data);
+			// console.log(data);
 			$.ajax({
 				url: "${APP_PATH}/MlbackAreafreight/save",
 				data: data,
@@ -266,6 +266,7 @@
 				}
 			});
 		});
+
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {

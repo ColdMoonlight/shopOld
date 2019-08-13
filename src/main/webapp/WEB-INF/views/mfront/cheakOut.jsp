@@ -742,7 +742,7 @@
 			var targetEl = $(e.target);
 			var id = targetEl.data('couponid');
 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-			console.log(totalPrice)
+			// console.log(totalPrice)
 			if (parseFloat(totalPrice) >= counponDataList[id].couponPriceBaseline) {
 				// console.log(totalPrice, resData.couponPrice)
 				var couponPrice = counponDataList[id].couponPrice;
