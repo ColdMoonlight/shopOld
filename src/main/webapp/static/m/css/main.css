@@ -639,7 +639,7 @@ a:focus {
 	margin-left: .25em;
   	font-size: 14px;
     text-decoration: line-through;
-    color:#333锛�
+    color: #333;
 }
 
 .product-to-cart {
@@ -1288,7 +1288,7 @@ a:focus {
 /* condition of product*/
 .condition.select {
 	display: flex;
-	aligin-items: center;
+	align-items: center;
 	justify-content: flex-end;
 	padding:10px;
 	background-color:#fff;
@@ -1953,7 +1953,7 @@ a:focus {
 
 .pagination li.active {
 	background-color: #ff1671;
-	border-color: #f1671;
+	border-color: #ff1671;
 }
 
 .pagination li.active a {
@@ -1986,7 +1986,6 @@ a:focus {
 	padding: 6px 10px;
 	font-size: 14px;
 }
-.order-info .order-item-title .order-id  {}
 .order-info .order-item-title .order-status  {
 	color: tomato;
 }
