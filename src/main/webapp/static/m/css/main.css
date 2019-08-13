@@ -1953,7 +1953,7 @@ a:focus {
 
 .pagination li.active {
 	background-color: #ff1671;
-	border-color: #f1671;
+	border-color: #ff1671;
 }
 
 .pagination li.active a {
@@ -1986,7 +1986,7 @@ a:focus {
 	padding: 6px 10px;
 	font-size: 14px;
 }
-.order-info .order-item-title .order-id  {}
+
 .order-info .order-item-title .order-status  {
 	color: tomato;
 }
