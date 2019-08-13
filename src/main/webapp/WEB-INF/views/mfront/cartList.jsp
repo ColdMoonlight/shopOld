@@ -52,10 +52,10 @@
 	<div class="main cart-box">
 		<div class="cart-title" style="display: none">
 			<img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_cart.jpg">
-			<div class="cart-status">
+			<!-- <div class="cart-status">
 				Shopping List
 				<span class="icon dot"></span>
-			</div>
+			</div> -->
 		</div>
 		<!-- purechase step -->
 		
