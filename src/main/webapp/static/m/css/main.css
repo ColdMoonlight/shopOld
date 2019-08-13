@@ -1406,7 +1406,7 @@ a:focus {
 
 .cart-item>input:checked::after,
 .checkbox:checked::after {
-  content: '鉁�';
+  content: '✔';
   position: absolute;
   top: 0;
   left: 0;
