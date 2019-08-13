@@ -84,7 +84,26 @@
 	    }).resize()
 		});
 		var totalRecord, currentPage, itemid;
+
 		var timeFormat = 'YYYY-MM-DD HH:mm:ss';
+		var date = new Date();
+		var minDate = moment()
+		.set({
+			'date': date.getDate() - 1,
+			'hour': date.getHours(),
+			'minute': date.getMinutes(),
+			'second': date.getSeconds()
+		})
+		.format(timeFormat);
+		var maxDate = moment()
+			.set({
+				'date': date.getDate(),
+				'hour': date.getHours(),
+				'minute': date.getMinutes(),
+				'second': date.getSeconds()
+			})
+			.format(timeFormat);
+
 		var count = 1;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		$(function () {
@@ -213,9 +232,14 @@
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
 			$('.table-box').load('${APP_PATH}/static/tpl/addcountDown.html', function() {
-				$('.countdown').find('input').each(function(i, item) {
+				$(":input[name='countdownStarttime']").val(minDate);
+				$(":input[name='countdownEndtime']").val(maxDate);
+				$('.date-timepicker').each(function(i, item) {
 					$(item).datePicker({
-						isRange: true
+						hasShortcut: true,
+						isRange: true,
+						min: minDate,
+						max: maxDate
 					});
 				});
 			});
@@ -230,19 +254,23 @@
 					url: "${APP_PATH}/MlbackCountDown/getOneMlbackCountDownDetail",
 					data: {"countdownId": editId},
 					type: "POST",
-					async: false,
 					success: function (result) {
 						if (result.code == 100) {
 							obj = result.extend.mlbackCountDownOne;
 							tianchong(obj);
+							$(":input[name='countdownStarttime']").val(minDate);
+							$(":input[name='countdownEndtime']").val(maxDate);
+							$('.date-timepicker').each(function(i, item) {
+								$(item).datePicker({
+									isRange: true,
+									min: minDate,
+									max: maxDate
+								});
+							});
 						} else {
 							alert("联系管理员");
 						}
 					}
-				});
-				$('.countdown').datePicker({
-					format: timeFormat,
-					isRange: true
 				});
 			});
 		});
@@ -251,9 +279,8 @@
 			$(":input[name='countdownId']").val(data.countdownId);
 			$(":input[name='countdownTitle']").val(data.countdownTitle);
 			$(":input[name='countdownDescription']").val(data.countdownDescription);
-			$(":input[name='countdownStarttime']").val(data.countdownStarttime);
-			$(":input[name='countdownEndtime']").val(data.countdownEndtime);
-			$(":input[name='countdownMotifytime']").val(data.countdownMotifytime);
+			minDate = data.countdownStarttime || minDate;
+			maxDate = data.countdownEndtime || maxDate;
 		}
 		// 新建/编辑 保存
 		$(document).on('click', '#tasksubmit', function () {

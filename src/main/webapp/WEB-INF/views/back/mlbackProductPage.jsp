@@ -9,6 +9,7 @@
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
 
@@ -90,6 +91,11 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
+		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
+		console.log("adminAccname:" + adminAccname);
+		$("#UEmailSession").html(adminAccname);
+	</script>
+	<script type="text/javascript">
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
@@ -99,11 +105,6 @@
 				enablekeyboard: false,
 	    }).resize()
 		});
-		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
-		$("#UEmailSession").html(adminAccname);
-	</script>
-	<script type="text/javascript">
 		var totalRecord, currentPage, editid;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		$(function () {
@@ -273,7 +274,8 @@
 					// 设置归属类
 					getCategoryDown();
 					// productDesc
-					summernote = $('.summer-note').summernote({
+					$('.summer-note').summernote();
+				/* 	summernote = $('.summer-note').summernote({
 						disableDragAndDrop: true,
 						height: 300,
 						emptyPara: '',
@@ -284,7 +286,7 @@
 							lineNumbers: true,
 							theme: 'monokai'
 						}
-					});
+					}); */
 					// option
 					$('.add-item').each(function (i, item) {
 						$(item).on('click', function () {
