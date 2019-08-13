@@ -52,7 +52,7 @@
 	<div class="main cart-box clearfix">
 		<div class="container cat_list_box clearfix">
 			<div class="cart-title" style="display: none">
-				<img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_cart.jpg">
+				<img class="purechase-step" src="${APP_PATH }/static/pc/img/sep1.jpg">
 				<!-- <div class="cart-status">
 					Shopping List
 					<span class="icon dot"></span>
@@ -64,9 +64,14 @@
 		
 					</div>
 					<div class="cart-footer" style="display: none">
-						<!-- <span class="show-t-price"></span> -->
-						<h3>Sub-Total:	$521.53</h3>	
-						<h4>Total:	$521.53</h4>    
+						<div class="show-t-num">
+							<span class="show-t-num-text">NUMTOTAL</span>
+							<span class="show-t-num-num"></span>
+						</div>
+						<div class="show-t-price">
+							<span class="show-t-price-text">SUBTOTAL</span>
+							<span class="show-t-price-num"></span>
+						</div>
 						<div class="op">
 							<a href="${APP_PATH}/index/isMobileOrPc" class="btn add-product">Continue To Add</a>
 							<a href="javascript:;" class="btn calc-price">calculate Price</a>
@@ -82,51 +87,66 @@
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 
 	<script>
-		var cartBox = $('.main.cart-box');
-		var cartList = $('.cart-list');
-
-		function renderProdcutList(parent, data) {
-			// console.log(data);
-			var html = '';
-			for (var i = 0, len = data.length; i < len; i += 1) {
-				html += '<div class="cart-item bd-b">' +
-					'<input onclick="event.stopPropagation();" class="checkbox" type="checkbox" data-cartitemid="' + data[i]
-					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
-					'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
-					'<div class="content">' +
-					' <div class="text">' +
-					'<div class="title">' + data[i].cartitemProductName + '</div>' +
-					' <div class="condition">';
-				var skuIdArr = data[i].cartitemProductskuIdstr.split(',');
-				var skuIdNameArr = data[i].cartitemProductskuIdnamestr.split(',');
-				var skuNameArr = data[i].cartitemProductskuNamestr.split(',');
-				var skuPriceArr = data[i].cartitemProductskuMoneystr.split(',');
-				for (var j = 0, len2 = skuIdArr.length; j < len2; j += 1) {
-					html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
-						': ' + skuNameArr[j] + '</div>';
+			var cartBox = $('.main.cart-box');
+			var cartList = $('.cart-list');
+			var cartObj = {};
+			var subTotal = $('.show-t-price-num');
+			var numTotal = $('.show-t-num-num');
+			
+			function clearData(data) {
+				var targetObj = JSON.parse(window.window.localStorage.getItem('cartlist')) || {};
+				if (targetObj === {}) {} else {
+					for (var key in data) {
+						if (targetObj[data[key].cartitemId]) {
+							cartObj[data[key].cartitemId] = targetObj[data[key].cartitemId]
+						}
+					}
 				}
-				html += '</div>' +
-					'</div>' +
-					'<div class="num" data-cartitemid="' + data[i].cartitemId + '" data-cartid="' + data[i].cartitemCartId +
-					'" data-productname="' + data[i].cartitemProductName + '">' +
-					'<span class="price">$' + (getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
-						.cartitemProductActoff).current) + '</span>' +
-					'<span class="original">$' + (getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
-						.cartitemProductActoff).origin) + '</span>' +
-					'<div class="input-group">' +
-					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-					'<input type="text" name="cart-product-num" class="form-control" value="' + data[i].cartitemProductNumber +
-					'">' +
-					'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
-					'</div>' +
-					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
-					'</div>' +
-					'</div>' +
-					'</div>';
 			}
+			
+			function renderProdcutList(parent, data) {
+				// console.log(data);
+				var html = '';
+				for (var i = 0, len = data.length; i < len; i += 1) {
+					var hasStorageItem = cartObj[data[i].cartitemId];
+					html += '<div class="cart-item bd-b">' +
+						'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
+						.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
+						'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
+						'<div class="content">' +
+						' <div class="text">' +
+						'<div class="title">' + data[i].cartitemProductName + '</div>' +
+						' <div class="condition">';
+					var skuIdArr = data[i].cartitemProductskuIdstr.split(',');
+					var skuIdNameArr = data[i].cartitemProductskuIdnamestr.split(',');
+					var skuNameArr = data[i].cartitemProductskuNamestr.split(',');
+					var skuPriceArr = data[i].cartitemProductskuMoneystr.split(',');
+					for (var j = 0, len2 = skuIdArr.length; j < len2; j += 1) {
+						html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
+							': ' + skuNameArr[j] + '</div>';
+					}
+					var dataPrice = getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
+					.cartitemProductActoff);
+					html += '</div>' +
+						'</div>' +
+						'<div class="num" data-cartitemid="' + data[i].cartitemId + '" data-cartid="' + data[i].cartitemCartId +
+						'" data-productname="' + data[i].cartitemProductName + '">' +
+						'<span class="price">$' + (dataPrice.current) + '</span>' +
+						'<span class="original">$' + (dataPrice.origin) + '</span>' +
+						'<div class="input-group">' +
+						'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
+						'<input type="text" name="cart-product-num" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
+						'">' +
+						'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
+						'</div>' +
+						'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
+						'</div>' +
+						'</div>' +
+						'</div>';
+				}
 
-			parent.html(html);
-		}
+				parent.html(html);
+			}
 
 		function renderProductNone(parent) {
 			var html = '';
@@ -140,16 +160,27 @@
 
 		function addNum(e) {
 			e.stopPropagation();
-			var productNum = $(e.target).parent().parent().find('input');
+			var item  = $(e.target);
+			var checkbox = item.parents('.cart-item').find('.checkbox');
+			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			productNumText += 1;
 			productNum.val(productNumText);
-			updateCartItemNum($(e.target), productNumText);
+
+			if(checkbox.is(':checked')) {
+				cartObj[checkbox.data('cartitemid')].num = productNumText;
+				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+				getTotalPrice();
+			}
+
+			updateCartItemNum(item, productNumText);
 		}
 
 		function subNum(e) {
 			e.stopPropagation();
-			var productNum = $(e.target).parent().parent().find('input');
+			var item  = $(e.target);
+			var checkbox = item.parents('.cart-item').find('.checkbox');
+			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			if (productNumText <= 1) {
 				productNumText = 1;
@@ -158,7 +189,14 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 			}
-			updateCartItemNum($(e.target), productNumText);
+			
+			if(checkbox.is(':checked')) {
+				cartObj[checkbox.data('cartitemid')].num = productNumText;
+				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+				getTotalPrice();
+			}
+			
+			updateCartItemNum(item, productNumText);
 		}
 
 		/* private Integer cartitemId;
@@ -201,6 +239,16 @@
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
 			}
 		}
+		function getTotalPrice() {
+			var price = 0;
+			var num = 0;
+			for (var i in cartObj) {
+				price = (parseFloat(price) + cartObj[i].num * cartObj[i].price).toFixed(2);
+				num += cartObj[i].num;
+			}
+			numTotal.text(num)
+			subTotal.text('$ ' + price);
+		}
 
 		function calcTotalPrice() {
 			var cartItemArr = []
@@ -226,7 +274,7 @@
 					dataType: 'JSON',
 					contentType: 'application/json',
 					success: function (data) {
-						var data = JSON.parse(data);
+						//var data = JSON.parse(data);
 						if (data.code === 100) {
 							window.location.href = '${APP_PATH}/MlbackCart/topcCheakOut';
 						}
@@ -243,6 +291,7 @@
 			calcTotalPrice();
 			fbq('track', 'InitiateCheckout');
 		});
+		
 		$.ajax({
 			url: '${APP_PATH}/MlbackCart/getCartProductNumber',
 			type: 'POST',
@@ -258,6 +307,7 @@
 								$('.cart-title').show();
 								renderProdcutList(cartList, resData);
 								$('.cart-footer').show();
+								getTotalPrice();
 								// for all cart-product bind event of going product-details
 								toProductDetails();
 							} else {
@@ -278,6 +328,23 @@
 				})
 			}, true)
 		}
+		
+		function selectCartItem(e) {
+			e.stopPropagation();
+			var item = $(e.target);
+			var cartItemId = item.data('cartitemid');
+			if(item.is(':checked') && !cartObj[cartItemId]) {
+				cartObj[cartItemId] = {
+						num: parseInt(item.parent().find('input[type=text]').val().trim(), 10),
+						price: (+item.parent().find('.price').text().trim().substring(1))
+				}
+			} else {
+				delete cartObj[cartItemId];
+			}
+			window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+			getTotalPrice();
+		}
+		
 		/**
 		 *     private Integer cartitemId;
 		 *		private Integer cartitemCartId;
