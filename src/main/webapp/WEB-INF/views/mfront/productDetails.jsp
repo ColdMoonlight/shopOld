@@ -102,10 +102,12 @@
 	<script>
 		var imgCount = 1;
 		var reviewId = null;
+		var sessionScopeproductId = '${sessionScope.productDetailId}';
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
+			
 			//接到产品id，查询本id产品的详情
-			var pidA = window.location.href.split('?')[1].split('=');
+			var pidA = sessionScopeproductId;
 			var dataPrice = null;
 
 			var swiper = $('.product__details-banner .swiper-wrapper');
@@ -128,7 +130,7 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProductImg/getMlbackProductImgListByProductId',
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -153,7 +155,7 @@
 				//url: '${APP_PATH}/MlbackProductSku/getOneProductAllSku',
 				url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -229,13 +231,13 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getOneMlbackProductDetail',
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
-						// console.log(productData)
+						console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
 						prodcutDpriceText.attr('data-price', productData.productOriginalprice);
@@ -257,7 +259,7 @@
       $.ajax({
         url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
         data: {
-          "productId": pidA[1],
+          "productId": pidA,
         },
         type: "POST",
         success: function (data) {
@@ -321,7 +323,7 @@
     	  $.ajax({
 	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
 	  			data: {
- 	          			"productId": pidA[1],
+ 	          			"productId": pidA,
  	          			"pn": pn
  	        		  },
 	  			type: "POST",
@@ -440,7 +442,7 @@
 				$.ajax({
 					url: "${APP_PATH}/MlfrontReview/saveNew",
 					data: JSON.stringify({
-						reviewPid: pidA[1],
+						reviewPid: pidA,
 					}),
 					dataType: "json",
 					contentType: 'application/json',
@@ -509,7 +511,7 @@
 						reviewId: reviewId,
 						reviewUname: username,
 						reviewPname: email,
-						reviewPid: pidA[1],
+						reviewPid: pidA,
 						reviewDetailstr: details,
 						reviewProstarnum: starNum
 				}
@@ -612,7 +614,7 @@
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
-				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductId = parseInt(pidA);
 				reqData.cartitemProductName = dataPrice.productName;
 				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
 				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
@@ -691,7 +693,7 @@
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
-				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductId = parseInt(pidA);
 				reqData.cartitemProductName = dataPrice.productName;
 				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
 				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
