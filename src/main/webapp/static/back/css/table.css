@@ -32,6 +32,14 @@
     left: initial;
 }
 
+.table-box .nav-tabs a {
+	cursor: pointer;
+}
+
+.table-box .nav-tabs li.active a:hover {
+	cursor: pointer;
+}
+
 .table-content {
     width: 100%;
     overflow: auto;
