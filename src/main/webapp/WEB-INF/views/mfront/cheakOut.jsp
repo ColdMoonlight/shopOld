@@ -555,9 +555,9 @@
 					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
 					addressId = resDataAddress.addressId;
 					// console.log(addressId)
-					totalPrice = (totalPrice - resDataMoney).toFixed(2);
+					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
 					resDataMoney = JSON.parse(data).extend.areafreightMoney;
-					console.log(totalPrice, resDataMoney)
+
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
 					var addressBox = $('.address');
 					$('.address-id').val(resDataAddress.addressId);
@@ -619,7 +619,7 @@
 			type: 'get',
 			success: function (data) {
 				var resData = data.extend.mlfrontOrderItemList;
-				console.log(resData);
+				// console.log(resData);
 				orderId = resData[0].orderId || null;
 				var cartList = $('.cart-list');
 				cartList.attr('data-id', resData.orderId);
@@ -742,7 +742,8 @@
 			var targetEl = $(e.target);
 			var id = targetEl.data('couponid');
 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-			if (parseFloat(totalPrice).toFixed >= counponDataList[id].couponPriceBaseline) {
+			console.log(totalPrice)
+			if (parseFloat(totalPrice) >= counponDataList[id].couponPriceBaseline) {
 				// console.log(totalPrice, resData.couponPrice)
 				var couponPrice = counponDataList[id].couponPrice;
 				priceInfo.text('-$' + couponPrice);
@@ -845,8 +846,8 @@
 					"addressinfoId": addressId,
 				};
 
-			console.log(reqDataUp)
-			console.log(checkAddress(reqDataUp))
+			// console.log(reqDataUp)
+			// console.log(checkAddress(reqDataUp))
 			if (checkAddress(reqDataUp)) {
 				fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 				$.ajax({
