@@ -300,7 +300,7 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			console.log(reqData)
+			// console.log(reqData)
 			//alert(data.productDesc);
 			$.ajax({
 				url: "${APP_PATH}/MlbackProduct/save",
