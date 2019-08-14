@@ -61,6 +61,9 @@
 					<!-- add/show address -->
 				<div class="left_list_check">
 				<div class="address bd-t"></div>
+				<div class="rece">
+			    	<b>Receiving information</b>	
+				</div>
 				<div class="address-box">
 					<div class="win-box-content">
 						<form action="">
@@ -385,7 +388,8 @@
 				</div>
 				<div class="win-box-title">
 					<!-- <span class="cancel">cancel</span> -->
-					<span class="save">save it</span>
+					<span class="save">  <b>save it</b> </span>
+					<!-- <label><input id="checkbox" type="checkbox" name="" value="" />save it</label> -->
 				</div>
 				</div>
 				<!--*********************-->
@@ -489,10 +493,13 @@
 	var orderItemArr = [];
 	var productNumArr = [];
 	var payplate = 0;
-
+	
+	
+	
 	function renderAddressDetail(parent, data) {
+	
 		var html = '';
-		html += '<div class="address-details address-trigger">' +
+		html += '<div class="address-details address-trigger" style="display:none">' +
 			'<i class="icon address"></i>' +
 			'<div class="address-info">' +
 			'<div class="address-i-item">' +
@@ -510,7 +517,7 @@
 
 		function renderAddressAdd(parent) {
 			parent.html(
-				'<div class="add-address address-trigger"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
+				'<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
 		}
 		/* 初始化地址模块 */
 		/* 初始化地址模块 */
@@ -549,8 +556,28 @@
 		/*$('.address-box .cancel').on('click', function () {
 			$('.address-box').hide();
 		})*/
-
+		
+		
+  //       if($("#checkbox").attr("checked")==true){
+		// 	alert(111)
+		// }else{
+		// 	alert(222)
+		// }
+  //       $('#checkbox').on('click', function () {
+		// 	var formData = $('.address-box form').serializeArray();
+		// 	var reqData = formData.reduce(function (obj, item) {
+		// 		obj[item.name] = item.value;
+		// 		return obj
+		// 	}, {});
+		// 	if (!inputCheck(reqData)) return;
+		// 	reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+		// 	
+		// 
+		// 	
+		// 	
+		// })
 		$('.left_list_check .save').on('click', function () {
+			$(this).toggleClass("active")
 			var formData = $('.address-box form').serializeArray();
 			var reqData = formData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
@@ -558,6 +585,18 @@
 			}, {});
 			if (!inputCheck(reqData)) return;
 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+				 if($(this).hasClass("active")){
+				$(".left_list_check .form-input").each(function(){
+						$(this).find("input").attr("disabled","disabled");
+						$(this).find("select").attr("disabled","disabled");
+					})
+				}else{
+					$(".left_list_check .form-input").each(function(){
+						$(this).find("input").removeAttr("disabled");
+						$(this).find("select").removeAttr("disabled");
+					})
+				}
+			
 			//console.log(reqData)
 			$.ajax({
 				url: '${APP_PATH}/MlfrontAddress/save',
@@ -583,10 +622,6 @@
 					shippingPriceText.text('$' + resDataMoney);
 					subtotalPriceText.text('$' + totalPrice);
 					renderAddressDetail(addressBox, reqData);
-					//$('.address-box').hide();
-					//$('.address-trigger').on('click', function () {
-					//	$('.address-box').show();
-					//});
 				}
 			})
 		});
@@ -834,7 +869,7 @@
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
 		 $('.place-order').on('click', function () {
-
+ 
 				//if  addressId=null  alert
 
 				var reqData = {
@@ -873,7 +908,11 @@
 						success: function (data) {
 							//var resData = JSON.parse(data).extend;
 							// console.log(data)
-							window.location.href = '${APP_PATH }/paypal/pay';
+							if($(".save").hasClass("active")){
+								window.location.href = '${APP_PATH }/paypal/pay';
+							}else{
+								alert("Please fill in the shipping address")
+							}
 						}
 					})
 				} else {
@@ -906,10 +945,8 @@
 			});
 			return flag;
 		}
-
 		 function inputCheck(data) {
 				var flag = true;
-
 				//1验证是否为空
 				//2验证格式
 				for (var key in data) {
@@ -926,9 +963,10 @@
 					} else {
 						if (data[key].trim().length < 1) {
 							flag = !flag;
-
+							$(".save").removeClass("active")
 							renderSysMsg('Required fields with an asterisk cannot be empty. Please check before submitting');
 							break;
+							
 						}
 					}
 				}
