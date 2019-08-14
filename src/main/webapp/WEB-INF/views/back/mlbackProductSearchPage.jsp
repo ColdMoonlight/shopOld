@@ -8,10 +8,11 @@
 	<title>产品查询管理</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="${APP_PATH }/static/css/main.css">
+	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
+	
 	<!-- <link rel="stylesheet" href="${APP_PATH }/static/back/css/daterangepicker.css"> -->
 	<!-- summernote css -->
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/codemirror.min.css" />
@@ -25,7 +26,7 @@
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
-					<h2>产品列表</h2>
+					<h2>产品查询管理</h2>
 					<span class="user">admin</span>
 				</div>
 				<div class="content">
@@ -104,7 +105,7 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					//console.log(result);
+					// console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -120,6 +121,7 @@
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
 			$.each(task, function (index, item) {
+				var productLablestate = '未知';
 				if (item.productLable == 1) {
 					productLablestate = '热销';
 				} else if (item.productLable == 2) {
@@ -127,6 +129,7 @@
 				} else if (item.productLable == 3) {
 					productLablestate = '限时';
 				};
+
 				var productId = $("<td></td>").append(item.productId);
 				var imgurl = item.productMainimgurl;
 				var oraLength = item.productName;

@@ -86,3 +86,20 @@
     return this.init()
   }
 })(jQuery);
+
+(function($){
+	$(document.body).on('click', function(e) {
+		var clickObj = $(e.target);
+		if (clickObj.data('toggle') === 'tab') {
+			clickObj.parent('li').addClass('active').siblings().removeClass('active');
+			var id = clickObj.data('href').slice(1);
+			var tabContent = clickObj.parents('.nav-tabs').siblings('.tab-content');
+			tabContent.find('.tab-pane').hide();
+			var activePane = tabContent.find('#' + id);
+			if (activePane.find('.tab-content').length > 0) {
+				activePane.find('.tab-pane.active').show();
+			}
+			activePane.show();
+		}
+	});
+})(jQuery);

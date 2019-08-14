@@ -33,6 +33,10 @@ html,body {
     background: #f5f5f5;       
 }
 
+.main-box .c-datepicker-picker {
+	margin-left: 15.6%;
+}
+
 .content {
     width: 100%;
     height: auto;
@@ -188,9 +192,14 @@ html,body {
   .product-option .tab-content {
     flex-grow: 1;
   }
+  
+  .table-box .tab-content .active {
+  	display: block;
+  }
 
   .product-option .tab-list li {
     list-style: none;
+    float: none;
   }
 
   .product-option .tab-list li+li {
@@ -351,7 +360,7 @@ html,body {
  .check-container {
  	min-width: 500px;
  	min-height: 200px;
- 	max-height: 800px;
+ 	max-height: calc(100vh - 200px);
  	overflow-y: scroll;
  }
  

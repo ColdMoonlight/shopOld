@@ -10,6 +10,8 @@ public class MlbackActShowPro {
     private Integer actshowproProid;	//产品id
 
     private String actshowproProname;	//产品名字
+    
+    private String actshowproSeoname;	//产品Seo名字
 
     private String actshowproImgwapurl;	//活动品wap端图
 
@@ -62,8 +64,16 @@ public class MlbackActShowPro {
     public void setActshowproProname(String actshowproProname) {
         this.actshowproProname = actshowproProname == null ? null : actshowproProname.trim();
     }
+    
+    public String getActshowproSeoname() {
+		return actshowproSeoname;
+	}
 
-    public String getActshowproImgwapurl() {
+	public void setActshowproSeoname(String actshowproSeoname) {
+		this.actshowproSeoname = actshowproSeoname == null ? null : actshowproSeoname.trim();
+	}
+
+	public String getActshowproImgwapurl() {
         return actshowproImgwapurl;
     }
 
@@ -111,15 +121,13 @@ public class MlbackActShowPro {
         this.actshowproMotifytime = actshowproMotifytime == null ? null : actshowproMotifytime.trim();
     }
     
-    
-
 	public MlbackActShowPro() {
 		super();
 	}
 
 	public MlbackActShowPro(Integer actshowproId, String actshowproName, Integer actshowproActnum,
-			Integer actshowproProid, String actshowproProname, String actshowproImgwapurl, String actshowproImgpcurl,
-			Integer actshowproStatus, Integer actshowproOrderth, String actshowproCreatetime,
+			Integer actshowproProid, String actshowproProname, String actshowproSeoname, String actshowproImgwapurl,
+			String actshowproImgpcurl, Integer actshowproStatus, Integer actshowproOrderth, String actshowproCreatetime,
 			String actshowproMotifytime) {
 		super();
 		this.actshowproId = actshowproId;
@@ -127,6 +135,7 @@ public class MlbackActShowPro {
 		this.actshowproActnum = actshowproActnum;
 		this.actshowproProid = actshowproProid;
 		this.actshowproProname = actshowproProname;
+		this.actshowproSeoname = actshowproSeoname;
 		this.actshowproImgwapurl = actshowproImgwapurl;
 		this.actshowproImgpcurl = actshowproImgpcurl;
 		this.actshowproStatus = actshowproStatus;
@@ -139,10 +148,11 @@ public class MlbackActShowPro {
 	public String toString() {
 		return "MlbackActShowPro [actshowproId=" + actshowproId + ", actshowproName=" + actshowproName
 				+ ", actshowproActnum=" + actshowproActnum + ", actshowproProid=" + actshowproProid
-				+ ", actshowproProname=" + actshowproProname + ", actshowproImgwapurl=" + actshowproImgwapurl
-				+ ", actshowproImgpcurl=" + actshowproImgpcurl + ", actshowproStatus=" + actshowproStatus
-				+ ", actshowproOrderth=" + actshowproOrderth + ", actshowproCreatetime=" + actshowproCreatetime
-				+ ", actshowproMotifytime=" + actshowproMotifytime + "]";
+				+ ", actshowproProname=" + actshowproProname + ", actshowproSeoname=" + actshowproSeoname
+				+ ", actshowproImgwapurl=" + actshowproImgwapurl + ", actshowproImgpcurl=" + actshowproImgpcurl
+				+ ", actshowproStatus=" + actshowproStatus + ", actshowproOrderth=" + actshowproOrderth
+				+ ", actshowproCreatetime=" + actshowproCreatetime + ", actshowproMotifytime=" + actshowproMotifytime
+				+ "]";
 	}
-    
+
 }

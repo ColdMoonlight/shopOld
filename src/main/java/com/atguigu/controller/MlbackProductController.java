@@ -71,7 +71,7 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 1.1	UseOff	0505
+	 * 2.0	UseOff	0505
 	 * to分类MlbackProduct列表页面
 	 * @param jsp
 	 * @return 
@@ -83,24 +83,56 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 1.1	UseNow	0505
+	 * 3.1.1	UseNow	0505
 	 * 前台移动端获取详情页面mfront/productDetails
 	 * @param jsp
 	 * @return 
 	 * */
 	@RequestMapping(value="/tomProductDetailPage",method=RequestMethod.GET)
-	public String tomProductDetailPage(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId) throws Exception{
+	public String tomProductDetailPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productId") Integer productId) throws Exception{
 		//接收传递进来的参数
 		Integer productIdReq = productId;
 		//放回响应域中
 		res.setAttribute("productId", productIdReq);
+		//放回session域中
+		session.setAttribute("productDetailId", productIdReq);
 		//返回视图
 		return "mfront/productDetails";
+	}
+	/**
+	 * 3.1.2	UseNow	0505
+	 * 前台移动端获取详情页面mfront/productDetails
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/tomProductDetailPageByhtml",method=RequestMethod.GET)
+	public String tomProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
+		
+		//接收传递进来的参数
+		String StringReq = productSeo;
+		
+		//准备封装参数
+		MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
+		mlbackProductrepBySeo.setProductSeo(productSeo);
+		
+		MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
+		
+		if(mlbackProductRes==null){
+			return "mfront/index";
+		}else{
+			Integer productIdReq = mlbackProductRes.getProductId();
+			//放回响应域中
+			res.setAttribute("productId", productIdReq);
+			//放回session域中
+			session.setAttribute("productDetailId", productIdReq);
+			//返回视图
+			return "mfront/productDetails";
+		}
 	}
 	
 	
 	/**
-	 * 1.2	UseNow	0505
+	 * 3.2.1	UseNow	0505
 	 * 前台PC端获取详情页面front/pcproductDetails
 	 * @param jsp
 	 * @return 
@@ -116,7 +148,7 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 1.2	useOn	0505
+	 * 3.2.2	useOn	0505
 	 * 前台PC端获取详情页面front/PCproductDetails
 	 * @param jsp
 	 * @return 
@@ -131,7 +163,7 @@ public class MlbackProductController {
 		return "front/pcproductDetails";
 	}
 	
-	/**2.0	UseNow	0505
+	/**4.0	UseNow	0505
 	 * 分类MlbackProduct列表分页list数据
 	 * @param pn
 	 * @return
@@ -154,7 +186,7 @@ public class MlbackProductController {
 //		}
 	}
 	
-	/**3.0	UseNow	0505
+	/**5.0	UseNow	0505
 	 * MlbackProduct	insert
 	 * @param MlbackProduct
 	 */
@@ -208,7 +240,7 @@ public class MlbackProductController {
 	
 	
 	/**
-	 * 3.1
+	 * 5.1
 	 * //从中读取categoryIdsStr,切割得到每一个categoryId,
 	 * 遍历categoryId查询，把productId,填充再每个查回来的category中的proidStr拼上
 	 * */
@@ -377,7 +409,7 @@ public class MlbackProductController {
 		}
 	}
 
-	/**4.0	UseNow	0505
+	/**6.0	UseNow	0505
 	 * MlbackProduct	delete
 	 * @param id
 	 */
@@ -393,7 +425,7 @@ public class MlbackProductController {
 	
 	
 	/**
-	 * 5.0	UseNow	0505
+	 * 7.0	UseNow	0505
 	 * 查看单个产品的详情
 	 * @param productId
 	 * @return 
@@ -411,7 +443,7 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 6.0	UseNow	0505
+	 * 8.0	UseNow	0505
 	 * 通过产品名查看单条产品的详情
 	 * @param productId
 	 * @return 
@@ -432,7 +464,7 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 7.0	useOn	0505
+	 * 9.0	useOn	0505
 	 * 推荐//热销//爆款
 	 * @param MlbackProduct
 	 * @return 
@@ -459,7 +491,7 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 8.0	UseNow	0505
+	 * 10.0	UseNow	0505
 	 * 通过，类id查询，该类下的全部产品
 	 * @param MlbackProduct
 	 * @return 
@@ -479,7 +511,7 @@ public class MlbackProductController {
 	
 	
 	/**
-	 * 8.1	UseNow	0505
+	 * 10.1	UseNow	0505
 	 * 通过，类id查询，该类下的全部产品
 	 * @param MlbackProduct
 	 * @return 
@@ -535,7 +567,7 @@ public class MlbackProductController {
 	}
 	
 	/**
-	 * 9.0	UseNow	0527
+	 * 11.0	UseNow	0527
 	 * 通过，类id,productColor,查询满足条件的全部产品
 	 * @param productCategoryid,productColor
 	 * @return 
@@ -569,7 +601,7 @@ public class MlbackProductController {
 	} 
 	
 	/**
-	 * 9.0	UseNow	0527
+	 * 12.0	UseNow	0527
 	 * 通过，类id,productColor,查询满足条件的全部产品
 	 * @param productCategoryid,productColor
 	 * @return 
@@ -588,82 +620,6 @@ public class MlbackProductController {
 		return Msg.success().add("resMsg", "查看上架状态的下的全部产品")
 					.add("mlbackProductResList", mlbackProductResList);
 		
-	} 
-	
-	
-	/**7.0
-	 * @author Shinelon
-	 * @exception 导出单一发布任务执行明细
-	 * @param MlbackCategory
-	 * @return 
-	 * */
-//	@ResponseBody
-//	@RequestMapping("/exportFile")
-//	public String exportFile(HttpServletRequest request,HttpServletResponse response) throws IOException {
-//		response.reset(); 
-//		// 接收请求相应
-//	    //准备请求头参数
-//		String authstatus =request.getParameter("authStatus");
-//		String userworkGroupdisplayId =request.getParameter("userworkGroupdisplayId");
-//		int authStatus =Integer.parseInt(authstatus);
-//		int userworkGroupdisplayIdId =Integer.parseInt(userworkGroupdisplayId);
-//		Date date =new Date();
-//		SimpleDateFormat sdf =new SimpleDateFormat("yyyyMMddHHmmss");
-//		String time =sdf.format(date);
-//		response.setHeader("Content-Disposition", "attachment;filename=File" + time +".xlsx");
-//		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-//		response.setHeader("Pragma", "no-cache");
-//		response.setHeader("Cache-Control", "no-cache");
-//		response.setDateHeader("Expires", 0);
-//	    XSSFWorkbook workbook = null;
-//	    try {
-//	    	UserWork userWork= new UserWork();
-//	    	userWork.setUserworkGroupdisplayId(userworkGroupdisplayIdId);
-//	    	if(authStatus==1) {	    		
-//	    		List<UserWork> UserWorkList = userWorkService.getUserWorkByConditions(userWork);
-//	            workbook = ExcelUtils.exportContactsGroupDisplay(UserWorkList);
-//	        }
-//	        OutputStream output;
-//	        try {
-//	        	output = response.getOutputStream();
-//	            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
-//	            bufferedOutPut.flush();
-//	            workbook.write(bufferedOutPut);
-//	            bufferedOutPut.close();
-//	            } catch (Exception e) {
-//	                e.printStackTrace();
-//	            }
-//	        } catch (Exception e1) {
-//	            e1.printStackTrace();
-//	        }
-//	        return null;
-//	}
-	
-	/**1.1	useOn
-	 * 远程调用url,name,pimageUrl
-	 * @return Map
-	 */
-//	private Map<String, String> HttpGetPImgUrl(String id) {
-//		HttpUtil httpUtil = new HttpUtil();
-//		String urls="https://itunes.apple.com/cn/lookup";
-//		String idParm = "id="+id;
-//		String result = null;
-//		Map<String, String> iosNeedMap= new HashMap<String, String>();
-//		try {
-//			result = httpUtil.sendPostUrl(urls,idParm,"utf-8");
-//			JSONObject JSONObject = new JSONObject(result);
-//			String resStr = JSONObject.get("results").toString();
-//			String resStr2 =resStr.substring(1, resStr.length()-1);
-//			System.out.println(resStr2);
-//			JSONObject JSONObjectStr2 = new JSONObject(resStr2);
-//			iosNeedMap.put("artworkUrl100", (String) JSONObjectStr2.get("artworkUrl100"));
-////			iosNeedMap.put("trackName", (String) JSONObjectStr2.get("trackName"));
-//			iosNeedMap.put("bundleId", (String) JSONObjectStr2.get("bundleId"));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return iosNeedMap;
-//	}
+	}
 	
 }
