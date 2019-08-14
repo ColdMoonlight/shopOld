@@ -9,6 +9,7 @@
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
 	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
@@ -32,8 +33,7 @@
 						<!-- operator -->
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>邮件模板管理列表</a>
-							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
-									class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
@@ -71,7 +71,7 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/codemirror.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/xml.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/summernote.min.js"></script>
-	
+
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
@@ -80,16 +80,16 @@
 
 	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
-	
+
 	<script type="text/javascript">
-		$('.nicescroll').each(function(i, item) {
+		$('.nicescroll').each(function (i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
 				cursorwidth: "4px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
-	    }).resize()
+			}).resize()
 		});
 		var totalRecord, currentPage, editid;
 		var count = 1;
