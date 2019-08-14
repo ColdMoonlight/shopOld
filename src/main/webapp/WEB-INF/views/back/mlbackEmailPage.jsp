@@ -94,10 +94,7 @@
 		var totalRecord, currentPage, editid;
 		var count = 1;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
-		$(function () {
-			//去首页
-			to_page(1);
-		});
+		to_page(1);
 
 		function to_page(pn) {
 			$.ajax({
@@ -141,14 +138,14 @@
 				var emailMotifytime = $("<td></td>").append(item.emailMotifytime);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
-				//为编辑按钮添加一个分类id
+				// 为编辑按钮添加一个分类id
 				editBtn.attr("edit-id", item.emailId);
 				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-				//为删除按钮添加一个分类id
+				// 为删除按钮添加一个分类id
 				delBtn.attr("del-id", item.emailId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
-				//append方法执行完成以后还是返回原来的元素
+				// append方法执行完成以后还是返回原来的元素
 				$("<tr></tr>").append(emailId)
 					.append(emailName)
 					.append(emailStatus)
@@ -158,7 +155,7 @@
 					.appendTo("#task_table tbody");
 			});
 		}
-		//解析显示分页信息
+		// 解析显示分页信息
 		function build_page_info(result) {
 			$("#page_info_area").empty();
 			$("#page_info_area").append("当前" + result.extend.pageInfo.pageNum + "页,总" +
@@ -167,20 +164,20 @@
 			totalRecord = result.extend.pageInfo.total;
 			currentPage = result.extend.pageInfo.pageNum;
 		}
-		//解析显示分页条，点击分页要能去下一页....
+		// 解析显示分页条，点击分页要能去下一页....
 		function build_page_nav(result) {
-			//page_nav_area
+			// page_nav_area
 			$("#page_nav_area").empty();
 			var ul = $("<ul></ul>").addClass("pagination");
 
-			//构建元素
+			// 构建元素
 			var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
 			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
 			if (result.extend.pageInfo.hasPreviousPage == false) {
 				firstPageLi.addClass("disabled");
 				prePageLi.addClass("disabled");
 			} else {
-				//为元素添加点击翻页的事件
+				// 为元素添加点击翻页的事件
 				firstPageLi.click(function () {
 					to_page(1);
 				});
@@ -203,9 +200,9 @@
 				});
 			}
 
-			//添加首页和前一页 的提示
+			// 添加首页和前一页 的提示
 			ul.append(firstPageLi).append(prePageLi);
-			//1,2，3遍历给ul中添加页码提示
+			// 1,2，3遍历给ul中添加页码提示
 			$.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
 
 				var numLi = $("<li></li>").append($("<a></a>").append(item));
@@ -217,19 +214,21 @@
 				});
 				ul.append(numLi);
 			});
-			//添加下一页和末页 的提示
+			// 添加下一页和末页 的提示
 			ul.append(nextPageLi).append(lastPageLi);
 
-			//把ul加入到nav
+			// 把ul加入到nav
 			var navEle = $("<nav></nav>").append(ul);
 			navEle.appendTo("#page_nav_area");
 		}
-		//新建任務
+
+		// 新建任務
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
 			loadTpl();
 		});
-		//新建/编辑任務提交按钮
+
+		// 新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
 			// console.log(data)
@@ -252,7 +251,8 @@
 				}
 			});
 		});
-		//删除任務
+
+		// 删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
 				emailId: $(this).attr('del-id')
@@ -271,12 +271,14 @@
 				}
 			});
 		});
-		//编辑任务
+
+		// 编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
 			loadTpl($(this).attr('edit-id'));
 		});
 
+		// 数据回显
 		function tianchong(data) {
 			$(":input[name='emailId']").val(data.emailId);
 			$(":input[name='emailName']").val(data.emailName);
@@ -284,11 +286,10 @@
 			$(".summer-note").html(data.emailContent);
 		}
 
-
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addEmail.html', function () {
 				$('.summer-note').summernote({
-					height: 300,
+					height: 500,
 					codemirror: {
 						// codemirror options
 						mode: 'text/html',
@@ -297,29 +298,37 @@
 						theme: 'monokai'
 					}
 				});
-
-				var reqData = {
-					"emailId": id
-				};
-				$.ajax({
-					url: "${APP_PATH}/MlbackEmail/getOneMlbackEmailOneDetail",
-					data: reqData,
-					type: "POST",
-					success: function (result) {
-						// console.log(result)
-						if (result.code == 100) {
-							obj = result.extend.mlbackEmailOne;
-							$('.summer-note').summernote('destroy');
-							tianchong(obj);
-							$('.summer-note').summernote({
-								focus: true
-							});
-						} else {
-							alert("联系管理员");
+				
+				if (id) {
+					$.ajax({
+						url: "${APP_PATH}/MlbackEmail/getOneMlbackEmailOneDetail",
+						data: {
+							"emailId": id
+						},
+						type: "POST",
+						success: function (result) {
+							// console.log(result)
+							if (result.code == 100) {
+								obj = result.extend.mlbackEmailOne;
+								$('.summer-note').summernote('destroy');
+								tianchong(obj);
+								$('.summer-note').summernote({
+									height: 500,
+									codemirror: {
+										// codemirror options
+										mode: 'text/html',
+										htmlMode: true,
+										lineNumbers: true,
+										theme: 'monokai'
+									}
+								});
+							} else {
+								alert("联系管理员");
+							}
 						}
-					}
-				});
-			})
+					});
+				}				
+			});
 		}
 	</script>
 </body>
