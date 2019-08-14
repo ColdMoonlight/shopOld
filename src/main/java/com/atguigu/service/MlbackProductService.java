@@ -123,6 +123,11 @@ public class MlbackProductService {
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByStatus(mlbackProduct);
 		return mlbackProductList;
 	}
+	public MlbackProduct selectMlbackProductBySeo(MlbackProduct mlbackProductrepBySeo) {
+		// TODO Auto-generated method stub
+		MlbackProduct  mlbackProduct = mlbackProductMapper.selectMlbackProductBySeo(mlbackProductrepBySeo);
+		return mlbackProduct;
+	}
 	
 	
 	

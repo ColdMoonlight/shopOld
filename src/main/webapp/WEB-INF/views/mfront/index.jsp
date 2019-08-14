@@ -79,11 +79,11 @@
 							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
           '</a>' +
           '</div>';
-        /* html += '<div class="banner">'
-        '<a href="${APP_PATH}/MlbackProduct/172.html">' +
+    	  /* html += '<div class="banner">' +
+          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].actshowproProid + '">' +
 							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-        '</a>' +
-        '</div>';  */
+          '</a>' +
+          '</div>'; */
       }
       parent.html(html);
     }
@@ -159,7 +159,7 @@
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="product-item">' +
           '<div class="product-img">' +
-          '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' +
+          '<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
           '<img src="' + data[i].productMainimgurl + '" alt="">' +
           '</a>' +
           '</div>' +

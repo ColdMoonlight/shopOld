@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.1//EN"  "http://tuckey.org/res/dtds/urlrewrite3.1.dtd"> 
+<urlrewrite>
+    <!-- <rule>
+        <from>^/news/news.html$</from>
+        <to>/news/news.jsp</to>
+    </rule>
+    <rule>
+        <from>^/news/([0-9]+).html$</from>
+        <to>/news/news.jsp?newsId=$1</to>
+    </rule>
+    <outbound-rule>
+        <from>^/UrlReWriteDemo/news/news.jsp\?newsId=([0-9]+)$</from>
+        <to>/UrlReWriteDemo/news/$1.html</to>
+    </outbound-rule>
+     
+    <rule>
+        <from>^/([0-9]+).html</from>
+        <to type="forward">/MlbackProduct/tomProductDetailPage?productId=$1</to>
+    </rule>-->
+    <rule>
+        <from>^/([a-z0-9A-Z-]{3,40}).html</from>
+        <to type="forward">/MlbackProduct/tomProductDetailPageByhtml?productSeo=$1</to>
+    </rule>
+</urlrewrite>
