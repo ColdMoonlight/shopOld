@@ -1,15 +1,15 @@
 <div class="op">
-    <a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>展区banner列表</a>
+    <a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>展区banner列表</a>
     <button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
 </div>
 <form class="form-horizontal">
 	<ul id="categoryTab" class="nav nav-tabs">
-		<li class="active"><a href="#general" data-toggle="tab">基本</a></li>
-		<li><a href="#pic" data-toggle="tab">图片</a></li>
+		<li class="active"><a data-href="#general" data-toggle="tab">基本</a></li>
+		<li><a data-href="#pic" data-toggle="tab">图片</a></li>
 	</ul>
 	<div id="categoryTabContent" class="tab-content">
 		<input type="text" style="display: none;" placeholder="showareaId" name="showareaId">
-		<div class="tab-pane fade in active" id="general">
+		<div class="tab-pane in active" id="general">
 		 	<div class="form-group">
 	            <label for="showareaName" class="col-sm-2 control-label">展区标题:</label>
 	            <div class="col-sm-4">
@@ -40,7 +40,7 @@
 	         </div>
 	         
 		</div>
-		<div class="tab-pane fade" id="pic">
+		<div class="tab-pane" id="pic">
 			<h2>banner图片：</h2>
 		    <div>
 		    	 <div class="upload-img-btn img">

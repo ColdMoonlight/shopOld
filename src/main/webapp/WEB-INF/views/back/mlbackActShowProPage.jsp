@@ -47,6 +47,7 @@
 										<th>活动品归属组</th>
 										<th>产品id</th>
 										<th>产品名称</th>
+										<th>产品SEO名称</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
@@ -149,6 +150,7 @@
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);
 				var actshowproProid = $("<td></td>").append(item.actshowproProid);
 				var actshowproProname = $("<td></td>").append(item.actshowproProname);
+				var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
 				
 				var imgurl = item.actshowproImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
@@ -176,6 +178,7 @@
 					.append(actshowproActnum)
 					.append(actshowproProid)
 					.append(actshowproProname)
+					.append(actshowproSeoname)
 					.append(actshowproImgwapurl)
 					.append(actshowproImgpcurl)
 					.append(actshowproStatus)
@@ -417,11 +420,25 @@
 			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/actShowPro/' + url;
 			img.src = url;
 			img.onload = function () {
-				console.log(img.width)
-				el.css({
-					'width': img.width + 'px',
-					'backgroundImage': 'url(' + url + ')'
-				});
+				var winW = $('#categoryTabContent').width();
+				var imgW = img.width;
+				var imgH = img.height;
+
+				if (imgW >= winW) {
+					el.css({
+						'width': '100%',
+						'height': Math.floor(img.height * $('#categoryTabContent').width() / img.width) + 'px',
+						'backgroundImage': 'url(' + url + ')',
+						'backgroundSize': '100%'
+					});
+				} else {
+					el.css({
+						'width': imgW + 'px',
+						'height': imgH + 'px',
+						'backgroundImage': 'url(' + url + ')',
+						'backgroundSize': '100%'
+					});
+				}
 			}
 		}
 

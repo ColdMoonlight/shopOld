@@ -5,7 +5,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Insert title here</title>
+	<title>Megalook</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
@@ -35,7 +35,7 @@
 					<div class="model" data-type="pie">
 						<div class="model-h">
 							<span class="model-name">各项指标</span>
-							<div class="c-datepicker-date-editor">
+							<div class="c-datepicker-date-editor date-timepicker">
 								<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
 								<input placeholder="开始日期" name="" value="" class="c-datepicker-data-input">
 								<span class="c-datepicker-range-separator">-</span>
@@ -111,7 +111,7 @@
 				enablekeyboard: false,
 	    }).resize()
 		});
-		var targetInput = $('.c-datepicker-date-editor');
+		var targetInput = $('.date-timepicker');
 		var date = new Date();
 		var minDate = moment()
 			.set({

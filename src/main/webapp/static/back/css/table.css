@@ -32,6 +32,14 @@
     left: initial;
 }
 
+.table-box .nav-tabs a {
+	cursor: pointer;
+}
+
+.table-box .nav-tabs li.active a:hover {
+	cursor: pointer;
+}
+
 .table-content {
     width: 100%;
     overflow: auto;
@@ -50,6 +58,10 @@
 
 .table-box .table tbody>tr>th, .table-box .table tbody>tr>td {
     vertical-align: middle;
+}
+
+.table-box .date-timepicker {
+	margin-left: 0;
 }
 
 /* pagination */
