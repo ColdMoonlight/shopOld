@@ -9,6 +9,7 @@
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
 	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
@@ -291,17 +292,6 @@
 
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addFootNav.html', function () {
-				$('.summer-note').summernote({
-					height: 300,
-					codemirror: {
-						// codemirror options
-						mode: 'text/html',
-						htmlMode: true,
-						lineNumbers: true,
-						theme: 'monokai'
-					}
-				});
-
 				var reqData = {
 					"footnavId": id
 				};
@@ -316,7 +306,14 @@
 							$('.summer-note').summernote('destroy');
 							tianchong(obj);
 							$('.summer-note').summernote({
-								focus: true
+								height: 500,
+								codemirror: {
+									// codemirror options
+									mode: 'text/html',
+									htmlMode: true,
+									lineNumbers: true,
+									theme: 'monokai'
+								}
 							});
 						} else {
 							alert("联系管理员");
