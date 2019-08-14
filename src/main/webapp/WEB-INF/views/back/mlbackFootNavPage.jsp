@@ -292,12 +292,24 @@
 
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addFootNav.html', function () {
-				var reqData = {
-					"footnavId": id
-				};
+				$('.summer-note').summernote({
+					height: 500,
+					codemirror: {
+						// codemirror options
+						mode: 'text/html',
+						htmlMode: true,
+						lineNumbers: true,
+						theme: 'monokai'
+					}
+				});
+				if (id) {
+					
+				}
 				$.ajax({
 					url: "${APP_PATH}/MlbackFootNav/getOneMlbackFootNavOneAllDetail",
-					data: reqData,
+					data:  {
+						"footnavId": id
+					},
 					type: "POST",
 					success: function (result) {
 						// console.log(result)
