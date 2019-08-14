@@ -728,14 +728,14 @@
 					  url: '${APP_PATH}/MlbackCart/toBuyNow',
 					  data: JSON.stringify(reqData),
 					  type:"POST",
-					  dataType: 'JSON',
+					  dataType: 'text',
 					  contentType: 'application/json',
 					  success: function(data) {
 						var resData = JSON.parse(data);
 					    if(resData.code === 100) {
 					    	// console.log(resData)
 					    	// cartText.text(parseInt(cartText.text()) + 1);
-					    	window.location.href='${APP_PATH}/MlbackCart/toCheakOut';
+					    	window.location.href='${APP_PATH}/MlbackCart/topcCheakOut';
 					    }
 					  },
 					  error: function(data) {
