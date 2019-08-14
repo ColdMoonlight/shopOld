@@ -15,11 +15,11 @@
     </outbound-rule>
      
     <rule>
-        <from>^/([0-9]+).html</from>
-        <to type="forward">/MlbackProduct/tomProductDetailPage?productId=$1</to>
+        <from>^/([a-z0-9A-Z-]{8,80}).html</from>
+        <to type="forward">/MlbackProduct/tomProductDetailPageByhtml?productSeo=$1</to>
     </rule>-->
     <rule>
-        <from>^/([a-z0-9A-Z-]{3,40}).html</from>
+        <from>^/([a-z0-9A-Z-]{8,80}).html</from>
         <to type="forward">/MlbackProduct/tomProductDetailPageByhtml?productSeo=$1</to>
     </rule>
 </urlrewrite>

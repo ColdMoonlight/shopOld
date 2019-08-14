@@ -7,6 +7,7 @@
     <result column="actShowPro_actNum" jdbcType="INTEGER" property="actshowproActnum" />
     <result column="actShowPro_proId" jdbcType="INTEGER" property="actshowproProid" />
     <result column="actShowPro_proName" jdbcType="VARCHAR" property="actshowproProname" />
+    <result column="actShowPro_seoname" jdbcType="VARCHAR" property="actshowproSeoname" />
     <result column="actShowPro_imgwapurl" jdbcType="VARCHAR" property="actshowproImgwapurl" />
     <result column="actShowPro_imgpcurl" jdbcType="VARCHAR" property="actshowproImgpcurl" />
     <result column="actShowPro_status" jdbcType="INTEGER" property="actshowproStatus" />
@@ -73,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    actShowPro_id, actShowPro_name, actShowPro_actNum, actShowPro_proId, actShowPro_proName, 
+    actShowPro_id, actShowPro_name, actShowPro_actNum, actShowPro_proId, actShowPro_proName, actShowPro_seoname,
     actShowPro_imgwapurl, actShowPro_imgpcurl, actShowPro_status, actShowPro_orderth, 
     actShowPro_createTime, actShowPro_motifyTime
   </sql>
@@ -106,12 +107,12 @@
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackActShowPro">
     insert into tb_mlback_actshowpro (actShowPro_id, actShowPro_name, actShowPro_actNum, 
-      actShowPro_proId, actShowPro_proName, actShowPro_imgwapurl, 
+      actShowPro_proId, actShowPro_proName, actShowPro_seoname, actShowPro_imgwapurl, 
       actShowPro_imgpcurl, actShowPro_status, actShowPro_orderth, 
       actShowPro_createTime, actShowPro_motifyTime
       )
     values (#{actshowproId,jdbcType=INTEGER}, #{actshowproName,jdbcType=VARCHAR}, #{actshowproActnum,jdbcType=INTEGER}, 
-      #{actshowproProid,jdbcType=INTEGER}, #{actshowproProname,jdbcType=VARCHAR}, #{actshowproImgwapurl,jdbcType=VARCHAR}, 
+      #{actshowproProid,jdbcType=INTEGER}, #{actshowproProname,jdbcType=VARCHAR}, #{actshowproSeoname,jdbcType=VARCHAR}, #{actshowproImgwapurl,jdbcType=VARCHAR}, 
       #{actshowproImgpcurl,jdbcType=VARCHAR}, #{actshowproStatus,jdbcType=INTEGER}, #{actshowproOrderth,jdbcType=INTEGER}, 
       #{actshowproCreatetime,jdbcType=VARCHAR}, #{actshowproMotifytime,jdbcType=VARCHAR}
       )
@@ -140,6 +141,9 @@
       </if>
       <if test="record.actshowproProname != null">
         actShowPro_proName = #{record.actshowproProname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.actshowproSeoname != null">
+        actShowPro_seoname = #{record.actshowproSeoname,jdbcType=VARCHAR},
       </if>
       <if test="record.actshowproImgwapurl != null">
         actShowPro_imgwapurl = #{record.actshowproImgwapurl,jdbcType=VARCHAR},
@@ -171,6 +175,7 @@
       actShowPro_actNum = #{record.actshowproActnum,jdbcType=INTEGER},
       actShowPro_proId = #{record.actshowproProid,jdbcType=INTEGER},
       actShowPro_proName = #{record.actshowproProname,jdbcType=VARCHAR},
+      actShowPro_seoname = #{record.actshowproSeoname,jdbcType=VARCHAR},
       actShowPro_imgwapurl = #{record.actshowproImgwapurl,jdbcType=VARCHAR},
       actShowPro_imgpcurl = #{record.actshowproImgpcurl,jdbcType=VARCHAR},
       actShowPro_status = #{record.actshowproStatus,jdbcType=INTEGER},
@@ -188,6 +193,7 @@
       actShowPro_actNum = #{actshowproActnum,jdbcType=INTEGER},
       actShowPro_proId = #{actshowproProid,jdbcType=INTEGER},
       actShowPro_proName = #{actshowproProname,jdbcType=VARCHAR},
+      actShowPro_seoname = #{actshowproSeoname,jdbcType=VARCHAR},
       actShowPro_imgwapurl = #{actshowproImgwapurl,jdbcType=VARCHAR},
       actShowPro_imgpcurl = #{actshowproImgpcurl,jdbcType=VARCHAR},
       actShowPro_status = #{actshowproStatus,jdbcType=INTEGER},
@@ -216,6 +222,9 @@
       </if>
       <if test="actshowproProname != null">
         actShowPro_proName,
+      </if>
+      <if test="actshowproSeoname != null">
+        actShowPro_seoname,
       </if>
       <if test="actshowproImgwapurl != null">
         actShowPro_imgwapurl,
@@ -251,6 +260,9 @@
       </if>
       <if test="actshowproProname != null">
         #{actshowproProname,jdbcType=VARCHAR},
+      </if>
+      <if test="actshowproSeoname != null">
+        #{actshowproSeoname,jdbcType=VARCHAR},
       </if>
       <if test="actshowproImgwapurl != null">
         #{actshowproImgwapurl,jdbcType=VARCHAR},
@@ -293,6 +305,9 @@
       </if>
       <if test="actshowproProname != null">
         actShowPro_proName = #{actshowproProname,jdbcType=VARCHAR},
+      </if>
+      <if test="actshowproSeoname != null">
+        actShowPro_seoname = #{actshowproSeoname,jdbcType=VARCHAR},
       </if>
       <if test="actshowproImgwapurl != null">
         actShowPro_imgwapurl = #{actshowproImgwapurl,jdbcType=VARCHAR},
