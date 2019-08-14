@@ -1,20 +1,20 @@
 <div class="op">
-	<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>添加产品</a>
-	<!-- <a href="#" id="taskDefault" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-cancel"></i>取消</a> -->
-	<!-- <a href="#" id="tasksubmit" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-floppy-save"></i> 保存</a> -->
+	<a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>添加产品</a>
+	<!-- <a data-href="#" id="taskDefault" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-cancel"></i>取消</a> -->
+	<!-- <a data-href="#" id="tasksubmit" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-floppy-save"></i> 保存</a> -->
 	<button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
 </div>
 <form class="form-horizontal">
 	<ul id="productTab" class="nav nav-tabs">
-		<li class="active"><a href="#general" data-toggle="tab">基本</a></li>
-		<li><a href="#pic" data-toggle="tab">图片</a></li>
-		<li><a href="#option" data-toggle="tab">option</a></li>
+		<li class="active"><a data-href="#general" data-toggle="tab">基本</a></li>
+		<li><a data-href="#pic" data-toggle="tab">图片</a></li>
+		<li><a data-href="#option" data-toggle="tab">option</a></li>
 	</ul>
 	
 	<div id="productTabContent" class="tab-content">
 		<!-- 基本 -->
 		<input type="text" style="display: none;" placeholder="productId" name="productId">
-		<div class="tab-pane fade in active" id="general">
+		<div class="tab-pane in active" id="general">
 			<div class="form-group">
 				<label for="productName" class="col-sm-2 control-label">产品名:</label>
 				<div class="col-sm-4">
@@ -152,7 +152,7 @@
 		</div>
 		
 		<!-- 图片 -->		
-		<div class="tab-pane fade in" id="pic">
+		<div class="tab-pane in" id="pic">
 			<h2>产品主图片：</h2>
 			<!-- 主图 -->
 			<div class="main-img">
@@ -202,48 +202,48 @@
 		    </div>	
 		</div>
 		<!-- option -->
-		<div class="tab-pane fade in" id="option">
+		<div class="tab-pane in" id="option">
 			<div class="product-option">
-		      <ul class="tab-list" role="tablist">
-		        <li role="presentation" class="active">
-		          <a class="btn btn-default" href="#length" role="tab" data-toggle="tab">length</a>
+		      <ul class="nav-tabs tab-list">
+		        <li class="active">
+		          <a class="btn btn-default" data-href="#length" role="tab" data-toggle="tab">length</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Length-Bundle-Deal" role="tab" data-toggle="tab">Length-Bundle-Deal</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Length-Bundle-Deal" role="tab" data-toggle="tab">Length-Bundle-Deal</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Closure-Length" role="tab" data-toggle="tab">Closure-Length</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Closure-Length" role="tab" data-toggle="tab">Closure-Length</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Color" role="tab" data-toggle="tab">Color</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Color" role="tab" data-toggle="tab">Color</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Texture" role="tab" data-toggle="tab">Texture</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Texture" role="tab" data-toggle="tab">Texture</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Hair-Material" role="tab" data-toggle="tab">Hair-Material</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Hair-Material" role="tab" data-toggle="tab">Hair-Material</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Part-Design" role="tab" data-toggle="tab">Part-Design</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Part-Design" role="tab" data-toggle="tab">Part-Design</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Free-Wig-Making-Service" role="tab" data-toggle="tab">Free-Wig-Making-Service</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Free-Wig-Making-Service" role="tab" data-toggle="tab">Free-Wig-Making-Service</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Wig-Cap" role="tab" data-toggle="tab">Wig-Cap</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Wig-Cap" role="tab" data-toggle="tab">Wig-Cap</a>
 		        </li>
-		        <li role="presentation">
-		          <a class="btn btn-default" href="#Cap-Size" role="tab" data-toggle="tab">Cap-Size</a>
+		        <li>
+		          <a class="btn btn-default" data-href="#Cap-Size" role="tab" data-toggle="tab">Cap-Size</a>
 		        </li>
 		      </ul>
 		      <div class="tab-content">
 		      	<!-- length -->
-		        <div class="tab-pane fade in active length" id="length">
+		        <div class="tab-pane in active length" id="length">
 		          <input type="hidden" class="productskuId">
 		          <!-- 状态 -->
 		          <div class="form-group clearfix">
-		            <label for="productskuStatus" class="col-sm-1 control-label">Required:</label>
-		            <div class="col-sm-11">
+		            <label for="productskuStatus" class="col-sm-2 control-label">Required:</label>
+		            <div class="col-sm-10">
 		                <select name="productskuStatus" class="productskuStatus form-control">
 		                  <option value="0">NO</option>
 		                  <option value="1">YES</option>
@@ -271,12 +271,12 @@
 		           <a href="javascript:;" class="btn btn-primary save" data-name="length">保存</a>
 		        </div>
 				<!-- Length-Bundle-Deal -->
-		        <div class="tab-pane fade Length-Bundle-Deal" id="Length-Bundle-Deal">
+		        <div class="tab-pane Length-Bundle-Deal" id="Length-Bundle-Deal">
 		          <input type="hidden" class="productskuId">
 		          <!-- 状态 -->
 		          <div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required:</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required:</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -304,12 +304,12 @@
 		           <a href="javascript:;" class="btn btn-primary save" data-name="Length-Bundle-Deal">保存</a>
 		        </div>
 		        <!-- Closure-Length -->
-		        <div class="tab-pane fade Closure-Length" id="Closure-Length">
+		        <div class="tab-pane Closure-Length" id="Closure-Length">
 		        	<input type="hidden" class="productskuId">
 		          <!-- 状态 -->
 		          <div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -338,12 +338,12 @@
 		        </div>
 		        
 		        <!-- Color -->
-		        <div class="tab-pane fade Color" id="Color">
+		        <div class="tab-pane Color" id="Color">
 		        	<input type="hidden" class="productskuId">
 		          <!-- 状态 -->
 		          <div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -372,12 +372,12 @@
 		        </div>
 		        		        
 		        <!-- Texture -->
-		        <div class="tab-pane fade Texture" id="Texture">
+		        <div class="tab-pane Texture" id="Texture">
 		        	<input type="hidden" class="productskuId">
 		          	<!-- 状态 -->
 		          	<div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -406,12 +406,12 @@
 		        </div>
 		        
 		        <!-- Hair-Material -->
-		        <div class="tab-pane fade Hair-Material" id="Hair-Material">
+		        <div class="tab-pane Hair-Material" id="Hair-Material">
 		        	<input type="hidden" class="productskuId">
 		         	<!-- 状态 -->
 		          	<div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -440,12 +440,12 @@
 		        </div>
 		        
 		        <!-- Part-Design -->
-	            <div class="tab-pane fade Part-Design" id="Part-Design">
+	            <div class="tab-pane Part-Design" id="Part-Design">
 		        	<input type="hidden" class="productskuId">
 		         	 <!-- 状态 -->
 		          	<div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -474,12 +474,12 @@
 		        </div>
 		        
 		        <!-- Free-Wig-Making-Service -->
-	            <div class="tab-pane fade Free-Wig-Making-Service" id="Free-Wig-Making-Service">
+	            <div class="tab-pane Free-Wig-Making-Service" id="Free-Wig-Making-Service">
 		        	<input type="hidden" class="productskuId">
 		          	<!-- 状态 -->
 		          	<div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -508,12 +508,12 @@
 		        </div>
 		        
 		        <!-- Wig-Cap -->
-	            <div class="tab-pane fade Wig-Cap" id="Wig-Cap">
+	            <div class="tab-pane Wig-Cap" id="Wig-Cap">
 		        	<input type="hidden" class="productskuId">
 		          	<!-- 状态 -->
 		          	<div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>
@@ -542,12 +542,12 @@
 		        </div>
 		        
 		        <!-- Cap-Size -->
-	            <div class="tab-pane fade Cap-Size" id="Cap-Size">
+	            <div class="tab-pane Cap-Size" id="Cap-Size">
 		        	<input type="hidden" class="productskuId">
 		          	<!-- 状态 -->
 		          	<div class="form-group clearfix">
-		              <label for="productskuStatus" class="col-sm-1 control-label">Required：</label>
-		              <div class="col-sm-11">
+		              <label for="productskuStatus" class="col-sm-2 control-label">Required：</label>
+		              <div class="col-sm-10">
 		                  <select class="productskuStatus form-control">
 		                    <option value="0">NO</option>
 		                    <option value="1">YES</option>

@@ -256,48 +256,44 @@
 		//查看任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
-			loadTpl();
-			// fetch data
-			data = {
-				"userId": $(this).attr('edit-id')
-			};
-			$.ajax({
-				url: "${APP_PATH}/MlfrontUser/getOneMlfrontUserDetail",
-				data: data,
-				type: "POST",
-				success: function (result) {
-					if (result.code == 100) {
-						obj = result.extend.mlfrontUserOne;
-						tianchong(obj);
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
-
-			function tianchong(data) {
-				$(":input[name='userId']").val(data.userId);
-				$(":input[name='userEmail']").val(data.userEmail);
-				$(":input[name='userTelephone']").val(data.userTelephone);
-				$(":input[name='userAddressCountry']").val(data.userAddressCountry);
-				$(":input[name='userAddressProvince']").val(data.userAddressProvince);
-				$(":input[name='userAddressCity']").val(data.userAddressCity);
-				$(":input[name='userAddressStreetaddress']").val(data.userAddressStreetaddress);
-				$(":input[name='userFirstname']").val(data.userFirstname);
-				$(":input[name='userLastname']").val(data.userLastname);
-				$(":input[name='userCreatetime']").val(data.userCreatetime);
-				$(":input[name='userMotifytime']").val(data.userMotifytime);
-				$(":input[name='userLastonlinetime']").val(data.userLastonlinetime);
-			}
+			loadTpl($(this).attr('edit-id'));
 		});
 
+	 	function tianchong(data) {
+			$(":input[name='userId']").val(data.userId);
+			$(":input[name='userEmail']").val(data.userEmail);
+			$(":input[name='userTelephone']").val(data.userTelephone);
+			$(":input[name='userAddressCountry']").val(data.userAddressCountry);
+			$(":input[name='userAddressProvince']").val(data.userAddressProvince);
+			$(":input[name='userAddressCity']").val(data.userAddressCity);
+			$(":input[name='userAddressStreetaddress']").val(data.userAddressStreetaddress);
+			$(":input[name='userFirstname']").val(data.userFirstname);
+			$(":input[name='userLastname']").val(data.userLastname);
+			$(":input[name='userCreatetime']").val(data.userCreatetime);
+			$(":input[name='userMotifytime']").val(data.userMotifytime);
+			$(":input[name='userLastonlinetime']").val(data.userLastonlinetime);
+		}
 
-		function loadTpl() {
+		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addUser.html', function () {
-				$('.coupon-status').find('input').on('change', function () {
-					var spanEl = $(this).parent().find('span');
-					$(this).is(':checked') ? $(this).val(1) && spanEl.text('已支付') : $(this).val(0) && spanEl.text('未支付');
-				});
+				if (id) {
+					// fetch data
+					$.ajax({
+						url: "${APP_PATH}/MlfrontUser/getOneMlfrontUserDetail",
+						data: {
+							"userId": id
+						},
+						type: "POST",
+						success: function (result) {
+							if (result.code === 100) {
+								var resData = result.extend.mlfrontUserOne;
+								tianchong(resData);
+							} else {
+								alert("联系管理员");
+							}
+						}
+					});
+				}
 			});
 		}
 	</script>

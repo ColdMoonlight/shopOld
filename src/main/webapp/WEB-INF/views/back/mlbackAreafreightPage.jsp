@@ -209,49 +209,25 @@
 		 * 邮递地区/价格  新建-编辑-删除-保存
 		 */
 
-		//新建任務
+		// 新建任務
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
-			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html');
+			loadTpl();
 		});
-		//编辑任务
+		// 编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
-			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html');
-			// fetch data
-			data = {
-				"areafreightId": $(this).attr('edit-id')
-			};
-			$.ajax({
-				url: "${APP_PATH}/MlbackAreafreight/getOneMlbackAreafreightDetail",
-				data: data,
-				type: "POST",
-				success: function (result) {
-					if (result.code == 100) {
-						obj = result.extend.mlbackAreafreightOne;
-						tianchong(obj);
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
-
-			function tianchong(data) {
-				$(":input[name='areafreightId']").val(data.areafreightId);
-				$(":input[name='areafreightCountryEnglish']").val(data.areafreightCountryEnglish);
-				$(":input[name='areafreightCountry']").val(data.areafreightCountry);
-				$(":input[name='areafreightPrice']").val(data.areafreightPrice);
-			}
+			loadTpl($(this).attr('edit-id'));
 		});
 		// 新建/编辑 保存
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
 			data = JSON.stringify(data.reduce(function (obj, item) {
-				console.log(obj);
+				// console.log(obj);
 				obj[item.name] = item.value;
 				return obj
 			}, {}));
-			console.log(data);
+			// console.log(data);
 			$.ajax({
 				url: "${APP_PATH}/MlbackAreafreight/save",
 				data: data,
@@ -259,14 +235,15 @@
 				contentType: 'application/json',
 				type: "POST",
 				success: function (result) {
-					if (result.code == 100) {
+					if (result.code === 100) {
 						alert('新建/修改成功！');
 						window.location.href = "${APP_PATH}/MlbackAreafreight/toMlbackAreafreightPage";
 					}
 				}
 			});
 		});
-		//删除任務
+
+		// 删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
 				areafreightId: $(this).attr('del-id')
@@ -285,6 +262,38 @@
 				}
 			});
 		});
+
+		// 数据回显
+		function tianchong(data) {
+			$(":input[name='areafreightId']").val(data.areafreightId);
+			$(":input[name='areafreightCountryEnglish']").val(data.areafreightCountryEnglish);
+			$(":input[name='areafreightCountry']").val(data.areafreightCountry);
+			$(":input[name='areafreightPrice']").val(data.areafreightPrice);
+		}
+
+		// 加载模板
+		function loadTpl(id) {
+			$('.table-box').load('${APP_PATH}/static/tpl/addArea.html', function() {
+				if (id) {
+					// fetch data
+					$.ajax({
+						url: "${APP_PATH}/MlbackAreafreight/getOneMlbackAreafreightDetail",
+						data: {
+							"areafreightId": id
+						},
+						type: "POST",
+						success: function (result) {
+							if (result.code === 100) {
+								var resData = result.extend.mlbackAreafreightOne;
+								tianchong(resData);
+							} else {
+								alert("联系管理员");
+							}
+						}
+					});
+				}
+			});
+		}
 	</script>
 </body>
 
