@@ -426,7 +426,7 @@ header .tt-account .tt-dropdown-menu {
 #countdown-area {
   display: flex;
   flex-direction: column;
-  /*align-items: center;*/
+  align-items: center;
 }
 
 #countdown-area.hide {
@@ -458,9 +458,9 @@ header .tt-account .tt-dropdown-menu {
 
 .dark .time-item {
   position: relative;
-  min-width: 2em;
-  padding: 1em .5em 1.5em .5em;
-  font-size: 32px;
+  min-width: 2.5em;
+  padding: 1em .5em 1.25em .5em;
+  font-size: 26px;
   color: #fff;
   text-align: center;
   border-radius: .25em;
@@ -473,7 +473,7 @@ header .tt-account .tt-dropdown-menu {
 .dark .time-item .text {
   position: absolute;
   right: 0;
-  bottom: 1em;
+  bottom: .3em;
   display: block;
   width: 100%;
   font-size: 14px;
@@ -488,15 +488,15 @@ header .tt-account .tt-dropdown-menu {
 }
 
 .dark .state {
- 	position: absolute;
- 	top: -26px;
-  left: -6px;
+  position: absolute;
+  top: -40px;
+  left: 0;
   display: inline-block;
   padding: 6px 12px;
   font-size: 14px;
-  color: yellowgreen;
-  /* background-color: yellowgreen;
-  border-radius: 3px; */
+  color: #fff;
+  background-color: yellowgreen;
+  border-radius: 3px;
 }
 
 #buyer-show {
