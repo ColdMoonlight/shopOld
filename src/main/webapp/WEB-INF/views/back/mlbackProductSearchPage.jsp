@@ -33,9 +33,8 @@
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品列表</a>
-							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
-									class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品查询</a>
+							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
