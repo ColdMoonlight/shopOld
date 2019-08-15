@@ -94,6 +94,7 @@
 				enablekeyboard: false,
 	    }).resize()
 		});
+		var CategoryHash = {};
 		var totalRecord, currentPage, editid;
 		var count = 1;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
@@ -120,7 +121,7 @@
 		}
 
 		function build_task_table(result) {
-			//清空table表格
+			// 清空table表格
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
 			$.each(task, function (index, item) {
@@ -138,14 +139,14 @@
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
-				//为编辑按钮添加一个分类id
+				// 为编辑按钮添加一个分类id
 				editBtn.attr("edit-id", item.categoryId);
 				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
-				//为删除按钮添加一个分类id
+				// 为删除按钮添加一个分类id
 				delBtn.attr("del-id", item.categoryId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
-				//append方法执行完成以后还是返回原来的元素
+				// append方法执行完成以后还是返回原来的元素
 				$("<tr></tr>").append(categoryId)
 					.append(categoryImgurl)
 					.append(categoryName)
@@ -159,7 +160,7 @@
 					.appendTo("#task_table tbody");
 			});
 		}
-		//解析显示分页信息
+		// 解析显示分页信息
 		function build_page_info(result) {
 			$("#page_info_area").empty();
 			$("#page_info_area").append("当前" + result.extend.pageInfo.pageNum + "页,总" +
@@ -168,13 +169,13 @@
 			totalRecord = result.extend.pageInfo.total;
 			currentPage = result.extend.pageInfo.pageNum;
 		}
-		//解析显示分页条，点击分页要能去下一页....
+		// 解析显示分页条，点击分页要能去下一页....
 		function build_page_nav(result) {
-			//page_nav_area
+			// page_nav_area
 			$("#page_nav_area").empty();
 			var ul = $("<ul></ul>").addClass("pagination");
 
-			//构建元素
+			// 构建元素
 			var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
 			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
 			if (result.extend.pageInfo.hasPreviousPage == false) {
@@ -204,9 +205,9 @@
 				});
 			}
 
-			//添加首页和前一页 的提示
+			// 添加首页和前一页 的提示
 			ul.append(firstPageLi).append(prePageLi);
-			//1,2，3遍历给ul中添加页码提示
+			// 1,2，3遍历给ul中添加页码提示
 			$.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
 
 				var numLi = $("<li></li>").append($("<a></a>").append(item));
@@ -218,20 +219,21 @@
 				});
 				ul.append(numLi);
 			});
-			//添加下一页和末页 的提示
+			// 添加下一页和末页 的提示
 			ul.append(nextPageLi).append(lastPageLi);
 
-			//把ul加入到nav
+			// 把ul加入到nav
 			var navEle = $("<nav></nav>").append(ul);
 			navEle.appendTo("#page_nav_area");
 		}
-		//新建任務
 
+		// 新建任務
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
 			loadTpl()
 		});
-		//新建/编辑任務提交按钮
+
+		// 新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
 			data = JSON.stringify(data.reduce(function (obj, item) {
@@ -254,7 +256,8 @@
 				}
 			});
 		});
-		//删除任務
+
+		// 删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
 				categoryId: $(this).attr('del-id')
@@ -273,7 +276,40 @@
 				}
 			});
 		});
-		var CategoryHash = {}
+
+		// 编辑任务
+		$("#task_table").on("click", ".edit_btn", function () {
+			// tab tpl
+			loadTpl($(this).attr('edit-id'));
+		});
+		
+		// 加载模板
+		function loadTpl(id) {
+			$('.table-box').load('${APP_PATH}/static/tpl/addCategory.html', function () {
+				// 获取归属类数据
+				getCategoryDown();
+				
+				if (id) {
+					$.ajax({
+						url: "${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail",
+						data: {
+							"categoryId": id
+						},
+						type: "POST",
+						success: function (result) {
+							if (result.code == 100) {
+								obj = result.extend.mlbackCategoryOne;
+								// console.log(obj);
+								tianchong(obj);
+							} else {
+								alert("联系管理员");
+							}
+						}
+					});
+				}
+			});
+		}
+
 		// 获取归属类下拉
 		function getCategoryDown() {
 			$.ajax({
@@ -300,65 +336,34 @@
 			});
 		}
 
-		function loadTpl() {
-			$('.table-box').load('${APP_PATH}/static/tpl/addCategory.html', function () {
-				// 设置归属类
-				getCategoryDown();
-			});
+		// 数据回显
+		function tianchong(data) {
+			$(":input[name='categoryId']").val(data.categoryId);
+			$(":input[name='categoryName']").val(data.categoryName);
+			if (data.categoryImgurl && data.categoryImgurl.length) {
+				var el = $(".upload-img-btn.img");
+				el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
+				setImage(el, data.categoryImgurl);
+			}
+			if (data.categoryImgPcurl && data.categoryImgPcurl.length) {
+				var el2 = $(".upload-img-btn.img2");
+				el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
+				setImage(el2, data.categoryImgPcurl);
+			}
+			$(":input[name='categoryParentId']").val(data.categoryParentId);
+			$(":input[name='categoryParentName']").val(data.categoryParentName);
+			$('.categoryProducts.form-control').html(
+					(data.categoryProductNames ? data.categoryProductNames.split(',').join('<br>') : "暂无产品")
+			);
+			$(":input[name='categoryStatus']").val(data.categoryStatus);
+			$(":input[name='categorySortOrder']").val(data.categorySortOrder);
+			$(":input[name='categorySeo']").val(data.categorySeo);
+			$(":input[name='categoryDesc']").val(data.categoryDesc);
+			$(":input[name='categoryProductIds']").val(data.categoryProductIds);
+			$(":input[name='categoryProductNames']").val(data.categoryProductNames);
 		}
 
-		//编辑任务
-		$("#task_table").on("click", ".edit_btn", function () {
-			// tab tpl
-			loadTpl()
-			// 设置归属类
-			getCategoryDown();
-			// fetch data
-			data = {
-				"categoryId": $(this).attr('edit-id')
-			};
-			$.ajax({
-				url: "${APP_PATH}/MlbackCategory/getOneMlbackCategoryDetail",
-				data: data,
-				type: "POST",
-				success: function (result) {
-					if (result.code == 100) {
-						obj = result.extend.mlbackCategoryOne;
-						// console.log(obj);
-						tianchong(obj);
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
-
-			function tianchong(data) {
-				$(":input[name='categoryId']").val(data.categoryId);
-				$(":input[name='categoryName']").val(data.categoryName);
-				if (data.categoryImgurl && data.categoryImgurl.length) {
-					var el = $(".upload-img-btn.img");
-					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el, data.categoryImgurl);
-				}
-				if (data.categoryImgPcurl && data.categoryImgPcurl.length) {
-					var el2 = $(".upload-img-btn.img2");
-					el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el2, data.categoryImgPcurl);
-				}
-				$(":input[name='categoryParentId']").val(data.categoryParentId);
-				$(":input[name='categoryParentName']").val(data.categoryParentName);
-				$('.categoryProducts.form-control').html((data.categoryProductNames ? data.categoryProductNames.split(',')
-					.join('<br>') : "暂无产品"));
-				$(":input[name='categoryStatus']").val(data.categoryStatus);
-				$(":input[name='categorySortOrder']").val(data.categorySortOrder);
-				$(":input[name='categorySeo']").val(data.categorySeo);
-				$(":input[name='categoryDesc']").val(data.categoryDesc);
-				$(":input[name='categoryProductIds']").val(data.categoryProductIds);
-				$(":input[name='categoryProductNames']").val(data.categoryProductNames);
-			}
-
-		});
-
+		// 图片上传
 		$(document.body).on("change", "#file1", upload);
 		$(document.body).on("change", "#file2", uploadMainFu);
 
@@ -393,32 +398,6 @@
 			}
 		}
 
-		function setImage(el, url) {
-			var img = new Image();
-			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/category/' + url;
-			img.src = url;
-			img.onload = function () {
-				var winW = $('#categoryTabContent').width();
-				var imgW = img.width;
-				var imgH = img.height;
-				if (imgW >= winW) {
-					el.css({
-						'width': '100%',
-						'height': Math.floor(img.height * $('#categoryTabContent').width() / img.width) + 'px',
-						'backgroundImage': 'url(' + url + ')',
-						'backgroundSize': '100%'
-					});
-				} else {
-					el.css({
-						'width': imgW + 'px',
-						'height': imgH + 'px',
-						'backgroundImage': 'url(' + url + ')',
-						'backgroundSize': '100%'
-					});
-				}
-			}
-		}
-
 		function uploadMainFu() {
 			var self = this;
 			//实例化一个FormData
@@ -448,6 +427,32 @@
 						setImage($(self).parent(), returl);
 					}
 				});
+			}
+		}
+
+		function setImage(el, url) {
+			var img = new Image();
+			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/category/' + url;
+			img.src = url;
+			img.onload = function () {
+				var winW = $('#categoryTabContent').width();
+				var imgW = img.width;
+				var imgH = img.height;
+				if (imgW >= winW) {
+					el.css({
+						'width': '100%',
+						'height': Math.floor(img.height * $('#categoryTabContent').width() / img.width) + 'px',
+						'backgroundImage': 'url(' + url + ')',
+						'backgroundSize': '100%'
+					});
+				} else {
+					el.css({
+						'width': imgW + 'px',
+						'height': imgH + 'px',
+						'backgroundImage': 'url(' + url + ')',
+						'backgroundSize': '100%'
+					});
+				}
 			}
 		}
 	</script>

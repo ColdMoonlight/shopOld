@@ -11,7 +11,9 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
-	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
+	
+	<link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css">
+
 	<!-- summernote css -->
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/codemirror.min.css" />
 	<link rel="stylesheet" type="text/css" href="${APP_PATH }/static/back/js/summernote/monokai.min.css">
@@ -84,8 +86,9 @@
 
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/session.js"></script>
 	
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script>
+
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		console.log("adminAccname:" + adminAccname);
@@ -102,7 +105,26 @@
 	    }).resize()
 		});
 		var totalRecord, currentPage, editid;
+
 		var timeFormat = 'YYYY-MM-DD HH:mm:ss';
+		var date = new Date();
+		var minDate = moment()
+		.set({
+			'date': date.getDate() - 1,
+			'hour': date.getHours(),
+			'minute': date.getMinutes(),
+			'second': date.getSeconds()
+		})
+		.format(timeFormat);
+		var maxDate = moment()
+			.set({
+				'date': date.getDate(),
+				'hour': date.getHours(),
+				'minute': date.getMinutes(),
+				'second': date.getSeconds()
+			})
+			.format(timeFormat);
+
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		to_page(1);
 
@@ -237,12 +259,18 @@
 				function () {
 					// 设置归属类
 					getProductDown();
-					
-					$('.countdown').datePicker({
-						format: timeFormat,
-						isRange: true
+
+					$(":input[name='reviewCreatetime']").val(minDate);
+					$(":input[name='reviewConfirmtime']").val(maxDate);
+					$('.date-timepicker').each(function(i, item) {
+						$(item).datePicker({
+							min: minDate,
+							max: maxDate,
+							isRange: true
+						});
 					});
-				})
+				}
+			);
 		});
 		//新建编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
@@ -365,14 +393,20 @@
 						// console.log(obj)
 						// render data
 						tianchong(obj);
+
+						$(":input[name='reviewCreatetime']").val(minDate);
+						$(":input[name='reviewConfirmtime']").val(maxDate);
+						$('.date-timepicker').each(function(i, item) {
+							$(item).datePicker({
+								isRange: true,
+								min: minDate,
+								max: maxDate 
+							});
+						});
 					} else {
 						alert("联系管理员");
 					}
 				}
-			});
-			$('.countdown').datePicker({
-				format: timeFormat,
-				isRange: true
 			});
 		}
 
@@ -385,8 +419,8 @@
 			$(":input[name='reviewUname']").val(data.reviewUname);
 			$(":input[name='reviewPid']").val(data.reviewPid);
 			$(":input[name='reviewPname']").val(data.reviewPname);
-			$(":input[name='reviewCreatetime']").val(data.reviewCreatetime);
-			$(":input[name='reviewConfirmtime']").val(data.reviewConfirmtime);
+			minDate = data.reviewCreatetime || minDate;
+			maxDate = data.reviewConfirmtime || maxDate;
 			$(":input[name='reviewStatus']").val(data.reviewStatus);
 			
 			if (data.reviewUimgurl && data.reviewUimgurl.length) {
@@ -474,7 +508,6 @@
 				});
 			}
 		}
-		
 	</script>
 </body>
 

@@ -1,5 +1,5 @@
 <div class="op">
-	<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 新增/编辑</a>
+	<a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 新增/编辑</a>
 	<button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
 </div>
 <form class="form-horizontal col-sm-8">
@@ -17,17 +17,17 @@
 			<input type="text" class="form-control" placeholder="标题补充Description" name="countdownDescription">
 		</div>
 	</div>
-	<div class="row countdown">
+	<div class="date-timepicker">
 		<div class="form-group row">
 			<label for="countdownStarttime" class="col-sm-3 control-label">倒计时活动startTime</label>
 			<div class="col-sm-9">
-				<input type="text" class="form-control countdown-start" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="countdownStarttime">
+				<input type="text" class="form-control countdown-start" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="countdownStarttime" value="">
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="countdownEndtime" class="col-sm-3 control-label">倒计时活动Endtime</label>
 			<div class="col-sm-9">
-				<input type="text" class="form-control countdown-end" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="countdownEndtime">
+				<input type="text" class="form-control countdown-end" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="countdownEndtime" value="">
 			</div>
 		</div>
 	</div>

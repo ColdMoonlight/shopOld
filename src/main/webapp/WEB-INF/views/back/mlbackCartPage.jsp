@@ -68,6 +68,7 @@
 		</div>
 	</div>
 
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
 	
@@ -90,6 +91,9 @@
 				enablekeyboard: false,
 	    }).resize()
 		});
+		
+		$('.table-content').niceScroll()
+
 		var totalRecord, currentPage, editid;
 		var count = 1;
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
