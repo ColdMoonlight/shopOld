@@ -38,7 +38,7 @@
 .original{text-decoration: line-through;font-size: 18px; margin: 0 10px;}
 .price-text{font-size: 16px;}
 .product-d-price{margin: 1em 0;}
-.btn.buy-now{background:#ff186e; margin: 0 0 0 15px;}
+.btn.buy-now{background:#000; margin: 0 0 0 15px; color: #fff;}
 .product-d-length>span, .product-d-count>span, .product-d-price>span, .product-d-length>span{ font-size: 14px;font-weight: bold;color: #333;}
 .rightrule #countdown-area. .title{text-align: left;padding: 1em 0;font-size: 18px; color: #333;}
 .product-d-length .list>span{color: #333;}
@@ -98,7 +98,7 @@
 .right_checkout .list-group{margin: 0;}
 .order-list .group-title{padding: 1em 0;}/***结算页面**/
 .order-list .group-title span{font-weight: bold; color: #333;}
-.right_checkout .input-group .input-group-addon{border: 1px solid #ccc; border-left:none;background: #eee;border-radius:0 6px 6px 0}
+.right_checkout .input-group .input-group-addon{cursor: pointer; border: 1px solid #ccc; border-left:none;background: #eee;border-radius:0 6px 6px 0}
 .right_checkout .coupon-item{display: block;margin: 0;border: 1px solid #ccc; padding:10px}
 .right_checkout .group-details.customer-message{padding:1em 0;}
 .right_checkout .coupons .coupon-error{ padding: 1em 0 0;}
@@ -113,7 +113,14 @@
 .bottom_list_account{-webkit-box-flex: 1;flex-grow: 1; display:flex; float: left;width: 100%; padding:0 8%}
 .right_allcont .order-cal .cal-price-item{margin: 15px 0;font-size:14px}
 .right_allcont .order-cal .cal-price-item span.cal-price-num{float: right;color:#ff1671}
-.right_allcont .order-cal .btn{margin: 20px 0 0;}
+.right_allcont .order-cal .btn{margin: 20px 0 0;background: #000;}
+.login-register .btn.sigin{line-height: 40px;padding: 0;}
+.login-register .btn.sigin:hover{background: #000;}
+
+.login-register .btn.register{line-height: 40px;padding: 0;}
+.login-register .btn.register:hover{background: #000;}
+
+
 .bottom_list_account .cart-item>.content .condition>.c-item{width:100%;float:left}
 
 .order-list .content .num{-webkit-box-flex:1;min-width:150px; height:100%; position:absolute;right:20px;top:0}
@@ -122,6 +129,12 @@
 /* .cart-item>.content .num{-webkit-box-flex:1;min-width:150px; height:100%; position:absolute;right:0;top:0}
 .cart-item>.content .num span{height:100%; display: flex;align-items:center;}*/
 .rece b{font-weight: bold;color: #333;} 
+.loginregister  .login-register{padding: 5% 30% 20%;}
+.loginregister .login-register .input-group>input{border-radius:5px;}
+.add-to-cart{background: #fff;color: #000; border: 1px solid #000000;}
+.add-to-cart:hover{background: #fff;color: #000; border: 1px solid #000000;}
+
+
 
 
 

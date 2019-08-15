@@ -1261,6 +1261,75 @@ width: 100%;
 }
 
 
+/* login/register */
+.tab {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.tab-item {
+  flex-grow: 1;
+  padding: 1em 0;
+  text-align: center;
+}
+
+.tab-item.active {
+  box-sizing: border-box;
+  border-bottom: 2px solid #f23030;
+}
+
+.login-register {
+  background-color: #fff;
+}
+
+.login-register .tab {
+  padding: 0 20px;
+}
+
+.login-register .tab-item {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.login-register .tab-pane {
+  padding: 20px;
+  display: none;
+}
+
+.login-register .tab-pane.active {
+  display: block;
+}
+
+.login-register .input-group {
+  flex-direction: column;
+}
+
+.login-register .input-group+.input-group {
+  margin-top: 1em;
+}
+
+.login-register .input-group>input {
+  width: 100%;
+  height: 36px;
+	margin-top:10px;
+  font-family: Quicksand;
+  text-indent: 2em;
+	text-align:left;
+  border: 0;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+	background-color: #ccc;
+}
+
+.login-register .btn {
+  display: inline-block;
+  width: 100%;
+  padding: .5em 0;
+  margin: 20px 0;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+}
 
 
 

@@ -58,7 +58,7 @@
 								<div class="tt-mobile-add">
 									<button class="tt-close">Close</button>
 								</div>
-								<div class="tt-dropdown-inner">
+								<!-- <div class="tt-dropdown-inner">
 									<ul>
 										<li><a href="login.html"><i class="icon-f-94"></i>Account</a></li>
 										<li><a href="wishlist.html"><i class="icon-n-072"></i>Wishlist</a></li>
@@ -68,7 +68,7 @@
 										<li><a href="page404.html"><i class="icon-f-77"></i>Sign Out</a></li>
 										<li><a href="create-account.html"><i class="icon-f-94"></i>Register</a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -503,7 +503,7 @@
 		  if ($(this).hasClass('active')) {
 		    window.location.href = "${APP_PATH }/MlfrontUser/toUserCenter";
 		  } else {
-		    window.location.href = "${APP_PATH }/MlfrontUser/toLoginRegisterPage";
+		    window.location.href = "${APP_PATH }/MlfrontUser/toPcLoginRegisterPage";
 		  }
 		})
 		
@@ -512,5 +512,7 @@
 		
 	</script>
 </body>
+
+
 
 </html>

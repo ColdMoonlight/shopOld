@@ -829,7 +829,7 @@
 					"couponCode": couponCode2
 				}),
 				type: 'post',
-				dataType: 'JSON',
+				dataType: 'text',
 				contentType: 'application/json',
 				success: function (data) {
 					var resData = JSON.parse(data).extend.mlbackCouponOne;
