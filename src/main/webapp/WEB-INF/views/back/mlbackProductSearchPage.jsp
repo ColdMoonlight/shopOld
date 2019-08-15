@@ -8,7 +8,7 @@
 	<title>产品查询管理</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-	<link href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
@@ -33,9 +33,8 @@
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品列表</a>
-							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
-									class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品查询</a>
+							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">

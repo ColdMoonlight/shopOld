@@ -60,6 +60,10 @@
     vertical-align: middle;
 }
 
+.table-box .date-timepicker {
+	margin-left: 0;
+}
+
 /* pagination */
 #page_info_area{
   height:74px;

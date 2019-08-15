@@ -637,9 +637,9 @@ a:focus {
 
 .product-define-price {
 	margin-left: .25em;
-  	font-size: 14px;
-    text-decoration: line-through;
-    color: #333;
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #333;
 }
 
 .product-to-cart {

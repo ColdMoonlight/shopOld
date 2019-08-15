@@ -201,8 +201,9 @@ a {
 }
 
 .c-datepicker-scrollbar__wrap {
-  overflow: scroll;
-  height: 100%
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .c-datepicker-time-spinner__wrapper .c-datepicker-scrollbar__wrap:not(.c-datepicker-scrollbar__wrap--hidden-default) {
