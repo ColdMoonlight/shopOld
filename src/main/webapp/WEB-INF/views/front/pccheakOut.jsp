@@ -595,6 +595,8 @@
 						$(this).find("input").removeAttr("disabled");
 						$(this).find("select").removeAttr("disabled");
 					})
+					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
+					totalPriceText.text('$' + totalPrice);
 				}
 			
 			//console.log(reqData)
