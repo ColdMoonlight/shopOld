@@ -148,12 +148,43 @@ public class MlbackProductController {
 	}
 	
 	/**
+	 * 3.1.2	UseNow	0505
+	 * 前台移动端获取详情页面mfront/productDetails
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/topcProductDetailPageByhtml",method=RequestMethod.GET)
+	public String topcProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
+		
+		//接收传递进来的参数
+		String StringReq = productSeo;
+		
+		//准备封装参数
+		MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
+		mlbackProductrepBySeo.setProductSeo(productSeo);
+		
+		MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
+		
+		if(mlbackProductRes==null){
+			return "mfront/index";
+		}else{
+			Integer productIdReq = mlbackProductRes.getProductId();
+			//放回响应域中
+			res.setAttribute("productId", productIdReq);
+			//放回session域中
+			session.setAttribute("productDetailId", productIdReq);
+			//返回视图
+			return "front/pcproductDetails";
+		}
+	}
+	
+	/**
 	 * 3.2.2	useOn	0505
 	 * 前台PC端获取详情页面front/PCproductDetails
 	 * @param jsp
 	 * @return 
 	 * */
-	@RequestMapping(value="/tomProductDetailPagePC",method=RequestMethod.GET)
+	/*@RequestMapping(value="/tomProductDetailPagePC",method=RequestMethod.GET)
 	public String tomProductDetailPagePC(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId) throws Exception{
 		//接收传递进来的参数
 		Integer productIdReq = productId;
@@ -161,7 +192,7 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//返回视图
 		return "front/pcproductDetails";
-	}
+	}*/
 	
 	/**4.0	UseNow	0505
 	 * 分类MlbackProduct列表分页list数据

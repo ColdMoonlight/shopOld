@@ -283,7 +283,7 @@
 		}
 		$('.btn.calc-price').on('click', function () {
 			calcTotalPrice();
-			fbq('track', 'InitiateCheckout');
+			fbq('track', 'InitiateCheckout');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 		});
 		$.ajax({
 			url: '${APP_PATH}/MlbackCart/getCartProductNumber',

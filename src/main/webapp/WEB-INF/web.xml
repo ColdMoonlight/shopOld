@@ -11,22 +11,7 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  <!-- urlrewrite伪静态化配置	begin -->
-  <filter>
-	  <filter-name>UrlRewriteFilter</filter-name>
-	  <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-	  <init-param> 
-		  <param-name>confPath</param-name> 
-		  <param-value>/WEB-INF/urlrewrite.xml</param-value> 　　　　　　<!-- urlrewrite.xml的路径 --> 
-	  </init-param> 
-  </filter>
-  <filter-mapping>
-	  <filter-name>UrlRewriteFilter</filter-name>
-	  <url-pattern>/*</url-pattern>
-	  <dispatcher>REQUEST</dispatcher>
-	  <dispatcher>FORWARD</dispatcher>
-  </filter-mapping>
-  <!-- urlrewrite伪静态化配置	end -->
+  
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -91,6 +76,22 @@
     <dispatcher>INCLUDE</dispatcher>
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
+  <!-- urlrewrite伪静态化配置	begin -->
+  <filter>
+	  <filter-name>UrlRewriteFilter</filter-name>
+	  <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	  <init-param> 
+		  <param-name>confPath</param-name> 
+		  <param-value>/WEB-INF/urlrewrite.xml</param-value> 　　　　　　<!-- urlrewrite.xml的路径 --> 
+	  </init-param> 
+  </filter>
+  <filter-mapping>
+	  <filter-name>UrlRewriteFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	  <dispatcher>REQUEST</dispatcher>
+	  <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <!-- urlrewrite伪静态化配置	end -->
   
   <servlet>
     <description></description>
