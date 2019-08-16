@@ -137,6 +137,20 @@
 .add-to-cart{background: #fff;color: #000; border: 1px solid #000000;}
 .add-to-cart:hover{background: #fff;color: #000; border: 1px solid #000000;}
 /******************************************************/
+.op .btn:hover{background: #000;}
+.show-t-num {margin: 10px 0 0 ;}
+.show-t-price{margin: 10px 0;}
+.person.active .tt-dropdown-obj .tt-dropdown-toggle .icon-f-94{color:#ff1671;}
+.tt-status{height: 40px;}
+.tt-tip{ line-height: 40px;}
+.pserson_box{margin: 30px auto;}
+.pserson_box .integral-details{box-shadow:none;border-radius:0;margin: 0 auto;}
+.pserson-center .pserson_box .person-info{background:none;}
+.pserson-center  .pserson_box  .person-info-name{color: #333;}
+.pserson-center .pserson_box .person-info-img{border-color: #333;}
+.pserson_box .integral-details {margin: 0 0 10px;}
+.pserson_box .integral-details .id-item {width: 21%;margin: 0 2%; border: 1px solid #ccc;}
+.pserson-center .person-info .signout:hover{background: #000000;}
 
 
 

@@ -205,6 +205,16 @@ public class MlfrontUserController {
 		return "mfront/userCenter";
 	}
 	
+	/**6.1	UseNow	0515
+	 * ifSession	去个人中心
+	 * @param ifSession
+	 */
+	@RequestMapping(value="/topcUserCenter")
+	public String topcUserCenter(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+		
+		return "front/pcuserCenter";
+	}
+	
 	/**
 	 * 7.0	UseNow	0505
 	 * to	MlfrontUser列表页面

@@ -65,11 +65,11 @@
 					</div>
 					<div class="cart-footer" style="display: none">
 						<div class="show-t-num">
-							<span class="show-t-num-text">NUMTOTAL</span>
+							<span class="show-t-num-text">NUMTOTAL:</span>
 							<span class="show-t-num-num"></span>
 						</div>
 						<div class="show-t-price">
-							<span class="show-t-price-text">SUBTOTAL</span>
+							<span class="show-t-price-text">SUBTOTAL:</span>
 							<span class="show-t-price-num"></span>
 						</div>
 						<div class="op">
