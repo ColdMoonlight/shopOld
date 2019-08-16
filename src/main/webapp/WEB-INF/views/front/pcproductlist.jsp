@@ -31,7 +31,7 @@
 		<div class="container">
 			<div class="condition select list_homeselect">
 				<div class="slect_po">
-					<select class="select-item select-category" data-type="category"></select>
+				<span>style</span>	<select class="select-item select-category" data-type="category"></select>
 				</div>
 			</div>
 			<div class="product-list product-list_home"></div>

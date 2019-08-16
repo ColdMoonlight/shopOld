@@ -21,8 +21,8 @@
 				<div class="container">
 					<!-- tt-langue and tt-currency -->
 					<div class="tt-desctop-parent-multi tt-parent-box">
-						<div class="tt-multi-obj tt-dropdown-obj">
-							<button class="tt-dropdown-toggle" data-tooltip="Settings" data-tposition="bottom"><i
+						<div class="tt-multi-obj tt-dropdown-obj" style="display: none;">
+							<button class="tt-dropdown-toggle " data-tooltip="Settings" data-tposition="bottom"><i
 									class="icon-f-79"></i></button>
 							<div class="tt-dropdown-menu">
 								<div class="tt-mobile-add">
@@ -49,7 +49,7 @@
 					<div class="tt-tip">Free Shipping World Wide.</div>
 					<!-- /tt-tip -->
 					<!-- tt-account -->
-					<div class="tt-desctop-parent-account tt-parent-box">
+					<div class="tt-desctop-parent-account tt-parent-box person">
 						<div class="tt-account tt-dropdown-obj">
 							<button class="tt-dropdown-toggle" data-tooltip="My Account" data-tposition="bottom">
 								<i class="icon-f-94"></i>
@@ -58,7 +58,7 @@
 								<div class="tt-mobile-add">
 									<button class="tt-close">Close</button>
 								</div>
-								<div class="tt-dropdown-inner">
+								<!-- <div class="tt-dropdown-inner">
 									<ul>
 										<li><a href="login.html"><i class="icon-f-94"></i>Account</a></li>
 										<li><a href="wishlist.html"><i class="icon-n-072"></i>Wishlist</a></li>
@@ -68,7 +68,7 @@
 										<li><a href="page404.html"><i class="icon-f-77"></i>Sign Out</a></li>
 										<li><a href="create-account.html"><i class="icon-f-94"></i>Register</a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -192,7 +192,7 @@
 					 </a>
 					<!-- /tt-logo -->
 					<!-- tt-cart -->
-					<div class="tt-desctop-parent-cart tt-parent-box">
+					<div class="tt-desctop-parent-cart tt-parent-box" style="display: none;">
 						<div class="tt-cart tt-dropdown-obj" data-tooltip="Cart" data-tposition="bottom">
 							<button class="tt-dropdown-toggle">
 								<i class="icon-f-39"></i>
@@ -387,7 +387,7 @@
 		
 		var categoryActiveNum = 1;
 		var iCart = $('.icon.cart');
-		var iPerson = $('.icon.person');
+		var iPerson = $('.person');
 		var mask = $('<div class="mask"></div>');
 		var sysFlag = 0;
 		
@@ -449,7 +449,7 @@
 		var mainCategory = $('.tt-desctop-menu ul');
 		var categoryData = {};
 		// 获取全部的category信息,文件信息
-		$.ajax({
+		$.ajax({ 
 			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
 			method: 'GET',
 			success: function (data) {
@@ -501,16 +501,37 @@
 		
 		iPerson.on('click', function () {
 		  if ($(this).hasClass('active')) {
-		    window.location.href = "${APP_PATH }/MlfrontUser/toUserCenter";
+		    window.location.href = "${APP_PATH }/MlfrontUser/topcUserCenter";
 		  } else {
-		    window.location.href = "${APP_PATH }/MlfrontUser/toLoginRegisterPage";
+		    window.location.href = "${APP_PATH }/MlfrontUser/toPcLoginRegisterPage";
+		  }
+		})
+		 /* check user is login or not  */
+		$.ajax({
+		  url: "${APP_PATH }/MlfrontUser/ifLogin",
+		  type: 'POST',
+		  success: function (data) {
+		    // console.log(data);
+		    var resData = data.extend;
+		
+		    if (resData.ifLogin === 1) {
+		      if (!iPerson.hasClass('active')) iPerson.addClass('active')
+		    }
+		
+		    if (resData.ifLogin === 0) {
+		      if (iPerson.hasClass('active')) iPerson.removeClass('active')
+		    }
 		  }
 		})
 		
 		/* check user is login or not  */
-		
+		  function toProductItem(id) {
+		  if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/topcProductDetailPage?productId=" + id;
+		}
 		
 	</script>
 </body>
+
+
 
 </html>

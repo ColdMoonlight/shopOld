@@ -96,11 +96,13 @@ public class MlbackActShowProController {
 		List<MlbackProduct> mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
 		mlbackProductRes = mlbackProductResList.get(0);
 		String Pname = mlbackProductRes.getProductName();
+		String Pseoname = mlbackProductRes.getProductSeo();
 		
 		//mlbackProductService;
 		String nowtime = DateUtil.strTime14s();
 		mlbackActShowPro.setActshowproMotifytime(nowtime);
-		mlbackActShowPro.setActshowproProname(Pname);
+		mlbackActShowPro.setActshowproProname(Pname);//Pseoname
+		mlbackActShowPro.setActshowproSeoname(Pseoname);
 		if(actshowproId==null){
 			mlbackActShowPro.setActshowproCreatetime(nowtime);
 			//无id，insert

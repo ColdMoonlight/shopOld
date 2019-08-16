@@ -47,6 +47,7 @@
 										<th>活动品归属组</th>
 										<th>产品id</th>
 										<th>产品名称</th>
+										<th>产品SEO名称</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
@@ -149,6 +150,7 @@
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);
 				var actshowproProid = $("<td></td>").append(item.actshowproProid);
 				var actshowproProname = $("<td></td>").append(item.actshowproProname);
+				var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
 				
 				var imgurl = item.actshowproImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
@@ -176,6 +178,7 @@
 					.append(actshowproActnum)
 					.append(actshowproProid)
 					.append(actshowproProname)
+					.append(actshowproSeoname)
 					.append(actshowproImgwapurl)
 					.append(actshowproImgpcurl)
 					.append(actshowproStatus)
