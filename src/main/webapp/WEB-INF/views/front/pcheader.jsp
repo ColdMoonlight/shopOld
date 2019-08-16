@@ -192,8 +192,8 @@
 					 </a>
 					<!-- /tt-logo -->
 					<!-- tt-cart -->
-					<div class="tt-desctop-parent-cart tt-parent-box" style="display: none;">
-						<div class="tt-cart tt-dropdown-obj" data-tooltip="Cart" data-tposition="bottom">
+					<div class="tt-desctop-parent-cart tt-parent-box">
+						<div class="tt-cart tt-dropdown-obj" data-tooltip="Cart" data-tposition="bottom" style="display: none;">
 							<button class="tt-dropdown-toggle">
 								<i class="icon-f-39"></i>
 								<span class="tt-badge-cart">3</span>
@@ -449,7 +449,7 @@
 		var mainCategory = $('.tt-desctop-menu ul');
 		var categoryData = {};
 		// 获取全部的category信息,文件信息
-		$.ajax({ 
+		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
 			method: 'GET',
 			success: function (data) {
