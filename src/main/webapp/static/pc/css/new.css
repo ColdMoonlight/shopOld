@@ -103,10 +103,18 @@
 .order-list .group-title span{font-weight: bold; color: #333;}
 .right_checkout .input-group .input-group-addon{cursor: pointer; border: 1px solid #ccc; border-left:none;background: #eee;border-radius:0 6px 6px 0}
 .right_checkout .coupon-item{display: block;margin: 0;border: 1px solid #ccc; padding:10px}
+.right_checkout .coupons .coupon-item{border-bottom:none;}
+.right_checkout .coupons{border-bottom: 1px solid #ccc;}
+.right_checkout .coupons .coupon-item .price{margin: 0 10px;}
+
+
 .right_checkout .group-details.customer-message{padding:1em 0;}
 .right_checkout .coupons .coupon-error{ padding: 1em 0 0;}
 .right_checkout .coupon-item .checkbox{display: inline-block; vertical-align: middle;margin:0;}
 .left_list_check .address-details{border: 1px solid #ccc;}
+
+
+
 
 
 .left_bt_list{width:100%;padding: 0 5% 0 0;}
