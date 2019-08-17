@@ -79,13 +79,22 @@ public class MlfrontUserController {
 	}
 	
 	/**2.0	UseNow	0515
-	 * ifSession	去登录/注册页面
+	 * ifSession	wap去登录/注册页面
 	 * @param ifSession
 	 */
 	@RequestMapping(value="/toLoginRegisterPage")
 	public String toLoginRegisterPage() throws Exception{
 		
 		return "mfront/loginRegister";
+	}
+	/**2.1	UseNow	0515
+	 * ifSession	PC去登录/注册页面
+	 * @param ifSession
+	 */
+	@RequestMapping(value="/toPcLoginRegisterPage")
+	public String toPcLoginRegisterPage() throws Exception{
+		
+		return "front/pcloginRegister";
 	}
 	
 	/**3.0	UseNow	0515
@@ -194,6 +203,16 @@ public class MlfrontUserController {
 	public String toUserCenter(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
 		
 		return "mfront/userCenter";
+	}
+	
+	/**6.1	UseNow	0515
+	 * ifSession	去个人中心
+	 * @param ifSession
+	 */
+	@RequestMapping(value="/topcUserCenter")
+	public String topcUserCenter(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+		
+		return "front/pcuserCenter";
 	}
 	
 	/**

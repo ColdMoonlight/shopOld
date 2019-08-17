@@ -21,13 +21,12 @@
 	<meta name="wap-font-scale" content="no">
 	<meta name="aplus-touch" content="1">
 	
-	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
-	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 </head>
 
 <body>
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
+    <link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
+	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 	<!-- main -->
 	<div class="main">
 		<div class="container">
@@ -84,10 +83,18 @@
 	<script>
 		var imgCount = 1;
 		var reviewId = null;
+		var sessionScopeproductId = '${sessionScope.productDetailId}';
+		// $(".review-list .review-item ").each(function{
+		// 	$(this).click(function(){
+		//        var img =$(this).find(".review-imgs img")
+		// 		alert(img)
+		// 		
+		// 	})
+		// })
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/pcproductDetail.html', function () {
 			//接到产品id，查询本id产品的详情
-			var pidA = window.location.href.split('?')[1].split('=');
+			var pidA = sessionScopeproductId;
 			var dataPrice = null;
 
 			var swiper = $('.product__details-banner .swiper-wrapper');
@@ -110,7 +117,7 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProductImg/getMlbackProductImgListByProductId',
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -135,7 +142,7 @@
 				//url: '${APP_PATH}/MlbackProductSku/getOneProductAllSku',
 				url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -211,7 +218,7 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getOneMlbackProductDetail',
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -239,7 +246,7 @@
       $.ajax({
         url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
         data: {
-          "productId": pidA[1],
+          "productId": pidA,
         },
         type: "POST",
         success: function (data) {
@@ -303,7 +310,7 @@
     	  $.ajax({
 	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
 	  			data: {
- 	          			"productId": pidA[1],
+ 	          			"productId": pidA,
  	          			"pn": pn
  	        		  },
 	  			type: "POST",
@@ -362,7 +369,49 @@
 	         '</li>';
 				}
 				parent.html(html);
+				var mySwiper = new Swiper('.swiper-container2', {
+					simulateTouch : false,//禁止鼠标模拟
+					 pagination: {
+						el: '.swiper-pagination_1',
+						type: 'fraction',
+					  },
+					  navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					  },
+					  observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                      observeParents:true,//修改swiper的父元素时，自动初始化swiper
+					})
+				$(".review-item").on("click", ".review-imgs img", 
+				function() {
+					var imgBox = $(this).parents(".review-imgs").find("img");
+					var i = $(imgBox).index(this);
+					$(".big_img .swiper-wrapper").html("")
+					for(var j = 0 ,c = imgBox.length; j < c ;j++){
+					 $(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+					}
+					$(".big_img").css({
+						"z-index": 1001,
+						"opacity": "1"
+					});
+					mySwiper.slideTo(i, 0, false);
+					return false;
+				});
+			  
+				$(".close_box .close_an").on("click", function() {
+					$(this).parents(".big_img").css({
+						"z-index": "-1",
+						"opacity": "0"
+					});
+
+				});
+
+				
+				
+				
+				
 			}
+			
 			
 			// render page nav
 			function render_page_nav(parent, pageInfo) {
@@ -728,14 +777,14 @@
 					  url: '${APP_PATH}/MlbackCart/toBuyNow',
 					  data: JSON.stringify(reqData),
 					  type:"POST",
-					  dataType: 'JSON',
+					  dataType: 'text',
 					  contentType: 'application/json',
 					  success: function(data) {
 						var resData = JSON.parse(data);
 					    if(resData.code === 100) {
 					    	// console.log(resData)
 					    	// cartText.text(parseInt(cartText.text()) + 1);
-					    	window.location.href='${APP_PATH}/MlbackCart/toCheakOut';
+					    	window.location.href='${APP_PATH}/MlbackCart/topcCheakOut';
 					    }
 					  },
 					  error: function(data) {
