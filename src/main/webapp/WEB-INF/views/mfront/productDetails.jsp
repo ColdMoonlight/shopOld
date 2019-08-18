@@ -237,7 +237,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
-						console.log(productData)
+						// console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
 						prodcutDpriceText.attr('data-price', productData.productOriginalprice);
@@ -337,7 +337,10 @@
 						if (reviewImgData.length > 0) {
 							renderReviewList(reviewBoxList, reviewTextData, reviewImgData);
 							pageArea.removeClass('hide');
-			  				render_page_nav(pageArea, pageInfo);
+			  			render_page_nav(pageArea, pageInfo);
+			  			$('.review-imgs').each(function(i, item) {
+			  				lightbox($(item).find('img'));
+			  			})
 						} else {
 							// renderErrorMsg(reviewBoxList, '暂无评论信息, 请添加');
 							renderErrorMsg(reviewBoxList, 'No comment information, please add.');
@@ -854,6 +857,56 @@
 				});
 			})
 		}
+		
+		function lightbox(imgs) {
+		      var win = $(window);
+		      var winW = win.width() - 60;
+		      var winH = win.height() - 60;
+		      var imgW = 200;
+		      var imgH = 200;
+
+		      imgs.each(function (i, item) {
+		        $(item).on('click', function () {
+		          var img = new Image();
+		          img.src = this.src;
+
+		          popup();
+
+		          img.onload = function () {
+		            var ratio = img.width / img.height;
+		            if (winW / ratio > winH) {
+		              img.style = 'width: auto; height: 100%;';
+		            } else {
+		              img.style = 'width: 100%; height: auto;';
+		            }
+
+		            $('.light_box-inner').html(img);
+		          }
+		        });
+		      });
+
+		      function popup(src, style) {
+		        var lightboxEl = $('<div class="light_box"></div>');
+		        var html = '<div class="light_box-close"><i class="icon close"></i></div>';
+		        html += '<div class="light_box-inner">' +
+		          // '<img src="'+ src +'" style="'+ style +'" />' +
+		            '<div class="loader"></div>' +
+		          '</div>';
+
+		        $(document.body).append(lightboxEl.html(html));
+
+		        [$('.light_box'), $('.light_box-close i')].forEach(function(item) {
+		          $(item).on('click', function () {
+		            var lightboxEl = $('.light_box');
+		            lightboxEl.addClass('zoom_out');
+
+		            setTimeout(function () {
+		              lightboxEl.remove();
+		            }, 600);
+		          });
+		        })
+		      }
+		    }
 	</script>
 </body>
 

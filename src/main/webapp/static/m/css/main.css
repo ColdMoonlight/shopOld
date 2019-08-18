@@ -2131,3 +2131,138 @@ a:focus {
   background-color: yellowgreen;
   border-radius: 3px;
 }
+
+/* lightbox */
+.light_box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .85);
+}
+
+.light_box-close {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.light_box-close i {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+	font-size: 24px;
+	color: #fff;
+  margin-right: 10px;
+}
+
+.light_box-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 60px);
+  height: calc(100vh - 60px);
+  margin: 0 30px 30px 30px;
+}
+
+@-webkit-keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.zoom_out {
+  -webkit-animation-name: zoomOut;
+  animation-name: zoomOut;
+  -webkit-animation-duration: .6s;
+  animation-duration: .6s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.loader,
+.loader::after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+
+.loader {
+  position: relative;
+  margin: 60px auto;
+  font-size: 10px;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(255, 255, 255, 0.2);
+  border-left: 1.1em solid #ffffff;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: loading 1.1s infinite linear;
+  animation: loading 1.1s infinite linear;
+}
+
+@media screen and (max-width: 600px) {
+  .loader,
+  .loader::after {
+    width: 3.6em;
+    height: 3.6em;
+  }
+
+  .loader {
+    border-width: .5em;
+  }
+}
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
