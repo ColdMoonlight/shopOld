@@ -36,10 +36,10 @@ import com.paypal.base.rest.PayPalRESTException;
 @RequestMapping("/paypal")
 public class PaypalController {
 		
-	public static final String PAYPAL_SUCCESS_URL = "paypal/success";
-    public static final String PAYPAL_CANCEL_URL = "paypal/cancel";
-    public static final String PAYPAL_SUCCESS_URLIn = "success";
-    public static final String PAYPAL_CANCEL_URLIn = "cancel";
+	public static final String PAYPAL_SUCCESS_M_URL = "paypal/msuccess";
+    public static final String PAYPAL_CANCEL_M_URL = "paypal/mcancel";
+    public static final String PAYPAL_SUCCESS_M_URLIn = "msuccess";
+    public static final String PAYPAL_CANCEL_M_URLIn = "mcancel";
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -60,7 +60,7 @@ public class PaypalController {
      * paypal/pay
      * */
 //    @RequestMapping(method = RequestMethod.POST, value = "pay")
-    @RequestMapping(method = RequestMethod.GET, value = "pay")
+    @RequestMapping(method = RequestMethod.GET, value = "mpay")
     public String pay(HttpServletRequest request,HttpSession session){
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
@@ -70,8 +70,8 @@ public class PaypalController {
     	String moneyTypeStr = toPaypalInfo.getMoneyType();
     	String payDes = toPaypalInfo.getPaymentDescription();
     	//封装paypal所需
-        String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
-        String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
+        String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
+        String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -97,7 +97,7 @@ public class PaypalController {
      * 返回成功页面
      * mfront/paySuccess
      * */
-    @RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_URLIn)
+    @RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_M_URLIn)
     public String successPay(HttpSession session,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
 
     	try {
@@ -192,7 +192,7 @@ public class PaypalController {
      * 返回失败页面
      * mfront/payFail
      * */
-	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_URLIn)
+	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_M_URLIn)
     public String cancelPay(HttpSession session){
 		
 		toUpdatePayInfoFail(session);
