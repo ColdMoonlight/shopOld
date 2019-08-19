@@ -912,7 +912,7 @@
 							//var resData = JSON.parse(data).extend;
 							// console.log(data)
 							if($(".save").hasClass("active")){
-								window.location.href = '${APP_PATH }/paypal/pay';
+								window.location.href = '${APP_PATH }/paypal/ppay';
 							}else{
 								alert("Please fill in the shipping address")
 							}

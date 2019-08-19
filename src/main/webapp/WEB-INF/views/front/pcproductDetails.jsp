@@ -83,6 +83,7 @@
 	<script>
 		var imgCount = 1;
 		var reviewId = null;
+		var sessionScopeproductId = '${sessionScope.productDetailId}';
 		// $(".review-list .review-item ").each(function{
 		// 	$(this).click(function(){
 		//        var img =$(this).find(".review-imgs img")
@@ -93,7 +94,7 @@
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/pcproductDetail.html', function () {
 			//接到产品id，查询本id产品的详情
-			var pidA = window.location.href.split('?')[1].split('=');
+			var pidA = sessionScopeproductId;
 			var dataPrice = null;
 
 			var swiper = $('.product__details-banner .swiper-wrapper');
@@ -116,7 +117,7 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProductImg/getMlbackProductImgListByProductId',
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -141,7 +142,7 @@
 				//url: '${APP_PATH}/MlbackProductSku/getOneProductAllSku',
 				url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -199,7 +200,7 @@
 						}
 					}
 				}
-				html += '<span class="sku-id-name">' + data.productskuName + ':</span>';
+				html +=  '<i>* </i>'+'<span class="sku-id-name">' + data.productskuName + ':</span>';
 				html += '<div class="list">';
 				for (var i = 0; i < len; i += 1) {
 					if (i === 0) {
@@ -217,7 +218,7 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getOneMlbackProductDetail',
 				data: {
-					"productId": pidA[1]
+					"productId": pidA
 				},
 				type: "POST",
 				success: function (data) {
@@ -245,7 +246,7 @@
       $.ajax({
         url: '${APP_PATH}/MlfrontReview/getMlfrontReviewCount',
         data: {
-          "productId": pidA[1],
+          "productId": pidA,
         },
         type: "POST",
         success: function (data) {
@@ -309,7 +310,7 @@
     	  $.ajax({
 	  			url: "${APP_PATH}/MlfrontReview/getMlfrontReviewByProductIdAndPage",
 	  			data: {
- 	          			"productId": pidA[1],
+ 	          			"productId": pidA,
  	          			"pn": pn
  	        		  },
 	  			type: "POST",

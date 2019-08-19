@@ -107,11 +107,21 @@
     function renderHotProduct(parent, data) {
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
-				html += '<div class="swiper-slide">' +
-	          '<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].actshowproProid + '">' +
-								'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+				/* html += '<div class="swiper-slide">' +
+	          			'<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].actshowproProid + '">' +
+						'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 						'</a>' +
-					'</div>';
+						'</div>'; */
+				html += '<div class="swiper-slide">' +
+		          		'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.htm">' +
+						'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+						'</a>' +
+						'</div>';
+				/* html += '<div class="banner">' +
+		        '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+		        '</a>' +
+		        '</div>'; */
 			}
       parent.html(html);
     }
@@ -195,10 +205,15 @@
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="product-item col-lg-3">' +
-          '<div class="product-img">' +
-          '<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].productId + '">' +
-          '<img src="' + data[i].productMainimgurl + '" alt="">' +
-          '</a>' +
+          		'<div class="product-img">' +
+          		'<a href="${APP_PATH}/' + data[i].productSeo + '.htm">' +
+          		'<img src="' + data[i].productMainimgurl + '" alt="">' +
+          		'</a>' +
+          		/* '<div class="product-item col-lg-3">' +
+          		'<div class="product-img">' +
+          		'<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].productId + '">' +
+          		'<img src="' + data[i].productMainimgurl + '" alt="">' +
+          		'</a>' + */
           '</div>' +
           '<div class="product-desc">' +
           '<div class="product-title">' + data[i].productName + '</div>' +

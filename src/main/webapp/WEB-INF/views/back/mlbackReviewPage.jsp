@@ -107,23 +107,6 @@
 		var totalRecord, currentPage, editid;
 
 		var timeFormat = 'YYYY-MM-DD HH:mm:ss';
-		var date = new Date();
-		var minDate = moment()
-		.set({
-			'date': date.getDate() - 1,
-			'hour': date.getHours(),
-			'minute': date.getMinutes(),
-			'second': date.getSeconds()
-		})
-		.format(timeFormat);
-		var maxDate = moment()
-			.set({
-				'date': date.getDate(),
-				'hour': date.getHours(),
-				'minute': date.getMinutes(),
-				'second': date.getSeconds()
-			})
-			.format(timeFormat);
 
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		to_page(1);
@@ -264,9 +247,8 @@
 					$(":input[name='reviewConfirmtime']").val(maxDate);
 					$('.date-timepicker').each(function(i, item) {
 						$(item).datePicker({
-							min: minDate,
-							max: maxDate,
-							isRange: true
+							isRange: true,
+							format: timeFormat
 						});
 					});
 				}
@@ -394,13 +376,10 @@
 						// render data
 						tianchong(obj);
 
-						$(":input[name='reviewCreatetime']").val(minDate);
-						$(":input[name='reviewConfirmtime']").val(maxDate);
 						$('.date-timepicker').each(function(i, item) {
 							$(item).datePicker({
 								isRange: true,
-								min: minDate,
-								max: maxDate 
+								format: timeFormat
 							});
 						});
 					} else {
@@ -419,8 +398,10 @@
 			$(":input[name='reviewUname']").val(data.reviewUname);
 			$(":input[name='reviewPid']").val(data.reviewPid);
 			$(":input[name='reviewPname']").val(data.reviewPname);
-			minDate = data.reviewCreatetime || minDate;
-			maxDate = data.reviewConfirmtime || maxDate;
+			
+			$(":input[name='reviewCreatetime']").val(data.reviewCreatetime);
+			$(":input[name='reviewConfirmtime']").val(data.reviewConfirmtime);
+
 			$(":input[name='reviewStatus']").val(data.reviewStatus);
 			
 			if (data.reviewUimgurl && data.reviewUimgurl.length) {
