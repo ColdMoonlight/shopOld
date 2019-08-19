@@ -67,7 +67,7 @@ public class MlfrontReviewController {
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
 //		}else{
-			int PagNum = 20;
+			int PagNum = 50;
 			PageHelper.startPage(pn, PagNum);
 			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewAll();
 			

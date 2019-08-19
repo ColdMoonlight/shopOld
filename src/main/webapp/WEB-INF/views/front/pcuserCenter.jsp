@@ -123,19 +123,19 @@
 	// 直接   window.location.href="${APP_PATH }/MlfrontUser/toPersonInfoPage";到这个页面再请求userInfo信息
 
 	$('#order_info').on('click', function () {
-		window.location.href = "${APP_PATH }/MlfrontUser/tommyOrderPage";
+		window.location.href = "${APP_PATH }/MlfrontUser/topcmyOrderPage";
 	})
 
 	$('#shopping-cart').on('click', function () {
-		window.location.href = "${APP_PATH }/MlbackCart/toCartList";
+		window.location.href = "${APP_PATH }/MlbackCart/topcCartList";
 	})
 
 	$('#coupon_info').on('click', function () {
-		window.location.href = "${APP_PATH }/MlfrontUser/tomCouponPage";
+		window.location.href = "${APP_PATH }/MlfrontUser/topcCouponPage";
 	})
 
 	$('#personal_info').on('click', function () {
-		window.location.href = "${APP_PATH }/MlfrontUser/toPersonInfoPage";
+		window.location.href = "${APP_PATH }/MlfrontUser/topcPersonInfoPage";
 	})
 </script>
 

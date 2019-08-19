@@ -29,8 +29,10 @@
   <jsp:include page="pcheader.jsp"></jsp:include>
 
   <!-- main -->
-  <div class="main article"></div>
-
+  <div class="container word_box">
+  	 <div class="main article"></div>
+  </div>
+ 
   <jsp:include page="pcfooter.jsp"></jsp:include>
   
  	<script type="text/javascript">
