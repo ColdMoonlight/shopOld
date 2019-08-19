@@ -136,6 +136,11 @@
 
 					if (resData.loginYes === 1) {
 						renderSysMsg(resData.resMsg);
+						setTimeout(function(){
+							$('.sys-box').remove();
+							$('.mask').remove();
+							sysFlag = !sysFlag;
+						},1000)
 						setInterval(function() {
 							if (sysFlag) {
 								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
@@ -174,6 +179,11 @@
 					if (resData.registerYes === 1) {
 						fbq('track', 'CompleteRegistration');//追踪'注册'事件		facebook广告插件可以注释掉，但不要删除
 						renderSysMsg(resData.resMsg);
+						setTimeout(function(){
+							$('.sys-box').remove();
+							$('.mask').remove();
+							sysFlag = !sysFlag;
+						},1000)
 						setInterval(function() {
 							if (sysFlag) {
 								window.location.href = "${APP_PATH}/index/isMobileOrPc";	

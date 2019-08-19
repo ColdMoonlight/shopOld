@@ -767,7 +767,7 @@
 					$.ajax({
 						url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
 						type: 'post',
-						dataType: 'JSON',
+						dataType: 'text',
 						async: false,
 						success: function (data) {
 							// console.log(data);
@@ -776,10 +776,11 @@
 							for (var i = 0; i < len; i += 1) {
 								counponDataList[resData[i].couponId] = resData[i];
 								html += '<div class="coupon-item">' +
-									'<span class="price">$' + resData[i].couponPrice + '</span>' +
-									'<span class="name">' + resData[i].couponName + '</span>' +
 									'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
 									'" onclick="selectCoupon(event)" class="checkbox">' +
+									'<span class="price">$' + resData[i].couponPrice + '</span>' +
+									'<span class="name">' + resData[i].couponName + '</span>' +
+									
 									'</div>';
 							}
 						}
@@ -911,7 +912,7 @@
 							//var resData = JSON.parse(data).extend;
 							// console.log(data)
 							if($(".save").hasClass("active")){
-								window.location.href = '${APP_PATH }/paypal/pay';
+								window.location.href = '${APP_PATH }/paypal/ppay';
 							}else{
 								alert("Please fill in the shipping address")
 							}
