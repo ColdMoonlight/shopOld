@@ -200,7 +200,7 @@
 						}
 					}
 				}
-				html += '<span class="sku-id-name">' + data.productskuName + ':</span>';
+				html +=  '<i>* </i>'+'<span class="sku-id-name">' + data.productskuName + ':</span>';
 				html += '<div class="list">';
 				for (var i = 0; i < len; i += 1) {
 					if (i === 0) {

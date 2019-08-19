@@ -47,14 +47,16 @@
 <body>
 
   <jsp:include page="pcheader.jsp"></jsp:include>
-
   <!-- main -->
   <div class="main">
-  
+    <div class="container pay_box">
   	<input type="hidden" class="order-id" name="orderId">
 
     <!-- purechase step -->
-    <img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_pay.jpg">
+	<div class="cart-title">
+		 <img class="purechase-step" src="${APP_PATH }/static/pc/img/sep4.jpg">
+	</div>
+   
 
     <div class="box-none">
       <img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
@@ -64,7 +66,7 @@
       <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-pink">ConTine Shopping</a>
     </div>
   </div>
-
+</div>
   <jsp:include page="pcfooter.jsp"></jsp:include>
   <script type="text/javascript">
 	$.ajax({

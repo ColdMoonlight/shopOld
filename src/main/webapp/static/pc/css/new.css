@@ -45,6 +45,11 @@
 .product-d-length>span, .product-d-count>span, .product-d-price>span, .product-d-length>span{ font-size: 14px;font-weight: bold;color: #333;}
 .rightrule #countdown-area. .title{text-align: left;padding: 1em 0;font-size: 18px; color: #333;}
 .product-d-length .list>span{color: #333;}
+.product-d-length i{color: #f00;font-size: 14px;margin: 0 5px 0 0;}
+.box-none .btn:hover{background: #000;}
+
+
+
 
 /**错误提示****/
 .sys-box {
