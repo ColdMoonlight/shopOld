@@ -859,7 +859,7 @@
 					success: function (data) {
 						var resData = JSON.parse(data).extend;
 						// console.log(data)
-						window.location.href = '${APP_PATH }/paypal/pay';
+						window.location.href = '${APP_PATH }/paypal/mpay';
 					}
 				})
 			} else {
