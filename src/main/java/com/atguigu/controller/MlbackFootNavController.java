@@ -218,7 +218,7 @@ public class MlbackFootNavController {
 	
 	/**
 	 * 8.0	UseNow	0505
-	 * toMlbackFootNav展示页面
+	 * toMlbackFootNav展示页面(wap)
 	 * @param jsp
 	 * @return 
 	 * */
@@ -233,6 +233,25 @@ public class MlbackFootNavController {
 		session.setAttribute("footnavId", footnavIdReq);
 		
 		return "mfront/footNavPage";
+	}
+	
+	/**
+	 * 8.02	UseNow	0505
+	 * toMlbackFootNav展示页面(PC)
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/topcMlfrontFootNavPage",method=RequestMethod.GET)
+	public String topcMlfrontFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
+	
+		//接收传递进来的参数
+		Integer footnavIdReq = footnavId;
+		//放回响应域中
+		res.setAttribute("footnavId", footnavIdReq);
+		
+		session.setAttribute("footnavId", footnavIdReq);
+		
+		return "front/pcfootNavPage";
 	}
 	
 	/**
