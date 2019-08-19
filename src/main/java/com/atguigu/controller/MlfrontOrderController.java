@@ -430,6 +430,22 @@ public class MlfrontOrderController {
 	}
 	
 	/**
+	 * 6.0.1	useOn	0505
+	 * to	MlfrontCart列表页面
+	 * @param jsp
+	 * @return  
+	 * */	
+	@RequestMapping(value="/getMlfrontOrderDetailpcPage",method=RequestMethod.GET)
+	public String topcProductDetailPage() throws Exception{
+		//接收传递进来的参数
+		/*Integer orderIdReq = orderId;
+		//放回响应域中
+		res.setAttribute("orderId", orderIdReq);*/
+		//返回视图
+		return "front/pcmyOrderDetail";
+	}
+	
+	/**
 	 * 6.0	useOn	0505
 	 * 查看单条类目的详情细节
 	 * @param mlfrontOrderOne
