@@ -238,8 +238,7 @@
 					$(item).datePicker({
 						hasShortcut: true,
 						isRange: true,
-						min: minDate,
-						max: maxDate
+						fomat: timeFormat
 					});
 				});
 			});
@@ -258,13 +257,11 @@
 						if (result.code == 100) {
 							obj = result.extend.mlbackCountDownOne;
 							tianchong(obj);
-							$(":input[name='countdownStarttime']").val(minDate);
-							$(":input[name='countdownEndtime']").val(maxDate);
+							
 							$('.date-timepicker').each(function(i, item) {
 								$(item).datePicker({
 									isRange: true,
-									min: minDate,
-									max: maxDate
+									format: timeFormat
 								});
 							});
 						} else {
@@ -279,8 +276,9 @@
 			$(":input[name='countdownId']").val(data.countdownId);
 			$(":input[name='countdownTitle']").val(data.countdownTitle);
 			$(":input[name='countdownDescription']").val(data.countdownDescription);
-			minDate = data.countdownStarttime || minDate;
-			maxDate = data.countdownEndtime || maxDate;
+
+			$(":input[name='countdownStarttime']").val(data.countdownStarttime);
+			$(":input[name='countdownEndtime']").val(data.countdownEndtime);
 		}
 		// 新建/编辑 保存
 		$(document).on('click', '#tasksubmit', function () {
