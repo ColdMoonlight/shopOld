@@ -40,6 +40,12 @@ public class PaypalController {
     public static final String PAYPAL_CANCEL_M_URL = "paypal/mcancel";
     public static final String PAYPAL_SUCCESS_M_URLIn = "msuccess";
     public static final String PAYPAL_CANCEL_M_URLIn = "mcancel";
+    
+    
+    public static final String PAYPAL_SUCCESS_P_URL = "paypal/psuccess";
+    public static final String PAYPAL_CANCEL_P_URL = "paypal/pcancel";
+    public static final String PAYPAL_SUCCESS_P_URLIn = "psuccess";
+    public static final String PAYPAL_CANCEL_P_URLIn = "pcancel";
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -56,10 +62,9 @@ public class PaypalController {
     MlfrontAddressService mlfrontAddressService;
 
     /**1.0
-     * 组装参数,发起真实的支付
+     * 组装参数,WAP端发起真实的支付
      * paypal/pay
      * */
-//    @RequestMapping(method = RequestMethod.POST, value = "pay")
     @RequestMapping(method = RequestMethod.GET, value = "mpay")
     public String pay(HttpServletRequest request,HttpSession session){
     	//读取参数
@@ -72,6 +77,43 @@ public class PaypalController {
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
+        try {
+            Payment payment = paypalService.createPayment(
+            		moneyDouble,// 888.00, 
+            		moneyTypeStr, //"USD", 
+                    PaypalPaymentMethod.paypal, //paypal
+                    PaypalPaymentIntent.sale,//paypal
+                    payDes,//"payment description", 
+                    cancelUrl, 
+                    successUrl);
+            for(Links links : payment.getLinks()){
+                if(links.getRel().equals("approval_url")){
+                	System.out.println("links.getHref:"+links.getHref());
+                    return "redirect:" + links.getHref();
+                }
+            }
+        } catch (PayPalRESTException e) {
+            log.error(e.getMessage());
+        }
+        return "redirect:/";
+    }
+    
+    /**1.1
+     * 组装参数,PC端发起真实的支付
+     * paypal/ppay
+     * */
+    @RequestMapping(method = RequestMethod.GET, value = "ppay")
+    public String ppay(HttpServletRequest request,HttpSession session){
+    	//读取参数
+    	ToPaypalInfo toPaypalInfo = getPayInfo(session);
+    	BigDecimal money = toPaypalInfo.getMoneyNum();
+    	String moneyStr = money.toString();
+    	Double moneyDouble = Double.parseDouble(moneyStr);
+    	String moneyTypeStr = toPaypalInfo.getMoneyType();
+    	String payDes = toPaypalInfo.getPaymentDescription();
+    	//封装paypal所需
+        String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_P_URL;
+        String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_P_URL;
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -122,6 +164,36 @@ public class PaypalController {
             return "mfront/payFail";
         }
        // return "redirect:/";
+    }
+    
+    /**2.1
+     * 返回PC成功页面
+     * front/paySuccess
+     * */
+    @RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_P_URLIn)
+    public String pcsuccessPay(HttpSession session,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
+
+    	try {
+            Payment payment = paypalService.executePayment(paymentId, payerId);
+            
+            toUpdatePayInfoSuccess(session,payerId,paymentId);
+            
+            sendResultEmail(session);
+            
+            System.out.println(payment.toJSON());
+            
+            
+            
+            if(payment.getState().equals("approved")){
+                return "front/paySuccess";
+            }else{
+            	return "front/payFail";
+            }
+        } catch (PayPalRESTException e) {
+            log.error(e.getMessage());
+            System.out.println(e.getMessage());
+            return "front/payFail";
+        }
     }
     
     private void sendResultEmail(HttpSession session) {
@@ -198,6 +270,18 @@ public class PaypalController {
 		toUpdatePayInfoFail(session);
 		
         return "mfront/payFail";
+    }
+	
+	/**2.0
+     * 返回PC失败页面
+     * front/payFail
+     * */
+	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_P_URLIn)
+    public String pcancelPay(HttpSession session){
+		
+		toUpdatePayInfoFail(session);
+		
+        return "front/payFail";
     }
     
     private void toUpdatePayInfoFail(HttpSession session) {
