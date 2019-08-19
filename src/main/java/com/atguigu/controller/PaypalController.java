@@ -1,6 +1,7 @@
 package com.atguigu.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontOrder;
+import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.ToPaypalInfo;
 import com.atguigu.enumC.PaypalPaymentIntent;
 import com.atguigu.enumC.PaypalPaymentMethod;
 import com.atguigu.service.MlfrontAddressService;
+import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.service.PaypalService;
@@ -59,6 +62,9 @@ public class PaypalController {
 	MlfrontOrderService mlfrontOrderService;
     
     @Autowired
+    MlfrontOrderItemService mlfrontOrderItemService;
+    
+    @Autowired
     MlfrontAddressService mlfrontAddressService;
 
     /**1.0
@@ -69,6 +75,11 @@ public class PaypalController {
     public String pay(HttpServletRequest request,HttpSession session){
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
+    	
+    	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
+    	
+    	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
+    	
     	BigDecimal money = toPaypalInfo.getMoneyNum();
     	String moneyStr = money.toString();
     	Double moneyDouble = Double.parseDouble(moneyStr);
@@ -80,7 +91,9 @@ public class PaypalController {
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
-            		moneyTypeStr, //"USD", 
+            		moneyTypeStr, //"USD",  
+            		mlfrontAddress,//mlfrontAddress
+            		mlfrontOrderItemList,
                     PaypalPaymentMethod.paypal, //paypal
                     PaypalPaymentIntent.sale,//paypal
                     payDes,//"payment description", 
@@ -106,6 +119,11 @@ public class PaypalController {
     public String ppay(HttpServletRequest request,HttpSession session){
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
+    	
+    	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
+    	
+    	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
+    	
     	BigDecimal money = toPaypalInfo.getMoneyNum();
     	String moneyStr = money.toString();
     	Double moneyDouble = Double.parseDouble(moneyStr);
@@ -118,6 +136,8 @@ public class PaypalController {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
             		moneyTypeStr, //"USD", 
+            		mlfrontAddress,//mlfrontAddress
+            		mlfrontOrderItemList, 
                     PaypalPaymentMethod.paypal, //paypal
                     PaypalPaymentIntent.sale,//paypal
                     payDes,//"payment description", 
@@ -348,4 +368,33 @@ public class PaypalController {
 		return toPaypalInfo;
 	}
 	
+    private MlfrontAddress getMlfrontAddress(HttpSession session) {
+    	MlfrontAddress mlfrontAddressToPay = (MlfrontAddress) session.getAttribute("mlfrontAddressToPay");
+		return mlfrontAddressToPay;
+	}
+    
+    private List<MlfrontOrderItem> getMlfrontOrderItemList(HttpSession session) {
+    	Integer orderId = (Integer) session.getAttribute("orderId");
+    	
+    	MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+    	mlfrontOrderReq.setOrderId(orderId);
+    	List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq);
+    	MlfrontOrder mlfrontOrderRes = mlfrontOrderList.get(0);
+    	String orderitemidstr = mlfrontOrderRes.getOrderOrderitemidstr();
+    	String orderitemidArr[] = orderitemidstr.split(",");
+    	
+    	MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
+    	MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
+    	
+    	List<MlfrontOrderItem> mlfrontOrderItemsList = new ArrayList<MlfrontOrderItem>();
+    	for(int i=0;i<orderitemidArr.length;i++){
+			Integer orderItemId = Integer.parseInt(orderitemidArr[i]);
+			mlfrontOrderItemReq.setOrderitemId(orderItemId);
+			List<MlfrontOrderItem> mlfrontOrderItemList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemReq);
+			mlfrontOrderItemRes = mlfrontOrderItemList.get(0);
+			mlfrontOrderItemsList.add(mlfrontOrderItemRes);
+		}
+		return mlfrontOrderItemsList;
+	}
+    
 }
