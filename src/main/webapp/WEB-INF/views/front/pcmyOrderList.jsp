@@ -30,16 +30,18 @@
 
 	<!-- main -->
 	<div class="main order-info">
-		<div class="tab">
-			<div class="tab-item active" data-id="all">All orders</div>
-			<div class="tab-item" data-id="0">Unpaid</div>
-			<div class="tab-item" data-id="1">Paid</div>
-			<div class="tab-item" data-id="2">Payment failed</div>
-			<div class="tab-item" data-id="3">Shipped</div>
-		</div>
-		<div class="tab-content">
-			<div class="order-list"></div>
-			<div class="page-info-area"></div>
+		<div class="container order_box">
+			<div class="tab">
+				<div class="tab-item active" data-id="all">All orders</div>
+				<div class="tab-item" data-id="0">Unpaid</div>
+				<div class="tab-item" data-id="1">Paid</div>
+				<div class="tab-item" data-id="2">Payment failed</div>
+				<div class="tab-item" data-id="3">Shipped</div>
+			</div>
+			<div class="tab-content">
+				<div class="order-list"></div>
+				<div class="page-info-area"></div>
+			</div>
 		</div>
 	</div>
 
