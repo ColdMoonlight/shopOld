@@ -8,6 +8,27 @@
  %>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
+	
+	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
+	<script>
+	  !function(f,b,e,v,n,t,s)
+	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	  n.queue=[];t=b.createElement(e);t.async=!0;
+	  t.src=v;s=b.getElementsByTagName(e)[0];
+	  s.parentNode.insertBefore(t,s)}(window, document,'script',
+	  'https://connect.facebook.net/en_US/fbevents.js');
+	  fbq('init', '667403967094866');
+	  fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!-- End Facebook Pixel Code -->
+	
+	<script>
+  		fbq('track', 'ViewContent');
+	</script>
+	<!-- Facebook Pixel Code end -->
 </head>
 
 <body>
@@ -113,7 +134,7 @@
 						'</a>' +
 						'</div>'; */
 				html += '<div class="swiper-slide">' +
-		          		'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.htm">' +
+		          		'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
 						'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 						'</a>' +
 						'</div>';
@@ -206,7 +227,7 @@
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="product-item col-lg-3">' +
           		'<div class="product-img">' +
-          		'<a href="${APP_PATH}/' + data[i].productSeo + '.htm">' +
+          		'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
           		'<img src="' + data[i].productMainimgurl + '" alt="">' +
           		'</a>' +
           		/* '<div class="product-item col-lg-3">' +

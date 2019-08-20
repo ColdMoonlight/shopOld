@@ -348,6 +348,17 @@ public class MlfrontUserController {
 	
 		return "mfront/PersonInfo";
 	}
+	/**
+	 * 13.1	useOn	0505
+	 * to	toPersonInfoPage列表页面
+	 * @param jsp
+	 * @return  
+	 * */
+	@RequestMapping("/topcPersonInfoPage")
+	public String topcPersonInfoPage() throws Exception{
+	
+		return "front/pcPersonInfo";
+	}
 	
 	
 	/**
@@ -383,9 +394,20 @@ public class MlfrontUserController {
 	
 		return "mfront/myCoupon";
 	}
+	/**
+	 * 15.1	useOn	0505
+	 * to	topcCouponPage列表页面
+	 * @param jsp
+	 * @return  
+	 * */
+	@RequestMapping("/topcCouponPage")
+	public String topcCouponPage() throws Exception{
+	
+		return "front/pcmyCoupon";
+	}
 	
 	/**
-	 * 15.0	useOn	0505
+	 * 16.0	useOn	0505
 	 * to	tommyOrderPage列表页面
 	 * @param jsp
 	 * @return  
@@ -394,5 +416,16 @@ public class MlfrontUserController {
 	public String tommyOrderPage() throws Exception{
 	
 		return "mfront/myOrderList";
+	}
+	/**
+	 * 16.1	useOn	0505
+	 * to	tommyOrderPage列表页面
+	 * @param jsp
+	 * @return  
+	 * */
+	@RequestMapping("/topcmyOrderPage")
+	public String topcmyOrderPage() throws Exception{
+	
+		return "front/pcmyOrderList";
 	}
 }

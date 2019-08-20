@@ -20,6 +20,26 @@
 	<!-- uc 字体放大-->
 	<meta name="wap-font-scale" content="no">
 	<meta name="aplus-touch" content="1">
+	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
+	<script>
+	  !function(f,b,e,v,n,t,s)
+	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	  n.queue=[];t=b.createElement(e);t.async=!0;
+	  t.src=v;s=b.getElementsByTagName(e)[0];
+	  s.parentNode.insertBefore(t,s)}(window, document,'script',
+	  'https://connect.facebook.net/en_US/fbevents.js');
+	  fbq('init', '667403967094866');
+	  fbq('track', 'PageView');
+	</script>
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!-- End Facebook Pixel Code -->
+	
+	<script>
+  		fbq('track', 'ViewContent');
+	</script>
+	<!-- Facebook Pixel Code end -->
 	
 </head>
 
@@ -224,6 +244,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
+						addHeaderInfo(productData);
 						// console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
@@ -238,6 +259,40 @@
 					}
 				}
 			});
+			function addHeaderInfo(productData){
+				
+				console.log(productData);
+				   var productNameStr = productData.productName;
+				   var productSeoStr =productData.productSeo;
+				   var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+				   var imageStr =productData.productMainimgurl;
+				   var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
+				   var productIdStr =productData.productId;
+		           var meta = $('<meta property = "og:title" content ="'+ productNameStr +'">'+
+					'<meta property = "og:description" content = "'+ productSeoStr +'" >'+
+					'<meta property = "og:url" content = "'+urlStr+'" >'+
+					'<meta property = "og:image" content = "'+imageStr+'" >'+
+					'<meta property = "product:brand" content = "MegaLook" >'+
+					'<meta property = "product:availability" content = "in stock" >'+
+					'<meta property = "product:condition" content = "new" > '+
+					'<meta property = "product:price:amount" content = "'+amountStr+'" >'+
+					'<meta property = "product:price:currency" content = "USD" >'+
+					'<meta property = "product:retailer_item_id" content = "'+productIdStr+'" >'+
+					'');
+		          	$(document.head).append(meta)
+					/*
+						<meta property = “og：title” content = “Facebook T-Shirt” >  					该项目的标题。
+						<meta property = “og：description” content = “男女皆宜的Facebook T恤，小” >  			项目描述。
+						<meta property = “og：url” content = “https://example.org/facebook” >  			产品页面的完整URL。
+						<meta property = “og：image” content = “https://example.org/facebook.jpg” >  	链接到产品页面上使用的图像。
+						<meta property = “product：brand” content = “Facebook” >  						商品的品牌名称。
+						<meta property = “product：availability” content = “in stock” >  				该项目的当前可用性：in stock，out of stock，preorder，available for order，discontinued。
+						<meta property = “product：condition” content = “new” >  						项目现状：new，refurbished，used。
+						<meta property = “product：price：amount” content = “9.99” >  					该项目的当前价格。不要在价格中包含符号，例如“$”。
+						<meta property = “product：price：currency” content = “USD” >  					ISO格式的价格货币（例如USD）。
+						<meta property = “product：retailer_item_id” content = “facebook_tshirt_001” >  	零售商的物品ID。
+					*/
+			}
 			/*
       review汇总接口  
       Integer productId;
@@ -648,6 +703,7 @@
 
 			// add-to-cart
 			$('.add-to-cart').on('click', function () {
+				fbq('track', 'AddToCart');//追踪'添加购物车'事件		facebook广告插件可以注释掉，但不要删除
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
@@ -743,6 +799,7 @@
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
 				// console.log(data);
+				fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
 				
 				// name, id, price
 				function getSkuData(els) {
