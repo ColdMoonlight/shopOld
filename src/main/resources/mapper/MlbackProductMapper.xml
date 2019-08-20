@@ -24,6 +24,7 @@
     <result column="product_reviewNum" jdbcType="INTEGER" property="productReviewnum" />
     <result column="product_category_idsStr" jdbcType="VARCHAR" property="productCategoryIdsStr" />
     <result column="product_category_namesStr" jdbcType="VARCHAR" property="productCategoryNamesStr" />
+    <result column="product_meta_desc" jdbcType="VARCHAR" property="productMetaDesc" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.atguigu.bean.MlbackProduct">
     <result column="product_desc" jdbcType="LONGVARCHAR" property="productDesc" />
@@ -90,7 +91,7 @@
     product_id, product_name, product_color, product_seo, product_categoryId, product_mainimgurl, product_originalPrice, 
     product_haveSaleNum, product_status, product_createTime, product_motifyTime, product_admin_id, 
     product_admin_operatorName, product_lable, product_firsth, product_actoffId, product_actoffOff, product_reviewNum,
-    product_category_idsStr,product_category_namesStr
+    product_category_idsStr,product_category_namesStr,product_meta_desc
   </sql>
   <sql id="Blob_Column_List">
     product_desc
@@ -146,14 +147,14 @@
       product_haveSaleNum, product_status, product_createTime, 
       product_motifyTime, product_admin_id, product_admin_operatorName, 
       product_lable, product_firsth, product_actoffId, product_actoffOff, 
-      product_reviewNum, product_desc,product_category_idsStr,product_category_namesStr)
+      product_reviewNum, product_desc,product_category_idsStr,product_category_namesStr,product_meta_desc)
     values (#{productId,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{productSeo,jdbcType=VARCHAR}, 
       #{productCategoryid,jdbcType=INTEGER}, #{productMainimgurl,jdbcType=VARCHAR}, #{productOriginalprice,jdbcType=DECIMAL}, 
       #{productHavesalenum,jdbcType=INTEGER}, #{productStatus,jdbcType=INTEGER}, #{productCreatetime,jdbcType=VARCHAR}, 
       #{productMotifytime,jdbcType=VARCHAR}, #{productAdminId,jdbcType=INTEGER}, #{productAdminOperatorname,jdbcType=VARCHAR}, 
       #{productLable,jdbcType=INTEGER}, #{productFirsth,jdbcType=INTEGER}, #{productActoffid,jdbcType=INTEGER}, #{productActoffoff,jdbcType=INTEGER}, 
       #{productReviewnum,jdbcType=INTEGER}, #{productDesc,jdbcType=LONGVARCHAR}, 
-      #{productCategoryIdsStr,jdbcType=VARCHAR}, #{productCategoryNamesStr,jdbcType=VARCHAR})
+      #{productCategoryIdsStr,jdbcType=VARCHAR}, #{productCategoryNamesStr,jdbcType=VARCHAR}, #{productMetaDesc,jdbcType=VARCHAR})
   </insert>
   
   <select id="countByExample" parameterType="com.atguigu.bean.MlbackProductExample" resultType="java.lang.Long">
@@ -225,6 +226,9 @@
       <if test="record.productCategoryNamesStr != null">
         product_category_namesStr = #{record.productCategoryNamesStr,jdbcType=VARCHAR},
       </if>
+      <if test="record.productMetaDesc != null">
+        product_meta_desc = #{record.productMetaDesc,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -251,7 +255,8 @@
       product_reviewNum = #{record.productReviewnum,jdbcType=INTEGER},
       product_desc = #{record.productDesc,jdbcType=LONGVARCHAR},
       product_category_idsStr = #{record.productCategoryIdsStr,jdbcType=VARCHAR},
-      product_category_namesStr = #{record.productCategoryNamesStr,jdbcType=VARCHAR}
+      product_category_namesStr = #{record.productCategoryNamesStr,jdbcType=VARCHAR},
+      product_meta_desc = #{record.productMetaDesc,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -276,7 +281,8 @@
       product_actoffOff = #{record.productActoffoff,jdbcType=INTEGER},
       product_reviewNum = #{record.productReviewnum,jdbcType=INTEGER},
       product_category_idsStr = #{record.productCategoryIdsStr,jdbcType=VARCHAR},
-      product_category_namesStr = #{record.productCategoryNamesStr,jdbcType=VARCHAR}
+      product_category_namesStr = #{record.productCategoryNamesStr,jdbcType=VARCHAR},
+      product_meta_desc = #{record.productMetaDesc,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -302,7 +308,8 @@
       product_reviewNum = #{productReviewnum,jdbcType=INTEGER},
       product_desc = #{productDesc,jdbcType=LONGVARCHAR},
       product_category_idsStr = #{productCategoryIdsStr,jdbcType=VARCHAR},
-      product_category_namesStr = #{productCategoryNamesStr,jdbcType=VARCHAR}
+      product_category_namesStr = #{productCategoryNamesStr,jdbcType=VARCHAR},
+      product_meta_desc = #{productMetaDesc,jdbcType=VARCHAR}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlbackProduct">
@@ -324,7 +331,8 @@
       product_actoffOff = #{productActoffoff,jdbcType=INTEGER},
       product_reviewNum = #{productReviewnum,jdbcType=INTEGER},
       product_category_idsStr = #{productCategoryIdsStr,jdbcType=VARCHAR},
-      product_category_namesStr = #{productCategoryNamesStr,jdbcType=VARCHAR}
+      product_category_namesStr = #{productCategoryNamesStr,jdbcType=VARCHAR},
+      product_meta_desc = #{productMetaDesc,jdbcType=VARCHAR}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
   
@@ -398,6 +406,9 @@
       </if>
       <if test="productCategoryNamesStr != null">
         product_category_namesStr = #{productCategoryNamesStr,jdbcType=VARCHAR},
+      </if>
+      <if test="productMetaDesc != null">
+        product_meta_desc = #{productMetaDesc,jdbcType=VARCHAR},
       </if>
   </select>
   <!-- selectMlbackProductByPName使用中 -->
@@ -486,6 +497,9 @@
       <if test="productCategoryNamesStr != null">
         product_category_namesStr,
       </if>
+      <if test="productMetaDesc != null">
+        product_meta_desc,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productId != null">
@@ -556,6 +570,9 @@
       </if>
       <if test="productCategoryNamesStr != null">
         #{productCategoryNamesStr,jdbcType=VARCHAR},
+      </if>
+      <if test="productMetaDesc != null">
+        #{productMetaDesc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -630,6 +647,9 @@
 	  <if test="productCategoryNamesStr != null">
 		product_category_namesStr = #{productCategoryNamesStr,jdbcType=VARCHAR},
 	  </if>
+	  <if test="productMetaDesc != null">
+		product_meta_desc = #{productMetaDesc,jdbcType=VARCHAR},
+	  </if>
     </set>
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
@@ -676,6 +696,5 @@
  	from tb_mlback_product
     where product_seo = #{productSeo,jdbcType=VARCHAR}
   </select>
-  
   
 </mapper>
