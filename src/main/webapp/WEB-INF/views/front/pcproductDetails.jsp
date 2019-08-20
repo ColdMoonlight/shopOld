@@ -244,6 +244,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
+						addHeaderInfo(productData);
 						// console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
@@ -258,6 +259,40 @@
 					}
 				}
 			});
+			function addHeaderInfo(productData){
+				
+				console.log(productData);
+				   var productNameStr = productData.productName;
+				   var productSeoStr =productData.productSeo;
+				   var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+				   var imageStr =productData.productMainimgurl;
+				   var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
+				   var productIdStr =productData.productId;
+		           var meta = $('<meta property = "og:title" content ="'+ productNameStr +'">'+
+					'<meta property = "og:description" content = "'+ productSeoStr +'" >'+
+					'<meta property = "og:url" content = "'+urlStr+'" >'+
+					'<meta property = "og:image" content = "'+imageStr+'" >'+
+					'<meta property = "product:brand" content = "MegaLook" >'+
+					'<meta property = "product:availability" content = "in stock" >'+
+					'<meta property = "product:condition" content = "new" > '+
+					'<meta property = "product:price:amount" content = "'+amountStr+'" >'+
+					'<meta property = "product:price:currency" content = "USD" >'+
+					'<meta property = "product:retailer_item_id" content = "'+productIdStr+'" >'+
+					'');
+		          	$(document.head).append(meta)
+					/*
+						<meta property = “og：title” content = “Facebook T-Shirt” >  					该项目的标题。
+						<meta property = “og：description” content = “男女皆宜的Facebook T恤，小” >  			项目描述。
+						<meta property = “og：url” content = “https://example.org/facebook” >  			产品页面的完整URL。
+						<meta property = “og：image” content = “https://example.org/facebook.jpg” >  	链接到产品页面上使用的图像。
+						<meta property = “product：brand” content = “Facebook” >  						商品的品牌名称。
+						<meta property = “product：availability” content = “in stock” >  				该项目的当前可用性：in stock，out of stock，preorder，available for order，discontinued。
+						<meta property = “product：condition” content = “new” >  						项目现状：new，refurbished，used。
+						<meta property = “product：price：amount” content = “9.99” >  					该项目的当前价格。不要在价格中包含符号，例如“$”。
+						<meta property = “product：price：currency” content = “USD” >  					ISO格式的价格货币（例如USD）。
+						<meta property = “product：retailer_item_id” content = “facebook_tshirt_001” >  	零售商的物品ID。
+					*/
+			}
 			/*
       review汇总接口  
       Integer productId;

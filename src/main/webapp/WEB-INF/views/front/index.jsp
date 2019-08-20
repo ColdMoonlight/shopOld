@@ -134,7 +134,7 @@
 						'</a>' +
 						'</div>'; */
 				html += '<div class="swiper-slide">' +
-		          		'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.htm">' +
+		          		'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
 						'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 						'</a>' +
 						'</div>';
@@ -227,7 +227,7 @@
       for (var i = 0; i < data.length; i += 1) {
         html += '<div class="product-item col-lg-3">' +
           		'<div class="product-img">' +
-          		'<a href="${APP_PATH}/' + data[i].productSeo + '.htm">' +
+          		'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
           		'<img src="' + data[i].productMainimgurl + '" alt="">' +
           		'</a>' +
           		/* '<div class="product-item col-lg-3">' +
