@@ -195,6 +195,7 @@ ${APP_PATH }/MlfrontUser/update
 					// console.log(data);
 					if (data.code === 100) {
 						// console.log(data.extend.resMsg);
+	
 						$(this).attr('data-flag', 0).text('edit');
 						$('.input').each(function (i, item) {
 							$(item).removeAttr('contenteditable');
