@@ -97,6 +97,26 @@ public class MlfrontUserController {
 		return "front/pcloginRegister";
 	}
 	
+	/**2.0	UseNow	0515
+	 * ifSession	wap重置密码
+	 * @param ifSession
+	 */
+	@RequestMapping(value="/tomForgetPassWord")
+	public String tomForgetPassWord() throws Exception{
+		
+		return "mfront/forgetPassWord";
+	}
+	
+	/**2.0	UseNow	0515
+	 * ifSession	pc重置密码
+	 * @param ifSession
+	 */
+	@RequestMapping(value="/topcForgetPassWord")
+	public String topcForgetPassWord() throws Exception{
+		
+		return "front/pcsetpassword";
+	}
+	
 	/**3.0	UseNow	0515
 	 * MlfrontUser	登录login
 	 * @param MlfrontUser
