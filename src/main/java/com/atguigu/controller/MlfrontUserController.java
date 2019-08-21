@@ -78,7 +78,7 @@ public class MlfrontUserController {
 		return Msg.success().add("resMsg", "初始化验证是否登录").add("ifLogin", ifLogin);
 	}
 	
-	/**2.0	UseNow	0515
+	/**2.0.1	UseNow	0515
 	 * ifSession	wap去登录/注册页面
 	 * @param ifSession
 	 */
@@ -87,7 +87,7 @@ public class MlfrontUserController {
 		
 		return "mfront/loginRegister";
 	}
-	/**2.1	UseNow	0515
+	/**2.0.2	UseNow	0515
 	 * ifSession	PC去登录/注册页面
 	 * @param ifSession
 	 */
@@ -97,7 +97,7 @@ public class MlfrontUserController {
 		return "front/pcloginRegister";
 	}
 	
-	/**2.0	UseNow	0515
+	/**2.1.1	UseNow	0515
 	 * ifSession	wap重置密码
 	 * @param ifSession
 	 */
@@ -107,7 +107,7 @@ public class MlfrontUserController {
 		return "mfront/forgetPassWord";
 	}
 	
-	/**2.0	UseNow	0515
+	/**2.2.2	UseNow	0515
 	 * ifSession	pc重置密码
 	 * @param ifSession
 	 */
@@ -115,6 +115,24 @@ public class MlfrontUserController {
 	public String topcForgetPassWord() throws Exception{
 		
 		return "front/pcsetpassword";
+	}
+	
+	/**2.3	useOn	0505
+	 * MlfrontUser	update
+	 * @param id MlbackProduct
+	 * @return
+	 */
+	@RequestMapping(value="/reSetPwd",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg reSetPwd(@RequestBody MlfrontUser mlfrontUser){
+		//接受信息
+		String nowtime = DateUtil.strTime14s();
+		mlfrontUser.setUserMotifytime(nowtime);
+		//更新本条状态
+		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
+		System.out.println(intResult);
+		System.out.println(mlfrontUser);
+		return Msg.success().add("resMsg", "更新成功").add("mlfrontUser", mlfrontUser);
 	}
 	
 	/**3.0	UseNow	0515
