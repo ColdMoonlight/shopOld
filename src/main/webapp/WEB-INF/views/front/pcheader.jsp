@@ -462,7 +462,7 @@
 			method: 'GET',
 			success: function (data) {
 				var resData = data.extend.mlbackCategorydownList;
-				console.log(resData);
+				// console.log(resData);
 				if (data.code === 100) {
 					categoryData = resData.reduce(function (obj, item) {
 						if (item.categoryParentId === -1) {
