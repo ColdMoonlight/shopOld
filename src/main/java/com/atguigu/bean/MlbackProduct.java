@@ -49,6 +49,7 @@ public class MlbackProduct {
     
     private String productCategoryNamesStr;
     
+    private String productMetaDesc;
 
     public Integer getProductId() {
         return productId;
@@ -232,6 +233,14 @@ public class MlbackProduct {
 
 	public void setProductCategoryNamesStr(String productCategoryNamesStr) {
 		this.productCategoryNamesStr = productCategoryNamesStr == null ? null : productCategoryNamesStr.trim();
+	}
+	
+	public String getProductMetaDesc() {
+		return productMetaDesc;
+	}
+
+	public void setProductMetaDesc(String productMetaDesc) {
+		this.productMetaDesc = productMetaDesc == null ? null : productMetaDesc.trim();
 	}
 
 	@Override

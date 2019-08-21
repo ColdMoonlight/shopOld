@@ -446,7 +446,13 @@
 					'</div>';
 			}
 			parent.html(html);
+			var firstli =$(".dropdown").eq(0);
+			firstli.find(".dropdown-menu").addClass("noshow")
+			firstli.click(function(){
+				 window.location.href = "${APP_PATH }/MlbackCategory/topcproductlist?categoryId=49";
+			})
 		}
+		
 
 		var mainCategory = $('.tt-desctop-menu ul');
 		var categoryData = {};
