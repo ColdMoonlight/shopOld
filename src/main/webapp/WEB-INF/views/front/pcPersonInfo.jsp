@@ -27,7 +27,7 @@
 <body>
 
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
+      <div class="container">
 	<!-- main -->
 	<div class="main person-info">
 		<div class="form-op"><span class="edit-save" data-flag="0">edit</span></div>
@@ -79,7 +79,7 @@
 			</div>
 		</div>
 	</div>
-
+ </div>
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
 
@@ -156,7 +156,6 @@ ${APP_PATH }/MlfrontUser/update
 	}
 
 	var editSave = $('.edit-save');
-
 	editSave.on('click', function () {
 		var flag = parseInt($(this).data('flag'));
 		if (!flag) {
@@ -196,7 +195,6 @@ ${APP_PATH }/MlfrontUser/update
 					// console.log(data);
 					if (data.code === 100) {
 						// console.log(data.extend.resMsg);
-
 						$(this).attr('data-flag', 0).text('edit');
 						$('.input').each(function (i, item) {
 							$(item).removeAttr('contenteditable');
@@ -204,7 +202,7 @@ ${APP_PATH }/MlfrontUser/update
 					}
 				}
 			})
-
+	
 		}
 	})
 

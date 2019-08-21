@@ -27,18 +27,20 @@
 <body>
 
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
+    <div class="container order_info_box">
+    		<div class="main order-info">
+    		<div class="address bd-t"></div>
+    	
+    		<div class="order-list"></div>
+    	
+    		<div class="order-data">
+    			<div class="title">Order Time</div>
+    			<div class="body"></div>
+    		</div>
+    	</div>
+    </div>
 	<!-- main -->
-	<div class="main order-info">
-		<div class="address bd-t"></div>
 
-		<div class="order-list"></div>
-
-		<div class="order-data">
-			<div class="title">Order Time</div>
-			<div class="body"></div>
-		</div>
-	</div>
 
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>

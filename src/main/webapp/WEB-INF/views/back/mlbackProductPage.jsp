@@ -118,7 +118,7 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					console.log(result);
+					//console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -566,6 +566,7 @@
 			$(":input[name='productCategoryid']").val(data.productCategoryid);
 			$(":input[name='productCategoryIdsStr']").val(data.productCategoryIdsStr);
 			$(":input[name='productCategoryNamesStr']").val(data.productCategoryNamesStr);
+			$(":input[name='productMetaDesc']").val(data.productMetaDesc);
 			$(".product-cate-text").html((data.productCategoryNamesStr ? data.productCategoryNamesStr.split(',').join('\n') : '无'));
 			if (data.productCategoryIdsStr && data.productCategoryIdsStr.length) {
 				productCategoryIdArr = data.productCategoryIdsStr.split(',');

@@ -15,14 +15,14 @@
 .tt-desctop-menu .tt-megamenu-submenu > li.listfl6{max-width: 100%; padding: 0; margin: 10px 0;}
 .tt-megamenu-submenu li>a>img{float: left;}
 .tt-desctop-menu .tt-megamenu-submenu{margin: 0 0 0 50px;}
-.product__details-banner.swiper-container{width: 578px; height: 578px;border:1px solid #eeeee1; margin: 20px 20px 0 0;float:left}
+.product__details-banner.swiper-container{width: 578px; height: 578px;border:1px solid #eeeee1; margin: 20px 60px 0 0;float:left}
 .product__details-banner .swiper-slide img{width: 100%; height: 100%;}
 .cart-list .input-group{width: 200px;}
 .rightrule .input-group{width: 200px;}
 .tt-desktop-header{border-bottom: 1px solid #eeeee1;}
-.product-d-length .list>span{min-width:20%}
+.product-d-length .list>span{min-width:19%}
 .product-d-title{ line-height:30px; border:none}
-.rightrule{width:700px;float:left}
+.rightrule{width:660px;float:left;margin: 30px 0 0;}
 .rightrule #countdown-area {align-items:flex-start}
 .product__details-text{width:100%}
 .top_detial{width:100%}
@@ -45,11 +45,22 @@
 .product-d-length>span, .product-d-count>span, .product-d-price>span, .product-d-length>span{ font-size: 14px;font-weight: bold;color: #333;}
 .rightrule #countdown-area. .title{text-align: left;padding: 1em 0;font-size: 18px; color: #333;}
 .product-d-length .list>span{color: #333;}
-.product-d-length i{color: #f00;font-size: 14px;margin: 0 5px 0 0;}
+.product-details .product-d-length i{color: #f00;font-size: 14px;margin: 0 5px 0 0;}
 .box-none .btn:hover{background: #000;}
-
-
-
+.cat_list_box .cart-item>input, .checkbox{position: relative;z-index: 2;}
+/*******/
+/* without data info */
+.without-data {
+	padding: 8px 36px;
+	text-align: center;
+	font-style: italic;
+	font-size: 14px;
+	color: #ff1671;
+}
+.order_box{
+	min-height: 400px;
+}
+.box_coupon{margin: 0 auto 15px;}
 
 /**错误提示****/
 .sys-box {
@@ -64,7 +75,7 @@
 	z-index: 100000;
 	position:fixed;
 }
-.sys-box:before{display:noe;}
+.pc_tanc.sys-box:before{display:none}
 .sys-title {
 	padding: .5em;
 	text-align: right;
@@ -164,6 +175,9 @@
 .pserson_box .integral-details {margin: 0 0 10px;}
 .pserson_box .integral-details .id-item {width: 21%;margin: 0 2%; border: 1px solid #ccc;}
 .pserson-center .person-info .signout:hover{background: #000000;}
+#product-block .product-title{font-weight: normal;line-height: 20px;color: #666;}
+
+
 
 
 

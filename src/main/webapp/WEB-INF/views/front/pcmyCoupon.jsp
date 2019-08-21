@@ -29,7 +29,10 @@
 	<jsp:include page="pcheader.jsp"></jsp:include>
 
 	<!-- main -->
-	<div class="main coupon-info"></div>
+	<div class="container box_coupon">
+		<div class="main coupon-info"></div>
+	</div>
+	
 
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
