@@ -780,7 +780,7 @@
 				                  content_type: 'product'
 				                });
 							// cartText.text(parseInt(cartText.text()) + 1);
-							//window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
+							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
 						}
 					},
 					error: function (data) {
