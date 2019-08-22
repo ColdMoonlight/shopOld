@@ -129,7 +129,7 @@ public class MlfrontUserController {
 		String nowtime = DateUtil.strTime14s();
 		mlfrontUser.setUserMotifytime(nowtime);
 		//更新本条状态
-		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
+		int intResult = mlfrontUserService.updatePwdByEmail(mlfrontUser);
 		System.out.println(intResult);
 		System.out.println(mlfrontUser);
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontUser", mlfrontUser);
