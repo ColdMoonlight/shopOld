@@ -36,11 +36,6 @@
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
 	<!-- End Facebook Pixel Code -->
 	
-	<script>
-  		fbq('track', 'ViewContent');
-	</script>
-	<!-- Facebook Pixel Code end -->
-	
 </head>
 
 <body>
@@ -245,6 +240,14 @@
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
 						addHeaderInfo(productData);
+						var fbpid=productData.productId;
+						var fbprice=(productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
+						fbq('track', 'ViewContent', {
+							  content_ids: fbpid,
+							  content_type: 'product',
+							  value: fbprice,
+							  currency: 'USD'
+							});
 						// console.log(productData)
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
@@ -261,37 +264,37 @@
 			});
 			function addHeaderInfo(productData){
 				
-				console.log(productData);
-				   var productNameStr = productData.productName;
-				   var productSeoStr =productData.productSeo;
-				   var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
-				   var imageStr =productData.productMainimgurl;
-				   var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
-				   var productIdStr =productData.productId;
-		           var meta = $('<meta property = "og:title" content ="'+ productNameStr +'">'+
-					'<meta property = "og:description" content = "'+ productSeoStr +'" >'+
-					'<meta property = "og:url" content = "'+urlStr+'" >'+
-					'<meta property = "og:image" content = "'+imageStr+'" >'+
-					'<meta property = "product:brand" content = "MegaLook" >'+
-					'<meta property = "product:availability" content = "in stock" >'+
-					'<meta property = "product:condition" content = "new" > '+
-					'<meta property = "product:price:amount" content = "'+amountStr+'" >'+
-					'<meta property = "product:price:currency" content = "USD" >'+
-					'<meta property = "product:retailer_item_id" content = "'+productIdStr+'" >'+
-					'');
-		          	$(document.head).append(meta)
-					/*
-						<meta property = “og：title” content = “Facebook T-Shirt” >  					该项目的标题。
-						<meta property = “og：description” content = “男女皆宜的Facebook T恤，小” >  			项目描述。
-						<meta property = “og：url” content = “https://example.org/facebook” >  			产品页面的完整URL。
-						<meta property = “og：image” content = “https://example.org/facebook.jpg” >  	链接到产品页面上使用的图像。
-						<meta property = “product：brand” content = “Facebook” >  						商品的品牌名称。
-						<meta property = “product：availability” content = “in stock” >  				该项目的当前可用性：in stock，out of stock，preorder，available for order，discontinued。
-						<meta property = “product：condition” content = “new” >  						项目现状：new，refurbished，used。
-						<meta property = “product：price：amount” content = “9.99” >  					该项目的当前价格。不要在价格中包含符号，例如“$”。
-						<meta property = “product：price：currency” content = “USD” >  					ISO格式的价格货币（例如USD）。
-						<meta property = “product：retailer_item_id” content = “facebook_tshirt_001” >  	零售商的物品ID。
-					*/
+				// console.log(productData);
+			    var productNameStr = productData.productName;
+			    var productSeoStr =productData.productSeo;
+			    var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+			    var imageStr =productData.productMainimgurl;
+			    var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
+			    var productIdStr =productData.productId;
+	            var meta = $('<meta property = "og:title" content ="'+ productNameStr +'">'+
+				'<meta property = "og:description" content = "'+ productSeoStr +'" >'+
+				'<meta property = "og:url" content = "'+urlStr+'" >'+
+				'<meta property = "og:image" content = "'+imageStr+'" >'+
+				'<meta property = "product:brand" content = "MegaLook" >'+
+				'<meta property = "product:availability" content = "in stock" >'+
+				'<meta property = "product:condition" content = "new" > '+
+				'<meta property = "product:price:amount" content = "'+amountStr+'" >'+
+				'<meta property = "product:price:currency" content = "USD" >'+
+				'<meta property = "product:retailer_item_id" content = "'+productIdStr+'" >'+
+				'');
+	          	$(document.head).append(meta)
+				/*
+					<meta property = “og：title” content = “Facebook T-Shirt” >  					该项目的标题。
+					<meta property = “og：description” content = “男女皆宜的Facebook T恤，小” >  			项目描述。
+					<meta property = “og：url” content = “https://example.org/facebook” >  			产品页面的完整URL。
+					<meta property = “og：image” content = “https://example.org/facebook.jpg” >  	链接到产品页面上使用的图像。
+					<meta property = “product：brand” content = “Facebook” >  						商品的品牌名称。
+					<meta property = “product：availability” content = “in stock” >  				该项目的当前可用性：in stock，out of stock，preorder，available for order，discontinued。
+					<meta property = “product：condition” content = “new” >  						项目现状：new，refurbished，used。
+					<meta property = “product：price：amount” content = “9.99” >  					该项目的当前价格。不要在价格中包含符号，例如“$”。
+					<meta property = “product：price：currency” content = “USD” >  					ISO格式的价格货币（例如USD）。
+					<meta property = “product：retailer_item_id” content = “facebook_tshirt_001” >  	零售商的物品ID。
+				*/
 			}
 			/*
       review汇总接口  
@@ -703,7 +706,6 @@
 
 			// add-to-cart
 			$('.add-to-cart').on('click', function () {
-				fbq('track', 'AddToCart');//追踪'添加购物车'事件		facebook广告插件可以注释掉，但不要删除
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
@@ -759,6 +761,7 @@
 
 			function generateOrder(reqData) {
 				// console.log(reqData)
+				var fbpid=pidA;
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/toAddToCart',
 					data: JSON.stringify(reqData),
@@ -771,6 +774,11 @@
 						var resData =data.code;
 						if (resData === 100) {
 							// console.log(resData)
+							//追踪'添加购物车'事件    facebook广告插件可以注释掉，但不要删除
+				              fbq('track', 'AddToCart', {
+				                  content_ids: fbpid,
+				                  content_type: 'product'
+				                });
 							// cartText.text(parseInt(cartText.text()) + 1);
 							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
 						}
