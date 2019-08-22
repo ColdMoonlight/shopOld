@@ -27,6 +27,8 @@ public interface MlfrontUserMapper {
     int insertSelective(MlfrontUser record);
     //删除MlfrontUser00
     int deleteByPrimaryKey(Integer userId);
+    //更新updatePwdByEmail
+    int updatePwdByEmail(MlfrontUser record);
     //更新MlfrontUser00
     int updateByPrimaryKeySelective(MlfrontUser record);
     //条件查询MlfrontUser00
