@@ -28,6 +28,7 @@ import com.atguigu.service.MlfrontCartService;
 import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -55,9 +56,15 @@ public class MlfrontCartController {
 	 * @return 
 	 * */
 	@RequestMapping("/toCheakOut")
-	public String toCheakOut() throws Exception{
-	
-		return "mfront/cheakOut";
+	public String toCheakOut(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+		
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		//1手机0PC
+		if(ifMobile.equals("1")){
+			  return "mfront/cheakOut";
+		  }else{
+			  return "front/pccheakOut";
+		  }
 	}
 	
 	/**
@@ -365,24 +372,20 @@ public class MlfrontCartController {
 	
 	/**
 	 * 4.0	useOn	0505
-	 * 前台移动端解算页面mfront/cheakOut
+	 * 前台购物车列表页面CartList
 	 * @param jsp
 	 * @return 
 	 * */
 	@RequestMapping("/toCartList")
-	public String toCartList() throws Exception{
-		return "mfront/cartList";
-	}
-	
-	/**
-	 * 4.1	useOn	0505
-	 * 前台移动端解算页面mfront/cheakOut
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping("/topcCartList")
-	public String topcCartList() throws Exception{
-		return "front/pccartList";
+	public String toCartList(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+		
+		//判断来源的设备
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		if(ifMobile.equals("1")){
+			  return "mfront/cartList";
+		  }else{
+			  return "front/pccartList";
+		  }
 	}
 	
 	/**5.0	useOn	0505

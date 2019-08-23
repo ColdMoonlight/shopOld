@@ -77,6 +77,7 @@
 						<div class="input-group">
 							<label for="userEmail">e-mail</label>
 							<input type="email" name="userEmail" placeholder="please input eamil" required>
+								<p class="error_tips">请输入正确的邮箱</p>
 						</div>
 						<div class="input-group">
 							<label for="userPassword">password</label>
@@ -136,19 +137,19 @@
 					var resData = data.extend;
 					if (resData.loginYes === 0) {
 						renderSysMsg(resData.resMsg);
+						sysFlag = !sysFlag;
 					}
-
 					if (resData.loginYes === 1) {
 						renderSysMsg(resData.resMsg);
 						setTimeout(function(){
 							$('.sys-box').remove();
 							$('.mask').remove();
 							sysFlag = !sysFlag;
-						},1000)
+						},800)
 						setInterval(function() {
-							if (sysFlag) {
+							// if (sysFlag) {
 								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
-							}
+							// }
 						}, 1000);
 					}
 				}
@@ -157,6 +158,10 @@
 			renderSysMsg('email or password format incorrect!');
 		}
 	})
+    var emailf = $('#register input[name=userEmail]');
+     emailf.focus(function(){
+		 $(this).parents(".input-group").find(".error_tips").show();
+	 })
 
 	$('.btn.register').on('click', function () {
 		var email = $('#register input[name=userEmail]').val();
@@ -189,9 +194,9 @@
 							sysFlag = !sysFlag;
 						},1000)
 						setInterval(function() {
-							if (sysFlag) {
+							// if (sysFlag) {
 								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
-							}
+							// }
 						}, 1000);
 					}
 				}
@@ -209,6 +214,7 @@
 				if (!pattern.test(data[key])) {
 					flag = !flag;
 					break;
+					
 				}
 			}
 

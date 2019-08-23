@@ -5,25 +5,28 @@
         <from>^/news/news.html$</from>
         <to>/news/news.jsp</to>
     </rule>
-    <rule>
-        <from>^/news/([0-9]+).html$</from>
-        <to>/news/news.jsp?newsId=$1</to>
-    </rule>
     <outbound-rule>
         <from>^/UrlReWriteDemo/news/news.jsp\?newsId=([0-9]+)$</from>
         <to>/UrlReWriteDemo/news/$1.html</to>
-    </outbound-rule>
-    
+    </outbound-rule>-->
     <rule>
-        <from>^/([a-z0-9A-Z-]{8,80}).html</from>
-        <to type="forward">/MlbackProduct/tomProductDetailPageByhtml?productSeo=$1</to>
+        <from>^/index.html</from>
+        <to type="forward">/index/isMobileOrPc</to>
     </rule>
     <rule>
-        <from>^/([a-z0-9A-Z-]{8,80}).htm</from>
-        <to type="forward">/MlbackProduct/topcProductDetailPageByhtml?productSeo=$1</to>
-    </rule> -->
+        <from>^/Category/([0-9]{1,3}).html</from>
+        <to type="forward">/MlbackCategory/toproductlist?categoryId=$1</to>
+    </rule> 
     <rule>
         <from>^/([a-z0-9A-Z-]{8,80}).html</from>
         <to type="forward">/MlbackProduct/tofbProductDetailPageByhtml?productSeo=$1</to>
+    </rule>
+    <rule>
+        <from>^/myCart.html</from>
+        <to>/MlbackCart/toCartList</to>
+    </rule>
+    <rule>
+        <from>^/CheakOut.html</from>
+        <to>/MlbackCart/toCheakOut</to>
     </rule>
 </urlrewrite>

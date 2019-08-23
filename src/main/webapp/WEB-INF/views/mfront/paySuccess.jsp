@@ -61,7 +61,7 @@
       <p>Successful Payment Of Orders</p>
 
       <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-gray">Check The Order Details</a>
-      <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-pink">ConTine Shopping</a>
+      <a href="${APP_PATH}/index.html" class="btn btn-pink">ConTine Shopping</a>
     </div>
   </div>
 
@@ -73,17 +73,81 @@
 		success: function (data) {
 			// console.log(data)
 			var mlfrontOrderOne = data.extend.mlfrontOrderOne;
+			var payinfoId = data.extend.payinfoId;
 			var orderMoney = mlfrontOrderOne.orderMoney;
 			// console.log(mlfrontOrderOne);
-			// console.log("orderMoney:"+orderMoney);
+			console.log("orderMoney:"+orderMoney);
+			getPayInfo(payinfoId,orderMoney);
 			
 			// console.log("fbq111111");
-			fbq('track', 'Purchase', {value:orderMoney,currency:'USD'});//追踪'购买'事件		facebook广告插件可以注释掉，但不要删除
+			//fbq('track', 'Purchase', {value:orderMoney,currency:'USD'});//追踪'购买'事件		facebook广告插件可以注释掉，但不要删除
 			// console.log("fbq222222");
 			$(".order-id").val(mlfrontOrderOne.orderId);
 			
 		}
 	});
+	
+	function getPayInfo(payinfoId,orderMoney){
+		var reqData = {
+				"payinfoId": payinfoId
+			};
+		console.log("orderMoney:"+orderMoney);
+		$.ajax({
+			url: "${APP_PATH}/MlfrontPayInfo/getOneMlfrontPayInfoDetail",
+			data: reqData,
+			type: "POST",
+			success: function (result) {
+				if (result.code == 100) {
+					var resData = result.extend;
+					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
+					// console.log(mlfrontOrderItemList);
+					//拼接所需参数:content_ids
+					stridsContent=toFbidsPurchase(resDataOrderItemList);
+					console.log("stridsContent:"+stridsContent);
+					//拼接所需参数:contents
+					strContent=toFbPurchase(resDataOrderItemList);
+					console.log("strContent:"+strContent);
+					//fbq('track', 'Purchase');//追踪'购买'事件		facebook广告插件可以注释掉，但不要删除
+					fbq('track', 'Purchase', {
+						  content_ids: [stridsContent],
+						  //contents: [strContent],
+						  content_type: 'product',
+						  value: orderMoney,
+						  currency: 'USD'
+						});
+				} else {
+					//alert("联系管理员");
+				}
+			}
+		});
+	}
+	
+	function toFbidsPurchase(resDataOrderItemList){
+		var infoStrlids = '';
+		var infoRelids = '';
+		for(var i=0;i<resDataOrderItemList.length;i++){
+			infoStrlids=infoStrlids+resDataOrderItemList[i].orderitemPid+',';
+		}
+		infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
+		console.log("infoRelids:"+infoRelids);
+		return infoRelids;
+	}
+	
+	function toFbPurchase(resDataOrderItemList){
+		var infoRel = '';
+		var infoStr = '';
+		for(var i=0;i<resDataOrderItemList.length;i++){
+			var infoStrOne = '';
+			var pid = resDataOrderItemList[i].orderitemPid;
+			var pnum = resDataOrderItemList[i].orderitemPskuNumber;
+			var price = resDataOrderItemList[i].orderitemPskuReamoney;
+			infoStrOne = infoStrOne+'{'+'id:'+pid+','+'quantity:'+pnum+','+'item_price:'+price+'}';
+			infoStr=infoStr+infoStrOne+',';
+		}
+		infoRel=infoStr.substr(0,infoStr.length-1);
+		console.log("infoRel:"+infoRel);
+		return infoRel;
+	}
 </script>
 
 <script>

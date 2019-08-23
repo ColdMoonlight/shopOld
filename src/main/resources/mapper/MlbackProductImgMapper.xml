@@ -5,6 +5,7 @@
     <id column="productImg_id" jdbcType="INTEGER" property="productimgId" />
     <result column="productImg_name" jdbcType="VARCHAR" property="productimgName" />
     <result column="productImg_url" jdbcType="VARCHAR" property="productimgUrl" />
+    <result column="productImg_secleturl" jdbcType="VARCHAR" property="productImgsecleturl" />
     <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="productImg_sort_order" jdbcType="INTEGER" property="productimgSortOrder" />
     <result column="productImg_createTime" jdbcType="VARCHAR" property="productimgCreatetime" />
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    productImg_id, productImg_name, productImg_url, product_id, productImg_sort_order, 
+    productImg_id, productImg_name, productImg_url, productImg_secleturl, product_id, productImg_sort_order, 
     productImg_createTime, productImg_motifyTime
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackProductImgExample" resultMap="BaseResultMap">
@@ -100,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackProductImg">
-    insert into tb_mlback_productimg (productImg_id, productImg_name, productImg_url, 
+    insert into tb_mlback_productimg (productImg_id, productImg_name, productImg_url, productImg_secleturl
       product_id, productImg_sort_order, productImg_createTime, 
       productImg_motifyTime)
-    values (#{productimgId,jdbcType=INTEGER}, #{productimgName,jdbcType=VARCHAR}, #{productimgUrl,jdbcType=VARCHAR}, 
+    values (#{productimgId,jdbcType=INTEGER}, #{productimgName,jdbcType=VARCHAR}, #{productimgUrl,jdbcType=VARCHAR},  #{productImgsecleturl,jdbcType=VARCHAR}, 
       #{productId,jdbcType=INTEGER}, #{productimgSortOrder,jdbcType=INTEGER}, #{productimgCreatetime,jdbcType=VARCHAR}, 
       #{productimgMotifytime,jdbcType=VARCHAR})
   </insert>
@@ -125,6 +126,9 @@
       </if>
       <if test="record.productimgUrl != null">
         productImg_url = #{record.productimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productImgsecleturl != null">
+        productImg_secleturl = #{record.productImgsecleturl,jdbcType=VARCHAR},
       </if>
       <if test="record.productId != null">
         product_id = #{record.productId,jdbcType=INTEGER},
@@ -148,6 +152,7 @@
     set productImg_id = #{record.productimgId,jdbcType=INTEGER},
       productImg_name = #{record.productimgName,jdbcType=VARCHAR},
       productImg_url = #{record.productimgUrl,jdbcType=VARCHAR},
+      productImg_secleturl = #{record.productImgsecleturl,jdbcType=VARCHAR},
       product_id = #{record.productId,jdbcType=INTEGER},
       productImg_sort_order = #{record.productimgSortOrder,jdbcType=INTEGER},
       productImg_createTime = #{record.productimgCreatetime,jdbcType=VARCHAR},
@@ -161,15 +166,13 @@
     update tb_mlback_productimg
     set productImg_name = #{productimgName,jdbcType=VARCHAR},
       productImg_url = #{productimgUrl,jdbcType=VARCHAR},
+      productImg_secleturl = #{productImgsecleturl,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=INTEGER},
       productImg_sort_order = #{productimgSortOrder,jdbcType=INTEGER},
       productImg_createTime = #{productimgCreatetime,jdbcType=VARCHAR},
       productImg_motifyTime = #{productimgMotifytime,jdbcType=VARCHAR}
     where productImg_id = #{productimgId,jdbcType=INTEGER}
   </update>
-  
-  
-  
   
   <!-- insert -->
   <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackProductImg">
@@ -183,6 +186,9 @@
       </if>
       <if test="productimgUrl != null">
         productImg_url,
+      </if>
+      <if test="productImgsecleturl != null">
+        productImg_secleturl,
       </if>
       <if test="productId != null">
         product_id,
@@ -206,6 +212,9 @@
       </if>
       <if test="productimgUrl != null">
         #{productimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productImgsecleturl != null">
+        #{productImgsecleturl,jdbcType=VARCHAR},
       </if>
       <if test="productId != null">
         #{productId,jdbcType=INTEGER},
@@ -238,6 +247,9 @@
       <if test="productimgUrl != null">
         productImg_url = #{productimgUrl,jdbcType=VARCHAR},
       </if>
+      <if test="productImgsecleturl != null">
+        productImg_secleturl = #{productImgsecleturl,jdbcType=VARCHAR},
+      </if>
       <if test="productId != null">
         product_id = #{productId,jdbcType=INTEGER},
       </if>
@@ -265,6 +277,9 @@
       </if>
       <if test="productimgUrl != null">
         productImg_url = #{productimgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productImgsecleturl != null">
+        productImg_secleturl = #{productImgsecleturl,jdbcType=VARCHAR},
       </if>
       <if test="productId != null">
         product_id = #{productId,jdbcType=INTEGER},

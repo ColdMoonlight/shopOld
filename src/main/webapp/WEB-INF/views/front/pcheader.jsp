@@ -182,7 +182,7 @@
 					</div>
 					<!-- /tt-search -->
 					<!-- tt-logo -->
-					<a href="${APP_PATH}/index/isMobileOrPc">
+					<a href="${APP_PATH}/index.html">
 					<div class="tt-logo">
 						   <div class="logo">
 							 <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
@@ -429,7 +429,7 @@
 					html += '<ul class="tt-megamenu-submenu">';
 					for (var j = 0; j < data[i].list.length; j += 1) {
 						html += '<li class="col-sm-6 listfl6">' +
-						'<a href="${APP_PATH}/MlbackCategory/topcproductlist?categoryId='+ data[i].list[j].categoryId +'">' +
+						'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId='+ data[i].list[j].categoryId +'">' +
 								'<img src="'+ data[i].list[j].categoryImgurl +'" />' +
 								'<span>'+ data[i].list[j].categoryName +'</span>' + 
 						'</a></li>';
@@ -449,7 +449,7 @@
 			var firstli =$(".dropdown").eq(0);
 			firstli.find(".dropdown-menu").addClass("noshow")
 			firstli.click(function(){
-				 window.location.href = "${APP_PATH }/MlbackCategory/topcproductlist?categoryId=49";
+				 window.location.href = "${APP_PATH }/Category/49.html";
 			})
 		}
 		
@@ -541,7 +541,7 @@
 		
 		
 		iCart.on('click', function () {
-		  window.location.href = "${APP_PATH }/MlbackCart/toCartList";
+		  window.location.href = "${APP_PATH }/myCart.html";
 		})
 		
 		

@@ -274,6 +274,9 @@ public class MlfrontPayInfoController {
 	@ResponseBody
 	public Msg getsuccessPayinfo(HttpSession session, HttpServletResponse rep,HttpServletRequest res){
 		
+		Integer payinfoId = (Integer) session.getAttribute("payinfoId");
+		System.out.println("****payinfoId****:"+payinfoId);
+		
 		//从session中取出,付款成功的参数successPayinfoId,successOrderId
 		Integer successOrderId =(Integer) session.getAttribute("successOrderId");
 		if(successOrderId==null){
@@ -284,7 +287,7 @@ public class MlfrontPayInfoController {
 			mlfrontOrderReq.setOrderId(successOrderId);
 			List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq);
 			MlfrontOrder mlfrontOrderOne = mlfrontOrderList.get(0);
-			return Msg.success().add("resMsg", "更新成功").add("mlfrontOrderOne", mlfrontOrderOne);
+			return Msg.success().add("resMsg", "更新成功").add("mlfrontOrderOne", mlfrontOrderOne).add("payinfoId", payinfoId);
 		}
 	}
 	

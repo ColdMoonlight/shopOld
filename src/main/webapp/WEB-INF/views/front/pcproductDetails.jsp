@@ -113,7 +113,8 @@
 			var dataPrice = null;
 
 			var swiper = $('.product__details-banner .swiper-wrapper');
-
+            var swipersmall =$('.additional_pic .swiper-wrapper')
+			
 			var conditionBox = $('.conditionBox');
 
 			var productDetailsBox = $('.product__details-text');
@@ -139,12 +140,34 @@
 					if (data.code === 100) {
 						var resData = data.extend.mbackProductImgResList;
 						renderProductDetailsBanner(swiper, resData);
-						new Swiper('.product__details-banner', {
+						var galleryleft  = new Swiper('.additional_pic', {
+							direction: 'vertical',
+							slidesPerView: 6,
+							freeMode: true,
+							navigation: {
+								nextEl: '.swiper-button-next',
+								prevEl: '.swiper-button-prev',
+							},
+						});
+						var galleryright = new Swiper('.product__details-banner', {
 							pagination: {
 								el: '.swiper-pagination',
 								clickable: true
-							}
+							},
+							navigation: {
+								nextEl: '.swiper-button-next',
+								prevEl: '.swiper-button-prev',
+							},
+							thumbs: {
+								swiper: galleryleft
+							  }
+
 						});
+					
+						
+						
+						
+						
 					} else {
 						renderErrorMsg(swiper, 'No data for the relevant image was obtained');
 					}
@@ -175,15 +198,21 @@
 			});
 			
 			function renderProductDetailsBanner(parent, data) {
-				var html = '';
-				
+				var htmlbig = '';
+				var htmlsmall = '';
 				for (var i=0, len=data.length; i < len; i += 1) {
-						html += '<div class="swiper-slide">' +
+						htmlbig += '<div class="swiper-slide">' +
 						'<img src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
 						'</div>';
 				}
-
-				swiper.html(html);
+				for (var a=0, len=data.length; a < len; a += 1) {
+						htmlsmall += '<div class="swiper-slide">' +
+						'<img src="' + data[a].productImgsecleturl + '">' +
+						'</div>';
+				}
+				
+				swipersmall.html(htmlsmall);
+				swiper.html(htmlbig);
 			}
 
 			function triggerCondition(parent) {
@@ -788,7 +817,7 @@
 				                  content_type: 'product'
 				                });
 							// cartText.text(parseInt(cartText.text()) + 1);
-							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
+							window.location.href = '${APP_PATH}/myCart.html';
 						}
 					},
 					error: function (data) {
