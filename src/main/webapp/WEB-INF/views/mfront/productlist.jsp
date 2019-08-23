@@ -39,11 +39,13 @@
 	<script>
 		var condition = $('.select');
 		var productList = $('.product-list');
-		var cidA = window.location.href.split('?')[1].split('=');
+		var sessionScopecategoryId = '${sessionScope.categoryId}';
+		//var cidA = window.location.href.split('?')[1].split('=');
+		var cidA = sessionScopecategoryId;
 
 		//default codition
 		getProductList({
-			"productCategoryid": cidA[1]
+			"productCategoryid": cidA
 		});
 
 		/* category condition */
