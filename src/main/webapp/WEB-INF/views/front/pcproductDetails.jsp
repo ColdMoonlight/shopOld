@@ -20,6 +20,7 @@
 	<!-- uc 字体放大-->
 	<meta name="wap-font-scale" content="no">
 	<meta name="aplus-touch" content="1">
+	
 	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
 	<script>
 	  !function(f,b,e,v,n,t,s)
