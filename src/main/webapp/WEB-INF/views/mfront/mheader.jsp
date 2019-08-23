@@ -58,7 +58,7 @@
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
-      <a href="${APP_PATH}/index/isMobileOrPc">
+      <a href="${APP_PATH}/index.html">
 	      <div class="logo">
 	        <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 	      </div>

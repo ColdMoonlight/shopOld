@@ -182,7 +182,7 @@
 					</div>
 					<!-- /tt-search -->
 					<!-- tt-logo -->
-					<a href="${APP_PATH}/index/isMobileOrPc">
+					<a href="${APP_PATH}/index.html">
 					<div class="tt-logo">
 						   <div class="logo">
 							 <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
