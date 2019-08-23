@@ -6,6 +6,8 @@ public class MlbackProductImg {
     private String productimgName;
 
     private String productimgUrl;
+    
+    private String productImgsecleturl;
 
     private Integer productId;
 
@@ -38,8 +40,16 @@ public class MlbackProductImg {
     public void setProductimgUrl(String productimgUrl) {
         this.productimgUrl = productimgUrl == null ? null : productimgUrl.trim();
     }
+    
+    public String getProductImgsecleturl() {
+		return productImgsecleturl;
+	}
 
-    public Integer getProductId() {
+	public void setProductImgsecleturl(String productImgsecleturl) {
+		this.productImgsecleturl = productImgsecleturl == null ? null : productImgsecleturl.trim();
+	}
+
+	public Integer getProductId() {
         return productId;
     }
 
