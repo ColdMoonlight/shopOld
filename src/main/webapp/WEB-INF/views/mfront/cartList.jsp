@@ -71,7 +71,7 @@
 				<span class="show-t-price-num"></span>
 			</div>
 			<div class="op">
-				<a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-default add-product">Continue Shopping</a>
+				<a href="${APP_PATH}/index.html" class="btn btn-default add-product">Continue Shopping</a>
 				<a href="javascript:;" class="btn btn-black calc-price">Checkout</a>
 			</div>
 		</div>
@@ -146,7 +146,7 @@
 			html += '<div class="box-none">' +
 				'<img src="${APP_PATH}/static/m/img/index/cart-none.png" alt="">' +
 				'<p>The shopping cart is empty. Come and fill it up!</p>' +
-				'<a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-pink"> Shop Now</a>' +
+				'<a href="${APP_PATH}/index.html" class="btn btn-pink"> Shop Now</a>' +
 				'</div>';
 			parent.html(html)
 		}
@@ -395,7 +395,7 @@
 							//alert('删除成功')
 							delete cartObj[cartitemid];
 							window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+							window.location.href = '${APP_PATH}/myCart.html';
 							
 						}
 
@@ -404,13 +404,13 @@
 							//全是错误情况，直接刷新
 							renderSysMsg('The system is abnormal, please try again later');
 							if (sysFlag) {
-								window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+								window.location.href = '${APP_PATH}/myCart.html';
 							}
 						}
 					} else {
 						renderSysMsg('The system is abnormal, please try again later');
 						if (sysFlag) {
-							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
+							window.location.href = '${APP_PATH}/myCart.html';
 						}
 					}
 				}

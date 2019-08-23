@@ -73,7 +73,7 @@
 							<span class="show-t-price-num"></span>
 						</div>
 						<div class="op">
-							<a href="${APP_PATH}/index/isMobileOrPc" class="btn add-product">Continue To Add</a>
+							<a href="${APP_PATH}/index.html" class="btn add-product">Continue To Add</a>
 							<a href="javascript:;" class="btn calc-price">calculate Price</a>
 						</div>
 					</div>
@@ -153,7 +153,7 @@
 			html += '<div class="box-none">' +
 				'<img src="${APP_PATH}/static/m/img/index/cart-none.png" alt="">' +
 				'<p>The shopping cart is empty. Come and fill it up!</p>' +
-				'<a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-pink"> Shop Now</a>' +
+				'<a href="${APP_PATH}/index.html" class="btn btn-pink"> Shop Now</a>' +
 				'</div>';
 			parent.html(html)
 		}
