@@ -15,6 +15,8 @@
 -->
 <script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 
+
+
 </head>
 <body>
 
