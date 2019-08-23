@@ -362,6 +362,8 @@ public class UPloadController {
 		
 		mlbackProductImg.setProductimgUrl(returnReaUrlAll);
 		
+		mlbackProductImg.setProductImgsecleturl(returnReaUrlAll);//详情页轮播筛选所用
+		
 		mlbackProductImg.setProductimgSortOrder(productimgSortInt);
 		
 		mlbackProductImg.setProductimgName(returnReaUrl);
