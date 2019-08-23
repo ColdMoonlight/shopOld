@@ -65,9 +65,12 @@
 						<label for="userPassword">password</label>
 						<input type="password" name="userPassword" placeholder="password at least six figures">
 					</div>
+					
 				</form>
-
 				<a href="javascript:;" class="btn btn-black sigin"> SIGIN </a>
+				<div class="input-group">
+					<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/tomForgetPassWord">忘记密码</a></p>
+				</div>
 			</div>
 			<div class="tab-pane register">
 				<form id="register">

@@ -104,7 +104,7 @@ public class MlfrontUserController {
 	@RequestMapping(value="/tomForgetPassWord")
 	public String tomForgetPassWord() throws Exception{
 		
-		return "mfront/forgetPassWord";
+		return "mfront/setpassword";
 	}
 	
 	/**2.2.2	UseNow	0515
