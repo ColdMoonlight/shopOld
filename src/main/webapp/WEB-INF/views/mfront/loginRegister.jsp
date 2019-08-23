@@ -145,9 +145,9 @@
 							sysFlag = !sysFlag;
 						},1000)
 						setInterval(function() {
-							if (sysFlag) {
+							// if (sysFlag) {
 								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
-							}
+							// }
 						}, 1000);
 					}
 				}
@@ -188,9 +188,9 @@
 							sysFlag = !sysFlag;
 						},1000)
 						setInterval(function() {
-							if (sysFlag) {
+							// if (sysFlag) {
 								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
-							}
+							// }
 						}, 1000);
 					}
 				}
