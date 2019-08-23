@@ -56,9 +56,15 @@ public class MlfrontCartController {
 	 * @return 
 	 * */
 	@RequestMapping("/toCheakOut")
-	public String toCheakOut() throws Exception{
-	
-		return "mfront/cheakOut";
+	public String toCheakOut(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+		
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		//1手机0PC
+		if(ifMobile.equals("1")){
+			  return "mfront/cheakOut";
+		  }else{
+			  return "front/pccheakOut";
+		  }
 	}
 	
 	/**

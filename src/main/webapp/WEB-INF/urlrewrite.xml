@@ -25,4 +25,8 @@
         <from>^/myCart.html</from>
         <to>/MlbackCart/toCartList</to>
     </rule>
+    <rule>
+        <from>^/CheakOut.html</from>
+        <to>/MlbackCart/toCheakOut</to>
+    </rule>
 </urlrewrite>
