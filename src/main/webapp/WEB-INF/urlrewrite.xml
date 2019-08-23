@@ -12,16 +12,15 @@
     <outbound-rule>
         <from>^/UrlReWriteDemo/news/news.jsp\?newsId=([0-9]+)$</from>
         <to>/UrlReWriteDemo/news/$1.html</to>
-    </outbound-rule>
-    
-    <rule>
-        <from>^/([a-z0-9A-Z-]{8,80}).html</from>
-        <to type="forward">/MlbackProduct/tomProductDetailPageByhtml?productSeo=$1</to>
-    </rule> -->
+    </outbound-rule>-->
     <rule>
         <from>^/index.html</from>
         <to type="forward">/index/isMobileOrPc</to>
     </rule>
+    <rule>
+        <from>^/Category/([0-9]{1,3}).html</from>
+        <to type="forward">/MlbackCategory/toproductlist?categoryId=$1</to>
+    </rule> 
     <rule>
         <from>^/([a-z0-9A-Z-]{8,80}).html</from>
         <to type="forward">/MlbackProduct/tofbProductDetailPageByhtml?productSeo=$1</to>

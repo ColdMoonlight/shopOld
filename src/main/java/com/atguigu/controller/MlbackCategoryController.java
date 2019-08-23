@@ -26,6 +26,7 @@ import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -60,32 +61,22 @@ public class MlbackCategoryController {
 	 * @return 
 	 * */
 	@RequestMapping(value="/toproductlist",method=RequestMethod.GET)
-	public String tomProductDetailPage(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "categoryId") Integer categoryId) throws Exception{
+	public String toProductDetailPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "categoryId") Integer categoryId) throws Exception{
 		//接收传递进来的参数
 		Integer categoryIdReq = categoryId;
 		//放回响应域中
 		res.setAttribute("categoryId", categoryIdReq);
+		//放回session域中
+		session.setAttribute("categoryId", categoryId);
+		//判断请求设备
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
-		return "mfront/productlist";
+		if(ifMobile.equals("1")){	//1手机0PC
+			  return "mfront/productlist";
+		  }else{
+			  return "front/pcproductlist";
+		  }
 	}
-	
-	
-	/**
-	 * 1.2	UseNow	0505
-	 * 前台PC端获取分类页面MlbackCategory/toPproductlist
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/topcproductlist",method=RequestMethod.GET)
-	public String toPCproductlist(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "categoryId") Integer categoryId) throws Exception{
-		//接收传递进来的参数
-		Integer categoryIdReq = categoryId;
-		//放回响应域中
-		res.setAttribute("categoryId", categoryIdReq);
-		//返回视图
-		return "front/pcproductlist";
-	}
-	
 	
 	/**2.0	UseNow	0505
 	 * 分类MlbackCategory列表分页list数据
