@@ -17,11 +17,11 @@
     <rule>
         <from>^/([a-z0-9A-Z-]{8,80}).html</from>
         <to type="forward">/MlbackProduct/tomProductDetailPageByhtml?productSeo=$1</to>
-    </rule>
-    <rule>
-        <from>^/([a-z0-9A-Z-]{8,80}).htm</from>
-        <to type="forward">/MlbackProduct/topcProductDetailPageByhtml?productSeo=$1</to>
     </rule> -->
+    <rule>
+        <from>^/index.html</from>
+        <to type="forward">/index/isMobileOrPc</to>
+    </rule>
     <rule>
         <from>^/([a-z0-9A-Z-]{8,80}).html</from>
         <to type="forward">/MlbackProduct/tofbProductDetailPageByhtml?productSeo=$1</to>
