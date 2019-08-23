@@ -63,7 +63,7 @@
       <p>Successful Payment Of Orders</p>
 
       <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-gray">Check The Order Details</a>
-      <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-pink">ConTine Shopping</a>
+      <a href="${APP_PATH}/index.html" class="btn btn-pink">ConTine Shopping</a>
     </div>
   </div>
 </div>

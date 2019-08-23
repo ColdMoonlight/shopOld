@@ -541,7 +541,7 @@
 		
 		
 		iCart.on('click', function () {
-		  window.location.href = "${APP_PATH }/MlbackCart/toCartList";
+		  window.location.href = "${APP_PATH }/myCart.html";
 		})
 		
 		
