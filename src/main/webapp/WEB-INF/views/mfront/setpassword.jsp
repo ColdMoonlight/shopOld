@@ -46,7 +46,7 @@
 
 <body>
 
-	<jsp:include page="pcheader.jsp"></jsp:include>
+	<jsp:include page="mheader.jsp"></jsp:include>
 
 
 
@@ -76,7 +76,7 @@
 		</div>
 	</div>
 
-	<jsp:include page="pcfooter.jsp"></jsp:include>
+	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 
 <script>
@@ -107,7 +107,7 @@
 						},1000)
 						setInterval(function() {
 							if (sysFlag) {
-								window.location.href = "${APP_PATH}/MlfrontUser/toPcLoginRegisterPage";	
+								window.location.href = "${APP_PATH}/MlfrontUser/toLoginRegisterPage";	
 							}
 						}, 1000);
 					
