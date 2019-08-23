@@ -299,14 +299,26 @@
            // console.log(productList1)
            if (data.code === 100) {
              var productData = data.extend.mlbackProductResList;
+             // number5Times(productData.length,productData);
              // console.log(productData);
-             productBlock.append(rednerProduct(productData));
+             // productBlock.append(rednerProduct(productData));
+			 productBlock.append(rednerProduct(number5Times(productData.length,productData)));
            } else {
              renderErrorMsg(prodcutBox, 'Not acquired product-related data');
            }
          }
        });
     }
+		// function number5Times(len,productData) {
+		// 	var lens=parseInt(len-(len%5));
+		// 	// console.log(productData.slice(0,lens))
+		// 	return productData.slice(0,lens);
+		//    }
+		   
+	function number5Times(len,productData) {
+        var lens=parseInt(len-(len%5));
+		return productData.slice(0,lens);
+       }	   
   </script>
 </body>
 

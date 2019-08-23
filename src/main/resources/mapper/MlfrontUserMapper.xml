@@ -395,6 +395,16 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <!-- update使用中 -->
+  <update id="updatePwdByEmail" parameterType="com.atguigu.bean.MlfrontUser">
+    update tb_mlfront_user
+    <set>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where user_email = #{userEmail,jdbcType=VARCHAR}
+  </update>
+  <!-- update使用中 -->
   <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlfrontUser">
     update tb_mlfront_user
     <set>

@@ -146,6 +146,7 @@
 
 .login-register .btn.register{line-height: 40px;padding: 0;}
 .login-register .btn.register:hover{background: #000;}
+.login-register .btn.save_newpass:hover{background: #000;}
 
 
 .bottom_list_account .cart-item>.content .condition>.c-item{width:100%;float:left}

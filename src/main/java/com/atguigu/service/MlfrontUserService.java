@@ -55,6 +55,18 @@ public class MlfrontUserService {
 	 * @exception 更新本条信息
 	 * 
 	 * */
+	public int updatePwdByEmail(MlfrontUser mlfrontUser) {
+		// TODO Auto-generated method stub
+		int  intReslut = mlfrontUsertMapper.updatePwdByEmail(mlfrontUser);
+		return intReslut;
+	}
+	
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 更新本条信息
+	 * 
+	 * */
 	public int updateByPrimaryKeySelective(MlfrontUser mlfrontUser) {
 		// TODO Auto-generated method stub
 		int  intReslut = mlfrontUsertMapper.updateByPrimaryKeySelective(mlfrontUser);

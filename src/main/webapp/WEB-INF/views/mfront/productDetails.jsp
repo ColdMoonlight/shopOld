@@ -34,15 +34,10 @@
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
 	  fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+	  /* fbq('track', 'PageView'); */
 	</script>
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
 	<!-- End Facebook Pixel Code -->
-	
-	<script>
-  		fbq('track', 'ViewContent');
-	</script>
-	<!-- Facebook Pixel Code end -->
 </head>
 
 <body>
@@ -238,6 +233,22 @@
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
 						addHeaderInfo(productData);
+						var fbpid=productData.productId;
+						var fbprice=(productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
+						fbq('track', 'PageView', {
+							content_ids: fbpid,
+							contents:[{"id": fbpid, "quantity": 999, "item_price": fbprice}],
+							content_type: 'product',
+							value: fbprice,
+							currency: 'USD'
+						}); 
+						fbq('track', 'ViewContent', {
+							  content_ids: fbpid,
+							  contents:[{"id": fbpid, "quantity": 999, "item_price": fbprice}],
+							  content_type: 'product',
+							  value: fbprice,
+							  currency: 'USD'
+							});
 						// console.log(productData);
 						dataPrice = productData;
 						prodcutDtitle.text(productData.productName);
@@ -651,7 +662,6 @@
 
 			// add-to-cart
 			$('.add-to-cart').on('click', function () {
-				fbq('track', 'AddToCart');//追踪'添加购物车'事件		facebook广告插件可以注释掉，但不要删除
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
@@ -707,6 +717,7 @@
 
 			function generateOrder(reqData) {
 				// console.log(reqData)
+				var fbpid=reqData.cartitemProductId;
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/toAddToCart',
 					data: JSON.stringify(reqData),
@@ -717,6 +728,11 @@
 						var resData = JSON.parse(data);
 						if (resData.code === 100) {
 							// console.log(resData)
+							//追踪'添加购物车'事件		facebook广告插件可以注释掉，但不要删除
+							fbq('track', 'AddToCart', {
+								  content_ids: fbpid,
+								  content_type: 'product'
+								});
 							// cartText.text(parseInt(cartText.text()) + 1);
 							window.location.href = '${APP_PATH}/MlbackCart/toCartList';
 						}
