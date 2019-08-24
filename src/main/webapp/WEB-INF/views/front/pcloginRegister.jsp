@@ -69,7 +69,7 @@
 					</form>
 					<a href="javascript:;" class="btn btn-black sigin"> SIGIN </a>
 					<div class="input-group">
-						<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/topcForgetPassWord">忘记密码</a></p>
+						<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/topcForgetPassWord">Forget PassWord?</a></p>
 					</div>
 				</div>
 				<div class="tab-pane register">
@@ -77,7 +77,7 @@
 						<div class="input-group">
 							<label for="userEmail">e-mail</label>
 							<input type="email" name="userEmail" placeholder="please input eamil" required>
-								<p class="error_tips">请输入正确的邮箱</p>
+								<p class="error_tips">Please enter the correct mailbox</p>
 						</div>
 						<div class="input-group">
 							<label for="userPassword">password</label>
@@ -148,7 +148,7 @@
 						},800)
 						setInterval(function() {
 							// if (sysFlag) {
-								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
+								window.location.href = "${APP_PATH}/index.html";	
 							// }
 						}, 1000);
 					}
@@ -195,7 +195,7 @@
 						},1000)
 						setInterval(function() {
 							// if (sysFlag) {
-								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
+								window.location.href = "${APP_PATH}/index.html";	
 							// }
 						}, 1000);
 					}
@@ -214,7 +214,6 @@
 				if (!pattern.test(data[key])) {
 					flag = !flag;
 					break;
-					
 				}
 			}
 
