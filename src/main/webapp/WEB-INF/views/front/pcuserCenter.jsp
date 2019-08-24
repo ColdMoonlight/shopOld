@@ -23,11 +23,8 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 </head>
-
 <body>
-
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
 	<!-- main -->
 	<div class="main pserson-center">
 		<div class="container pserson_box clearfix">
@@ -38,7 +35,6 @@
 			<div class="person-info-name" id="UHello_zsh">login in</div>
 			<a href="javascript:;" class="btn signout">sign out</a>
 		</div>
-
 		<div class="integral-details">
 			<div class="id-title bd-b">My All Details</div>
 			<div class="id-list">
@@ -48,7 +44,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="integral-details">
 			<div class="id-title bd-b">My Order</div>
 			<div class="id-list">
@@ -74,15 +69,10 @@
 				</div> -->
 			</div>
 		</div>
-		
-		
-		
 	</div>
 </div>
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
-
-
 <script type="text/javascript">
 	var Session_userEmail = '${sessionScope.loginUser.userEmail}';
 	var Session_userFirstname = '${sessionScope.loginUser.userFirstname}';
@@ -118,10 +108,7 @@
 			}
 		})
 	})
-
-
 	// 直接   window.location.href="${APP_PATH }/MlfrontUser/toPersonInfoPage";到这个页面再请求userInfo信息
-
 	$('#order_info').on('click', function () {
 		window.location.href = "${APP_PATH }/MlfrontUser/topcmyOrderPage";
 	})

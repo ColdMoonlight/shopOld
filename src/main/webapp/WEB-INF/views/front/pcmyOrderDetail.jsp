@@ -30,9 +30,7 @@
     <div class="container order_info_box">
     		<div class="main order-info">
     		<div class="address bd-t"></div>
-    	
     		<div class="order-list"></div>
-    	
     		<div class="order-data">
     			<div class="title">Order Time</div>
     			<div class="body"></div>
@@ -40,8 +38,6 @@
     	</div>
     </div>
 	<!-- main -->
-
-
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
@@ -50,7 +46,6 @@ url: MlfrontOrder/getOneMlfrontOrderDetail
 method:  POST请求	
 param:　orderId
 */
-
 	var orderId = window.location.href.split('?')[1].split('=')[1];
 	var reqData = {
 		"orderId": orderId
@@ -70,7 +65,6 @@ param:　orderId
 			renderOrderinfo($('.order-data .body'), resDataOrder);
 		}
 	});
-
 	function renderAddressDetail(parent, data) {
 		var html = '';
 		html += '<div class="address-details address-trigger">' +
@@ -88,7 +82,6 @@ param:　orderId
 			'</div>';
 		parent.html(html);
 	}
-
 	function orderMap(data) {
 		var orderMap = {};
 		var orderItemMap = {}
@@ -105,7 +98,6 @@ param:　orderId
 			orderItemMap: orderItemMap
 		}
 	}
-
 	function renderContainer(parent, data, orderItemList) {
 		var map = orderMap(orderItemList);
 		//console.log(map);
@@ -148,7 +140,6 @@ param:　orderId
 			renderErrorMsg(containerBox, 'No orders.');
 		}
 	}
-
 	function renderOrderinfo(parent, data) {
 		var html = '';
 		html = '<div><span>Payment_Method：</span><span>' + data.orderPayPlate + '</span></div>' +

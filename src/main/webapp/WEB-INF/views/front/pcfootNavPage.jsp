@@ -38,7 +38,6 @@
  	<script type="text/javascript">
 		var footnavId = '${sessionScope.footnavId}';
 		// console.log("footnavId:" + footnavId)
-	  
 	  /* details of banner */
 		$.ajax({
 			url: '${APP_PATH}/MlbackFootNav/getOneMlbackFootNavOneAllDetail',
