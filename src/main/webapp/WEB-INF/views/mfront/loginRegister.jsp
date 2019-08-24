@@ -69,7 +69,7 @@
 				</form>
 				<a href="javascript:;" class="btn btn-black sigin"> SIGIN </a>
 				<div class="input-group">
-					<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/tomForgetPassWord">忘记密码</a></p>
+					<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/tomForgetPassWord">Forget PassWord?</a></p>
 				</div>
 			</div>
 			<div class="tab-pane register">
@@ -145,9 +145,9 @@
 							sysFlag = !sysFlag;
 						},1000)
 						setInterval(function() {
-							if (sysFlag) {
-								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
-							}
+							// if (sysFlag) {
+								window.location.href = "${APP_PATH}/index.html";	
+							// }
 						}, 1000);
 					}
 				}
@@ -188,9 +188,9 @@
 							sysFlag = !sysFlag;
 						},1000)
 						setInterval(function() {
-							if (sysFlag) {
-								window.location.href = "${APP_PATH}/index/isMobileOrPc";	
-							}
+							// if (sysFlag) {
+								window.location.href = "${APP_PATH}/index.html";	
+							// }
 						}, 1000);
 					}
 				}

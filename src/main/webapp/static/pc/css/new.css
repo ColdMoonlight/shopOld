@@ -15,14 +15,14 @@
 .tt-desctop-menu .tt-megamenu-submenu > li.listfl6{max-width: 100%; padding: 0; margin: 10px 0;}
 .tt-megamenu-submenu li>a>img{float: left;}
 .tt-desctop-menu .tt-megamenu-submenu{margin: 0 0 0 50px;}
-.product__details-banner.swiper-container{width: 578px; height: 578px;border:1px solid #eeeee1; margin: 20px 60px 0 0;float:left}
+.product__details-banner.swiper-container{width: 500px; height: 500px;border:1px solid #eeeee1; float:left;margin: 0 0 0 20px;}
 .product__details-banner .swiper-slide img{width: 100%; height: 100%;}
 .cart-list .input-group{width: 200px;}
 .rightrule .input-group{width: 200px;}
 .tt-desktop-header{border-bottom: 1px solid #eeeee1;}
-.product-d-length .list>span{min-width:19%}
+.product-d-length .list>span{min-width:17%;padding: 0 1%;}
 .product-d-title{ line-height:30px; border:none}
-.rightrule{width:660px;float:left;margin: 30px 0 0;}
+.rightrule{width:660px;float:left;margin: 5px 0 0;}
 .rightrule #countdown-area {align-items:flex-start}
 .product__details-text{width:100%}
 .top_detial{width:100%}
@@ -48,6 +48,20 @@
 .product-details .product-d-length i{color: #f00;font-size: 14px;margin: 0 5px 0 0;}
 .box-none .btn:hover{background: #000;}
 .cat_list_box .cart-item>input, .checkbox{position: relative;z-index: 2;}
+/*************************************************************/
+.left_swiper_cont{width:600px; height: 500px; position: relative; float: left;margin: 20px 40px 0 0;}
+.additional_pic{width: 80px; height:100%;position: absolute; top: 0; left: 0; float: left;}
+.additional_pic .swiper-slide{height: 80px;width: 100%;border: 1px solid #ccc;margin: 2px 0;}
+.additional_pic .swiper-slide img{width: 100%;}
+.additional_pic  .swiper-button-next{width: 25px;height: 25px; top: 0;left: 50%; right:10px;margin: 0 0 0 -13px;background: url(../../../../../ShopTemplate/static/pc/img/1s.png) no-repeat}
+.additional_pic  .swiper-button-prev{width: 25px;height: 25px; top:475px;bottom: 0; left: 50%; right:10px;margin: 0 0 0 -13px;background: url(../../../../../ShopTemplate/static/pc/img/2x.png) no-repeat}
+.product__details-banner  .swiper-button-next{width: 25px;height: 25px; background: url(../../../../../ShopTemplate/static/pc/img/4y.png) no-repeat}
+.product__details-banner  .swiper-button-prev{width: 25px;height: 25px; background: url(../../../../../ShopTemplate/static/pc/img/3z.png) no-repeat}
+
+
+
+
+
 /*******/
 /* without data info */
 .without-data {
@@ -147,7 +161,8 @@
 .login-register .btn.register{line-height: 40px;padding: 0;}
 .login-register .btn.register:hover{background: #000;}
 .login-register .btn.save_newpass:hover{background: #000;}
-
+p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right: 20px;line-height: 40px; color: #f00;margin: 0;}
+.login-register .input-group>input{text-indent:1em}
 
 .bottom_list_account .cart-item>.content .condition>.c-item{width:100%;float:left}
 

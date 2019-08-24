@@ -15,13 +15,15 @@
 -->
 <script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 
+
+
 </head>
 <body>
 
 <script>
 	// submit
 	  $(function() {
-		window.location.href="${APP_PATH}/index.html";
+		window.location.href="${APP_PATH}/index/isMobileOrPc";
 		//启动index页面，调用接口判断请求来源 
 	}) 
 	
