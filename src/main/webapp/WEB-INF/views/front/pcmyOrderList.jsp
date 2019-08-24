@@ -23,11 +23,8 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 </head>
-
 <body>
-
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
 	<!-- main -->
 	<div class="main order-info">
 		<div class="container order_box">
@@ -49,7 +46,6 @@
 </body>
 <script type="text/javascript">
 	// 0未支付1已支付2,支付失败3,已发货;
-
 	var mainBox = $(".main .tab-content");
 	var containerBox = mainBox.find(".order-list");
 	var pageArea = mainBox.find(".page-info-area");
@@ -61,7 +57,6 @@
 	}
 	//去首页
 	to_page(1);
-
 	function to_page(pn, type) {
 		$.ajax({
 			url: "${APP_PATH}/MlfrontOrder/getmOrderByUidPage",
@@ -112,7 +107,6 @@
 			orderItemMap: orderItemMap
 		}
 	}
-
 	function renderContainer(parent, data, orderItemList) {
 		var map = orderMap(orderItemList);
 		//console.log(map);

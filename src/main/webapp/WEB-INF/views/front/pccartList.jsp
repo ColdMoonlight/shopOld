@@ -198,12 +198,9 @@
 			
 			updateCartItemNum(item, productNumText);
 		}
-
 		/* private Integer cartitemId;
 		private String cartitemProductName;
-
 		${APP_PATH}/MlbackCart/updateCartItemSkuNum		POST请求 */
-
 		function updateCartItemNum(el, num) {
 			target = el.parent().parent().parent();
 			var reqData = {
@@ -226,14 +223,12 @@
 				}
 			})
 		}
-
 		function getPrice(originalePrice, skuPriceArr, discount) {
 			var singlePrice = parseFloat(originalePrice);
 			for (var k = 0, len = skuPriceArr.length; k < len; k += 1) {
 				singlePrice += (parseFloat(skuPriceArr[k]) ? parseFloat(skuPriceArr[k]) : 0);
 			}
 			// console.log(singlePrice, discount)
-
 			return {
 				origin: parseFloat(singlePrice).toFixed(2),
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
@@ -259,10 +254,6 @@
 						cartitemProductId: $(item).data('productid'),
 						cartitemProductNumber: $(item).parent().find('.input-group input').val()
 					});
-					/* cartItemArr.push({
-						cartitemId: $(item).data('cartitemid'),
-						cartitemProductId: $(item).data('productid')
-					}); */
 				}
 			})
 			if (cartItemArr.length) {
@@ -291,7 +282,6 @@
 			calcTotalPrice();
 			fbq('track', 'InitiateCheckout');
 		});
-		
 		$.ajax({
 			url: '${APP_PATH}/MlbackCart/getCartProductNumber',
 			type: 'POST',
@@ -320,7 +310,6 @@
 				}
 			}
 		})
-
 		function toProductDetails() {
 			$('.cart-item').each(function (i, item) {
 				$(item).on('click', function () {
@@ -344,44 +333,35 @@
 			window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 			getTotalPrice();
 		}
-		
 		/**
 		 *     private Integer cartitemId;
 		 *		private Integer cartitemCartId;
 		 *		url: '${APP_PATH}/MlbackCart/delCartItem',
 		 *		JSon格式，post请求
 		 */
-
 		var cartNum = parseInt(cartText.text());
 
 		function deleteCartItem(e) {
 
 			e.stopPropagation();
 			var el = $(e.target);
-
 			// 只需要传递这一个参数就可以了。cartitemId
 			/* var reqData = { // 测试数据
 					cartitemCartId: 1000000,
 					// cartitemId: 1000000
 			} */
-
 			var reqData = {
 				//cartitemCartId: el.data('cartid'),
 				cartitemId: el.parent().data('cartitemid')
 			}
-
-
 			el.parent().parent().parent().remove();
-
 			cartNum -= 1
-
 			if (cartNum <= 0) {
 				cartText.text(0);
 				renderProductNone(cartBox);
 			} else {
 				cartText.text(cartNum);
 			}
-
 			$.ajax({
 				url: '${APP_PATH}/MlbackCart/delCartItem',
 				type: 'POST',
@@ -399,7 +379,6 @@
 							//alert('删除成功')
 							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
 						}
-
 						if (resData.isDelSuccess === 0) {
 							//0，删除失败。alert（resMsg），刷新
 							//全是错误情况，直接刷新

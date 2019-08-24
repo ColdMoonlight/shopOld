@@ -45,9 +45,7 @@
 </head>
 
 <body>
-
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
 <!-- main -->
 	<div class="main">
 		<div class="container pc_cheakout clearfix">
@@ -387,18 +385,14 @@
 					</div>
 				</div>
 				<div class="win-box-title">
-					<!-- <span class="cancel">cancel</span> -->
 					<span class="save">  <b>save it</b> </span>
-					<!-- <label><input id="checkbox" type="checkbox" name="" value="" />save it</label> -->
 				</div>
 				</div>
 				<!--*********************-->
-				
 				<div class="right_checkout clearfix">
 					<div class="list-group clearfix">
 						<li class="list-group-item">
 							<div class="group-title"><span>Choose Coupons</span> <!-- <span class="price-info"></span> --><!-- <iclass="icon right"></i> --></div>
-									
 							<div class="group-details coupons"></div>
 						</li>
 						<li class="list-group-item">
@@ -408,10 +402,6 @@
 									<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox">
 									<img src="${APP_PATH }/static/m/img/other/paypal.jpg">
 								</div>
-								<%-- <div class="coupon-item">
-						<input type="radio" name="payment" data-payid="1" onclick="selectPay(event)" class="checkbox">
-						<img src="${APP_PATH }/static/m/img/other/paypal.jpg">
-					</div> --%>
 							</div>
 						</li>
 						<li class="list-group-item">
@@ -552,30 +542,6 @@
 				//});
 			}
 		})
-
-		/*$('.address-box .cancel').on('click', function () {
-			$('.address-box').hide();
-		})*/
-		
-		
-  //       if($("#checkbox").attr("checked")==true){
-		// 	alert(111)
-		// }else{
-		// 	alert(222)
-		// }
-  //       $('#checkbox').on('click', function () {
-		// 	var formData = $('.address-box form').serializeArray();
-		// 	var reqData = formData.reduce(function (obj, item) {
-		// 		obj[item.name] = item.value;
-		// 		return obj
-		// 	}, {});
-		// 	if (!inputCheck(reqData)) return;
-		// 	reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-		// 	
-		// 
-		// 	
-		// 	
-		// })
 		$('.left_list_check .save').on('click', function () {
 			$(this).toggleClass("active")
 			var formData = $('.address-box form').serializeArray();
@@ -727,26 +693,9 @@
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
 			}
 		}
-
-	/*	$('.list-group')
-			.find('.list-group-item')
-			.each(function (i, item) {
-				var details = $(item).find(".group-details");
-				$(item).find('.group-title').on('click', function () {
-					if (details.hasClass('active')) {
-						details.removeClass('active').hide();
-						$(this).find('.icon').removeClass('bottom').addClass('right');
-					} else {
-						details.addClass('active').show();
-						$(this).find('.icon').removeClass('right').addClass('bottom');
-					}
-				})
-			});*/
-
 		/* 优惠券 
 		 * 
 		//MlbackCoupon/getOneMlbackCouponDetailByCode
-
 		 字段，String couponCode
 		 */
 		var counponDataList = {};
@@ -758,11 +707,8 @@
 						'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
 						'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 				}
-
 				/* MlbackCoupon/getOneMlbackCouponDetailByUId
-				
 				无参数  post */
-
 				if (userType === 1) {
 					$.ajax({
 						url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
