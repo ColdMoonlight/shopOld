@@ -23,26 +23,19 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 </head>
-
 <body>
-
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
 	<!-- main -->
 	<div class="container box_coupon">
 		<div class="main coupon-info"></div>
 	</div>
-	
-
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
-
 <script>
 	/* 初始化请求这个接口
  ${APP_PATH }/MlbackCoupon/getOneMlbackCouponDetailByUId
  查询该用户名下所有优惠券 post请求，无参数
 */
-
 	$.ajax({
 		url: "${APP_PATH }/MlbackCoupon/getOneMlbackCouponDetailByUId",
 		type: 'POST',
@@ -63,7 +56,6 @@
 			}
 		}
 	})
-
 	function renderCoupon(parent, data) {
 		var html = ''
 		for (var i = 0, len = data.length; i < len; i += 1) {
@@ -76,7 +68,6 @@
 				'<span>' + data[i].couponCode + '</span>' +
 				'</div>';
 		}
-
 		parent.html(html);
 	}
 </script>

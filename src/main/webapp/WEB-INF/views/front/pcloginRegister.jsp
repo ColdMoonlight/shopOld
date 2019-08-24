@@ -43,11 +43,8 @@
 	</script>
 	<!-- Facebook Pixel Code end -->
 </head>
-
 <body>
-
 	<jsp:include page="pcheader.jsp"></jsp:include>
-
 	<!-- main -->
 	<div class="main">
 		<div class="container loginregister">
@@ -90,10 +87,8 @@
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
-
 <script>
 	var loginRegister = $('.login-register');
 	var activeItem = loginRegister.find('.tab-item.active');
@@ -205,7 +200,6 @@
 			renderSysMsg('email or password format incorrect!');
 		}
 	})
-
 	function inputCheck(data) {
 		var flag = true;
 		for (var key in data) {

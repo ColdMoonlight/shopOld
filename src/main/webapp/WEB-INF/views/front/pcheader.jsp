@@ -58,17 +58,6 @@
 								<div class="tt-mobile-add">
 									<button class="tt-close">Close</button>
 								</div>
-								<!-- <div class="tt-dropdown-inner">
-									<ul>
-										<li><a href="login.html"><i class="icon-f-94"></i>Account</a></li>
-										<li><a href="wishlist.html"><i class="icon-n-072"></i>Wishlist</a></li>
-										<li><a href="compare.html"><i class="icon-n-08"></i>Compare</a></li>
-										<li><a href="page404.html"><i class="icon-f-68"></i>Check Out</a></li>
-										<li><a href="login.html"><i class="icon-f-76"></i>Sign In</a></li>
-										<li><a href="page404.html"><i class="icon-f-77"></i>Sign Out</a></li>
-										<li><a href="create-account.html"><i class="icon-f-94"></i>Register</a></li>
-									</ul>
-								</div> -->
 							</div>
 						</div>
 					</div>
@@ -97,84 +86,6 @@
 										<div class="tt-info-text">
 											What are you Looking for?
 										</div>
-										<!-- <div class="search-results">
-											<ul>
-												<li>
-													<a href="product.html">
-														<div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-03.jpg"
-																alt=""></div>
-														<div class="tt-description">
-															<div class="tt-title">Flared Shift Bag</div>
-															<div class="tt-price">
-																<span class="new-price">$14</span>
-																<span class="old-price">$24</span>
-															</div>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="product.html">
-														<div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-02.jpg"
-																alt=""></div>
-														<div class="tt-description">
-															<div class="tt-title">Flared Shift Bag</div>
-															<div class="tt-price">
-																$24
-															</div>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="product.html">
-														<div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-01.jpg"
-																alt=""></div>
-														<div class="tt-description">
-															<div class="tt-title">Flared Shift Bag</div>
-															<div class="tt-price">
-																$14
-															</div>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="product.html">
-														<div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-04.jpg"
-																alt=""></div>
-														<div class="tt-description">
-															<div class="tt-title">Flared Shift Bag</div>
-															<div class="tt-price">
-																$24
-															</div>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="product.html">
-														<div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-05.jpg"
-																alt=""></div>
-														<div class="tt-description">
-															<div class="tt-title">Flared Shift Bag</div>
-															<div class="tt-price">
-																$17
-															</div>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="product.html">
-														<div class="thumbnail"><img src="images/loader.svg" data-src="images/product/product-06.jpg"
-																alt=""></div>
-														<div class="tt-description">
-															<div class="tt-title">Flared Shift Bag</div>
-															<div class="tt-price">
-																$20
-															</div>
-														</div>
-													</a>
-												</li>
-											</ul>
-											<button type="button" class="tt-view-all">View all products</button>
-										</div> -->
 									</form>
 								</div>
 							</div>
@@ -187,7 +98,6 @@
 						   <div class="logo">
 							 <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 						   </div>
-						<!-- <img src="${APP_PATH }/static/m/img/index/logo.png" alt="megalook"> -->
 					</div>
 					 </a>
 					<!-- /tt-logo -->
@@ -205,62 +115,6 @@
 								</div>
 								<div class="tt-dropdown-inner">
 									<div class="tt-cart-layout">
-										<!-- layout emty cart -->
-										<!-- <div class="tt-cart-content">
-											<div class="tt-cart-list">
-												<div class="tt-item">
-													<a href="product.html">
-														<div class="tt-item-img">
-															<img src="images/loader.svg" data-src="images/product/product-01.jpg" alt="">
-														</div>
-														<div class="tt-item-descriptions">
-															<h2 class="tt-title">Flared Shift Dress</h2>
-															<ul class="tt-add-info">
-																<li>Yellow, Material 2, Size 58,</li>
-																<li>Vendor: Addidas</li>
-															</ul>
-															<div class="tt-quantity">1 X</div>
-															<div class="tt-price">$12</div>
-														</div>
-													</a>
-													<div class="tt-item-close">
-														<a href="#" class="tt-btn-close"></a>
-													</div>
-												</div>
-												<div class="tt-item">
-													<a href="product.html">
-														<div class="tt-item-img">
-															<img src="images/loader.svg" data-src="images/product/product-02.jpg" alt="">
-														</div>
-														<div class="tt-item-descriptions">
-															<h2 class="tt-title">Flared Shift Dress</h2>
-															<ul class="tt-add-info">
-																<li>Yellow, Material 2, Size 58,</li>
-																<li>Vendor: Addidas</li>
-															</ul>
-															<div class="tt-quantity">1 X</div>
-															<div class="tt-price">$18</div>
-														</div>
-													</a>
-													<div class="tt-item-close">
-														<a href="#" class="tt-btn-close"></a>
-													</div>
-												</div>
-											</div>
-											<div class="tt-cart-total-row">
-												<div class="tt-cart-total-title">SUBTOTAL:</div>
-												<div class="tt-cart-total-price">$324</div>
-											</div>
-											<div class="tt-cart-btn">
-												<div class="tt-item">
-													<a href="#" class="btn">PROCEED TO CHECKOUT</a>
-												</div>
-												<div class="tt-item">
-													<a href="shopping_cart_02.html" class="btn-link-02 tt-hidden-mobile">View Cart</a>
-													<a href="shopping_cart_02.html" class="btn btn-border tt-hidden-desctope">VIEW CART</a>
-												</div>
-											</div>
-										</div> -->
 									</div>
 								</div>
 							</div>
@@ -274,103 +128,6 @@
 					<div class="tt-desctop-menu">
 						<nav>
 							<ul>
-								<!-- <li class="dropdown megamenu">
-									<a href="listing-left-column.html">WOMEN</a>
-									<div class="dropdown-menu">
-										<div class="row">
-											<div class="left col-sm-9">
-												<div class="row tt-col-list">
-													<div class="col-sm-3">
-														<a class="tt-title-submenu" href="listing-left-column.html"> TOPS </a>
-														<ul class="tt-megamenu-submenu">
-															<li><a href="listing-left-column.html">Blouses &amp; Shirts</a></li>
-															<li>
-																<a href="listing-left-column.html">Dresses <span class="tt-badge tt-new">New</span></a></li>
-															<li>
-																<a href="listing-left-column.html">Tops &amp; T-shirts</a>
-																<ul>
-																	<li><a href="listing-left-column.html">Link Level 1</a></li>
-																	<li>
-																		<a href="listing-left-column.html">Link Level 1</a>
-																		<ul>
-																			<li><a href="listing-left-column.html">Link Level 2</a></li>
-																			<li>
-																				<a href="listing-left-column.html">Link Level 2</a>
-																				<ul>
-																					<li><a href="listing-left-column.html">Link Level 3</a></li>
-																					<li><a href="listing-left-column.html">Link Level 3</a></li>
-																					<li><a href="listing-left-column.html">Link Level 3</a></li>
-																					<li>
-																						<a href="listing-left-column.html">Link Level 3</a>
-																						<ul>
-																							<li>
-																								<a href="listing-left-column.html">Link Level 4</a>
-																								<ul>
-																									<li><a href="listing-left-column.html">Link Level 5</a></li>
-																									<li><a href="listing-left-column.html">Link Level 5</a></li>
-																									<li><a href="listing-left-column.html">Link Level 5</a></li>
-																									<li><a href="listing-left-column.html">Link Level 5</a></li>
-																									<li><a href="listing-left-column.html">Link Level 5</a></li>
-																								</ul>
-																							</li>
-																							<li><a href="listing-left-column.html">Link Level 4</a></li>
-																						</ul>
-																					</li>
-																					<li><a href="listing-left-column.html">Link Level 3</a></li>
-																				</ul>
-																			</li>
-																			<li><a href="listing-left-column.html">Link Level 2</a></li>
-																			<li><a href="listing-left-column.html">Link Level 2</a></li>
-																		</ul>
-																	</li>
-																	<li><a href="listing-left-column.html">Link Level 1</a></li>
-																	<li><a href="listing-left-column.html">Link Level 1</a></li>
-																	<li><a href="listing-left-column.html">Link Level 1</a></li>
-																</ul>
-															</li>
-															<li><a href="listing-left-column.html">Sleeveless Tops</a></li>
-															<li><a href="listing-left-column.html">Sweaters</a></li>
-															<li><a href="listing-left-column.html">Jackets</a></li>
-															<li><a href="listing-left-column.html">Outerwear</a></li>
-														</ul>
-													</div>
-													<div class="col-sm-3">
-														<a class="tt-title-submenu" href="listing-left-column.html">
-															BOTTOMS
-														</a>
-														<ul class="tt-megamenu-submenu">
-															<li><a href="listing-left-column.html">Trousers <span
-																		class="tt-badge tt-fatured">Fatured</span></a></li>
-															<li>
-																<a href="listing-left-column.html">Jeans</a>
-															</li>
-															<li><a href="listing-left-column.html">Leggings</a></li>
-															<li><a href="listing-left-column.html">Jumpsuit &amp; Shorts</a></li>
-															<li><a href="listing-left-column.html">Skirts</a></li>
-															<li><a href="listing-left-column.html">Tights</a></li>
-														</ul>
-													</div>
-													<div class="col-sm-3">
-														<a class="tt-title-submenu" href="listing-left-column.html">
-															ACCESSORIES
-														</a>
-														<ul class="tt-megamenu-submenu">
-															<li><a href="listing-left-column.html">Jewellery</a></li>
-															<li><a href="listing-left-column.html">Hats</a></li>
-															<li><a href="listing-left-column.html">Scarves &amp; Snoods</a></li>
-															<li><a href="listing-left-column.html">Belts</a></li>
-															<li><a href="listing-left-column.html">Bags</a></li>
-															<li><a href="listing-left-column.html">Shoes <span class="tt-badge tt-sale">Sale
-																		15%</span></a></li>
-															<li><a href="listing-left-column.html">Sunglasses</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="right col-sm-3">ssssssss</div>
-										</div>
-									</div>
-								</li> -->
 							</ul>
 						</nav>
 					</div>
@@ -381,16 +138,12 @@
 	</header>
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	 
-	
 	<script>
-		
 		var categoryActiveNum = 1;
 		var iCart = $('.icon.cart');
 		var iPerson = $('.person');
 		var mask = $('<div class="mask"></div>');
 		var sysFlag = 0;
-
 		function renderErrorMsg(parent, msg) {
 			  parent.html('<p class="without-data">' + msg + '</p>');
 		}
@@ -452,8 +205,6 @@
 				 window.location.href = "${APP_PATH }/Category/49.html";
 			})
 		}
-		
-
 		var mainCategory = $('.tt-desctop-menu ul');
 		var categoryData = {};
 		// 获取全部的category信息,文件信息
@@ -538,13 +289,9 @@
 		    cartText.text(parseInt(data.extend.number) || 0);
 		  }
 		})
-		
-		
 		iCart.on('click', function () {
 		  window.location.href = "${APP_PATH }/myCart.html";
 		})
-		
-		
 		iPerson.on('click', function () {
 		  if ($(this).hasClass('active')) {
 		    window.location.href = "${APP_PATH }/MlfrontUser/topcUserCenter";
