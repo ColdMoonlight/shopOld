@@ -40,6 +40,7 @@
 
 <body>
 	<jsp:include page="pcheader.jsp"></jsp:include>
+	<script src="${APP_PATH }/static/pc/js/jquery.jqzoom-core.js"></script>
     <link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
 	<!-- main -->
@@ -108,6 +109,8 @@
 		// })
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/pcproductDetail.html', function () {
+			$(".jqzoom").imagezoom();
+			$(".jqPreload0").remove()
 			//接到产品id，查询本id产品的详情
 			var pidA = sessionScopeproductId;
 			var dataPrice = null;
@@ -163,11 +166,7 @@
 							  }
 
 						});
-					
-						
-						
-						
-						
+						$(".jqzoom").imagezoom();
 					} else {
 						renderErrorMsg(swiper, 'No data for the relevant image was obtained');
 					}
@@ -201,10 +200,10 @@
 				var htmlbig = '';
 				var htmlsmall = '';
 				for (var i=0, len=data.length; i < len; i += 1) {
-						htmlbig += '<div class="swiper-slide">' +
-						'<img src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
-						'</div>';
-				}
+					htmlbig += '<div class="swiper-slide">' +
+					'<img src="' + data[i].productimgUrl + '" rel="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '" class="jqzoom">' +
+					'</div>';
+			}
 				for (var a=0, len=data.length; a < len; a += 1) {
 						htmlsmall += '<div class="swiper-slide">' +
 						'<img src="' + data[a].productImgsecleturl + '">' +
