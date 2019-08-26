@@ -132,7 +132,7 @@ public class MlfrontUserController {
 		int intResult = mlfrontUserService.updatePwdByEmail(mlfrontUser);
 		System.out.println(intResult);
 		System.out.println(mlfrontUser);
-		return Msg.success().add("resMsg", "更新成功").add("mlfrontUser", mlfrontUser);
+		return Msg.success().add("resMsg", "Update Successful").add("mlfrontUser", mlfrontUser);
 	}
 	
 	/**3.0	UseNow	0515
@@ -353,7 +353,7 @@ public class MlfrontUserController {
 		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
 		System.out.println(intResult);
 		System.out.println(mlfrontUser);
-		return Msg.success().add("resMsg", "更新成功").add("mlfrontUser", mlfrontUser);
+		return Msg.success().add("resMsg", "Update Successful").add("mlfrontUser", mlfrontUser);
 	}
 	
 	/**
