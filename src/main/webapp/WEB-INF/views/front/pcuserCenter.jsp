@@ -114,7 +114,7 @@
 	})
 
 	$('#shopping-cart').on('click', function () {
-		window.location.href = "${APP_PATH }/MlbackCart/topcCartList";
+		window.location.href = "${APP_PATH }/myCart.html";
 	})
 
 	$('#coupon_info').on('click', function () {
