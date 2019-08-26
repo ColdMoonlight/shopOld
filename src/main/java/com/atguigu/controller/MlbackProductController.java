@@ -100,36 +100,6 @@ public class MlbackProductController {
 		//返回视图
 		return "mfront/productDetails";
 	}
-	/**
-	 * 3.1.2	UseNow	0505
-	 * 前台移动端获取详情页面mfront/productDetails
-	 * @param jsp
-	 * @return 
-	 * */
-//	@RequestMapping(value="/tomProductDetailPageByhtml",method=RequestMethod.GET)
-//	public String tomProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
-//		
-//		//接收传递进来的参数
-//		String StringReq = productSeo;
-//		
-//		//准备封装参数
-//		MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
-//		mlbackProductrepBySeo.setProductSeo(productSeo);
-//		
-//		MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
-//		
-//		if(mlbackProductRes==null){
-//			return "mfront/index";
-//		}else{
-//			Integer productIdReq = mlbackProductRes.getProductId();
-//			//放回响应域中
-//			res.setAttribute("productId", productIdReq);
-//			//放回session域中
-//			session.setAttribute("productDetailId", productIdReq);
-//			//返回视图
-//			return "mfront/productDetails";
-//		}
-//	}
 	
 	
 	/**
@@ -148,36 +118,6 @@ public class MlbackProductController {
 		return "front/pcproductDetails";
 	}
 	
-	/**
-	 * 3.2.2	UseNow	0505
-	 * 前台移动端获取详情页面mfront/productDetails
-	 * @param jsp
-	 * @return 
-	 * */
-//	@RequestMapping(value="/topcProductDetailPageByhtml",method=RequestMethod.GET)
-//	public String topcProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
-//		
-//		//接收传递进来的参数
-//		String StringReq = productSeo;
-//		
-//		//准备封装参数
-//		MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
-//		mlbackProductrepBySeo.setProductSeo(productSeo);
-//		
-//		MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
-//		
-//		if(mlbackProductRes==null){
-//			return "mfront/index";
-//		}else{
-//			Integer productIdReq = mlbackProductRes.getProductId();
-//			//放回响应域中
-//			res.setAttribute("productId", productIdReq);
-//			//放回session域中
-//			session.setAttribute("productDetailId", productIdReq);
-//			//返回视图
-//			return "front/pcproductDetails";
-//		}
-//	}
 	/**
 	 * 3.3.2	UseNow	0505
 	 * 前台移动端获取详情页面mfront/productDetails
@@ -622,6 +562,106 @@ public class MlbackProductController {
 					.add("mlbackProductResList", mlbackProductResList);
 	}
 	
+	/**
+	 * 10.2	UseNow	0505
+	 * 通过，类id查询，该类下的全部产品
+	 * @param MlbackProduct
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackProductByparentCategoryIdListAndpn",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackProductByparentCategoryIdListAndpn(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "categoryId") Integer categoryId,@RequestParam(value = "pn", defaultValue = "1") Integer pn){
+		
+		MlbackCategory mlbackCategory = new MlbackCategory();
+		
+		MlbackCategory mlbackCategoryOne = new MlbackCategory();
+		
+		mlbackCategory.setCategoryId(categoryId);
+		
+	 	List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategory(mlbackCategory);
+	 	
+	 	mlbackCategoryOne = mlbackCategoryList.get(0);
+	 	
+	 	String categoryProductIds = mlbackCategoryOne.getCategoryProductIds();
+	 	
+	 	
+	 	List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
+	 	
+	 	List<MlbackProduct> returnList = new ArrayList<MlbackProduct>();
+	 	
+	 	PageInfo page = new PageInfo();
+	 	
+	 	if(categoryProductIds==null||categoryProductIds.length()==0){
+	 		System.out.println("mlbackProductResList的长度："+mlbackProductResList.size());
+	 	}else{
+	 		
+	 		String categoryProductIdsArr [] = categoryProductIds.split(",");
+	 		//遍历查询product产品
+	 		String proIdStr = "";
+	 		Integer proIdInt = 0;
+	 		
+	 		MlbackProduct mlbackProductReq = new MlbackProduct();
+	 		MlbackProduct mlbackProductResOne = new MlbackProduct();
+	 		List<MlbackProduct> mlbackProductList = new ArrayList<MlbackProduct>();
+	 		for(int i=0;i<categoryProductIdsArr.length;i++){
+	 			proIdStr = categoryProductIdsArr[i];
+	 			proIdInt = Integer.parseInt(proIdStr);
+	 		 	mlbackProductReq.setProductId(proIdInt);
+	 		 	mlbackProductList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
+	 		 	if(mlbackProductList.size()>0){
+	 		 		mlbackProductResOne = mlbackProductList.get(0);
+	 		 		Integer proStatus = mlbackProductResOne.getProductStatus();
+	 		 		if(proStatus==1){	//0不上架	1上架
+	 		 			mlbackProductResList.add(mlbackProductResOne);
+	 		 		}
+	 		 	}
+	 		}
+	 		
+			
+	 		returnList = getPropnList(mlbackProductResList,pn);
+	 		
+	 		page = getPageInfo(mlbackProductResList,pn);
+	 		
+	 	}
+		return Msg.success().add("resMsg", "查看该母category下的全部产品")
+					.add("mlbackProductResList", returnList).add("pageInfo", page);
+	}
+	
+	private PageInfo getPageInfo(List<MlbackProduct> mlbackProductResList,Integer pn) {
+		int PagNum = 25;
+		PageHelper.startPage(pn, PagNum);
+		PageInfo page = new PageInfo(mlbackProductResList, PagNum);
+		return page;
+	}
+
+	private List<MlbackProduct> getPropnList(List<MlbackProduct> mlbackProductResList,Integer pn) {
+		
+		List<MlbackProduct> mlfrontProductResListPage = new ArrayList<MlbackProduct>();
+		List<MlbackProduct> mlfrontProductResreturn = new ArrayList<MlbackProduct>();
+		//分页数据获取完毕
+		int PagNum = 25;
+		PageHelper.startPage(pn, PagNum);
+		PageInfo page = new PageInfo(mlbackProductResList, PagNum);
+		//从中获取本次展示的25条信息
+		mlfrontProductResListPage = page.getList();
+
+		//开始对5条信息进行遍历，获取每条的详情照片
+		Integer StartIndex = (pn-1)*PagNum;
+		Integer lengthAll = mlfrontProductResListPage.size();
+		Integer EndIndex = 0;
+		if(StartIndex+25>lengthAll){
+			EndIndex = lengthAll;
+		}else{
+			EndIndex = StartIndex+25;
+		}
+		
+		for(int i=0;i<EndIndex;i++){
+			MlbackProduct mlfrontProductOne = mlfrontProductResListPage.get(i);
+			mlfrontProductResreturn.add(mlfrontProductOne);
+		}
+		return mlfrontProductResreturn;
+	}
+
 	/**
 	 * 11.0	UseNow	0527
 	 * 通过，类id,productColor,查询满足条件的全部产品

@@ -47,11 +47,14 @@
 		console.log("sessionScopecategoryId:"+sessionScopecategoryId);
 		//var cidA = window.location.href.split('?')[1].split('=');
 		var cidA = sessionScopecategoryId;
+		var productCategoryid = cidA;
 
 		//default codition
-		getProductList({
+		/* getProductList({
 			"productCategoryid": cidA
-		});
+		}); */
+		
+		getProductList(productCategoryid,1);
 
 		/* category condition */
 		$.ajax({
@@ -66,9 +69,11 @@
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
 							$(item).on('change', function () {
 								//console.log($('.select-category').val(), $('.select-color').val());
-								getProductList({
+								/* getProductList({
 									"productCategoryid": $('.select-category').val() || cidA[1]
-								});
+								}); */
+								var productCategoryid = $('.select-category').val() || cidA[1];
+								getProductList(productCategoryid,1);
 							})
 
 						}
@@ -79,8 +84,10 @@
 				}
 			}
 		});
+		
+		
 		/* product list for category */
-		function getProductList(data) {
+/* 		function getProductList(data) {
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
 				data: JSON.stringify(data),
@@ -105,20 +112,109 @@
 					}
 				}
 			});
-		}
+		} */
 
 
-		function renderErrorMsg(parent, msg) {
+/* 		function renderErrorMsg(parent, msg) {
 			parent.html('<p>' + msg + '</p>');
-		}
+		} */
 
-		function rednerProduct(parent, data) {
+/* 		function rednerProduct(parent, data) {
 			var html = '';
 			if (data.length > 0) {
 				for (var i = 0; i < data.length; i += 1) {
 					html += '<div class="product-item">' +
 						'<div class="product-img">' +
-						/* '<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].productId + '">' + */
+						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+						'<img src="' + data[i].productMainimgurl + '" alt="">' +
+						'</a>' +
+						'</div>' +
+						'<div class="product-desc">' +
+						'<div class="product-title">' + data[i].productName + '</div>' +
+						'<div class="product-type"></div>' +
+						'<div class="product-data">' +
+						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+						'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+						' Review(s)</span>' +
+						'</div>' +
+						'<div class="product-price">' +
+						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+							.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+						'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+						'</span>' +
+						'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+						'</div>' +
+						'</div>' +
+						'</div>';
+				}
+
+				parent.html(html);
+			} else {
+				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
+			}
+		} */
+
+/* 		function renderCondition(parent, data, defaultHtml) {
+			var html = defaultHtml || '';
+			html += ''
+
+			for (var i = 0, len = data.length; i < len; i += 1) {
+				if (data[i].categoryId === parseInt(cidA[1])) {
+					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
+				} else {
+					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
+				}
+			}
+
+			parent.html(html);
+		} */
+		
+		
+		
+		/* product list for category */
+ 		function getProductList(productCategoryid,pn) {
+			$.ajax({
+				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListAndpn',
+				data: {
+	          			"categoryId": productCategoryid,
+	          			"pn": pn
+	        		  },
+				type: "POST",
+				success: function (data) {
+					// console.log(data)
+					// var data = JSON.parse(data);
+					if (data.code === 100) {
+						rednerProduct(productList, data.extend.mlbackProductResList);
+						var pageInfo = data.extend.pageInfo;
+						console.log("************pageInfo*************");
+						console.log(pageInfo);
+						console.log("************pageInfo*************");
+					} else {
+						renderErrorMsg(productList, 'No product-related data was obtained');
+					}
+				},
+				error: function (error) {
+					if (error.status === 400) {
+						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
+						setTimeout(function () {
+							window.location.href = "${APP_PATH}/index/isMobileOrPc";
+						}, 3000);
+					}
+				}
+			});
+		} 
+
+
+ 		function renderErrorMsg(parent, msg) {
+			parent.html('<p>' + msg + '</p>');
+		}
+
+ 		function rednerProduct(parent, data) {
+			var html = '';
+			if (data.length > 0) {
+				for (var i = 0; i < data.length; i += 1) {
+					html += '<div class="product-item">' +
+						'<div class="product-img">' +
 						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
 						'<img src="' + data[i].productMainimgurl + '" alt="">' +
 						'</a>' +
@@ -154,7 +250,6 @@
 
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				if (data[i].categoryId === parseInt(cidA[1])) {
-					// console.log("*********")
 					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
 				} else {
 					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
