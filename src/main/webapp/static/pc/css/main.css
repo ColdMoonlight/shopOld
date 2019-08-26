@@ -1708,4 +1708,6 @@ width: 100%;
 	background-color: #ff186e
 }
 
-
+.page-info-area.product_list .pagination {
+	justify-content: flex-end;
+}

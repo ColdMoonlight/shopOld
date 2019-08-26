@@ -35,6 +35,7 @@
 				</div>
 			</div>
 			<div class="product-list product-list_home"></div>
+			<div class="page-info-area product_list"></div>
 		</div>
 	</div>
 
@@ -54,8 +55,8 @@
 			"productCategoryid": cidA
 		}); */
 		
-		getProductList(productCategoryid,1);
-
+		// getProductList(productCategoryid,1);
+	to_page(1);
 		/* category condition */
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
@@ -72,8 +73,8 @@
 								/* getProductList({
 									"productCategoryid": $('.select-category').val() || cidA[1]
 								}); */
-								var productCategoryid = $('.select-category').val() || cidA[1];
-								getProductList(productCategoryid,1);
+								productCategoryid = $('.select-category').val() || cidA;
+								to_page(1);
 							})
 
 						}
@@ -172,7 +173,7 @@
 		
 		
 		/* product list for category */
- 		function getProductList(productCategoryid,pn) {
+ 		/* function getProductList(productCategoryid,pn) {
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListAndpn',
 				data: {
@@ -202,8 +203,95 @@
 					}
 				}
 			});
-		} 
+		} */
+		function to_page(pn) {
+			$.ajax({
+				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListAndpn',
+				data: {
+     			"categoryId": productCategoryid,
+     			"pn": pn
+   		  },
+				type: "POST",
+				success: function (data) {
+					// console.log(data)
+					// var data = JSON.parse(data);
+					if (data.code === 100) {
+						rednerProduct(productList, data.extend.mlbackProductResList);
+						var pageInfo = data.extend.pageInfo;
+						console.log("************pageInfo*************");
+						console.log(pageInfo);
+						console.log("************pageInfo*************");
+						render_page_nav($('.page-info-area'), pageInfo)
+					} else {
+						renderErrorMsg(productList, 'No product-related data was obtained');
+					}
+				},
+				error: function (error) {
+					if (error.status === 400) {
+						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
+						setTimeout(function () {
+							window.location.href = "${APP_PATH}/index/isMobileOrPc";
+						}, 3000);
+					}
+				}
+			});
+		}
+		
+		var pageInfo
 
+		// render page nav
+		function render_page_nav(parent, pageInfo) {
+			//page_nav_area
+			parent.empty();
+			var ul = $("<ul></ul>").addClass("pagination");
+
+			//构建元素
+			var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
+			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+			if (pageInfo.hasPreviousPage == false) {
+				firstPageLi.addClass("disabled");
+				prePageLi.addClass("disabled");
+			} else {
+				//为元素添加点击翻页的事件
+				firstPageLi.click(function () {
+					to_page(1);
+				});
+				prePageLi.click(function () {
+					to_page(pageInfo.pageNum - 1);
+				});
+			}
+
+			var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+			var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
+			if (pageInfo.hasNextPage == false) {
+				nextPageLi.addClass("disabled");
+				lastPageLi.addClass("disabled");
+			} else {
+				nextPageLi.click(function () {
+					to_page(pageInfo.pageNum + 1);
+				});
+				lastPageLi.click(function () {
+					to_page(pageInfo.pages);
+				});
+			}
+
+			//添加首页和前一页 的提示
+			ul.append(firstPageLi).append(prePageLi);
+			//1,2，3遍历给ul中添加页码提示
+			$.each(pageInfo.navigatepageNums, function (index, item) {
+
+				var numLi = $("<li></li>").append($("<a></a>").append(item));
+				if (pageInfo.pageNum == item) {
+					numLi.addClass("active");
+				}
+				numLi.click(function () {
+					to_page(item);
+				});
+				ul.append(numLi);
+			});
+			//添加下一页和末页 的提示
+			ul.append(nextPageLi).append(lastPageLi).appendTo(parent);
+		}
 
  		function renderErrorMsg(parent, msg) {
 			parent.html('<p>' + msg + '</p>');
