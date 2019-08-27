@@ -518,18 +518,19 @@
 					$('.shipping').find('span').text('Please add the shipping address first');
 					shippingPriceText.text('$' + 0)
 				}
-				// totalPriceText.text('$' + (resDataMoney + totalPrice));
 
-				subtotalPriceText.text('$' + (resDataMoney + totalPrice).toFixed(2));
+				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+
+				subtotalPriceText.text(subtotalText);
 				$('.address-trigger').on('click', function () {
 					$('.address-box').show();
 				});
 			}
-		})
+		});
 
 		$('.address-box .cancel').on('click', function () {
 			$('.address-box').hide();
-		})
+		});
 
 		$('.address-box .save').on('click', function () {
 			var formData = $('.address-box form').serializeArray();
@@ -560,7 +561,6 @@
 
 					// console.log(resDataMoney)
 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
-					// totalPriceText.text('$' + totalPrice);
 					
 					shippingPriceText.text('$' + resDataMoney);
 					subtotalPriceText.text('$' + totalPrice);
@@ -616,17 +616,16 @@
 			success: function (data) {
 				var resData = data.extend.mlfrontOrderItemList;
 				// console.log(resData);
-				orderId = resData[0].orderId || null;
+				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
 				var cartList = $('.cart-list');
 				cartList.attr('data-id', resData.orderId);
 				renderCartList(cartList, resData)
 
 				// console.log(typeof totalPrice)
 				var allPriceObj = calAllProductPrice(resData);
+				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
+				
 				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoney).toFixed(2);
-				// totalPriceText.text('$' + totalPrice);
-
-				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice));
 				subtotalPriceText.text('$' + totalPrice);
 			}
 		})

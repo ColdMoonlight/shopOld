@@ -1685,7 +1685,29 @@ width: 100%;
 	font-size: 14px;
 }
 
+/* review-container */
+.review-container {
+	display: flex;
+	align-items: center;
+}
 
+.review-left,
+.review-right {
+	width: 50%;
+}
 
+.review-right {
+	text-align: center;
+}
 
+.review-right .btn {
+	width: 80%;
+}
 
+.review-right .btn:hover {
+	background-color: #ff186e
+}
+
+.page-info-area.product_list .pagination {
+	justify-content: flex-end;
+}
