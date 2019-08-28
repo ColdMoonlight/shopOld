@@ -124,9 +124,9 @@
 					'<span class="original">$' + (dataPrice.origin) + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-					'<input type="text" name="cart-product-num" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
+					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
 					'">' +
-					'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
+					'<span class="input-group-addon"  id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
 					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 					'</div>' +
