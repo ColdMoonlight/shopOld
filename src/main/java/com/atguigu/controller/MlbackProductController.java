@@ -640,7 +640,7 @@ public class MlbackProductController {
 		boolean hasPreviousPage=true;
 		boolean isFirstPage = true;
 		boolean isLastPage = true;
-		
+		//计算上半部分参数
 		if(pn==lastPage&&lastPage>1){
 			isFirstPage = false;
 			isLastPage = true;
@@ -669,8 +669,6 @@ public class MlbackProductController {
 		
 		int navigateFirstPage = 1;
 		int navigateLastPage = lastPage;
-//		navigateFirstPage = pn;
-//		navigateLastPage=lastPage;
 		
 		int navigatePages = PagNum;
 		
@@ -679,6 +677,7 @@ public class MlbackProductController {
 			navigatepageNums[i]=i+1;
 		}
 		page.setNavigatepageNums(navigatepageNums);
+		//计算下半部分参数
 		int nextPage =0;
 		int pageNum = 0;
 		int pageSize = 0;
@@ -708,7 +707,7 @@ public class MlbackProductController {
 			prePage = pn-1;
 			size = PagNum;
 		}
-		//navigatepageNums
+		//封装参数
 		page.setEndRow(EndRow);
 		page.setFirstPage(firstPage);
 		page.setHasNextPage(hasNextPage);
@@ -752,7 +751,7 @@ public class MlbackProductController {
 			EndIndex = StartIndex+25;
 		}
 		
-		for(int i=0;i<EndIndex;i++){
+		for(int i=StartIndex;i<EndIndex;i++){
 			MlbackProduct mlfrontProductOne = mlfrontProductResListPage.get(i);
 			mlfrontProductResreturn.add(mlfrontProductOne);
 		}

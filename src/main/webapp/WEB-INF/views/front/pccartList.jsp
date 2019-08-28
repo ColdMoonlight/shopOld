@@ -377,20 +377,20 @@
 							//取出isDelSuccess字段
 							//1，删除成功。  不alert，刷新 
 							//alert('删除成功')
-							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
+							window.location.href = '${APP_PATH}/myCart.html';
 						}
 						if (resData.isDelSuccess === 0) {
 							//0，删除失败。alert（resMsg），刷新
 							//全是错误情况，直接刷新
 							renderSysMsg('The system is abnormal, please try again later');
 							if (sysFlag) {
-								window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
+								window.location.href = '${APP_PATH}/myCart.html';
 							}
 						}
 					} else {
 						renderSysMsg('The system is abnormal, please try again later');
 						if (sysFlag) {
-							window.location.href = '${APP_PATH}/MlbackCart/topcCartList';
+							window.location.href = '${APP_PATH}/myCart.html';
 						}
 					}
 				}
