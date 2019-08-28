@@ -135,7 +135,7 @@
 						'<span class="original">$' + (dataPrice.origin) + '</span>' +
 						'<div class="input-group">' +
 						'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-						'<input type="text" name="cart-product-num" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
+						'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
 						'">' +
 						'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 						'</div>' +
@@ -311,16 +311,27 @@
 			}
 		})
 		function toProductDetails() {
-			$('.cart-item').each(function () {
-			  var textlink =$(this).children(".content").children(".text").find(".title");
-			   var imglink =$(this).find(".img");
-			  var productid = $(this).find('.checkbox').data('productid')
+			// $('.cart-item').each(function (i, item) {
+			// 	$(item).on('click', function () {
+			// 		toProductItem($(this).find('.checkbox').data('productid'))
+			// 	})
+			// }, true)
+			
+			$(".cart-item").each(function(){
+				var textlink =$(this).children(".content").children(".text").find(".title");
+				var imglink =$(this).find(".img");
 				textlink.on('click', function () {
-					toProductItem(productid)
+					var product_id = $(this).parents(".content").parents(".cart-item").find(".checkbox").data('productid');
+					alert(product_id)
+				     toProductItem(product_id)
 				});
 				imglink.on('click', function () {
-					toProductItem(productid)
+					var product_id = $(this).prev(".checkbox").data('productid');
+					alert(product_id)
+				     toProductItem(product_id)
 				});
+				
+				
 			}, true)
 		}
 		
