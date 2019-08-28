@@ -66,6 +66,14 @@
 .rightrule .input-group-addon,.rightrule.input-group-addon{width: 30px;}
 .input-group-addon>.icon{width: 30px;height: 30px;}
 .cart-page .form-control{font-size: 16px;width: 70px;flex:inherit;background: none;}
+.classimg0{background:url(../../../../../ShopTemplate/static/pc/img/new.gif) no-repeat center top; background-size:35px 25px;}
+.classimg1{background:url(../../../../../ShopTemplate/static/pc/img/40%off.gif) no-repeat center top; background-size:64px 25px;}
+.classimg2{background:url(../../../../../ShopTemplate/static/pc/img/hot.gif) no-repeat center top; background-size:35px 25px;}
+
+.tt-desctop-menu nav > ul > li.dropdown > a{padding: 25px 12px 10px;}
+
+
+
 
 
 /*********************************************/
