@@ -751,7 +751,7 @@ public class MlbackProductController {
 			EndIndex = StartIndex+25;
 		}
 		
-		for(int i=0;i<EndIndex;i++){
+		for(int i=StartIndex;i<EndIndex;i++){
 			MlbackProduct mlfrontProductOne = mlfrontProductResListPage.get(i);
 			mlfrontProductResreturn.add(mlfrontProductOne);
 		}
