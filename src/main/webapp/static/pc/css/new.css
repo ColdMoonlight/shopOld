@@ -59,6 +59,10 @@
 .additional_pic  .swiper-button-prev{width: 25px;height: 25px; top:475px;bottom: 0; left: 50%; right:10px;margin: 0 0 0 -13px;background: url(../../../../../ShopTemplate/static/pc/img/2x.png) no-repeat}
 .product__details-banner  .swiper-button-next{width: 25px;height: 25px; background: url(../../../../../ShopTemplate/static/pc/img/4y.png) no-repeat}
 .product__details-banner  .swiper-button-prev{width: 25px;height: 25px; background: url(../../../../../ShopTemplate/static/pc/img/3z.png) no-repeat}
+.cart-item>.content .title{color: #666;font-size: 16px;}
+.cart-item>.content .title:hover{text-decoration: underline;color: #111;}
+.cart-item>.content .original{font-size: 12px;}
+.cart-item>.content .price{font-size: 16px;}
 
 /*********************************************/
 .tb-pic a{display:table-cell;text-align:center;vertical-align:middle;}
