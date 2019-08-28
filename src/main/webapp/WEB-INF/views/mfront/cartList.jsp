@@ -305,13 +305,41 @@
 			}
 		})
 
+		// function toProductDetails() {
+		// 	$('.cart-item').each(function (i, item) {
+		// 		$(item).on('click', function () {
+		// 			toProductItem($(this).find('.checkbox').data('productid'))
+		// 		})
+		// 	}, true)
+		// }
 		function toProductDetails() {
-			$('.cart-item').each(function (i, item) {
-				$(item).on('click', function () {
-					toProductItem($(this).find('.checkbox').data('productid'))
-				})
+			// $('.cart-item').each(function (i, item) {
+			// 	$(item).on('click', function () {
+			// 		toProductItem($(this).find('.checkbox').data('productid'))
+			// 	})
+			// }, true)
+			
+			$(".cart-item").each(function(){
+				var textlink =$(this).children(".content").children(".text").find(".title");
+				var imglink =$(this).find(".img");
+				textlink.on('click', function () {
+					var product_id = $(this).parents(".content").parents(".cart-item").find(".checkbox").data('productid');
+					// alert(product_id)
+				     toProductItem(product_id)
+				});
+				imglink.on('click', function () {
+					var product_id = $(this).prev(".checkbox").data('productid');
+					// alert(product_id)
+				     toProductItem(product_id)
+				});
+				
+				
 			}, true)
 		}
+		
+		
+		
+		
 		
 		function selectCartItem(e) {
 			e.stopPropagation();
