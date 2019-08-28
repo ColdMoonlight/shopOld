@@ -35,12 +35,14 @@
 				</div>
 			</div>
 			<div class="product-list product-list_home"></div>
+			<div class="page-info-area product_list"></div>
 		</div>
 	</div>
 
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 
 	<script>
+		var reviewId = null;
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopecategoryId = '${sessionScope.categoryId}';
@@ -54,8 +56,8 @@
 			"productCategoryid": cidA
 		}); */
 		
-		getProductList(productCategoryid,1);
-
+		// getProductList(productCategoryid,1);
+	to_page(1);
 		/* category condition */
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
@@ -72,8 +74,8 @@
 								/* getProductList({
 									"productCategoryid": $('.select-category').val() || cidA[1]
 								}); */
-								var productCategoryid = $('.select-category').val() || cidA[1];
-								getProductList(productCategoryid,1);
+								productCategoryid = $('.select-category').val() || cidA;
+								to_page(1);
 							})
 
 						}
@@ -85,110 +87,26 @@
 			}
 		});
 		
-		
-		/* product list for category */
-/* 		function getProductList(data) {
-			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
-				data: JSON.stringify(data),
-				dataType: "JSON",
-				contentType: 'application/json',
-				type: "POST",
-				success: function (data) {
-					// console.log(data)
-					// var data = JSON.parse(data);
-					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
-					} else {
-						renderErrorMsg(productList, 'No product-related data was obtained');
-					}
-				},
-				error: function (error) {
-					if (error.status === 400) {
-						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
-						setTimeout(function () {
-							window.location.href = "${APP_PATH}/index/isMobileOrPc";
-						}, 3000);
-					}
-				}
-			});
-		} */
-
-
-/* 		function renderErrorMsg(parent, msg) {
-			parent.html('<p>' + msg + '</p>');
-		} */
-
-/* 		function rednerProduct(parent, data) {
-			var html = '';
-			if (data.length > 0) {
-				for (var i = 0; i < data.length; i += 1) {
-					html += '<div class="product-item">' +
-						'<div class="product-img">' +
-						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-						'<img src="' + data[i].productMainimgurl + '" alt="">' +
-						'</a>' +
-						'</div>' +
-						'<div class="product-desc">' +
-						'<div class="product-title">' + data[i].productName + '</div>' +
-						'<div class="product-type"></div>' +
-						'<div class="product-data">' +
-						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
-						'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
-						' Review(s)</span>' +
-						'</div>' +
-						'<div class="product-price">' +
-						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
-							.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
-						'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
-						'</span>' +
-						'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
-						'</div>' +
-						'</div>' +
-						'</div>';
-				}
-
-				parent.html(html);
-			} else {
-				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
-			}
-		} */
-
-/* 		function renderCondition(parent, data, defaultHtml) {
-			var html = defaultHtml || '';
-			html += ''
-
-			for (var i = 0, len = data.length; i < len; i += 1) {
-				if (data[i].categoryId === parseInt(cidA[1])) {
-					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
-				} else {
-					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
-				}
-			}
-
-			parent.html(html);
-		} */
-		
-		
-		
-		/* product list for category */
- 		function getProductList(productCategoryid,pn) {
+		function to_page(pn) {
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListAndpn',
 				data: {
-	          			"categoryId": productCategoryid,
-	          			"pn": pn
-	        		  },
+     			"categoryId": productCategoryid,
+     			"pn": pn
+   		  },
 				type: "POST",
 				success: function (data) {
 					// console.log(data)
 					// var data = JSON.parse(data);
 					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
+						var reviewTextData =  data.extend.mlbackProductResList;
+						console.log(reviewTextData)
+						rednerProduct(productList,reviewTextData);
 						var pageInfo = data.extend.pageInfo;
 						console.log("************pageInfo*************");
 						console.log(pageInfo);
 						console.log("************pageInfo*************");
+						render_page_nav($('.page-info-area'), pageInfo)
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
@@ -202,8 +120,64 @@
 					}
 				}
 			});
-		} 
+		}
+		
+		// var pageInfo
 
+		// render page nav
+		function render_page_nav(parent, pageInfo) {
+			//page_nav_area
+			parent.empty();
+			var ul = $("<ul></ul>").addClass("pagination");
+
+			//构建元素
+			var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
+			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+			if (pageInfo.hasPreviousPage == false) {
+				firstPageLi.addClass("disabled");
+				prePageLi.addClass("disabled");
+			} else {
+				//为元素添加点击翻页的事件
+				firstPageLi.click(function () {
+					to_page(1);
+				});
+				prePageLi.click(function () {
+					to_page(pageInfo.pageNum - 1);
+				});
+			}
+
+			var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+			var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
+			if (pageInfo.hasNextPage == false) {
+				nextPageLi.addClass("disabled");
+				lastPageLi.addClass("disabled");
+			} else {
+				nextPageLi.click(function () {
+					to_page(pageInfo.pageNum + 1);
+				});
+				lastPageLi.click(function () {
+					to_page(pageInfo.pages);
+				});
+			}
+
+			//添加首页和前一页 的提示
+			ul.append(firstPageLi).append(prePageLi);
+			//1,2，3遍历给ul中添加页码提示
+			$.each(pageInfo.navigatepageNums, function (index, item) {
+
+				var numLi = $("<li></li>").append($("<a></a>").append(item));
+				if (pageInfo.pageNum == item) {
+					numLi.addClass("active");
+				}
+				numLi.click(function () {
+					to_page(item);
+					
+				});
+				ul.append(numLi);
+			});
+			//添加下一页和末页 的提示
+			ul.append(nextPageLi).append(lastPageLi).appendTo(parent);
+		}
 
  		function renderErrorMsg(parent, msg) {
 			parent.html('<p>' + msg + '</p>');
@@ -213,7 +187,7 @@
 			var html = '';
 			if (data.length > 0) {
 				for (var i = 0; i < data.length; i += 1) {
-					html += '<div class="product-item">' +
+					html += '<div class="product-item" data-productid="'+ data[i].productId +'">' +
 						'<div class="product-img">' +
 						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
 						'<img src="' + data[i].productMainimgurl + '" alt="">' +

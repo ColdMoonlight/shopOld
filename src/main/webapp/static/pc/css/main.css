@@ -993,7 +993,7 @@ margin: 10px 0;
 
 .cart-item>.content .original {
 	text-decoration: line-through;
-	font: 12px/12px '';
+	/* font: 12px/12px ''; */
 	margin-left: .5em;
   margin-bottom: 1px;
 }
@@ -1685,7 +1685,29 @@ width: 100%;
 	font-size: 14px;
 }
 
+/* review-container */
+.review-container {
+	display: flex;
+	align-items: center;
+}
 
+.review-left,
+.review-right {
+	width: 50%;
+}
 
+.review-right {
+	text-align: center;
+}
 
+.review-right .btn {
+	width: 80%;
+}
 
+.review-right .btn:hover {
+	background-color: #ff186e
+}
+
+.page-info-area.product_list .pagination {
+	justify-content: flex-end;
+}
