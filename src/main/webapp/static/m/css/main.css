@@ -661,6 +661,7 @@ a:focus {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   text-align:center;
+  background: #fff;
 }
 .input-group-addon {
   display: inline-block;
@@ -2285,7 +2286,7 @@ a:focus {
 
 .loginregister{margin: 0 auto;}
 .login-register .input-group>input{border-radius:5px;}
-
+.input-group .input-group>input, .input-group .input-group>.input{background: #fff;}
 
 
 
