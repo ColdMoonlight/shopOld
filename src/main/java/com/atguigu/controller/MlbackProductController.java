@@ -572,18 +572,25 @@ public class MlbackProductController {
 	@ResponseBody
 	public Msg getMlbackProductByparentCategoryIdListAndpn(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "categoryId") Integer categoryId,@RequestParam(value = "pn", defaultValue = "1") Integer pn){
 		
-		MlbackCategory mlbackCategory = new MlbackCategory();
+		MlbackCategory mlbackCategoryReq = new MlbackCategory();
 		
 		MlbackCategory mlbackCategoryOne = new MlbackCategory();
 		
-		mlbackCategory.setCategoryId(categoryId);
+		Integer categoryIdInt = categoryId;
+		System.out.println("categoryIdInt:"+categoryIdInt);
+		
+		mlbackCategoryReq.setCategoryId(categoryIdInt);
+		
+		mlbackCategoryOne = mlbackCategoryService.selectMlbackCategoryById(mlbackCategoryReq);
 		
 		List<MlbackCategory> mlbackCategoryList = new ArrayList<MlbackCategory>();
 	 	
-	 	mlbackCategoryOne = mlbackCategoryService.selectMlbackCategoryById(mlbackCategory);
-	 	
-	 	String categoryProductIds = mlbackCategoryOne.getCategoryProductIds();
-	 	
+	 	String categoryProductIds = null;
+	 	if(mlbackCategoryOne==null){
+	 		categoryProductIds = null;
+	 	}else{
+	 		categoryProductIds = mlbackCategoryOne.getCategoryProductIds();
+	 	}
 	 	
 	 	List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
 	 	
