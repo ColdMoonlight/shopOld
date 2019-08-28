@@ -309,17 +309,13 @@
          }
        });
     }
-		// function number5Times(len,productData) {
-		// 	var lens=parseInt(len-(len%5));
-		// 	// console.log(productData.slice(0,lens))
-		// 	return productData.slice(0,lens);
-		//    }
 		   
 	function number5Times(len,productData) {
         var lens=parseInt(len-(len%5));
 		return productData.slice(0,lens);
        }	   
   </script>
+  <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
 
 </html>
