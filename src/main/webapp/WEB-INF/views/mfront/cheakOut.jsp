@@ -42,6 +42,7 @@
   		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
+	
 </head>
 
 <body>
@@ -109,6 +110,7 @@
 						</div>
 					</div>
 					<div class="btn btn-black place-order">Place Order</div>
+					<div id="paypal-button-container"></div>
 				</div>
 			</div>
 		</div>
@@ -914,6 +916,39 @@
 
 			return flag;
 		}
+	</script>
+	<script
+    	src="https://www.paypal.com/sdk/js?client-id=AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj">
+    </script>
+
+   <script>
+   		var kkk=156;
+	  paypal.Buttons({
+	    createOrder: function(data, actions) {
+	      return actions.order.create({
+	        purchase_units: [{
+	          amount: {
+	            value: kkk
+	          }
+	        }]
+	      });
+	    },
+	    onApprove: function(data, actions) {
+	      return actions.order.capture().then(function(details) {
+	        alert('Transaction completed by ' + details.payer.name.given_name);
+	        // Call your server to save the transaction
+	        return fetch('/paypal-transaction-complete', {
+	          method: 'post',
+	          headers: {
+	            'content-type': 'application/json'
+	          },
+	          body: JSON.stringify({
+	            orderID: data.orderID
+	          })
+	        });
+	      });
+	    }
+	  }).render('#paypal-button-container');
 	</script>
 	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
