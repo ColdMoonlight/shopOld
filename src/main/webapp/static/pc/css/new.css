@@ -69,9 +69,8 @@
 .classimg0{background:url(../../../../../ShopTemplate/static/pc/img/new.gif) no-repeat center top; background-size:35px 25px;}
 .classimg1{background:url(../../../../../ShopTemplate/static/pc/img/40%off.gif) no-repeat center top; background-size:64px 25px;}
 .classimg2{background:url(../../../../../ShopTemplate/static/pc/img/hot.gif) no-repeat center top; background-size:35px 25px;}
-
 .tt-desctop-menu nav > ul > li.dropdown > a{padding: 25px 12px 10px;}
-
+.u-flyer{width: 100px; height: 100px;z-index: 99999;}
 
 
 

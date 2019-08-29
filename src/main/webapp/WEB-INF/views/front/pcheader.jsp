@@ -138,13 +138,14 @@
 	</header>
 	<div class="fix_iconnav">
 		<ul class="icon_nav">
-			<li class="cart_icon"><a href="###"></a><span class="cart_num">10</span></li>
+			<li id="cart_icon" class="cart_icon"><a href="###"></a><span class="cart_num">0</span></li>
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
 	</div>
 	
 	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
+	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>
        $(function(){
@@ -160,9 +161,10 @@
 					$(".go_top").hide();
 				}
 			   });
+			   /***************************************/
 	   })
 		var categoryActiveNum = 1;
-		var iCart = $('.icon.cart');
+		var iCart = $('.cart_icon');
 		var iPerson = $('.person');
 		var mask = $('<div class="mask"></div>');
 		var sysFlag = 0;
@@ -317,7 +319,7 @@
 			}
 		
 		// cart icon default number
-		var cartText = iCart.find('.num');
+		var cartText = iCart.find('.cart_num');
 		var num = window.localStorage.getItem('productNum') || 0;
 		
 		$.ajax({
