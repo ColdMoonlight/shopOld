@@ -361,6 +361,8 @@ a:focus {
 .category .category-item {
 	padding: .5em 0;
 	border-bottom: 1px solid #ccc;
+	background: url(../../../../../ShopTemplate/static/m/img/index/jtn_02.png) no-repeat right center;
+	background-size:30px ;
 }
 .category .category-item a {
 	position: relative;
@@ -2293,7 +2295,7 @@ a:focus {
 .showactive2{background:url(../../../../../ShopTemplate/static/pc/img/sale20.png) no-repeat center;background-size:45px;}
 .showactive3{background:url(../../../../../ShopTemplate/static/pc/img/sale30.png) no-repeat center;background-size:45px;}
 .showactive4{background:url(../../../../../ShopTemplate/static/pc/img/sale40.png) no-repeat center;background-size:45px;}
-
+.no_all .product-box{display: none !important;}
 
 
 
