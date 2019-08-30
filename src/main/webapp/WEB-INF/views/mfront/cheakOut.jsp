@@ -441,7 +441,6 @@
 						</div>
 					</div>
 					<div class="btn btn-black place-order">Place Order</div>
-					<div id="paypal-button-container"></div>
 				</div>
 			</div>
 		</div>
@@ -663,8 +662,9 @@
 					return (price + parseFloat(item))
 				}, originalPrice);
 				// console.log(data[i])
-				allOriginPrice += parseFloat((singlePrice * data[i].orderitemPskuNumber).toFixed(2))
-				allSubtotalPrice += parseFloat((allOriginPrice * discount).toFixed(2))
+				var singleNumPrice = singlePrice * data[i].orderitemPskuNumber;
+				allOriginPrice = parseFloat((allOriginPrice + singleNumPrice).toFixed(2));
+				allSubtotalPrice = parseFloat((allSubtotalPrice + singleNumPrice * discount).toFixed(2));
 			}
 			return {
 				allOriginPrice: allOriginPrice,
@@ -929,39 +929,7 @@
 			return flag;
 		}
 	</script>
-	<script
-    	src="https://www.paypal.com/sdk/js?client-id=AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj">
-    </script>
 
-   <script>
-   		var kkk=156;
-	  paypal.Buttons({
-	    createOrder: function(data, actions) {
-	      return actions.order.create({
-	        purchase_units: [{
-	          amount: {
-	            value: kkk
-	          }
-	        }]
-	      });
-	    },
-	    onApprove: function(data, actions) {
-	      return actions.order.capture().then(function(details) {
-	        alert('Transaction completed by ' + details.payer.name.given_name);
-	        // Call your server to save the transaction
-	        return fetch('/paypal-transaction-complete', {
-	          method: 'post',
-	          headers: {
-	            'content-type': 'application/json'
-	          },
-	          body: JSON.stringify({
-	            orderID: data.orderID
-	          })
-	        });
-	      });
-	    }
-	  }).render('#paypal-button-container');
-	</script>
 	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
 
