@@ -42,6 +42,7 @@
   		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
+	
 </head>
 
 <body>
@@ -661,8 +662,9 @@
 					return (price + parseFloat(item))
 				}, originalPrice);
 				// console.log(data[i])
-				allOriginPrice += parseFloat((singlePrice * data[i].orderitemPskuNumber).toFixed(2))
-				allSubtotalPrice += parseFloat((allOriginPrice * discount).toFixed(2))
+				var singleNumPrice = singlePrice * data[i].orderitemPskuNumber;
+				allOriginPrice = parseFloat((allOriginPrice + singleNumPrice).toFixed(2));
+				allSubtotalPrice = parseFloat((allSubtotalPrice + singleNumPrice * discount).toFixed(2));
 			}
 			return {
 				allOriginPrice: allOriginPrice,
@@ -927,6 +929,7 @@
 			return flag;
 		}
 	</script>
+
 	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
 
