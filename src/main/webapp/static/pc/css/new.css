@@ -16,8 +16,10 @@
 .tt-megamenu-submenu li>a>img{float: left;}
 .tt-desctop-menu .tt-megamenu-submenu{margin: 0 0 0 50px;}
 .product__details-banner.swiper-container{width:500px; height: 500px;float:left;margin: 0 0 0 20px;}
+.product__details-banner.swiper-container .swiper-wrapper{width:500px; height: 500px;}
+
 .product__details-banner .swiper-slide{width: 500px; height: 500px;}
-.product__details-banner .swiper-slide img{max-height:498px; max-width:498px;display: block; float: left;border: 1px solid #EEEEE1;}
+.product__details-banner .swiper-slide img{max-height:500px; max-width:500px;display: block; float: left}
 .cart-list .input-group{width: 200px;}
 .rightrule .input-group{width: 200px;}
 .tt-desktop-header{border-bottom: 1px solid #eeeee1;}
