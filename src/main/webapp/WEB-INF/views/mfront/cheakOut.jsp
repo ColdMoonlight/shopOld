@@ -872,7 +872,7 @@
 					}
 				})
 			} else {
-				renderSysMsg('Please fill in the shipping address')
+				renderSysMsg('Please fill in the shipping address And save it ')
 			}
 		})
 
