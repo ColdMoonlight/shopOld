@@ -49,7 +49,7 @@ public class MlfrontAddressController {
 	 * MlfrontAddress	insert
 	 * @param MlfrontAddress
 	 */
-/*	@RequestMapping(value="/save",method=RequestMethod.POST)
+	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontAddress mlfrontAddress){
 		//接受参数信息
@@ -124,7 +124,7 @@ public class MlfrontAddressController {
 				return Msg.success().add("resMsg", "登录用户地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
 			}	
 		}
-	}*/
+	}
 	/**1.0	UseNow	0505
 	 * MlfrontAddress	insert
 	 * @param MlfrontAddress
@@ -164,7 +164,7 @@ public class MlfrontAddressController {
 	 * MlfrontAddress	insert
 	 * @param MlfrontAddress
 	 */
-	@RequestMapping(value="/save",method=RequestMethod.POST)
+/*	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontAddress mlfrontAddress){
 		//接受参数信息
@@ -226,7 +226,7 @@ public class MlfrontAddressController {
 				return Msg.success().add("resMsg", "登录用户地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("usertype", usertype);
 			}	
 		}
-	}
+	}*/
 	
 	/**2.0	useOn	0505
 	 * MlfrontAddress	delete
