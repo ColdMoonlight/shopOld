@@ -98,7 +98,7 @@
 						<span class="label-exp">Don't forget the apartment No.</span>
 						<div class="form-input">
 							<input type="text" name="addressDetail" placeholder="street address (Dont't forget the apartment)"
-								class="form-control address">
+								class="form-control address addreNo">
 						</div>
 					</div>
 					<!-- Zip/Postal code -->
@@ -509,21 +509,6 @@
 		});
 
 		function renderAddressDetail(data) {
-			/* var html = '';
-			html += '<div class="address-details address-trigger">' +
-				'<i class="address icon_dz"></i>' +
-				'<div class="address-info">' +
-				'<div class="address-i-item">' +
-				'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
-				'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
-				'</div>' +
-				'<div class="address-i-item">' +
-				'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
-				' ' + data.addressCountry + '</span>' +
-				'</div>' +
-				'</div>' +
-				'</div>';
-			parent.html(html); */
 			
 	        $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
@@ -576,16 +561,17 @@
 			$('.address-box').hide();
 		});
 		 
-	//	$('.address-box .save').on('click', function () {
 		function savr_address(){
+			//var returnaddressId;
 			var formData = $('.address-box form').serializeArray();
 			var reqData = formData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			if (!inputCheck(reqData)) return;
+			//if (!inputCheck(reqData)) return;
+			console.log("************")
+			console.log(reqData)
 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-			//console.log(reqData)
 			$.ajax({
 				url: '${APP_PATH}/MlfrontAddress/save',
 				type: 'post',
@@ -597,13 +583,14 @@
 					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
 					addressId = resDataAddress.addressId;
 					addressIdIntInt = resDataAddress.addressId;
+					returnaddressId = addressIdIntInt;
 					console.log("addressIdIntInt:"+addressIdIntInt);
 					var addressBox = $('.address');
 					$('.address-id').val(resDataAddress.addressId);
 				}
 			})
+			//return returnaddressId;
 		}
-//		});
        
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
@@ -818,25 +805,18 @@
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
 		$('.place-order').on('click', function () {
-			savr_address();  //addres 保存
-			var addressIdInt = $('.address-id').val();
-
-			//if  addressId=null  alert
-
-			var reqData = {
-				"orderId": orderId,
-				"orderOrderitemidstr": orderItemArr.join(','),
-				"orderCouponId": couponId,
-				"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-				"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-				"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-				"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-				"addressinfoId": addressIdInt,
-			};
 			
-			
-			
-			var reqDataUp = {
+			if (inputCheck9()==1){
+				return ;
+			} else{
+				
+				var kkkaddressid ;
+					savr_address();  // addres 保存
+				console.log("kkkaddressid:"+kkkaddressid)
+				var addressIdInt = $('.address-id').val();
+				sleep(2000);
+	
+				var reqData = {
 					"orderId": orderId,
 					"orderOrderitemidstr": orderItemArr.join(','),
 					"orderCouponId": couponId,
@@ -846,27 +826,40 @@
 					"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
 					"addressinfoId": addressIdInt,
 				};
-
-			// console.log(reqData)
-		    // console.log(reqDataUp)
-			console.log(checkAddress(reqDataUp))
-			if (checkAddress(reqDataUp)) {
-				fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
-				$.ajax({
-					url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
-					data: JSON.stringify(reqData),
-					type: 'post',
-					dataType: 'JSON',
-					contentType: 'application/json',
-					success: function (data) {
-						var resData = JSON.parse(data).extend;
-						// console.log(data)
-						window.location.href = '${APP_PATH }/paypal/mpay';
-					}
-				})
-			} else {
-				renderSysMsg('Please fill in the shipping address And save it ')
+				
+				var reqDataUp = {
+						"orderId": orderId,
+						"orderOrderitemidstr": orderItemArr.join(','),
+						"orderCouponId": couponId,
+						"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+						"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+						"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+						"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+						"addressinfoId": addressIdInt,
+					};
+	
+				// console.log(reqData)
+			    // console.log(reqDataUp)
+				console.log(checkAddress(reqDataUp))
+				//if (checkAddress(reqDataUp)) {
+					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+					$.ajax({
+						url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
+						data: JSON.stringify(reqData),
+						type: 'post',
+						dataType: 'JSON',
+						contentType: 'application/json',
+						success: function (data) {
+							var resData = JSON.parse(data).extend;
+							// console.log(data)
+							window.location.href = '${APP_PATH }/paypal/mpay';
+						}
+					})
+				//} else {
+					renderSysMsg('Please fill in the shipping address And save it ')
+				// }
 			}
+			
 		})
 
 		function checkAddress(reqDataUp) {
@@ -921,6 +914,56 @@
 
 			return flag;
 		}
+		
+		function inputCheck9() {
+			
+			var flag = 0;
+			var firstnamestr = $(".firstname").val();
+			console.log("firstnamestr:"+firstnamestr);
+			var lastnamestr = $(".lastname").val();
+			console.log("lastnamestr:"+lastnamestr);
+			var emailstr = $(".email").val();
+			var phonestr = $(".phone").val();
+			var addressstr = $(".addreNo").val();
+			var codestr = $(".code").val();
+			var citystr = $(".city").val();
+			var countrystr = $("#country").val();
+			var provincestr = $(".province").val();
+			if(firstnamestr==null||firstnamestr==''){
+				flag = 1;
+				alert("firstnamestr为空");
+			}else if(lastnamestr==null||lastnamestr==''){
+				flag = 1;
+				alert("lastnamestr为空");
+			}else if(emailstr==null||emailstr==''){
+				flag = 1;
+				alert("emailstr为空");
+			}else if(phonestr==null||phonestr==''){
+				flag = 1;
+				alert("phonestr为空");
+			}else if(addressstr==null||addressstr==''){
+				flag = 1;
+				alert("addressstr为空");
+			}else if(codestr==null||codestr==''){
+				flag = 1;
+				alert("codestr为空");
+			}else if(countrystr==null||countrystr==''){
+				flag = 1;
+				alert("countrystr为空");
+			}else if(provincestr==null||provincestr==''){
+				flag = 1;
+				alert("provincestr为空");
+			}
+			return flag;
+		}
+		
+		
+		function sleep(delay) {
+			  var start = (new Date()).getTime();
+			  while ((new Date()).getTime() - start < delay) {
+			    continue;
+			  }
+			}
 	</script>
 
 	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>

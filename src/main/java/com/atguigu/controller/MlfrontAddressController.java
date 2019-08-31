@@ -125,7 +125,7 @@ public class MlfrontAddressController {
 			}	
 		}
 	}
-	/**1.0	UseNow	0505
+	/**1.1	UseNow	0505
 	 * MlfrontAddress	insert
 	 * @param MlfrontAddress
 	 */
@@ -160,73 +160,6 @@ public class MlfrontAddressController {
 		}
 		return Msg.success().add("resMsg", "查询运费成功").add("areafreightMoney", areafreightMoney).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
 	}
-	/**1.1	UseNow	0505
-	 * MlfrontAddress	insert
-	 * @param MlfrontAddress
-	 */
-/*	@RequestMapping(value="/save",method=RequestMethod.POST)
-	@ResponseBody
-	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontAddress mlfrontAddress){
-		//接受参数信息
-		System.out.println("mlfrontAddress:"+mlfrontAddress);
-		
-		//取出id
-		System.out.println(1);
-		Integer addressId = mlfrontAddress.getAddressId();
-		String nowTime = DateUtil.strTime14s();
-		mlfrontAddress.setAddressMotifytime(nowTime);
-		MlfrontUser loginUser =  (MlfrontUser) session.getAttribute("loginUser");
-		Integer usertype = 0;
-		if(loginUser==null){
-			usertype = 0;//游客
-		}else{
-			usertype = 1;//注册用户
-		}
-		if(loginUser==null){
-			String sessionId = session.getId();
-			//获取ip地址
-			String Userip =sessionId;
-			
-			if(addressId==null){
-				//无id，insert
-				mlfrontAddress.setAddressIp(Userip);
-				mlfrontAddress.setAddressCreatetime(nowTime);
-				int intResult = mlfrontAddressService.insertSelective(mlfrontAddress);
-				
-				MlfrontAddress mlfrontAddressLast = mlfrontAddressService.selectMlfrontAddressAll().get(0);
-				
-				System.out.println(intResult);
-				
-				return Msg.success().add("resMsg", "游客地址信息插入成功").add("mlfrontAddress", mlfrontAddressLast).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
-			}else{
-				//有id，update
-				mlfrontAddress.setAddressMotifytime(nowTime);
-				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
-				System.out.println(intResult);
-				return Msg.success().add("resMsg", "游客地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("usertype", usertype);
-			}		
-		}else{
-			Integer uid = loginUser.getUserId();
-			mlfrontAddress.setAddressUid(uid);
-			if(addressId==null){
-				//无id，insert
-				mlfrontAddress.setAddressCreatetime(nowTime);
-				int intResult = mlfrontAddressService.insertSelective(mlfrontAddress);
-				
-				MlfrontAddress mlfrontAddressLast = mlfrontAddressService.selectMlfrontAddressAll().get(0);
-				
-				System.out.println(intResult);
-				
-				return Msg.success().add("resMsg", "登录用户地址信息插入成功").add("mlfrontAddress", mlfrontAddressLast).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
-			}else{
-				//有id，update
-				mlfrontAddress.setAddressMotifytime(nowTime);
-				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
-				System.out.println(intResult);
-				return Msg.success().add("resMsg", "登录用户地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("usertype", usertype);
-			}	
-		}
-	}*/
 	
 	/**2.0	useOn	0505
 	 * MlfrontAddress	delete
