@@ -607,10 +607,13 @@ a:focus {
   font: 13px/13px '';
   font-weight: bold;
   color: #333333;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   text-overflow: ellipsis;
   overflow: hidden;
+  height: 40px;
+  line-height:20px;
   font-family: inherit;
+  word-wrap:break-word
 }
 
 .product-data {
@@ -2315,6 +2318,19 @@ a:focus {
 .order_box .group-details.coupons {padding: 1em 0 0;}
 .order_box .coupons .coupon-error{padding: 0;}
 .address-details .address.icon_dz{background:url(../../../../../ShopTemplate/static/m/img/index/loa.png) no-repeat center;background-size:32px;}
+
+.cart-item{border-bottom: 1px solid #ccc;}
+.cart-list{border-top: 1px solid #ccc;}
+.order-title{text-align: right;display: block;}
+.order-title .text{font-size: 12px; color: #666;}
+/*********************/
+.edit{font-size: 12px; podisplay: flex;flex-direction:inherit;justify-content: space-between; line-height: 30px;margin: 0 0 0 30px;}
+.address-details{ }
+
+
+
+
+
 
 
 
