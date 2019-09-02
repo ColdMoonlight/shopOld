@@ -42,6 +42,15 @@
   		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128377932-2"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'UA-128377932-2');
+	</script>
 </head>
 
 <body>
@@ -153,7 +162,8 @@
 <script>
 
 var orderId = $(".order-id").val();
-	window.dataLayer = window.dataLayer || []
+console.log("window.dataLayer = window.dataLayer");
+	window.dataLayer = window.dataLayer || [];
 	dataLayer.push({
 	   'transactionId': orderId ,
 	   'transactionAffiliation': 'megalookhair',
