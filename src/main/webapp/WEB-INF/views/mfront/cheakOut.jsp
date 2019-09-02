@@ -371,7 +371,6 @@
 							</select>
 						</div>
 					</div>
-					
 					<!-- State/Province -->
 					<div class="form-group">
 						<label for="addressProvince" class="form-label required">State/Province</label>
