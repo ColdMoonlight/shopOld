@@ -241,7 +241,7 @@
 				price = (parseFloat(price) + cartObj[i].num * cartObj[i].price).toFixed(2);
 				num += cartObj[i].num;
 			}
-			numTotal.text('$ ' + num)
+			numTotal.text(num)
 			subTotal.text('$ ' + price);
 		}
 

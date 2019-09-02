@@ -72,7 +72,7 @@
 /*new*/.classimg2{background:url(../../../../../ShopTemplate/static/pc/img/new.gif) no-repeat center top; background-size:64px 25px;}
 /*Sale*/.classimg3{background:url(../../../../../ShopTemplate/static/pc/img/40%off.gif) no-repeat center top; background-size:35px 25px;}
 /*Double Drawn*/.classimg4{background:url(../../../../../ShopTemplate/static/pc/img/dd.gif) no-repeat center top; background-size:35px 25px;}
-
+.red{color: #ff1671;}
 
 .tt-desctop-menu nav > ul > li.dropdown > a{padding: 25px 12px 10px;}
 .u-flyer{width: 100px; height: 100px;z-index: 99999;}
