@@ -78,6 +78,8 @@ public class MlfrontAddressController {
 		}else{
 			usertype = 1;//注册用户
 		}
+		
+		int realAddressId = 0;
 		if(loginUser==null){
 			String sessionId = session.getId();
 			//获取ip地址
@@ -91,6 +93,10 @@ public class MlfrontAddressController {
 				
 				MlfrontAddress mlfrontAddressLast = mlfrontAddressService.selectMlfrontAddressAll().get(0);
 				
+				realAddressId = mlfrontAddressLast.getAddressId();
+				
+				session.setAttribute("realAddressId", realAddressId);
+				
 				System.out.println(intResult);
 				
 				return Msg.success().add("resMsg", "游客地址信息插入成功").add("mlfrontAddress", mlfrontAddressLast).add("areafreightMoney", areafreightMoney).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
@@ -98,6 +104,8 @@ public class MlfrontAddressController {
 				//有id，update
 				mlfrontAddress.setAddressMotifytime(nowTime);
 				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
+				
+				session.setAttribute("realAddressId", addressId);
 				System.out.println(intResult);
 				//MlfrontAddress mlfrontAddressres = mlfrontAddressService.selectMlfrontAddressByIp(Userip);
 				return Msg.success().add("resMsg", "游客地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
@@ -112,6 +120,10 @@ public class MlfrontAddressController {
 				
 				MlfrontAddress mlfrontAddressLast = mlfrontAddressService.selectMlfrontAddressAll().get(0);
 				
+				realAddressId = mlfrontAddressLast.getAddressId();
+				
+				session.setAttribute("realAddressId", realAddressId);
+				
 				System.out.println(intResult);
 				
 				return Msg.success().add("resMsg", "登录用户地址信息插入成功").add("mlfrontAddress", mlfrontAddressLast).add("areafreightMoney", areafreightMoney).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
@@ -119,6 +131,8 @@ public class MlfrontAddressController {
 				//有id，update
 				mlfrontAddress.setAddressMotifytime(nowTime);
 				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
+				
+				session.setAttribute("realAddressId", addressId);
 				System.out.println(intResult);
 				//MlfrontAddress mlfrontAddressres = mlfrontAddressService.selectMlfrontAddressByIp(Userip);
 				return Msg.success().add("resMsg", "登录用户地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
