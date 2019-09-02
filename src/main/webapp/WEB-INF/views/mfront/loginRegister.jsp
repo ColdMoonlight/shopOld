@@ -67,7 +67,7 @@
 					</div>
 					
 				</form>
-				<a href="javascript:;" class="btn btn-black sigin"> SIGIN </a>
+				<a href="javascript:;" class="btn btn-black sigin"> SIGN IN </a>
 				<div class="input-group">
 					<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/tomForgetPassWord">Forget PassWord?</a></p>
 				</div>

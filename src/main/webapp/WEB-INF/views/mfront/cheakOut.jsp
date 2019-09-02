@@ -399,12 +399,12 @@
 				<div class="list-group">
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
-						<div class="tit_numtt"><span>3</span><b>Checkout Review</b></div>	
+						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
 						<div class="group-details coupons active"></div>
 					</li>
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>PAYMENT METHOD</span></div> -->
-						<div class="tit_numtt"><span>4</span><b>Checkout Review</b></div>	
+						<div class="tit_numtt"><span>4</span><b>PAYMENT METHOD</b></div>	
 						<div class="group-details pay-method active">
 							<div class="coupon-item">
 								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox">
@@ -414,7 +414,7 @@
 					</li>
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Buyer messages</span></div> -->
-						<div class="tit_numtt"><span>5</span><b>Checkout Review</b></div>	
+						<div class="tit_numtt"><span>5</span><b>ADDITIONAL INFORMATION</b></div>	
 						<div class="group-details customer-message active">
 							<textarea placeholder="Buyer message"></textarea>
 						</div>
