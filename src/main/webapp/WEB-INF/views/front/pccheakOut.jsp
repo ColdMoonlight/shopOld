@@ -405,6 +405,7 @@
 								</div>
 							</div>
 						</li>
+						
 						<li class="list-group-item">
 							<div class="group-title"><span>Buyer messages</span> <!-- <i class="icon right"></i> --></div>
 							<div class="group-details customer-message">
