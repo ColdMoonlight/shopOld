@@ -810,11 +810,8 @@
 				return ;
 			} else{
 				
-				var kkkaddressid ;
-					savr_address();  // addres 保存
-				console.log("kkkaddressid:"+kkkaddressid)
+				savr_address();  // addres 保存
 				var addressIdInt = $('.address-id').val();
-				sleep(2000);
 	
 				var reqData = {
 					"orderId": orderId,
@@ -841,7 +838,7 @@
 				// console.log(reqData)
 			    // console.log(reqDataUp)
 				console.log(checkAddress(reqDataUp))
-				//if (checkAddress(reqDataUp)) {
+				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 					$.ajax({
 						url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
@@ -855,9 +852,9 @@
 							window.location.href = '${APP_PATH }/paypal/mpay';
 						}
 					})
-				//} else {
+				} else {
 					renderSysMsg('Please fill in the shipping address And save it ')
-				// }
+				 }
 			}
 			
 		})
@@ -957,13 +954,6 @@
 			return flag;
 		}
 		
-		
-		function sleep(delay) {
-			  var start = (new Date()).getTime();
-			  while ((new Date()).getTime() - start < delay) {
-			    continue;
-			  }
-			}
 	</script>
 
 	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
