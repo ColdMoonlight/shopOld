@@ -121,6 +121,7 @@
 						<div class="form-input">
 							<!-- <input type="text" name="addressCountry" class="form-control"> -->
 							<select name="addressCountry" class="form-control" id="country">
+								<option value="" selected="selected">select the Country</option>
 								<option value="Afghanistan">Afghanistan</option>
 								<option value="Åland Islands">Åland Islands</option>
 								<option value="Albania">Albania</option>
@@ -354,7 +355,7 @@
 								<option value="Ukraine">Ukraine</option>
 								<option value="United Arab Emirates">United Arab Emirates</option>
 								<option value="United Kingdom">United Kingdom</option>
-								<option value="United States" selected="selected">United States</option>
+								<!-- <option value="United States">United States</option> -->
 								<option value="Uruguay">Uruguay</option>
 								<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
 								<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
@@ -509,7 +510,8 @@
 		});
 
 		function renderAddressDetail(data) {
-			
+			// console.log("renderAddressDetail")
+			// console.log(data)
 	        $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -518,7 +520,10 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-
+			// console.log("data.addressCountry")
+			// console.log(data.addressCountry)
+			$("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			
 		}
 
 		/* 初始化地址模块 */
@@ -916,40 +921,82 @@
 			
 			var flag = 0;
 			var firstnamestr = $(".firstname").val();
-			console.log("firstnamestr:"+firstnamestr);
+			// console.log("firstnamestr:"+firstnamestr);
 			var lastnamestr = $(".lastname").val();
-			console.log("lastnamestr:"+lastnamestr);
+			// console.log("lastnamestr:"+lastnamestr);
 			var emailstr = $(".email").val();
 			var phonestr = $(".phone").val();
 			var addressstr = $(".addreNo").val();
 			var codestr = $(".code").val();
 			var citystr = $(".city").val();
-			var countrystr = $("#country").val();
+			// var countrystr = $("#country").val();
+			var countrystr=$('#country option:checked').text()
 			var provincestr = $(".province").val();
+			
+			
 			if(firstnamestr==null||firstnamestr==''){
 				flag = 1;
 				alert("firstnamestr is empty");
+				$(".firstname").addClass("error_br");
+				$(".firstname").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(lastnamestr==null||lastnamestr==''){
 				flag = 1;
 				alert("lastnamestr is empty");
+				$(".lastname").addClass("error_br");
+				$(".lastname").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(emailstr==null||emailstr==''){
 				flag = 1;
 				alert("emailstr is empty");
+				$(".email").addClass("error_br");
+				$(".email").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(phonestr==null||phonestr==''){
 				flag = 1;
 				alert("phonestr is empty");
+				$(".phone").addClass("error_br");
+				$(".phone").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(addressstr==null||addressstr==''){
 				flag = 1;
 				alert("addressstr is empty");
+				$(".addreNo").addClass("error_br");
+				$(".addreNo").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(codestr==null||codestr==''){
 				flag = 1;
 				alert("codestr is empty");
-			}else if(countrystr==null||countrystr==''){
+				$(".codestr").addClass("error_br");
+				$(".codestr").focus(function(){
+					$(this).removeClass("error_br")
+				})
+			}else if(citystr==null||citystr==''){
+				flag = 1;
+				alert("citystr is empty");
+				$(".city").addClass("error_br");
+				$(".city").focus(function(){
+					$(this).removeClass("error_br")
+				})	
+			}else if(countrystr==null||countrystr==''||countrystr=='select the Country'){
 				flag = 1;
 				alert("countrystr is empty");
+				$("#country").addClass("error_br");
+				$("#country").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(provincestr==null||provincestr==''){
 				flag = 1;
 				alert("provincestr is empty");
+				$(".province").addClass("error_br");
+				$(".province").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}
 			return flag;
 		}
