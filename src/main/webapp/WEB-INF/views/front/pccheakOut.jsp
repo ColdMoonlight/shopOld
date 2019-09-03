@@ -58,7 +58,7 @@
 			<div class="order-item clearfix">
 					<!-- add/show address -->
 				<div class="left_list_check">
-				<!-- <div class="address bd-t"></div> -->
+				<div class="address bd-t"></div>
 				<div class="rece">
 			    	<b>Receiving information</b>	
 				</div>
@@ -66,33 +66,33 @@
 					<div class="win-box-content">
 						<form action="">
 							<!-- address id -->
-							<input type="hidden" class="address-id" name="addressId" />
+							<input type="hidden" class="address-id" name="addressId">
 							<!-- first name -->
 							<div class="form-group">
 								<label for="addressUserfirstname" class="form-label required">First Name</label>
 								<div class="form-input">
-									<input type="text" name="addressUserfirstname" class="form-control firstname">
+									<input type="text" name="addressUserfirstname" class="form-control">
 								</div>
 							</div>
 							<!-- last name -->
 							<div class="form-group">
 								<label for="addressUserlastname" class="form-label required">Last Name</label>
 								<div class="form-input">
-									<input type="text" name="addressUserlastname" class="form-control lastname">
+									<input type="text" name="addressUserlastname" class="form-control">
 								</div>
 							</div>
 							<!-- email address -->
 							<div class="form-group">
 								<label for="addressEmail" class="form-label required">Email Adress</label>
 								<div class="form-input">
-									<input type="text" name="addressEmail" class="form-control email">
+									<input type="text" name="addressEmail" class="form-control">
 								</div>
 							</div>
 							<!-- telephone -->
 							<div class="form-group">
-								<label for="addressTelephone" class="form-label required ">Telephone</label>
+								<label for="addressTelephone" class="form-label required">Telephone</label>
 								<div class="form-input">
-									<input type="text" name="addressTelephone" class="form-control phone">
+									<input type="text" name="addressTelephone" class="form-control">
 								</div>
 							</div>
 							<!-- address -->
@@ -101,21 +101,21 @@
 								<span class="label-exp">Don't forget the apartment No.</span>
 								<div class="form-input">
 									<input type="text" name="addressDetail" placeholder="street address (Dont't forget the apartment)"
-										class="form-control address addreNo">
+										class="form-control">
 								</div>
 							</div>
 							<!-- Zip/Postal code -->
 							<div class="form-group">
 								<label for="addressPost" class="form-label required">Zip/Postal code</label>
 								<div class="form-input">
-									<input type="text" name="addressPost" class="form-control code">
+									<input type="text" name="addressPost" class="form-control">
 								</div>
 							</div>
 							<!-- city -->
 							<div class="form-group">
 								<label for="addressCity" class="form-label required">City</label>
 								<div class="form-input">
-									<input type="text" name="addressCity" class="form-control city">
+									<input type="text" name="addressCity" class="form-control">
 								</div>
 							</div>
 							<!-- country -->
@@ -123,7 +123,7 @@
 								<label for="addressCountry" class="form-label required">Country</label>
 								<div class="form-input">
 									<!-- <input type="text" name="addressCountry" class="form-control"> -->
-									<select name="addressCountry" class="form-control" id="country">
+									<select name="addressCountry" class="form-control">
 										<option value="Afghanistan">Afghanistan</option>
 										<option value="Åland Islands">Åland Islands</option>
 										<option value="Albania">Albania</option>
@@ -378,16 +378,15 @@
 							<div class="form-group">
 								<label for="addressProvince" class="form-label required">State/Province</label>
 								<div class="form-input">
-									<input type="text" name="addressProvince" class="form-control province">
+									<input type="text" name="addressProvince" class="form-control">
 								</div>
 							</div>
 						</form>
 					</div>
-					<div class="shipping">SHIPPING: <span>$0</span></div>
 				</div>
-<!-- 				<div class="win-box-title">
+				<div class="win-box-title">
 					<span class="save">  <b>save it</b> </span>
-				</div> -->
+				</div>
 				</div>
 				<!--*********************-->
 				<div class="right_checkout clearfix">
@@ -405,7 +404,6 @@
 								</div>
 							</div>
 						</li>
-						
 						<li class="list-group-item">
 							<div class="group-title"><span>Buyer messages</span> <!-- <i class="icon right"></i> --></div>
 							<div class="group-details customer-message">
@@ -423,7 +421,7 @@
 						<div class="order-body">
 							<div class="cart-list"> </div>
 						</div>
-						
+						<div class="shipping">SHIPPING: <span>$0</span></div>
 					</div>
 					<div class="right_allcont">
 						<div class="order-cal bd-t">
@@ -485,68 +483,27 @@
 	var orderItemArr = [];
 	var productNumArr = [];
 	var payplate = 0;
-	var addressIdIntInt;
-			$("#country").bind("change",function(){
-				 var dataname = $(this).val();
-				 $.ajax({
-					  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
-					  data: JSON.stringify({
-						"addressCountry": dataname
-					  }),
-					  type: 'post',
-					  dataType: 'text',
-					  contentType: 'application/json',
-					  success: function (data) {
-						// console.log(data)
-						var resData = JSON.parse(data);
-						console.log(resData)
-						var resareafreightMoney = resData.extend.areafreightMoney;
-						// console.log("resareafreightMoney:"+resareafreightMoney)
-						$('.shipping').find('span').text(dataname + ' of $' + resareafreightMoney);
-						shippingPriceText.text('$' + resareafreightMoney)
-						
-						totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
-						resDataMoney = resareafreightMoney;
-			
-						totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-						
-						subtotalPriceText.text('$' + totalPrice);
-						
-					  }
-					});
-			});
 	
-		function renderAddressDetail(data) {
-			
-			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
-			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
-			$("input.email").val(data.addressEmail ? data.addressEmail : '');
-			$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
-			$("input.address").val(data.addressDetail ? data.addressDetail : '');
-			$("input.code").val(data.addressPost ? data.addressPost : '');
-			$("input.city").val(data.addressCity ? data.addressCity : '');
-			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-		
-		}
 	
-	// function renderAddressDetail(parent, data) {
-	// 
-	// 	var html = '';
-	// 	html += '<div class="address-details address-trigger" style="display:none">' +
-	// 		'<i class="icon address"></i>' +
-	// 		'<div class="address-info">' +
-	// 		'<div class="address-i-item">' +
-	// 		'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
-	// 		'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
-	// 		'</div>' +
-	// 		'<div class="address-i-item">' +
-	// 		'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
-	// 		' ' + data.addressCountry + '</span>' +
-	// 		'</div>' +
-	// 		'</div>' +
-	// 		'</div>';
-	// 	parent.html(html);
-	// }
+	
+	function renderAddressDetail(parent, data) {
+	
+		var html = '';
+		html += '<div class="address-details address-trigger" style="display:none">' +
+			'<i class="icon address"></i>' +
+			'<div class="address-info">' +
+			'<div class="address-i-item">' +
+			'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
+			'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
+			'</div>' +
+			'<div class="address-i-item">' +
+			'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
+			' ' + data.addressCountry + '</span>' +
+			'</div>' +
+			'</div>' +
+			'</div>';
+		parent.html(html);
+	}
 
 		function renderAddressAdd(parent) {
 			parent.html(
@@ -560,117 +517,82 @@
 			success: function (data) {
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				// console.log(resDataAddress)
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
-				// console.log(resDataMoney)
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
 				// console.log(data)
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
-					renderAddressDetail(resDataAddress);
+					renderAddressDetail(addressBox, resDataAddress);
 					$('.address-id').val(resDataAddress.addressId);
 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
-					$(".address").addClass("active")
 				} else {
-					// renderAddressAdd(addressBox);
+					renderAddressAdd(addressBox);
 					$('.shipping').find('span').text('Please add the shipping address first');
 					shippingPriceText.text('$' + 0)
 				}
+				totalPriceText.text('$' + (resDataMoney + totalPrice));
 
-				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-
-				subtotalPriceText.text(subtotalText);
-				
+				subtotalPriceText.text('$' + (resDataMoney + totalPrice));
+				//$('.address-trigger').on('click', function () {
+					//$('.address-box').show();
+				//});
 			}
-		});
-		
-				function savr_address(){
-					//var returnaddressId;
-					var formData = $('.address-box form').serializeArray();
-					var reqData = formData.reduce(function (obj, item) {
-						obj[item.name] = item.value;
-						return obj
-					}, {});
-					//if (!inputCheck(reqData)) return;
-					console.log("************")
-					console.log(reqData)
-					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-					$.ajax({
-						url: '${APP_PATH}/MlfrontAddress/save',
-						type: 'post',
-						dataType: 'text',
-						data: JSON.stringify(reqData),
-						contentType: 'application/json',
-						success: function (data) {
-							 console.log(data)
-							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-							 var resDataAddress = data.extend.mlfrontAddress;
-							 console.log(resDataAddress)
-							addressId = resDataAddress.addressId;
-							addressIdIntInt = resDataAddress.addressId;
-							returnaddressId = addressIdIntInt;
-							console.log("addressIdIntInt:"+addressIdIntInt);
-							var addressBox = $('.address');
-							$('.address-id').val(resDataAddress.addressId);
-						}
+		})
+		$('.left_list_check .save').on('click', function () {
+			$(this).toggleClass("active")
+			var formData = $('.address-box form').serializeArray();
+			var reqData = formData.reduce(function (obj, item) {
+				obj[item.name] = item.value;
+				return obj
+			}, {});
+			if (!inputCheck(reqData)) return;
+			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+				 if($(this).hasClass("active")){
+				$(".left_list_check .form-input").each(function(){
+						$(this).find("input").attr("disabled","disabled");
+						$(this).find("select").attr("disabled","disabled");
 					})
-					//return returnaddressId;
+				}else{
+					$(".left_list_check .form-input").each(function(){
+						$(this).find("input").removeAttr("disabled");
+						$(this).find("select").removeAttr("disabled");
+					})
+					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
+					totalPriceText.text('$' + totalPrice);
 				}
-// 		$('.left_list_check .save').on('click', function () {
-// 			$(this).toggleClass("active")
-// 			var formData = $('.address-box form').serializeArray();
-// 			var reqData = formData.reduce(function (obj, item) {
-// 				obj[item.name] = item.value;
-// 				return obj
-// 			}, {});
-// 			if (!inputCheck(reqData)) return;
-// 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-// 				 if($(this).hasClass("active")){
-// 				$(".left_list_check .form-input").each(function(){
-// 						$(this).find("input").attr("disabled","disabled");
-// 						$(this).find("select").attr("disabled","disabled");
-// 					})
-// 				}else{
-// 					$(".left_list_check .form-input").each(function(){
-// 						$(this).find("input").removeAttr("disabled");
-// 						$(this).find("select").removeAttr("disabled");
-// 					})
-// 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
-// 					totalPriceText.text('$' + totalPrice);
-// 				}
-// 			
-// 			//console.log(reqData)
-// 			$.ajax({
-// 				url: '${APP_PATH}/MlfrontAddress/save',
-// 				type: 'post',
-// 				dataType: 'text',
-// 				data: JSON.stringify(reqData),
-// 				contentType: 'application/json',
-// 				success: function (data) {
-// 					// console.log(data)
-// 					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-// 					addressId = resDataAddress.addressId;
-// 					// console.log(addressId)
-// 					totalPrice -= resDataMoney;
-// 					resDataMoney = JSON.parse(data).extend.areafreightMoney;
-// 					totalPrice += resDataMoney;
-// 					var addressBox = $('.address');
-// 					$('.address-id').val(resDataAddress.addressId);
-// 
-// 					// console.log(resDataMoney)
-// 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
-// 					totalPriceText.text('$' + totalPrice);
-// 					
-// 					shippingPriceText.text('$' + resDataMoney);
-// 					subtotalPriceText.text('$' + totalPrice);
-// 					renderAddressDetail(addressBox, reqData);
-// 				}
-// 			})
-// 		});
+			
+			//console.log(reqData)
+			$.ajax({
+				url: '${APP_PATH}/MlfrontAddress/save',
+				type: 'post',
+				dataType: 'text',
+				data: JSON.stringify(reqData),
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data)
+					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
+					addressId = resDataAddress.addressId;
+					// console.log(addressId)
+					totalPrice -= resDataMoney;
+					resDataMoney = JSON.parse(data).extend.areafreightMoney;
+					totalPrice += resDataMoney;
+					var addressBox = $('.address');
+					$('.address-id').val(resDataAddress.addressId);
+
+					// console.log(resDataMoney)
+					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
+					totalPriceText.text('$' + totalPrice);
+					
+					shippingPriceText.text('$' + resDataMoney);
+					subtotalPriceText.text('$' + totalPrice);
+					renderAddressDetail(addressBox, reqData);
+				}
+			})
+		});
 
 		/* 所购商品列表 */
 		/* 所购商品列表 */
@@ -896,15 +818,10 @@
 		    private String orderCouponCode; //1，每条的产品数量，需要拼成字段"1,1"中间逗号拼接。
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
-		$('.place-order').on('click', function () {
-			
-			if (inputCheck9()==1){
-				return ;
-			} else{
-				
-				savr_address();  // addres 保存
-				var addressIdInt = $('.address-id').val();
-			
+		 $('.place-order').on('click', function () {
+ 
+				//if  addressId=null  alert
+
 				var reqData = {
 					"orderId": orderId,
 					"orderOrderitemidstr": orderItemArr.join(','),
@@ -913,8 +830,9 @@
 					"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
 					"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
 					"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-					"addressinfoId": addressIdInt,
+					"addressinfoId": addressId,
 				};
+				
 				
 				var reqDataUp = {
 						"orderId": orderId,
@@ -924,11 +842,10 @@
 						"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
 						"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
 						"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-						"addressinfoId": addressIdInt,
+						"addressinfoId": addressId,
 					};
-			
-				// console.log(reqData)
-			    // console.log(reqDataUp)
+
+				console.log(reqDataUp)
 				console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
@@ -936,20 +853,22 @@
 						url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 						data: JSON.stringify(reqData),
 						type: 'post',
-						dataType: 'text',
+						dataType: 'JSON',
 						contentType: 'application/json',
 						success: function (data) {
-							var resData = JSON.parse(data).extend;
+							//var resData = JSON.parse(data).extend;
 							// console.log(data)
-							window.location.href = '${APP_PATH }/paypal/ppay';
+							if($(".save").hasClass("active")){
+								window.location.href = '${APP_PATH }/paypal/ppay';
+							}else{
+								alert("Please fill in the shipping address")
+							}
 						}
 					})
 				} else {
-					renderSysMsg('Please fill in the shipping address ')
-				 }
-			}
-			
-		})
+					renderSysMsg('Please fill in the shipping address')
+				}
+			})
 
 		function checkAddress(reqDataUp) {
 			var flag = false;
@@ -1002,47 +921,6 @@
 					}
 				}
 
-				return flag;
-			}
-					function inputCheck9() {
-				
-				var flag = 0;
-				var firstnamestr = $(".firstname").val();
-				console.log("firstnamestr:"+firstnamestr);
-				var lastnamestr = $(".lastname").val();
-				console.log("lastnamestr:"+lastnamestr);
-				var emailstr = $(".email").val();
-				var phonestr = $(".phone").val();
-				var addressstr = $(".addreNo").val();
-				var codestr = $(".code").val();
-				var citystr = $(".city").val();
-				var countrystr = $("#country").val();
-				var provincestr = $(".province").val();
-				if(firstnamestr==null||firstnamestr==''){
-					flag = 1;
-					alert("firstnamestr为空");
-				}else if(lastnamestr==null||lastnamestr==''){
-					flag = 1;
-					alert("lastnamestr为空");
-				}else if(emailstr==null||emailstr==''){
-					flag = 1;
-					alert("emailstr为空");
-				}else if(phonestr==null||phonestr==''){
-					flag = 1;
-					alert("phonestr为空");
-				}else if(addressstr==null||addressstr==''){
-					flag = 1;
-					alert("addressstr为空");
-				}else if(codestr==null||codestr==''){
-					flag = 1;
-					alert("codestr为空");
-				}else if(countrystr==null||countrystr==''){
-					flag = 1;
-					alert("countrystr为空");
-				}else if(provincestr==null||provincestr==''){
-					flag = 1;
-					alert("provincestr为空");
-				}
 				return flag;
 			}
 	</script>
