@@ -928,28 +928,28 @@
 			var provincestr = $(".province").val();
 			if(firstnamestr==null||firstnamestr==''){
 				flag = 1;
-				alert("firstnamestr为空");
+				alert("firstnamestr is empty");
 			}else if(lastnamestr==null||lastnamestr==''){
 				flag = 1;
-				alert("lastnamestr为空");
+				alert("lastnamestr is empty");
 			}else if(emailstr==null||emailstr==''){
 				flag = 1;
-				alert("emailstr为空");
+				alert("emailstr is empty");
 			}else if(phonestr==null||phonestr==''){
 				flag = 1;
-				alert("phonestr为空");
+				alert("phonestr is empty");
 			}else if(addressstr==null||addressstr==''){
 				flag = 1;
-				alert("addressstr为空");
+				alert("addressstr is empty");
 			}else if(codestr==null||codestr==''){
 				flag = 1;
-				alert("codestr为空");
+				alert("codestr is empty");
 			}else if(countrystr==null||countrystr==''){
 				flag = 1;
-				alert("countrystr为空");
+				alert("countrystr is empty");
 			}else if(provincestr==null||provincestr==''){
 				flag = 1;
-				alert("provincestr为空");
+				alert("provincestr is empty");
 			}
 			return flag;
 		}
