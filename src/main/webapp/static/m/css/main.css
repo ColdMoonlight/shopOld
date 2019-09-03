@@ -2327,9 +2327,7 @@ a:focus {
 .edit{font-size: 12px; podisplay: flex;flex-direction:inherit;justify-content: space-between; line-height: 30px;margin: 0 0 0 30px;}
 .address-details{ }
 
-
-
-
+.form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e;}
 
 
 
