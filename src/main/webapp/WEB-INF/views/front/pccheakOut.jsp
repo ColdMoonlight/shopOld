@@ -58,7 +58,7 @@
 			<div class="order-item clearfix">
 					<!-- add/show address -->
 				<div class="left_list_check">
-				<div class="address bd-t"></div>
+				<!-- <div class="address bd-t"></div> -->
 				<div class="rece">
 			    	<b>Receiving information</b>	
 				</div>
@@ -66,33 +66,33 @@
 					<div class="win-box-content">
 						<form action="">
 							<!-- address id -->
-							<input type="hidden" class="address-id" name="addressId">
+							<input type="hidden" class="address-id" name="addressId" />
 							<!-- first name -->
 							<div class="form-group">
 								<label for="addressUserfirstname" class="form-label required">First Name</label>
 								<div class="form-input">
-									<input type="text" name="addressUserfirstname" class="form-control">
+									<input type="text" name="addressUserfirstname" class="form-control firstname">
 								</div>
 							</div>
 							<!-- last name -->
 							<div class="form-group">
 								<label for="addressUserlastname" class="form-label required">Last Name</label>
 								<div class="form-input">
-									<input type="text" name="addressUserlastname" class="form-control">
+									<input type="text" name="addressUserlastname" class="form-control lastname">
 								</div>
 							</div>
 							<!-- email address -->
 							<div class="form-group">
 								<label for="addressEmail" class="form-label required">Email Adress</label>
 								<div class="form-input">
-									<input type="text" name="addressEmail" class="form-control">
+									<input type="text" name="addressEmail" class="form-control email">
 								</div>
 							</div>
 							<!-- telephone -->
 							<div class="form-group">
-								<label for="addressTelephone" class="form-label required">Telephone</label>
+								<label for="addressTelephone" class="form-label required ">Telephone</label>
 								<div class="form-input">
-									<input type="text" name="addressTelephone" class="form-control">
+									<input type="text" name="addressTelephone" class="form-control phone">
 								</div>
 							</div>
 							<!-- address -->
@@ -101,21 +101,21 @@
 								<span class="label-exp">Don't forget the apartment No.</span>
 								<div class="form-input">
 									<input type="text" name="addressDetail" placeholder="street address (Dont't forget the apartment)"
-										class="form-control">
+										class="form-control address addreNo">
 								</div>
 							</div>
 							<!-- Zip/Postal code -->
 							<div class="form-group">
 								<label for="addressPost" class="form-label required">Zip/Postal code</label>
 								<div class="form-input">
-									<input type="text" name="addressPost" class="form-control">
+									<input type="text" name="addressPost" class="form-control code">
 								</div>
 							</div>
 							<!-- city -->
 							<div class="form-group">
 								<label for="addressCity" class="form-label required">City</label>
 								<div class="form-input">
-									<input type="text" name="addressCity" class="form-control">
+									<input type="text" name="addressCity" class="form-control city">
 								</div>
 							</div>
 							<!-- country -->
@@ -123,7 +123,8 @@
 								<label for="addressCountry" class="form-label required">Country</label>
 								<div class="form-input">
 									<!-- <input type="text" name="addressCountry" class="form-control"> -->
-									<select name="addressCountry" class="form-control">
+									<select name="addressCountry" class="form-control" id="country">
+										<option value="select the Country" selected="selected">select the Country</option>
 										<option value="Afghanistan">Afghanistan</option>
 										<option value="Åland Islands">Åland Islands</option>
 										<option value="Albania">Albania</option>
@@ -357,7 +358,7 @@
 										<option value="Ukraine">Ukraine</option>
 										<option value="United Arab Emirates">United Arab Emirates</option>
 										<option value="United Kingdom">United Kingdom</option>
-										<option value="United States" selected="selected">United States</option>
+										<option value="United States">United States</option>
 										<option value="Uruguay">Uruguay</option>
 										<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
 										<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
@@ -378,15 +379,16 @@
 							<div class="form-group">
 								<label for="addressProvince" class="form-label required">State/Province</label>
 								<div class="form-input">
-									<input type="text" name="addressProvince" class="form-control">
+									<input type="text" name="addressProvince" class="form-control province">
 								</div>
 							</div>
 						</form>
 					</div>
+					<div class="shipping">SHIPPING: <span>$0</span></div>
 				</div>
-				<div class="win-box-title">
+<!-- 				<div class="win-box-title">
 					<span class="save">  <b>save it</b> </span>
-				</div>
+				</div> -->
 				</div>
 				<!--*********************-->
 				<div class="right_checkout clearfix">
@@ -404,6 +406,7 @@
 								</div>
 							</div>
 						</li>
+						
 						<li class="list-group-item">
 							<div class="group-title"><span>Buyer messages</span> <!-- <i class="icon right"></i> --></div>
 							<div class="group-details customer-message">
@@ -421,7 +424,7 @@
 						<div class="order-body">
 							<div class="cart-list"> </div>
 						</div>
-						<div class="shipping">SHIPPING: <span>$0</span></div>
+						
 					</div>
 					<div class="right_allcont">
 						<div class="order-cal bd-t">
@@ -483,28 +486,73 @@
 	var orderItemArr = [];
 	var productNumArr = [];
 	var payplate = 0;
+	var addressIdIntInt;
+			$("#country").bind("change",function(){
+				 var dataname = $(this).val();
+				 $.ajax({
+					  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
+					  data: JSON.stringify({
+						"addressCountry": dataname
+					  }),
+					  type: 'post',
+					  dataType: 'text',
+					  contentType: 'application/json',
+					  success: function (data) {
+						// console.log(data)
+						var resData = JSON.parse(data);
+						console.log(resData)
+						var resareafreightMoney = resData.extend.areafreightMoney;
+						// console.log("resareafreightMoney:"+resareafreightMoney)
+						$('.shipping').find('span').text(dataname + ' of $' + resareafreightMoney);
+						shippingPriceText.text('$' + resareafreightMoney)
+						
+						totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
+						resDataMoney = resareafreightMoney;
+			
+						totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
+						
+						subtotalPriceText.text('$' + totalPrice);
+						
+					  }
+					});
+			});
 	
+		function renderAddressDetail(data) {
+			
+			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
+			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
+			$("input.email").val(data.addressEmail ? data.addressEmail : '');
+			$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
+			$("input.address").val(data.addressDetail ? data.addressDetail : '');
+			$("input.code").val(data.addressPost ? data.addressPost : '');
+			$("input.city").val(data.addressCity ? data.addressCity : '');
+			$("input.province").val(data.addressProvince ? data.addressProvince : '');
+		    $("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			
+			// $("")
+			// addressCountry
+			
+		
+		}
 	
-	
-	function renderAddressDetail(parent, data) {
-	
-		var html = '';
-		html += '<div class="address-details address-trigger" style="display:none">' +
-			'<i class="icon address"></i>' +
-			'<div class="address-info">' +
-			'<div class="address-i-item">' +
-			'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
-			'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
-			'</div>' +
-			'<div class="address-i-item">' +
-			'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
-			' ' + data.addressCountry + '</span>' +
-			'</div>' +
-			'</div>' +
-			'</div>';
-		parent.html(html);
-	}
-
+	// function renderAddressDetail(parent, data) {
+	// 
+	// 	var html = '';
+	// 	html += '<div class="address-details address-trigger" style="display:none">' +
+	// 		'<i class="icon address"></i>' +
+	// 		'<div class="address-info">' +
+	// 		'<div class="address-i-item">' +
+	// 		'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
+	// 		'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
+	// 		'</div>' +
+	// 		'<div class="address-i-item">' +
+	// 		'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
+	// 		' ' + data.addressCountry + '</span>' +
+	// 		'</div>' +
+	// 		'</div>' +
+	// 		'</div>';
+	// 	parent.html(html);
+	// }
 		function renderAddressAdd(parent) {
 			parent.html(
 				'<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
@@ -517,83 +565,115 @@
 			success: function (data) {
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
+				console.log(resDataAddress)
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
+				// console.log(resDataMoney)
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
 				// console.log(data)
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
-					renderAddressDetail(addressBox, resDataAddress);
+					renderAddressDetail(resDataAddress);
 					$('.address-id').val(resDataAddress.addressId);
 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
+					$(".address").addClass("active")
 				} else {
-					renderAddressAdd(addressBox);
+					// renderAddressAdd(addressBox);
 					$('.shipping').find('span').text('Please add the shipping address first');
 					shippingPriceText.text('$' + 0)
 				}
-				totalPriceText.text('$' + (resDataMoney + totalPrice));
-
-				subtotalPriceText.text('$' + (resDataMoney + totalPrice));
-				//$('.address-trigger').on('click', function () {
-					//$('.address-box').show();
-				//});
+				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+				subtotalPriceText.text(subtotalText);
+				
 			}
-		})
-		$('.left_list_check .save').on('click', function () {
-			$(this).toggleClass("active")
-			var formData = $('.address-box form').serializeArray();
-			var reqData = formData.reduce(function (obj, item) {
-				obj[item.name] = item.value;
-				return obj
-			}, {});
-			if (!inputCheck(reqData)) return;
-			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-				 if($(this).hasClass("active")){
-				$(".left_list_check .form-input").each(function(){
-						$(this).find("input").attr("disabled","disabled");
-						$(this).find("select").attr("disabled","disabled");
-					})
-				}else{
-					$(".left_list_check .form-input").each(function(){
-						$(this).find("input").removeAttr("disabled");
-						$(this).find("select").removeAttr("disabled");
-					})
-					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
-					totalPriceText.text('$' + totalPrice);
-				}
-			
-			//console.log(reqData)
-			$.ajax({
-				url: '${APP_PATH}/MlfrontAddress/save',
-				type: 'post',
-				dataType: 'text',
-				data: JSON.stringify(reqData),
-				contentType: 'application/json',
-				success: function (data) {
-					// console.log(data)
-					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-					addressId = resDataAddress.addressId;
-					// console.log(addressId)
-					totalPrice -= resDataMoney;
-					resDataMoney = JSON.parse(data).extend.areafreightMoney;
-					totalPrice += resDataMoney;
-					var addressBox = $('.address');
-					$('.address-id').val(resDataAddress.addressId);
-
-					// console.log(resDataMoney)
-					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
-					totalPriceText.text('$' + totalPrice);
-					
-					shippingPriceText.text('$' + resDataMoney);
-					subtotalPriceText.text('$' + totalPrice);
-					renderAddressDetail(addressBox, reqData);
-				}
-			})
 		});
-
+		
+				function savr_address(){
+					//var returnaddressId;
+					var formData = $('.address-box form').serializeArray();
+					var reqData = formData.reduce(function (obj, item) {
+						obj[item.name] = item.value;
+						return obj
+					}, {});
+					//if (!inputCheck(reqData)) return;
+					console.log("************")
+					console.log(reqData)
+					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+					$.ajax({
+						url: '${APP_PATH}/MlfrontAddress/save',
+						type: 'post',
+						dataType: 'text',
+						data: JSON.stringify(reqData),
+						contentType: 'application/json',
+						success: function (data) {
+							 console.log(data)
+							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
+							 var resDataAddress = data.extend.mlfrontAddress;
+							 console.log(resDataAddress)
+							addressId = resDataAddress.addressId;
+							addressIdIntInt = resDataAddress.addressId;
+							returnaddressId = addressIdIntInt;
+							console.log("addressIdIntInt:"+addressIdIntInt);
+							var addressBox = $('.address');
+							$('.address-id').val(resDataAddress.addressId);
+						}
+					})
+					//return returnaddressId;
+				}
+// 		$('.left_list_check .save').on('click', function () {
+// 			$(this).toggleClass("active")
+// 			var formData = $('.address-box form').serializeArray();
+// 			var reqData = formData.reduce(function (obj, item) {
+// 				obj[item.name] = item.value;
+// 				return obj
+// 			}, {});
+// 			if (!inputCheck(reqData)) return;
+// 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+// 				 if($(this).hasClass("active")){
+// 				$(".left_list_check .form-input").each(function(){
+// 						$(this).find("input").attr("disabled","disabled");
+// 						$(this).find("select").attr("disabled","disabled");
+// 					})
+// 				}else{
+// 					$(".left_list_check .form-input").each(function(){
+// 						$(this).find("input").removeAttr("disabled");
+// 						$(this).find("select").removeAttr("disabled");
+// 					})
+// 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
+// 					totalPriceText.text('$' + totalPrice);
+// 				}
+// 			
+// 			//console.log(reqData)
+// 			$.ajax({
+// 				url: '${APP_PATH}/MlfrontAddress/save',
+// 				type: 'post',
+// 				dataType: 'text',
+// 				data: JSON.stringify(reqData),
+// 				contentType: 'application/json',
+// 				success: function (data) {
+// 					// console.log(data)
+// 					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
+// 					addressId = resDataAddress.addressId;
+// 					// console.log(addressId)
+// 					totalPrice -= resDataMoney;
+// 					resDataMoney = JSON.parse(data).extend.areafreightMoney;
+// 					totalPrice += resDataMoney;
+// 					var addressBox = $('.address');
+// 					$('.address-id').val(resDataAddress.addressId);
+// 
+// 					// console.log(resDataMoney)
+// 					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
+// 					totalPriceText.text('$' + totalPrice);
+// 					
+// 					shippingPriceText.text('$' + resDataMoney);
+// 					subtotalPriceText.text('$' + totalPrice);
+// 					renderAddressDetail(addressBox, reqData);
+// 				}
+// 			})
+// 		});
 		/* 所购商品列表 */
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
@@ -602,7 +682,6 @@
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				orderItemArr.push(data[i].orderitemId);
 				productNumArr.push(data[i].orderitemPskuNumber);
-
 				html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +
 					data[i].orderitemPid + ')">' +
 					'<img class="img" src="' + data[i].orderitemProductMainimgurl + '" alt="">' +
@@ -631,7 +710,6 @@
 			}
 			parent.html(html)
 		}
-
 		$.ajax({
 			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
 			type: 'get',
@@ -642,12 +720,10 @@
 				var cartList = $('.cart-list');
 				cartList.attr('data-id', resData.orderId);
 				renderCartList(cartList, resData)
-
 				// console.log(typeof totalPrice)
 				var allPriceObj = calAllProductPrice(resData);
 				totalPrice = allPriceObj.allSubtotalPrice + resDataMoney;
 				totalPriceText.text('$' + totalPrice);
-
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice));
 				subtotalPriceText.text('$' + totalPrice);
 			}
@@ -670,15 +746,15 @@
 					return (price + parseFloat(item))
 				}, originalPrice);
 				// console.log(data[i])
-				allOriginPrice += parseFloat((singlePrice * data[i].orderitemPskuNumber).toFixed(2))
-				allSubtotalPrice += parseFloat((allOriginPrice * discount).toFixed(2))
+				var singleNumPrice = singlePrice * data[i].orderitemPskuNumber;
+				allOriginPrice = parseFloat((allOriginPrice + singleNumPrice).toFixed(2));
+				allSubtotalPrice = parseFloat((allSubtotalPrice + singleNumPrice * discount).toFixed(2));
 			}
 			return {
 				allOriginPrice: allOriginPrice,
 				allSubtotalPrice: allSubtotalPrice
 			};
 		}
-
 		/* single */
 		/* single */
 		function getPrice(originalePrice, skuPriceArr, discount) {
@@ -687,7 +763,6 @@
 				singlePrice += (parseFloat(skuPriceArr[k]) ? parseFloat(skuPriceArr[k]) : 0);
 			}
 			// console.log(singlePrice, discount)
-
 			return {
 				origin: parseFloat(singlePrice).toFixed(2),
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
@@ -735,7 +810,6 @@
 				parent.html(html);
 			}
 		var couponPrice = 0;
-
 		function selectCoupon(e) {
 			// console.log(counponDataList)
 			var targetEl = $(e.target);
@@ -749,7 +823,6 @@
 				
 				couponPriceText.text('-$' + couponPrice);
 				subtotalPriceText.text('$' + (totalPrice - couponPrice).toFixed(2));
-
 				couponCode = counponDataList[id].couponCode;
 				couponId = counponDataList[id].couponId;
 			} else {
@@ -761,12 +834,10 @@
 				subtotalPriceText.text('$' + (totalPrice).toFixed(2));
 			}
 		}
-
 		function selectPay(e) {
 			var targetEl = $(e.target);
 			payplate = targetEl.data('payid');
 		}
-
 		function checkCouponCode(event) {
 			var couponCode2 = $(event.target).prev('input').val();
 			var data = {
@@ -792,7 +863,6 @@
 							
 							couponPriceText.text('-$' + resData.couponPrice);
 							subtotalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
-
 							couponId = resData.couponId;
 							couponCode = couponCode2;
 							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
@@ -805,10 +875,7 @@
 				}
 			})
 		}
-
-
 		//MlfrontOrder/orderToPayInfo
-
 		//这5个参数，json格式
 		/* 
 			private Integer orderId;  //1  都一样，随便从一条取出就行了
@@ -817,10 +884,15 @@
 		    private String orderCouponCode; //1，每条的产品数量，需要拼成字段"1,1"中间逗号拼接。
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
-		 $('.place-order').on('click', function () {
- 
-				//if  addressId=null  alert
-
+		$('.place-order').on('click', function () {
+			
+			if (inputCheck9()==1){
+				return ;
+			} else{
+				
+				savr_address();  // addres 保存
+				var addressIdInt = $('.address-id').val();
+			
 				var reqData = {
 					"orderId": orderId,
 					"orderOrderitemidstr": orderItemArr.join(','),
@@ -829,9 +901,8 @@
 					"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
 					"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
 					"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-					"addressinfoId": addressId,
+					"addressinfoId": addressIdInt,
 				};
-				
 				
 				var reqDataUp = {
 						"orderId": orderId,
@@ -841,10 +912,11 @@
 						"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
 						"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
 						"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-						"addressinfoId": addressId,
+						"addressinfoId": addressIdInt,
 					};
-
-				console.log(reqDataUp)
+			
+				// console.log(reqData)
+			    // console.log(reqDataUp)
 				console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
@@ -852,23 +924,20 @@
 						url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 						data: JSON.stringify(reqData),
 						type: 'post',
-						dataType: 'JSON',
+						dataType: 'text',
 						contentType: 'application/json',
 						success: function (data) {
-							//var resData = JSON.parse(data).extend;
+							var resData = JSON.parse(data).extend;
 							// console.log(data)
-							if($(".save").hasClass("active")){
-								window.location.href = '${APP_PATH }/paypal/ppay';
-							}else{
-								alert("Please fill in the shipping address")
-							}
+							window.location.href = '${APP_PATH }/paypal/ppay';
 						}
 					})
 				} else {
-					renderSysMsg('Please fill in the shipping address')
-				}
-			})
-
+					renderSysMsg('Please fill in the shipping address ')
+				 }
+			}
+			
+		})
 		function checkAddress(reqDataUp) {
 			var flag = false;
 			$.ajax({
@@ -919,10 +988,92 @@
 						}
 					}
 				}
-
 				return flag;
 			}
+					function inputCheck9() {
+				
+				var flag = 0;
+				var firstnamestr = $(".firstname").val();
+				// console.log("firstnamestr:"+firstnamestr);
+				var lastnamestr = $(".lastname").val();
+				// console.log("lastnamestr:"+lastnamestr);
+				var emailstr = $(".email").val();
+				var phonestr = $(".phone").val();
+				var addressstr = $(".addreNo").val();
+				var codestr = $(".code").val();
+				var citystr = $(".city").val();
+				// var countrystr = $("#country").val();
+				var provincestr = $(".province").val();
+				var country_address = $("#country option:checked").text(); 
+				
+				
+				if(firstnamestr==null||firstnamestr==''){
+					flag = 1;
+					alert("firstnamestr is empty");
+					$(".firstname").addClass("error_br");
+					$(".firstname").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(lastnamestr==null||lastnamestr==''){
+					flag = 1;
+					alert("lastnamestr is empty");
+					$(".lastname").addClass("error_br");
+					$(".lastname").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(emailstr==null||emailstr==''){
+					flag = 1;
+					alert("emailstr is empty");
+					$(".email").addClass("error_br");
+					$(".email").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(phonestr==null||phonestr==''){
+					flag = 1;
+					alert("phonestr is empty");
+					$(".phone").addClass("error_br");
+					$(".phone").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(addressstr==null||addressstr==''){
+					flag = 1;
+					alert("addressstr is empty");
+					$(".addressstr").addClass("error_br");
+					$(".addressstr").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(codestr==null||codestr==''){
+					flag = 1;
+					alert("codestr is empty");
+					$(".codestr").addClass("error_br");
+					$(".codestr").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(country_address==null||country_address==''||country_address=='select the Country'){
+					flag = 1;
+					alert("countrystr is empty");
+					$("#country").addClass("error_br");
+					$("#country").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(provincestr==null||provincestr==''){
+					flag = 1;
+					alert("provincestr is empty");
+					$(".province").addClass("error_br");
+					$(".province").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}
+				
+				return flag;
+				
+					
+					
+				
+			}
+			
 	</script>
+	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
 
 </html>
