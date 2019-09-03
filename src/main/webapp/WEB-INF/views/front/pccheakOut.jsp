@@ -124,6 +124,7 @@
 								<div class="form-input">
 									<!-- <input type="text" name="addressCountry" class="form-control"> -->
 									<select name="addressCountry" class="form-control" id="country">
+										<option value="select the Country" selected="selected">select the Country</option>
 										<option value="Afghanistan">Afghanistan</option>
 										<option value="Åland Islands">Åland Islands</option>
 										<option value="Albania">Albania</option>
@@ -357,7 +358,7 @@
 										<option value="Ukraine">Ukraine</option>
 										<option value="United Arab Emirates">United Arab Emirates</option>
 										<option value="United Kingdom">United Kingdom</option>
-										<option value="United States" selected="selected">United States</option>
+										<option value="United States">United States</option>
 										<option value="Uruguay">Uruguay</option>
 										<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
 										<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
@@ -526,6 +527,11 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
+		    $("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			
+			// $("")
+			// addressCountry
+			
 		
 		}
 	
@@ -560,7 +566,7 @@
 			success: function (data) {
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				// console.log(resDataAddress)
+				console.log(resDataAddress)
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
@@ -1008,43 +1014,84 @@
 				
 				var flag = 0;
 				var firstnamestr = $(".firstname").val();
-				console.log("firstnamestr:"+firstnamestr);
+				// console.log("firstnamestr:"+firstnamestr);
 				var lastnamestr = $(".lastname").val();
-				console.log("lastnamestr:"+lastnamestr);
+				// console.log("lastnamestr:"+lastnamestr);
 				var emailstr = $(".email").val();
 				var phonestr = $(".phone").val();
 				var addressstr = $(".addreNo").val();
 				var codestr = $(".code").val();
 				var citystr = $(".city").val();
-				var countrystr = $("#country").val();
+				// var countrystr = $("#country").val();
 				var provincestr = $(".province").val();
+				var country_address = $("#country option:checked").text(); 
+				
+				
 				if(firstnamestr==null||firstnamestr==''){
 					flag = 1;
-					alert("firstnamestr为空");
+					alert("firstnamestr is empty");
+					$(".firstname").addClass("error_br");
+					$(".firstname").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}else if(lastnamestr==null||lastnamestr==''){
 					flag = 1;
-					alert("lastnamestr为空");
+					alert("lastnamestr is empty");
+					$(".lastname").addClass("error_br");
+					$(".lastname").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}else if(emailstr==null||emailstr==''){
 					flag = 1;
-					alert("emailstr为空");
+					alert("emailstr is empty");
+					$(".email").addClass("error_br");
+					$(".email").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}else if(phonestr==null||phonestr==''){
 					flag = 1;
-					alert("phonestr为空");
+					alert("phonestr is empty");
+					$(".phone").addClass("error_br");
+					$(".phone").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}else if(addressstr==null||addressstr==''){
 					flag = 1;
-					alert("addressstr为空");
+					alert("addressstr is empty");
+					$(".addressstr").addClass("error_br");
+					$(".addressstr").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}else if(codestr==null||codestr==''){
 					flag = 1;
-					alert("codestr为空");
-				}else if(countrystr==null||countrystr==''){
+					alert("codestr is empty");
+					$(".codestr").addClass("error_br");
+					$(".codestr").focus(function(){
+						$(this).removeClass("error_br")
+					})
+				}else if(country_address==null||country_address==''||country_address=='select the Country'){
 					flag = 1;
-					alert("countrystr为空");
+					alert("countrystr is empty");
+					$("#country").addClass("error_br");
+					$("#country").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}else if(provincestr==null||provincestr==''){
 					flag = 1;
-					alert("provincestr为空");
+					alert("provincestr is empty");
+					$(".province").addClass("error_br");
+					$(".province").focus(function(){
+						$(this).removeClass("error_br")
+					})
 				}
+				
 				return flag;
+				
+					
+					
+				
 			}
+			
 	</script>
 	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>

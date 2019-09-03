@@ -73,12 +73,14 @@
 /*Sale*/.classimg3{background:url(../../../../../ShopTemplate/static/pc/img/40%off.gif) no-repeat center top; background-size:35px 25px;}
 /*Double Drawn*/.classimg4{background:url(../../../../../ShopTemplate/static/pc/img/dd.gif) no-repeat center top; background-size:35px 25px;}
 .red{color: #ff1671;}
+.form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e ;}
+.shipping>span{color: #ff6f5e;}
 
 .tt-desctop-menu nav > ul > li.dropdown > a{padding: 25px 12px 10px;}
 .u-flyer{width: 100px; height: 100px;z-index: 99999;}
 .product-item{ position: relative;}
 .hui_icon{width:50px; height: 50px; position: absolute; top: 0;right: 0; }
-.showactive1{background:url(../../../../../ShopTemplate/static/pc/img/sale1.png) no-repeat center; background-size: 50px;}
+.showactive1{background:url(../../../../../ShopTemplate/static/pc/img/sale6.png) no-repeat center; background-size: 50px;}
 .showactive2{background:url(../../../../../ShopTemplate/static/pc/img/sale2.png) no-repeat center; background-size: 50px;}
 .showactive3{background:url(../../../../../ShopTemplate/static/pc/img/sale3.png) no-repeat center; background-size: 50px;}
 .showactive4{background:url(../../../../../ShopTemplate/static/pc/img/sale4.png) no-repeat center; background-size: 50px;}
@@ -138,7 +140,7 @@ div.zoomMask{position:absolute;cursor:move;z-index:1;}
 	text-align: center;
 	font-style: italic;
 	font-size: 14px;
-	color: #ff1671;
+	color:#ff6f5e;
 }
 .order_box{
 	min-height: 400px;
