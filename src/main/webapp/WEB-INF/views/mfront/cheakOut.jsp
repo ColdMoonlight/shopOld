@@ -510,7 +510,6 @@
 		});
 
 		function renderAddressDetail(data) {
-			// console.log("renderAddressDetail")
 			// console.log(data)
 	        $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
@@ -520,9 +519,8 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-			// console.log("data.addressCountry")
-			// console.log(data.addressCountry)
 			$("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 			
 		}
 
@@ -531,13 +529,12 @@
 			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
 			type: 'post',
 			success: function (data) {
+				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				// console.log(resDataAddress)
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
-				// console.log(resDataMoney)
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
 				// console.log(data)
@@ -574,10 +571,10 @@
 				return obj
 			}, {});
 			//if (!inputCheck(reqData)) return;
-			console.log("************")
+			console.log("*****savr_address*******")
 			console.log(reqData)
 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-			$.ajax({
+			 $.ajax({
 				url: '${APP_PATH}/MlfrontAddress/save',
 				type: 'post',
 				dataType: 'JSON',
@@ -594,7 +591,6 @@
 					$('.address-id').val(resDataAddress.addressId);
 				}
 			})
-			//return returnaddressId;
 		}
        
 		/* 所购商品列表 */
@@ -802,8 +798,7 @@
 		}
 		//MlfrontOrder/orderToPayInfo
 		//这5个参数，json格式
-		/* 
-			private Integer orderId;  //1  都一样，随便从一条取出就行了
+		/*  private Integer orderId;  //1  都一样，随便从一条取出就行了
 		    private String orderOrderitemidstr;//1 每条的orderitemId都不一样，需要拼成字段"77,78"中间逗号拼接。
 		    private Integer orderCouponId  // 1  优惠码，就一个
 		    private String orderCouponCode; //1，每条的产品数量，需要拼成字段"1,1"中间逗号拼接。
@@ -841,7 +836,7 @@
 					};
 	
 				// console.log(reqData)
-			    // console.log(reqDataUp)
+			    console.log(reqDataUp)
 				console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
