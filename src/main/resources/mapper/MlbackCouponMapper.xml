@@ -390,6 +390,12 @@
     where coupon_code = #{couponCode,jdbcType=VARCHAR}
   </select>
   
+  <select id="selectMlbackCouponBYAreaNum" parameterType="com.atguigu.bean.MlbackCoupon" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_coupon 
+    where coupon_AreaNum = #{couponAreaNum,jdbcType=INTEGER}
+  </select>
+  
   
   <!-- selectAll使用中 -->
   <select id="selectMlbackCouponGetAll" parameterType="com.atguigu.bean.MlbackCoupon" resultMap="BaseResultMap">

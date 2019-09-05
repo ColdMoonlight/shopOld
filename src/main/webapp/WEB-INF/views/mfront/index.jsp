@@ -232,22 +232,41 @@
  	    });
     	// product
    	 	$.ajax({
-         url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
-         data: "productLable=" + blockList[i].product,
-         type: "POST",
-         async: false,
-         success: function (data) {
-           // console.log(productList1)
+	         url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
+	         data: "productLable=" + blockList[i].product,
+	         type: "POST",
+	         async: false,
+	         success: function (data) {
+	           // console.log(productList1)
+	           if (data.code === 100) {
+	             var resData = data.extend.mlbackProductResList;
+	             // console.log(resData);
+	             productBlock.append(rednerProduct(resData));
+	           } else {
+	             renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+	           }
+	         }
+	       });
+    }
+    
+    $.ajax({
+		url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByAreaNum',
+		data: JSON.stringify({
+			"couponAreaNum": 2
+		}),
+		type: 'post',
+		dataType: 'JSON',
+		contentType: 'application/json',
+		success: function (data) {
+			 console.log(data)
            if (data.code === 100) {
-             var resData = data.extend.mlbackProductResList;
-             // console.log(resData);
-             productBlock.append(rednerProduct(resData));
+             var resData = data.extend.mlbackCouponResList;
+             //productBlock.append(rednerProduct(resData));
            } else {
              renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
            }
          }
        });
-    }
   </script>
   <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
