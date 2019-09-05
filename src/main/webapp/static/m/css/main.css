@@ -475,7 +475,7 @@ a:focus {
 	display: inline-block;
 	width: 100%;
 	height: auto;
-	min-height: 414px;
+	min-height: 400px;
 	overflow: hidden;
 }
 
