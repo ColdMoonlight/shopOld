@@ -31,6 +31,7 @@ import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
+import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackReviewImg;
@@ -45,6 +46,7 @@ import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.MlbackActShowProService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
+import com.atguigu.service.MlbackCouponService;
 import com.atguigu.service.MlbackProductImgService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackReviewImgService;
@@ -85,6 +87,9 @@ public class UPloadController {
 	
 	@Autowired
 	MlbackReviewImgService mlbackReviewImgService;
+	
+	@Autowired
+	MlbackCouponService mlbackCouponService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -680,6 +685,113 @@ public class UPloadController {
 			//存在insert
 			mlbackReviewImgService.insertSelective(mlbackReviewImgImg);
 		}
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	
+	/**
+	 * 7.1	useOn	0505
+	 * uploadCouponWapImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadCouponWapImg")
+	@ResponseBody
+	public Msg uploadCouponWapImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/Coupon/";
+		//存储图片
+		String returnUrl = UpImgUtils.keepCouponWapFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String CouponIdstr = aa[1];
+		
+		int CouponIdstrInt = Integer.parseInt(CouponIdstr);
+		
+		System.out.println("CouponIdstr:"+CouponIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlbackCoupon mlbackCoupon = new MlbackCoupon();
+		
+		mlbackCoupon.setCouponId(CouponIdstrInt);
+		//win环境下
+		mlbackCoupon.setCouponImgwapurl(returnReaUrlAll);
+		//linux环境下
+		//mlbackCategory.setCategoryImgurl(returnReaUrl);
+		
+		mlbackCouponService.updateByPrimaryKeySelective(mlbackCoupon);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	/**
+	 * 5.2	useOn	0505
+	 * uploadCouponPcImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadCouponPcImg")
+	@ResponseBody
+	public Msg uploadCouponPcImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/Coupon/";
+		//存储图片
+		String returnUrl = UpImgUtils.keepCouponPcFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String CouponIdstr = aa[1];
+		
+		int CouponIdInt = Integer.parseInt(CouponIdstr);
+		
+		System.out.println("CouponIdstr:"+CouponIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlbackCoupon mlbackCoupon = new MlbackCoupon();
+		
+		mlbackCoupon.setCouponId(CouponIdInt);
+		//win环境下
+		mlbackCoupon.setCouponImgpcurl(returnReaUrlAll);
+		
+		mlbackCouponService.updateByPrimaryKeySelective(mlbackCoupon);
+		
 		System.out.println("returnReaUrl:"+returnReaUrl);
 		
 		//把文件存储的url存到数据库中
