@@ -235,4 +235,23 @@ public class MlbackCouponController {
 		}
 	}
 	
+	/**
+	 * 8.0	useOn	0505
+	 * 某页面展示的优惠券列表查询
+	 * @param MlbackCoupon
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackCouponShowByAreaNum",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackCouponShowByAreaNum(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackCoupon mlbackCoupon){
+		
+		Integer couponAreaNum = mlbackCoupon.getCouponAreaNum();
+		//接受信息
+		MlbackCoupon mlbackCouponReq = new MlbackCoupon();
+		mlbackCouponReq.setCouponAreaNum(couponAreaNum);
+		List<MlbackCoupon> mlbackCouponResList =mlbackCouponService.selectMlbackCouponBYAreaNum(mlbackCouponReq);
+		
+		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList);
+	}
+	
 }

@@ -126,13 +126,13 @@
 				
 				var couponAreaNumStr = "";
 				if (item.couponAreaNum == 1) {
-					couponAreaNumStr = '-请选择-';
+					couponAreaNumStr = '1-请选择';
 				} else if (item.couponAreaNum == 2) {
-					couponAreaNumStr = '首页';
+					couponAreaNumStr = '2-首页';
 				} else if (item.couponAreaNum == 3) {
-					couponAreaNumStr = '详情页';
+					couponAreaNumStr = '3-详情页';
 				} else if (item.couponAreaNum == 4) {
-					couponAreaNumStr = '结算页';
+					couponAreaNumStr = '4-结算页';
 				} 
 				
 				var couponAreaNum = $("<td></td>").append(couponAreaNumStr);
