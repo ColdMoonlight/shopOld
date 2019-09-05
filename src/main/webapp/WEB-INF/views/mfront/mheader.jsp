@@ -50,11 +50,11 @@
 
 <body>
   <!-- info -->
-  <div class="info">
-    <p class="container" style="text-align: center;">Free Shipping World Wide.</p>
-  </div>
   <!--header  -->
   <div class="header bd-b">
+			<div class="info">
+			<p style="text-align: center;">Free Shipping World Wide.</p>
+		  </div>
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>

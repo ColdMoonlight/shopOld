@@ -178,6 +178,11 @@ a:focus {
 
 .header {
   background-color: #fff;
+  width: 100%;
+  position:fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 
 .header .container {
@@ -229,6 +234,7 @@ a:focus {
 
 /* main */
 .main {
+	margin: 99px 0 0;
 	min-height: 360px;
 }
 
@@ -362,8 +368,15 @@ a:focus {
 	padding: .5em 0;
 	border-bottom: 1px solid #ccc;
 	background: url(../../../../../ShopTemplate/static/m/img/index/jtn_02.png) no-repeat right center;
-	background-size:30px ;
+	background-size:20px ;
+	position: relative;
 }
+.category .category-item:nth-of-type(1):before{content: ""; width:20px; height:20px; position: absolute; top: 0; left:50%;}
+.category .category-item:nth-of-type(2):before{content: ""; width:20px; height:20px; position: absolute; top: 0; left:50%;}
+.category .category-item:nth-of-type(3):before{content: ""; width:20px; height:20px; position: absolute; top: 0; left:50%;}
+.category .category-item:nth-of-type(4):before{content: ""; width:20px; height:20px; position: absolute; top: 0; left:50%;}
+
+
 .category .category-item a {
 	position: relative;
   display: block;

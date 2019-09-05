@@ -530,7 +530,6 @@
 		    //$("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
 		    $("select option:checked").text(data.addressCountry ? data.addressCountry : '');
 		    $("#country").val(data.addressCountry ? data.addressCountry : '');
-			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 
 		}
 	

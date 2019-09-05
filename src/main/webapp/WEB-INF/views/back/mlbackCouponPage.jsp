@@ -390,15 +390,15 @@
 
 				if (imgW >= winW) {
 					el.css({
-						'width': '100%',
-						'height': Math.floor(img.height * $('#categoryTabContent').width() / img.width) + 'px',
+						'width': '320px',
+						'height': '320px',
 						'backgroundImage': 'url(' + url + ')',
 						'backgroundSize': '100%'
 					});
 				} else {
 					el.css({
-						'width': imgW + 'px',
-						'height': imgH + 'px',
+						'width': '320px',
+						'height': '320px',
 						'backgroundImage': 'url(' + url + ')',
 						'backgroundSize': '100%'
 					});
