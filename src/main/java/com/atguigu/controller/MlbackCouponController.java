@@ -190,7 +190,6 @@ public class MlbackCouponController {
 	 * @return 
 	 */
 	@RequestMapping(value="/getOneMlbackCouponDetailByUId",method=RequestMethod.POST)
-	//@RequestMapping(value="/getOneMlbackCouponDetailByUId",method=RequestMethod.GET)
 	@ResponseBody
 	public Msg getOneMlbackCouponDetailByUId(HttpServletResponse rep,HttpServletRequest res,HttpSession session){
 		Integer userType= 0;
