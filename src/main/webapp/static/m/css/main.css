@@ -2341,8 +2341,8 @@ a:focus {
 .address-details{ }
 
 .form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e;}
-
-
-
+.go_re{width: 200px; height: 200px; position:fixed;top:50%; left: 50%; margin: -100px 0 0 -100px; background: #fff; border-radius:5px;}
+.coupon_cont{width: 100%; height: auto;}
+.coup_img{width:33.33%; float: left;}
 
 
