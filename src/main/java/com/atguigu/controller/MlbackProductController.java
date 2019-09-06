@@ -174,7 +174,7 @@ public class MlbackProductController {
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
 //		}else{
-			int PagNum = 90;
+			int PagNum = 50;
 			PageHelper.startPage(pn, PagNum);
 			List<MlbackProduct> mlbackProductList = mlbackProductService.selectMlbackProductGetAll();
 			PageInfo page = new PageInfo(mlbackProductList, PagNum);
