@@ -335,6 +335,26 @@
         var lens=parseInt(len-(len%5));
 		return productData.slice(0,lens);
        }	   
+	
+	$.ajax({
+		 url: '${APP_PATH}/MlbackSlide/getMlbackSlidepcListByArea',
+	      data: JSON.stringify({
+		 	"slideArea": 1
+		 }),
+		 type: 'post',
+		 dataType: 'JSON',
+		 contentType: 'application/json',
+		 success: function (data) {
+		 	 console.log(data)/***data**/
+           if (data.code === 100) {
+             var resData = data.extend.mlbackSlideList;;
+		 	 console.log(resData);
+		// 	  renderCoupon(couponCont,resData)
+           } else {
+             renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+           }
+         }
+       });
   </script>
   <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>

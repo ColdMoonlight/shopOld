@@ -128,7 +128,9 @@
 			$.each(task, function (index, item) {
 				
 				var slideAreaStr = "";
-				if (item.slideArea == 1) {
+				if (item.slideArea == 0) {
+					slideAreaStr = '未选择位置';
+				} else if (item.slideArea == 1) {
 					slideAreaStr = '首页活动';
 				} else if (item.slideArea == 2) {
 					slideAreaStr = '第2活动';

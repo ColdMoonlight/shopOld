@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackSlide;
 import com.atguigu.bean.Msg;
@@ -157,22 +158,45 @@ public class MlbackSlideController {
 	}
 	
 	/**
-	 * 5.0	UseNow	0505
-	 * 查看首页活动品区域的顺序
-	 * @param MlbackActShowPro
+	 * 6.0	UseNow	0505
+	 * 查询wap不同位置的图片
+	 * @param MlbackSlide
 	 * @return 
 	 */
-	@RequestMapping(value="/getMlbackActShowProListByActnum",method=RequestMethod.POST)
+	@RequestMapping(value="/getMlbackSlidewapListByArea",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getMlbackActShowProListByActnum(@RequestParam(value = "actshowproActnum") Integer actshowproActnum){
-		//接受actshowproId
-		MlbackActShowPro mlbackActShowProReq = new MlbackActShowPro();
-		mlbackActShowProReq.setActshowproStatus(1);
-		mlbackActShowProReq.setActshowproActnum(actshowproActnum);
+	public Msg getMlbackSlidewapListByArea(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackSlide mlbackSlide){
+		//接受slideArea
+		
+		Integer slideArea = mlbackSlide.getSlideArea();
+		
+		MlbackSlide mlbackSlideReq = new MlbackSlide();
+		mlbackSlideReq.setSlideArea(slideArea);
+		mlbackSlideReq.setSlideWapstatus(1);
 		//查询本条
-		List<MlbackActShowPro> mlbackActShowProList =mlbackActShowProService.selectMlbackActShowProByActnum(mlbackActShowProReq);
-		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
-					.add("mlbackActShowProList", mlbackActShowProList);
+		List<MlbackSlide> mlbackSlideList =mlbackSlideService.selectMlbackSlidewapListByArea(mlbackSlideReq);
+		return Msg.success().add("resMsg", "查看该位置的轮播完毕")
+					.add("mlbackSlideList", mlbackSlideList);
+	}
+	
+	/**
+	 * 7.0	UseNow	0505
+	 * 查询pc不同位置的图片
+	 * @param MlbackSlide
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackSlidepcListByArea",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackSlidepcListByArea(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackSlide mlbackSlide){
+		//接受slideArea
+		Integer slideArea = mlbackSlide.getSlideArea();
+		MlbackSlide mlbackSlideReq = new MlbackSlide();
+		mlbackSlideReq.setSlideArea(slideArea);
+		mlbackSlideReq.setSlidePcstatus(1);
+		//查询本条
+		List<MlbackSlide> mlbackSlideList =mlbackSlideService.selectMlbackSlidepcListByArea(mlbackSlideReq);
+		return Msg.success().add("resMsg", "查看该位置的轮播完毕")
+					.add("mlbackSlideList", mlbackSlideList);
 	}
 
 }

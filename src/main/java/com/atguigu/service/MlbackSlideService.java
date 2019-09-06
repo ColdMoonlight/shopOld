@@ -72,6 +72,16 @@ public class MlbackSlideService {
 		List<MlbackSlide>  MlbackSlideList = mlbackSlideMapper.selectMlbackSlideGetAll();
 		return MlbackSlideList;
 	}
+
+	public List<MlbackSlide> selectMlbackSlidewapListByArea(MlbackSlide mlbackSlide) {
+		List<MlbackSlide>  MlbackSlideList = mlbackSlideMapper.selectMlbackSlidewapListByArea(mlbackSlide);
+		return MlbackSlideList;
+	}
+	
+	public List<MlbackSlide> selectMlbackSlidepcListByArea(MlbackSlide mlbackSlide) {
+		List<MlbackSlide>  MlbackSlideList = mlbackSlideMapper.selectMlbackSlidepcListByArea(mlbackSlide);
+		return MlbackSlideList;
+	}
 	
 	/**
 	 * @author Shinelon
