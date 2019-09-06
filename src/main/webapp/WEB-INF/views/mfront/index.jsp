@@ -67,10 +67,11 @@
     <!-- product show -->
     <div id="product-block"></div>
   </div>
-  <div class="mask" style="display: none;"></div>
-   <div class="go_re" style="display: none;"><a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/zctc.jpg"></a> </div>
-   	
-  
+   <div class="mask" style="display: none;"></div>
+   <div class="go_re" style="display: none;">
+	   <span class="close">×</span> 
+	   <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/zctc.jpg"></a>
+   </div>
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
   <script>
@@ -313,7 +314,11 @@
 							$(".mask").show();
 						}
 					},2000);
-					go_re.click(function(){$(this).parents().hide();$(".mask").hide();})
+					$(".close").click(function(){
+						go_re.hide();
+						$(".mask").hide();
+					}) 
+						
 /***************首页banner***********************************************/		
                   var bannerfirst=$(".bannerfirst")
 			    function rednertop(parent, data) {
