@@ -138,6 +138,10 @@ div.zoomMask{position:absolute;cursor:move;z-index:1;}
 
 /*************************/
 .video_cont{width: 100%; height:500px; position: relative;}
+#banner .swiper-button-next, #banner .swiper-button-prev{z-index: 13; }
+
+
+
 
 
 
