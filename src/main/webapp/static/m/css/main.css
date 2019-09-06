@@ -2348,9 +2348,12 @@ a:focus {
 
 .form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e;}
 .go_re{z-index: 9999999; width: 300px; height: 300px; position:fixed;top:50%; left: 50%; margin: -150px 0 0 -150px; background: #fff; border-radius:5px;}
-.go_re a{display: block;}
+.go_re a{display: block; position:relative;}
 .go_re a img{max-width: 100%;border-radius:3px;}
 .coupon_cont{width: 100%; height: auto;}
 .coup_img{width:33.33%; float: left;}
+.close{z-index: 99999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff;}
+
+
 
 
