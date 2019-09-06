@@ -318,6 +318,26 @@
 					},2000);
 					go_re.click(function(){$(this).parents().hide();$(".mask").hide();})
 					
+			 $.ajax({
+		     url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+		        data: JSON.stringify({
+		       "slideArea": 1
+		     }),
+		     type: 'post',
+		     dataType: 'JSON',
+		     contentType: 'application/json',
+		     success: function (data) {
+		        	console.log(data)/***data**/
+		            if (JSON.parse(data).code === 100) {
+		              var resData = JSON.parse(data).extend.mlbackSlideList;;
+		        	console.log(resData);
+		    //     renderCoupon(couponCont,resData)
+		            } else {
+		              renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+		            }
+		          }
+		        });
+					
 	   
 	   
   </script>

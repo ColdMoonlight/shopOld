@@ -34,5 +34,8 @@ public interface MlbackSlideMapper {
     //查询全部
 	List<MlbackSlide> selectMlbackSlideGetAll();
 
-	/*List<MlbackSlide> selectMlbackSlideByActnum(MlbackSlide mlbackSlide);*/
+	List<MlbackSlide> selectMlbackSlidewapListByArea(MlbackSlide mlbackSlide);
+	
+	List<MlbackSlide> selectMlbackSlidepcListByArea(MlbackSlide mlbackSlide);
+
 }
