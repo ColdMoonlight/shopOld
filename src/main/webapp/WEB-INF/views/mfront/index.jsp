@@ -70,7 +70,8 @@
     <!-- product show -->
     <div id="product-block"></div>
   </div>
-   <div class="go_re" style="display: none;"><a href="https://www.baidu.com/">Please register first</a> </div>
+  <div class="mask" style="display: none;"></div>
+   <div class="go_re" style="display: none;"><a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/zctc.jpg"></a> </div>
    	
   
   <jsp:include page="mfooter.jsp"></jsp:include>
@@ -311,10 +312,11 @@
 					setTimeout(function(){
 						if (get_cookie("popped")==""){
 							document.cookie="popped=yes";
-							go_re.show()
+							go_re.show();
+							$(".mask").show();
 						}
 					},2000);
-					go_re.click(function(){$(this).parents().hide()})
+					go_re.click(function(){$(this).parents().hide();$(".mask").hide();})
 					
 	   
 	   
