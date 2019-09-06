@@ -48,6 +48,11 @@ var aside_data = [
 				url: '/ShopTemplate/MlbackCountDown/toMlbackCountDownPage',
 				name:'倒计时管理',
 				icon: "glyphicon-stats"
+			},
+			{
+				url: '/ShopTemplate/MlbackSlide/toMlbackSlidePage',
+				name:'轮播管理',
+				icon: "glyphicon-stats"
 			}
 			
 		]
