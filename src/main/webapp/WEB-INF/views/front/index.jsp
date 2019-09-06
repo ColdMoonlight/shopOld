@@ -75,34 +75,7 @@
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <script>
   	/* banner */
-  	// var slideData = [
-   //     {
-   //  	   title: '',
-   //  	   link: 'javascript:;',
-   //  	   path: '${APP_PATH }/static/pc/slide/pc_firsr01.jpg'
-   //     },
-   //     {
-   //  	   title: '',
-   //  	   link: 'javascript:;',
-   //  	   path: '${APP_PATH }/static/pc/slide/pc_firsr02.jpg'
-   //     },
-   //     {
-   //  	   title: '',
-   //  	   link: 'javascript:;',
-   //  	   path: '${APP_PATH }/static/pc/slide/pc_firsr03.jpg'
-   //     },
-   //     {
-   //  	   title: '',
-   //  	   link: 'javascript:;',
-   //  	   path: '${APP_PATH }/static/pc/slide/pc_firsr04.jpg'
-   //     },
-   //     {
-   //  	   title: '',
-   //  	   link: 'javascript:;',
-   //  	   path: '${APP_PATH }/static/pc/slide/pc_firsr05.jpg'
-   //     }
-  	// ];
-
+  	
     function renderHotProduct(parent, data) {
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
