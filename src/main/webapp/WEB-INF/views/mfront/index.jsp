@@ -67,7 +67,7 @@
     <!-- product show -->
     <div id="product-block"></div>
   </div>
-   <div class="mask" style="display: none;"></div>
+   <div class="mask maskindex" style="display: none;"></div>
    <div class="go_re" style="display: none;">
 	   <span class="close">×</span> 
 	   <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/zctc.jpg"></a>

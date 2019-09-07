@@ -2353,7 +2353,9 @@ a:focus {
 .coupon_cont{width: 100%; height: auto;}
 .coup_img{width:33.33%; float: left;}
 .close{z-index: 99999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff;}
-
+.maskindex {
+  background-color: rgba(0, 0, 0, .6);
+}
 
 
 
