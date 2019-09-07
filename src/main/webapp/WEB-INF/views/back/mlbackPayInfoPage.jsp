@@ -261,7 +261,7 @@
 					success: function (result) {
 						if (result.code == 100) {
 							var resData = result.extend;
-							// console.log(resData);
+							console.log(resData);
 							var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 							var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
@@ -285,6 +285,8 @@
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
 							orderId = orderData.orderId;
 							shipName = orderData.orderLogisticsname;
+							
+							
 							renderOrderInfo(orderData);
 
 							var receiveData = resDataAddressOne;
@@ -407,9 +409,20 @@
 					'<label class="col-sm-4 control-label">物流:</label>' +
 					'<div class="col-sm-6">' +
 					'<select class="ship-name form-control">' +
-					'<option value ="顺丰" selected="selected">顺丰</option>' +
-					'<option value ="申通">申通</option>' +
-					'<option value ="天天">天天</option>' +
+					'<option value ="英国专线-4PX">英国专线-4PX</option>' +
+					'<option value ="华磊物流通测试">华磊物流通测试</option>' +
+					'<option value ="FBA">FBA</option>' +
+					'<option value ="AliExpress无忧物流-标准">AliExpress无忧物流-标准</option>' +
+					'<option value ="ARAMEX">ARAMEX</option>' +
+					'<option value ="UPS">UPS</option>' +
+					'<option value ="TNT">TNT</option>' +
+					'<option value ="顺丰">顺丰</option>' +
+					'<option value ="FedEx">FedEx</option>' +
+					'<option value ="E邮宝">E邮宝</option>' +
+					'<option value ="DPEX">DPEX</option>' +
+					'<option value ="DHL">DHL</option>' +
+					// '<option value ="挂号">挂号</option>' +
+					// '<option value ="中国邮政挂号小包">天天</option>' +
 					'</select>' +
 					'</div>' +
 					'</div>' +
@@ -485,10 +498,17 @@
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
 				'<div><span>收货人名字：</span><span>' + (data.addressUserfirstname + data.addressUserlastname) + '</span></div>' +
 				'<div><span>收货人电话：</span><span>' + data.addressTelephone + '</span></div>' +
-				'<div><span>收货人地址：</span><span>' + (data.addressDetail + '  ' + data.addressCity + ' ' + data.addressProvince +
-					' ' + data.addressCountry) + '</span></div>' +
+				'<div><span>收货人详细地址：</span><span>' + data.addressDetail + '</span></div>' +
+				'<div><span>收货人城市：</span><span>' + data.addressCity + '</span></div>' +
+				'<div><span>收货人省份：</span><span>' + data.addressProvince + '</span></div>' +
+				'<div><span>收货人国家：</span><span>' + data.addressCountry + '</span></div>' +
+				'<div><span>邮编：</span><span>' + data.addressPost + '</span></div>' +
+				'<div><span>邮箱：</span><span>' + data.addressEmail + '</span></div>' +
 				'<div><span>购买时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 				'<div><span>支付时间：</span><span>' + data.payinfoCreatetime + '</span></div>';
+				
+				
+				
 			$('.revceiver-info').html(html);
 		}
 
