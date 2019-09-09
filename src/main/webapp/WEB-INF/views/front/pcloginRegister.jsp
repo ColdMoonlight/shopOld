@@ -86,7 +86,7 @@
 					<a href="javascript:;" class="btn btn-black register"> REGISTER </a>
 				</div>
 				<div class="home_box">
-					<a href="javascript:;" class="btn btn-black go_home">Go Home</a>
+					<a href="${APP_PATH}/index.html" class="btn btn-black go_home">Go Home</a>
 				</div>
 			</div>
 			
