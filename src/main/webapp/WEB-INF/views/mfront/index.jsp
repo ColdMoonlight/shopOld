@@ -12,6 +12,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <!--  禁用telphone -->
+   <link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
   <meta name="format-detection" content="telephone=no">
   <!-- 关闭下拉刷新 -->
   <meta id="WV.Meta.DisableRefresh" value="true">
@@ -46,20 +47,24 @@
 <body>
 
   <jsp:include page="mheader.jsp"></jsp:include>
-
+  
+	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <!-- main -->
   <div class="main">
     <!-- sale -->
     <div class="bannerfirst">
-
+        <div id="ban_silder">
+        	<div class="swiper-wrapper">
+        		
+        	</div>
+			<div class="swiper-pagination"></div>
+        </div>
     </div>
     <!-- count date -->
     <div class="banner">
-		<div class="coupon_cont">
+		<div class="coupon_cont2">
+			
 		</div>
-      <a href="#" alt="">
-        <img src="${APP_PATH }/static/m/img/firstpage/tp_02.png" alt="">
-      </a>
     </div>
     <!-- countDownArea date -->
     <div id="countdown-area"> </div>
@@ -321,15 +326,26 @@
 					}) 
 						
 /***************首页banner***********************************************/		
-                  var bannerfirst=$(".bannerfirst")
+              var bannerfirst=$("#ban_silder .swiper-wrapper")
 			    function rednertop(parent, data) {
 					  var html = '';
 					  for (var i = 0; i < data.length; i += 1) {
-						html += '<div class="banner">' +
-						'<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-						'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-						'</a>' +
-						'</div>';
+						  var slideIfinto_click = data[i].slideIfinto;
+						  // console.log(slideIfinto_click);
+						  if(slideIfinto_click==0){
+						  	html += '<div class="swiper-slide">' +
+						  		  '<a href="javascript:;">' +
+						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+						  			'</a>' +
+						  		'</div>';
+						  }else{
+						  	html += '<div class="swiper-slide">' +
+						  		  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+						  			'</a>' +
+						  		'</div>';
+						  }
+							
 					  }
 					  parent.html(html);
 					}
@@ -344,14 +360,55 @@
 				 success: function (data) {
 						console.log(data)/***data**/
 						if (JSON.parse(data).code === 100) {
-						  var resData = JSON.parse(data).extend.mlbackSlideList;;
-						  console.log(resData);
-				         rednertop(bannerfirst,resData)
+						  var resData = JSON.parse(data).extend.mlbackSlideList;
+							rednertop(bannerfirst, resData);
+							  new Swiper('#ban_silder', {
+								freeMode: true,
+								autoplay: {delay: 3000,},
+									pagination: {
+										el: '.swiper-pagination',
+										clickable: true
+									}
+				                })
+						  // console.log(resData);
+				         // rednertop(bannerfirst,resData)
 						} else {
 						  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
 						}
 					  }
 		        });
+/*******优惠券*************************/			
+	                  var bannercoupon=$(".coupon_cont2")
+					function rednerCoupon(parent, data) {
+						  var html = '';
+						  for (var i = 0; i < data.length; i += 1) {
+							html += '<div class="banner">' +
+							'<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+							'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							'</a>' +
+							'</div>';
+						  }
+						  parent.html(html);
+						}
+				 $.ajax({
+					 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+						data: JSON.stringify({
+					   "slideArea": 2
+					 }),
+					 type: 'post',
+					 dataType: 'JSON',
+					 contentType: 'application/json',
+					 success: function (data) {
+							console.log(data)/***data**/
+							if (JSON.parse(data).code === 100) {
+							  var resData = JSON.parse(data).extend.mlbackSlideList;;
+							  console.log(resData);
+					         rednerCoupon(bannercoupon,resData)
+							} else {
+							  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+							}
+						  }
+	   });			
 					
 	   
 	   

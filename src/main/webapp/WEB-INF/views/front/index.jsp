@@ -291,11 +291,22 @@
 	  	function renderSlide(parent, data) {
 			var html = '';
 			for (var i=0, len=data.length; i<len; i+=1) {
-				html += '<div class="swiper-slide">' +
-					  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-								'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-						'</a>' +
-					'</div>';
+				var slideIfinto_click = data[i].slideIfinto;
+				// console.log(slideIfinto_click);
+				if(slideIfinto_click==0){
+					html += '<div class="swiper-slide">' +
+						  '<a href="javascript:;">' +
+									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							'</a>' +
+						'</div>';
+				}else{
+					html += '<div class="swiper-slide">' +
+						  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							'</a>' +
+						'</div>';
+				}
+				
 			}
 			parent.html(html);
 		}
