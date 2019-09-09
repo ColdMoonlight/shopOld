@@ -14,17 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackSlide;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.atguigu.service.MlbackActShowProService;
 import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackSlideService;
 import com.atguigu.utils.DateUtil;
@@ -36,13 +32,7 @@ public class MlbackSlideController {
 	
 	@Autowired
 	MlbackSlideService mlbackSlideService;
-	
-	@Autowired
-	MlbackActShowProService mlbackActShowProService;
 		
-	@Autowired
-	MlbackCategoryService mlbackCategoryService;
-	
 	@Autowired
 	MlbackProductService mlbackProductService;
 	
