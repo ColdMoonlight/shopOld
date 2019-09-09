@@ -680,7 +680,7 @@ public class UPloadController {
 			//取出id
 			int rImgId = mlbackReviewImgIfList.get(0).getReviewimgId();
 			
-			mlbackReviewImgImg.setReviewimgId(rImgId);;
+			mlbackReviewImgImg.setReviewimgId(rImgId);
 			
 			mlbackReviewImgService.updateByPrimaryKeySelective(mlbackReviewImgImg);
 			
