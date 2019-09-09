@@ -32,6 +32,7 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
+	  //fbq('init', '246433859565492');
 	  fbq('init', '667403967094866');
 	  fbq('track', 'PageView');
 	</script>
@@ -121,6 +122,7 @@
 						<div class="form-input">
 							<!-- <input type="text" name="addressCountry" class="form-control"> -->
 							<select name="addressCountry" class="form-control" id="country">
+								<option value="" selected="selected">select the Country</option>
 								<option value="Afghanistan">Afghanistan</option>
 								<option value="Åland Islands">Åland Islands</option>
 								<option value="Albania">Albania</option>
@@ -354,7 +356,7 @@
 								<option value="Ukraine">Ukraine</option>
 								<option value="United Arab Emirates">United Arab Emirates</option>
 								<option value="United Kingdom">United Kingdom</option>
-								<option value="United States" selected="selected">United States</option>
+								<option value="United States">United States</option>
 								<option value="Uruguay">Uruguay</option>
 								<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
 								<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
@@ -509,7 +511,7 @@
 		});
 
 		function renderAddressDetail(data) {
-			
+			// console.log(data)
 	        $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -518,7 +520,9 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-
+			$("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
+			
 		}
 
 		/* 初始化地址模块 */
@@ -526,13 +530,12 @@
 			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
 			type: 'post',
 			success: function (data) {
+				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				// console.log(resDataAddress)
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
-				// console.log(resDataMoney)
 				var addressBox = $('.address');
 				var couponBox = $('.coupons');
 				// console.log(data)
@@ -569,10 +572,10 @@
 				return obj
 			}, {});
 			//if (!inputCheck(reqData)) return;
-			console.log("************")
+			console.log("*****savr_address*******")
 			console.log(reqData)
 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-			$.ajax({
+			 $.ajax({
 				url: '${APP_PATH}/MlfrontAddress/save',
 				type: 'post',
 				dataType: 'JSON',
@@ -589,7 +592,6 @@
 					$('.address-id').val(resDataAddress.addressId);
 				}
 			})
-			//return returnaddressId;
 		}
        
 		/* 所购商品列表 */
@@ -797,8 +799,7 @@
 		}
 		//MlfrontOrder/orderToPayInfo
 		//这5个参数，json格式
-		/* 
-			private Integer orderId;  //1  都一样，随便从一条取出就行了
+		/*  private Integer orderId;  //1  都一样，随便从一条取出就行了
 		    private String orderOrderitemidstr;//1 每条的orderitemId都不一样，需要拼成字段"77,78"中间逗号拼接。
 		    private Integer orderCouponId  // 1  优惠码，就一个
 		    private String orderCouponCode; //1，每条的产品数量，需要拼成字段"1,1"中间逗号拼接。
@@ -836,7 +837,7 @@
 					};
 	
 				// console.log(reqData)
-			    // console.log(reqDataUp)
+			    console.log(reqDataUp)
 				console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
@@ -916,40 +917,82 @@
 			
 			var flag = 0;
 			var firstnamestr = $(".firstname").val();
-			console.log("firstnamestr:"+firstnamestr);
+			// console.log("firstnamestr:"+firstnamestr);
 			var lastnamestr = $(".lastname").val();
-			console.log("lastnamestr:"+lastnamestr);
+			// console.log("lastnamestr:"+lastnamestr);
 			var emailstr = $(".email").val();
 			var phonestr = $(".phone").val();
 			var addressstr = $(".addreNo").val();
 			var codestr = $(".code").val();
 			var citystr = $(".city").val();
-			var countrystr = $("#country").val();
+			// var countrystr = $("#country").val();
+			var countrystr=$('#country option:checked').text()
 			var provincestr = $(".province").val();
+			
+			
 			if(firstnamestr==null||firstnamestr==''){
 				flag = 1;
 				alert("firstnamestr is empty");
+				$(".firstname").addClass("error_br");
+				$(".firstname").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(lastnamestr==null||lastnamestr==''){
 				flag = 1;
 				alert("lastnamestr is empty");
+				$(".lastname").addClass("error_br");
+				$(".lastname").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(emailstr==null||emailstr==''){
 				flag = 1;
 				alert("emailstr is empty");
+				$(".email").addClass("error_br");
+				$(".email").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(phonestr==null||phonestr==''){
 				flag = 1;
 				alert("phonestr is empty");
+				$(".phone").addClass("error_br");
+				$(".phone").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(addressstr==null||addressstr==''){
 				flag = 1;
 				alert("addressstr is empty");
+				$(".addreNo").addClass("error_br");
+				$(".addreNo").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(codestr==null||codestr==''){
 				flag = 1;
 				alert("codestr is empty");
-			}else if(countrystr==null||countrystr==''){
+				$(".codestr").addClass("error_br");
+				$(".codestr").focus(function(){
+					$(this).removeClass("error_br")
+				})
+			}else if(citystr==null||citystr==''){
+				flag = 1;
+				alert("citystr is empty");
+				$(".city").addClass("error_br");
+				$(".city").focus(function(){
+					$(this).removeClass("error_br")
+				})	
+			}else if(countrystr==null||countrystr==''||countrystr=='select the Country'){
 				flag = 1;
 				alert("countrystr is empty");
+				$("#country").addClass("error_br");
+				$("#country").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}else if(provincestr==null||provincestr==''){
 				flag = 1;
 				alert("provincestr is empty");
+				$(".province").addClass("error_br");
+				$(".province").focus(function(){
+					$(this).removeClass("error_br")
+				})
 			}
 			return flag;
 		}

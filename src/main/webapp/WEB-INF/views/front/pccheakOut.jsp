@@ -32,6 +32,7 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
+	  //fbq('init', '246433859565492');
 	  fbq('init', '667403967094866');
 	  fbq('track', 'PageView');
 	</script>
@@ -527,32 +528,12 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-		    $("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-			
-			// $("")
-			// addressCountry
-			
-		
+		    //$("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+		    $("select option:checked").text(data.addressCountry ? data.addressCountry : '');
+		    $("#country").val(data.addressCountry ? data.addressCountry : '');
+
 		}
 	
-	// function renderAddressDetail(parent, data) {
-	// 
-	// 	var html = '';
-	// 	html += '<div class="address-details address-trigger" style="display:none">' +
-	// 		'<i class="icon address"></i>' +
-	// 		'<div class="address-info">' +
-	// 		'<div class="address-i-item">' +
-	// 		'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
-	// 		'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
-	// 		'</div>' +
-	// 		'<div class="address-i-item">' +
-	// 		'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
-	// 		' ' + data.addressCountry + '</span>' +
-	// 		'</div>' +
-	// 		'</div>' +
-	// 		'</div>';
-	// 	parent.html(html);
-	// }
 		function renderAddressAdd(parent) {
 			parent.html(
 				'<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');

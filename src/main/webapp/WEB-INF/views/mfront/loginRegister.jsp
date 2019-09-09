@@ -32,6 +32,7 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
+	  //fbq('init', '246433859565492');
 	  fbq('init', '667403967094866');
 	  fbq('track', 'PageView');
 	</script>
@@ -86,6 +87,11 @@
 
 				<a href="javascript:;" class="btn btn-black register"> REGISTER </a>
 			</div>
+			<div class="home_box">
+				<a href="${APP_PATH}/index.html" class="btn btn-black go_home">Go Home</a>
+			</div>
+			
+			
 		</div>
 	</div>
 
