@@ -382,11 +382,22 @@
 					function rednerCoupon(parent, data) {
 						  var html = '';
 						  for (var i = 0; i < data.length; i += 1) {
-							html += '<div class="banner">' +
-							'<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-							'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-							'</a>' +
-							'</div>';
+							   var slideIfinto_click = data[i].slideIfinto;
+							  if(slideIfinto_click==0){
+								  html += '<div class="banner">' +
+								  '<a href="javascript:;">' +
+								  '<img src="' + data[i].slideWapimgurl + '" alt="">' +
+								  '</a>' +
+								  '</div>';
+							  }else{
+								  html += '<div class="banner">' +
+								  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+								  '<img src="' + data[i].slideWapimgurl + '" alt="">' +
+								  '</a>' +
+								  '</div>';
+							  }
+							  
+							
 						  }
 						  parent.html(html);
 						}
