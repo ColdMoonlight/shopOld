@@ -501,7 +501,8 @@
 			var html = '';
 			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
-				'<div><span>收货人名字：</span><span>' + (data.addressUserfirstname + data.addressUserlastname) + '</span></div>' +
+				'<div><span>收货人firstname：</span><span>' + data.addressUserfirstname + '</span></div>' +
+				'<div><span>收货人lastname：</span><span>' + data.addressUserlastname + '</span></div>' +
 				'<div><span>收货人电话：</span><span>' + data.addressTelephone + '</span></div>' +
 				'<div><span>收货人详细地址：</span><span>' + data.addressDetail + '</span></div>' +
 				'<div><span>收货人城市：</span><span>' + data.addressCity + '</span></div>' +
