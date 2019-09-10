@@ -278,6 +278,10 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 #product-block .product-title{font-weight: normal;line-height: 20px;color: #666;}
 .login-register .btn.go_home{display: block;width: 100%;height:40px;background-color:#fe186e;border-color:#fe186e ; color: #fff;padding: 0; line-height:40px;text-align:center;}
 .home_box{margin:0 20px;}
+/*****************************/
+.coupon_cont2{width: 100%; height: auto;}
+.coupon_cont2 .coupon_ban{width: 100%; height: 320px;}
+.coupon_cont2 .coupon_ban img{width: 100%; height: 320px;}
 
 
 
