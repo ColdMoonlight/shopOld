@@ -280,6 +280,17 @@ public class MlfrontAddressController {
 			 if(mlbackAreafreightResList.size()>0){
 				areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
 			 }
+		}else{
+			String areafreightCountryEnglish = "United States";
+			//接受areafreightCountryEnglish
+			 MlbackAreafreight mlbackAreafreightReq = new MlbackAreafreight();
+			 mlbackAreafreightReq.setAreafreightCountryEnglish(areafreightCountryEnglish);
+			 //查询本条
+			 List<MlbackAreafreight> mlbackAreafreightResList =mlbackAreafreightService.selectMlbackAreafreightByEng(mlbackAreafreightReq);
+			 
+			 if(mlbackAreafreightResList.size()>0){
+				areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
+			 }
 		}
 		return Msg.success().add("resMsg", "查看单条mlfrontAddressOne的详情细节完毕")
 					.add("mlfrontAddressOne", mlfrontAddressOne).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
