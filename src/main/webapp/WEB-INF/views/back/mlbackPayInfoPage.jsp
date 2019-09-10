@@ -120,7 +120,12 @@
 				var payinfoOid = $("<td></td>").append(item.payinfoOid);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoMoney = $("<td></td>").append(parseFloat(item.payinfoMoney));
-				var payinfoStatus = $("<td></td>").append((item.payinfoStatus === 1 ? '已支付' : '未支付'));
+				if(item.payinfoStatus ===1){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
+				}else{
+					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
+				}
+				// var payinfoStatus = $("<td></td>").append((item.payinfoStatus === 1 ? '已支付' : '未支付'));
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
 				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs view_btn")
