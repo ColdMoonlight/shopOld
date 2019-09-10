@@ -125,7 +125,7 @@
 								<div class="form-input">
 									<!-- <input type="text" name="addressCountry" class="form-control"> -->
 									<select name="addressCountry" class="form-control" id="country">
-										<option value="select the Country" selected="selected">select the Country</option>
+										<!-- <option value="select the Country">select the Country</option> -->
 										<option value="Afghanistan">Afghanistan</option>
 										<option value="Åland Islands">Åland Islands</option>
 										<option value="Albania">Albania</option>
@@ -359,7 +359,7 @@
 										<option value="Ukraine">Ukraine</option>
 										<option value="United Arab Emirates">United Arab Emirates</option>
 										<option value="United Kingdom">United Kingdom</option>
-										<option value="United States">United States</option>
+										<option value="United States" selected="selected">United States</option>
 										<option value="Uruguay">Uruguay</option>
 										<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
 										<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
@@ -489,6 +489,14 @@
 	var payplate = 0;
 	var addressIdIntInt;
 			$("#country").bind("change",function(){
+				var radio_zt =$(".coupons .coupon-item input[type='radio']");
+				 couponPriceText.text('-$' + 0);
+				   if(radio_zt.is(":checked")){
+					  radio_zt.removeAttr("checked");
+					 couponPriceText.text('-$' + 0);
+				   }
+				   $(".coed_inp").val("");
+				   $(".without-data").text("Enter coupon code to get a discount!");
 				 var dataname = $(this).val();
 				 $.ajax({
 					  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -501,8 +509,9 @@
 					  success: function (data) {
 						// console.log(data)
 						var resData = JSON.parse(data);
-						console.log(resData)
+						// console.log(resData)
 						var resareafreightMoney = resData.extend.areafreightMoney;
+						// console.log(resareafreightMoney)
 						// console.log("resareafreightMoney:"+resareafreightMoney)
 						$('.shipping').find('span').text(dataname + ' of $' + resareafreightMoney);
 						shippingPriceText.text('$' + resareafreightMoney)
@@ -513,6 +522,7 @@
 						totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
 						
 						subtotalPriceText.text('$' + totalPrice);
+						// subtotalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
 						
 					  }
 					});
@@ -529,7 +539,7 @@
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
 		    //$("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-		    $("select option:checked").text(data.addressCountry ? data.addressCountry : '');
+		    // $("select option:checked").text(data.addressCountry ? data.addressCountry : '');
 		    $("#country").val(data.addressCountry ? data.addressCountry : '');
 
 		}
@@ -546,7 +556,7 @@
 			success: function (data) {
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				console.log(resDataAddress)
+				// console.log(resDataAddress)
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
@@ -563,8 +573,12 @@
 					$(".address").addClass("active")
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text('Please add the shipping address first');
-					shippingPriceText.text('$' + 0)
+					$('.shipping').find('span').text('United States'+ ' of $' + resDataMoney);
+					if($("#country").val="United States"){
+						shippingPriceText.text('$' + 5)
+					}else{
+						shippingPriceText.text('$' + 0)
+					}
 				}
 				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
 				subtotalPriceText.text(subtotalText);
@@ -696,7 +710,7 @@
 			type: 'get',
 			success: function (data) {
 				var resData = data.extend.mlfrontOrderItemList;
-				console.log(resData);
+				// console.log(resData);/*************************dfgdfgdfgdfg***************dfgdfgdf*/
 				orderId = resData[0].orderId || null;
 				var cartList = $('.cart-list');
 				cartList.attr('data-id', resData.orderId);
@@ -759,7 +773,7 @@
 				var html = '';
 				if (userType === 0) {
 					html = '<div class="input-group">' +
-						'<input type="text" name="productNum" class="form-control" value="" placeholder="Please enter coupon code">' +
+						'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 						'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
 						'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 				}
@@ -772,7 +786,7 @@
 						dataType: 'text',
 						async: false,
 						success: function (data) {
-							// console.log(data);
+							console.log(data);
 							var resData = JSON.parse(data).extend.mlbackCouponReturnList;
 							var len = resData.length
 							for (var i = 0; i < len; i += 1) {
