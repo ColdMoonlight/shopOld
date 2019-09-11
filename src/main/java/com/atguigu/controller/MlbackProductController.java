@@ -839,6 +839,7 @@ public class MlbackProductController {
 	  System.out.println("mlbackProductResListnum.size():"+num);
 	  return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 	     .add("mlbackProductResList", mlbackProductResList).add("mlbackProductResListnum", num);
+	  
 	 }
 	
 }
