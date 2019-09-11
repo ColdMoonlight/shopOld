@@ -120,7 +120,12 @@
 				var payinfoOid = $("<td></td>").append(item.payinfoOid);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoMoney = $("<td></td>").append(parseFloat(item.payinfoMoney));
-				var payinfoStatus = $("<td></td>").append((item.payinfoStatus === 1 ? '已支付' : '未支付'));
+				if(item.payinfoStatus ===1){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
+				}else{
+					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
+				}
+				// var payinfoStatus = $("<td></td>").append((item.payinfoStatus === 1 ? '已支付' : '未支付'));
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
 				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs view_btn")
@@ -496,7 +501,8 @@
 			var html = '';
 			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
-				'<div><span>收货人名字：</span><span>' + (data.addressUserfirstname + data.addressUserlastname) + '</span></div>' +
+				'<div><span>收货人firstname：</span><span>' + data.addressUserfirstname + '</span></div>' +
+				'<div><span>收货人lastname：</span><span>' + data.addressUserlastname + '</span></div>' +
 				'<div><span>收货人电话：</span><span>' + data.addressTelephone + '</span></div>' +
 				'<div><span>收货人详细地址：</span><span>' + data.addressDetail + '</span></div>' +
 				'<div><span>收货人城市：</span><span>' + data.addressCity + '</span></div>' +
