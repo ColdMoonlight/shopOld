@@ -58,5 +58,7 @@ public interface MlbackProductMapper {
 	MlbackProduct selectMlbackProductBySeo(MlbackProduct mlbackProductrepBySeo);
 
 	List<MlbackProduct> selectMlbackProductLike(MlbackProduct mlbackProduct);
+
+	List<MlbackProduct> selectMlbackProductLikeNum(MlbackProduct mlbackProduct);
     
 }
