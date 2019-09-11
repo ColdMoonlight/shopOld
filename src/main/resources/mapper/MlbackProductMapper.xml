@@ -721,6 +721,12 @@
   <select id="selectMlbackProductLike" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
     select 
 	product_id, product_name,  product_seo from tb_mlback_product
+    where product_name like concat(concat("%",#{productName}),"%") AND product_status = 1 limit 5
+  </select>
+  
+  <select id="selectMlbackProductLikeNum" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
+    select 
+	product_id
     where product_name like concat(concat("%",#{productName}),"%") AND product_status = 1
   </select>
   

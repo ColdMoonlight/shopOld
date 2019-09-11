@@ -133,6 +133,10 @@ public class MlbackProductService {
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductLike(mlbackProduct);
 		return mlbackProductList;
 	}
+	public List<MlbackProduct> selectMlbackProductLikeNum(MlbackProduct mlbackProduct) {
+		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductLikeNum(mlbackProduct);
+		return mlbackProductList;
+	}
 	
 	
 	
