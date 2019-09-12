@@ -41,6 +41,7 @@
 										<th>支付方式</th>
 										<th>支付金额</th>
 										<th>支付状态</th>
+										<th>支付运费编号</th>
 										<th>支付发起时间</th>
 										<th>支付更新时间</th>
 										<th>操作</th>
@@ -125,7 +126,7 @@
 				}else{
 					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
 				}
-				// var payinfoStatus = $("<td></td>").append((item.payinfoStatus === 1 ? '已支付' : '未支付'));
+				var payinfoPlateNum = $("<td></td>").append(item.payinfoPlateNum);
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
 				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs view_btn")
@@ -143,6 +144,7 @@
 					.append(payinfoPlatform)
 					.append(payinfoMoney)
 					.append(payinfoStatus)
+					.append(payinfoPlateNum)
 					.append(payinfoCreatetime)
 					.append(payinfoMotifytime)
 					.append(btnTd)

@@ -143,6 +143,18 @@ var aside_data = [
 	},
 	{
 		url: 'javascript:;',
+		name:'渠道管理',
+		icon: "glyphicon-chevron-right",
+		children: [
+			{
+				url: '/ShopTemplate/MlbackChannel/toMlbackChannelPage',
+				name:'渠道管理列表',
+				icon: "glyphicon-stats"
+			}
+		]
+	},
+	{
+		url: 'javascript:;',
 		name:'评论管理',
 		icon: "glyphicon-chevron-right",
 		children: [
