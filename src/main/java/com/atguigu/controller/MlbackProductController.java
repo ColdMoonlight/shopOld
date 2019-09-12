@@ -833,6 +833,7 @@ public class MlbackProductController {
 	  //接受信息
 	  MlbackProduct mlbackProductReq = new MlbackProduct();
 	  mlbackProductReq.setProductName(productName);
+	  System.out.println("productName:"+productName);
 	  List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProductLike(mlbackProductReq);
 	  List<MlbackProduct> mlbackProductResListnum =mlbackProductService.selectMlbackProductLikeNum(mlbackProductReq);
 	  Integer num = mlbackProductResListnum.size();
