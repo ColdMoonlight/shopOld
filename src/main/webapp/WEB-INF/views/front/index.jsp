@@ -47,8 +47,8 @@
 	    <div id="banner" class="swiper-container">
 	      <div class="swiper-wrapper"></div>
 	      <div class="swiper-pagination"></div>
-		  <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
+		  <div class="swiper-button-nexta"></div>
+          <div class="swiper-button-preva"></div>
 	    </div>
 	    <!-- discount -->
 		<div class="coupon_cont2">
@@ -336,8 +336,8 @@
 					 simulateTouch : false,//禁止鼠标模拟
 					autoplay: {delay: 3000,},
 					  navigation: {
-						nextEl: '.swiper-button-next',
-						prevEl: '.swiper-button-prev',
+						nextEl: '.swiper-button-nexta',
+						prevEl: '.swiper-button-preva',
 					  },
 			});
 		
@@ -389,7 +389,6 @@
 	   							}
 	   						  }
 	   	   });	
-	   
   </script>
   <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>
