@@ -924,7 +924,7 @@
 						success: function (data) {
 							var resData = JSON.parse(data).extend;
 							// console.log(data)
-							// window.location.href = '${APP_PATH }/paypal/ppay';
+							window.location.href = '${APP_PATH }/paypal/ppay';
 						}
 					})
 				} else {
@@ -1000,11 +1000,11 @@
 				// var countrystr = $("#country").val();
 				var provincestr = $(".province").val();
 				var country_address = $("#country option:checked").text(); 
-				var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
-				if(radio_zt_copn==null||radio_zt_copn==''){
-					flag = 1;
-					alert("优惠券未使用")
-				}
+				// var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
+				// if(radio_zt_copn==null||radio_zt_copn==''){
+				// 	flag = 1;
+				// 	alert("优惠券未使用")
+				// }
 				if(firstnamestr==null||firstnamestr==''){
 					flag = 1;
 					alert("firstnamestr is empty");
