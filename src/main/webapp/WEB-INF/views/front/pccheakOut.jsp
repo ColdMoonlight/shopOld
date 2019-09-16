@@ -575,9 +575,7 @@
 					// renderAddressAdd(addressBox);
 					$('.shipping').find('span').text('United States'+ ' of $' + resDataMoney);
 					if($("#country").val="United States"){
-						shippingPriceText.text('$' + 5)
-					}else{
-						shippingPriceText.text('$' + 0)
+						shippingPriceText.text('$' + resDataMoney)
 					}
 				}
 				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
@@ -594,8 +592,8 @@
 						return obj
 					}, {});
 					//if (!inputCheck(reqData)) return;
-					console.log("************")
-					console.log(reqData)
+					// console.log("************")
+					// console.log(reqData)
 					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
 					$.ajax({
 						url: '${APP_PATH}/MlfrontAddress/save',
@@ -604,14 +602,14 @@
 						data: JSON.stringify(reqData),
 						contentType: 'application/json',
 						success: function (data) {
-							 console.log(data)
+							 // console.log(data)
 							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-							 var resDataAddress = data.extend.mlfrontAddress;
-							 console.log(resDataAddress)
+							 // var resDataAddress = data.extend.mlfrontAddress;
+							 // console.log(resDataAddress)
 							addressId = resDataAddress.addressId;
 							addressIdIntInt = resDataAddress.addressId;
 							returnaddressId = addressIdIntInt;
-							console.log("addressIdIntInt:"+addressIdIntInt);
+							// console.log("addressIdIntInt:"+addressIdIntInt);
 							var addressBox = $('.address');
 							$('.address-id').val(resDataAddress.addressId);
 						}
@@ -786,7 +784,7 @@
 						dataType: 'text',
 						async: false,
 						success: function (data) {
-							console.log(data);
+							// console.log(data);
 							var resData = JSON.parse(data).extend.mlbackCouponReturnList;
 							var len = resData.length
 							for (var i = 0; i < len; i += 1) {
@@ -881,6 +879,8 @@
 		 */
 		$('.place-order').on('click', function () {
 			
+			// var val=$('input:radio[name="sex"]:checked').val();
+			// var no_check_copn =radio_zt.
 			if (inputCheck9()==1){
 				return ;
 			} else{
@@ -912,7 +912,7 @@
 			
 				// console.log(reqData)
 			    // console.log(reqDataUp)
-				console.log(checkAddress(reqDataUp))
+				// console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 					$.ajax({
@@ -924,7 +924,7 @@
 						success: function (data) {
 							var resData = JSON.parse(data).extend;
 							// console.log(data)
-							window.location.href = '${APP_PATH }/paypal/ppay';
+							// window.location.href = '${APP_PATH }/paypal/ppay';
 						}
 					})
 				} else {
@@ -1000,8 +1000,11 @@
 				// var countrystr = $("#country").val();
 				var provincestr = $(".province").val();
 				var country_address = $("#country option:checked").text(); 
-				
-				
+				var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
+				if(radio_zt_copn==null||radio_zt_copn==''){
+					flag = 1;
+					alert("优惠券未使用")
+				}
 				if(firstnamestr==null||firstnamestr==''){
 					flag = 1;
 					alert("firstnamestr is empty");

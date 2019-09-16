@@ -558,9 +558,7 @@
 					// renderAddressAdd(addressBox);
 					$('.shipping').find('span').text('United States'+ ' of $' + resDataMoney);
 					if($("#country").val="United States"){
-						shippingPriceText.text('$' + 5)
-					}else{
-						shippingPriceText.text('$' + 0)
+						shippingPriceText.text('$' + resDataMoney)
 					}
 				}
 
@@ -584,8 +582,8 @@
 				return obj
 			}, {});
 			//if (!inputCheck(reqData)) return;
-			console.log("*****savr_address*******")
-			console.log(reqData)
+			// console.log("*****savr_address*******")
+			// console.log(reqData)
 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
 			 $.ajax({
 				url: '${APP_PATH}/MlfrontAddress/save',
@@ -599,7 +597,7 @@
 					addressId = resDataAddress.addressId;
 					addressIdIntInt = resDataAddress.addressId;
 					returnaddressId = addressIdIntInt;
-					console.log("addressIdIntInt:"+addressIdIntInt);
+					// console.log("addressIdIntInt:"+addressIdIntInt);
 					var addressBox = $('.address');
 					$('.address-id').val(resDataAddress.addressId);
 				}
@@ -849,8 +847,8 @@
 					};
 	
 				// console.log(reqData)
-			    console.log(reqDataUp)
-				console.log(checkAddress(reqDataUp))
+			    // console.log(reqDataUp)
+				// console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 					$.ajax({
