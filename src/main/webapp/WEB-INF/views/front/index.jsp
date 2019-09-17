@@ -19,8 +19,8 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  //fbq('init', '246433859565492');
-	  fbq('init', '667403967094866');
+	  fbq('init', '246433859565492');
+	  //fbq('init', '667403967094866');
 	  fbq('track', 'PageView');
 	</script>
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
@@ -47,11 +47,14 @@
 	    <div id="banner" class="swiper-container">
 	      <div class="swiper-wrapper"></div>
 	      <div class="swiper-pagination"></div>
-		  <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
+		  <div class="swiper-button-nexta"></div>
+          <div class="swiper-button-preva"></div>
 	    </div>
 	    <!-- discount -->
-	    <img class="discount" src="${APP_PATH }/static/pc/discount.jpg" />
+		<div class="coupon_cont2">
+			
+		</div>
+	    <!-- <img class="discount" src="${APP_PATH }/static/pc/discount.jpg" /> -->
 	    <!-- countDownArea date -->
 	    <div id="countdown-area"> </div>
 	    <!-- product intro -->
@@ -319,10 +322,10 @@
 		 dataType: 'JSON',
 		 contentType: 'application/json',
 		 success: function (data) {
-		 	 console.log(data)/***data**/
+		 	 // console.log(data)/***data**/
            if (data.code === 100) {
              var resData = data.extend.mlbackSlideList;;
-		 	 console.log(resData);
+		 	 // console.log(resData);
 			renderSlide($('#banner .swiper-wrapper'), resData);
 			new Swiper('#banner', {
 			  freeMode: true,
@@ -333,8 +336,8 @@
 					 simulateTouch : false,//禁止鼠标模拟
 					autoplay: {delay: 3000,},
 					  navigation: {
-						nextEl: '.swiper-button-next',
-						prevEl: '.swiper-button-prev',
+						nextEl: '.swiper-button-nexta',
+						prevEl: '.swiper-button-preva',
 					  },
 			});
 		
@@ -343,6 +346,49 @@
            }
          }
        });
+	   /*******优惠券*************************/
+	   	                  var bannercoupon=$(".coupon_cont2")
+	   					function rednerCoupon(parent, data) {
+	   						  var html = '';
+	   						  for (var i = 0; i < data.length; i += 1) {
+	   							   var slideIfinto_click = data[i].slideIfinto;
+	   							  if(slideIfinto_click==0){
+	   								  html += '<div class="coupon_ban">' +
+	   								  '<a href="javascript:;">' +
+	   								  '<img src="' + data[i].slidePcimgurl + '" alt="">' +
+	   								  '</a>' +
+	   								  '</div>';
+	   							  }else{
+	   								  html += '<div class="coupon_ban">' +
+	   								  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+	   								  '<img src="' + data[i].slidePcimgurl + '" alt="">' +
+	   								  '</a>' +
+	   								  '</div>';
+	   							  }
+	   							  
+	   							
+	   						  }
+	   						  parent.html(html);
+	   						}
+	   				 $.ajax({
+	   					 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+	   						data: JSON.stringify({
+	   					   "slideArea": 2
+	   					 }),
+	   					 type: 'post',
+	   					 dataType: 'JSON',
+	   					 contentType: 'application/json',
+	   					 success: function (data) {
+	   							// console.log(data)/***data**/
+	   							if (data.code === 100) {
+	   							  var resData = data.extend.mlbackSlideList;;
+	   							  // console.log(resData);
+	   					         rednerCoupon(bannercoupon,resData)
+	   							} else {
+	   							  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+	   							}
+	   						  }
+	   	   });	
   </script>
   <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
 </body>

@@ -32,8 +32,8 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  //fbq('init', '246433859565492');
-	  fbq('init', '667403967094866');
+	  fbq('init', '246433859565492');
+	  //fbq('init', '667403967094866');
 	  fbq('track', 'PageView');
 	</script>
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
@@ -122,7 +122,6 @@
 						<div class="form-input">
 							<!-- <input type="text" name="addressCountry" class="form-control"> -->
 							<select name="addressCountry" class="form-control" id="country">
-								<option value="" selected="selected">select the Country</option>
 								<option value="Afghanistan">Afghanistan</option>
 								<option value="Åland Islands">Åland Islands</option>
 								<option value="Albania">Albania</option>
@@ -356,7 +355,7 @@
 								<option value="Ukraine">Ukraine</option>
 								<option value="United Arab Emirates">United Arab Emirates</option>
 								<option value="United Kingdom">United Kingdom</option>
-								<option value="United States">United States</option>
+								<option value="United States" selected="selected">United States</option>
 								<option value="Uruguay">Uruguay</option>
 								<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
 								<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
@@ -482,6 +481,15 @@
 		var addressIdIntInt;
 		
 		$("#country").bind("change",function(){
+			var radio_zt =$(".coupons .coupon-item input[type='radio']");
+			 couponPriceText.text('-$' + 0);
+			   if(radio_zt.is(":checked")){
+				  radio_zt.removeAttr("checked");
+				 couponPriceText.text('-$' + 0);
+			   }
+			   $(".coed_inp").val("");
+			   $(".without-data").text("Enter coupon code to get a discount!");
+			
 			 var dataname = $(this).val();
 			 $.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -520,7 +528,7 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-			$("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
 			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 			
 		}
@@ -548,8 +556,10 @@
 					$(".address").addClass("active")
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text('Please add the shipping address first');
-					shippingPriceText.text('$' + 0)
+					$('.shipping').find('span').text('United States'+ ' of $' + resDataMoney);
+					if($("#country").val="United States"){
+						shippingPriceText.text('$' + resDataMoney)
+					}
 				}
 
 				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
@@ -572,8 +582,8 @@
 				return obj
 			}, {});
 			//if (!inputCheck(reqData)) return;
-			console.log("*****savr_address*******")
-			console.log(reqData)
+			// console.log("*****savr_address*******")
+			// console.log(reqData)
 			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
 			 $.ajax({
 				url: '${APP_PATH}/MlfrontAddress/save',
@@ -587,7 +597,7 @@
 					addressId = resDataAddress.addressId;
 					addressIdIntInt = resDataAddress.addressId;
 					returnaddressId = addressIdIntInt;
-					console.log("addressIdIntInt:"+addressIdIntInt);
+					// console.log("addressIdIntInt:"+addressIdIntInt);
 					var addressBox = $('.address');
 					$('.address-id').val(resDataAddress.addressId);
 				}
@@ -700,7 +710,7 @@
 			var html = '';
 			if (userType === 0) {
 				html = '<div class="input-group">' +
-					'<input type="text" name="productNum" class="form-control" value="" placeholder="Please enter coupon code">' +
+					'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
 					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 			}
@@ -837,8 +847,8 @@
 					};
 	
 				// console.log(reqData)
-			    console.log(reqDataUp)
-				console.log(checkAddress(reqDataUp))
+			    // console.log(reqDataUp)
+				// console.log(checkAddress(reqDataUp))
 				if (checkAddress(reqDataUp)) {
 					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 					$.ajax({
