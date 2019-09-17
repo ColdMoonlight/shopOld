@@ -68,10 +68,10 @@
 				<!-- search logo cart -->
 				<div class="tt-header-holder">
 					<!-- tt-search -->
-					<div class="tt-desctop-parent-search tt-parent-box">
+					<!-- <div class="tt-desctop-parent-search tt-parent-box">
 						<div class="tt-search tt-dropdown-obj">
 							<button class="tt-dropdown-toggle" data-tooltip="Search" data-tposition="bottom">
-								<i class="icon-f-85"></i>
+								
 							</button>
 							<div class="tt-dropdown-menu">
 								<div class="container">
@@ -90,6 +90,9 @@
 								</div>
 							</div>
 						</div>
+					</div> -->
+					<div class="search_btn">
+						<i class="icon-f-85"></i>
 					</div>
 					<!-- /tt-search -->
 					<!-- tt-logo -->
@@ -141,6 +144,22 @@
 			<li id="cart_icon" class="cart_icon"><a href="###"></a><span class="cart_num">0</span></li>
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
+	</div>
+	<div class="serch_cont">
+		<div class="serch_box">
+			<span class="close_serch"></span>
+			<p class="serch_tit">What are you Looking for?</p>
+			<div class="tt-col">
+				<input type="text" class="tt-search-input" placeholder="Search Products..." />
+				<button class="tt-btn-search" type="submit"></button>
+			</div>
+			<ul class="show_ul">
+				<li>sdsdfsdfsdf</li>
+				<li>sdsdfsdfsdf</li>
+				<li>sdsdfsdfsdf</li>
+			</ul>
+		</div>
+		
 	</div>
 	
 	
@@ -361,6 +380,50 @@
 		  function toProductItem(id) {
 		  if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/topcProductDetailPage?productId=" + id;
 		}
+/*******搜索****************************************/
+		    function list_li (parent,data){
+				  var html=""
+				  for(var i=0, len=data.length; i < len; i += 1){
+					  html += '<li>' + data[i].productName + '</li>';
+				  }
+			    parent.html(html);
+			  }
+			  
+			  
+		     function serch_box (productName){
+				   $.ajax({
+				   	url: "${APP_PATH}/MlbackProduct/searchProductLike",
+				   	data: "productName=" + productName,
+				   	type: "POST",
+				   	success: function (data) {
+						console.log(data)
+						if(data.code==100){
+							var resultlist = data.extend.mlbackProductResList;
+							 list_li($('.show_ul'), resultlist);
+							 $(".show_ul").show();
+						}
+				   	}
+				   });
+			   }
+				$('.tt-search-input').bind('input propertychange', function(data) {  
+				    var keywords = $(this).val();
+				    if (keywords == '') {
+				        $('.show_ul').hide();
+				        return
+				    };
+					if(keywords.length>3){
+							serch_box(1)
+					}
+				}) 
+				// $(document).on('click', '.show_ul li',function() {
+				// 	
+				// })
+				$("body").on('click', '.search_btn',function() {
+				    $('.serch_cont').slideDown(200)
+				})
+			  $("body").on('click', '.close_serch',function() {
+				    $('.serch_cont').slideUp(200)
+				})
 		
 		
 	</script>

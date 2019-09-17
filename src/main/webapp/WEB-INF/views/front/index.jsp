@@ -115,6 +115,7 @@
           new Swiper('#hot-product', {
         	  slidesPerView: 4,
             spaceBetween: 10,
+			 autoplay: {delay: 3000,},
             freeMode: true,
 						pagination: {
 							el: '.swiper-pagination',

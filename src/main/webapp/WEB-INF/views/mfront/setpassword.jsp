@@ -59,7 +59,7 @@
 				<div class="tab-pane signin active">
 					<form id="chage_password">
 						<div class="input-group">
-							<label for="userEmail">e-mail</label>
+							<label for="userEmail">e-mail address</label>
 							<input type="email" name="userEmail" placeholder="eamil">
 						</div>
 						<div class="input-group">
@@ -67,11 +67,11 @@
 							<input class="newpassword" type="password" name="userPassword" placeholder="password">
 						</div>
 						<div class="input-group">
-							<label for="">password</label>
+							<label for="">repeat password</label>
 							<input class="repassword" type="password" name="userPassword" placeholder="password">
 						</div>
 					</form>
-					<a href="javascript:;" class="btn btn-black save_newpass"> SURE </a>
+					<a href="javascript:;" class="btn btn-black save_newpass">confirm</a>
 				</div>
 			</div>
 		</div>

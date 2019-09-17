@@ -127,7 +127,13 @@
 			$.each(task, function (index, item) {
 				var cartitemId = $("<td></td>").append(item.cartitemId);
 				var cartitemUid = $("<td></td>").append(item.cartitemUid);
-				var cartitemStatus = $("<td></td>").append((item.cartitemStatus === 1 ? '已去结算' : '未去结算'));
+				// var cartitemStatus = $("<td></td>").append((item.cartitemStatus === 1 ? '已去结算' : '未去结算'));
+				if(item.cartitemStatus ===1){
+					var cartitemStatus = $("<td class='yzf_bg'></td>").append('<b>已去结算</b>');
+				}else{
+					var cartitemStatus = $("<td class='wzf_bg'></td>").append('<b>未去结算</b>');
+				}
+				
 				var cartitemProductName = $("<td></td>").append(item.cartitemProductName);
 
 				var imgurl = item.cartitemProductMainimgurl;
