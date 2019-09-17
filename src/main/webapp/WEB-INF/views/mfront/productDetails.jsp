@@ -267,7 +267,7 @@
 				
 			function addHeaderInfo(productData){
 				
-				console.log(productData);
+				// console.log(productData);
 				   var productNameStr = productData.productName;
 				   var productMetaDescStr =productData.productMetaDesc;
 				   var productSeoStr =productData.productSeo;
@@ -853,6 +853,55 @@
 	        }
 	      }
 	    });
+		/*******hot_box_product********************************/
+		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
+		 function hot_pic_detial(parent, data) {
+		 	  var html = '';
+		 	  for (var i = 0; i < data.length; i += 1) {
+		 		   var slideIfinto_click = data[i].slideIfinto;
+		 			  html += '<div class="swiper-slide">' +
+		 			  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+		 			  '<img src="' + data[i].slideWapimgurl + '" alt="">' +
+		 			  '</a>' +
+		 			  '</div>';
+		 	  }
+		 	  parent.html(html);
+		 	}
+		
+		$.ajax({
+			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+				data: JSON.stringify({
+			   "slideArea": 3
+			 }),
+			 type: 'post',
+			 dataType: 'JSON',
+			 contentType: 'application/json',
+			 success: function (data) {
+					// console.log(data)/***data**/
+					if (JSON.parse(data).code === 100) {
+					  var resData = JSON.parse(data).extend.mlbackSlideList;;
+					  console.log(resData);
+					 hot_pic_detial(hot_pic,resData);
+					 new Swiper('.hot_box_product_cont', {
+					          	  slidesPerView: 2,
+					    spaceBetween:5,
+					    freeMode: true,
+					    autoplay: {delay: 3000,},
+					 	pagination: {
+					 		el: '.swiper-pagination2',
+					 		clickable: true
+					 	}
+					 })
+					 
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					}
+				  }
+		});	
+		
+		
+		
+		
 		});
 
 		function deleteReview() {

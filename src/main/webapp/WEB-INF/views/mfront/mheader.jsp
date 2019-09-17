@@ -185,7 +185,7 @@
       method: 'GET',
       success: function (data) {
 		  var resData = data.extend.mlbackCategorydownList;
-		  console.log(resData)/**************resData********/
+		  // console.log(resData)/**************resData********/
         if (data.code === 100) {
           categoryData = data.extend.mlbackCategorydownList.reduce(function (obj, item) {
             if (item.categoryParentId === -1) {
