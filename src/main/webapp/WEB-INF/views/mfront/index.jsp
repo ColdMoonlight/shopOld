@@ -45,7 +45,6 @@
 </head>
 
 <body>
-
   <jsp:include page="mheader.jsp"></jsp:include>
   
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
