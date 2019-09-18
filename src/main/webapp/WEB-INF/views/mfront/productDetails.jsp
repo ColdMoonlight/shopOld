@@ -983,17 +983,18 @@
 		              img.style = 'width: 100%; height: auto;';
 		            }
 
-		            $('.light_box-inner').html(img);
+		            $('.imgbig_cont').html(img);
 		          }
 		        });
 		      });
 
 		      function popup(src, style) {
 		        var lightboxEl = $('<div class="light_box"></div>');
-		        var html = '<div class="light_box-close"><i class="icon close"></i></div>';
+				var html="";
 		        html += '<div class="light_box-inner">' +
 		          // '<img src="'+ src +'" style="'+ style +'" />' +
-		            '<div class="loader"></div>' +
+				   '<div class="img_boxbig"><div class="light_box-close"><i class="icon close"></i></div><div class="imgbig_cont"></div></div>' +
+		            // '<div class="loader"></div>' +
 		          '</div>';
 
 		        $(document.body).append(lightboxEl.html(html));

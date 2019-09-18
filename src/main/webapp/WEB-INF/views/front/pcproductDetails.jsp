@@ -465,6 +465,7 @@
 	         '</li>';
 				}
 				parent.html(html);
+				
 				var mySwiper = new Swiper('.swiper-container2', {
 					simulateTouch : false,//禁止鼠标模拟
 					 pagination: {
@@ -484,17 +485,17 @@
 					var i = $(imgBox).index(this);
 					$(".big_img .swiper-wrapper").html("")
 					for(var j = 0 ,c = imgBox.length; j < c ;j++){
-					 $(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+					 $(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><div class="img_boxcont"><div class="close_box"><span class="close_an">×</span> </div><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div></div>');
 					}
 					$(".big_img").css({
-						"z-index": 1001,
+						"z-index": 10001,
 						"opacity": "1"
 					});
 					mySwiper.slideTo(i, 0, false);
 					return false;
 				});
 			  
-				$(".close_box .close_an").on("click", function() {
+			   $("body").on('click', '.close_an',function() {
 					$(this).parents(".big_img").css({
 						"z-index": "-1",
 						"opacity": "0"
@@ -989,11 +990,19 @@
 					         	  slidesPerView: 5,
 					   spaceBetween: 10,
 					   freeMode: true,
-					   autoplay: {delay: 3000,},
+					  autoplay: {
+					      disableOnInteraction: false,
+					    },
+					   loop:true,
+					    simulateTouch : false,//禁止鼠标模拟
 						pagination: {
 							el: '.swiper-pagination2',
 							clickable: true
-						}
+						},
+						navigation: {
+							nextEl: '.swiper-button-next',
+							prevEl: '.swiper-button-prev',
+						},
 				    })
 					 
 					} else {
