@@ -488,7 +488,7 @@
 				 couponPriceText.text('-$' + 0);
 			   }
 			   $(".coed_inp").val("");
-			   $(".without-data").text("Enter coupon code to get a discount!");
+			   $(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
 			
 			 var dataname = $(this).val();
 			 $.ajax({
@@ -712,7 +712,7 @@
 				html = '<div class="input-group">' +
 					'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
-					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
+					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!(Please enter uppercase)</p></div>';
 			}
 			/* MlbackCoupon/getOneMlbackCouponDetailByUId
 			无参数  post */

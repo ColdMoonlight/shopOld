@@ -300,10 +300,10 @@ a:focus {
 
 /* without data info */
 .without-data {
-	padding: 8px 36px;
+	padding: 8px 20px;
 	text-align: center;
 	font-style: italic;
-	font-size: 14px;
+	font-size: 12px;
 	color: #ff1671;
 }
 
@@ -2203,11 +2203,15 @@ a:focus {
 }
 
 .light_box-close {
-  width: 100%;
+  width:30px;
   height: 30px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  position:absolute;
+  top: 0; left: 0;
+  background: #0000CC;
+  z-index: 333;
 }
 
 .light_box-close i {
