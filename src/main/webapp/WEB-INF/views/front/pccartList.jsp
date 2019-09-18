@@ -276,7 +276,7 @@
 					}
 				})
 			} else {
-				renderSysMsg('请选择最终要购买的产品！')
+				renderSysMsg('Please select the final product to buy！')
 			}
 		}
 		$('.btn.calc-price').on('click', function () {

@@ -291,6 +291,7 @@
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
+							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							shipName = orderData.orderLogisticsname;
 							
@@ -346,6 +347,7 @@
 			var headerHtml = '';
 			// console.log(data)
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
+			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span>订单状态 ：' + statusDetail + '</span>';
 			if (data.orderStatus === 1 || data.orderStatus === 3) {
 				headerHtml += '<span class="shipping">';
@@ -504,15 +506,15 @@
 			var html = '';
 			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
-				'<div><span>收货人firstname：</span><span id="fza_txt">' + data.addressUserfirstname + '</span><input class="btn_fz" type="button" name="" id="fza" value="复制文本" /></div>' +
-				'<div><span>收货人lastname：</span><span id="fzb_txt">' + data.addressUserlastname + '</span><input class="btn_fz" type="button" name="" id="fzb" value="复制文本" /></div>' +
-				'<div><span>收货人电话：</span><span id="fzc_txt">' + data.addressTelephone + '</span><input class="btn_fz" type="button" name="" id="fzc" value="复制文本" /></div>' +
-				'<div><span>收货人详细地址：</span><span id="fzd_txt">' + data.addressDetail + '</span><input class="btn_fz" type="button" name="" id="fzd" value="复制文本" /></div>' +
-				'<div><span>收货人城市：</span><span id="fze_txt">' + data.addressCity + '</span><input class="btn_fz" type="button" name="" id="fze" value="复制文本" /></div>' +
-				'<div><span>收货人省份：</span><span id="fzf_txt">' + data.addressProvince + '</span><input class="btn_fz" type="button" name="" id="fzf" value="复制文本" /></div>' +
-				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountry + '</span><input class="btn_fz" type="button" name="" id="fzg" value="复制文本" /></div>' +
-				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz" type="button" name="" id="fzh" value="复制文本" /></div>' +
-				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz" type="button" name="" id="fzi" value="复制文本" /></div>' +
+				'<div><span>收货人firstname：</span><span id="fza_txt">' + data.addressUserfirstname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fza" value="复制文本" /></div>' +
+				'<div><span>收货人lastname：</span><span id="fzb_txt">' + data.addressUserlastname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzb" value="复制文本" /></div>' +
+				'<div><span>收货人电话：</span><span id="fzc_txt">' + data.addressTelephone + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzc" value="复制文本" /></div>' +
+				'<div><span>收货人详细地址：</span><span id="fzd_txt">' + data.addressDetail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzd" value="复制文本" /></div>' +
+				'<div><span>收货人城市：</span><span id="fze_txt">' + data.addressCity + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fze" value="复制文本" /></div>' +
+				'<div><span>收货人省份：</span><span id="fzf_txt">' + data.addressProvince + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzf" value="复制文本" /></div>' +
+				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountry + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzg" value="复制文本" /></div>' +
+				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzh" value="复制文本" /></div>' +
+				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzi" value="复制文本" /></div>' +
 				'<div><span>购买时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 				'<div><span>支付时间：</span><span>' + data.payinfoCreatetime + '</span></div>';
 			$('.revceiver-info').html(html);

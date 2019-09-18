@@ -335,7 +335,11 @@
 						clickable: true
 					},
 					 simulateTouch : false,//禁止鼠标模拟
-					autoplay: {delay: 3000,},
+					 loop:true,
+					// autoplay: {delay: 3000,},
+					autoplay: {
+					    disableOnInteraction: false,
+					  },
 					  navigation: {
 						nextEl: '.swiper-button-nexta',
 						prevEl: '.swiper-button-preva',
