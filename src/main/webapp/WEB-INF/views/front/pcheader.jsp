@@ -176,6 +176,7 @@
 				var winS=$(this).scrollTop();
 				if(winS>0){
 					$(".go_top").show();
+					$('.serch_cont').slideUp(200);
 				}else{
 					$(".go_top").hide();
 				}
@@ -388,15 +389,13 @@
 				  }
 			    parent.html(html);
 			  }
-			  
-			  
 		     function serch_box (productName){
 				   $.ajax({
 				   	url: "${APP_PATH}/MlbackProduct/searchProductLike",
 				   	data: "productName=" + productName,
 				   	type: "POST",
 				   	success: function (data) {
-						console.log(data)
+						// console.log(data)
 						if(data.code==100){
 							var resultlist = data.extend.mlbackProductResList;
 							 list_li($('.show_ul'), resultlist);
@@ -412,12 +411,16 @@
 				        return
 				    };
 					if(keywords.length>3){
-							serch_box(1)
+							// serch_box(1)
 					}
 				}) 
-				// $(document).on('click', '.show_ul li',function() {
-				// 	
-				// })
+				
+				$('body').delegate('.show_ul li','click',function(e){
+					var val = $(this).text();
+					$(".tt-col").find("input.tt-search-input").val(val);
+					$(".serch_box").find("ul.show_ul").slideUp(200)
+					e.stopPropagation();
+				});
 				$("body").on('click', '.search_btn',function() {
 				    $('.serch_cont').slideDown(200)
 				})
