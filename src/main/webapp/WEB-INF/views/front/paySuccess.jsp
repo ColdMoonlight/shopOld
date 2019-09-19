@@ -113,6 +113,23 @@
 						  value: orderMoney,
 						  currency: 'USD'
 						});
+					
+					/*准备google数据*/
+					var transaction_id = resDataPayInfoOne.payinfoPlateNum;
+					//console.log("transaction_id:"+transaction_id);
+					var transaction_value = resDataPayInfoOne.payinfoMoney;
+					//console.log("transaction_value:"+transaction_value);
+					strGGContent=toGooGlePurchase(resDataOrderItemList);
+					//console.log(strGGContent);
+					 gtag('event', 'purchase', {
+						  "transaction_id": transaction_id,
+						  "affiliation": "MegaLookHair",
+						  "value": transaction_value,
+						  "currency": "USD",
+						  "tax": 0,
+						  "shipping": 0,
+						  "items": strGGContent
+						});
 				} else {
 					//alert("联系管理员");
 				}
@@ -146,32 +163,26 @@
 		console.log("infoRel:"+infoRel);
 		return infoRel;
 	}
-</script>
-
-<script>
-
-var orderId = $(".order-id").val();
-	window.dataLayer = window.dataLayer || []
-	dataLayer.push({
-	   'transactionId': orderId ,
-	   'transactionAffiliation': 'megalookhair',
-	   'transactionTotal': 500,
-	   'transactionTax': 0,
-	   'transactionShipping': 18,
-	   'transactionProducts': [{
-	       'sku': 'DD44',
-	       'name': 'T-Shirt',
-	       'category': 'Apparel',
-	       'price': 11.99,
-	       'quantity': 1
-	   },{
-	       'sku': 'AA1243544',
-	       'name': 'Socks',
-	       'category': 'Apparel',
-	       'price': 9.99,
-	       'quantity': 2
-	   }]
-	});
+	
+	function toGooGlePurchase(resDataOrderItemList){
+		var infoRel = '';
+		var infoStr = '[';
+		for(var i=0;i<resDataOrderItemList.length;i++){
+			var infoStrOne = '';
+			var pid = resDataOrderItemList[i].orderitemPid;
+			var pname = resDataOrderItemList[i].orderitemPname;
+			var pnum = resDataOrderItemList[i].orderitemPskuNumber;
+			var allprice = resDataOrderItemList[i].orderitemPskuReamoney;
+			var price = ((allprice/pnum).toFixed(2));
+			infoStrOne = infoStrOne+'{' + '"id":' + pid +', "name": "'+ pname + '" ,' + '"list_name": "Search Results", "brand": "MLH", "quantity": ' + pnum + ', "price": "'+ price +'"}';
+			infoStr=infoStr+infoStrOne+',';
+		}
+		infoRel=infoStr.substr(0, infoStr.length-1);
+		infoRel=infoRel+']';
+		//console.log("infoRel:*********");
+		//console.log(JSON.parse(infoRel));
+		return JSON.parse(infoRel);
+	}
 </script>
 
 </body>
