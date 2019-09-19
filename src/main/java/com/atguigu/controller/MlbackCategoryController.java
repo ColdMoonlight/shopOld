@@ -49,9 +49,15 @@ public class MlbackCategoryController {
 	 * @return 
 	 * */
 	@RequestMapping("/toMlbackCategoryPage")
-	public String tologin() throws Exception{
-	
-		return "back/mlbackCategoryPage";
+	public String tologin(HttpSession session) throws Exception{
+		
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackCategoryPage";
+		}
 	}
 	
 	/**

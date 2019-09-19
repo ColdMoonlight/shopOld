@@ -66,9 +66,15 @@ public class MlbackProductController {
 	 * @return 
 	 * */
 	@RequestMapping("/toMlbackProductPage")
-	public String toMlbackProductPage() throws Exception{
+	public String toMlbackProductPage(HttpSession session) throws Exception{
 	
-		return "back/mlbackProductPage";
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackProductPage";
+		}
 	}
 	
 	/**

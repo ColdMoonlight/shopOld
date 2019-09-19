@@ -51,9 +51,15 @@ public class MlbackActShowProController {
 	 * @return 
 	 * */
 	@RequestMapping("/toMlbackActShowProPage")
-	public String tologin() throws Exception{
+	public String tologin(HttpSession session) throws Exception{
 	
-		return "back/mlbackActShowProPage";
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackActShowProPage";
+		}
 	}
 	
 	/**2.0	UseNow	0505
