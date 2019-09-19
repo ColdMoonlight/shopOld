@@ -38,11 +38,16 @@ public class MlbackAreafreightController {
 	 * @return 
 	 * */
 	@RequestMapping("/toMlbackAreafreightPage")
-	public String toMlbackAreafreightPage() throws Exception{
-	
-		return "back/mlbackAreafreightPage";
+	public String toMlbackAreafreightPage(HttpSession session) throws Exception{
+		
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackAreafreightPage";
+		}
 	}
-	
 	
 	/**2.0	useOn	0505
 	 * 分类MlbackCategory列表分页list数据
