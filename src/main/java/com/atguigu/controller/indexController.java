@@ -18,11 +18,10 @@ public class indexController {
 		String requestHeader = request.getHeader("user-agent");
 		if(isMobileDevice(requestHeader)){
 			System.out.println("使用手机浏览器");
-			return "mfront/index";
+			return "mfront/index";//手机首页
 		}else{
 			System.out.println("使用web浏览器");
-			return "front/index";//真实PC首页
-			// return "front/index2";//首页维修中图片
+			return "front/index";//PC首页
 		}
 	}
 	
