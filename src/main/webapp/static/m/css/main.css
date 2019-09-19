@@ -2377,16 +2377,14 @@ a:focus {
 #ban_silder{position:relative;width:100%;}
 #ban_silder img{width:100%;}
 
-.hot_box_product{width: 96%; height:auto; border-radius:3px; border: 1px dashed #ccc; padding: 20px 1%; margin: 2%;}
+.hot_box_product{width: 96%; height:auto; border-radius:3px; border: 1px dashed #ff186e; padding: 20px 1%; margin: 2%;}
 .hot_box_product .swiper-slide{width: 50%; height: auto;}
 .hot_box_product .swiper-slide img{max-width: 100%; height: auto;}
 .hot_box_product h3{width: 100%;display: flex;justify-content:center;padding:0 0 20px;color: #666;}
-.hot_box_product_cont{overflow: hidden;}
+.hot_box_product_cont{overflow: hidden;padding: 0 0 20px; position: relative;}
 .hot_box_product_cont .swiper-pagination2{text-align: center;margin: 20px 0 0;}
 .hot_box_product_cont .swiper-pagination2 span{display: inline-block;}
-.img_boxbig{}
-
-
+.hot_box_product_cont .swiper-slide .product-item{width: 100%;}
 
 
 

@@ -855,19 +855,59 @@
 	    });
 		/*******hot_box_product********************************/
 		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
-		 function hot_pic_detial(parent, data) {
-		 	  var html = '';
-		 	  for (var i = 0; i < data.length; i += 1) {
-		 		   var slideIfinto_click = data[i].slideIfinto;
-		 			  html += '<div class="swiper-slide">' +
-		 			  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-		 			  '<img src="' + data[i].slideWapimgurl + '" alt="">' +
-		 			  '</a>' +
-		 			  '</div>';
-		 	  }
-		 	  parent.html(html);
-		 	}
-		
+		 function rednerProduct(parent, data) {
+		 	var html = '';
+		 		for (var i = 0; i < data.length; i += 1) {
+		 			 var productactoffif = data[i].productActoffIf;
+		 			// console.log(productactoffif)
+		 			var productactoffid  =  data[i].productActoffid;
+		 			 // console.log(productactoffid)  
+		 			var cp_icon = "";
+		 			var showspan = "";
+		 			if(productactoffif == 1){
+		 						  if(productactoffid==1){
+		 							   showspan ="showactive1"
+		 						  }else if(productactoffid==2){
+		 							   showspan ="showactive2"
+		 						  }else if(productactoffid==3){
+		 							   showspan ="showactive3"
+		 						  }else if(productactoffid==4){
+		 							   showspan ="showactive4"
+		 						  }
+		 						  
+		 			}else{
+		 						   showspan ="hideactive"
+		 			}
+		 			html += '<div class="swiper-slide">' +
+		 				'<div class="product-item" data-productid="'+ data[i].productId +'">' +
+		 			    '<span class="hui_icon '+showspan+'"></span>'+
+		 				'<div class="product-img">' +
+		 				'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+		 				'<img src="' + data[i].productMainimgurl + '" alt="">' +
+		 				'</a>' +
+		 				'</div>' +
+		 				'<div class="product-desc">' +
+		 				'<div class="product-title">' + data[i].productName + '</div>' +
+		 				'<div class="product-type"></div>' +
+		 				'<div class="product-data">' +
+		 				'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+		 				'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+		 				' Review(s)</span>' +
+		 				'</div>' +
+		 				'<div class="product-price">' +
+		 				'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+		 					.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+		 				'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+		 				'</span>' +
+		 				'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+		 				'</div>' +
+		 				'</div>' +
+		 				'</div>'+
+		 				'</div>';
+		 		}
+		 
+		 		parent.html(html);
+		 }
 		$.ajax({
 			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
 				data: JSON.stringify({
@@ -879,14 +919,17 @@
 			 success: function (data) {
 					// console.log(data)/***data**/
 					if (JSON.parse(data).code === 100) {
-					  var resData = JSON.parse(data).extend.mlbackSlideList;;
-					  console.log(resData);
-					 hot_pic_detial(hot_pic,resData);
+					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					  // console.log(resData);
+					 rednerProduct(hot_pic,resDataProduct);
 					 new Swiper('.hot_box_product_cont', {
 					          	  slidesPerView: 2,
 					    spaceBetween:5,
 					    freeMode: true,
-					    autoplay: {delay: 3000,},
+						loop:true,
+					   autoplay: {
+					       disableOnInteraction: false,
+					     },
 					 	pagination: {
 					 		el: '.swiper-pagination2',
 					 		clickable: true
