@@ -84,7 +84,7 @@ public class MlbackProductViewDetailController {
 	 * @param pn
 	 * @return
 	 */
-	@RequestMapping(value="/getProductViewDetailNum",method=RequestMethod.GET)
+	@RequestMapping(value="/getProductViewDetailNum",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg getProductViewDetailNum(HttpSession session,String starttime,String endtime) {
 		
@@ -92,7 +92,8 @@ public class MlbackProductViewDetailController {
 		mlbackProductViewDetailreq.setProviewdetailStarttime(starttime);
 		mlbackProductViewDetailreq.setProviewdetailEndtime(endtime);
 		List<MlbackProductViewDetail> mlbackActShowProList = mlbackProductViewDetailService.selectMlbackProductViewDetailByTime(mlbackProductViewDetailreq);
-		return Msg.success().add("mlbackActShowProList", mlbackActShowProList);
+		Integer toDayNum = mlbackActShowProList.size();
+		return Msg.success().add("mlbackActShowProList", mlbackActShowProList).add("toDayNum", toDayNum);
 	}
 	
 	
