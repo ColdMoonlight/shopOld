@@ -300,8 +300,10 @@
 
 							var receiveData = resDataAddressOne;
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
+							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
 							receiveData.payinfoPlatform = resDataPayInfoOne.payinfoPlatform;
 							receiveData.payinfoCreatetime = resDataPayInfoOne.payinfoCreatetime;
+							
 							receiveData.payinfoPlatformserialcode = resDataPayInfoOne.payinfoPlatformserialcode;
 							renderReceiverinfo(receiveData);
 						} else {
@@ -515,6 +517,7 @@
 				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountry + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzg" value="复制文本" /></div>' +
 				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzh" value="复制文本" /></div>' +
 				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzi" value="复制文本" /></div>' +
+				'<div><span>留言：</span><span>' + data.orderBuyMess + '</span></div>' +
 				'<div><span>购买时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 				'<div><span>支付时间：</span><span>' + data.payinfoCreatetime + '</span></div>';
 			$('.revceiver-info').html(html);

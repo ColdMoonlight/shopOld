@@ -2385,7 +2385,77 @@ a:focus {
 .hot_box_product_cont .swiper-pagination2{text-align: center;margin: 20px 0 0;}
 .hot_box_product_cont .swiper-pagination2 span{display: inline-block;}
 .hot_box_product_cont .swiper-slide .product-item{width: 100%;}
+.loading{display: none; width: 100%; height: 100%; position: fixed; top: 0;left: 0; background: rgba(255,255,255,.7);z-index: 9999;}
+.boxload {
+			    display: inline-block;
+			    width: 60px;
+			    height: 60px;
+				position:fixed;
+				top: 50%; left: 50%;
+				margin: -30px 0 0 -30px;
+			    border-radius: 3px;
+			    font-size: 30px;
+			    color: rgba(249, 190, 22);
+			    vertical-align: top;
+			    -webkit-transition: .3s color, .3s border;
+			    transition: .3s color, .3s border;
+			}
 
+			[class*="loader-"] {
+			    display: inline-block;
+			    width: 1em;
+			    height: 1em;
+			    color: inherit;
+			    vertical-align: middle;
+			    pointer-events: none;
+			}
+			.loader-14 {
+			    border-radius: 50%;
+			    box-shadow: 0 1em 0 -.2em currentcolor;
+			    position: relative;
+			    -webkit-animation: loader-14 0.8s ease-in-out alternate infinite;
+			    animation: loader-14 0.8s ease-in-out alternate infinite;
+			    -webkit-animation-delay: 0.32s;
+			    animation-delay: 0.32s;
+			    top: -1em;
+			}
+			.loader-14:after,
+			.loader-14:before {
+			    content: '';
+			    position: absolute;
+			    width: inherit;
+			    height: inherit;
+			    border-radius: inherit;
+			    box-shadow: inherit;
+			    -webkit-animation: inherit;
+			    animation: inherit;
+			}
+			.loader-14:before {
+			    left: -1em;
+			    -webkit-animation-delay: 0.48s;
+			    animation-delay: 0.48s;
+			}
+			.loader-14:after {
+			    right: -1em;
+			    -webkit-animation-delay: 0.16s;
+			    animation-delay: 0.16s;
+			}
+			@-webkit-keyframes loader-14 {
+			    0% {
+			        box-shadow: 0 2em 0 -.2em currentcolor;
+			    }
+			    100% {
+			        box-shadow: 0 1em 0 -.2em currentcolor;
+			    }
+			}
+			@keyframes loader-14 {
+			    0% {
+			        box-shadow: 0 2em 0 -.2em currentcolor;
+			    }
+			    100% {
+			        box-shadow: 0 1em 0 -.2em currentcolor;
+			    }
+			}
 
 
 

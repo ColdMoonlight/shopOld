@@ -446,6 +446,9 @@
 			</div>
 		</div>
 	</div>
+	<div class="loading">
+		<div class="boxload"> <div class="loader-14"></div></div>
+	</div>
 	<jsp:include page="mfooter.jsp"></jsp:include>
 	<script type="text/javascript">
 		var myDate = new Date();
@@ -816,9 +819,9 @@
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
 		$('.place-order').on('click', function () {
-			
+			// $(".loading").show();
 			if (inputCheck9()==1){
-				return ;
+				return;
 			} else{
 				
 				savr_address();  // addres 保存
@@ -860,6 +863,7 @@
 						success: function (data) {
 							var resData = JSON.parse(data).extend;
 							// console.log(data)
+							$(".loading").show();
 							window.location.href = '${APP_PATH }/paypal/mpay';
 						}
 					})
