@@ -384,11 +384,16 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 			$.each(result.pageInfo.list, function (index, item) {
 				var payinfoId = $("<td></td>").append(item.payinfoId);
 				var payinfoOid = $("<td></td>").append(item.payinfoOid);
-				var payinfoStatus = $("<td></td>").append((item.payinfoStatus ? '已支付' : '未支付'));
+				// var payinfoStatus = $("<td></td>").append((item.payinfoStatus ? '已支付' : '未支付'));
+				if(item.payinfoStatus ===1){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
+				}else{
+					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
+				}
 				var payinfoMoney = $("<td></td>").append(payinfoMoney);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
-				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
+				var payinfoMotifytime = $ ("<td></td>").append(item.payinfoMotifytime);
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
