@@ -29,6 +29,7 @@ import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
+import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.Msg;
 import com.atguigu.bean.SysUser;
 import com.atguigu.bean.UserWork;
@@ -38,6 +39,7 @@ import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
+import com.atguigu.service.MlbackProductViewDetailService;
 import com.atguigu.service.SysUserService;
 import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
@@ -58,6 +60,9 @@ public class MlbackProductController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlbackProductViewDetailService mlbackProductViewDetailService;
 	
 	/**
 	 * 1.0	UseNow	0505
@@ -140,6 +145,10 @@ public class MlbackProductController {
 	  MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
 	  mlbackProductrepBySeo.setProductSeo(productSeo);
 	  
+	  insertProView(productSeo,session);
+
+
+	  
 	  MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
 	  
 	  String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
@@ -165,6 +174,22 @@ public class MlbackProductController {
 	  	}
 	 }
 	
+	private void insertProView(String productSeo,HttpSession session) {
+		  
+		//准备参数信息
+		MlbackProductViewDetail mlbackProductViewDetailreq = new MlbackProductViewDetail();
+		//浏览对象
+		mlbackProductViewDetailreq.setProviewdetailSeoname(productSeo);
+		//sessionID
+		String sessionId =  session.getId();
+		mlbackProductViewDetailreq.setProviewdetailSessionid(sessionId);
+		//时间信息
+		String nowTime = DateUtil.strTime14s();
+		mlbackProductViewDetailreq.setProviewdetailCreatetime(nowTime);
+		mlbackProductViewDetailreq.setProviewdetailMotifytime(nowTime);
+		mlbackProductViewDetailService.insertSelective(mlbackProductViewDetailreq);
+	}
+
 	/**4.0	UseNow	0505
 	 * 分类MlbackProduct列表分页list数据
 	 * @param pn
