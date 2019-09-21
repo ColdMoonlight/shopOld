@@ -119,26 +119,32 @@ public class MlbackProductViewDetailController {
 		
 		Integer proSeoNum = 0;
 		
+		Integer k=0;
+		
 		List<Integer> numList = new ArrayList<Integer>();
 		
 		List<String> SeoStringList = new ArrayList<String>();
 		
 		for(int i=0;i<mlbackActShowProList.size();i++){
+			k++;
 			MlbackProductViewDetail mlbackProductViewDetailOne = mlbackActShowProList.get(i);
 			if(proSeo.isEmpty()){
 				System.out.println("第一次来，都不记录");
 				proSeo = mlbackProductViewDetailOne.getProviewdetailSeoname();
+				SeoStringList.add(proSeo);
 			}else{
 				proSeo = mlbackProductViewDetailOne.getProviewdetailSeoname();
 				if(proSeo.equals(mlbackActShowProList.get(i-1).getProviewdetailSeoname())){
 					proSeoNum++;
 				}else{
 					SeoStringList.add(proSeo);
+					proSeoNum = k-1;
 					numList.add(proSeoNum);
-					proSeoNum = 0;
+					k=1;
 				}
 			}
 		}
+		numList.add(k);
 		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
 	}
 
