@@ -42,11 +42,15 @@
 								<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 							</div>
 						</div>
-						<div class="model-b model-pie">
-							<div class="model-pie-data model-pie-list"></div>
-							<div class="model-pie-chart">
-								<canvas></canvas>
+						<div class="model-b model-pie num_data">
+							<div class="model-pie-data model-pie-list">
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量" class="model-item"><div class="model-text">浏览量</div><div class="model-num">3</div></a>
+								
 							</div>
+								
+							<!-- <div class="model-pie-chart">
+								<canvas></canvas>
+							</div> -->
 						</div>
 					</div>
 					<!-- pie -->
@@ -140,40 +144,55 @@
 
 		function initHtml() {
 			var $input = targetInput.find('input');
-			$input.eq(0).val(minDate)
-			$input.eq(1).val(maxDate)
+			$input.eq(0).val(minDate);
+			$input.eq(1).val(maxDate);
 		}
 
 		function initJs() {
 			targetInput.each(function (i, item) {
 				$(item).datePicker({
 					hasShortcut: true,
-					min: minDate,
+					min: '2018-01-01 06:00:00',
 					max: maxDate,
 					isRange: true,
 					shortcutOptions: [{
-						name: '昨天',
-						day: '-1,-1',
-						time: '00:00:00,23:59:59'
+					 name: '昨天',
+					 day: '-1,-1',
+					 time: '00:00:00,23:59:59'
+					},{
+					 name: '最近一周',
+					 day: '-7,0',
+					 time:'00:00:00,'
 					}, {
-						name: '最近一周',
-						day: '-7,0',
-						time: '00:00:00,'
+					 name: '最近一个月',
+					 day: '-30,0',
+					 time: '00:00:00,'
 					}, {
-						name: '最近一个月',
-						day: '-30,0',
-						time: '00:00:00,'
-					}, {
-						name: '最近三个月',
-						day: '-90, 0',
-						time: '00:00:00,'
-					}, {
-						name: '最近半年',
-						day: '-180, 0',
-						time: '00:00:00,'
+					 name: '最近三个月',
+					 day: '-90, 0',
+					 time: '00:00:00,'
 					}],
 					hide: function (type) {
+						console.log(1);
 						// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
+						var startime = this.$input.eq(0).val();
+						var endtime = this.$input.eq(1).val();
+						$.ajax({
+						        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
+						        data: JSON.stringify({
+						        "proviewdetailStarttime": startime,
+						        "proviewdetailEndtime": endtime,
+						        }),
+						        type: 'post',
+						        dataType: 'JSON',
+						        contentType: 'application/json',
+						        success: function (data) {
+						        console.log(data);
+								var resData = data.extend.mlbackActShowProList;
+								$(".num_data .model-num").html(resData.length)
+						        }
+						      });
+						
 					}
 				})
 			})
@@ -288,10 +307,9 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 			}
 		};
 
-		var ctx = document.querySelector('.model-pie-chart canvas').getContext('2d');
-		window.myPie = new Chart(ctx, config);
-
-		window.myPie.update()
+		// var ctx = document.querySelector('.model-pie-chart canvas').getContext('2d');
+		// window.myPie = new Chart(ctx, config);
+		// window.myPie.update()
 
 
 		function getUser(reqData) {
@@ -390,10 +408,11 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				}else{
 					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
 				}
+				
 				var payinfoMoney = $("<td></td>").append(payinfoMoney);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
-				var payinfoMotifytime = $ ("<td></td>").append(item.payinfoMotifytime);
+				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
