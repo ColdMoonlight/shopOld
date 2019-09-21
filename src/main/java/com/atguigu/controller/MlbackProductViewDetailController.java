@@ -1,5 +1,6 @@
 package com.atguigu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.Msg;
@@ -86,8 +88,10 @@ public class MlbackProductViewDetailController {
 	 */
 	@RequestMapping(value="/getProductViewDetailNum",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getProductViewDetailNum(HttpSession session,String starttime,String endtime) {
+	public Msg getProductViewDetailNum(HttpSession session,@RequestBody MlbackProductViewDetail mlbackProductViewDetail) {
 		
+		String starttime = mlbackProductViewDetail.getProviewdetailStarttime();
+		String endtime = mlbackProductViewDetail.getProviewdetailEndtime();
 		MlbackProductViewDetail mlbackProductViewDetailreq = new MlbackProductViewDetail();
 		mlbackProductViewDetailreq.setProviewdetailStarttime(starttime);
 		mlbackProductViewDetailreq.setProviewdetailEndtime(endtime);
@@ -98,23 +102,44 @@ public class MlbackProductViewDetailController {
 	
 	
 	
-/*	@RequestMapping(value="/getProductViewDetailNum",method=RequestMethod.GET)
+	@RequestMapping(value="/getProductViewDetailList",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getProductViewDetailNum(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session,String starttime,String endtime) {
-		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
-//		if(mlbackAdmin==null){
-//			//SysUsers对象为空
-//			return Msg.fail().add("resMsg", "session中adminuser对象为空");
-//		}else{
-			MlbackProductViewDetail mlbackProductViewDetailreq = new MlbackProductViewDetail();
-			mlbackProductViewDetailreq.setProviewdetailStarttime(starttime);
-			mlbackProductViewDetailreq.setProviewdetailEndtime(endtime);
-			int PagNum = 20;
-			PageHelper.startPage(pn, PagNum);
-			List<MlbackProductViewDetail> mlbackActShowProList = mlbackProductViewDetailService.selectMlbackProductViewDetailByTime(mlbackProductViewDetailreq);
-			PageInfo page = new PageInfo(mlbackActShowProList, PagNum);
-			return Msg.success().add("pageInfo", page);
-//		}
-	}*/
+	public Msg getProductViewDetailList(HttpSession session,@RequestBody MlbackProductViewDetail mlbackProductViewDetail) {
+		
+		
+		String starttime = mlbackProductViewDetail.getProviewdetailStarttime();
+		String endtime = mlbackProductViewDetail.getProviewdetailEndtime();
+		MlbackProductViewDetail mlbackProductViewDetailreq = new MlbackProductViewDetail();
+		mlbackProductViewDetailreq.setProviewdetailStarttime(starttime);
+		mlbackProductViewDetailreq.setProviewdetailEndtime(endtime);
+		int PagNum = 20;
+		List<MlbackProductViewDetail> mlbackActShowProList = mlbackProductViewDetailService.selectMlbackProductViewDetailByTime(mlbackProductViewDetailreq);
+		
+		String  proSeo = "";
+		
+		Integer proSeoNum = 0;
+		
+		List<Integer> numList = new ArrayList<Integer>();
+		
+		List<String> SeoStringList = new ArrayList<String>();
+		
+		for(int i=0;i<mlbackActShowProList.size();i++){
+			MlbackProductViewDetail mlbackProductViewDetailOne = mlbackActShowProList.get(i);
+			if(proSeo.isEmpty()){
+				System.out.println("第一次来，都不记录");
+				proSeo = mlbackProductViewDetailOne.getProviewdetailSeoname();
+			}else{
+				proSeo = mlbackProductViewDetailOne.getProviewdetailSeoname();
+				if(proSeo.equals(mlbackActShowProList.get(i-1).getProviewdetailSeoname())){
+					proSeoNum++;
+				}else{
+					SeoStringList.add(proSeo);
+					numList.add(proSeoNum);
+					proSeoNum = 0;
+				}
+			}
+		}
+		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
+	}
 
 }
