@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.atguigu.utils.DateUtil;
+
 @Controller
 @RequestMapping("/index")
 public class indexController {
@@ -15,6 +17,8 @@ public class indexController {
 	 * */
 	@RequestMapping("/isMobileOrPc")
 	public static String  isMobileOrPc(HttpServletResponse reponse,HttpServletRequest request){
+		String nowTime = DateUtil.strTime14s();
+		System.out.println("nowTime:"+nowTime);
 		String requestHeader = request.getHeader("user-agent");
 		if(isMobileDevice(requestHeader)){
 			System.out.println("使用手机浏览器");
