@@ -35,7 +35,7 @@
 					<div class="model" data-type="pie">
 						<div class="model-h">
 							<span class="model-name">各项指标</span>
-							<div class="c-datepicker-date-editor date-timepicker">
+							<div class="c-datepicker-date-editor date-timepicker data_num">
 								<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
 								<input placeholder="开始日期" name="" value="" class="c-datepicker-data-input">
 								<span class="c-datepicker-range-separator">-</span>
@@ -44,8 +44,7 @@
 						</div>
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list">
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量" class="model-item"><div class="model-text">浏览量</div><div class="model-num">3</div></a>
-								
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量" class="model-item"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
 							</div>
 								
 							<!-- <div class="model-pie-chart">
@@ -133,6 +132,17 @@
 				'second': 59
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
+			/****************************/
+			var minDate22 = moment()
+				.set({
+					'date': date.getDate(),
+					'hour': 0,
+					'minute': 0,
+					'second': 0
+				})
+				.format('YYYY-MM-DD HH:mm:ss');
+			// console.log(minDate22)/*****************************2222222*/
+			
 		var maxDate = moment()
 			.set({
 				'date': date.getDate(),
@@ -144,10 +154,29 @@
 
 		function initHtml() {
 			var $input = targetInput.find('input');
-			$input.eq(0).val(minDate);
+			$input.eq(0).val(minDate22);
 			$input.eq(1).val(maxDate);
 		}
-
+		/*****初始化时间*****************/
+		var startime =minDate22;
+		var endtime =maxDate;
+		$.ajax({
+		        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
+		        data: JSON.stringify({
+		        "proviewdetailStarttime": startime,
+		        "proviewdetailEndtime": endtime,
+		        }),
+		        type: 'post',
+		        dataType: 'JSON',
+		        contentType: 'application/json',
+		        success: function (data) {
+		        // console.log(data);
+				var resData = data.extend.mlbackActShowProList;
+				$(".num_data .model-num").html(resData.length)
+		        }
+		      });
+		
+/***********************************************/
 		function initJs() {
 			targetInput.each(function (i, item) {
 				$(item).datePicker({
@@ -173,7 +202,7 @@
 					 time: '00:00:00,'
 					}],
 					hide: function (type) {
-						console.log(1);
+						// console.log(1);
 						// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
 						var startime = this.$input.eq(0).val();
 						var endtime = this.$input.eq(1).val();
@@ -187,7 +216,7 @@
 						        dataType: 'JSON',
 						        contentType: 'application/json',
 						        success: function (data) {
-						        console.log(data);
+						        // console.log(data);
 								var resData = data.extend.mlbackActShowProList;
 								$(".num_data .model-num").html(resData.length)
 						        }
@@ -270,7 +299,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 			var result = {};
 			if (parent.data('type') === 'pay') {
 				result = getPay(reqData);
-				console.log(result)
+				// console.log(result)
 				if (result.countNumber) {
 					build_pay_table(parent, result);
 				} else {
@@ -323,6 +352,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -339,6 +369,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -355,6 +386,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -371,6 +403,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
