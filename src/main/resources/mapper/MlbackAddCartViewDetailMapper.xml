@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.MlbackAddCartViewDetailMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.MlbackAddCartViewDetail">
+    <id column="addcartViewDetail_id" jdbcType="INTEGER" property="addcartviewdetailId" />
+    <result column="addcartViewDetail_sessionid" jdbcType="VARCHAR" property="addcartviewdetailSessionid" />
+    <result column="addcartViewDetail_name" jdbcType="VARCHAR" property="addcartviewdetailName" />
+    <result column="addcartViewDetail_proid" jdbcType="INTEGER" property="addcartviewdetailProid" />
+    <result column="addcartViewDetail_proname" jdbcType="VARCHAR" property="addcartviewdetailProname" />
+    <result column="addcartViewDetail_seoname" jdbcType="VARCHAR" property="addcartviewdetailSeoname" />
+    <result column="addcartViewDetail_createTime" jdbcType="VARCHAR" property="addcartviewdetailCreatetime" />
+    <result column="addcartViewDetail_motifyTime" jdbcType="VARCHAR" property="addcartviewdetailMotifytime" />
+    <result column="addcartViewDetail_starttime" jdbcType="VARCHAR" property="addcartviewdetailStarttime" />
+    <result column="addcartViewDetail_endtime" jdbcType="VARCHAR" property="addcartviewdetailEndtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    addcartViewDetail_id, addcartViewDetail_sessionid, addcartViewDetail_name, addcartViewDetail_proid, 
+    addcartViewDetail_proname, addcartViewDetail_seoname, addcartViewDetail_createTime, 
+    addcartViewDetail_motifyTime, addcartViewDetail_starttime, addcartViewDetail_endtime
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.MlbackAddCartViewDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_mlback_addcartviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_mlback_addcartviewdetail
+    where addcartViewDetail_id = #{addcartviewdetailId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.MlbackAddCartViewDetailExample">
+    delete from tb_mlback_addcartviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.MlbackAddCartViewDetail">
+    insert into tb_mlback_addcartviewdetail (addcartViewDetail_id, addcartViewDetail_sessionid, 
+      addcartViewDetail_name, addcartViewDetail_proid, 
+      addcartViewDetail_proname, addcartViewDetail_seoname, 
+      addcartViewDetail_createTime, addcartViewDetail_motifyTime, 
+      addcartViewDetail_starttime, addcartViewDetail_endtime
+      )
+    values (#{addcartviewdetailId,jdbcType=INTEGER}, #{addcartviewdetailSessionid,jdbcType=VARCHAR}, 
+      #{addcartviewdetailName,jdbcType=VARCHAR}, #{addcartviewdetailProid,jdbcType=INTEGER}, 
+      #{addcartviewdetailProname,jdbcType=VARCHAR}, #{addcartviewdetailSeoname,jdbcType=VARCHAR}, 
+      #{addcartviewdetailCreatetime,jdbcType=VARCHAR}, #{addcartviewdetailMotifytime,jdbcType=VARCHAR}, 
+      #{addcartviewdetailStarttime,jdbcType=VARCHAR}, #{addcartviewdetailEndtime,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.MlbackAddCartViewDetailExample" resultType="java.lang.Long">
+    select count(*) from tb_mlback_addcartviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_mlback_addcartviewdetail
+    <set>
+      <if test="record.addcartviewdetailId != null">
+        addcartViewDetail_id = #{record.addcartviewdetailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addcartviewdetailSessionid != null">
+        addcartViewDetail_sessionid = #{record.addcartviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailName != null">
+        addcartViewDetail_name = #{record.addcartviewdetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailProid != null">
+        addcartViewDetail_proid = #{record.addcartviewdetailProid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addcartviewdetailProname != null">
+        addcartViewDetail_proname = #{record.addcartviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailSeoname != null">
+        addcartViewDetail_seoname = #{record.addcartviewdetailSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailCreatetime != null">
+        addcartViewDetail_createTime = #{record.addcartviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailMotifytime != null">
+        addcartViewDetail_motifyTime = #{record.addcartviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailStarttime != null">
+        addcartViewDetail_starttime = #{record.addcartviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addcartviewdetailEndtime != null">
+        addcartViewDetail_endtime = #{record.addcartviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_mlback_addcartviewdetail
+    set addcartViewDetail_id = #{record.addcartviewdetailId,jdbcType=INTEGER},
+      addcartViewDetail_sessionid = #{record.addcartviewdetailSessionid,jdbcType=VARCHAR},
+      addcartViewDetail_name = #{record.addcartviewdetailName,jdbcType=VARCHAR},
+      addcartViewDetail_proid = #{record.addcartviewdetailProid,jdbcType=INTEGER},
+      addcartViewDetail_proname = #{record.addcartviewdetailProname,jdbcType=VARCHAR},
+      addcartViewDetail_seoname = #{record.addcartviewdetailSeoname,jdbcType=VARCHAR},
+      addcartViewDetail_createTime = #{record.addcartviewdetailCreatetime,jdbcType=VARCHAR},
+      addcartViewDetail_motifyTime = #{record.addcartviewdetailMotifytime,jdbcType=VARCHAR},
+      addcartViewDetail_starttime = #{record.addcartviewdetailStarttime,jdbcType=VARCHAR},
+      addcartViewDetail_endtime = #{record.addcartviewdetailEndtime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlbackAddCartViewDetail">
+    update tb_mlback_addcartviewdetail
+    <set>
+      <if test="addcartviewdetailSessionid != null">
+        addcartViewDetail_sessionid = #{addcartviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailName != null">
+        addcartViewDetail_name = #{addcartviewdetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailProid != null">
+        addcartViewDetail_proid = #{addcartviewdetailProid,jdbcType=INTEGER},
+      </if>
+      <if test="addcartviewdetailProname != null">
+        addcartViewDetail_proname = #{addcartviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailSeoname != null">
+        addcartViewDetail_seoname = #{addcartviewdetailSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailCreatetime != null">
+        addcartViewDetail_createTime = #{addcartviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailMotifytime != null">
+        addcartViewDetail_motifyTime = #{addcartviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailStarttime != null">
+        addcartViewDetail_starttime = #{addcartviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailEndtime != null">
+        addcartViewDetail_endtime = #{addcartviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addcartViewDetail_id = #{addcartviewdetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlbackAddCartViewDetail">
+    update tb_mlback_addcartviewdetail
+    set addcartViewDetail_sessionid = #{addcartviewdetailSessionid,jdbcType=VARCHAR},
+      addcartViewDetail_name = #{addcartviewdetailName,jdbcType=VARCHAR},
+      addcartViewDetail_proid = #{addcartviewdetailProid,jdbcType=INTEGER},
+      addcartViewDetail_proname = #{addcartviewdetailProname,jdbcType=VARCHAR},
+      addcartViewDetail_seoname = #{addcartviewdetailSeoname,jdbcType=VARCHAR},
+      addcartViewDetail_createTime = #{addcartviewdetailCreatetime,jdbcType=VARCHAR},
+      addcartViewDetail_motifyTime = #{addcartviewdetailMotifytime,jdbcType=VARCHAR},
+      addcartViewDetail_starttime = #{addcartviewdetailStarttime,jdbcType=VARCHAR},
+      addcartViewDetail_endtime = #{addcartviewdetailEndtime,jdbcType=VARCHAR}
+    where addcartViewDetail_id = #{addcartviewdetailId,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+  <!-- insertSelective -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackAddCartViewDetail">
+    insert into tb_mlback_addcartviewdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addcartviewdetailId != null">
+        addcartViewDetail_id,
+      </if>
+      <if test="addcartviewdetailSessionid != null">
+        addcartViewDetail_sessionid,
+      </if>
+      <if test="addcartviewdetailName != null">
+        addcartViewDetail_name,
+      </if>
+      <if test="addcartviewdetailProid != null">
+        addcartViewDetail_proid,
+      </if>
+      <if test="addcartviewdetailProname != null">
+        addcartViewDetail_proname,
+      </if>
+      <if test="addcartviewdetailSeoname != null">
+        addcartViewDetail_seoname,
+      </if>
+      <if test="addcartviewdetailCreatetime != null">
+        addcartViewDetail_createTime,
+      </if>
+      <if test="addcartviewdetailMotifytime != null">
+        addcartViewDetail_motifyTime,
+      </if>
+      <if test="addcartviewdetailStarttime != null">
+        addcartViewDetail_starttime,
+      </if>
+      <if test="addcartviewdetailEndtime != null">
+        addcartViewDetail_endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addcartviewdetailId != null">
+        #{addcartviewdetailId,jdbcType=INTEGER},
+      </if>
+      <if test="addcartviewdetailSessionid != null">
+        #{addcartviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailName != null">
+        #{addcartviewdetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailProid != null">
+        #{addcartviewdetailProid,jdbcType=INTEGER},
+      </if>
+      <if test="addcartviewdetailProname != null">
+        #{addcartviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailSeoname != null">
+        #{addcartviewdetailSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailCreatetime != null">
+        #{addcartviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailMotifytime != null">
+        #{addcartviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailStarttime != null">
+        #{addcartviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="addcartviewdetailEndtime != null">
+        #{addcartviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_mlback_addcartviewdetail
+    where addcartViewDetail_id = #{addcartviewdetailId,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- selectMlbackAddCartViewDetailByTime -->
+  <select id="selectMlbackAddCartViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddCartViewDetail" resultMap="BaseResultMap">
+  	select addcartViewDetail_id, addcartViewDetail_seoname, addcartViewDetail_createTime from tb_mlback_addcartviewdetail where
+   	addcartViewDetail_createTime between #{addcartviewdetailStarttime,jdbcType=VARCHAR} and #{addcartviewdetailEndtime,jdbcType=VARCHAR} order by addcartViewDetail_seoname
+  </select>
+  
+</mapper>
