@@ -108,7 +108,7 @@
 					var resData = result.extend;
 					var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
-					console.log(resDataOrderItemList);
+					//console.log(resDataOrderItemList);
 					//拼接所需参数:content_ids
 					stridsContent=toFbidsPurchase(resDataOrderItemList);
 					//console.log("stridsContent:"+stridsContent);

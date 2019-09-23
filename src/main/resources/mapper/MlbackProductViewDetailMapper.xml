@@ -298,8 +298,8 @@
   
   <!-- selectMlbackProductViewDetailByTime -->
   <select id="selectMlbackProductViewDetailByTime" parameterType="com.atguigu.bean.MlbackProductViewDetail" resultMap="BaseResultMap">
-  	select * from tb_mlback_productviewdetail where
-   	proViewDetail_createTime between #{proviewdetailStarttime,jdbcType=VARCHAR} and #{proviewdetailEndtime,jdbcType=VARCHAR}
+  	select proViewDetail_id, proViewDetail_seoname, proViewDetail_createTime from tb_mlback_productviewdetail where
+   	proViewDetail_createTime between #{proviewdetailStarttime,jdbcType=VARCHAR} and #{proviewdetailEndtime,jdbcType=VARCHAR} order by proViewDetail_seoname
   </select>
   
 </mapper>
