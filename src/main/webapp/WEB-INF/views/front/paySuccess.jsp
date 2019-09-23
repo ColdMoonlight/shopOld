@@ -79,7 +79,7 @@
 			var payinfoId = data.extend.payinfoId;
 			var orderMoney = mlfrontOrderOne.orderMoney;
 			// console.log(mlfrontOrderOne);
-			console.log("orderMoney:"+orderMoney);
+			//console.log("orderMoney:"+orderMoney);
 			getPayInfo(payinfoId,orderMoney);
 			$(".order-id").val(mlfrontOrderOne.orderId);
 			
@@ -89,7 +89,7 @@
 		var reqData = {
 				"payinfoId": payinfoId
 			};
-		console.log("orderMoney:"+orderMoney);
+		//console.log("orderMoney:"+orderMoney);
 		$.ajax({
 			url: "${APP_PATH}/MlfrontPayInfo/getOneMlfrontPayInfoDetail",
 			data: reqData,
@@ -101,10 +101,10 @@
 					// console.log(mlfrontOrderItemList);
 					//拼接所需参数:content_ids
 					stridsContent=toFbidsPurchase(resDataOrderItemList);
-					console.log("stridsContent:"+stridsContent);
+					//console.log("stridsContent:"+stridsContent);
 					//拼接所需参数:contents
 					strContent=toFbPurchase(resDataOrderItemList);
-					console.log("strContent:"+strContent);
+					//console.log("strContent:"+strContent);
 					//fbq('track', 'Purchase');//追踪'购买'事件		facebook广告插件可以注释掉，但不要删除
 					fbq('track', 'Purchase', {
 						  content_ids: [stridsContent],
