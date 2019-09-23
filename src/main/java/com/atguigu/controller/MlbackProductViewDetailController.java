@@ -81,7 +81,7 @@ public class MlbackProductViewDetailController {
 	}
 	
 	
-	/**2.0	UseNow	0505
+	/**3.0	UseNow	0505
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
 	 * @return
@@ -101,11 +101,14 @@ public class MlbackProductViewDetailController {
 	}
 	
 	
-	
+	/**4.0	UseNow	0505
+	 * 分类MlbackProductViewDetail列表list数据
+	 * @param
+	 * @return
+	 */
 	@RequestMapping(value="/getProductViewDetailList",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg getProductViewDetailList(HttpSession session,@RequestBody MlbackProductViewDetail mlbackProductViewDetail) {
-		
 		
 		String starttime = mlbackProductViewDetail.getProviewdetailStarttime();
 		String endtime = mlbackProductViewDetail.getProviewdetailEndtime();
@@ -116,13 +119,9 @@ public class MlbackProductViewDetailController {
 		List<MlbackProductViewDetail> mlbackActShowProList = mlbackProductViewDetailService.selectMlbackProductViewDetailByTime(mlbackProductViewDetailreq);
 		
 		String  proSeo = "";
-		
 		Integer proSeoNum = 0;
-		
 		Integer k=0;
-		
 		List<Integer> numList = new ArrayList<Integer>();
-		
 		List<String> SeoStringList = new ArrayList<String>();
 		
 		for(int i=0;i<mlbackActShowProList.size();i++){
