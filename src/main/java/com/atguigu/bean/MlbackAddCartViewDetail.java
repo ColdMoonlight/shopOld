@@ -12,6 +12,8 @@ public class MlbackAddCartViewDetail {
     private String addcartviewdetailProname;
 
     private String addcartviewdetailSeoname;
+    
+    private Integer addcartviewdetailActNum;		//用户行为，0纯加购	1点buyNow
 
     private String addcartviewdetailCreatetime;
 
@@ -68,8 +70,16 @@ public class MlbackAddCartViewDetail {
     public void setAddcartviewdetailSeoname(String addcartviewdetailSeoname) {
         this.addcartviewdetailSeoname = addcartviewdetailSeoname == null ? null : addcartviewdetailSeoname.trim();
     }
+    
+	public Integer getAddcartviewdetailActNum() {
+		return addcartviewdetailActNum;
+	}
 
-    public String getAddcartviewdetailCreatetime() {
+	public void setAddcartviewdetailActNum(Integer addcartviewdetailActNum) {
+		this.addcartviewdetailActNum = addcartviewdetailActNum;
+	}
+
+	public String getAddcartviewdetailCreatetime() {
         return addcartviewdetailCreatetime;
     }
 
@@ -100,4 +110,40 @@ public class MlbackAddCartViewDetail {
     public void setAddcartviewdetailEndtime(String addcartviewdetailEndtime) {
         this.addcartviewdetailEndtime = addcartviewdetailEndtime == null ? null : addcartviewdetailEndtime.trim();
     }
+
+	public MlbackAddCartViewDetail(Integer addcartviewdetailId, String addcartviewdetailSessionid,
+			String addcartviewdetailName, Integer addcartviewdetailProid, String addcartviewdetailProname,
+			String addcartviewdetailSeoname, Integer addcartviewdetailActNum, String addcartviewdetailCreatetime,
+			String addcartviewdetailMotifytime, String addcartviewdetailStarttime, String addcartviewdetailEndtime) {
+		super();
+		this.addcartviewdetailId = addcartviewdetailId;
+		this.addcartviewdetailSessionid = addcartviewdetailSessionid;
+		this.addcartviewdetailName = addcartviewdetailName;
+		this.addcartviewdetailProid = addcartviewdetailProid;
+		this.addcartviewdetailProname = addcartviewdetailProname;
+		this.addcartviewdetailSeoname = addcartviewdetailSeoname;
+		this.addcartviewdetailActNum = addcartviewdetailActNum;
+		this.addcartviewdetailCreatetime = addcartviewdetailCreatetime;
+		this.addcartviewdetailMotifytime = addcartviewdetailMotifytime;
+		this.addcartviewdetailStarttime = addcartviewdetailStarttime;
+		this.addcartviewdetailEndtime = addcartviewdetailEndtime;
+	}
+
+	public MlbackAddCartViewDetail() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		return "MlbackAddCartViewDetail [addcartviewdetailId=" + addcartviewdetailId + ", addcartviewdetailSessionid="
+				+ addcartviewdetailSessionid + ", addcartviewdetailName=" + addcartviewdetailName
+				+ ", addcartviewdetailProid=" + addcartviewdetailProid + ", addcartviewdetailProname="
+				+ addcartviewdetailProname + ", addcartviewdetailSeoname=" + addcartviewdetailSeoname
+				+ ", addcartviewdetailActNum=" + addcartviewdetailActNum + ", addcartviewdetailCreatetime="
+				+ addcartviewdetailCreatetime + ", addcartviewdetailMotifytime=" + addcartviewdetailMotifytime
+				+ ", addcartviewdetailStarttime=" + addcartviewdetailStarttime + ", addcartviewdetailEndtime="
+				+ addcartviewdetailEndtime + "]";
+	}
+    
 }

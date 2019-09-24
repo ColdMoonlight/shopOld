@@ -366,6 +366,7 @@ public class MlfrontCartController {
 		String nowTime = DateUtil.strTime14s();
 		mlbackAddCartViewDetailreq.setAddcartviewdetailCreatetime(nowTime);
 		mlbackAddCartViewDetailreq.setAddcartviewdetailMotifytime(nowTime);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailActNum(1);
 		mlbackProductViewDetailService.insertSelective(mlbackAddCartViewDetailreq);
 		
 	}

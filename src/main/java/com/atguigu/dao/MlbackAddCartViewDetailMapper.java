@@ -2,8 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlbackAddCartViewDetail;
 import com.atguigu.bean.MlbackAddCartViewDetailExample;
-import com.atguigu.bean.MlbackProductViewDetail;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
