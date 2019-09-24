@@ -134,8 +134,10 @@ public class MlbackAddCartViewDetailController {
 				proSeo = mlbackAddCartViewDetailOne.getAddcartviewdetailSeoname();
 				SeoStringList.add(proSeo);
 			}else{
-				proSeo = mlbackAddCartViewDetailOne.getAddcartviewdetailEndtime();
-				if(proSeo.equals(mlbackAddCartViewDetailList.get(i-1).getAddcartviewdetailSeoname())){
+				proSeo = mlbackAddCartViewDetailOne.getAddcartviewdetailSeoname();
+				MlbackAddCartViewDetail mlbackAddCartViewDetailOneLast =mlbackAddCartViewDetailList.get(i-1);
+				String lastSeo = mlbackAddCartViewDetailOneLast.getAddcartviewdetailSeoname();
+				if(proSeo.equals(lastSeo)){
 					proSeoNum++;
 				}else{
 					SeoStringList.add(proSeo);
