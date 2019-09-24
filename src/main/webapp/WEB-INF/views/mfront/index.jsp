@@ -45,7 +45,6 @@
 </head>
 
 <body>
-
   <jsp:include page="mheader.jsp"></jsp:include>
   
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
@@ -358,9 +357,10 @@
 				 dataType: 'JSON',
 				 contentType: 'application/json',
 				 success: function (data) {
-						console.log(data)/***data**/
+						// console.log(data)/***data**/
 						if (JSON.parse(data).code === 100) {
 						  var resData = JSON.parse(data).extend.mlbackSlideList;
+						  console.log(resData)
 							rednertop(bannerfirst, resData);
 							  new Swiper('#ban_silder', {
 								freeMode: true,
@@ -410,7 +410,7 @@
 					 dataType: 'JSON',
 					 contentType: 'application/json',
 					 success: function (data) {
-							console.log(data)/***data**/
+							// console.log(data)/***data**/
 							if (JSON.parse(data).code === 100) {
 							  var resData = JSON.parse(data).extend.mlbackSlideList;;
 							  console.log(resData);

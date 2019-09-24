@@ -131,11 +131,11 @@
 				if (item.slideArea == 0) {
 					slideAreaStr = '未选择位置';
 				} else if (item.slideArea == 1) {
-					slideAreaStr = '首页活动';
+					slideAreaStr = '1首页活动';
 				} else if (item.slideArea == 2) {
-					slideAreaStr = '第2活动';
+					slideAreaStr = '2优惠券';
 				} else if (item.slideArea == 3) {
-					slideAreaStr = '第3活动';
+					slideAreaStr = '3关联产品';
 				} else if (item.slideArea == 4) {
 					slideAreaStr = '第4活动';
 				} else if (item.slideArea == 5) {

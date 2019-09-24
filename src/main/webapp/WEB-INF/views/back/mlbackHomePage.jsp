@@ -35,18 +35,24 @@
 					<div class="model" data-type="pie">
 						<div class="model-h">
 							<span class="model-name">各项指标</span>
-							<div class="c-datepicker-date-editor date-timepicker">
+							<div class="c-datepicker-date-editor date-timepicker data_num">
 								<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
 								<input placeholder="开始日期" name="" value="" class="c-datepicker-data-input">
 								<span class="c-datepicker-range-separator">-</span>
 								<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 							</div>
 						</div>
-						<div class="model-b model-pie">
-							<div class="model-pie-data model-pie-list"></div>
-							<div class="model-pie-chart">
-								<canvas></canvas>
+						<div class="model-b model-pie num_data">
+							<div class="model-pie-data model-pie-list num_box_list">
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量" class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="架构量" class="model-item addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="提交量" class="model-item refer"><div class="model-text">提交量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量" class="model-item accounts"><div class="model-text">结算量</div><div class="model-num">0</div></a>
 							</div>
+								
+							<!-- <div class="model-pie-chart">
+								<canvas></canvas>
+							</div> -->
 						</div>
 					</div>
 					<!-- pie -->
@@ -129,6 +135,17 @@
 				'second': 59
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
+			/****************************/
+			var minDate22 = moment()
+				.set({
+					'date': date.getDate(),
+					'hour': 0,
+					'minute': 0,
+					'second': 0
+				})
+				.format('YYYY-MM-DD HH:mm:ss');
+			// console.log(minDate22)/*****************************2222222*/
+			
 		var maxDate = moment()
 			.set({
 				'date': date.getDate(),
@@ -140,40 +157,113 @@
 
 		function initHtml() {
 			var $input = targetInput.find('input');
-			$input.eq(0).val(minDate)
-			$input.eq(1).val(maxDate)
+			$input.eq(0).val(minDate22);
+			$input.eq(1).val(maxDate);
 		}
-
+		/*****初始化时间*****************/
+		var startime =minDate22;
+		var endtime =maxDate;
+		/*****初始调取浏览量*****************/
+		$.ajax({
+		        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
+		        data: JSON.stringify({
+		        "proviewdetailStarttime": startime,
+		        "proviewdetailEndtime": endtime,
+		        }),
+		        type: 'post',
+		        dataType: 'JSON',
+		        contentType: 'application/json',
+		        success: function (data) {
+		        console.log(data);
+				var resData = data.extend.mlbackActShowProList;
+				$(".liulan .model-num").html(resData.length)
+		        }
+		      });
+			  /*****初始调取加购量****************/
+			  $.ajax({
+				  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
+				  data: JSON.stringify({
+				  "addcartviewdetailStarttime": startime,
+				  "addcartviewdetailEndtime": endtime,
+				  }),
+				  type: 'post',
+				  dataType: 'JSON',
+				  contentType: 'application/json',
+				  success: function (data) {
+				    console.log(data);
+				    var resData = data.extend.toDayNum;
+					
+				    $(".addcart .model-num").html(resData);
+					
+				  },
+				  
+				});
+		
+/***********************************************/
 		function initJs() {
 			targetInput.each(function (i, item) {
 				$(item).datePicker({
 					hasShortcut: true,
-					min: minDate,
+					min: '2018-01-01 06:00:00',
 					max: maxDate,
 					isRange: true,
 					shortcutOptions: [{
-						name: '昨天',
-						day: '-1,-1',
-						time: '00:00:00,23:59:59'
+					 name: '昨天',
+					 day: '-1,-1',
+					 time: '00:00:00,23:59:59'
+					},{
+					 name: '最近一周',
+					 day: '-7,0',
+					 time:'00:00:00,'
 					}, {
-						name: '最近一周',
-						day: '-7,0',
-						time: '00:00:00,'
+					 name: '最近一个月',
+					 day: '-30,0',
+					 time: '00:00:00,'
 					}, {
-						name: '最近一个月',
-						day: '-30,0',
-						time: '00:00:00,'
-					}, {
-						name: '最近三个月',
-						day: '-90, 0',
-						time: '00:00:00,'
-					}, {
-						name: '最近半年',
-						day: '-180, 0',
-						time: '00:00:00,'
+					 name: '最近三个月',
+					 day: '-90, 0',
+					 time: '00:00:00,'
 					}],
 					hide: function (type) {
+						// console.log(1);
 						// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
+						var startime = this.$input.eq(0).val();
+						var endtime = this.$input.eq(1).val();
+						/******根据时间调取浏览量***************************/
+						$.ajax({
+						        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
+						        data: JSON.stringify({
+						        "proviewdetailStarttime": startime,
+						        "proviewdetailEndtime": endtime,
+						        }),
+						        type: 'post',
+						        dataType: 'JSON',
+						        contentType: 'application/json',
+						        success: function (data) {
+						        // console.log(data);
+								var resData = data.extend.mlbackActShowProList;
+								$(".liulan .model-num").html(resData.length)
+						        }
+						      });
+					/******************************************************************/
+						  $.ajax({
+								  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
+								  data: JSON.stringify({
+								  "addcartviewdetailStarttime": startime,
+								  "addcartviewdetailEndtime": endtime,
+								  }),
+								  type: 'post',
+								  dataType: 'JSON',
+								  contentType: 'application/json',
+								  success: function (data) {
+									// console.log(data);
+									var resData = data.extend.toDayNum;
+									$(".addcart .model-num").html(resData);
+									
+								  },
+								  
+								});
+						
 					}
 				})
 			})
@@ -251,7 +341,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 			var result = {};
 			if (parent.data('type') === 'pay') {
 				result = getPay(reqData);
-				console.log(result)
+				// console.log(result)
 				if (result.countNumber) {
 					build_pay_table(parent, result);
 				} else {
@@ -288,10 +378,9 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 			}
 		};
 
-		var ctx = document.querySelector('.model-pie-chart canvas').getContext('2d');
-		window.myPie = new Chart(ctx, config);
-
-		window.myPie.update()
+		// var ctx = document.querySelector('.model-pie-chart canvas').getContext('2d');
+		// window.myPie = new Chart(ctx, config);
+		// window.myPie.update()
 
 
 		function getUser(reqData) {
@@ -305,6 +394,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -321,6 +411,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -337,6 +428,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -353,6 +445,7 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				contentType: 'application/json',
 				success: function (data) {
 					resData = data.extend;
+					// console.log(resData)
 				}
 			})
 			return resData;
@@ -384,7 +477,13 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 			$.each(result.pageInfo.list, function (index, item) {
 				var payinfoId = $("<td></td>").append(item.payinfoId);
 				var payinfoOid = $("<td></td>").append(item.payinfoOid);
-				var payinfoStatus = $("<td></td>").append((item.payinfoStatus ? '已支付' : '未支付'));
+				// var payinfoStatus = $("<td></td>").append((item.payinfoStatus ? '已支付' : '未支付'));
+				if(item.payinfoStatus ===1){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
+				}else{
+					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
+				}
+				
 				var payinfoMoney = $("<td></td>").append(payinfoMoney);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);

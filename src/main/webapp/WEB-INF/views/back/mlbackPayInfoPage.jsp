@@ -8,6 +8,7 @@
 	<title>付款管理</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/js/clipboard.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
@@ -290,6 +291,8 @@
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
+							
+							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							shipName = orderData.orderLogisticsname;
 							
@@ -298,8 +301,13 @@
 
 							var receiveData = resDataAddressOne;
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
+							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
+							receiveData.orderCouponCode = resDataOrderPayOne.orderCouponCode;	//**优惠码****
+						
+							
 							receiveData.payinfoPlatform = resDataPayInfoOne.payinfoPlatform;
 							receiveData.payinfoCreatetime = resDataPayInfoOne.payinfoCreatetime;
+							
 							receiveData.payinfoPlatformserialcode = resDataPayInfoOne.payinfoPlatformserialcode;
 							renderReceiverinfo(receiveData);
 						} else {
@@ -345,6 +353,7 @@
 			var headerHtml = '';
 			// console.log(data)
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
+			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span>订单状态 ：' + statusDetail + '</span>';
 			if (data.orderStatus === 1 || data.orderStatus === 3) {
 				headerHtml += '<span class="shipping">';
@@ -502,22 +511,151 @@
 		function renderReceiverinfo(data) {
 			var html = '';
 			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
+			    '<div><span>优惠码：</span><span>' + data.orderCouponCode + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
-				'<div><span>收货人firstname：</span><span>' + data.addressUserfirstname + '</span></div>' +
-				'<div><span>收货人lastname：</span><span>' + data.addressUserlastname + '</span></div>' +
-				'<div><span>收货人电话：</span><span>' + data.addressTelephone + '</span></div>' +
-				'<div><span>收货人详细地址：</span><span>' + data.addressDetail + '</span></div>' +
-				'<div><span>收货人城市：</span><span>' + data.addressCity + '</span></div>' +
-				'<div><span>收货人省份：</span><span>' + data.addressProvince + '</span></div>' +
-				'<div><span>收货人国家：</span><span>' + data.addressCountry + '</span></div>' +
-				'<div><span>邮编：</span><span>' + data.addressPost + '</span></div>' +
-				'<div><span>邮箱：</span><span>' + data.addressEmail + '</span></div>' +
+				'<div><span>收货人firstname：</span><span id="fza_txt">' + data.addressUserfirstname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fza" value="复制文本" /></div>' +
+				'<div><span>收货人lastname：</span><span id="fzb_txt">' + data.addressUserlastname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzb" value="复制文本" /></div>' +
+				'<div><span>收货人电话：</span><span id="fzc_txt">' + data.addressTelephone + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzc" value="复制文本" /></div>' +
+				'<div><span>收货人详细地址：</span><span id="fzd_txt">' + data.addressDetail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzd" value="复制文本" /></div>' +
+				'<div><span>收货人城市：</span><span id="fze_txt">' + data.addressCity + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fze" value="复制文本" /></div>' +
+				'<div><span>收货人省份：</span><span id="fzf_txt">' + data.addressProvince + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzf" value="复制文本" /></div>' +
+				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountry + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzg" value="复制文本" /></div>' +
+				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzh" value="复制文本" /></div>' +
+				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzi" value="复制文本" /></div>' +
+				'<div><span>留言：</span><span>' + data.orderBuyMess + '</span></div>' +
 				'<div><span>购买时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 				'<div><span>支付时间：</span><span>' + data.payinfoCreatetime + '</span></div>';
-				
-				
-				
 			$('.revceiver-info').html(html);
+			/*************/
+			var fza_btn = $("#fza_txt");
+			var fza_cont=fza_btn.html();
+			var clipboard = new Clipboard('#fza', {
+			    text: function() {
+			        return fza_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			    // alert("复制成功");
+				fza_btn.css("color","#999")
+				
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzb_btn = $("#fzb_txt");
+			var fzb_cont=fzb_btn.html();
+			var clipboard = new Clipboard('#fzb', {
+			    text: function() {
+			        return fzb_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			    // alert("复制成功");
+				fzb_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzc_btn = $("#fzc_txt");
+			var fzc_cont=fzc_btn.html();
+			var clipboard = new Clipboard('#fzc', {
+			    text: function() {
+			        return fzc_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			   fzc_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzd_btn = $("#fzd_txt");
+			var fzd_cont=fzd_btn.html();
+			var clipboard = new Clipboard('#fzd', {
+			    text: function() {
+			        return fzd_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			  fzd_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fze_btn = $("#fze_txt");
+			var fze_cont=fze_btn.html();
+			var clipboard = new Clipboard('#fze', {
+			    text: function() {
+			        return fze_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			     fze_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzf_btn = $("#fzf_txt");
+			var fzf_cont=fzf_btn.html();
+			var clipboard = new Clipboard('#fzf', {
+			    text: function() {
+			        return fzf_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			   fzf_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzg_btn = $("#fzg_txt");
+			var fzg_cont=fzg_btn.html();
+			var clipboard = new Clipboard('#fzg', {
+			    text: function() {
+			        return fzg_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			    fzg_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzh_btn = $("#fzh_txt");
+			var fzh_cont=fzh_btn.html();
+			var clipboard = new Clipboard('#fzh', {
+			    text: function() {
+			        return fzh_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			    fzh_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
+			/*************/
+			var fzi_btn = $("#fzi_txt");
+			var fzi_cont=fzi_btn.html();
+			var clipboard = new Clipboard('#fzi', {
+			    text: function() {
+			        return fzi_cont;
+			    }
+			});
+			clipboard.on('success', function(e) {
+			    // alert("复制成功");
+				 fzi_btn.css("color","#999")
+			});
+			clipboard.on('error', function(e) {
+			    console.log(e);
+			});
 		}
 
 		/* single */
@@ -532,6 +670,9 @@
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
 			}
 		}
+		/******************************/
+
+		
 	</script>
 </body>
 

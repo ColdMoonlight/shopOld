@@ -1,5 +1,6 @@
 package com.atguigu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -165,8 +166,23 @@ public class MlbackSlideController {
 		mlbackSlideReq.setSlideWapstatus(1);
 		//查询本条
 		List<MlbackSlide> mlbackSlideList =mlbackSlideService.selectMlbackSlidewapListByArea(mlbackSlideReq);
+		MlbackSlide mlbackSlideOne = new MlbackSlide();
+		MlbackProduct mlbackProductOne = new MlbackProduct();
+		List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
+		//MlbackProductService
+		if(mlbackSlideList.size()>0){
+			for(int i=0;i<mlbackSlideList.size();i++){
+				mlbackSlideOne = mlbackSlideList.get(i);
+				Integer proId = mlbackSlideOne.getSlideProid();
+				mlbackProductOne.setProductId(proId);
+				List<MlbackProduct> mlbackProductList  = mlbackProductService.selectMlbackProduct(mlbackProductOne);
+				if(mlbackProductList.size()>0){
+					mlbackProductResList.add(mlbackProductList.get(0));
+				}
+			}
+		}
 		return Msg.success().add("resMsg", "查看该位置的轮播完毕")
-					.add("mlbackSlideList", mlbackSlideList);
+					.add("mlbackSlideList", mlbackSlideList).add("mlbackProductResList", mlbackProductResList);
 	}
 	
 	/**
@@ -185,8 +201,23 @@ public class MlbackSlideController {
 		mlbackSlideReq.setSlidePcstatus(1);
 		//查询本条
 		List<MlbackSlide> mlbackSlideList =mlbackSlideService.selectMlbackSlidepcListByArea(mlbackSlideReq);
+		MlbackSlide mlbackSlideOne = new MlbackSlide();
+		MlbackProduct mlbackProductOne = new MlbackProduct();
+		List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
+		//MlbackProductService
+		if(mlbackSlideList.size()>0){
+			for(int i=0;i<mlbackSlideList.size();i++){
+				mlbackSlideOne = mlbackSlideList.get(i);
+				Integer proId = mlbackSlideOne.getSlideProid();
+				mlbackProductOne.setProductId(proId);
+				List<MlbackProduct> mlbackProductList  = mlbackProductService.selectMlbackProduct(mlbackProductOne);
+				if(mlbackProductList.size()>0){
+					mlbackProductResList.add(mlbackProductList.get(0));
+				}
+			}
+		}
 		return Msg.success().add("resMsg", "查看该位置的轮播完毕")
-					.add("mlbackSlideList", mlbackSlideList);
+					.add("mlbackSlideList", mlbackSlideList).add("mlbackProductResList", mlbackProductResList);
 	}
 
 }

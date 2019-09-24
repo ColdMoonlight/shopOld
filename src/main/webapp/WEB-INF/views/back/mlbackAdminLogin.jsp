@@ -29,13 +29,13 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			min-width: 360px;
+			min-width: 400px;
 			transform: translate(-50%, -50%);
 			-moz-transform: translate(-50%, -50%);
 			-webkit-transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);
 			padding: 30px 20px 0 20px;
-			background-color: #afd1f3;
+			background-color:rgba(255,255,255,.8);
 			border-radius: 4px;
 		}
 
@@ -53,10 +53,12 @@
 			font-size: 12px;
 			color: #ff0000;
 		}
+		.login-box .col-sm-3{width: 20%;}
+		.login-box .col-sm-offset-3{margin-left: 40%;}
 	</style>
 </head>
 
-<body>
+<body style="background: url(../../../../../ShopTemplate/static/pc/img/bglogin.jpg) no-repeat;">
 	<div class="col-sm-4 login-box">
 		<form class="form-horizontal">
 			<!-- username -->
@@ -78,7 +80,7 @@
 			<!-- submit -->
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9">
-					<button id="submit" class="btn btn-primary col-sm-3">登录</button>
+					<button id="submit" class="btn btn-primary">登录</button>
 				</div>
 			</div>
 		</form>

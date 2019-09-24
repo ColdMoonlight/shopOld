@@ -267,7 +267,7 @@
 				
 			function addHeaderInfo(productData){
 				
-				console.log(productData);
+				// console.log(productData);
 				   var productNameStr = productData.productName;
 				   var productMetaDescStr =productData.productMetaDesc;
 				   var productSeoStr =productData.productSeo;
@@ -853,6 +853,98 @@
 	        }
 	      }
 	    });
+		/*******hot_box_product********************************/
+		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
+		 function rednerProduct(parent, data) {
+		 	var html = '';
+		 		for (var i = 0; i < data.length; i += 1) {
+		 			 var productactoffif = data[i].productActoffIf;
+		 			// console.log(productactoffif)
+		 			var productactoffid  =  data[i].productActoffid;
+		 			 // console.log(productactoffid)  
+		 			var cp_icon = "";
+		 			var showspan = "";
+		 			if(productactoffif == 1){
+		 						  if(productactoffid==1){
+		 							   showspan ="showactive1"
+		 						  }else if(productactoffid==2){
+		 							   showspan ="showactive2"
+		 						  }else if(productactoffid==3){
+		 							   showspan ="showactive3"
+		 						  }else if(productactoffid==4){
+		 							   showspan ="showactive4"
+		 						  }
+		 						  
+		 			}else{
+		 						   showspan ="hideactive"
+		 			}
+		 			html += '<div class="swiper-slide">' +
+		 				'<div class="product-item" data-productid="'+ data[i].productId +'">' +
+		 			    '<span class="hui_icon '+showspan+'"></span>'+
+		 				'<div class="product-img">' +
+		 				'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+		 				'<img src="' + data[i].productMainimgurl + '" alt="">' +
+		 				'</a>' +
+		 				'</div>' +
+		 				'<div class="product-desc">' +
+		 				'<div class="product-title">' + data[i].productName + '</div>' +
+		 				'<div class="product-type"></div>' +
+		 				'<div class="product-data">' +
+		 				'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+		 				'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+		 				' Review(s)</span>' +
+		 				'</div>' +
+		 				'<div class="product-price">' +
+		 				'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+		 					.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+		 				'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+		 				'</span>' +
+		 				'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+		 				'</div>' +
+		 				'</div>' +
+		 				'</div>'+
+		 				'</div>';
+		 		}
+		 
+		 		parent.html(html);
+		 }
+		$.ajax({
+			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+				data: JSON.stringify({
+			   "slideArea": 3
+			 }),
+			 type: 'post',
+			 dataType: 'JSON',
+			 contentType: 'application/json',
+			 success: function (data) {
+					// console.log(data)/***data**/
+					if (JSON.parse(data).code === 100) {
+					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					  // console.log(resData);
+					 rednerProduct(hot_pic,resDataProduct);
+					 new Swiper('.hot_box_product_cont', {
+					          	  slidesPerView: 2,
+					    spaceBetween:5,
+					    freeMode: true,
+						loop:true,
+					   autoplay: {
+					       disableOnInteraction: false,
+					     },
+					 	pagination: {
+					 		el: '.swiper-pagination2',
+					 		clickable: true
+					 	}
+					 })
+					 
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					}
+				  }
+		});	
+		
+		
+		
+		
 		});
 
 		function deleteReview() {
@@ -934,17 +1026,18 @@
 		              img.style = 'width: 100%; height: auto;';
 		            }
 
-		            $('.light_box-inner').html(img);
+		            $('.imgbig_cont').html(img);
 		          }
 		        });
 		      });
 
 		      function popup(src, style) {
 		        var lightboxEl = $('<div class="light_box"></div>');
-		        var html = '<div class="light_box-close"><i class="icon close"></i></div>';
+				var html="";
 		        html += '<div class="light_box-inner">' +
 		          // '<img src="'+ src +'" style="'+ style +'" />' +
-		            '<div class="loader"></div>' +
+				   '<div class="img_boxbig"><div class="light_box-close"><i class="icon close"></i></div><div class="imgbig_cont"></div></div>' +
+		            // '<div class="loader"></div>' +
 		          '</div>';
 
 		        $(document.body).append(lightboxEl.html(html));

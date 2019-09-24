@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.atguigu.bean.AppuserInfo;
 import com.atguigu.bean.GroupDisplay;
+import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
 
@@ -33,11 +34,15 @@ import com.atguigu.bean.Msg;
 public class HomePageController {
 	
 	@RequestMapping("/toHomePage")
-	public String tologin() throws Exception{
+	public String tologin(HttpSession session) throws Exception{
 		
-//		System.out.println("进入toHomePage");
-	
-		return "back/mlbackHomePage";
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackHomePage";
+		}
 	}
 	
 	

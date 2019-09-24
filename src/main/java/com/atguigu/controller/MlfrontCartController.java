@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.bean.MlbackAddCartViewDetail;
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackProduct;
+import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.MlfrontCart;
 import com.atguigu.bean.MlfrontCartItem;
 import com.atguigu.bean.MlfrontOrder;
@@ -23,6 +26,9 @@ import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
+import com.atguigu.service.MlbackAddCartViewDetailService;
+import com.atguigu.service.MlbackProductService;
+import com.atguigu.service.MlbackProductViewDetailService;
 import com.atguigu.service.MlfrontCartItemService;
 import com.atguigu.service.MlfrontCartService;
 import com.atguigu.service.MlfrontOrderItemService;
@@ -49,6 +55,11 @@ public class MlfrontCartController {
 	@Autowired
 	MlfrontCartItemService mlfrontCartItemService;
 	
+	@Autowired
+	MlbackProductService mlbackProductService;
+	
+	@Autowired
+	MlbackAddCartViewDetailService mlbackProductViewDetailService;
 	/**
 	 * 1.0	useOn	0505
 	 * 前台移动端解算页面mfront/cheakOut
@@ -88,6 +99,11 @@ public class MlfrontCartController {
 	@RequestMapping(value="/toAddToCart",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg toAddToCart(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
+		String nowViewTime = DateUtil.strTime14s();
+		System.out.println("nowViewTime:"+nowViewTime);
+		
+		insertAddCartView(mlfrontCartItem,session);
+		
 		//接收传递进来的参数
 		System.out.println(mlfrontCartItem);
 		//放回响应域中
@@ -323,6 +339,38 @@ public class MlfrontCartController {
 		return Msg.success().add("resMsg", "添加成功");
 	}	
 	
+	private void insertAddCartView(MlfrontCartItem mlfrontCartItem, HttpSession session) {
+		// TODO Auto-generated method stub
+		Integer productId = mlfrontCartItem.getCartitemProductId();
+		
+		MlbackProduct mlbackProductrep = new MlbackProduct();
+		mlbackProductrep.setProductId(productId);
+		
+		List<MlbackProduct> mlbackProductresList = mlbackProductService.selectMlbackProduct(mlbackProductrep);
+		MlbackProduct mlbackProductres = mlbackProductresList.get(0);
+		
+		String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
+		String addcartviewdetailProname = mlbackProductres.getProductName();
+		
+		
+		
+		//准备参数信息
+		MlbackAddCartViewDetail mlbackAddCartViewDetailreq = new MlbackAddCartViewDetail();
+		//浏览对象
+		mlbackAddCartViewDetailreq.setAddcartviewdetailSeoname(addcartviewdetailSeoname);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailProname(addcartviewdetailProname);
+		//sessionID
+		String sessionId =  session.getId();
+		mlbackAddCartViewDetailreq.setAddcartviewdetailSessionid(sessionId);
+		//时间信息
+		String nowTime = DateUtil.strTime14s();
+		mlbackAddCartViewDetailreq.setAddcartviewdetailCreatetime(nowTime);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailMotifytime(nowTime);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailActNum(1);
+		mlbackProductViewDetailService.insertSelective(mlbackAddCartViewDetailreq);
+		
+	}
+
 	/**3.0	useOn	0505
 	 * getCartProductNumber	get
 	 * @param 

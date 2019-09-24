@@ -270,6 +270,7 @@
 						var productData = data.extend.mlbackProductOne;
 						addHeaderInfo(productData);
 						var fbpid=productData.productId;
+						// alert(fbpid)
 						var fbprice=(productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
 						fbq('track', 'PageView', {
 							  content_ids: fbpid,
@@ -465,6 +466,7 @@
 	         '</li>';
 				}
 				parent.html(html);
+				
 				var mySwiper = new Swiper('.swiper-container2', {
 					simulateTouch : false,//禁止鼠标模拟
 					 pagination: {
@@ -484,17 +486,17 @@
 					var i = $(imgBox).index(this);
 					$(".big_img .swiper-wrapper").html("")
 					for(var j = 0 ,c = imgBox.length; j < c ;j++){
-					 $(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div>');
+					 $(".big_img .swiper-wrapper").append('<div class="swiper-slide"><div class="cell"><div class="img_boxcont"><div class="close_box"><span class="close_an">×</span> </div><img src="' + imgBox.eq(j).attr("src") + '" / ></div></div></div>');
 					}
 					$(".big_img").css({
-						"z-index": 1001,
+						"z-index": 10001,
 						"opacity": "1"
 					});
 					mySwiper.slideTo(i, 0, false);
 					return false;
 				});
 			  
-				$(".close_box .close_an").on("click", function() {
+			   $("body").on('click', '.close_an',function() {
 					$(this).parents(".big_img").css({
 						"z-index": "-1",
 						"opacity": "0"
@@ -567,7 +569,7 @@
 				$.ajax({
 					url: "${APP_PATH}/MlfrontReview/saveNew",
 					data: JSON.stringify({
-						reviewPid: pidA[1],
+						reviewPid: pidA,
 					}),
 					dataType: "json",
 					contentType: 'application/json',
@@ -636,7 +638,7 @@
 						reviewId: reviewId,
 						reviewUname: username,
 						reviewPname: email,
-						reviewPid: pidA[1],
+						reviewPid: pidA,
 						reviewDetailstr: details,
 						reviewProstarnum: starNum
 				}
@@ -747,7 +749,7 @@
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
-				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductId = parseInt(pidA);
 				reqData.cartitemProductName = dataPrice.productName;
 				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
 				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
@@ -799,6 +801,7 @@
 			function generateOrder(reqData) {
 				// console.log(reqData)
 				var fbpid=pidA;
+				// alert(fbpid)
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/toAddToCart',
 					data: JSON.stringify(reqData),
@@ -811,14 +814,15 @@
 						var resData =data.code;
 						if (resData === 100) {
 							// console.log(resData)
+							setTimeout(function(){
+								cartText.text(parseInt(cartText.text()) + 1);
+							},1000)
 							//追踪'添加购物车'事件    facebook广告插件可以注释掉，但不要删除
 				              fbq('track', 'AddToCart', {
 				                  content_ids: fbpid,
 				                  content_type: 'product'
 				                });
-							setTimeout(function(){
-								cartText.text(parseInt(cartText.text()) + 1);
-							},1000)
+							
 							// window.location.href = '${APP_PATH}/myCart.html';
 						}
 					},
@@ -853,7 +857,7 @@
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
-				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductId = parseInt(pidA);
 				reqData.cartitemProductName = dataPrice.productName;
 				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
 				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
@@ -863,7 +867,8 @@
 				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
-				// console.log(data);
+				// console.log(reqData);
+				
 				fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
 				
 				// name, id, price
@@ -894,7 +899,7 @@
 			});
 			
 			function generateOrderNow(reqData) {
-				// console.log(reqData)
+				console.log(reqData)
 				$.ajax({
 					  url: '${APP_PATH}/MlbackCart/toBuyNow',
 					  data: JSON.stringify(reqData),
@@ -956,6 +961,121 @@
 	        }
 	      }
 	    });
+		/*******hot_box_product********************************/
+		
+		
+		
+		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
+            function rednerProduct(parent, data) {
+			var html = '';
+				for (var i = 0; i < data.length; i += 1) {
+					 var productactoffif = data[i].productActoffIf;
+					// console.log(productactoffif)
+					var productactoffid  =  data[i].productActoffid;
+					 // console.log(productactoffid)  
+					var cp_icon = "";
+					var showspan = "";
+					if(productactoffif == 1){
+								  if(productactoffid==1){
+									   showspan ="showactive1"
+								  }else if(productactoffid==2){
+									   showspan ="showactive2"
+								  }else if(productactoffid==3){
+									   showspan ="showactive3"
+								  }else if(productactoffid==4){
+									   showspan ="showactive4"
+								  }
+								  
+					}else{
+								   showspan ="hideactive"
+					}
+					html += '<div class="swiper-slide">' +
+						'<div class="product-item" data-productid="'+ data[i].productId +'">' +
+					    '<span class="hui_icon '+showspan+'"></span>'+
+						'<div class="product-img">' +
+						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+						'<img src="' + data[i].productMainimgurl + '" alt="">' +
+						'</a>' +
+						'</div>' +
+						'<div class="product-desc">' +
+						'<div class="product-title">' + data[i].productName + '</div>' +
+						'<div class="product-type"></div>' +
+						'<div class="product-data">' +
+						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+						'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+						' Review(s)</span>' +
+						'</div>' +
+						'<div class="product-price">' +
+						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+							.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+						'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+						'</span>' +
+						'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+						'</div>' +
+						'</div>' +
+						'</div>'+
+						'</div>';
+				}
+
+				parent.html(html);
+		}
+		 
+		 // function hot_pic_detial(parent, data) {
+		 // 	  var html = '';
+		 // 	  for (var i = 0; i < data.length; i += 1) {
+		 // 		   var slideIfinto_click = data[i].slideIfinto;
+		 // 			  html += '<div class="swiper-slide">' +
+		 // 			  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+		 // 			  '<img src="' + data[i].slidePcimgurl + '" alt="">' +
+		 // 			  '</a>' +
+		 // 			  '</div>';
+		 // 	  }
+		 // 	  parent.html(html);
+		 // 	}
+		
+		$.ajax({
+			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidepcListByArea',
+				data: JSON.stringify({
+			   "slideArea": 3
+			 }),
+			 type: 'post',
+			 dataType: 'text',
+			 contentType: 'application/json',
+			 success: function (data) {
+					    // console.log(JSON.parse(data))/***data**/
+					if (JSON.parse(data).code === 100) {
+					  // var resData = JSON.parse(data).extend.mlbackSlideList;;
+					  var resDataProduct = JSON.parse(data).extend.mlbackProductResList;;
+					  // console.log(resData);
+					  // console.log(resDataProduct);
+					 rednerProduct(hot_pic,resDataProduct)
+					 new Swiper('.hot_box_product_cont', {
+					         	  slidesPerView: 5,
+					   spaceBetween: 10,
+					   freeMode: true,
+					   loop:true,
+					  autoplay: {
+					      disableOnInteraction: false,
+					    },
+					   // loop:true,
+					    simulateTouch : false,//禁止鼠标模拟
+						pagination: {
+							el: '.swiper-pagination2',
+							clickable: true
+						},
+						navigation: {
+							nextEl: '.swiper-button-nextcc',
+							prevEl: '.swiper-button-prevcc',
+						},
+				    })
+					 
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					}
+				  }
+		});	
+		
+		
 		});
 
 		function deleteReview() {

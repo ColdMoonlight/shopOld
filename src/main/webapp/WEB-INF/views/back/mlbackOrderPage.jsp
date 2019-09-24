@@ -116,7 +116,12 @@
 			$.each(task, function (index, item) {
 				var orderId = $("<td></td>").append(item.orderId);
 				var orderMoney = $("<td></td>").append(parseFloat(item.orderMoney));
-				var orderStatus = $("<td></td>").append((item.orderStatus === 1 ? '已支付' : '未支付'));
+				<!-- var orderStatus = $("<td></td>").append((item.orderStatus === 1 ? '已支付' : '未支付')); -->
+				if(item.orderStatus ===1){
+					var orderStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
+				}else{
+					var orderStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
+				}
 				var addressinfoId = $("<td></td>").append(item.addressinfoId);
 				var orderCouponCode = $("<td></td>").append((item.orderCouponCode ? item.orderCouponCode : '未使用'));
 				var orderCreatetime = $("<td></td>").append(item.orderCreatetime);

@@ -10,6 +10,28 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/theme.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/new.css">
+	
+	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
+<!-- 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-145178467-1');
+	</script> -->
+	
+	
+	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326913-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-148326913-1');
+	</script>
+	
 </head>
 
 <body>
@@ -68,10 +90,10 @@
 				<!-- search logo cart -->
 				<div class="tt-header-holder">
 					<!-- tt-search -->
-					<div class="tt-desctop-parent-search tt-parent-box">
+					<!-- <div class="tt-desctop-parent-search tt-parent-box">
 						<div class="tt-search tt-dropdown-obj">
 							<button class="tt-dropdown-toggle" data-tooltip="Search" data-tposition="bottom">
-								<i class="icon-f-85"></i>
+								
 							</button>
 							<div class="tt-dropdown-menu">
 								<div class="container">
@@ -90,6 +112,9 @@
 								</div>
 							</div>
 						</div>
+					</div> -->
+					<div class="search_btn">
+						<i class="icon-f-85"></i>
 					</div>
 					<!-- /tt-search -->
 					<!-- tt-logo -->
@@ -142,6 +167,22 @@
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
 	</div>
+	<div class="serch_cont">
+		<div class="serch_box">
+			<span class="close_serch"></span>
+			<p class="serch_tit">What are you Looking for?</p>
+			<div class="tt-col">
+				<input type="text" class="tt-search-input" placeholder="Search Products..." />
+				<button class="tt-btn-search" type="submit"></button>
+			</div>
+			<ul class="show_ul">
+				<li>sdsdfsdfsdf</li>
+				<li>sdsdfsdfsdf</li>
+				<li>sdsdfsdfsdf</li>
+			</ul>
+		</div>
+		
+	</div>
 	
 	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
@@ -157,6 +198,7 @@
 				var winS=$(this).scrollTop();
 				if(winS>0){
 					$(".go_top").show();
+					$('.serch_cont').slideUp(200);
 				}else{
 					$(".go_top").hide();
 				}
@@ -361,6 +403,52 @@
 		  function toProductItem(id) {
 		  if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/topcProductDetailPage?productId=" + id;
 		}
+/*******搜索****************************************/
+		    function list_li (parent,data){
+				  var html=""
+				  for(var i=0, len=data.length; i < len; i += 1){
+					  html += '<li>' + data[i].productName + '</li>';
+				  }
+			    parent.html(html);
+			  }
+		     function serch_box (productName){
+				   $.ajax({
+				   	url: "${APP_PATH}/MlbackProduct/searchProductLike",
+				   	data: "productName=" + productName,
+				   	type: "POST",
+				   	success: function (data) {
+						// console.log(data)
+						if(data.code==100){
+							var resultlist = data.extend.mlbackProductResList;
+							 list_li($('.show_ul'), resultlist);
+							 $(".show_ul").show();
+						}
+				   	}
+				   });
+			   }
+				$('.tt-search-input').bind('input propertychange', function(data) {  
+				    var keywords = $(this).val();
+				    if (keywords == '') {
+				        $('.show_ul').hide();
+				        return
+				    };
+					if(keywords.length>3){
+							// serch_box(1)
+					}
+				}) 
+				
+				$('body').delegate('.show_ul li','click',function(e){
+					var val = $(this).text();
+					$(".tt-col").find("input.tt-search-input").val(val);
+					$(".serch_box").find("ul.show_ul").slideUp(200)
+					e.stopPropagation();
+				});
+				$("body").on('click', '.search_btn',function() {
+				    $('.serch_cont').slideDown(200)
+				})
+			  $("body").on('click', '.close_serch',function() {
+				    $('.serch_cont').slideUp(200)
+				})
 		
 		
 	</script>

@@ -115,6 +115,7 @@
           new Swiper('#hot-product', {
         	  slidesPerView: 4,
             spaceBetween: 10,
+			 autoplay: {delay: 3000,},
             freeMode: true,
 						pagination: {
 							el: '.swiper-pagination',
@@ -334,7 +335,11 @@
 						clickable: true
 					},
 					 simulateTouch : false,//禁止鼠标模拟
-					autoplay: {delay: 3000,},
+					 loop:true,
+					// autoplay: {delay: 3000,},
+					autoplay: {
+					    disableOnInteraction: false,
+					  },
 					  navigation: {
 						nextEl: '.swiper-button-nexta',
 						prevEl: '.swiper-button-preva',

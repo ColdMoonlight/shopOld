@@ -456,6 +456,9 @@
 		</div>
 	</div>
 </div>
+	<div class="loading">
+		<div class="boxload"> <div class="loader-14"></div></div>
+	</div>
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 	<script type="text/javascript">
 		var myDate = new Date();
@@ -496,7 +499,7 @@
 					 couponPriceText.text('-$' + 0);
 				   }
 				   $(".coed_inp").val("");
-				   $(".without-data").text("Enter coupon code to get a discount!");
+				   $(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
 				 var dataname = $(this).val();
 				 $.ajax({
 					  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -773,7 +776,7 @@
 					html = '<div class="input-group">' +
 						'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 						'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
-						'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
+						'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!(Please enter uppercase)</p></div>';
 				}
 				/* MlbackCoupon/getOneMlbackCouponDetailByUId
 				无参数  post */
@@ -878,7 +881,6 @@
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
 		$('.place-order').on('click', function () {
-			
 			// var val=$('input:radio[name="sex"]:checked').val();
 			// var no_check_copn =radio_zt.
 			if (inputCheck9()==1){
@@ -924,6 +926,7 @@
 						success: function (data) {
 							var resData = JSON.parse(data).extend;
 							// console.log(data)
+							$(".loading").show();
 							window.location.href = '${APP_PATH }/paypal/ppay';
 						}
 					})
@@ -1062,7 +1065,6 @@
 						$(this).removeClass("error_br")
 					})
 				}
-				
 				return flag;
 				
 					
