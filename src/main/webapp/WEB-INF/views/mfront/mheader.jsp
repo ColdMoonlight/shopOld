@@ -37,14 +37,24 @@
 	    return $(nextEls);
 	 };
   </script>
-	  <!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
+	  <!-- Global site tag (gtag.js) - Google Analytics 生产-->
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 	
 	  gtag('config', 'UA-145178467-1');
+	</script> -->
+	
+	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326913-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-148326913-1');
 	</script>
 </head>
 
