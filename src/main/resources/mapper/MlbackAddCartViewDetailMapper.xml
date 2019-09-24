@@ -8,6 +8,7 @@
     <result column="addcartViewDetail_proid" jdbcType="INTEGER" property="addcartviewdetailProid" />
     <result column="addcartViewDetail_proname" jdbcType="VARCHAR" property="addcartviewdetailProname" />
     <result column="addcartViewDetail_seoname" jdbcType="VARCHAR" property="addcartviewdetailSeoname" />
+    <result column="addcartViewDetail_actnum" jdbcType="INTEGER" property="addcartviewdetailActNum" />
     <result column="addcartViewDetail_createTime" jdbcType="VARCHAR" property="addcartviewdetailCreatetime" />
     <result column="addcartViewDetail_motifyTime" jdbcType="VARCHAR" property="addcartviewdetailMotifytime" />
     <result column="addcartViewDetail_starttime" jdbcType="VARCHAR" property="addcartviewdetailStarttime" />
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     addcartViewDetail_id, addcartViewDetail_sessionid, addcartViewDetail_name, addcartViewDetail_proid, 
-    addcartViewDetail_proname, addcartViewDetail_seoname, addcartViewDetail_createTime, 
+    addcartViewDetail_proname, addcartViewDetail_seoname, addcartViewDetail_actnum, addcartViewDetail_createTime, 
     addcartViewDetail_motifyTime, addcartViewDetail_starttime, addcartViewDetail_endtime
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackAddCartViewDetailExample" resultMap="BaseResultMap">
@@ -106,13 +107,13 @@
   <insert id="insert" parameterType="com.atguigu.bean.MlbackAddCartViewDetail">
     insert into tb_mlback_addcartviewdetail (addcartViewDetail_id, addcartViewDetail_sessionid, 
       addcartViewDetail_name, addcartViewDetail_proid, 
-      addcartViewDetail_proname, addcartViewDetail_seoname, 
+      addcartViewDetail_proname, addcartViewDetail_seoname, addcartViewDetail_actnum, 
       addcartViewDetail_createTime, addcartViewDetail_motifyTime, 
       addcartViewDetail_starttime, addcartViewDetail_endtime
       )
     values (#{addcartviewdetailId,jdbcType=INTEGER}, #{addcartviewdetailSessionid,jdbcType=VARCHAR}, 
       #{addcartviewdetailName,jdbcType=VARCHAR}, #{addcartviewdetailProid,jdbcType=INTEGER}, 
-      #{addcartviewdetailProname,jdbcType=VARCHAR}, #{addcartviewdetailSeoname,jdbcType=VARCHAR}, 
+      #{addcartviewdetailProname,jdbcType=VARCHAR}, #{addcartviewdetailSeoname,jdbcType=VARCHAR}, #{addcartviewdetailActNum,jdbcType=INTEGER}, 
       #{addcartviewdetailCreatetime,jdbcType=VARCHAR}, #{addcartviewdetailMotifytime,jdbcType=VARCHAR}, 
       #{addcartviewdetailStarttime,jdbcType=VARCHAR}, #{addcartviewdetailEndtime,jdbcType=VARCHAR}
       )
@@ -145,6 +146,9 @@
       <if test="record.addcartviewdetailSeoname != null">
         addcartViewDetail_seoname = #{record.addcartviewdetailSeoname,jdbcType=VARCHAR},
       </if>
+      <if test="record.addcartviewdetailActNum != null">
+        addcartViewDetail_actnum = #{record.addcartviewdetailActNum,jdbcType=INTEGER},
+      </if>
       <if test="record.addcartviewdetailCreatetime != null">
         addcartViewDetail_createTime = #{record.addcartviewdetailCreatetime,jdbcType=VARCHAR},
       </if>
@@ -170,6 +174,7 @@
       addcartViewDetail_proid = #{record.addcartviewdetailProid,jdbcType=INTEGER},
       addcartViewDetail_proname = #{record.addcartviewdetailProname,jdbcType=VARCHAR},
       addcartViewDetail_seoname = #{record.addcartviewdetailSeoname,jdbcType=VARCHAR},
+      addcartViewDetail_actnum = #{record.addcartviewdetailActNum,jdbcType=INTEGER},
       addcartViewDetail_createTime = #{record.addcartviewdetailCreatetime,jdbcType=VARCHAR},
       addcartViewDetail_motifyTime = #{record.addcartviewdetailMotifytime,jdbcType=VARCHAR},
       addcartViewDetail_starttime = #{record.addcartviewdetailStarttime,jdbcType=VARCHAR},
@@ -196,6 +201,9 @@
       <if test="addcartviewdetailSeoname != null">
         addcartViewDetail_seoname = #{addcartviewdetailSeoname,jdbcType=VARCHAR},
       </if>
+       <if test="addcartviewdetailActNum != null">
+        addcartViewDetail_actnum = #{addcartviewdetailActNum,jdbcType=INTEGER},
+      </if>
       <if test="addcartviewdetailCreatetime != null">
         addcartViewDetail_createTime = #{addcartviewdetailCreatetime,jdbcType=VARCHAR},
       </if>
@@ -218,6 +226,7 @@
       addcartViewDetail_proid = #{addcartviewdetailProid,jdbcType=INTEGER},
       addcartViewDetail_proname = #{addcartviewdetailProname,jdbcType=VARCHAR},
       addcartViewDetail_seoname = #{addcartviewdetailSeoname,jdbcType=VARCHAR},
+      addcartViewDetail_actnum = #{addcartviewdetailActNum,jdbcType=INTEGER},
       addcartViewDetail_createTime = #{addcartviewdetailCreatetime,jdbcType=VARCHAR},
       addcartViewDetail_motifyTime = #{addcartviewdetailMotifytime,jdbcType=VARCHAR},
       addcartViewDetail_starttime = #{addcartviewdetailStarttime,jdbcType=VARCHAR},
@@ -251,6 +260,9 @@
       <if test="addcartviewdetailSeoname != null">
         addcartViewDetail_seoname,
       </if>
+      <if test="addcartviewdetailActNum != null">
+        addcartViewDetail_actnum,
+      </if>
       <if test="addcartviewdetailCreatetime != null">
         addcartViewDetail_createTime,
       </if>
@@ -283,6 +295,9 @@
       <if test="addcartviewdetailSeoname != null">
         #{addcartviewdetailSeoname,jdbcType=VARCHAR},
       </if>
+      <if test="addcartviewdetailActNum != null">
+        #{addcartviewdetailActNum,jdbcType=INTEGER},
+      </if>
       <if test="addcartviewdetailCreatetime != null">
         #{addcartviewdetailCreatetime,jdbcType=VARCHAR},
       </if>
@@ -305,7 +320,7 @@
   
   <!-- selectMlbackAddCartViewDetailByTime -->
   <select id="selectMlbackAddCartViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddCartViewDetail" resultMap="BaseResultMap">
-  	select addcartViewDetail_id, addcartViewDetail_seoname, addcartViewDetail_createTime from tb_mlback_addcartviewdetail where
+  	select addcartViewDetail_id, addcartViewDetail_seoname, addcartViewDetail_actnum, addcartViewDetail_createTime from tb_mlback_addcartviewdetail where
    	addcartViewDetail_createTime between #{addcartviewdetailStarttime,jdbcType=VARCHAR} and #{addcartviewdetailEndtime,jdbcType=VARCHAR} order by addcartViewDetail_seoname
   </select>
   
