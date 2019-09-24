@@ -43,8 +43,11 @@
 							</div>
 						</div>
 						<div class="model-b model-pie num_data">
-							<div class="model-pie-data model-pie-list">
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量" class="model-item"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
+							<div class="model-pie-data model-pie-list num_box_list">
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量" class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="架构量" class="model-item addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="提交量" class="model-item refer"><div class="model-text">提交量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量" class="model-item accounts"><div class="model-text">结算量</div><div class="model-num">0</div></a>
 							</div>
 								
 							<!-- <div class="model-pie-chart">
@@ -160,6 +163,7 @@
 		/*****初始化时间*****************/
 		var startime =minDate22;
 		var endtime =maxDate;
+		/*****初始调取浏览量*****************/
 		$.ajax({
 		        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
 		        data: JSON.stringify({
@@ -170,11 +174,30 @@
 		        dataType: 'JSON',
 		        contentType: 'application/json',
 		        success: function (data) {
-		        // console.log(data);
+		        console.log(data);
 				var resData = data.extend.mlbackActShowProList;
-				$(".num_data .model-num").html(resData.length)
+				$(".liulan .model-num").html(resData.length)
 		        }
 		      });
+			  /*****初始调取加购量****************/
+			  $.ajax({
+				  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
+				  data: JSON.stringify({
+				  "addcartviewdetailStarttime": startime,
+				  "addcartviewdetailEndtime": endtime,
+				  }),
+				  type: 'post',
+				  dataType: 'JSON',
+				  contentType: 'application/json',
+				  success: function (data) {
+				    console.log(data);
+				    var resData = data.extend.toDayNum;
+					
+				    $(".addcart .model-num").html(resData);
+					
+				  },
+				  
+				});
 		
 /***********************************************/
 		function initJs() {
@@ -206,6 +229,7 @@
 						// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
 						var startime = this.$input.eq(0).val();
 						var endtime = this.$input.eq(1).val();
+						/******根据时间调取浏览量***************************/
 						$.ajax({
 						        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
 						        data: JSON.stringify({
@@ -218,9 +242,27 @@
 						        success: function (data) {
 						        // console.log(data);
 								var resData = data.extend.mlbackActShowProList;
-								$(".num_data .model-num").html(resData.length)
+								$(".liulan .model-num").html(resData.length)
 						        }
 						      });
+					/******************************************************************/
+						  $.ajax({
+								  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
+								  data: JSON.stringify({
+								  "addcartviewdetailStarttime": startime,
+								  "addcartviewdetailEndtime": endtime,
+								  }),
+								  type: 'post',
+								  dataType: 'JSON',
+								  contentType: 'application/json',
+								  success: function (data) {
+									console.log(data);
+									var resData = data.extend.toDayNum;
+									$(".addcart .model-num").html(resData);
+									
+								  },
+								  
+								});
 						
 					}
 				})
