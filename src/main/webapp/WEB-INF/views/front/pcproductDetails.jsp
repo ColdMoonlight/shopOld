@@ -270,6 +270,7 @@
 						var productData = data.extend.mlbackProductOne;
 						addHeaderInfo(productData);
 						var fbpid=productData.productId;
+						// alert(fbpid)
 						var fbprice=(productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
 						fbq('track', 'PageView', {
 							  content_ids: fbpid,
@@ -568,7 +569,7 @@
 				$.ajax({
 					url: "${APP_PATH}/MlfrontReview/saveNew",
 					data: JSON.stringify({
-						reviewPid: pidA[1],
+						reviewPid: pidA,
 					}),
 					dataType: "json",
 					contentType: 'application/json',
@@ -637,7 +638,7 @@
 						reviewId: reviewId,
 						reviewUname: username,
 						reviewPname: email,
-						reviewPid: pidA[1],
+						reviewPid: pidA,
 						reviewDetailstr: details,
 						reviewProstarnum: starNum
 				}
@@ -748,7 +749,7 @@
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
-				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductId = parseInt(pidA);
 				reqData.cartitemProductName = dataPrice.productName;
 				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
 				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
@@ -800,6 +801,7 @@
 			function generateOrder(reqData) {
 				// console.log(reqData)
 				var fbpid=pidA;
+				// alert(fbpid)
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/toAddToCart',
 					data: JSON.stringify(reqData),
@@ -812,14 +814,15 @@
 						var resData =data.code;
 						if (resData === 100) {
 							// console.log(resData)
+							setTimeout(function(){
+								cartText.text(parseInt(cartText.text()) + 1);
+							},1000)
 							//追踪'添加购物车'事件    facebook广告插件可以注释掉，但不要删除
 				              fbq('track', 'AddToCart', {
 				                  content_ids: fbpid,
 				                  content_type: 'product'
 				                });
-							setTimeout(function(){
-								cartText.text(parseInt(cartText.text()) + 1);
-							},1000)
+							
 							// window.location.href = '${APP_PATH}/myCart.html';
 						}
 					},
@@ -854,7 +857,7 @@
 				// console.log(dataPrice)
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
-				reqData.cartitemProductId = parseInt(pidA[1]);
+				reqData.cartitemProductId = parseInt(pidA);
 				reqData.cartitemProductName = dataPrice.productName;
 				reqData.cartitemProductOriginalprice = dataPrice.productOriginalprice;
 				reqData.cartitemProductMainimgurl = dataPrice.productMainimgurl;
@@ -864,7 +867,8 @@
 				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
-				// console.log(data);
+				// console.log(reqData);
+				
 				fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
 				
 				// name, id, price
@@ -895,7 +899,7 @@
 			});
 			
 			function generateOrderNow(reqData) {
-				// console.log(reqData)
+				console.log(reqData)
 				$.ajax({
 					  url: '${APP_PATH}/MlbackCart/toBuyNow',
 					  data: JSON.stringify(reqData),
