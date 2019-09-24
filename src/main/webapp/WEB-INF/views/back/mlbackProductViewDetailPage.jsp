@@ -196,6 +196,8 @@
 								// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
 								var startime = this.$input.eq(0).val();
 								var endtime = this.$input.eq(1).val();
+								 $(".td_name").empty();
+								  $(".td_num").empty();
 								$.ajax({
 								        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailList',
 								        data: JSON.stringify({
