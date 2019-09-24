@@ -197,7 +197,7 @@
 								var startime = this.$input.eq(0).val();
 								var endtime = this.$input.eq(1).val();
 								 $(".td_name").empty();
-								  $(".td_num").empty();
+								 $(".td_num").empty();
 								$.ajax({
 								        url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailList',
 								        data: JSON.stringify({

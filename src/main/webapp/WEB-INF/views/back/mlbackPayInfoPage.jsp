@@ -291,6 +291,7 @@
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
+							
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							shipName = orderData.orderLogisticsname;
@@ -301,6 +302,9 @@
 							var receiveData = resDataAddressOne;
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
+							receiveData.orderCouponCode = resDataOrderPayOne.orderCouponCode;	//**优惠码****
+						
+							
 							receiveData.payinfoPlatform = resDataPayInfoOne.payinfoPlatform;
 							receiveData.payinfoCreatetime = resDataPayInfoOne.payinfoCreatetime;
 							
@@ -507,6 +511,7 @@
 		function renderReceiverinfo(data) {
 			var html = '';
 			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
+			    '<div><span>优惠码：</span><span>' + data.orderCouponCode + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
 				'<div><span>收货人firstname：</span><span id="fza_txt">' + data.addressUserfirstname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fza" value="复制文本" /></div>' +
 				'<div><span>收货人lastname：</span><span id="fzb_txt">' + data.addressUserlastname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzb" value="复制文本" /></div>' +
