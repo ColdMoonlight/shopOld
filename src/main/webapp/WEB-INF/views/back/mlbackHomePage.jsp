@@ -256,7 +256,7 @@
 								  dataType: 'JSON',
 								  contentType: 'application/json',
 								  success: function (data) {
-									console.log(data);
+									// console.log(data);
 									var resData = data.extend.toDayNum;
 									$(".addcart .model-num").html(resData);
 									
