@@ -443,10 +443,12 @@ html,body {
 .btn_fz{margin: 0 0 0 20px;}
 .revceiver-info div{margin: 10px 0;}
 .num_box_list{width: 100%; display: flex;  align-items: center;justify-content: space-between;}
-
-
-
-
+.table tr td.td_name{border-right:1px solid #CCCCCC; padding: 0;}
+.table tr td.td_num{border-right:1px solid #CCCCCC; padding: 0;}
+.td_name p{border-bottom: 1px solid #ccc; padding: 2px;margin: 0;}
+.td_name p:nth-of-type(2n){background: #F2F6FC;}
+.td_num p{border-bottom: 1px solid #ccc;padding: 2px;margin: 0;}
+.td_num p:nth-of-type(2n){background: #F2F6FC;}
 
 
 

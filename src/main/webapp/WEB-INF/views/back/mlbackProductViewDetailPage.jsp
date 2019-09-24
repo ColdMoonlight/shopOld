@@ -155,13 +155,13 @@
               		var seohtml = data.extend.SeoStringList;
               		var numhtml = data.extend.numList;
               		 $.each(seohtml, function(index, value){
-              			 var html =".html";
-              			 var index="产品";
-              		                $(".td_name").append(index+"---"+ value + html + '<br>');
-              		            });
-              		$.each(numhtml, function(index, value){
-              		               $(".td_num").append(+ value + '<br>');
-              		           });
+              		 	 var html =".html";
+              		 	 var index="产品";
+              		      $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
+              		 });
+              		 $.each(numhtml, function(index, value){
+              		       $(".td_num").append('<p>'+ value +  '</p>');
+              		 });
               		
                       }
                     });
@@ -214,11 +214,11 @@
 										 $.each(seohtml, function(index, value){
 											 var html =".html";
 											 var index="产品";
-										                $(".td_name").append(index+"---"+ value + html + '<br>');
-										            });
+										     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
+										});
 										$.each(numhtml, function(index, value){
-										               $(".td_num").append(+ value + '<br>');
-										           });
+										      $(".td_num").append('<p>'+ value +  '</p>');
+										});
 										
 								        }
 								      });
