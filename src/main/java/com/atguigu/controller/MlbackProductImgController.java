@@ -45,7 +45,7 @@ public class MlbackProductImgController {
 	}
 	
 	/**2.0	UseNow	0505
-	 * MlbackReviewImg	delete
+	 * MlbackProductImg	delete
 	 * @param id
 	 */
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
