@@ -87,9 +87,6 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/summernote.min.js"></script>
 
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/session.js"></script>
-	
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
@@ -422,7 +419,32 @@
 					});
 				});
 				saveOption(productId);
+				/**********/
+				$(".clear_img").on("click",function(id){
+					var selfimg =this;
+						var data = {
+							productimgId:$(this).parents(".upload-img-btn").attr("id")
+						};
+						// console.log(data);
+						$.ajax({
+							url: "${APP_PATH}/MlbackProductImg/delete",
+							data: JSON.stringify(data),
+							dataType: "json",
+							contentType: 'application/json',
+							type: "post",
+							success: function (result) {
+								console.log(result)
+								if (result.code == 100) {
+									alert('删除成功！');
+									$(selfimg).parents(".upload-img-btn").css({"background":"url(/ShopTemplate/static/img/plus.png) no-repeat","background-size":"200px"})
+								}
+							}
+						});
+					});
 			});
+			
+			
+			
 		});
 
 		function categorySave(e) {
@@ -586,13 +608,13 @@
 
 		// 编辑-回显-数据（仅图片）
 		function tianchongImg(data) {
-			// console.log(data);
+			console.log(data);
 			var elImgs = $('.sub-img').find('.upload-img-btn');
 			for (var i = 0; i < data.length; i += 1) {
 				$(elImgs[data[i].productimgSortOrder - 1]).css("background-image", "url(" + data[i].productimgUrl + ")");
+				var imgid =data[i].productimgId;
+				$(elImgs[data[i].productimgSortOrder - 1]).attr("id",imgid)
 			}
-
-			// productimgUrl  productimgSortOrder
 		}
 
 		// upload img 
