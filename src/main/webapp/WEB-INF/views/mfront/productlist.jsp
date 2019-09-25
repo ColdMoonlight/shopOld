@@ -201,8 +201,10 @@
 			parent.html(html);
 		}
 	</script>
-	<!--  这是一个聊天交流的工具 -->
-  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
+	<!-- megalookhair 
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  	<!-- huashuohair -->
+  	<script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
 </body>
 
 </html>
