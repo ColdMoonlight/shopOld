@@ -46,8 +46,9 @@
 										<th>活动品name</th>
 										<th>活动品归属组</th>
 										<th>产品id</th>
-										<th>产品名称</th>
 										<th>产品SEO名称</th>
+										<th>类id</th>
+										<th>类SEO名称</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
@@ -149,11 +150,10 @@
 				var actshowproName = $("<td></td>").append(item.actshowproName);
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);
 				var actshowproProid = $("<td></td>").append(item.actshowproProid);
-				// var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
-				
-				
-				var actshowproProname = $("<td></td>").append(item.actshowproProname);
 				var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
+				var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
+				var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
+				
 				
 				var imgurl = item.actshowproImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
@@ -181,9 +181,10 @@
 					.append(actshowproName)
 					.append(actshowproActnum)
 					.append(actshowproProid)
-					// .append(actshowproCateid)
-					.append(actshowproProname)
+					// .append(actshowproProname)
 					.append(actshowproSeoname)
+					.append(actshowproCateid)
+					.append(actshowproCatename)
 					.append(actshowproImgwapurl)
 					.append(actshowproImgpcurl)
 					.append(actshowproStatus)
