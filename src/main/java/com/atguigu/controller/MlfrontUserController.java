@@ -155,6 +155,9 @@ public class MlfrontUserController {
 			//此账号邮箱存在，返回即可
 			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
 			String alreadyPwd= mlfrontUserres.getUserPassword();
+			Integer UserId = mlfrontUserres.getUserId();
+			
+			updateLoginTime(UserId);
 			if(alreadyPwd.equals(userPassword)){
 				System.out.println("密码正确,登陆成功");
 				session.setAttribute("loginUser", mlfrontUserres);
@@ -169,6 +172,19 @@ public class MlfrontUserController {
 		}
 	}
 	
+	private void updateLoginTime(Integer userId) {
+		
+		String nowtime = DateUtil.strTime14s();
+		
+		MlfrontUser mlfrontUser = new MlfrontUser();
+		mlfrontUser.setUserId(userId);
+		mlfrontUser.setUserMotifytime(nowtime);
+		mlfrontUser.setUserLastonlinetime(nowtime);
+		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
+		System.out.println(intResult);
+		System.out.println(mlfrontUser);
+	}
+
 	/**4.0	UseNow	0608
 	 * MlfrontUser	注册register
 	 * @param MlfrontUser
@@ -184,6 +200,7 @@ public class MlfrontUserController {
 		mlfrontUserreq.setUserEmail(userEmail);
 		Integer registerYes = 0;
 		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
+		String nowtime = DateUtil.strTime14s();
 		if(mlfrontUserList.size()>0){
 			//此账号邮箱已经注册，返回即可
 			return Msg.success().add("resMsg", "Registration failed, the email has been registered").add("registerYes", registerYes);//0的话取出resMsg
@@ -192,6 +209,8 @@ public class MlfrontUserController {
 			mlfrontUserreq.setUserPassword(userPassword);
 			//给user的Coupon字段加入优惠券的idStr
 			mlfrontUserreq.setUserCouponidstr("1,2,3");
+			mlfrontUserreq.setUserCreatetime(nowtime);
+			mlfrontUserreq.setUserLastonlinetime(nowtime);
 			int intResult = mlfrontUserService.insertSelective(mlfrontUserreq);
 			System.out.println(intResult);
 			//用账号把它查回来
@@ -349,6 +368,7 @@ public class MlfrontUserController {
 		//接受信息
 		String nowtime = DateUtil.strTime14s();
 		mlfrontUser.setUserMotifytime(nowtime);
+		mlfrontUser.setUserLastonlinetime(nowtime);
 		//更新本条状态
 		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
 		System.out.println(intResult);

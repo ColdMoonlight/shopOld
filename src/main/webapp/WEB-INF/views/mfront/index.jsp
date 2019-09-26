@@ -93,7 +93,6 @@
 		  }else if(actshowprolei==1){
 			  html += '<div class="banner">' +
 			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
-			 // '< a href="${APP_PATH}/MlbackCategory/toproductlist?actshowproCateid=' + data.actshowproCateid + '">' +
 			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  '</a>' +
 			  '</div>';
