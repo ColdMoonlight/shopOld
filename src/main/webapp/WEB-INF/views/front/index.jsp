@@ -83,21 +83,20 @@
     function renderHotProduct(parent, data) {
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
-				/* html += '<div class="swiper-slide">' +
-	          			'<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].actshowproProid + '">' +
-						'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-						'</a>' +
-						'</div>'; */
-				html += '<div class="swiper-slide">' +
-		          		'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-						'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-						'</a>' +
-						'</div>';
-				/* html += '<div class="banner">' +
-		        '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+				  var actshowprolei = data[i].actshowproIfproORcate;
+				  if(actshowprolei==0){
+							html += '<div class="swiper-slide">' +
+									'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
 									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-		        '</a>' +
-		        '</div>'; */
+									'</a>' +
+									'</div>';
+				  }else if(actshowprolei==1){
+							  html += '<div class="swiper-slide">' +
+							   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+							  '</a>' +
+							  '</div>';
+				  }
 			}
       parent.html(html);
     }
