@@ -34,7 +34,7 @@ html,body {
 }
 
 .main-box .c-datepicker-picker {
-	margin-left: 15.6%;
+	margin-left:0;
 }
 
 .content {
@@ -449,8 +449,7 @@ html,body {
 .td_name p:nth-of-type(2n){background: #F2F6FC;}
 .td_num p{border-bottom: 1px solid #ccc;padding: 2px;margin: 0;}
 .td_num p:nth-of-type(2n){background: #F2F6FC;}
-
-
+.data_num{margin: 0 100px 0 0;}
 
 
 
