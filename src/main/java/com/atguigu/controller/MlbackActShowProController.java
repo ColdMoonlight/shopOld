@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
@@ -93,22 +94,43 @@ public class MlbackActShowProController {
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackActShowPro mlbackActShowPro){
 		//接受参数信息
 		//获取类名
-		Integer actshowproId = mlbackActShowPro.getActshowproId();
-		Integer proId = mlbackActShowPro.getActshowproProid();
 		
-		MlbackProduct mlbackProductReq = new MlbackProduct();
-		MlbackProduct mlbackProductRes = new MlbackProduct();
-		mlbackProductReq.setProductId(proId);
-		List<MlbackProduct> mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
-		mlbackProductRes = mlbackProductResList.get(0);
-		String Pname = mlbackProductRes.getProductName();
-		String Pseoname = mlbackProductRes.getProductSeo();
+		Integer actshowproIfproORcate = mlbackActShowPro.getActshowproActnum();
+		if(actshowproIfproORcate==0){
+			//产品
+			Integer proId = mlbackActShowPro.getActshowproProid();
+			
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			MlbackProduct mlbackProductRes = new MlbackProduct();
+			mlbackProductReq.setProductId(proId);
+			List<MlbackProduct> mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
+			mlbackProductRes = mlbackProductResList.get(0);
+			String Pname = mlbackProductRes.getProductName();
+			String Pseoname = mlbackProductRes.getProductSeo();
+			mlbackActShowPro.setActshowproProname(Pname);//Pseoname
+			mlbackActShowPro.setActshowproSeoname(Pseoname);
+		}else if(actshowproIfproORcate==1){
+			//类
+			Integer cId = mlbackActShowPro.getActshowproCateid();
+			MlbackCategory mlbackCategoryReq = new MlbackCategory();
+			MlbackCategory mlbackCategoryRes = new MlbackCategory();
+			
+			mlbackCategoryReq.setCategoryId(cId);
+			
+			List<MlbackCategory> mlbackCategoryResList = mlbackCategoryService.selectMlbackCategory(mlbackCategoryReq);
+			mlbackCategoryRes = mlbackCategoryResList.get(0);
+			
+			String Cname = mlbackCategoryRes.getCategoryName();
+			String CategoryDesc = mlbackCategoryRes.getCategoryDesc();
+			mlbackActShowPro.setActshowproCatename(CategoryDesc);//Cname
+		}
+		Integer actshowproId = mlbackActShowPro.getActshowproId();
+		
 		
 		//mlbackProductService;
 		String nowtime = DateUtil.strTime14s();
 		mlbackActShowPro.setActshowproMotifytime(nowtime);
-		mlbackActShowPro.setActshowproProname(Pname);//Pseoname
-		mlbackActShowPro.setActshowproSeoname(Pseoname);
+		
 		if(actshowproId==null){
 			mlbackActShowPro.setActshowproCreatetime(nowtime);
 			//无id，insert
