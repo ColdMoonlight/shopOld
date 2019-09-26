@@ -95,7 +95,7 @@ public class MlbackActShowProController {
 		//接受参数信息
 		//获取类名
 		
-		Integer actshowproIfproORcate = mlbackActShowPro.getActshowproActnum();
+		Integer actshowproIfproORcate = mlbackActShowPro.getActshowproIfproORcate();
 		if(actshowproIfproORcate==0){
 			//产品
 			Integer proId = mlbackActShowPro.getActshowproProid();

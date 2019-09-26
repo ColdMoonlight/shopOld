@@ -83,11 +83,24 @@
     function rednerHotProduct(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
-        html += '<div class="banner">' +
-        '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-        '</a>' +
-        '</div>';
+		   var actshowprolei = data[i].actshowproIfproORcate;
+		  if(actshowprolei==0){
+			  html += '<div class="banner">' +
+			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+			  					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  '</a>' +
+			  '</div>';
+		  }else if(actshowprolei==1){
+			  html += '<div class="banner">' +
+			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+			 // '< a href="${APP_PATH}/MlbackCategory/toproductlist?actshowproCateid=' + data.actshowproCateid + '">' +
+			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  '</a>' +
+			  '</div>';
+			  
+		  }
+		  
+        
       }
       parent.html(html);
     }
