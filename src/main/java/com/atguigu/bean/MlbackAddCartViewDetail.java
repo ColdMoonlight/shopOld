@@ -13,7 +13,7 @@ public class MlbackAddCartViewDetail {
 
     private String addcartviewdetailSeoname;
     
-    private Integer addcartviewdetailActNum;		//用户行为，0纯加购	1点buyNow
+    private Integer addcartviewdetailActNum;		//用户行为，0纯加购	1点buyNow附带的加购
 
     private String addcartviewdetailCreatetime;
 
