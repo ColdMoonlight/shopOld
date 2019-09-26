@@ -62,6 +62,25 @@ public class MlbackAddCheakoutViewDetailController {
 		}
 	}
 	
+	/**
+	 * 1.1	UseNow	0505
+	 * MlbackAddCheakoutViewDetail列表页面
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/toMlbackAddCheakoutBuyNowViewDetailPage")
+	public String toMlbackAddCheakoutBuyNowViewDetailPage(HttpSession session) throws Exception{
+	
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackAddCheakoutViewbuynowDetailPage";
+		}
+	}
+	
+	
 	/**2.0	UseNow	0505
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
