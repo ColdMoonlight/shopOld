@@ -5,7 +5,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>仅加购量</title>
+	<title>加购量</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css">
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
@@ -28,7 +28,7 @@
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
-					<h2>仅加购量</h2>
+					<h2>加购量</h2>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
@@ -142,7 +142,7 @@
 			  console.log(startime);/******startime***********/
 			  console.log(endtime);/**-*******endtime******/
               $.ajax({
-                      url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailList',
+                      url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
                       data: JSON.stringify({
                       "addcartviewdetailStarttime": startime,
                       "addcartviewdetailEndtime": endtime,
@@ -199,7 +199,7 @@
 								 $(".td_name").empty();
 								 $(".td_num").empty();
 								$.ajax({
-								        url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailList',
+								        url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
 								        data: JSON.stringify({
 								        "addcartviewdetailStarttime": startime,
 								        "addcartviewdetailEndtime": endtime,

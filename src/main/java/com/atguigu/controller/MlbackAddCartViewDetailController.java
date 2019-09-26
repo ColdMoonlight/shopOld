@@ -58,6 +58,25 @@ public class MlbackAddCartViewDetailController {
 		}
 	}
 	
+	/**
+	 * 1.1	UseNow	0505
+	 * MlbackAddCartViewbuynowDetail列表页面
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/toMlbackAddCartViewbuynowDetailPage")
+	public String toMlbackAddCartViewbuynowDetailPage(HttpSession session) throws Exception{
+	
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
+		if(mlbackAdmin==null){
+			//SysUsers对象为空
+			return "back/mlbackAdminLogin";
+		}else{
+			return "back/mlbackAddCartViewbuynowDetailPage";
+		}
+	}
+	
+	
 	/**2.0	UseNow	0505
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
@@ -153,7 +172,7 @@ public class MlbackAddCartViewDetailController {
 		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
 	}
 	
-	/**3.0	UseNow	0505
+	/**5.0	UseNow	0505
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
 	 * @return
@@ -174,7 +193,7 @@ public class MlbackAddCartViewDetailController {
 	}
 	
 	
-	/**4.0	UseNow	0505
+	/**6.0	UseNow	0505
 	 * 分类MlbackProductViewDetail列表list数据
 	 * @param
 	 * @return
