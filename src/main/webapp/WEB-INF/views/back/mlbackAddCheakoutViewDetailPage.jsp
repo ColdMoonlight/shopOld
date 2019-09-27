@@ -142,7 +142,7 @@
 			  console.log(startime);/******startime***********/
 			  console.log(endtime);/**-*******endtime******/
               $.ajax({
-                      url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddOrderViewDetailBuyNowList',
+                      url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailList',
                       data: JSON.stringify({
                       "addcheakoutviewdetailStarttime": startime,
                       "addcheakoutviewdetailEndtime": endtime,
@@ -199,7 +199,7 @@
 								 $(".td_name").empty();
 								 $(".td_num").empty();
 								$.ajax({
-								        url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddOrderViewDetailBuyNowList',
+								        url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailList',
 								        data: JSON.stringify({
 								        "addcheakoutviewdetailStarttime": startime,
 								        "addcheakoutviewdetailEndtime": endtime,
