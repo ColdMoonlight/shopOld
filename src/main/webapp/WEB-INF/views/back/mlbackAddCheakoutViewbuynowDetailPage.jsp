@@ -5,7 +5,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>buynow加购量</title>
+	<title>buynow结算量</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css">
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
@@ -28,7 +28,7 @@
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
-					<h2>buynow加购量</h2>
+					<h2>buynow结算量</h2>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 									<th>产品SEO名称</th>
-								    <th>buynow加购量</th>
+								    <th>buynow结算量</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -142,10 +142,10 @@
 			  console.log(startime);/******startime***********/
 			  console.log(endtime);/**-*******endtime******/
               $.ajax({
-                      url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
+                      url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddOrderViewDetailBuyNowList',
                       data: JSON.stringify({
-                      "addcartviewdetailStarttime": startime,
-                      "addcartviewdetailEndtime": endtime,
+                      "addcheakoutviewdetailStarttime": startime,
+                      "addcheakoutviewdetailEndtime": endtime,
                       }),
                       type: 'post',
                       dataType: 'JSON',
@@ -156,7 +156,7 @@
               		var numhtml = data.extend.numList;
               		$.each(seohtml, function(index, value){
               			 var html =".html";
-              			 var index="buynow加购";
+              			 var index="buynow结算量";
               		     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
               		 });
               		$.each(numhtml, function(index, value){
@@ -199,10 +199,10 @@
 								 $(".td_name").empty();
 								 $(".td_num").empty();
 								$.ajax({
-								        url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
+								        url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddOrderViewDetailBuyNowList',
 								        data: JSON.stringify({
-								        "addcartviewdetailStarttime": startime,
-								        "addcartviewdetailEndtime": endtime,
+								        "addcheakoutviewdetailStarttime": startime,
+								        "addcheakoutviewdetailEndtime": endtime,
 								        }),
 								        type: 'post',
 								        dataType: 'JSON',
@@ -213,7 +213,7 @@
 										var numhtml = data.extend.numList;
 										 $.each(seohtml, function(index, value){
 											 var html =".html";
-											 var index="buynow加购量";
+											 var index="buynow结算量";
 										     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
 										 });
 										$.each(numhtml, function(index, value){

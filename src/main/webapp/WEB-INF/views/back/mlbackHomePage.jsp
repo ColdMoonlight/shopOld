@@ -46,10 +46,13 @@
 							<div class="model-pie-data model-pie-list num_box_list">
 								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"  class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="架构量" class="cart_num addcart"><div class="model-text">仅加购量</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="架构量" class="cart_num addcart2"><div class="model-text">加购量</div><div class="model-num">0</div></a>
+									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="仅加购量" class="cart_num addcart"><div class="model-text">仅加购量</div><div class="model-num">0</div></a>
+									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
 								</span>
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="提交量" class="model-item refer"><div class="model-text">提交量</div><div class="model-num">0</div></a>
+								<span class="model-item addcart_box">
+									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
+									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
+								</span>
 								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量" class="model-item accounts"><div class="model-text">结算量</div><div class="model-num">0</div></a>
 							</div>
 								
@@ -177,7 +180,7 @@
 			dataType: 'JSON',
 			contentType: 'application/json',
 			success: function (data) {
-			console.log(data);
+			// console.log(data);
 			var resData = data.extend.mlbackActShowProList;
 			$(".liulan .model-num").html(resData.length)
 			}
@@ -193,7 +196,7 @@
 				  dataType: 'JSON',
 				  contentType: 'application/json',
 				  success: function (data) {
-					console.log(data);
+					// console.log(data);
 					var resData = data.extend.toDayNum;
 					
 					$(".addcart .model-num").html(resData);
@@ -212,13 +215,46 @@
 					  dataType: 'JSON',
 					  contentType: 'application/json',
 					  success: function (data) {
-						console.log(data);
+						// console.log(data);
 						var resData = data.extend.toDayNum;
 						$(".addcart2 .model-num").html(resData);
 					  },
 				  
 				});
-				
+				/****************buynow量**************************************************/
+				$.ajax({
+					  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
+					  data: JSON.stringify({
+					  "addcheakoutviewdetailStarttime": startime,
+					  "addcheakoutviewdetailEndtime": endtime,
+					  }),
+					  type: 'post',
+					  dataType: 'JSON',
+					  contentType: 'application/json',
+					  success: function (data) {
+						console.log(data);
+						var resData = data.extend.toDayNum;
+						$(".buy_nownum .model-num").html(resData);
+					  },
+				  
+				});
+				/****************购物车结算**************************************************/
+				$.ajax({
+					  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
+					  data: JSON.stringify({
+					  "addcheakoutviewdetailStarttime": startime,
+					  "addcheakoutviewdetailEndtime": endtime,
+					  }),
+					  type: 'post',
+					  dataType: 'JSON',
+					  contentType: 'application/json',
+					  success: function (data) {
+						console.log(data);
+						var resData = data.extend.toDayNum;
+						$(".addcart_num .model-num").html(resData);
+					  },
+				  
+				});
 				
 				
 		
@@ -268,7 +304,7 @@
 								$(".liulan .model-num").html(resData.length)
 						        }
 						      });
-					/******************************************************************/
+					/**********初始调取仅加购量********************************************************/
 							$.ajax({
 								  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
 								  data: JSON.stringify({
@@ -286,7 +322,7 @@
 								  },
 							  
 							});
-					/***************************************************************************/			
+					/***********初始调取加购量****************************************************************/			
 							$.ajax({
 								  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
 								  data: JSON.stringify({
@@ -303,6 +339,40 @@
 								  },
 							  
 							});	
+							/****************buynow量**************************************************/
+							$.ajax({
+								  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
+								  data: JSON.stringify({
+								  "addcheakoutviewdetailStarttime": startime,
+								  "addcheakoutviewdetailEndtime": endtime,
+								  }),
+								  type: 'post',
+								  dataType: 'JSON',
+								  contentType: 'application/json',
+								  success: function (data) {
+									console.log(data);
+									var resData = data.extend.toDayNum;
+									$(".buy_nownum .model-num").html(resData);
+								  },
+							  
+							});
+							/****************购物车结算**************************************************/
+							$.ajax({
+								  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
+								  data: JSON.stringify({
+								  "addcheakoutviewdetailStarttime": startime,
+								  "addcheakoutviewdetailEndtime": endtime,
+								  }),
+								  type: 'post',
+								  dataType: 'JSON',
+								  contentType: 'application/json',
+								  success: function (data) {
+									console.log(data);
+									var resData = data.extend.toDayNum;
+									$(".addcart_num .model-num").html(resData);
+								  },
+							  
+							});
 						
 					}
 				})

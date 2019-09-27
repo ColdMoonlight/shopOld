@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 									<th>产品SEO名称</th>
-								    <th>浏览量</th>
+								    <th>仅加购量</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -156,7 +156,7 @@
               		var numhtml = data.extend.numList;
               		$.each(seohtml, function(index, value){
               			 var html =".html";
-              			 var index="加购";
+              			 var index="仅加购量";
               		     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
               		 });
               		$.each(numhtml, function(index, value){
@@ -213,7 +213,7 @@
 										var numhtml = data.extend.numList;
 										 $.each(seohtml, function(index, value){
 											 var html =".html";
-											 var index="加购";
+											 var index="仅加购量";
 										     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
 										 });
 										$.each(numhtml, function(index, value){
