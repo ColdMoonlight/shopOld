@@ -111,9 +111,9 @@ public class MlbackAddCheakoutViewDetailController {
 	 * @param pn
 	 * @return
 	 */
-	@RequestMapping(value="/getAddOrderViewDetailNum",method=RequestMethod.POST)
+	@RequestMapping(value="/getAddCheakoutViewDetailNum",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getAddOrderViewDetailNum(HttpSession session,@RequestBody MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetail) {
+	public Msg getAddCheakoutViewDetailNum(HttpSession session,@RequestBody MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetail) {
 		
 		String starttime = mlbackAddCheakoutViewDetail.getAddcheakoutviewdetailStarttime();
 		String endtime = mlbackAddCheakoutViewDetail.getAddcheakoutviewdetailEndtime();
@@ -132,9 +132,9 @@ public class MlbackAddCheakoutViewDetailController {
 	 * @param
 	 * @return
 	 */
-	@RequestMapping(value="/getAddOrderViewDetailList",method=RequestMethod.POST)
+	@RequestMapping(value="/getAddCheakoutViewDetailList",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getAddOrderViewDetailList(HttpSession session,@RequestBody MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetail) {
+	public Msg getAddCheakoutViewDetailList(HttpSession session,@RequestBody MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetail) {
 		
 		String starttime = mlbackAddCheakoutViewDetail.getAddcheakoutviewdetailStarttime();
 		String endtime = mlbackAddCheakoutViewDetail.getAddcheakoutviewdetailEndtime();
@@ -181,9 +181,9 @@ public class MlbackAddCheakoutViewDetailController {
 	 * @param pn
 	 * @return
 	 */
-	@RequestMapping(value="/getAddOrderViewDetailBuyNowNum",method=RequestMethod.POST)
+	@RequestMapping(value="/getAddCheakoutViewDetailBuyNowNum",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getAddOrderViewDetailBuyNowNum(HttpSession session,@RequestBody MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetail) {
+	public Msg getAddCheakoutViewDetailBuyNowNum(HttpSession session,@RequestBody MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetail) {
 		
 		String starttime = mlbackAddCheakoutViewDetail.getAddcheakoutviewdetailStarttime();
 		String endtime = mlbackAddCheakoutViewDetail.getAddcheakoutviewdetailEndtime();

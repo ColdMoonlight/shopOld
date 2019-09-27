@@ -318,7 +318,7 @@
    <!-- selectMlbackAddCheakoutViewDetailByTime -->
   <select id="selectMlbackAddCheakoutViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddCheakoutViewDetail" resultMap="BaseResultMap">
   	select addcheakoutviewDetail_id, addcheakoutviewDetail_seoname, addcheakoutviewDetail_actnum, addcheakoutviewDetail_createTime from tb_mlback_addcheakoutviewdetail where
-   	addcheakoutviewDetail_createTime between #{addcheakoutviewdetailStarttime,jdbcType=VARCHAR} and #{addcheakoutviewdetailEndtime,jdbcType=VARCHAR} order by addcheakoutviewDetail_seoname
+   	addcheakoutviewDetail_createTime between #{addcheakoutviewdetailStarttime,jdbcType=VARCHAR} and #{addcheakoutviewdetailEndtime,jdbcType=VARCHAR} and addcheakoutviewDetail_actnum = #{addcheakoutviewdetailActnum,jdbcType=INTEGER} order by addcheakoutviewDetail_seoname
   </select>
   
 </mapper>
