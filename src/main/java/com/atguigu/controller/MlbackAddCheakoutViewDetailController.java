@@ -159,7 +159,7 @@ public class MlbackAddCheakoutViewDetailController {
 				proSeo = mlbackAddCheakoutViewDetailOne.getAddcheakoutviewdetailSeoname();
 				SeoStringList.add(proSeo);
 			}else{
-				proSeo = mlbackAddCheakoutViewDetailOne.getAddcheakoutviewdetailStarttime();
+				proSeo = mlbackAddCheakoutViewDetailOne.getAddcheakoutviewdetailSeoname();
 				MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetailOneLast =mlbackAddCheakoutViewDetailList.get(i-1);
 				String lastSeo = mlbackAddCheakoutViewDetailOneLast.getAddcheakoutviewdetailSeoname();
 				if(proSeo.equals(lastSeo)){
