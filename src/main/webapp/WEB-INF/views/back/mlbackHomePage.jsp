@@ -46,7 +46,7 @@
 							<div class="model-pie-data model-pie-list num_box_list">
 								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"  class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="仅加购量" class="cart_num addcart"><div class="model-text">仅加购量</div><div class="model-num">0</div></a>
+									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
 									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
 								</span>
 								<span class="model-item addcart_box">

@@ -5,7 +5,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>仅加购量</title>
+	<title>加购量</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css">
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
@@ -28,7 +28,7 @@
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
-					<h2>仅加购量</h2>
+					<h2>加购量</h2>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
@@ -52,7 +52,7 @@
 								<thead>
 									<tr>
 									<th>产品SEO名称</th>
-								    <th>仅加购量</th>
+								    <th>加购量</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -156,7 +156,7 @@
               		var numhtml = data.extend.numList;
               		$.each(seohtml, function(index, value){
               			 var html =".html";
-              			 var index="仅加购量";
+              			 var index="加购量";
               		     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
               		 });
               		$.each(numhtml, function(index, value){
@@ -213,7 +213,7 @@
 										var numhtml = data.extend.numList;
 										 $.each(seohtml, function(index, value){
 											 var html =".html";
-											 var index="仅加购量";
+											 var index="加购量";
 										     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
 										 });
 										$.each(numhtml, function(index, value){
