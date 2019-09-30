@@ -138,6 +138,9 @@ public class MlbackProductController {
 	@RequestMapping(value="/tofbProductDetailPageByhtml",method=RequestMethod.GET)
 	 public String tomfbProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
 	  
+	  String nowTime = DateUtil.strTime14s();
+	  System.out.println("nowTime:"+nowTime);
+	  
 	  //接收传递进来的参数
 	  String StringReq = productSeo;
 	  
