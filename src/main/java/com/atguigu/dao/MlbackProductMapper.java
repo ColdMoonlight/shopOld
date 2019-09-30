@@ -60,5 +60,8 @@ public interface MlbackProductMapper {
 	List<MlbackProduct> selectMlbackProductLike(MlbackProduct mlbackProduct);
 
 	List<MlbackProduct> selectMlbackProductLikeNum(MlbackProduct mlbackProduct);
+	
+	//查询全部登陆用户00
+	List<MlbackProduct> selectMlbackProductlast();
     
 }
