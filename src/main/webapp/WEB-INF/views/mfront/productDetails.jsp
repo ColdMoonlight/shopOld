@@ -747,7 +747,6 @@
 			}
 			
 			function selectCartOrCheckout(product) {
-			console.log(product)
 		    	var elBox = $('<div class="modal sys-box" style="display: block; box-shadow: 0 0 16px #9f8c8c;"></div>');
 		    	
 		    	var html = '<div class="sys-title" style="color: #ff186e;">' +
