@@ -259,6 +259,30 @@ public class MlfrontOrderController {
 	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
 	 * @param MlfrontOrder
 	 */
+	@RequestMapping(value="/updateOrderItemNum",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderItemNum(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrderItem mlfrontOrderItem){
+		
+		Integer orderitemId =  mlfrontOrderItem.getOrderitemId();
+		Integer orderitemPskuNumber = mlfrontOrderItem.getOrderitemPskuNumber();
+		
+		MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
+		mlfrontOrderItemReq.setOrderitemId(orderitemId);
+		mlfrontOrderItemReq.setOrderitemPskuNumber(orderitemPskuNumber);
+		
+		mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemReq);
+		
+		
+		return Msg.success().add("resMsg", "更新成功"); 
+	}
+	
+	
+	
+	
+	/**3.0	useOn	0505
+	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
+	 * @param MlfrontOrder
+	 */
 	@RequestMapping(value="/orderToPayInfo",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg orderToPayInfo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder){
