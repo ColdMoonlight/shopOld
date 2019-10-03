@@ -118,7 +118,7 @@ public class MlbackProductAdminController {
 		
 		
 		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
-				.add("insertResult", insertResult);
+				.add("insertResult", insertResult).add("productId", productIdIn);
 		  
 	}
 	
