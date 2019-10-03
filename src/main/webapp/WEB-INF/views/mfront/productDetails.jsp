@@ -733,7 +733,11 @@
 								  currency: 'USD'
 								});
 							// cartText.text(parseInt(cartText.text()) + 1);
-							window.location.href = '${APP_PATH}/myCart.html';
+							selectCartOrCheckout(reqData);
+							
+							setTimeout(function() {
+								window.location.href = '${APP_PATH}/myCart.html';
+							}, 5000);
 						}
 					},
 					error: function (data) {
@@ -741,9 +745,39 @@
 					}
 				});
 			}
+			
+			function selectCartOrCheckout(product) {
+			console.log(product)
+		    	var elBox = $('<div class="modal sys-box" style="display: block; box-shadow: 0 0 16px #9f8c8c;"></div>');
+		    	
+		    	var html = '<div class="sys-title" style="color: #ff186e;">' +
+		    		'Item successfully added to your cart!' +
+		    	'</div>' +
+		    	'<div class="sys-body" style="display: flex;">' +
+		    		'<img src="'+ product.cartitemProductMainimgurl +'" style="display: block; width: 30%; height: auto;">' +
+		    		'<div class="content" style="width: 70%; padding-left: 10px; text-align: left;">'+
+		    			'<h4>'+ product.cartitemProductName +'</h4>'+
+		    			'<div style="margin: 12px 0;">PRICE: $'+ (product.cartitemProductOriginalprice * product.cartitemProductActoff * product.cartitemProductNumber / 10).toFixed(2) +'</div>' +
+		    			'<a href="${APP_PATH}/myCart.html" class="btn btn-red" style="padding: 8px; border-radius: 0;">view cart</a>' +
+		    			'<button class="btn btn-pink buy-now2" style="padding: 8px; margin-left: 1em; border-radius: 0;">checkout</button>' +
+		    		'</div>'+
+		    	'</div>' +
+		    	'<div class="sys-footer" style="padding: 8px 0; font-size: 14px; text-align: center; border-top: 1px solid #ccc;">Free Gift For Every Order!</div>'
+		    	;
+		 
+		    	$(document.body).append(elBox.html(html));
+		    	
+		    	$('.buy-now2').on('click', function() {
+		    		buyNow();
+		    	});
+			}
 
 			$('.buy-now').on('click', function() {
 				// console.log(dataPrice)
+				buyNow();
+			});
+			
+			function buyNow() {
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
 				reqData.cartitemProductId = parseInt(pidA);
@@ -787,8 +821,7 @@
 				flag = checkSku(skuCheckData);
 				// console.log(flag)
 				if (flag) generateOrderNow(reqData);
-				
-			});
+			}
 			
 			function generateOrderNow(reqData) {
 				// console.log(reqData)
