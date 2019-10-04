@@ -187,12 +187,13 @@
 	    		    				skuMoneystr.push(skuCheckData[productId][key].cprice);
 	    		    				skuNamestr.push(skuCheckData[productId][key].cname);
 	    		    			}
+	    		    			var cartitemProductActoffid = parseInt(cartItem.data('actoff'), 10);
 	    		    			var reqData = {};
 	    							reqData.cartitemProductId = parseInt(productId);
 	    							reqData.cartitemProductName = cartItem.find('.title').text();
 	    							reqData.cartitemProductOriginalprice = parseFloat(cartItem.find('.original').text().slice(1)).toFixed(2);
 	    							reqData.cartitemProductMainimgurl = cartItem.find('img').attr('src');
-	    							reqData.cartitemProductActoff = parseInt(cartItem.data('actoff'), 10);
+	    							reqData.cartitemProductActoff = cartitemProductActoffid/10;
 	    							reqData.cartitemProductskuIdstr = skuIdstr.join(',');
 	    							reqData.cartitemProductskuIdnamestr = skuIdnamestr.join(',');
 	    							reqData.cartitemProductskuNamestr = skuNamestr.join(',');
