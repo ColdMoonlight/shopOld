@@ -567,6 +567,10 @@ a:focus {
 	background-color: #fff;
 }
 
+.sys-box.modal::before {
+	diisplay: none;
+}
+
 .sys-title {
 	display: flex;
 	justify-content: flex-end;

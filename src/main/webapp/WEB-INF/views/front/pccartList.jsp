@@ -104,20 +104,20 @@
 					}
 				}
 			}
-			
+			var cartitemMap = {};
 			function renderProdcutList(parent, data) {
 				// console.log(data);
 				var html = '';
 				for (var i = 0, len = data.length; i < len; i += 1) {
 					var hasStorageItem = cartObj[data[i].cartitemId];
-					html += '<div class="cart-item bd-b">' +
+					html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'">' +
 						'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 						.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
 						'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
 						'<div class="content">' +
 						' <div class="text">' +
 						'<div class="title">' + data[i].cartitemProductName + '</div>' +
-						' <div class="condition">';
+						' <div class="condition" style="position: relative;">';
 					var skuIdArr = data[i].cartitemProductskuIdstr.split(',');
 					var skuIdNameArr = data[i].cartitemProductskuIdnamestr.split(',');
 					var skuNameArr = data[i].cartitemProductskuNamestr.split(',');
@@ -126,6 +126,7 @@
 						html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
 							': ' + skuNameArr[j] + '</div>';
 					}
+					html += '<span class="sku-edit" style="position: absolute; top: 0; right: 0; color: #ff6f5e;" onclick="skuEdit(event);"> EDIT </span>';
 					var dataPrice = getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
 					.cartitemProductActoff);
 					html += '</div>' +
@@ -148,6 +149,168 @@
 
 				parent.html(html);
 			}
+			var skuCheckData = {};
+			function skuEdit(e) {
+				var cartItem = $(e.target).parents('.cart-item');
+		    var productId = cartItem.find('input').data('productid');
+				skuCheckData[productId] = {};
+				var elBox = $('<div class="sys-box" style="position: fixed;z-index: 999999; display: block; height: 360px; margin-top: -180px; padding: 0 1em;"></div>');
+		    	
+		    	var html = '<div class="sys-body" style="overflow-y: scroll; min-height: 70%; border-bottom: 1px solid #ccc;"></div>' +
+		    	'<div class="sys-footer" style="display: flex; justify-content: space-between; margin-top: 1em;">'+
+		    		'<button class="btn btn-red cancel" style="width: 45%; padding: .75em; border-radius: 0;">cancel</button>' +
+						'<button class="btn btn-pink ok" style="width: 45%; padding: .75em; border-radius: 0;">OK</button>' +
+		    	'</div>';
+		 
+		    	$(document.body).append(elBox.html(html));
+		    	$(document.body).append(mask);
+		    	$('.sys-box .cancel').on('click', function() {
+		    		$('.sys-box').remove();
+		    		$('.mask').remove();
+		    		sysFlag = !sysFlag;
+		    	});
+		    	$('.sys-box .ok').on('click', function() {
+		    		if (skuCheckData[productId] && Object.keys(skuCheckData[productId]).length > 0) {
+		    			// delete order
+		    			$.ajax({
+		    				url: '${APP_PATH}/MlbackCart/delCartItem',
+		    				type: 'POST',
+		    				data: JSON.stringify({cartitemId: parseInt(cartItem.find('.checkbox').data('cartitemid'), 10)}),
+		    				async: false,
+		    				contentType: 'application/json',
+		    				success: function (data) {
+		    					// console.log(data)
+		    					var resData = data.extend;
+
+		    					if (data.code !== 100) {
+		    						alert('sys error!')
+		    					} else {
+		    						// repeat generate order
+		    		    			var skuIdstr = [];
+		    		    			var skuIdnamestr = [];
+		    		    			var skuMoneystr = [];
+		    		    			var skuNamestr = [];
+		    		    			for (var key in skuCheckData[productId]) {
+		    		    				skuIdstr.push(skuCheckData[productId][key].id);
+		    		    				skuIdnamestr.push(skuCheckData[productId][key].name);
+		    		    				skuMoneystr.push(skuCheckData[productId][key].cprice);
+		    		    				skuNamestr.push(skuCheckData[productId][key].cname);
+		    		    			}
+		    		    			var cartitemProductActoffid = parseInt(cartItem.data('actoff'), 10);
+		    		    			var reqData = {};
+		    							reqData.cartitemProductId = parseInt(productId);
+		    							reqData.cartitemProductName = cartItem.find('.title').text();
+		    							reqData.cartitemProductOriginalprice = parseFloat(cartItem.find('.original').text().slice(1)).toFixed(2);
+		    							reqData.cartitemProductMainimgurl = cartItem.find('img').attr('src');
+		    							reqData.cartitemProductActoff = cartitemProductActoffid/10;
+		    							reqData.cartitemProductskuIdstr = skuIdstr.join(',');
+		    							reqData.cartitemProductskuIdnamestr = skuIdnamestr.join(',');
+		    							reqData.cartitemProductskuNamestr = skuNamestr.join(',');
+		    							reqData.cartitemProductskuMoneystr = skuMoneystr.join(',');
+		    							reqData.cartitemProductNumber = parseInt(cartItem.find('input[type="text"]').val(), 10);
+
+		    		    			$.ajax({
+		    								url: '${APP_PATH}/MlbackCart/toAddToCart',
+		    								data: JSON.stringify(reqData),
+		    								type: "POST",
+		    								dataType: 'JSON',
+		    								contentType: 'application/json',
+		    								success: function (data) {
+		    									// console.log(data);
+		    									// var resData = JSON.parse(data);
+		    									if (data.code === 100) {
+		    										/* $('.sys-box').remove();
+	    							    		$('.mask').remove();
+	    							    		sysFlag = !sysFlag; */
+	    							    		window.location.href = window.location.href;
+		    									} else {
+		    										alert('sys error!');
+		    									}
+		    								}
+		    		    			});
+		    					}
+		    				}
+		    			});
+		    		} else {
+			    		alert('Please select product properties!');
+		    		}
+		    	});
+		    	
+		    	renderSkuData($('.sys-body'), productId);
+			}
+
+			function renderSkuData(conditionBox, productId) {
+				$.ajax({
+				  url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
+				  data: {
+				    "productId": productId,
+				  },
+				  type: "POST",
+				  success: function (data) {
+				    if (data.code === 100) {
+				      // console.log(data)
+				      var conditionArr = data.extend.mlbackProductSkuResList;
+				      for (var i = 0, len = conditionArr.length; i < len; i += 1) {
+				        skuCheckData[productId] = {};
+				        renderCondition(conditionBox, conditionArr[i])
+				      }
+				      triggerCondition(conditionBox, productId);
+				    }
+				  }
+				});
+			}
+
+			function triggerCondition(parent, productId) {
+			  parent.find('.product-d-length').each(function (i, item) {
+			    var activeItem = $(item).find('.price-item.active');
+			    $(item).find('.price-item').each(function (i, item) {
+			      $(item).on('click', function () {
+			        activeItem.removeClass('active');
+			        $(item).addClass('active');
+			        activeItem = $(item);
+			        var skuId = activeItem.parent().parent().data('id');
+			        if (skuCheckData[productId] && skuCheckData[productId][skuId]) {
+			        	skuCheckData[productId][skuId].cname = activeItem.text();
+				        skuCheckData[productId][skuId].cprice = activeItem.data('price');
+			        } else {
+			        	skuCheckData[productId][skuId] = {};
+			        	skuCheckData[productId][skuId]['id'] = skuId;
+				        skuCheckData[productId][skuId]['name'] = activeItem.parent().parent().data('name');
+				        skuCheckData[productId][skuId]['cname'] = activeItem.text();
+				        skuCheckData[productId][skuId]['cprice'] = activeItem.data('price');
+			        }
+			      })
+			    })
+			  });
+			}
+
+			function renderCondition(parent, data) {
+			  var conditionEl = $('<div class="container product-d-length" data-name="' + data.productskuName +
+			    '" data-id="' + data.productskuId + '"/>');
+			  var html = '';
+			  var len = 1;
+			  for (var key in data) {
+			    if (typeof data[key] === 'string' && data[key].indexOf(',') > -1) {
+			      data[key] = data[key].split(',');
+			      if (len === 1) {
+			        len = data[key].length;
+			      }
+			    }
+			  }
+			  html += '<span class="sku-id-name">' + data.productskuName + ':</span>';
+			  html += '<div class="list">';
+			  for (var i = 0; i < len; i += 1) {
+			    if (i === 0) {
+			      html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
+			        .productskuNameDetails[i] + '</span>'
+			    } else {
+			      html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
+			        .productskuNameDetails[i] + '</span>'
+			    }
+			  }
+			  html += '</div>';
+			  parent.append(conditionEl.html(html));
+		}
 
 		function renderProductNone(parent) {
 			var html = '';

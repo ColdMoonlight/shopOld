@@ -16512,14 +16512,6 @@ html.ie.gecko body.modal-open {
 .modal.show {
   opacity: 1; }
 
-@media (min-width: 320px) {
-  .modal:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -4px; } }
-
 .modal-md {
   width: 736px; }
 
@@ -16870,14 +16862,6 @@ html.ie.gecko body.modal-open {
     @media (max-width: 270px) {
       .modal .modal-body {
         padding: 15px; } }
-
-@media (min-width: 320px) {
-  .modal:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -4px; } }
 
 .modal-backdrop {
   background: #000000; }
