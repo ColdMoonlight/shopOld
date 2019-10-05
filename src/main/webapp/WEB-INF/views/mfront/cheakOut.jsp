@@ -742,13 +742,28 @@
 			// console.table(reqData);
 
 			$.ajax({
-				url: '${APP_PATH}/MlfrontOrder/delete',
+				url: '${APP_PATH}/MlfrontOrder/delOrderItem',
 				data: JSON.stringify(reqData),
 				type: "POST",
 				dataType: 'JSON',
 				contentType: 'application/json',
 				success: function (data) {
-					renderSysMsg('Delete success.');
+					//renderSysMsg('Delete success.');
+					var jsondate = JSON.parse(data);
+					console.log(JSON.parse(data));
+					
+					var isDelSuccess = jsondate.extend.isDelSuccess;
+					var orginalItemNum = jsondate.extend.orginalItemNum;
+					if(isDelSuccess==0){
+						renderSysMsg('Delete error.');
+					}else{
+						if(orginalItemNum>0){
+							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
+						}else{
+							renderSysMsg('购物车为空，5s后返回购物车页面.');
+							window.location.href = '${APP_PATH}/myCart.html';
+						}
+					}
 				},
 				error: function () {
 					renderSysMsg('Handle product fail, please contact customer service.')
