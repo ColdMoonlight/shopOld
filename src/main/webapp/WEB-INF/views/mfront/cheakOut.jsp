@@ -760,8 +760,10 @@
 						if(orginalItemNum>0){
 							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
 						}else{
-							renderSysMsg('购物车为空，5s后返回购物车页面.');
-							window.location.href = '${APP_PATH}/myCart.html';
+							renderSysMsg('The shopping cart is empty, return to the shopping cart page after 5s.');
+							setTimeout(function() {
+								window.location.href = '${APP_PATH}/myCart.html';
+							}, 5000);
 						}
 					}
 				},
