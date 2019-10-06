@@ -145,10 +145,10 @@
 			var cartItem = $(e.target).parents('.cart-item');
 	    var productId = cartItem.find('input').data('productid');
 			skuCheckData[productId] = {};
-			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block; max-width: 100%; min-width: 100%; height: 70%; padding: 0 1em;"></div>');
+			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block; max-width: 100%;min-height:460px"></div>');
 	    	
-	    	var html = '<div class="sys-body" style="overflow-y: scroll; min-height: 70%; border-bottom: 1px solid #ccc;"></div>' +
-	    	'<div class="sys-footer" style="display: flex; justify-content: space-between; margin-top: 1em;">'+
+	    	var html = '<div class="sys-body" style="overflow-y: scroll;max-height:390px; border-bottom: 1px solid #ccc;"></div>' +
+	    	'<div class="sys-footer" style=" position:absolute; bottom: 0; left: 0;width: 100%;display: flex; justify-content: space-between; padding: 1em;">'+
 	    		'<button class="btn btn-red cancel" style="width: 45%; padding: .75em; border-radius: 0;">cancel</button>' +
 					'<button class="btn btn-pink ok" style="width: 45%; padding: .75em; border-radius: 0;">OK</button>' +
 	    	'</div>';
