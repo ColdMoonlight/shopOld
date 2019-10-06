@@ -569,7 +569,7 @@ a:focus {
 
 .sys-title {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-statr;
 	padding: .5em;
 	border-bottom: 1px solid #ccc;
 }
@@ -2466,8 +2466,8 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .sale_copen ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}
 .sale_copen ul li span{ color: #d90b22;}
 
-
-
+#adv_silder img{max-width: 100%;}
+.info_adv{width: 100%;overflow: hidden;background: #000;padding: 5px 0;line-height: 35px;}
 
 
 /************************************/
