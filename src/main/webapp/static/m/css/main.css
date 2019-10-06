@@ -1491,8 +1491,11 @@ a:focus {
 .cart-item>.content .delete {
 	position: absolute;
   right: 1em;
+  width: 24px;
+  height: 24px;
   font-size: 20px;
   align-items: flex-end;
+  margin-right: -.25em;
 }
 
 /* .cart-item>.content .condition>.c-item+.c-item {

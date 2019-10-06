@@ -343,6 +343,8 @@ html,body {
  .product-cate-text {
  	min-height: 160px;
  }
+ 
+ .product-box,
  .check-box,
  .ship-box {
  	position: fixed;
@@ -357,6 +359,7 @@ html,body {
  	border-radius: 6px;
  }
  
+ .product-container,
  .check-container {
  	min-width: 500px;
  	min-height: 200px;
@@ -364,6 +367,7 @@ html,body {
  	overflow-y: scroll;
  }
  
+ .product-item,
 .check-item {
   display: flex;
   align-items: center;
@@ -414,13 +418,19 @@ html,body {
 	font: 14px/14px '';
 }
 
+.product-save,
 .check-save {
 	padding: 2em;
 	text-align: center;
 }
 
+.product-save .btn-danger,
 .check-save .btn-danger {
 	margin-right: 2em;
+}
+
+.product-box label {
+	margin-left: 1em;
 }
 
 .categoryProducts {
