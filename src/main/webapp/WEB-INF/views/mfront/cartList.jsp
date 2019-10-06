@@ -100,7 +100,7 @@
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				cartitemMap[data[i].cartitemId] = data[i];
 				var hasStorageItem = cartObj[data[i].cartitemId];
-				html += '<div class="cart-item bd-b bd-t" data-actoff="'+ data[i].cartitemProductActoff +'">' +
+				html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'">' +
 					'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
 					'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
@@ -125,13 +125,14 @@
 					'" data-productname="' + data[i].cartitemProductName + '">' +
 					'<span class="price">$' + (dataPrice.current) + '</span>' +
 					'<span class="original">$' + (dataPrice.origin) + '</span>' +
+					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
 					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
 					'">' +
 					'<span class="input-group-addon"  id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
-					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
+					
 					'</div>' +
 					'</div>' +
 					'</div>';
