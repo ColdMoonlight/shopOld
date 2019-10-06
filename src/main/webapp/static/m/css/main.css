@@ -1423,7 +1423,7 @@ a:focus {
 .cart-item {
   display: flex;
   align-items: flex-start;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #fff;
 }
 
@@ -1496,13 +1496,13 @@ a:focus {
 }
 
 .cart-item>.content .delete {
-	position: absolute;
-  right: 1em;
+	/* position: absolute;
+  right: 1em; */
   width: 24px;
   height: 24px;
   font-size: 20px;
   align-items: flex-end;
-  margin-right: -.25em;
+  margin:0 .6rem;
 }
 
 /* .cart-item>.content .condition>.c-item+.c-item {
@@ -1511,6 +1511,7 @@ a:focus {
 
 .cart-item>.content .condition>.c-item {
   margin-left: .5em;
+  line-height: 18px;
 }
 
 .cart-item>.content .num {
@@ -1531,7 +1532,7 @@ a:focus {
 }
 
 .cart-item>.content .input-group {
-  transform: scale(.7);
+  transform: scale(.9);
   margin-bottom: -3px;
 }
 
