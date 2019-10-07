@@ -42,7 +42,7 @@
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品列表</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
-							<a href="#" id="copy_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-copy"></i> 拷贝产品</a>
+							<a href="#" id="copy_btn" class="btn btn-info" role="button"><i class="glyphicon glyphicon-copy"></i> 拷贝产品</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
@@ -164,7 +164,12 @@
 
 				var productOriginalprice = $("<td></td>").append(item.productOriginalprice);
 				var productHavesalenum = $("<td></td>").append(item.productHavesalenum);
-				var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
+				// var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
+				if(item.productStatus ===1){
+					var productStatus = $("<td class='yzf_bg'></td>").append('<b>已上架</b>');
+				}else{
+					var productStatus = $("<td class='wzf_bg'></td>").append('<b>未上架</b>');
+				}
 				var productLable = $("<td></td>").append(productLablestate);
 				var productFirsth = $("<td></td>").append(item.productFirsth);
 				/* var productActoffid = $("<td></td>").append(item.productActoffid); */

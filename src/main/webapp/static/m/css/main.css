@@ -509,7 +509,7 @@ a:focus {
 
 /* mask */
 .win-box,
-.mask {
+.mask,.mask5 {
 	position: fixed;
   top: 0;
   left: 0;
@@ -523,9 +523,11 @@ a:focus {
 }
 
 .mask {
-  background-color: rgba(0, 0, 0, .8);
+  background-color: rgba(0, 0, 0, .7);
 }
-
+.mask5 {
+  background-color: rgba(0, 0, 0, .5);
+}
 .win-box-title {
 	padding: .25em;
 	/* border-bottom: 1px solid #cdcdcd; */
@@ -561,9 +563,8 @@ a:focus {
 }
 
 .sys-box {
-	max-width: 90%;
-	min-width: 75%;
-	border-radius: 3px;
+	width: 90%;
+	/* border-radius: 3px; */
 	background-color: #fff;
 }
 
@@ -573,13 +574,14 @@ a:focus {
 
 .sys-title {
 	display: flex;
-	justify-content: flex-statr;
+	justify-content:center;
 	padding: .5em;
 	border-bottom: 1px solid #ccc;
+	text-align: center;
 }
 
 .sys-body {
-	padding: 2em 1em;
+	padding:1em;
 	font-size: 14px;
 	text-align: center;
 }
@@ -1420,7 +1422,7 @@ a:focus {
 .cart-item {
   display: flex;
   align-items: flex-start;
-  padding: 10px 20px;
+  padding: 10px;
   background-color: #fff;
 }
 
@@ -1485,6 +1487,7 @@ a:focus {
 .cart-item>.content .title {
   font-size: 14px;
   text-decoration: underline;
+  padding:0 20px 0 0
 }
 
 .cart-item>.content .condition {
@@ -1493,13 +1496,13 @@ a:focus {
 }
 
 .cart-item>.content .delete {
-	position: absolute;
-  right: 1em;
+	/* position: absolute;
+  right: 1em; */
   width: 24px;
   height: 24px;
   font-size: 20px;
   align-items: flex-end;
-  margin-right: -.25em;
+  margin:0 .6rem;
 }
 
 /* .cart-item>.content .condition>.c-item+.c-item {
@@ -1508,6 +1511,7 @@ a:focus {
 
 .cart-item>.content .condition>.c-item {
   margin-left: .5em;
+  line-height: 18px;
 }
 
 .cart-item>.content .num {
@@ -1528,7 +1532,7 @@ a:focus {
 }
 
 .cart-item>.content .input-group {
-  transform: scale(.7);
+  /* transform: scale(.9); */
   margin-bottom: -3px;
 }
 
@@ -2472,7 +2476,14 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 
 #adv_silder img{max-width: 100%;}
 .info_adv{width: 100%;overflow: hidden;background: #000;padding: 5px 0;line-height: 35px;}
-
+/********************/
+.sys-body .product-d-length .list>span{}
+.sys-body .container{margin: 0;}
+.group-details.description{ position: relative;}
+/* .group-details.description{} */
+.sku-edit{font-size: 14px;}
+.order_box .cart-item>.content .input-group{margin: 0 20px; position: relative;}
+.order_box .cart-item>.content .delete{position: absolute; right: 0; top: 0;}
 
 /************************************/
 .fixed_footer{position: fixed; bottom: 0; left: 0;width: 100%;}

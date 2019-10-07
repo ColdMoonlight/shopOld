@@ -91,7 +91,7 @@
 	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
-
+    <div class="mask5" style="display: none;"></div>
   <script src="${APP_PATH }/static/js/relativetime.min.js"></script>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
@@ -697,7 +697,6 @@
 				flag = checkSku(skuCheckData);
 				// console.log(flag)
 				if (flag) generateOrder(reqData);
-
 			});
 
 			function checkSku(skuCheckData) {
@@ -734,7 +733,7 @@
 								});
 							// cartText.text(parseInt(cartText.text()) + 1);
 							selectCartOrCheckout(reqData);
-							
+							$(".mask5").show();
 							setTimeout(function() {
 								window.location.href = '${APP_PATH}/myCart.html';
 							}, 5000);
@@ -747,9 +746,9 @@
 			}
 			
 			function selectCartOrCheckout(product) {
-		    	var elBox = $('<div class="modal sys-box" style="display: block; box-shadow: 0 0 16px #9f8c8c;"></div>');
+		    	var elBox = $('<div class="modal sys-box" style="display: block;"></div>');
 		    	
-		    	var html = '<div class="sys-title" style="color: #ff186e;">' +
+		    	var html = '<div class="sys-title" style="background: #000; color: #fff;">' +
 		    		'Item successfully added to your cart!' +
 		    	'</div>' +
 		    	'<div class="sys-body" style="display: flex;">' +

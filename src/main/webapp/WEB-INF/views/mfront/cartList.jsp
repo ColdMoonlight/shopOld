@@ -126,13 +126,14 @@
 					'" data-productname="' + data[i].cartitemProductName + '">' +
 					'<span class="price">$' + (dataPrice.current) + '</span>' +
 					'<span class="original">$' + (dataPrice.origin) + '</span>' +
+					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
 					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
 					'">' +
 					'<span class="input-group-addon"  id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
-					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
+					
 					'</div>' +
 					'</div>' +
 					'</div>';
@@ -150,10 +151,10 @@
 			var cartItem = $(e.target).parents('.cart-item');
 	    var productId = cartItem.find('input').data('productid');
 			skuCheckData[productId] = {};
-			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block; max-width: 100%; min-width: 100%; height: 70%; padding: 0 1em;"></div>');
+			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block;width: 100%;min-height:460px"></div>');
 	    	
-	    	var html = '<div class="sys-body" style="overflow-y: scroll; min-height: 70%; border-bottom: 1px solid #ccc;"></div>' +
-	    	'<div class="sys-footer" style="display: flex; justify-content: space-between; margin-top: 1em;">'+
+	    	var html = '<div class="sys-body" style="overflow-y: scroll;max-height:390px; border-bottom: 1px solid #ccc;"></div>' +
+	    	'<div class="sys-footer" style=" position:absolute; bottom: 0; left: 0;width: 100%;display: flex; justify-content: space-between; padding: 1em;">'+
 	    		'<button class="btn btn-red cancel" style="width: 45%; padding: .75em; border-radius: 0;">cancel</button>' +
 					'<button class="btn btn-pink ok" style="width: 45%; padding: .75em; border-radius: 0;">OK</button>' +
 	    	'</div>';
