@@ -1487,6 +1487,7 @@ a:focus {
 .cart-item>.content .title {
   font-size: 14px;
   text-decoration: underline;
+  padding:0 20px 0 0
 }
 
 .cart-item>.content .condition {
@@ -1531,7 +1532,7 @@ a:focus {
 }
 
 .cart-item>.content .input-group {
-  transform: scale(.9);
+  /* transform: scale(.9); */
   margin-bottom: -3px;
 }
 
@@ -2478,6 +2479,11 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 /********************/
 .sys-body .product-d-length .list>span{}
 .sys-body .container{margin: 0;}
+.group-details.description{ position: relative;}
+/* .group-details.description{} */
+.sku-edit{font-size: 14px;}
+
+
 
 /************************************/
 .fixed_footer{position: fixed; bottom: 0; left: 0;width: 100%;}
