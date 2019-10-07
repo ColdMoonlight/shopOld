@@ -137,7 +137,7 @@
 				} else if (item.slideArea == 3) {
 					slideAreaStr = '3关联产品';
 				} else if (item.slideArea == 4) {
-					slideAreaStr = '第4活动';
+					slideAreaStr = '4首页广告';
 				} else if (item.slideArea == 5) {
 					slideAreaStr = '第5活动';
 				};

@@ -753,7 +753,7 @@
 		    		'Item successfully added to your cart!' +
 		    	'</div>' +
 		    	'<div class="sys-body" style="display: flex;">' +
-		    		'<img src="'+ product.cartitemProductMainimgurl +'" style="display: block; width: 30%; height: auto;">' +
+		    		'<img src="'+ product.cartitemProductMainimgurl +'" style="display: block; width:100px; height:100px;">' +
 		    		'<div class="content" style="width: 70%; padding-left: 10px; text-align: left;">'+
 		    			'<h4>'+ product.cartitemProductName +'</h4>'+
 		    			'<div style="margin: 12px 0;">PRICE: $'+ (product.cartitemProductOriginalprice * product.cartitemProductActoff * product.cartitemProductNumber / 10).toFixed(2) +'</div>' +
