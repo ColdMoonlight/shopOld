@@ -91,7 +91,7 @@
 	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
-    <div class="mask mask5" style="display: none;"></div>
+    <div class="mask5" style="display: none;"></div>
   <script src="${APP_PATH }/static/js/relativetime.min.js"></script>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
@@ -697,7 +697,6 @@
 				flag = checkSku(skuCheckData);
 				// console.log(flag)
 				if (flag) generateOrder(reqData);
-                $(".mask").show();
 			});
 
 			function checkSku(skuCheckData) {
@@ -734,7 +733,7 @@
 								});
 							// cartText.text(parseInt(cartText.text()) + 1);
 							selectCartOrCheckout(reqData);
-							
+							$(".mask5").show();
 							setTimeout(function() {
 								window.location.href = '${APP_PATH}/myCart.html';
 							}, 5000);

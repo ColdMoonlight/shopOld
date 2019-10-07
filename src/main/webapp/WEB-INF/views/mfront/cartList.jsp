@@ -146,7 +146,7 @@
 			var cartItem = $(e.target).parents('.cart-item');
 	    var productId = cartItem.find('input').data('productid');
 			skuCheckData[productId] = {};
-			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block; max-width: 100%;min-height:460px"></div>');
+			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block;width: 100%;min-height:460px"></div>');
 	    	
 	    	var html = '<div class="sys-body" style="overflow-y: scroll;max-height:390px; border-bottom: 1px solid #ccc;"></div>' +
 	    	'<div class="sys-footer" style=" position:absolute; bottom: 0; left: 0;width: 100%;display: flex; justify-content: space-between; padding: 1em;">'+
