@@ -327,11 +327,6 @@
 			productNumText += 1;
 			productNum.val(productNumText);
 
-			/* if(checkbox.is(':checked')) {
-				cartObj[checkbox.data('cartitemid')].num = productNumText;
-				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-				getTotalPrice();
-			} */
 			cartObj[cartitemid].num = productNumText;
 			getTotalPrice();
 
@@ -351,12 +346,7 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 			}
-			
-			/* if(checkbox.is(':checked')) {
-				cartObj[checkbox.data('cartitemid')].num = productNumText;
-				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-				getTotalPrice();
-			} */
+
 			cartObj[cartitemid].num = productNumText;
 			getTotalPrice();
 			
@@ -412,15 +402,7 @@
 
 		function calcTotalPrice() {
 			var cartItemArr = []
-			/* $('input[type="checkbox"]').each(function (i, item) {
-				if ($(item).is(':checked')) {
-					cartItemArr.push({
-						cartitemId: $(item).data('cartitemid'),
-						cartitemProductId: $(item).data('productid'),
-						cartitemProductNumber: $(item).parent().find('.input-group input').val()
-					});
-				}
-			}) */
+
 			$('.cart-item').each(function (i, item) {
 					cartItemArr.push({
 						cartitemId: $(item).data('cartitemid'),
@@ -487,20 +469,7 @@
 			}
 		})
 
-		// function toProductDetails() {
-		// 	$('.cart-item').each(function (i, item) {
-		// 		$(item).on('click', function () {
-		// 			toProductItem($(this).find('.checkbox').data('productid'))
-		// 		})
-		// 	}, true)
-		// }
-		function toProductDetails() {
-			// $('.cart-item').each(function (i, item) {
-			// 	$(item).on('click', function () {
-			// 		toProductItem($(this).find('.checkbox').data('productid'))
-			// 	})
-			// }, true)
-			
+		function toProductDetails() {			
 			$(".cart-item").each(function(){
 				var textlink =$(this).children(".content").children(".text").find(".title");
 				// var imglink =$(this).find(".img");
@@ -516,22 +485,6 @@
 				// });
 			}, true)
 		}
-		
-		/* function selectCartItem(e) {
-			e.stopPropagation();
-			var item = $(e.target);
-			var cartItemId = item.data('cartitemid');
-			if(item.is(':checked') && !cartObj[cartItemId]) {
-				cartObj[cartItemId] = {
-						num: parseInt(item.parent().find('input[type=text]').val().trim(), 10),
-						price: (+item.parent().find('.price').text().trim().substring(1))
-				}
-			} else {
-				delete cartObj[cartItemId];
-			}
-			window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-			getTotalPrice();
-		} */
 
 		var cartNum = parseInt(cartText.text());
 
