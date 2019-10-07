@@ -101,7 +101,7 @@
 				cartitemMap[data[i].cartitemId] = data[i];
 				var hasStorageItem = cartObj[data[i].cartitemId];
 				html += '<div class="cart-item bd-b bd-t" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
-				.cartitemId +'">' +
+				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '">' +
 					/* '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' + */
 					'<img class="img" style="margin-left: 0;" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
@@ -149,7 +149,7 @@
 		var skuCheckData = {};
 		function skuEdit(e) {
 			var cartItem = $(e.target).parents('.cart-item');
-	    var productId = cartItem.find('input').data('productid');
+	    var productId = cartItem.data('productid');
 			skuCheckData[productId] = {};
 			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block;width: 100%;min-height:460px"></div>');
 	    	
@@ -412,7 +412,7 @@
 
 		function calcTotalPrice() {
 			var cartItemArr = []
-			$('input[type="checkbox"]').each(function (i, item) {
+			/* $('input[type="checkbox"]').each(function (i, item) {
 				if ($(item).is(':checked')) {
 					cartItemArr.push({
 						cartitemId: $(item).data('cartitemid'),
@@ -420,7 +420,14 @@
 						cartitemProductNumber: $(item).parent().find('.input-group input').val()
 					});
 				}
-			})
+			}) */
+			$('.cart-item').each(function (i, item) {
+					cartItemArr.push({
+						cartitemId: $(item).data('cartitemid'),
+						cartitemProductId: $(item).data('productid'),
+						cartitemProductNumber: $(item).find('.input-group input').val()
+					});
+			});
 			if (cartItemArr.length) {
 				// console.log(cartItemArr)
 				$.ajax({
@@ -498,7 +505,7 @@
 				var textlink =$(this).children(".content").children(".text").find(".title");
 				// var imglink =$(this).find(".img");
 				textlink.on('click', function () {
-					var product_id = $(this).parents(".content").parents(".cart-item").find(".checkbox").data('productid');
+					var product_id = $(this).parents(".content").parents(".cart-item").data('productid');
 					// alert(product_id)
 				     toProductItem(product_id)
 				});
