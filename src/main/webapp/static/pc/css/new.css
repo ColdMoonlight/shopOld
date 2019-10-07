@@ -200,11 +200,11 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 
 /**错误提示****/
 .sys-box {
-	width:500px;
+	width:600px;
 	height: 200px;
 	left: 50%; 
 	top: 50%;
-	margin:-100px 0 0 -250px;
+	margin:-100px 0 0 -300px;
 	border-radius: 3px;
 	background-color: #fff;
 	opacity: 1;
@@ -473,6 +473,12 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .noshow{display: none !important;}
 .forget_pass{text-align: right; color: #666;}
 .forget_pass a{color: #666;}
+/*********************/
+.btn.cancel{height: 40px;line-height: 1.5rem;background: #ccc;}
+.btn.ok{height: 40px;line-height: 1.5rem;}
+.btn.cancel:hover{background: #ccc; color: #fff;}
+.btn.ok:hover{background: #000; color: #fff;}
+
 
  @media (max-width: 1330px) {
 	 .product-details{max-width:98%; margin: 0 1%;}
