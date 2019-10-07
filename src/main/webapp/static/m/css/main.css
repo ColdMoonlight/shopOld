@@ -568,6 +568,11 @@ a:focus {
 	background-color: #fff;
 }
 
+.sys-error {
+	z-index: 9999999999;
+	box-shadow: 0 0 2px #ccc;
+}
+
 .sys-box.modal::before {
 	diisplay: none;
 }

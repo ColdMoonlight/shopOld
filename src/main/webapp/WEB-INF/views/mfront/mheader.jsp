@@ -111,8 +111,8 @@
       parent.html('<p class="without-data">' + msg + '</p>');
     }
 
-    function renderSysMsg(msg) {
-    	var elBox = $('<div class="modal sys-box" style="display: block;"></div>');
+    function renderSysMsg(msg, cls) {
+    	var elBox = $('<div class="modal sys-box '+ cls +'" style="display: block;"></div>');
     	
     	var html = '<div class="sys-title">' +
     		'<span class="icon close"></span>' +
