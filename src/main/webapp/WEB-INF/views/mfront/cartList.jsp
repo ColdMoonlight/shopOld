@@ -95,13 +95,13 @@
 		}
 		var cartitemMap = {};
 		function renderProdcutList(parent, data) {
-			// console.log(data);
+			console.log(data);
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				cartitemMap[data[i].cartitemId] = data[i];
 				var hasStorageItem = cartObj[data[i].cartitemId];
 				html += '<div class="cart-item bd-b bd-t" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
-				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '">' +
+				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '" data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' +
 					/* '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' + */
 					'<img class="img" style="margin-left: 0;" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
@@ -210,7 +210,8 @@
 	    		    			var reqData = {};
 	    							reqData.cartitemProductId = parseInt(productId);
 	    							reqData.cartitemProductName = cartItem.find('.title').text();
-	    							reqData.cartitemProductOriginalprice = parseFloat(cartItem.find('.original').text().slice(1)).toFixed(2);
+	    							console.log(cartItem.find('.original').text().slice(1));
+	    							reqData.cartitemProductOriginalprice = parseFloat(cartItem.data('originalprice')).toFixed(2);
 	    							reqData.cartitemProductMainimgurl = cartItem.find('img').attr('src');
 	    							reqData.cartitemProductActoff = cartitemProductActoffid/10;
 	    							reqData.cartitemProductskuIdstr = skuIdstr.join(',');

@@ -232,6 +232,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
+						// console.log(productData);
 						addHeaderInfo(productData);
 						var fbpid=productData.productId;
 						var fbprice=(productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
@@ -671,7 +672,7 @@
 				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
-				// console.log(data);
+				console.log(reqData);
 
 				// name, id, price
 				function getSkuData(els) {
