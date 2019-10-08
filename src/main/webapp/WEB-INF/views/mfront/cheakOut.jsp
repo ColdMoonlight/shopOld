@@ -615,8 +615,8 @@
 				orderItemArr.push(data[i].orderitemId);
 				productNumArr.push(data[i].orderitemPskuNumber);
 
-				html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +
-					data[i].orderitemPid + ')">' +
+				// html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' + data[i].orderitemPid + ')">' +
+				   html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '">' +
 					'<img class="img" src="' + data[i].orderitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
 					'<div class="text">' +
