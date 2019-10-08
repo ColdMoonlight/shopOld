@@ -34,7 +34,7 @@ html,body {
 }
 
 .main-box .c-datepicker-picker {
-	margin-left: 15.6%;
+	margin-left:0;
 }
 
 .content {
@@ -343,6 +343,8 @@ html,body {
  .product-cate-text {
  	min-height: 160px;
  }
+ 
+ .product-box,
  .check-box,
  .ship-box {
  	position: fixed;
@@ -357,6 +359,7 @@ html,body {
  	border-radius: 6px;
  }
  
+ .product-container,
  .check-container {
  	min-width: 500px;
  	min-height: 200px;
@@ -364,6 +367,7 @@ html,body {
  	overflow-y: scroll;
  }
  
+ .product-item,
 .check-item {
   display: flex;
   align-items: center;
@@ -414,13 +418,19 @@ html,body {
 	font: 14px/14px '';
 }
 
+.product-save,
 .check-save {
 	padding: 2em;
 	text-align: center;
 }
 
+.product-save .btn-danger,
 .check-save .btn-danger {
 	margin-right: 2em;
+}
+
+.product-box label {
+	margin-left: 1em;
 }
 
 .categoryProducts {
@@ -449,8 +459,14 @@ html,body {
 .td_name p:nth-of-type(2n){background: #F2F6FC;}
 .td_num p{border-bottom: 1px solid #ccc;padding: 2px;margin: 0;}
 .td_num p:nth-of-type(2n){background: #F2F6FC;}
-
-
+.data_num{margin: 0 100px 0 0;}
+.addcart_box{display: flex;  align-items: center;justify-content: space-between;}
+.cart_num{display: flex;
+  	flex-grow:1;
+  	flex-direction: initial;
+  	justify-content: space-between;
+  	align-items: center;}
+.cart_num:hover{text-decoration:none}
 
 
 

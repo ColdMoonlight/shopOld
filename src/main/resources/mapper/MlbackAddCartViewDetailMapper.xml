@@ -321,7 +321,7 @@
   <!-- selectMlbackAddCartViewDetailByTime -->
   <select id="selectMlbackAddCartViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddCartViewDetail" resultMap="BaseResultMap">
   	select addcartViewDetail_id, addcartViewDetail_seoname, addcartViewDetail_actnum, addcartViewDetail_createTime from tb_mlback_addcartviewdetail where
-   	addcartViewDetail_createTime between #{addcartviewdetailStarttime,jdbcType=VARCHAR} and #{addcartviewdetailEndtime,jdbcType=VARCHAR} order by addcartViewDetail_seoname
+   	addcartViewDetail_createTime between #{addcartviewdetailStarttime,jdbcType=VARCHAR} and #{addcartviewdetailEndtime,jdbcType=VARCHAR} and addcartViewDetail_actnum = #{addcartviewdetailActNum,jdbcType=INTEGER} order by addcartViewDetail_seoname
   </select>
   
 </mapper>

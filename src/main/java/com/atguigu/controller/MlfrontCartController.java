@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAddCartViewDetail;
+import com.atguigu.bean.MlbackAddCheakoutViewDetail;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductViewDetail;
@@ -27,6 +28,7 @@ import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
 import com.atguigu.service.MlbackAddCartViewDetailService;
+import com.atguigu.service.MlbackAddCheakoutViewDetailService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackProductViewDetailService;
 import com.atguigu.service.MlfrontCartItemService;
@@ -60,6 +62,9 @@ public class MlfrontCartController {
 	
 	@Autowired
 	MlbackAddCartViewDetailService mlbackProductViewDetailService;
+	
+	@Autowired
+	MlbackAddCheakoutViewDetailService mlbackAddCheakoutViewDetailService;
 	/**
 	 * 1.0	useOn	0505
 	 * 前台移动端解算页面mfront/cheakOut
@@ -366,10 +371,13 @@ public class MlfrontCartController {
 		String nowTime = DateUtil.strTime14s();
 		mlbackAddCartViewDetailreq.setAddcartviewdetailCreatetime(nowTime);
 		mlbackAddCartViewDetailreq.setAddcartviewdetailMotifytime(nowTime);
-		mlbackAddCartViewDetailreq.setAddcartviewdetailActNum(1);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailActNum(0); //计数用户行为，0纯加购	，1点buyNow附带的加购
 		mlbackProductViewDetailService.insertSelective(mlbackAddCartViewDetailreq);
 		
 	}
+	
+	
+	
 
 	/**3.0	useOn	0505
 	 * getCartProductNumber	get
@@ -490,6 +498,11 @@ public class MlfrontCartController {
 	public Msg cartToOrder(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody List<MlfrontCartItem> mlfrontCartItemList) throws Exception{
 		//接收传递进来的参数
 		System.out.println(mlfrontCartItemList);
+		
+		String nowViewTime = DateUtil.strTime14s();
+		System.out.println("nowViewTime:"+nowViewTime);
+		
+		calcFormCartListToCheakoutPage(mlfrontCartItemList,session);
 		
 		System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
 		//从其中一个中获取cartId
@@ -639,7 +652,8 @@ public class MlfrontCartController {
 		return Msg.success().add("resMsg", "订单提交成功");
 	}
 	
-	
+
+
 	/**
 	 * 7.0	zsh 0615
 	 * 删除购物车中的项delCartItem
@@ -854,6 +868,14 @@ public class MlfrontCartController {
 	@RequestMapping(value="/toBuyNow",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg toBuyNow(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
+		
+		String nowViewTime = DateUtil.strTime14s();
+		System.out.println("nowViewTime:"+nowViewTime);
+		
+		insertAddCartViewBuyNow(mlfrontCartItem,session);
+		
+		insertAddCheckOutViewBuyNow(mlfrontCartItem,session);
+		
 		//放回响应域中
 		session.setAttribute("mlfrontCartItem", mlfrontCartItem);
 		String sessionId = session.getId();
@@ -1098,10 +1120,12 @@ public class MlfrontCartController {
 		return Msg.success().add("resMsg", "添加成功");
 	}
 	
+
 	
 	/**
+	 * 方法
+	 * 无碰
 	 * 购买中的任务
-	 * 
 	 * */
 	public void BuyNowAndcartToOrder(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody List<MlfrontCartItem> mlfrontCartItemList) throws Exception{
 		//接收传递进来的参数
@@ -1264,5 +1288,112 @@ public class MlfrontCartController {
 		session.setAttribute("orderId", orderIdFinally);
 		//返回视图
 	}
+	
+
+	/**
+	 * 计算从detail--buyNow的结算数
+	 * 
+	 * */
+	private void insertAddCheckOutViewBuyNow(MlfrontCartItem mlfrontCartItem, HttpSession session) {
+
+		Integer productId = mlfrontCartItem.getCartitemProductId();
 		
+		MlbackProduct mlbackProductrep = new MlbackProduct();
+		mlbackProductrep.setProductId(productId);
+		
+		List<MlbackProduct> mlbackProductresList = mlbackProductService.selectMlbackProduct(mlbackProductrep);
+		MlbackProduct mlbackProductres = mlbackProductresList.get(0);
+		
+		String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
+		String addcartviewdetailProname = mlbackProductres.getProductName();
+		
+		//准备参数信息
+		MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetailreq = new MlbackAddCheakoutViewDetail();
+		//浏览对象
+		mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailSeoname(addcartviewdetailSeoname);
+		mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailProname(addcartviewdetailProname);
+		//sessionID
+		String sessionId =  session.getId();
+		mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailSessionid(sessionId);
+		//时间信息
+		String nowTime = DateUtil.strTime14s();
+		mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailCreatetime(nowTime);
+		mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailMotifytime(nowTime);
+		mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailActnum(1); //计数用户行为，0纯加购	，1点buyNow附带的加购
+		mlbackAddCheakoutViewDetailService.insertSelective(mlbackAddCheakoutViewDetailreq);
+	}
+
+	/**
+	 * 计算从detail--buyNow的加购数
+	 * 
+	 * */
+	private void insertAddCartViewBuyNow(MlfrontCartItem mlfrontCartItem, HttpSession session) {
+		Integer productId = mlfrontCartItem.getCartitemProductId();
+		
+		MlbackProduct mlbackProductrep = new MlbackProduct();
+		mlbackProductrep.setProductId(productId);
+		
+		List<MlbackProduct> mlbackProductresList = mlbackProductService.selectMlbackProduct(mlbackProductrep);
+		MlbackProduct mlbackProductres = mlbackProductresList.get(0);
+		
+		String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
+		String addcartviewdetailProname = mlbackProductres.getProductName();
+		
+		
+		
+		//准备参数信息
+		MlbackAddCartViewDetail mlbackAddCartViewDetailreq = new MlbackAddCartViewDetail();
+		//浏览对象
+		mlbackAddCartViewDetailreq.setAddcartviewdetailSeoname(addcartviewdetailSeoname);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailProname(addcartviewdetailProname);
+		//sessionID
+		String sessionId =  session.getId();
+		mlbackAddCartViewDetailreq.setAddcartviewdetailSessionid(sessionId);
+		//时间信息
+		String nowTime = DateUtil.strTime14s();
+		mlbackAddCartViewDetailreq.setAddcartviewdetailCreatetime(nowTime);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailMotifytime(nowTime);
+		mlbackAddCartViewDetailreq.setAddcartviewdetailActNum(1); //计数用户行为，0纯加购	，1点buyNow附带的加购
+		mlbackProductViewDetailService.insertSelective(mlbackAddCartViewDetailreq);
+		
+	}
+	
+	
+	/**
+	 * 计算从CartList--Cheakout的结算数
+	 * 
+	 * */
+	private void calcFormCartListToCheakoutPage(List<MlfrontCartItem> mlfrontCartItemList, HttpSession session) {
+		
+		for(MlfrontCartItem mlfrontCartItem:mlfrontCartItemList){
+			
+			Integer productId = mlfrontCartItem.getCartitemProductId();
+			
+			MlbackProduct mlbackProductrep = new MlbackProduct();
+			mlbackProductrep.setProductId(productId);
+			
+			List<MlbackProduct> mlbackProductresList = mlbackProductService.selectMlbackProduct(mlbackProductrep);
+			MlbackProduct mlbackProductres = mlbackProductresList.get(0);
+			
+			String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
+			String addcartviewdetailProname = mlbackProductres.getProductName();
+			
+			//准备参数信息
+			MlbackAddCheakoutViewDetail mlbackAddCheakoutViewDetailreq = new MlbackAddCheakoutViewDetail();
+			//浏览对象
+			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailSeoname(addcartviewdetailSeoname);
+			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailProname(addcartviewdetailProname);
+			//sessionID
+			String sessionId =  session.getId();
+			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailSessionid(sessionId);
+			//时间信息
+			String nowTime = DateUtil.strTime14s();
+			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailCreatetime(nowTime);
+			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailMotifytime(nowTime);
+			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailActnum(0); //计数用户行为，0(从CartList--Cheakout)的结算数	，1(从buyNow--Cheakout)的结算数
+			mlbackAddCheakoutViewDetailService.insertSelective(mlbackAddCheakoutViewDetailreq);
+		}
+	
+	}
+
 }

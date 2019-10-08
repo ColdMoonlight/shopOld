@@ -699,7 +699,13 @@
 						.orderitemProductAccoff).current) + '</span>' +
 					'<span class="original">' + (getPrice(data[i].orderitemProductOriginalprice, skuMoneyArr, data[i]
 						.orderitemProductAccoff).origin) + '</span>' +
-					'<span class="p-num">X' + data[i].orderitemPskuNumber + '</span>' +
+					/* '<span class="p-num">X' + data[i].orderitemPskuNumber + '</span>' + */
+					'<div class="input-group">' +
+					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
+					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + data[i].orderitemPskuNumber + '">' +
+					'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
+					'</div>' +
+					'<span class="icon delete" onclick="deleteOrderItem(event)">' + '</span>' +
 					'</div>' +
 					'</div>' +
 					'</div>';
@@ -724,6 +730,111 @@
 				subtotalPriceText.text('$' + totalPrice);
 			}
 		})
+
+		function addNum(e) {
+			e.stopPropagation();
+			var item  = $(e.target);
+			var productNum = item.parent().parent().find('input');
+			var productNumText = parseInt(productNum.val());
+			productNumText += 1;
+			productNum.val(productNumText);
+
+			reCalPrice(item, true);
+
+			updateOrderItemNum(item, productNumText);
+		}
+
+		function subNum(e) {
+			e.stopPropagation();
+			var item  = $(e.target);
+			var productNum = item.parent().parent().find('input');
+			var productNumText = parseInt(productNum.val());
+
+			if (productNumText > 1) {
+				productNumText -= 1;
+				reCalPrice(item, false);
+				productNum.val(productNumText);
+				updateOrderItemNum(item, productNumText);
+			}
+		}
+		
+		function reCalPrice(item, flag) {
+			var parentEl = $(item).parents('.num');
+			var prototalEl = $('.c-prototal>.cal-price-num');
+			var subtotalEl = $('.c-subtotal>.cal-price-num');
+			var currentPrice = parseFloat(parentEl.find('.price').text());
+			if (flag) {
+				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
+				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) + currentPrice).toFixed(2));
+			} else {
+				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
+				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) - currentPrice).toFixed(2));
+			}
+		}
+
+		function updateOrderItemNum(el, num) {
+			var orderItem = el.parents('.cart-item');
+			var reqData = {
+				orderitemId: orderItem.data('orderitemid'),
+				orderitemPskuNumber: num
+			}
+			// console.table(reqData);
+			$.ajax({
+				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
+				data: JSON.stringify(reqData),
+				type: "POST",
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					console.info('success')
+				},
+				error: function () {
+					renderSysMsg('handle product fail.')
+				}
+			});
+		}
+		
+		function deleteOrderItem(e) {
+			e.stopPropagation();
+			var orderItem = $(e.target).parents('.cart-item');
+			var reqData = {
+				orderitemId: orderItem.data('orderitemid')
+			};
+			
+			// console.table(reqData);
+
+			$.ajax({
+				url: '${APP_PATH}/MlfrontOrder/delOrderItem',
+				data: JSON.stringify(reqData),
+				type: "POST",
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					//renderSysMsg('Delete success.');
+					var jsondate = data;
+					// console.log(JSON.parse(data));
+					
+					var isDelSuccess = jsondate.extend.isDelSuccess;
+					var orginalItemNum = jsondate.extend.orginalItemNum;
+					if(isDelSuccess==0){
+						renderSysMsg('Delete error.');
+					}else{
+						if(orginalItemNum>0){
+							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
+						}else{
+							renderSysMsg('The shopping cart is empty, return to the shopping cart page after 5s.');
+							setTimeout(function() {
+								window.location.href = '${APP_PATH}/myCart.html';
+							}, 5000);
+						}
+					}
+				},
+				error: function () {
+					renderSysMsg('Handle product fail, please contact customer service.')
+				}
+			})
+		}
+
 		/* all */
 		function calAllProductPrice(data) {
 			var len = data.length;
@@ -1073,7 +1184,10 @@
 			}
 			
 	</script>
-	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
+  	<!-- megalookhair 
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  	<!-- huashuohair -->
+  	<script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
 </body>
 
 </html>

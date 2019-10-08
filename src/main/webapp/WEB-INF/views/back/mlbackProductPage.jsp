@@ -42,6 +42,7 @@
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品列表</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" id="copy_btn" class="btn btn-info" role="button"><i class="glyphicon glyphicon-copy"></i> 拷贝产品</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
@@ -87,9 +88,6 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/summernote/summernote.min.js"></script>
 
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/session.js"></script>
-	
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
@@ -166,7 +164,12 @@
 
 				var productOriginalprice = $("<td></td>").append(item.productOriginalprice);
 				var productHavesalenum = $("<td></td>").append(item.productHavesalenum);
-				var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
+				// var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
+				if(item.productStatus ===1){
+					var productStatus = $("<td class='yzf_bg'></td>").append('<b>已上架</b>');
+				}else{
+					var productStatus = $("<td class='wzf_bg'></td>").append('<b>未上架</b>');
+				}
 				var productLable = $("<td></td>").append(productLablestate);
 				var productFirsth = $("<td></td>").append(item.productFirsth);
 				/* var productActoffid = $("<td></td>").append(item.productActoffid); */
@@ -422,6 +425,28 @@
 					});
 				});
 				saveOption(productId);
+				/**********/
+				$(".clear_img").on("click",function(id){
+					var selfimg =this;
+						var data = {
+							productimgId:$(this).parents(".upload-img-btn").attr("id")
+						};
+						// console.log(data);
+						$.ajax({
+							url: "${APP_PATH}/MlbackProductImg/delete",
+							data: JSON.stringify(data),
+							dataType: "json",
+							contentType: 'application/json',
+							type: "post",
+							success: function (result) {
+								console.log(result)
+								if (result.code == 100) {
+									alert('删除成功！');
+									$(selfimg).parents(".upload-img-btn").css({"background":"url(/ShopTemplate/static/img/plus.png) no-repeat","background-size":"200px"})
+								}
+							}
+						});
+					});
 			});
 		});
 
@@ -586,13 +611,13 @@
 
 		// 编辑-回显-数据（仅图片）
 		function tianchongImg(data) {
-			// console.log(data);
+			console.log(data);
 			var elImgs = $('.sub-img').find('.upload-img-btn');
 			for (var i = 0; i < data.length; i += 1) {
 				$(elImgs[data[i].productimgSortOrder - 1]).css("background-image", "url(" + data[i].productimgUrl + ")");
+				var imgid =data[i].productimgId;
+				$(elImgs[data[i].productimgSortOrder - 1]).attr("id",imgid)
 			}
-
-			// productimgUrl  productimgSortOrder
 		}
 
 		// upload img 
@@ -779,6 +804,95 @@
 					});
 				});
 			});
+		}
+		
+		function getProductsDown() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {				
+						setProductsSelect(result.extend.mlbackProductResList);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+
+		function setProductsSelect(data) {
+			var productBox = $('.product-box');
+
+			if (productBox.length === 0) {
+				productBox = $('<div class="product-box hide"></div>');
+				var html = '';
+				html += '<div class="product-container"><div class="product-list">';
+				for (var i = 0, len = data.length; i < len; i += 1) {
+					var dataId = data[i].productId;
+					html += '<div class="product-item">' +
+						'<input type="radio" title="' + data[i].productId + '"  data-id="' + data[i].productId + '" name="product" class="checkbox">' +
+						'<label> NO.' + data[i].productId + ' ' + data[i].productName + '</label>' +
+						'</div>';
+				}
+				html += '</div></div>' +
+					'<div class="check-save">' +
+					'<a class="btn btn-danger" onclick="productCancel(event)">取消</a>' +
+					'<a class="btn btn-primary" onclick="productSave(event)">确定</a>' +
+					'</div>';
+
+				productBox.html(html).appendTo($(document.body));
+
+				$('.product-item').each(function(i, item) {
+					$(item).find('input').on('click', function() {
+						productId = parseInt($(this).data('id'), 10);
+					});
+				});
+
+				$('.product-container').niceScroll({
+					cursorcolor: "rgba(0,0,0,.3)",
+					cursorwidth: "4px",
+					cursorborder: "none",
+					horizrailenabled: false,
+					enablekeyboard: false,
+		    });
+			}
+			productBox.removeClass('hide');
+		}
+
+		var productId;
+		$('#copy_btn').on('click', function() {
+			getProductsDown();
+		});
+
+		function productSave(e) {
+			var reqData = ({ productId: productId });
+			console.log(reqData)
+			if (productId) {
+				var productBox = $(e.target).parents('.product-box');
+				$.ajax({
+					url: "${APP_PATH}/MlbackProductAdmin/copyProduct",
+					type: "GET",
+					data: reqData,
+					dataType: "json",
+					contentType: 'application/json',
+					success: function (result) {
+						if (result.code == 100) {
+							// 是否返回产品ID，直接进入编辑页面
+							alert('拷贝成功')
+							productBox.addClass('hide');
+						} else {
+							alert("联系管理员");
+						}
+					}
+				});
+			} else {
+				alert('请选择要拷贝的产品！');
+			}
+		}
+		
+		function productCancel(e) {
+			$(e.target).parents('.product-box').addClass('hide');
 		}
 	</script>
 </body>

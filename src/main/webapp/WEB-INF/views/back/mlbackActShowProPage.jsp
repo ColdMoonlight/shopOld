@@ -46,11 +46,13 @@
 										<th>活动品name</th>
 										<th>活动品归属组</th>
 										<th>产品id</th>
-										<th>产品名称</th>
 										<th>产品SEO名称</th>
+										<th>类id</th>
+										<th>类SEO名称</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
+										<th>产品or类</th>
 										<th>同级别编号</th>
 										<th>更改时间</th>
 										<th>操作</th>
@@ -84,8 +86,7 @@
 		$("#UEmailSession").html(adminAccname);
 	</script>
 
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
+	
 
 	<script type="text/javascript">
 		$('.nicescroll').each(function(i, item) {
@@ -111,7 +112,7 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					//console.log(result);
+					console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -149,8 +150,10 @@
 				var actshowproName = $("<td></td>").append(item.actshowproName);
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);
 				var actshowproProid = $("<td></td>").append(item.actshowproProid);
-				var actshowproProname = $("<td></td>").append(item.actshowproProname);
 				var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
+				var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
+				var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
+				
 				
 				var imgurl = item.actshowproImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
@@ -160,6 +163,7 @@
 				var actshowproImgpcurl = $("<td></td>").append(imagepc);
 				
 				var actshowproStatus = $("<td></td>").append((item.actshowproStatus === 1 ? '已上架' : '未上架'));
+				var actshowproIfproORcate = $("<td></td>").append((item.actshowproIfproORcate === 1 ? '类' : '产品'));
 				var actshowproOrderth = $("<td></td>").append(item.actshowproOrderth);
 				var actshowproCreatetime = $("<td></td>").append(item.actshowproCreatetime);
 				var actshowproMotifytime = $("<td></td>").append(item.actshowproMotifytime);
@@ -177,11 +181,14 @@
 					.append(actshowproName)
 					.append(actshowproActnum)
 					.append(actshowproProid)
-					.append(actshowproProname)
+					// .append(actshowproProname)
 					.append(actshowproSeoname)
+					.append(actshowproCateid)
+					.append(actshowproCatename)
 					.append(actshowproImgwapurl)
 					.append(actshowproImgpcurl)
 					.append(actshowproStatus)
+					.append(actshowproIfproORcate)
 					.append(actshowproOrderth)
 					.append(actshowproMotifytime)
 					.append(btnTd)
@@ -267,6 +274,7 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {}));
+			console.log(data);/*****data***********/
 			$.ajax({
 				url: "${APP_PATH}/MlbackActShowPro/save",
 				data: data,
@@ -301,7 +309,7 @@
 			});
 		});
 		var CategoryHash = {}
-		// 获取归属类下拉
+		// 获取产品下拉
 		function getCategoryDown() {
 			$.ajax({
 				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
@@ -317,7 +325,8 @@
 							el.html(html);
 						}
 						objparentList = result.extend.mlbackProductResList;
-						// console.log(objparentList);
+						// console.log("objparentList");
+						 // console.log(objparentList);
 						var categoryIdSelect = $('#actshowproProid');
 						setCategoryDescSelect(categoryIdSelect, objparentList);
 					} else {
@@ -326,11 +335,53 @@
 				}
 			});
 		}
-
+		/*******类下拉**************/
+				function getLeiDown() {
+					$.ajax({
+						url: "${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail",
+						type: "GET",
+						async: false,
+						success: function (result) {
+							console.log(result);/********result***********/
+							if (result.code == 100) {
+								function setCategoryDescSelect(el, data) {
+									var html = '<option value="-1">---none---</option>';
+									for (var i = 0; i < data.length; i += 1) {
+										html += '<option value="' + data[i].categoryId + '">'+ data[i].categoryId+"   "+ data[i].categoryDesc + '</option>';
+									}
+									el.html(html);
+								}
+								objparentList = result.extend.mlbackCategorydownList;
+								console.log(objparentList);
+								var categoryIdSelect = $('#actshowproCateid');
+								setCategoryDescSelect(categoryIdSelect, objparentList);
+							} else {
+								alert("联系管理员");
+							}
+						}
+					});
+				}
+		
+		
+		
+       /*******************************/
 		function loadTpl() {
 			$('.table-box').load('${APP_PATH}/static/tpl/addActShowPro.html', function () {
 				// 设置归属类
 				getCategoryDown();
+				getLeiDown()
+				$(".lei_select").hide()
+				 $(".cp_orlei select").change(function() {
+					if($(this).val() == 0 ) {
+						$(".cp_select").show()
+						$(".lei_select").hide()
+					} else if($(this).val() == 1) {
+					    $(".lei_select").show()
+						$(".cp_select").hide()
+						
+					}
+				})
+				
 			});
 		}
 
@@ -340,6 +391,7 @@
 			loadTpl()
 			// 设置归属类
 			getCategoryDown();
+			getLeiDown()
 			// fetch data
 			data = {
 				"actshowproId": $(this).attr('edit-id')
@@ -351,7 +403,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						obj = result.extend.mlbackActShowProOne;
-						// console.log(obj);
+						console.log(obj);/*********************/
 						tianchong(obj);
 					} else {
 						alert("联系管理员");
@@ -364,6 +416,7 @@
 				$(":input[name='actshowproName']").val(data.actshowproName);
 				$(":input[name='actshowproActnum']").val(data.actshowproActnum);
 				$(":input[name='actshowproProid']").val(data.actshowproProid);
+				$(":input[name='actshowproCateid']").val(data.actshowproCateid);/*****************/
 				$(":input[name='actshowproProname']").val(data.actshowproProname);
 				if (data.actshowproImgwapurl && data.actshowproImgwapurl.length) {
 					var el = $(".upload-img-btn.img");
@@ -377,6 +430,11 @@
 				}
 				$(":input[name='actshowproStatus']").val(data.actshowproStatus);
 				$(":input[name='actshowproOrderth']").val(data.actshowproOrderth);
+				$(":input[name='actshowproIfproORcate']").val(data.actshowproIfproORcate);
+				if(data.actshowproIfproORcate==1){
+					$(".cp_select").hide();
+					$(".lei_select").show();
+				}
 			}
 
 		});

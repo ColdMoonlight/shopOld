@@ -93,20 +93,22 @@
 				}
 			}
 		}
-
+		var cartitemMap = {};
 		function renderProdcutList(parent, data) {
-			// console.log(data);
+			console.log(data);
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
+				cartitemMap[data[i].cartitemId] = data[i];
 				var hasStorageItem = cartObj[data[i].cartitemId];
-				html += '<div class="cart-item bd-b bd-t">' +
-					'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
-					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
-					'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
+				html += '<div class="cart-item bd-b bd-t" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
+				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '" data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' +
+					/* '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
+					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' + */
+					'<img class="img" style="margin-left: 0;" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
 					' <div class="text">' +
 					'<div class="title">' + data[i].cartitemProductName + '</div>' +
-					' <div class="condition">';
+					' <div class="condition" style="position: relative;">';
 				var skuIdArr = data[i].cartitemProductskuIdstr.split(',');
 				var skuIdNameArr = data[i].cartitemProductskuIdnamestr.split(',');
 				var skuNameArr = data[i].cartitemProductskuNamestr.split(',');
@@ -115,6 +117,7 @@
 					html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
 						': ' + skuNameArr[j] + '</div>';
 				}
+				html += '<span class="sku-edit" style="position: absolute; top: 0; right: 0; color: #ff6f5e;" onclick="skuEdit(event);"> EDIT </span>';
 				var dataPrice = getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
 				.cartitemProductActoff);
 				html += '</div>' +
@@ -123,19 +126,201 @@
 					'" data-productname="' + data[i].cartitemProductName + '">' +
 					'<span class="price">$' + (dataPrice.current) + '</span>' +
 					'<span class="original">$' + (dataPrice.origin) + '</span>' +
+					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
 					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
 					'">' +
 					'<span class="input-group-addon"  id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
-					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
+					
 					'</div>' +
 					'</div>' +
 					'</div>';
+					cartObj[data[i].cartitemId] = {
+							num: data[i].cartitemProductNumber,
+							price: dataPrice.current
+					};
+			}
+			parent.html(html);
+			getTotalPrice();
+		}
+
+		var skuCheckData = {};
+		function checkSku(skuCheckData) {
+			for (var key in skuCheckData) {
+				if (!skuCheckData[key].cname) {
+					renderSysMsg('Please select product attributes: ' + skuCheckData[key].name, 'sys-error');
+					
+					setTimeout(function() {
+						$('.sys-error').remove();
+					}, 1000);
+					return false;
+				}
 			}
 
-			parent.html(html);
+			return true;
+		}
+		function skuEdit(e) {
+			var cartItem = $(e.target).parents('.cart-item');
+	    var productId = cartItem.data('productid');
+			var elBox = $('<div class="sys-box" style="position: fixed; left: 0; bottom: 0; z-index: 999999; display: block;width: 100%;min-height:460px"></div>');
+	    	
+	    	var html = '<div class="sys-body" style="overflow-y: scroll;max-height:390px; border-bottom: 1px solid #ccc;"></div>' +
+	    	'<div class="sys-footer" style=" position:absolute; bottom: 0; left: 0;width: 100%;display: flex; justify-content: space-between; padding: 1em;">'+
+	    		'<button class="btn btn-red cancel" style="width: 45%; padding: .75em; border-radius: 0;">cancel</button>' +
+					'<button class="btn btn-pink ok" style="width: 45%; padding: .75em; border-radius: 0;">OK</button>' +
+	    	'</div>';
+	 
+	    	$(document.body).append(elBox.html(html));
+	    	$(document.body).append(mask);
+	    	$('.sys-box .cancel').on('click', function() {
+	    		$('.sys-box').remove();
+	    		$('.mask').remove();
+	    		sysFlag = !sysFlag;
+	    	});
+	    	$('.sys-box .ok').on('click', function() {
+	    		if (skuCheckData[productId] && checkSku(skuCheckData[productId])) {
+	    			// delete order
+	    			$.ajax({
+	    				url: '${APP_PATH}/MlbackCart/delCartItem',
+	    				type: 'POST',
+	    				data: JSON.stringify({cartitemId: parseInt(cartItem.data('cartitemid'), 10)}),
+	    				async: false,
+	    				contentType: 'application/json',
+	    				success: function (data) {
+	    					// console.log(data)
+	    					var resData = data.extend;
+
+	    					if (data.code !== 100) {
+	    						alert('sys error!')
+	    					} else {
+	    						// repeat generate order
+	    		    			var skuIdstr = [];
+	    		    			var skuIdnamestr = [];
+	    		    			var skuMoneystr = [];
+	    		    			var skuNamestr = [];
+	    		    			for (var key in skuCheckData[productId]) {
+	    		    				skuIdstr.push(skuCheckData[productId][key].id);
+	    		    				skuIdnamestr.push(skuCheckData[productId][key].name);
+	    		    				skuMoneystr.push(skuCheckData[productId][key].cprice);
+	    		    				skuNamestr.push(skuCheckData[productId][key].cname);
+	    		    			}
+	    		    			var cartitemProductActoffid = parseInt(cartItem.data('actoff'), 10);
+	    		    			var reqData = {};
+	    							reqData.cartitemProductId = parseInt(productId);
+	    							reqData.cartitemProductName = cartItem.find('.title').text();
+	    							console.log(cartItem.find('.original').text().slice(1));
+	    							reqData.cartitemProductOriginalprice = parseFloat(cartItem.data('originalprice')).toFixed(2);
+	    							reqData.cartitemProductMainimgurl = cartItem.find('img').attr('src');
+	    							reqData.cartitemProductActoff = cartitemProductActoffid/10;
+	    							reqData.cartitemProductskuIdstr = skuIdstr.join(',');
+	    							reqData.cartitemProductskuIdnamestr = skuIdnamestr.join(',');
+	    							reqData.cartitemProductskuNamestr = skuNamestr.join(',');
+	    							reqData.cartitemProductskuMoneystr = skuMoneystr.join(',');
+	    							reqData.cartitemProductNumber = parseInt(cartItem.find('input[type="text"]').val(), 10);
+
+	    		    			$.ajax({
+	    								url: '${APP_PATH}/MlbackCart/toAddToCart',
+	    								data: JSON.stringify(reqData),
+	    								type: "POST",
+	    								dataType: 'JSON',
+	    								contentType: 'application/json',
+	    								success: function (data) {
+	    									var resData = JSON.parse(data);
+	    									if (resData.code === 100) {
+    							    		window.location.href = window.location.href;
+	    									} else {
+	    										alert('sys error!');
+	    									}
+	    								}
+	    		    			});
+	    					}
+	    				}
+	    			});
+	    		}
+	    	});
+	    	
+	    	renderSkuData($('.sys-body'), productId);
+		}
+
+		function renderSkuData(conditionBox, productId) {
+			$.ajax({
+			  url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
+			  data: {
+			    "productId": productId,
+			  },
+			  type: "POST",
+			  success: function (data) {
+			    if (data.code === 100) {
+			      // console.log(data)
+			      var conditionArr = data.extend.mlbackProductSkuResList;
+			      for (var i = 0, len = conditionArr.length; i < len; i += 1) {
+			        renderCondition(conditionBox, conditionArr[i])
+			      }
+			      triggerCondition(conditionBox, productId);
+			    }
+			  }
+			});
+		}
+
+		function triggerCondition(parent, productId) {
+		  parent.find('.product-d-length').each(function (i, item) {
+		    var activeItem = $(item).find('.price-item.active');
+		    $(item).find('.price-item').each(function (i, item) {
+		      $(item).on('click', function () {
+		        activeItem.removeClass('active');
+		        $(item).addClass('active');
+		        activeItem = $(item);
+		        var skuId = activeItem.parent().parent().data('id');
+		        if (skuCheckData[productId] && skuCheckData[productId][skuId]) {
+		        	skuCheckData[productId][skuId].cname = activeItem.text();
+			        skuCheckData[productId][skuId].cprice = activeItem.data('price');
+		        }
+		      })
+		    })
+		  });
+		}
+
+		function renderCondition(parent, data) {
+		  var conditionEl = $('<div class="container product-d-length" data-name="' + data.productskuName +
+		    '" data-id="' + data.productskuId + '"/>');
+		  var html = '';
+		  var len = 1;
+
+	  	var productId = data.productId;
+	  	var skuId = data.productskuId;
+	  	if (!skuCheckData[productId]) {
+	  		skuCheckData[productId] = {};
+	  	}
+	  	if (!skuCheckData[productId][skuId]) {
+	     	skuCheckData[productId][skuId] = {};
+	  	}
+     	skuCheckData[productId][skuId]['id'] = skuId;
+      skuCheckData[productId][skuId]['name'] = data.productskuName;
+      skuCheckData[productId][skuId]['cname'] = undefined;
+      skuCheckData[productId][skuId]['cprice'] = undefined;
+		  for (var key in data) {
+		    if (typeof data[key] === 'string' && data[key].indexOf(',') > -1) {
+		      data[key] = data[key].split(',');
+		      if (len === 1) {
+		        len = data[key].length;
+		      }
+		    }
+		  }
+		  html += '<span class="sku-id-name">' + data.productskuName + ':</span>';
+		  html += '<div class="list">';
+		  for (var i = 0; i < len; i += 1) {
+		    if (i === 0) {
+		      html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
+		        .productskuNameDetails[i] + '</span>'
+		    } else {
+		      html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
+		        .productskuNameDetails[i] + '</span>'
+		    }
+		  }
+		  html += '</div>';
+		  parent.append(conditionEl.html(html));
 		}
 
 		function renderProductNone(parent) {
@@ -151,17 +336,14 @@
 		function addNum(e) {
 			e.stopPropagation();
 			var item  = $(e.target);
-			var checkbox = item.parents('.cart-item').find('.checkbox');
+			var cartitemid = item.parents('.cart-item').data('cartitemid');
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			productNumText += 1;
 			productNum.val(productNumText);
 
-			if(checkbox.is(':checked')) {
-				cartObj[checkbox.data('cartitemid')].num = productNumText;
-				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-				getTotalPrice();
-			}
+			cartObj[cartitemid].num = productNumText;
+			getTotalPrice();
 
 			updateCartItemNum(item, productNumText);
 		}
@@ -169,7 +351,7 @@
 		function subNum(e) {
 			e.stopPropagation();
 			var item  = $(e.target);
-			var checkbox = item.parents('.cart-item').find('.checkbox');
+			var cartitemid = item.parents('.cart-item').data('cartitemid');
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			if (productNumText <= 1) {
@@ -179,12 +361,9 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 			}
-			
-			if(checkbox.is(':checked')) {
-				cartObj[checkbox.data('cartitemid')].num = productNumText;
-				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-				getTotalPrice();
-			}
+
+			cartObj[cartitemid].num = productNumText;
+			getTotalPrice();
 			
 			updateCartItemNum(item, productNumText);
 		}
@@ -238,15 +417,14 @@
 
 		function calcTotalPrice() {
 			var cartItemArr = []
-			$('input[type="checkbox"]').each(function (i, item) {
-				if ($(item).is(':checked')) {
+
+			$('.cart-item').each(function (i, item) {
 					cartItemArr.push({
 						cartitemId: $(item).data('cartitemid'),
 						cartitemProductId: $(item).data('productid'),
-						cartitemProductNumber: $(item).parent().find('.input-group input').val()
+						cartitemProductNumber: $(item).find('.input-group input').val()
 					});
-				}
-			})
+			});
 			if (cartItemArr.length) {
 				// console.log(cartItemArr)
 				$.ajax({
@@ -306,25 +484,12 @@
 			}
 		})
 
-		// function toProductDetails() {
-		// 	$('.cart-item').each(function (i, item) {
-		// 		$(item).on('click', function () {
-		// 			toProductItem($(this).find('.checkbox').data('productid'))
-		// 		})
-		// 	}, true)
-		// }
-		function toProductDetails() {
-			// $('.cart-item').each(function (i, item) {
-			// 	$(item).on('click', function () {
-			// 		toProductItem($(this).find('.checkbox').data('productid'))
-			// 	})
-			// }, true)
-			
+		function toProductDetails() {			
 			$(".cart-item").each(function(){
 				var textlink =$(this).children(".content").children(".text").find(".title");
 				// var imglink =$(this).find(".img");
 				textlink.on('click', function () {
-					var product_id = $(this).parents(".content").parents(".cart-item").find(".checkbox").data('productid');
+					var product_id = $(this).parents(".content").parents(".cart-item").data('productid');
 					// alert(product_id)
 				     toProductItem(product_id)
 				});
@@ -333,29 +498,7 @@
 				// 	// alert(product_id)
 				//      toProductItem(product_id)
 				// });
-				
-				
 			}, true)
-		}
-		
-		
-		
-		
-		
-		function selectCartItem(e) {
-			e.stopPropagation();
-			var item = $(e.target);
-			var cartItemId = item.data('cartitemid');
-			if(item.is(':checked') && !cartObj[cartItemId]) {
-				cartObj[cartItemId] = {
-						num: parseInt(item.parent().find('input[type=text]').val().trim(), 10),
-						price: (+item.parent().find('.price').text().trim().substring(1))
-				}
-			} else {
-				delete cartObj[cartItemId];
-			}
-			window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
-			getTotalPrice();
 		}
 
 		var cartNum = parseInt(cartText.text());

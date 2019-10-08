@@ -12,7 +12,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <!--  禁用telphone -->
-   <link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
   <meta name="format-detection" content="telephone=no">
   <!-- 关闭下拉刷新 -->
   <meta id="WV.Meta.DisableRefresh" value="true">
@@ -46,8 +45,6 @@
 
 <body>
   <jsp:include page="mheader.jsp"></jsp:include>
-  
-	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <!-- main -->
   <div class="main">
     <!-- sale -->
@@ -83,11 +80,23 @@
     function rednerHotProduct(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
-        html += '<div class="banner">' +
-        '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-							'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-        '</a>' +
-        '</div>';
+		   var actshowprolei = data[i].actshowproIfproORcate;
+		  if(actshowprolei==0){
+			  html += '<div class="banner">' +
+			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+			  					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  '</a>' +
+			  '</div>';
+		  }else if(actshowprolei==1){
+			  html += '<div class="banner">' +
+			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  '</a>' +
+			  '</div>';
+			  
+		  }
+		  
+        
       }
       parent.html(html);
     }
@@ -364,7 +373,9 @@
 							rednertop(bannerfirst, resData);
 							  new Swiper('#ban_silder', {
 								freeMode: true,
-								autoplay: {delay: 3000,},
+								autoplay: {
+								    disableOnInteraction: false,
+								  },
 									pagination: {
 										el: '.swiper-pagination',
 										clickable: true
@@ -423,7 +434,10 @@
 					
 	   
   </script>
-  <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
+  <!-- megalookhair 
+  <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  <!-- huashuohair -->
+  <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
 </body>
 
 </html>

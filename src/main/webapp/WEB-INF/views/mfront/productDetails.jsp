@@ -91,7 +91,7 @@
 	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
-
+    <div class="mask5" style="display: none;"></div>
   <script src="${APP_PATH }/static/js/relativetime.min.js"></script>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
@@ -232,6 +232,7 @@
 				success: function (data) {
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductOne;
+						// console.log(productData);
 						addHeaderInfo(productData);
 						var fbpid=productData.productId;
 						var fbprice=(productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
@@ -671,7 +672,7 @@
 				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
-				// console.log(data);
+				console.log(reqData);
 
 				// name, id, price
 				function getSkuData(els) {
@@ -697,7 +698,6 @@
 				flag = checkSku(skuCheckData);
 				// console.log(flag)
 				if (flag) generateOrder(reqData);
-
 			});
 
 			function checkSku(skuCheckData) {
@@ -733,7 +733,11 @@
 								  currency: 'USD'
 								});
 							// cartText.text(parseInt(cartText.text()) + 1);
-							window.location.href = '${APP_PATH}/myCart.html';
+							selectCartOrCheckout(reqData);
+							$(".mask5").show();
+							setTimeout(function() {
+								window.location.href = '${APP_PATH}/myCart.html';
+							}, 5000);
 						}
 					},
 					error: function (data) {
@@ -741,9 +745,38 @@
 					}
 				});
 			}
+			
+			function selectCartOrCheckout(product) {
+		    	var elBox = $('<div class="modal sys-box" style="display: block;"></div>');
+		    	
+		    	var html = '<div class="sys-title" style="background: #000; color: #fff;">' +
+		    		'Item successfully added to your cart!' +
+		    	'</div>' +
+		    	'<div class="sys-body" style="display: flex;">' +
+		    		'<img src="'+ product.cartitemProductMainimgurl +'" style="display: block; width:100px; height:100px;">' +
+		    		'<div class="content" style="width: 70%; padding-left: 10px; text-align: left;">'+
+		    			'<h4>'+ product.cartitemProductName +'</h4>'+
+		    			'<div style="margin: 12px 0;">PRICE: $'+ (product.cartitemProductOriginalprice * product.cartitemProductActoff * product.cartitemProductNumber / 10).toFixed(2) +'</div>' +
+		    			'<a href="${APP_PATH}/myCart.html" class="btn btn-red" style="padding: 8px; border-radius: 0;">view cart</a>' +
+		    			'<button class="btn btn-pink buy-now2" style="padding: 8px; margin-left: 1em; border-radius: 0;">checkout</button>' +
+		    		'</div>'+
+		    	'</div>' +
+		    	'<div class="sys-footer" style="padding: 8px 0; font-size: 14px; text-align: center; border-top: 1px solid #ccc;">Free Gift For Every Order!</div>'
+		    	;
+		 
+		    	$(document.body).append(elBox.html(html));
+		    	
+		    	$('.buy-now2').on('click', function() {
+		    		buyNow();
+		    	});
+			}
 
 			$('.buy-now').on('click', function() {
 				// console.log(dataPrice)
+				buyNow();
+			});
+			
+			function buyNow() {
 				var skuData = getSkuData($('.product-d-length'));
 				var reqData = {};
 				reqData.cartitemProductId = parseInt(pidA);
@@ -787,8 +820,7 @@
 				flag = checkSku(skuCheckData);
 				// console.log(flag)
 				if (flag) generateOrderNow(reqData);
-				
-			});
+			}
 			
 			function generateOrderNow(reqData) {
 				// console.log(reqData)
@@ -1055,7 +1087,10 @@
 		      }
 		    }
 	</script>
-	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>
+	<!-- megalookhair 
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  	<!-- huashuohair -->
+  	<script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
 </body>
 
 </html>

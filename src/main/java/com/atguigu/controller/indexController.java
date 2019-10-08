@@ -17,8 +17,7 @@ public class indexController {
 	 * */
 	@RequestMapping("/isMobileOrPc")
 	public static String  isMobileOrPc(HttpServletResponse reponse,HttpServletRequest request){
-		String nowTime = DateUtil.strTime14s();
-		System.out.println("nowTime:"+nowTime);
+		
 		String requestHeader = request.getHeader("user-agent");
 		if(isMobileDevice(requestHeader)){
 			System.out.println("使用手机浏览器");

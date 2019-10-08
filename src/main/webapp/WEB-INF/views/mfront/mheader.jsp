@@ -4,7 +4,9 @@
 
 <head>
   <% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
+   <link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
   <link rel="stylesheet" href="${APP_PATH }/static/m/css/main.css">
+  <script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <script src="${APP_PATH }/static/m/js/zepto.min.js"></script>
   <script>
 	  $.fn.prevAll = function(selector){
@@ -62,9 +64,14 @@
   <!-- info -->
   <!--header  -->
   <div class="header bd-b">
-			<div class="info">
-			<p style="text-align: center;">Free Shipping World Wide.</p>
-		  </div>
+	  <div class="info_adv">
+	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
+	  	<div id="adv_silder">
+	  		<div class="swiper-wrapper">
+	  			
+	  		</div>
+	  	</div>
+	  </div>
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
@@ -104,8 +111,8 @@
       parent.html('<p class="without-data">' + msg + '</p>');
     }
 
-    function renderSysMsg(msg) {
-    	var elBox = $('<div class="modal sys-box" style="display: block;"></div>');
+    function renderSysMsg(msg, cls) {
+    	var elBox = $('<div class="modal sys-box '+ cls +'" style="display: block;"></div>');
     	
     	var html = '<div class="sys-title">' +
     		'<span class="icon close"></span>' +
@@ -301,6 +308,49 @@
     function toProductItem(id) {
       if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/tomProductDetailPage?productId=" + id;
     }
+	
+	/************advlistpic**********************************/
+	var banneradv=$("#adv_silder .swiper-wrapper")
+	   function rednertop(parent, data) {
+		  var html = '';
+		  for (var i = 0; i < data.length; i += 1) {
+				html += '<div class="swiper-slide">' +
+					'<a href="javascript:;">' +
+							'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+					'</a>' +
+					'</div>';
+		  }
+		  parent.html(html);
+		}
+			$.ajax({
+			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+				data: JSON.stringify({
+			   "slideArea": 4
+			 }),
+			 type: 'post',
+			 dataType: 'JSON',
+			 contentType: 'application/json',
+			 success: function (data) {
+					// console.log(data)/***1111111111data**/
+					if (JSON.parse(data).code === 100) {
+					  var resData = JSON.parse(data).extend.mlbackSlideList;
+					  console.log(resData)/****************首页广告******/
+						rednertop(banneradv, resData);
+						  new Swiper('#adv_silder', {
+							freeMode: true,
+							autoplay: {
+							    disableOnInteraction: false,
+							  },
+							})
+					  // console.log(resData);
+					 // rednertop(bannerfirst,resData)
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+					}
+				  }
+		});
+	
+	
   </script>
 </body>
 

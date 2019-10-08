@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.MlbackAddOrderViewDetailMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.MlbackAddOrderViewDetail">
+    <id column="addorderViewDetail_id" jdbcType="INTEGER" property="addorderviewdetailId" />
+    <result column="addorderViewDetail_sessionid" jdbcType="VARCHAR" property="addorderviewdetailSessionid" />
+    <result column="addorderViewDetail_name" jdbcType="VARCHAR" property="addorderviewdetailName" />
+    <result column="addorderViewDetail_proid" jdbcType="INTEGER" property="addorderviewdetailProid" />
+    <result column="addorderViewDetail_proname" jdbcType="VARCHAR" property="addorderviewdetailProname" />
+    <result column="addorderViewDetail_seoname" jdbcType="VARCHAR" property="addorderviewdetailSeoname" />
+    <result column="addorderViewDetail_actnum" jdbcType="INTEGER" property="addorderviewdetailActnum" />
+    <result column="addorderViewDetail_createTime" jdbcType="VARCHAR" property="addorderviewdetailCreatetime" />
+    <result column="addorderViewDetail_motifyTime" jdbcType="VARCHAR" property="addorderviewdetailMotifytime" />
+    <result column="addorderViewDetail_starttime" jdbcType="VARCHAR" property="addorderviewdetailStarttime" />
+    <result column="addorderViewDetail_endtime" jdbcType="VARCHAR" property="addorderviewdetailEndtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    addorderViewDetail_id, addorderViewDetail_sessionid, addorderViewDetail_name, addorderViewDetail_proid, 
+    addorderViewDetail_proname, addorderViewDetail_seoname, addorderViewDetail_actnum, 
+    addorderViewDetail_createTime, addorderViewDetail_motifyTime, addorderViewDetail_starttime, 
+    addorderViewDetail_endtime
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.MlbackAddOrderViewDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_mlback_addorderviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_mlback_addorderviewdetail
+    where addorderViewDetail_id = #{addorderviewdetailId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.MlbackAddOrderViewDetailExample">
+    delete from tb_mlback_addorderviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail">
+    insert into tb_mlback_addorderviewdetail (addorderViewDetail_id, addorderViewDetail_sessionid, 
+      addorderViewDetail_name, addorderViewDetail_proid, 
+      addorderViewDetail_proname, addorderViewDetail_seoname, 
+      addorderViewDetail_actnum, addorderViewDetail_createTime, 
+      addorderViewDetail_motifyTime, addorderViewDetail_starttime, 
+      addorderViewDetail_endtime)
+    values (#{addorderviewdetailId,jdbcType=INTEGER}, #{addorderviewdetailSessionid,jdbcType=VARCHAR}, 
+      #{addorderviewdetailName,jdbcType=VARCHAR}, #{addorderviewdetailProid,jdbcType=INTEGER}, 
+      #{addorderviewdetailProname,jdbcType=VARCHAR}, #{addorderviewdetailSeoname,jdbcType=VARCHAR}, 
+      #{addorderviewdetailActnum,jdbcType=INTEGER}, #{addorderviewdetailCreatetime,jdbcType=VARCHAR}, 
+      #{addorderviewdetailMotifytime,jdbcType=VARCHAR}, #{addorderviewdetailStarttime,jdbcType=VARCHAR}, 
+      #{addorderviewdetailEndtime,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.MlbackAddOrderViewDetailExample" resultType="java.lang.Long">
+    select count(*) from tb_mlback_addorderviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_mlback_addorderviewdetail
+    <set>
+      <if test="record.addorderviewdetailId != null">
+        addorderViewDetail_id = #{record.addorderviewdetailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addorderviewdetailSessionid != null">
+        addorderViewDetail_sessionid = #{record.addorderviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailName != null">
+        addorderViewDetail_name = #{record.addorderviewdetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailProid != null">
+        addorderViewDetail_proid = #{record.addorderviewdetailProid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addorderviewdetailProname != null">
+        addorderViewDetail_proname = #{record.addorderviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailSeoname != null">
+        addorderViewDetail_seoname = #{record.addorderviewdetailSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailActnum != null">
+        addorderViewDetail_actnum = #{record.addorderviewdetailActnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.addorderviewdetailCreatetime != null">
+        addorderViewDetail_createTime = #{record.addorderviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailMotifytime != null">
+        addorderViewDetail_motifyTime = #{record.addorderviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailStarttime != null">
+        addorderViewDetail_starttime = #{record.addorderviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailEndtime != null">
+        addorderViewDetail_endtime = #{record.addorderviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_mlback_addorderviewdetail
+    set addorderViewDetail_id = #{record.addorderviewdetailId,jdbcType=INTEGER},
+      addorderViewDetail_sessionid = #{record.addorderviewdetailSessionid,jdbcType=VARCHAR},
+      addorderViewDetail_name = #{record.addorderviewdetailName,jdbcType=VARCHAR},
+      addorderViewDetail_proid = #{record.addorderviewdetailProid,jdbcType=INTEGER},
+      addorderViewDetail_proname = #{record.addorderviewdetailProname,jdbcType=VARCHAR},
+      addorderViewDetail_seoname = #{record.addorderviewdetailSeoname,jdbcType=VARCHAR},
+      addorderViewDetail_actnum = #{record.addorderviewdetailActnum,jdbcType=INTEGER},
+      addorderViewDetail_createTime = #{record.addorderviewdetailCreatetime,jdbcType=VARCHAR},
+      addorderViewDetail_motifyTime = #{record.addorderviewdetailMotifytime,jdbcType=VARCHAR},
+      addorderViewDetail_starttime = #{record.addorderviewdetailStarttime,jdbcType=VARCHAR},
+      addorderViewDetail_endtime = #{record.addorderviewdetailEndtime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail">
+    update tb_mlback_addorderviewdetail
+    <set>
+      <if test="addorderviewdetailSessionid != null">
+        addorderViewDetail_sessionid = #{addorderviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailName != null">
+        addorderViewDetail_name = #{addorderviewdetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailProid != null">
+        addorderViewDetail_proid = #{addorderviewdetailProid,jdbcType=INTEGER},
+      </if>
+      <if test="addorderviewdetailProname != null">
+        addorderViewDetail_proname = #{addorderviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailSeoname != null">
+        addorderViewDetail_seoname = #{addorderviewdetailSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailActnum != null">
+        addorderViewDetail_actnum = #{addorderviewdetailActnum,jdbcType=INTEGER},
+      </if>
+      <if test="addorderviewdetailCreatetime != null">
+        addorderViewDetail_createTime = #{addorderviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailMotifytime != null">
+        addorderViewDetail_motifyTime = #{addorderviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailStarttime != null">
+        addorderViewDetail_starttime = #{addorderviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailEndtime != null">
+        addorderViewDetail_endtime = #{addorderviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addorderViewDetail_id = #{addorderviewdetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail">
+    update tb_mlback_addorderviewdetail
+    set addorderViewDetail_sessionid = #{addorderviewdetailSessionid,jdbcType=VARCHAR},
+      addorderViewDetail_name = #{addorderviewdetailName,jdbcType=VARCHAR},
+      addorderViewDetail_proid = #{addorderviewdetailProid,jdbcType=INTEGER},
+      addorderViewDetail_proname = #{addorderviewdetailProname,jdbcType=VARCHAR},
+      addorderViewDetail_seoname = #{addorderviewdetailSeoname,jdbcType=VARCHAR},
+      addorderViewDetail_actnum = #{addorderviewdetailActnum,jdbcType=INTEGER},
+      addorderViewDetail_createTime = #{addorderviewdetailCreatetime,jdbcType=VARCHAR},
+      addorderViewDetail_motifyTime = #{addorderviewdetailMotifytime,jdbcType=VARCHAR},
+      addorderViewDetail_starttime = #{addorderviewdetailStarttime,jdbcType=VARCHAR},
+      addorderViewDetail_endtime = #{addorderviewdetailEndtime,jdbcType=VARCHAR}
+    where addorderViewDetail_id = #{addorderviewdetailId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- insertSelective -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail">
+    insert into tb_mlback_addorderviewdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addorderviewdetailId != null">
+        addorderViewDetail_id,
+      </if>
+      <if test="addorderviewdetailSessionid != null">
+        addorderViewDetail_sessionid,
+      </if>
+      <if test="addorderviewdetailName != null">
+        addorderViewDetail_name,
+      </if>
+      <if test="addorderviewdetailProid != null">
+        addorderViewDetail_proid,
+      </if>
+      <if test="addorderviewdetailProname != null">
+        addorderViewDetail_proname,
+      </if>
+      <if test="addorderviewdetailSeoname != null">
+        addorderViewDetail_seoname,
+      </if>
+      <if test="addorderviewdetailActnum != null">
+        addorderViewDetail_actnum,
+      </if>
+      <if test="addorderviewdetailCreatetime != null">
+        addorderViewDetail_createTime,
+      </if>
+      <if test="addorderviewdetailMotifytime != null">
+        addorderViewDetail_motifyTime,
+      </if>
+      <if test="addorderviewdetailStarttime != null">
+        addorderViewDetail_starttime,
+      </if>
+      <if test="addorderviewdetailEndtime != null">
+        addorderViewDetail_endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addorderviewdetailId != null">
+        #{addorderviewdetailId,jdbcType=INTEGER},
+      </if>
+      <if test="addorderviewdetailSessionid != null">
+        #{addorderviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailName != null">
+        #{addorderviewdetailName,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailProid != null">
+        #{addorderviewdetailProid,jdbcType=INTEGER},
+      </if>
+      <if test="addorderviewdetailProname != null">
+        #{addorderviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailSeoname != null">
+        #{addorderviewdetailSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailActnum != null">
+        #{addorderviewdetailActnum,jdbcType=INTEGER},
+      </if>
+      <if test="addorderviewdetailCreatetime != null">
+        #{addorderviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailMotifytime != null">
+        #{addorderviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailStarttime != null">
+        #{addorderviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="addorderviewdetailEndtime != null">
+        #{addorderviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- deleteByPrimaryKey -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_mlback_addorderviewdetail
+    where addorderViewDetail_id = #{addorderviewdetailId,jdbcType=INTEGER}
+  </delete>
+  
+    <!-- selectMlbackAddOrderViewDetailByTime -->
+  <select id="selectMlbackAddOrderViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail" resultMap="BaseResultMap">
+  	select addorderViewDetail_id, addorderViewDetail_seoname, addorderViewDetail_actnum, addorderViewDetail_createTime from tb_mlback_addorderviewdetail where
+   	addorderViewDetail_createTime between #{addorderviewdetailStarttime,jdbcType=VARCHAR} and #{addorderviewdetailEndtime,jdbcType=VARCHAR} order by addorderViewDetail_seoname
+  </select>
+  
+  
+</mapper>

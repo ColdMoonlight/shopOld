@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,20 @@ public class MlbackProductImgController {
 		List<MlbackProductImg> mbackProductImgResList =mlbackProductImgService.selectMlbackProductImgById(productId);
 		return Msg.success().add("resMsg", "查看本productId下的所有小图,完毕")
 					.add("mbackProductImgResList", mbackProductImgResList);
+	}
+	
+	/**2.0	UseNow	0505
+	 * MlbackProductImg	delete
+	 * @param id
+	 */
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg delete(@RequestBody MlbackProductImg mlbackProductImg){
+		//接收id信息
+		Integer productimgId = mlbackProductImg.getProductimgId();
+		int intResult = mlbackProductImgService.deleteByPrimaryKey(productimgId);
+		System.out.println(intResult);
+		return Msg.success().add("resMsg", "delete success");
 	}
 	
 }

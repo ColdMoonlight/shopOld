@@ -138,7 +138,15 @@ public class MlbackProductService {
 		return mlbackProductList;
 	}
 	
-	
-	
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 查看全部用户信息
+	 * 
+	 * */
+	public List<MlbackProduct> selectMlbackProductlast() {
+		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductlast();
+		return mlbackProductList;
+	}	
 
 }

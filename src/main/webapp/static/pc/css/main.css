@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   outline: 0;
-  -webkit-tap-highlight-color: transparent
+  /* -webkit-tap-highlight-color: transparent */
 }
 
 @font-face {
@@ -972,10 +972,11 @@ margin: 10px 0;
 }
 
 .cart-item>.content .delete {
-	position: absolute;
-  right: 1em;
+/* 	position: absolute;
+  right: 1em; */
   font-size: 20px;
   align-items: flex-end;
+  margin: 0 50px;
 }
 
 /* .cart-item>.content .condition>.c-item+.c-item {
