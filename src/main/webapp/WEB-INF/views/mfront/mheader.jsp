@@ -98,7 +98,21 @@
     </div>
   </div>
   
-
+   <div class="serch_cont">
+      <div class="serch_box">
+        <span class="close_serch">X</span>
+        <p class="serch_tit">What are you Looking for?</p>
+        <div class="tt-col">
+          <input type="text" class="tt-search-input" placeholder="Search Products..." />
+          <button class="tt-btn-search" type="submit">Search</button>
+        </div>
+        <ul class="show_ul">
+          <li>bob</li>
+          <li>wigs</li>
+          <li>bundle</li>
+        </ul>
+      </div>
+    </div>
 
   <script>
     var categoryActiveNum = 1;
@@ -334,10 +348,11 @@
 					// console.log(data)/***1111111111data**/
 					if (JSON.parse(data).code === 100) {
 					  var resData = JSON.parse(data).extend.mlbackSlideList;
-					  console.log(resData)/****************首页广告******/
+					  // console.log(resData)/****************首页广告******/
 						rednertop(banneradv, resData);
 						  new Swiper('#adv_silder', {
 							freeMode: true,
+							loop:true,
 							autoplay: {
 							    disableOnInteraction: false,
 							  },
@@ -350,6 +365,40 @@
 				  }
 		});
 	
+	  /************************/
+	        $(".tt-btn-search").click(function(){
+	           var seaProductName = $(this).parents(".tt-col").find("input.tt-search-input").val();
+			   if(seaProductName==""){
+				   alert("Please enter keywords;")
+			   }else{
+				    window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+			   }
+			  
+			   
+			   // ${APP_PATH }/MlbackProduct/tomProductDetailPage?productId=" + id
+			   
+	        });
+	    
+	    /**************搜索*************************/
+	        $(".tt-search-input").focus(function(){
+	          $(".serch_box").find("ul.show_ul").show()
+	        });
+	        $('body').delegate('.show_ul li','click',function(e){
+	          var val = $(this).text();
+	          $(".tt-col").find("input.tt-search-input").val(val);
+	          $(".serch_box").find("ul.show_ul").hide()
+	          e.stopPropagation();
+	        });
+	        $("body").on('click', '.search',function() {
+	            $('.serch_cont').show()
+	        })
+	        $("body").on('click', '.close_serch',function() {
+	            $('.serch_cont').hide()
+	        })
+	
+	
+	
+
 	
   </script>
 </body>
