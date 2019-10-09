@@ -75,7 +75,7 @@
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
-	  <a href="TEL:(501)7226336" class="icon phone"></a>
+	  <a href="TEL:(501)7226336" class="icon myphone"></a>
       <a href="${APP_PATH}/index.html">
 	      <div class="logo">
 	        <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
