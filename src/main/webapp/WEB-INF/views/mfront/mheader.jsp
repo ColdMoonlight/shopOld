@@ -68,7 +68,6 @@
 	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
 	  	<div id="adv_silder">
 	  		<div class="swiper-wrapper">
-	  			
 	  		</div>
 	  	</div>
 	  </div>
@@ -213,7 +212,8 @@
     var categoryData = {};
     // 获取全部的category信息,文件信息
     $.ajax({
-      url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
+      //url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
+      url: '${APP_PATH}/MlbackCategory/getMenuMlbackCategory',
       method: 'GET',
       success: function (data) {
 		  var resData = data.extend.mlbackCategorydownList;
