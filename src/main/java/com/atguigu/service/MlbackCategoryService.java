@@ -72,6 +72,17 @@ public class MlbackCategoryService {
 		List<MlbackCategory>  mlbackCategoryList = mlbackCategoryMapper.selectMlbackCategoryGetAllByParentId();
 		return mlbackCategoryList;
 	}
+	
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 查看全部用户信息
+	 * 
+	 * */
+	public List<MlbackCategory> selectMenuMlbackCategoryGetAll() {
+		List<MlbackCategory>  mlbackCategoryList = mlbackCategoryMapper.selectMenuMlbackCategoryGetAll();
+		return mlbackCategoryList;
+	}
 	/**
 	 * @author Shinelon
 	 * @param 
