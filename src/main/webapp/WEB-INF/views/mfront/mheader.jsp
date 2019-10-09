@@ -68,7 +68,6 @@
 	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
 	  	<div id="adv_silder">
 	  		<div class="swiper-wrapper">
-	  			
 	  		</div>
 	  	</div>
 	  </div>
