@@ -49,9 +49,9 @@
 
 	<!-- main -->
 	<div class="main">
-		<div class="condition select">
+<!-- 		<div class="condition select">
 			<select class="select-item select-category" data-type="category"></select>
-		</div>
+		</div> -->
 		<div class="product-list"></div>
 	</div>
 
@@ -61,67 +61,54 @@
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopeSearchName = '${sessionScope.productName}';
+		console.log(sessionScopeSearchName)
 		//var cidA = window.location.href.split('?')[1].split('=');
-		var cidA = sessionScopecategoryId;
+		// var cidA = sessionScopecategoryId;
 
-		//default codition
-		getProductList({
-			"productCategoryid": cidA
-		});
 
 		/* category condition */
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			type: "GET",
+			url: "${APP_PATH}/MlbackProduct/searchProductLike",
+			data: "productName=" + sessionScopeSearchName,
+			type: "POST",
 			success: function (data) {
-				if (data.code === 100) {
-					var resData = data.extend.mlbackCategorydownEr;
-					console.log(resData);
-					renderCondition($('.select-item.select-category'), resData)
-					$('.select-item').each(function (i, item) {
-						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
-							$(item).on('change', function () {
-								//console.log($('.select-category').val(), $('.select-color').val());
-								getProductList({
-									"productCategoryid": $('.select-category').val() || cidA[1]
-								});
-							})
-
-						}
-					})
-
-				} else {
-					renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+				console.log(data)
+				if(data.code==100){
+					var resultlist = data.extend.mlbackProductResList;
+					// console.log("resultlist");
+					console.log(resultlist);
+					rednerProduct(productList,resultlist)
+					
 				}
 			}
 		});
 		/* product list for category */
-		function getProductList(data) {
-			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
-				data: JSON.stringify(data),
-				dataType: "JSON",
-				contentType: 'application/json',
-				type: "POST",
-				success: function (data) {
-					// console.log(data)
-					var data = JSON.parse(data);
-					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
-					} else {
-						renderErrorMsg(productList, 'No product-related data was obtained');
-					}
-				},
-				error: function (error) {
-					if (error.status === 400) {
-						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
-						setTimeout(function () {
-							window.location.href = "${APP_PATH}/index/isMobileOrPc";
-						}, 3000);
-					}
-				}
-			});
-		}
+		// function getProductList(data) {
+		// 	$.ajax({
+		// 		url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
+		// 		data: JSON.stringify(data),
+		// 		dataType: "JSON",
+		// 		contentType: 'application/json',
+		// 		type: "POST",
+		// 		success: function (data) {
+		// 			// console.log(data)
+		// 			var data = JSON.parse(data);
+		// 			if (data.code === 100) {
+		// 				rednerProduct(productList, data.extend.mlbackProductResList);
+		// 			} else {
+		// 				renderErrorMsg(productList, 'No product-related data was obtained');
+		// 			}
+		// 		},
+		// 		error: function (error) {
+		// 			if (error.status === 400) {
+		// 				renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
+		// 				setTimeout(function () {
+		// 					window.location.href = "${APP_PATH}/index/isMobileOrPc";
+		// 				}, 3000);
+		// 			}
+		// 		}
+		// 	});
+		// }
 
 
 		function renderErrorMsg(parent, msg) {

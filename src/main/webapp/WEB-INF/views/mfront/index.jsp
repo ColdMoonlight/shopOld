@@ -106,9 +106,9 @@
       type: "POST",
       success: function (data) {
         if (data.code === 100) {
-			console.log(data)
+			// console.log(data)
         	var resData = data.extend.mlbackActShowProList;
-            console.log(resData);/*banban*/
+            // console.log(resData);/*banban*/
           rednerHotProduct($('#hot-product'), resData)
         } else {
           renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
@@ -369,7 +369,7 @@
 						// console.log(data)/***data**/
 						if (JSON.parse(data).code === 100) {
 						  var resData = JSON.parse(data).extend.mlbackSlideList;
-						  console.log(resData)
+						  // console.log(resData)
 							rednertop(bannerfirst, resData);
 							  new Swiper('#ban_silder', {
 								freeMode: true,
@@ -424,7 +424,7 @@
 							// console.log(data)/***data**/
 							if (JSON.parse(data).code === 100) {
 							  var resData = JSON.parse(data).extend.mlbackSlideList;;
-							  console.log(resData);
+							  // console.log(resData);
 					         rednerCoupon(bannercoupon,resData)
 							} else {
 							  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');

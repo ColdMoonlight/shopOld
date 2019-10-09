@@ -863,9 +863,9 @@ public class MlbackProductController {
 	 * @return 
 	 * */
 	@RequestMapping(value="/tomSearchPage",method=RequestMethod.GET)
-	public String tomSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") Integer seaProductName) throws Exception{
+	public String tomSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
 		//接收传递进来的参数
-		Integer seaProductNameReq = seaProductName;
+		String seaProductNameReq = seaProductName;
 		//放回响应域中
 		res.setAttribute("productName", seaProductNameReq);
 		//放回session域中
@@ -881,9 +881,9 @@ public class MlbackProductController {
 	 * @return 
 	 * */
 	@RequestMapping(value="/topSearchPage",method=RequestMethod.GET)
-	public String topSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") Integer seaProductName) throws Exception{
+	public String topSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
 		//接收传递进来的参数
-		Integer seaProductNameReq = seaProductName;
+		String seaProductNameReq = seaProductName;
 		//放回响应域中
 		res.setAttribute("productName", seaProductNameReq);
 		//放回session域中
