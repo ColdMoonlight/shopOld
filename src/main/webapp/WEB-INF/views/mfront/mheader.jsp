@@ -373,12 +373,11 @@
 			   }else{
 				    window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
 			   }
-			  
-			   
-			   // ${APP_PATH }/MlbackProduct/tomProductDetailPage?productId=" + id
-			   
 	        });
-	    
+			  $(".show_ul li").click(function(){
+			    var seaProductName =$(this).html();
+				window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+	           });
 	    /**************搜索*************************/
 	        $(".tt-search-input").focus(function(){
 	          $(".serch_box").find("ul.show_ul").show()

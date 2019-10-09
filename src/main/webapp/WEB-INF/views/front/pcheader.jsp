@@ -407,12 +407,20 @@
 		   $(".tt-btn-search").click(function(){
 		     var seaProductName = $(this).parents(".tt-col").find("input.tt-search-input").val();
 		     if(seaProductName==""){
-		     				   alert("Please enter keywords;")
+		          alert("Please enter keywords;")
 		     }else{
-		     				    window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+		         window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
 		     }
 		   });
-				
+				$(".show_ul li").click(function(){
+				  var seaProductName =$(this).html();
+								window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+				 });
+				  $('body').keydown(function(){
+					 if (event.keyCode == 13) {    
+						 $('.tt-btn-search').click();
+					 };            
+				 })
 				$(".tt-search-input").focus(function(){
 					 $(".serch_box").find("ul.show_ul").slideDown(200);
 				})
