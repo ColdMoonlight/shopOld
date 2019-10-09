@@ -855,8 +855,27 @@ public class MlbackProductController {
 		
 	}
 	
+	
 	/**
-	  * 13.0 UseNow 0505
+	 * 13	UseNow	0505
+	 * 前台移动端获取详情页面mfront/productDetails
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/tomSearchPage",method=RequestMethod.GET)
+	public String tomSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") Integer seaProductName) throws Exception{
+		//接收传递进来的参数
+		Integer seaProductNameReq = seaProductName;
+		//放回响应域中
+		res.setAttribute("productName", seaProductNameReq);
+		//放回session域中
+		session.setAttribute("productName", seaProductNameReq);
+		//返回视图
+		return "mfront/searchproductlist";
+	}
+	
+	/**
+	  * 14.0 UseNow 0505
 	  * 通过产品名查看单条产品的详情
 	  * @param productId
 	  * @return 
