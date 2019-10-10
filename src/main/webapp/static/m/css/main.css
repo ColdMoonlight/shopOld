@@ -68,7 +68,7 @@ a:focus {
 .icon.person:before {
   content: "\e614";
 }
-
+.icon .search{cursor: pointer;}
 .icon.person.active:before {
 	color: #ff1671;
 }

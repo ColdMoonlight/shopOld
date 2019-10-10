@@ -593,18 +593,18 @@
 
 		function toProductDetails() {			
 			$(".cart-item").each(function(){
-				var textlink =$(this).children(".content").children(".text").find(".title");
-				// var imglink =$(this).find(".img");
-				textlink.on('click', function () {
-					var product_id = $(this).parents(".content").parents(".cart-item").data('productid');
-					// alert(product_id)
-				     toProductItem(product_id)
-				});
-				// imglink.on('click', function () {
-				// 	var product_id = $(this).prev(".checkbox").data('productid');
+				// var textlink =$(this).children(".content").children(".text").find(".title");
+				var imglink =$(this).find(".img");
+				// textlink.on('click', function () {
+				// 	var product_id = $(this).parents(".content").parents(".cart-item").data('productid');
 				// 	// alert(product_id)
 				//      toProductItem(product_id)
 				// });
+				imglink.on('click', function () {
+					// alert(111)
+					var product_id = $(this).parents(".cart-item").data('productid');
+				     toProductItem(product_id)
+				});
 			}, true)
 		}
 
