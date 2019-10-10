@@ -49,13 +49,15 @@ public class PaypalService {
             PaypalPaymentMethod method, 
             PaypalPaymentIntent intent, 
             String description, 
+            String Shopdiscount, 
+            String addressMoney, 
             String cancelUrl, 
             String successUrl) throws PayPalRESTException{
 		      
         
       //获取总价格
-  		String kk = (String.format("%.2f", total));
-  		System.out.println(kk);
+  		String totalStr = (String.format("%.2f", total));
+  		System.out.println(totalStr);
 
   		
 
@@ -104,14 +106,18 @@ public class PaypalService {
   		details.setShipping("0");
   		details.setSubtotal(subMoney);
   		details.setTax("0");//shipping_discount
-  		details.setShippingDiscount("-0.00");
+  		String shopdiscountMoney = "-"+Shopdiscount;
+  		details.setShippingDiscount(shopdiscountMoney);
+  		details.setShipping((addressMoney));
 
   		// ###Amount
   		// Let's you specify a payment amount.
   		Amount amount = new Amount();
   		amount.setCurrency("USD");
   		// Total must be equal to sum of shipping, tax and subtotal.
-  		amount.setTotal(subMoney);
+  		
+  		String amTotal = getamountTotal(subMoney,Shopdiscount,addressMoney);
+  		amount.setTotal(amTotal);
   		amount.setDetails(details);
   		transaction.setAmount(amount);
   		transaction.setItemList(itemList);
@@ -138,6 +144,7 @@ public class PaypalService {
   		payment.setPayer(payer);
   		payment.setTransactions(transactions);
   		
+  		
   		RedirectUrls redirectUrls = new RedirectUrls();
   		redirectUrls.setCancelUrl(cancelUrl);
   		redirectUrls.setReturnUrl(successUrl);
@@ -145,6 +152,21 @@ public class PaypalService {
 
         return payment.create(apiContext);
     }
+
+	private String getamountTotal(String subMoney, String shopdiscount, String addressMoney) {
+		
+		Double subMoneyDou = Double.parseDouble(subMoney);
+		
+		Double shopdiscountDou = Double.parseDouble(shopdiscount);
+		
+		Double addressMoneyDou = Double.parseDouble(addressMoney);
+		
+		Double amountTotalDou = subMoneyDou - shopdiscountDou + addressMoneyDou;
+		
+		String amountTotalDouStr = amountTotalDou+"";
+		
+		return amountTotalDouStr;
+	}
 
 	private String getOneAllMoney(Integer skuNum, String oneMoney) {
 		Double oneMoneyDou = new Double(oneMoney);

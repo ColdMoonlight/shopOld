@@ -77,6 +77,12 @@ public class PaypalController {
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
     	
+    	String Shopdiscount = getCouponMoney(session);
+    	
+    	String addressMoney = getAddressMoney(session);
+    	
+
+    	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
     	
     	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
@@ -86,6 +92,8 @@ public class PaypalController {
     	Double moneyDouble = Double.parseDouble(moneyStr);
     	String moneyTypeStr = toPaypalInfo.getMoneyType();
     	String payDes = toPaypalInfo.getPaymentDescription();
+    	
+
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
@@ -98,6 +106,8 @@ public class PaypalController {
                     PaypalPaymentMethod.paypal, //paypal
                     PaypalPaymentIntent.sale,//paypal
                     payDes,//"payment description", 
+                    Shopdiscount,//"CouponMoney", 
+                    addressMoney,//shopping
                     cancelUrl, 
                     successUrl);
             for(Links links : payment.getLinks()){
@@ -112,7 +122,20 @@ public class PaypalController {
         return "redirect:/";
     }
     
-    /**1.1
+    private String getAddressMoney(HttpSession session) {
+		// TODO Auto-generated method stub
+    	String addressMoney = (String) session.getAttribute("addressMoney");
+    	System.out.println("addressMoney:"+addressMoney);
+		return addressMoney;
+	}
+
+	private String getCouponMoney(HttpSession session) {
+    	String Shopdiscount = (String) session.getAttribute("CouponCodeMoney");
+    	System.out.println("Shopdiscount:"+Shopdiscount);
+		return Shopdiscount;
+	}
+
+	/**1.1
      * 组装参数,PC端发起真实的支付
      * paypal/ppay
      * */
@@ -121,6 +144,10 @@ public class PaypalController {
     	System.out.println("into**********/paypal/ppay**********");
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
+    	
+    	String Shopdiscount = getCouponMoney(session);
+    	
+    	String addressMoney = getAddressMoney(session);
     	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
     	
@@ -143,6 +170,8 @@ public class PaypalController {
                     PaypalPaymentMethod.paypal, //paypal
                     PaypalPaymentIntent.sale,//paypal
                     payDes,//"payment description", 
+                    Shopdiscount,//"CouponMoney", 
+                    addressMoney,//shopping
                     cancelUrl, 
                     successUrl);
             for(Links links : payment.getLinks()){
