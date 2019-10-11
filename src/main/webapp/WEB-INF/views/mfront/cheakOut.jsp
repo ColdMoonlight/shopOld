@@ -704,10 +704,12 @@
 			var currentPrice = parseFloat(parentEl.find('.price').text());
 			if (flag) {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) + currentPrice).toFixed(2));
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				subtotalEl.text('$' + totalPrice.toFixed(2));
 			} else {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) - currentPrice).toFixed(2));
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice);
+				subtotalEl.text('$' + totalPrice.toFixed(2));
 			}
 		}
 
