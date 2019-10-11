@@ -94,7 +94,9 @@
 			
 		</div>
 	</div>
-
+<div class="loading">
+	<div class="boxload"> <div class="loader-14"></div></div>
+</div>
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 
@@ -164,6 +166,7 @@
 	})
 
 	$('.btn.register').on('click', function () {
+		$(".loading").show();
 		var email = $('#register input[name=userEmail]').val();
 		var password = $('#register input[name=userPassword]').val();
 		var reqData = {};
@@ -188,6 +191,7 @@
 					if (resData.registerYes === 1) {
 						fbq('track', 'CompleteRegistration');//追踪'注册'事件		facebook广告插件可以注释掉，但不要删除
 						renderSysMsg(resData.resMsg);
+						
 						setTimeout(function(){
 							$('.sys-box').remove();
 							$('.mask').remove();

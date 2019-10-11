@@ -93,6 +93,9 @@
 			
 		</div>
 	</div>
+	<div class="loading">
+		<div class="boxload"> <div class="loader-14"></div></div>
+	</div>
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 </body>
 <script>
@@ -165,6 +168,8 @@
 	 })
 
 	$('.btn.register').on('click', function () {
+		$(".loading").show();
+		
 		var email = $('#register input[name=userEmail]').val();
 		var password = $('#register input[name=userPassword]').val();
 		var reqData = {};
