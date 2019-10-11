@@ -509,14 +509,12 @@
 					// console.log("resareafreightMoney:"+resareafreightMoney)
 					$('.shipping').find('span').text(dataname + ' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
-					
+
 					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
 					resDataMoney = resareafreightMoney;
 
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-
 					subtotalPriceText.text('$' + totalPrice);
-					
 				  }
 				});
 		});
