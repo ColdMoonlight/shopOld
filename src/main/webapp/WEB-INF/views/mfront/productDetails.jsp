@@ -735,9 +735,9 @@
 							// cartText.text(parseInt(cartText.text()) + 1);
 							selectCartOrCheckout(reqData);
 							$(".mask5").show();
-							// setTimeout(function() {
-							// 	window.location.href = '${APP_PATH}/myCart.html';
-							// }, 5000);
+							setTimeout(function() {
+								window.location.href = '${APP_PATH}/myCart.html';
+							}, 5000);
 						}
 					},
 					error: function (data) {
