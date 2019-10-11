@@ -514,7 +514,7 @@
 					resDataMoney = resareafreightMoney;
 
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-					
+
 					subtotalPriceText.text('$' + totalPrice);
 					
 				  }
@@ -567,7 +567,7 @@
 
 				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
 
-				subtotalPriceText.text(subtotalText);
+				subtotalPriceText.text('$' + subtotalText);
 				
 			}
 		});
@@ -665,6 +665,7 @@
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
 				
 				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoney).toFixed(2);
+
 				subtotalPriceText.text('$' + totalPrice);
 			}
 		})
@@ -790,9 +791,10 @@
 					return (price + parseFloat(item))
 				}, originalPrice);
 				// console.log(data[i])
-				var singleNumPrice = singlePrice * data[i].orderitemPskuNumber;
-				allOriginPrice = parseFloat((allOriginPrice + singleNumPrice).toFixed(2));
-				allSubtotalPrice = parseFloat((allSubtotalPrice + singleNumPrice * discount).toFixed(2));
+				var originSinglePrice = parseFloat(singlePrice.toFixed(2));
+				var currentSinglePrice = parseFloat((singlePrice * discount).toFixed(2));
+				allOriginPrice = parseFloat((allOriginPrice + originSinglePrice * data[i].orderitemPskuNumber).toFixed(2));
+				allSubtotalPrice = parseFloat((allSubtotalPrice + currentSinglePrice * data[i].orderitemPskuNumber).toFixed(2));
 			}
 			return {
 				allOriginPrice: allOriginPrice,
