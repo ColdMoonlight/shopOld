@@ -146,7 +146,7 @@
 						'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 						'<div class="input-group">' +
 						'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-						'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
+						'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (data[i].cartitemProductNumber) +
 						'">' +
 						'<span class="input-group-addon" id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 						'</div>' +
@@ -459,7 +459,7 @@
 
 			if(checkbox.is(':checked')) {
 				cartObj[checkbox.data('cartitemid')].num = productNumText;
-				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+				// window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 				getTotalPrice();
 			}
 
@@ -482,7 +482,7 @@
 			
 			if(checkbox.is(':checked')) {
 				cartObj[checkbox.data('cartitemid')].num = productNumText;
-				window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
+				// window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 				getTotalPrice();
 			}
 			

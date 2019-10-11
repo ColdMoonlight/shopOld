@@ -1249,21 +1249,19 @@
 					// console.log("resareafreightMoney:"+resareafreightMoney)
 					$('.shipping').find('span').text(dataname + ' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
-					
+
 					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
 					resDataMoney = resareafreightMoney;
 
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-
 					subtotalPriceText.text('$' + totalPrice);
-					
 				  }
 				});
 		});
 
 		function renderAddressDetail(data) {
 			// console.log(data)
-	        $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
+	    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
 			$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
@@ -1444,10 +1442,12 @@
 			var currentPrice = parseFloat(parentEl.find('.price').text());
 			if (flag) {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) + currentPrice).toFixed(2));
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				subtotalEl.text('$' + totalPrice.toFixed(2));
 			} else {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) - currentPrice).toFixed(2));
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice);
+				subtotalEl.text('$' + totalPrice.toFixed(2));
 			}
 		}
 
