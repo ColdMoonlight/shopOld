@@ -107,7 +107,6 @@
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				cartitemMap[data[i].cartitemId] = data[i];
-				var hasStorageItem = cartObj[data[i].cartitemId];
 				html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
 				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '" data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' +
 					/* '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
@@ -137,7 +136,7 @@
 					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
+					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + data[i].cartitemProductNumber +
 					'">' +
 					'<span class="input-group-addon"  id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
@@ -649,7 +648,6 @@
 							//1，删除成功。  不alert，刷新 
 							//alert('删除成功')
 							delete cartObj[cartitemid];
-							window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 							window.location.href = '${APP_PATH}/myCart.html';
 							
 						}

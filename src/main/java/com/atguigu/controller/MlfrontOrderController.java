@@ -192,7 +192,11 @@ public class MlfrontOrderController {
 		//拿到优惠码Code,
 		String CouponCode = mlfrontOrder.getOrderCouponCode();
 		//查询该优惠码的优惠价格
-		BigDecimal CouponCodeMoney = getCouponCodeMoney("0");
+		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode);
+		
+		String CouponCodeMoneyStr= df1.format(CouponCodeMoney);
+		
+		session.setAttribute("CouponCodeMoney", CouponCodeMoneyStr);
 		//加上优惠券减掉的
 		totalprice = totalprice.subtract(CouponCodeMoney);
 		//计算该订单的实际价格
@@ -413,12 +417,17 @@ public class MlfrontOrderController {
 		}
 		//查询英文名,查询该英文名的价格运费价格
 		Integer addressMoney = getAddressMoney(AddressId);
+		
+		String addressMoneyStr= df1.format(addressMoney);
+		session.setAttribute("addressMoney", addressMoneyStr);
 		//2.2加上地区快递费
 		totalprice = totalprice.add(new BigDecimal(addressMoney));
 		//拿到优惠码Code,
 		String CouponCode = mlfrontOrder.getOrderCouponCode();
 		//查询该优惠码的优惠价格
 		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode);
+		String CouponCodeMoneyStr= df1.format(CouponCodeMoney);
+		session.setAttribute("CouponCodeMoney", CouponCodeMoneyStr);
 		//加上优惠券减掉的
 		totalprice = totalprice.subtract(CouponCodeMoney);
 		//计算该订单的实际价格

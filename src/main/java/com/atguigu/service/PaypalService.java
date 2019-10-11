@@ -29,9 +29,23 @@ import com.paypal.base.rest.PayPalRESTException;
 @Service
 public class PaypalService {
 	
+	
+	//开发环境
 	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
 	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
+	String mode="sandbox";
 	
+	
+//	//mogalook环境
+//	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
+//	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
+//    String mode="live";
+	
+    
+	//陈鹏账户
+//    String clientId="AbYhYseSfoEHsp02nyg6O3A1NowoKN00tWYvwAYErFKy0T7FDUkHENMMP7TTDqn0bP9LKISVJILgx3G5";
+//    String clientSecret="EFOnl1UovBwjAUsbw8EzqGZd8rPdw7S0CAvy-2SxtQWbz2dl9FYF69sLptxxbcG2_8YjOIGZZwrCqlqN";
+//    String mode="live";
 	
 	@Autowired
 	MlfrontOrderService mlfrontOrderService;
@@ -39,7 +53,7 @@ public class PaypalService {
 	
 //	@Autowired
 //	private APIContext apiContext;
-	APIContext apiContext = new APIContext(clientId, clientSecret, "sandbox");
+	APIContext apiContext = new APIContext(clientId, clientSecret, mode);
 
 	public Payment createPayment(
             Double total, 
@@ -49,13 +63,15 @@ public class PaypalService {
             PaypalPaymentMethod method, 
             PaypalPaymentIntent intent, 
             String description, 
+            String Shopdiscount, 
+            String addressMoney, 
             String cancelUrl, 
             String successUrl) throws PayPalRESTException{
 		      
         
       //获取总价格
-  		String kk = (String.format("%.2f", total));
-  		System.out.println(kk);
+  		String totalStr = (String.format("%.2f", total));
+  		System.out.println(totalStr);
 
   		
 
@@ -104,14 +120,18 @@ public class PaypalService {
   		details.setShipping("0");
   		details.setSubtotal(subMoney);
   		details.setTax("0");//shipping_discount
-  		details.setShippingDiscount("-0.00");
+  		String shopdiscountMoney = "-"+Shopdiscount;
+  		details.setShippingDiscount(shopdiscountMoney);
+  		details.setShipping((addressMoney));
 
   		// ###Amount
   		// Let's you specify a payment amount.
   		Amount amount = new Amount();
   		amount.setCurrency("USD");
   		// Total must be equal to sum of shipping, tax and subtotal.
-  		amount.setTotal(subMoney);
+  		
+  		String amTotal = getamountTotal(subMoney,Shopdiscount,addressMoney);
+  		amount.setTotal(amTotal);
   		amount.setDetails(details);
   		transaction.setAmount(amount);
   		transaction.setItemList(itemList);
@@ -138,6 +158,7 @@ public class PaypalService {
   		payment.setPayer(payer);
   		payment.setTransactions(transactions);
   		
+  		
   		RedirectUrls redirectUrls = new RedirectUrls();
   		redirectUrls.setCancelUrl(cancelUrl);
   		redirectUrls.setReturnUrl(successUrl);
@@ -145,6 +166,21 @@ public class PaypalService {
 
         return payment.create(apiContext);
     }
+
+	private String getamountTotal(String subMoney, String shopdiscount, String addressMoney) {
+		
+		Double subMoneyDou = Double.parseDouble(subMoney);
+		
+		Double shopdiscountDou = Double.parseDouble(shopdiscount);
+		
+		Double addressMoneyDou = Double.parseDouble(addressMoney);
+		
+		Double amountTotalDou = subMoneyDou - shopdiscountDou + addressMoneyDou;
+		
+		String amountTotalDouStr = amountTotalDou+"";
+		
+		return amountTotalDouStr;
+	}
 
 	private String getOneAllMoney(Integer skuNum, String oneMoney) {
 		Double oneMoneyDou = new Double(oneMoney);
