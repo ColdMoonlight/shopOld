@@ -633,7 +633,7 @@
 						productNum.val(parseInt(productNum.val()) - 1);
 						calPrice(
 								(productNum.val() * originalPrice).toFixed(2),
-								(productNum.val() *  parseFloat((originalPrice * discount).toFixed(2)))
+								(productNum.val() *  parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
 						);
 					}
 				});
