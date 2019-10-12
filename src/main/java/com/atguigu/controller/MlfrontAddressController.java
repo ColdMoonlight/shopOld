@@ -157,8 +157,10 @@ public class MlfrontAddressController {
 		//查询本条
 		List<MlbackAreafreight> mlbackAreafreightResList =mlbackAreafreightService.selectMlbackAreafreightByEng(mlbackAreafreightReq);
 		Integer areafreightMoney = 0;
+		String areafreightCountry = "";
 		if(mlbackAreafreightResList.size()>0){
 			areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
+			areafreightCountry = mlbackAreafreightResList.get(0).getAreafreightCountry();
 		}
 		//取出id
 		System.out.println(1);
@@ -172,7 +174,7 @@ public class MlfrontAddressController {
 		}else{
 			usertype = 1;//注册用户
 		}
-		return Msg.success().add("resMsg", "查询运费成功").add("areafreightMoney", areafreightMoney).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
+		return Msg.success().add("resMsg", "查询运费成功").add("areafreightMoney", areafreightMoney).add("areafreightCountry", areafreightCountry).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
 	}
 	
 	/**2.0	useOn	0505
