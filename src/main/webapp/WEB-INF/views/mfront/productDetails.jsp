@@ -625,18 +625,25 @@
 					var originalPrice = prodcutDpriceText.data('price') + calOverPrice();
 					if (productNum.val() <= 1) {
 						productNum.val(1);
-						calPrice(originalPrice.toFixed(2), (originalPrice * discount).toFixed(2));
+						calPrice(
+								originalPrice.toFixed(2),
+								(originalPrice * discount).toFixed(2)
+						);
 					} else {
 						productNum.val(parseInt(productNum.val()) - 1);
-						calPrice((productNum.val() * originalPrice).toFixed(2), (productNum.val() * originalPrice * discount)
-							.toFixed(2));
+						calPrice(
+								(productNum.val() * originalPrice).toFixed(2),
+								(productNum.val() *  parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
+						);
 					}
 				});
 				add.on('click', function () {
 					var originalPrice = prodcutDpriceText.data('price') + calOverPrice();
 					productNum.val(parseInt(productNum.val()) + 1);
-					calPrice((productNum.val() * originalPrice).toFixed(2), (productNum.val() * originalPrice * discount)
-						.toFixed(2));
+					calPrice(
+							(productNum.val() * originalPrice).toFixed(2),
+							(productNum.val() * parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
+					);
 				})
 			}
 
