@@ -44,7 +44,6 @@ import com.atguigu.service.MlfrontUserService;
 import com.atguigu.service.SysUserService;
 import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.EmailUtil;
 import com.atguigu.utils.EmailUtils;
 import com.atguigu.utils.ExcelUtils;
 import com.atguigu.utils.HttpUtil;

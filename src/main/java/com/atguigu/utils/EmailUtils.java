@@ -65,6 +65,7 @@ public class EmailUtils {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
             msg.setSubject("Register Success");
             //设置邮件消息
             msg.setText(message);
