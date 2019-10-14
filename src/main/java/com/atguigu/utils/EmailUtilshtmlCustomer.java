@@ -23,7 +23,7 @@ import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.ToPaypalInfo;
-public class EmailUtilshtml {
+public class EmailUtilshtmlCustomer {
 	
 	/**
      * @Method: readyEmail----Fictitious
@@ -33,20 +33,20 @@ public class EmailUtilshtml {
      * @return
      * @throws Exception
      */ 
-	public static void readyEmailRegister(String getToEmail, String Message, MlfrontUser mlfrontUserafterIn)  throws Exception{
-		sendEmilRegister(getToEmail, Message, mlfrontUserafterIn);
+	public static void readyEmailRegisterCustomer(String getToEmail, String Message, MlfrontUser mlfrontUserafterIn)  throws Exception{
+		sendEmilRegisterCustomer(getToEmail, Message, mlfrontUserafterIn);
 	}
 	
-	public static void readyEmailPaySuccess(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
-		sendEmilPay(getToEmail, Message, mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
+	public static void readyEmailPaySuccessCustomer(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
+		sendEmilPayCustomer(getToEmail, Message, mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
 		
 	}
 	
-	public static void readyEmailSendSuccess(String getToEmail, String Message, String orderLogisticsnumber, String orderLogisticsname,Integer orderId) {
-		sendEmilSend(getToEmail, Message, orderLogisticsnumber,  orderLogisticsname,orderId);
+	public static void readyEmailSendSuccessCustomer(String getToEmail, String Message, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
+		sendEmildeliverCustomer(getToEmail, Message, orderLogisticsname, orderLogisticsnumber,orderId);
 	}
 	
-	public static void sendEmilRegister(String to, String message,MlfrontUser mlfrontUserafterIn) {
+	public static void sendEmilRegisterCustomer(String to, String message,MlfrontUser mlfrontUserafterIn) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -73,19 +73,19 @@ public class EmailUtilshtml {
 /*            String content="尊敬的客户，您好：<br>    您的退换货申请已由博乐宝客服受理，现需您将机器故障照片及检测结果等附件直接回复至此邮箱。我们收到您的邮件后会尽快为您处理。<br>如有任何问题，请致电。感谢您的配合与支持！"+
             		"<img src='http://www.megalookhair.com:80/ShopTemplate/static/img/Slide/anniversary-red-3.jpg'>";*/
             
-            String content="A new customer has signed up：<br><br><br>  "+
-            "First Name:"+mlfrontUserafterIn.getUserFirstname()+" <br>"+
-            "Last Name:"+mlfrontUserafterIn.getUserLastname()+" <br>"+
-            "E-Mail:"+mlfrontUserafterIn.getUserEmail()+" <br>"+
-            "Telephone:"+mlfrontUserafterIn.getUserTelephone()+" <br>";
+            String content="Thank you for your registr in MegalookHair,Here is your account number and password：<br><br><br>  "+
+            "Account number:"+mlfrontUserafterIn.getUserEmail()+" <br>"+
+            "password:"+mlfrontUserafterIn.getUserPassword()+" <br><br>"+
+            "Wishing you a pleasant shopping trip. <br><br>";
             //通过会话,得到一个邮件,用于发送
             MimeMessage  msg = new MimeMessage(session);
             //设置发件人
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
-            msg.setSubject("new costomer of "+ mlfrontUserafterIn.getUserId() +" Register Success.");
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+//            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));//这是
+            msg.setSubject("Welcome to Register Megalook.");
             
             Multipart mp = new MimeMultipart("related"); 
             BodyPart bodyPart = new MimeBodyPart(); 
@@ -100,7 +100,7 @@ public class EmailUtilshtml {
             
             //调用Transport的send方法去发送邮件
             Transport.send(msg);
-            System.out.println("给 "+mlfrontUserafterIn.getUserId()+" 客户,发送邮件完毕,"+"邮件内容为"+message);
+            System.out.println("给"+to+"客户,发送邮件完毕,"+"邮件内容为"+message);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,7 +109,7 @@ public class EmailUtilshtml {
 	
 	
 	
-	public static void sendEmilPay(String to, String message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
+	public static void sendEmilPayCustomer(String to, String message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -145,7 +145,8 @@ public class EmailUtilshtml {
             	
             }
             
-            String content="You have received an order.：<br><br><br>  "+
+            String content="Hi gorgeous girl.<br><br>  "+
+            "Here is Jason from Megalook Hair Team. We have received your order and confirmed your payment.：<br><br>  "+
             "Order ID :"+mlfrontOrderItemList.get(0).getOrderId()+" <br>"+
             "Date Added :"+mlfrontOrderItemList.get(0).getOrderitemMotifytime()+" <br>"+
             "Order Status : Complete <br><br>"+
@@ -155,7 +156,13 @@ public class EmailUtilshtml {
             "Sub-Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+",+$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>"+
             "Free Shipping: $"+addressMoney+"<br>"+
             "Coupon"+" ( "+mlfrontOrderResOne.getOrderCouponCode()+" ) : -$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>"+
-            "Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>";
+            "Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>"+
+            "Best Regards,<br>"+
+            "------------------------------------------<br>"+
+            "Jason-Megalook hair team <br>"+
+            "Email:service@megalook.com <br>"+
+            "Whatsapp:+86 18903740682<br>"+
+            "Telephone/SMS:+1 5017226336<br>";
             
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
@@ -164,10 +171,9 @@ public class EmailUtilshtml {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
             msg.setSubject("You have received an order of ID is : "+mlfrontOrderResOne.getOrderId());
             
-            Multipart mp = new MimeMultipart("related"); 
+            Multipart mp = new MimeMultipart("related");
             BodyPart bodyPart = new MimeBodyPart(); 
             bodyPart.setDataHandler(new DataHandler(content,"text/html;charset=UTF-8"));
             mp.addBodyPart(bodyPart); 
@@ -187,7 +193,7 @@ public class EmailUtilshtml {
 	
 	
 	
-	public static void sendEmilSend(String to, String message, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
+	public static void sendEmildeliverCustomer(String to, String message, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -219,7 +225,7 @@ public class EmailUtilshtml {
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
-//          msg.setFrom(new InternetAddress("发件人邮箱"));
+//                  msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
@@ -232,7 +238,7 @@ public class EmailUtilshtml {
             msg.setContent(mp);// 设置邮件内容对象 
             
             //设置邮件消息
-//            msg.setText(message);
+            msg.setText(message);
             //设置发送的日期
             msg.setSentDate(new Date());
             //调用Transport的send方法去发送邮件
