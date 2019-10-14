@@ -43,6 +43,8 @@ import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtils;
+import com.atguigu.utils.EmailUtilshtml;
+import com.atguigu.utils.EmailUtilshtmlCustomer;
 
 
 @Controller
@@ -875,13 +877,13 @@ public class MlfrontOrderController {
 		MlfrontOrder mlfrontOrderRes = mlfrontOrderResList.get(0);
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
 		
-		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber);
+		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId);
 		
 		return Msg.success().add("Msg", "更新成功");
 	}
 
 
-	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber) {
+	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
 		
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
 		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
@@ -895,7 +897,8 @@ public class MlfrontOrderController {
 			//测试方法
 			String getToEmail = userEmail;
 			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
-			EmailUtils.readyEmailRegister(getToEmail, Message);
+			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,orderLogisticsnumber,orderLogisticsname,orderId);
+			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,orderLogisticsnumber,orderLogisticsname,orderId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
