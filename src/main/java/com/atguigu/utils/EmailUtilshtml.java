@@ -4,14 +4,19 @@ import java.security.Security;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.activation.DataHandler;
 import javax.mail.Authenticator;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-public class EmailUtils {
+import javax.mail.internet.MimeMultipart;
+public class EmailUtilshtml {
 	
 	/**
      * @Method: readyEmail----Fictitious
@@ -58,17 +63,26 @@ public class EmailUtils {
                     return new PasswordAuthentication(username, password);
                 }
             });
+            String content="尊敬的客户，您好：<br>    您的退换货申请已由博乐宝客服受理，现需您将机器故障照片及检测结果等附件直接回复至此邮箱。我们收到您的邮件后会尽快为您处理。<br>如有任何问题，请致电。感谢您的配合与支持！"+
+            		"<img src='http://www.megalookhair.com:80/ShopTemplate/static/img/Slide/anniversary-red-3.jpg'>";
             //通过会话,得到一个邮件,用于发送
-            Message msg = new MimeMessage(session);
+            MimeMessage  msg = new MimeMessage(session);
             //设置发件人
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
-            msg.setSubject("Register Success");
+            //msg.setSubject("Register Success");
+            
+            Multipart mp = new MimeMultipart("related"); 
+            BodyPart bodyPart = new MimeBodyPart(); 
+            bodyPart.setDataHandler(new DataHandler(content,"text/html;charset=UTF-8"));
+            mp.addBodyPart(bodyPart); 
+            msg.setContent(mp);// 设置邮件内容对象 
+            
             //设置邮件消息
-            msg.setText(message);
+            //msg.setText(message);
             //设置发送的日期
             msg.setSentDate(new Date());
             

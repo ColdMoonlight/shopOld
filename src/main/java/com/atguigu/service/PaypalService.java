@@ -81,8 +81,11 @@ public class PaypalService {
   		// is fulfilling it. Transaction is created with
   		// a `Payee` and `Amount` types
   		Transaction transaction = new Transaction();
+//  		transaction
+//  				.setDescription("This is the payment transaction description.");
+  		
   		transaction
-  				.setDescription("This is the payment transaction description.");
+			.setDescription(description);
   		
 
   		
@@ -114,7 +117,8 @@ public class PaypalService {
   		}
   	  	//地址参数
         ShippingAddress shippingAddress = getShippingAddress(mlfrontAddress);
-        //itemList.setShippingAddress(shippingAddress); 		
+//  		ShippingAddress shippingAddress = getShippingAddressSDK(mlfrontAddress);
+//        itemList.setShippingAddress(shippingAddress); 		
   		
   		Details details = new Details();
   		details.setShipping("0");
@@ -251,14 +255,34 @@ public class PaypalService {
 	
 	private ShippingAddress getShippingAddress(MlfrontAddress mlfrontAddress) {
 		ShippingAddress shippingAddress = new ShippingAddress();
-        shippingAddress.setId(mlfrontAddress.getAddressId()+"");
-        shippingAddress.setCountryCode(mlfrontAddress.getAddressCountry());
-        shippingAddress.setLine1(mlfrontAddress.getAddressProvince());
-        shippingAddress.setCity(mlfrontAddress.getAddressCity());
-        shippingAddress.setLine2(mlfrontAddress.getAddressDetail());
-        shippingAddress.setPostalCode(mlfrontAddress.getAddressPost());
-        shippingAddress.setPhone(mlfrontAddress.getAddressTelephone());
-        shippingAddress.setRecipientName(mlfrontAddress.getAddressUserfirstname()+" "+mlfrontAddress.getAddressUserlastname());
+		String RecipientName = mlfrontAddress.getAddressUserfirstname()+" "+mlfrontAddress.getAddressUserlastname();
+		shippingAddress.setRecipientName(RecipientName);
+		String Line1 =mlfrontAddress.getAddressProvince();
+		shippingAddress.setLine1(Line1);
+		String Line2 =mlfrontAddress.getAddressDetail();
+		shippingAddress.setLine2(Line2);
+		String City = mlfrontAddress.getAddressCity();
+		shippingAddress.setCity(City);
+		shippingAddress.setState("CA");
+		String Phone = mlfrontAddress.getAddressTelephone();
+		shippingAddress.setPhone(Phone);
+		String PostalCode = mlfrontAddress.getAddressPost();
+		shippingAddress.setPostalCode(PostalCode);
+		String CountryCode = mlfrontAddress.getAddressCountry();
+        shippingAddress.setCountryCode(CountryCode);
+		return shippingAddress;
+	}
+	
+	private ShippingAddress getShippingAddressSDK(MlfrontAddress mlfrontAddress) {
+		ShippingAddress shippingAddress = new ShippingAddress();
+		shippingAddress.setRecipientName("Thomas Miller");
+		shippingAddress.setLine1("4th Floor, One Lagoon Drive");
+		shippingAddress.setLine2("Unit #34");
+		shippingAddress.setCity("Redwood City");
+		shippingAddress.setState("CA");
+		shippingAddress.setPhone("011862212345678");
+		shippingAddress.setPostalCode("94065");
+        shippingAddress.setCountryCode("US");
 		return shippingAddress;
 	}
 
