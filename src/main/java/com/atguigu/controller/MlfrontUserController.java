@@ -46,6 +46,7 @@ import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtils;
 import com.atguigu.utils.EmailUtilshtml;
+import com.atguigu.utils.EmailUtilshtmlCustomer;
 import com.atguigu.utils.ExcelUtils;
 import com.atguigu.utils.HttpUtil;
 
@@ -224,7 +225,8 @@ public class MlfrontUserController {
 				//测试方法
 				String getToEmail = userEmail;
 				String Message = "Welcome to Register In Megalook.";
-				EmailUtilshtml.readyEmailRegister(getToEmail, Message);
+				EmailUtilshtml.readyEmailRegister(getToEmail, Message,mlfrontUserafterIn);
+				EmailUtilshtmlCustomer.readyEmailRegisterCustomer(getToEmail, Message,mlfrontUserafterIn);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
