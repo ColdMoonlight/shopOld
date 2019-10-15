@@ -2392,6 +2392,10 @@ a:focus {
 .home_box{margin:0 20px;}
 #ban_silder{position:relative;width:100%;}
 #ban_silder img{width:100%;}
+#hot-product{position:relative;width:100%; overflow: hidden;}
+#hot-product img{width:100%;}
+
+
 
 .hot_box_product{width: 96%; height:auto; border-radius:3px; border: 1px dashed #ff186e; padding: 10px 1%; margin: 2%;}
 .hot_box_product .swiper-slide{width: 50%; height: auto;}
@@ -2401,6 +2405,12 @@ a:focus {
 .hot_box_product_cont .swiper-pagination2{text-align: center;margin: 20px 0 0;}
 .hot_box_product_cont .swiper-pagination2 span{display: inline-block;}
 .hot_box_product_cont .swiper-slide .product-item{width: 100%;}
+
+
+
+
+
+
 .loading{display: none; width: 100%; height: 100%; position: fixed; top: 0;left: 0; background: rgba(255,255,255,.7);z-index: 9999;}
 .boxload {
 			    display: inline-block;

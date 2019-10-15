@@ -65,7 +65,12 @@
     <!-- countDownArea date -->
     <div id="countdown-area"> </div>
     <!-- product intro -->
-    <div id="hot-product"></div>
+    <div id="hot-product">
+		<div class="swiper-wrapper">
+			
+		</div>
+		<div class="swiper-pagination swiper-pagination7"></div>
+	</div>
     <!-- product show -->
     <div id="product-block"></div>
   </div>
@@ -82,13 +87,13 @@
       for (var i = 0; i < data.length; i += 1) {
 		   var actshowprolei = data[i].actshowproIfproORcate;
 		  if(actshowprolei==0){
-			  html += '<div class="banner">' +
+			  html += '<div class="swiper-slide">' +
 			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
 			  					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  '</a>' +
 			  '</div>';
 		  }else if(actshowprolei==1){
-			  html += '<div class="banner">' +
+			  html += '<div class="swiper-slide">' +
 			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
 			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  '</a>' +
@@ -108,8 +113,22 @@
         if (data.code === 100) {
 			// console.log(data)
         	var resData = data.extend.mlbackActShowProList;
-            // console.log(resData);/*banban*/
-          rednerHotProduct($('#hot-product'), resData)
+            console.log(resData);/*banban*/
+          rednerHotProduct($('#hot-product .swiper-wrapper'), resData)
+		  new Swiper('#hot-product', {
+				freeMode: true,
+				 slidesPerView : 1.5,  
+				 loop : true,
+				autoplay: {
+					disableOnInteraction: false,
+				  },
+					pagination: {
+						el: '.swiper-pagination7',
+						clickable: true
+					}
+		    })
+		  
+		  
         } else {
           renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
         }
