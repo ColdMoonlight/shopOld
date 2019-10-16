@@ -2418,10 +2418,10 @@ a:focus {
 }
 .login-register .btn.go_home{border-color:#fe186e; display: block;width: 100%;height:40px;background-color:#fe186e;color: #fff;padding: 0; line-height:40px;text-align:center;}
 .home_box{margin:0 20px;}
-#ban_silder{position:relative;width:100%;height: 350px; overflow: hidden;}
-#ban_silder img{width:100%;}
+#ban_silder{position:relative;width:100%;overflow: hidden;}
+#ban_silder img{width: 100%;}
 #hot-product{position:relative;width:100%; overflow: hidden; height: 380px;}
-#hot-product img{width:100%;}
+#hot-product img{width: 100%;}
 
 
 
