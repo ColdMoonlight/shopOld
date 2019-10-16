@@ -98,6 +98,7 @@
 				if (result.code == 100) {
 					var resData = result.extend;
 					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
+					console.log(resDataOrderItemList)
 					// console.log(mlfrontOrderItemList);
 					//拼接所需参数:content_ids
 					stridsContent=toFbidsPurchase(resDataOrderItemList);

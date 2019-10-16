@@ -1066,8 +1066,8 @@
           			var resData = JSON.parse(data);
           			var resareafreightMoney = resData.extend.areafreightMoney;
           			// console.log("resareafreightMoney:"+resareafreightMoney)
-          			$('.shipping').find('span').text(' of $' + resareafreightMoney);
-          			shippingPriceText.text('$' + resareafreightMoney)
+          			// $('.shipping').find('span').text(' of $' + resareafreightMoney);
+          			// shippingPriceText.text('$' + resareafreightMoney)
 					couponPriceText.text('-$' + 0);
           			totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
           			resDataMoney = resareafreightMoney;
@@ -1220,7 +1220,7 @@
 				success: function (data) {
 					//renderSysMsg('Delete success.');
 					var jsondate = JSON.parse(data);
-					console.log(JSON.parse(data));
+					// console.log(JSON.parse(data));
 					
 					var isDelSuccess = jsondate.extend.isDelSuccess;
 					var orginalItemNum = jsondate.extend.orginalItemNum;
@@ -1338,7 +1338,7 @@
 			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
 			// console.log(shopnum);
 			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
-            console.log(totalPricecou2)			
+            // console.log(totalPricecou2)			
 			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
 				var couponPrice = counponDataList[id].couponPrice;
 				couponPriceold2 =couponPrice;
@@ -1380,7 +1380,7 @@
 				success: function (data) {
 					var resData = JSON.parse(data).extend.mlbackCouponOne;
 					var couponErrorBox = $('.coupon-error');
-					console.log(resData);
+					// console.log(resData);
 					if (resData) {
 						// console.log(totalPrice, totalPrice - resData.couponPriceBaseline)
 						var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
@@ -1402,7 +1402,7 @@
 						} else {
 							
 							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
-							console.log(resData)/*89898*/
+							// console.log(resData)/*89898*/
 							alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
 							$(".coed_inp").val("");
 							
