@@ -970,6 +970,8 @@
 		var orderItemArr = [];
 		var productNumArr = [];
 		var payplate = 0;
+		var couponPriceOld =0;
+		
 		
 		var addressIdIntInt;
 		$("#country").bind("change",function(){
@@ -1380,12 +1382,18 @@
 							// totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
 							couponPriceText.text('-$' + resData.couponPrice);
 							subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+							couponPriceOld = resData.couponPrice;
 							
 							couponId = resData.couponId;
 							couponCode = couponCode2;
 							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 						} else {
-							renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
+							
+							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
+							console.log(resData)/*89898*/
+							alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
+							$(".coed_inp").val("");
+							
 						}
 					} else {
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
@@ -1424,7 +1432,7 @@
 			var prototalEl = $('.c-prototal>.cal-price-num');
 			var subtotalEl = $('.c-subtotal>.cal-price-num');
 			var currentPrice = parseFloat(parentEl.find('.price').text());
-			
+			   
 			if (flag) {
 				
 				
@@ -1439,7 +1447,11 @@
 				
 				
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice);
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld);
+				couponPriceOld = 0;
+				couponPriceText.text('-$' + 0);
+				$(".coed_inp").val("");
+				$(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 			}
 		}
