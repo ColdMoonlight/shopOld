@@ -898,7 +898,7 @@
 						<div class="tit_numtt"><span>4</span><b>PAYMENT METHOD</b></div>	
 						<div class="group-details pay-method active">
 							<div class="coupon-item">
-								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox">
+								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox active">
 								<img src="${APP_PATH }/static/m/img/other/paypal.jpg">
 							</div>
 						</div>
@@ -976,6 +976,7 @@
 		var addressIdIntInt;
 		$("#country").bind("change",function(){
 			var radio_zt =$(".coupons .coupon-item input[type='radio']");
+			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			   couponPriceText.text('-$' + 0);
 			   $(".coed_inp").val("");
 			   $(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
@@ -1324,18 +1325,29 @@
 			}
 			parent.html(html);
 		}
-		var couponPrice = 0;
+		var couponPriceold2 = 0;
 
 		function selectCoupon(e) {
 			var targetEl = $(e.target);
 			var id = targetEl.data('couponid');
+			$(".coupons .coupon-item input[type=radio]").removeClass("active");
+			targetEl.addClass("active");
 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-			if (parseFloat(totalPrice) >= counponDataList[id].couponPriceBaseline) {
+			var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+			// console.log(abwq);
+			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+			// console.log(shopnum);
+			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
+            console.log(totalPricecou2)			
+			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
 				var couponPrice = counponDataList[id].couponPrice;
+				couponPriceold2 =couponPrice;
 				priceInfo.text('-$' + couponPrice);
 				
 				couponPriceText.text('-$' + couponPrice);
-				subtotalPriceText.text('$' + (totalPrice - couponPrice).toFixed(2));
+				subtotalPriceText.text('$' + (totalPricecou2 - couponPrice).toFixed(2));
+                // console.log(totalPricecou2);
+
 
 				couponCode = counponDataList[id].couponCode;
 				couponId = counponDataList[id].couponId;
@@ -1343,7 +1355,7 @@
 				targetEl[0].checked = false;   
 				priceInfo.text("Cann't use this Coupon!");
 				couponPriceText.text('-$' + 0);
-				subtotalPriceText.text('$' + totalPrice);
+				subtotalPriceText.text('$' + totalPricecou2);
 			}
 		}
 
@@ -1428,31 +1440,27 @@
 		}
 		
 		function reCalPrice(item, flag) {
+			
 			var parentEl = $(item).parents('.num');
 			var prototalEl = $('.c-prototal>.cal-price-num');
 			var subtotalEl = $('.c-subtotal>.cal-price-num');
 			var currentPrice = parseFloat(parentEl.find('.price').text());
-			   
 			if (flag) {
-				
-				
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
 				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				
-				console.log('subtotalEl:'+totalPrice.toFixed(2))/*8989898*/
-				console.log('prototalEl:'+(parseFloat(prototalEl.text().slice(1))).toFixed(2))/*121*/
-				
 			} else {
-				
-				
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld);
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld+couponPriceold2);
+				couponPriceold2 =0;
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				$(".coed_inp").val("");
 				$(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
+				$(".coupons .coupon-item input[type=radio]").removeClass("active");
+				
 			}
 		}
 		
