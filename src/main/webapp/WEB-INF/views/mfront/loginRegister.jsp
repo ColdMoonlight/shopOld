@@ -186,6 +186,8 @@
 					var resData = data.extend;
 					if (resData.registerYes === 0) {
 						renderSysMsg(resData.resMsg)
+						// console.log(resData.resMsg)/**/
+						$(".loading").hide();
 					}
 
 					if (resData.registerYes === 1) {

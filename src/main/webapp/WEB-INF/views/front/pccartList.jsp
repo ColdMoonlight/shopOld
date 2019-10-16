@@ -633,6 +633,8 @@
 			e.stopPropagation();
 			var item = $(e.target);
 			var cartItemId = item.data('cartitemid');
+			$(".coupons .coupon-item input[type=radio]").removeClass("active");
+			item.addClass("active");
 			if(item.is(':checked') && !cartObj[cartItemId]) {
 				cartObj[cartItemId] = {
 						num: parseInt(item.parent().find('input[type=text]').val().trim(), 10),
