@@ -450,7 +450,7 @@ a:focus {
   width: 96px;
   height: auto;
   margin-top: 12px;
-  margin-left: 12px;
+  margin-left:8px;
 }
 
 .category .sub-category-product>a {
@@ -654,6 +654,8 @@ a:focus {
   font-family: inherit;
   word-wrap:break-word
 }
+.product-title a{display: block;height: 40px;
+  line-height:20px;}
 
 .product-data {
   display: flex;
@@ -2420,7 +2422,7 @@ a:focus {
 .home_box{margin:0 20px;}
 #ban_silder{position:relative;width:100%;overflow: hidden;}
 #ban_silder img{width: 100%;}
-#hot-product{position:relative;width:100%; overflow: hidden; height: 380px;}
+#hot-product{position:relative;width:100%; overflow: hidden;}
 #hot-product img{width: 100%;}
 
 

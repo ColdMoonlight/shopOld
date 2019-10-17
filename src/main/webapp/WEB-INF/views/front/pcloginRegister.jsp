@@ -209,6 +209,7 @@
 				}
 			})
 		} else {
+			$(".loading").hide();
 			renderSysMsg('email or password format incorrect!');
 		}
 	})

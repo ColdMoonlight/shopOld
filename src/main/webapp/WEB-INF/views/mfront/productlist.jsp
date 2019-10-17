@@ -161,7 +161,9 @@
 						'</a>' +
 						'</div>' +
 						'<div class="product-desc">' +
-						'<div class="product-title">' + data[i].productName + '</div>' +
+						'<div class="product-title">' +
+						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
+						'</div>' +
 						'<div class="product-type"></div>' +
 						'<div class="product-data">' +
 						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
