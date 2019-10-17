@@ -744,6 +744,8 @@
 							$(".mask5").show();
 							setTimeout(function() {
 								window.location.href = '${APP_PATH}/myCart.html';
+								$(".mask5").hide();
+								$(".sys-box").hide();
 							}, 5000);
 						}
 					},
