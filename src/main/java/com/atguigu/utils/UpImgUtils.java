@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.util.Calendar;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -1117,7 +1118,10 @@ public class UpImgUtils {
              }
              //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+             
+             String newfilenamestr = getfilename(reviewIdstr,reviewimgSortIdstr);
              //解决上传文件中文名字乱码
+             filename = newfilenamestr;
              filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
              System.out.println("filename: " + filename );
@@ -1179,6 +1183,21 @@ public class UpImgUtils {
              }
 
 		
+		private static String getfilename(String reviewIdstr, String reviewimgSortIdstr) {
+			Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+			int year = c.get(Calendar.YEAR);  
+			 int month = c.get(Calendar.MONTH);   
+			int date = c.get(Calendar.DATE);    
+			int hour = c.get(Calendar.HOUR_OF_DAY);   
+			int minute = c.get(Calendar.MINUTE);   
+			int second = c.get(Calendar.SECOND);    
+			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+			String newfilename = "reviewId"+ reviewIdstr +"SortId"+reviewimgSortIdstr+"time"+date+hour+minute+second+".jpg";
+			System.out.println(newfilename);
+			return newfilename;
+		}
+
+
 		/*	
    	    *  7.0.1	keepCouponWapFile
         *  1、从request当中获取流信息
