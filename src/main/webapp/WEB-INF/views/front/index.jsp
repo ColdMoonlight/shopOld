@@ -88,13 +88,13 @@
 				  if(actshowprolei==0){
 							html += '<div class="swiper-slide">' +
 									'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 									'</a>' +
 									'</div>';
 				  }else if(actshowprolei==1){
 							  html += '<div class="swiper-slide">' +
 							   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
-									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 							  '</a>' +
 							  '</div>';
 				  }
@@ -110,7 +110,7 @@
         // console.log("mlbackActShowProList");
         if (data.code === 100) {
         	var resData = data.extend.mlbackActShowProList;
-          // console.log(resData);
+          console.log(resData);
           renderHotProduct($('#hot-product .swiper-wrapper'), resData);
           new Swiper('#hot-product', {
         	  slidesPerView: 4,
