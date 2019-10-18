@@ -200,7 +200,8 @@
 	    					var resData = data.extend;
 
 	    					if (data.code !== 100) {
-	    						alert('sys error!')
+	    						// alert('sys error!')
+								renderSysMsg('sys error!');
 	    					} else {
 	    						// repeat generate order
 	    		    			var skuIdstr = [];
@@ -238,7 +239,8 @@
 	    									if (resData.code === 100) {
     							    		window.location.href = window.location.href;
 	    									} else {
-	    										alert('sys error!');
+	    										// alert('sys error!');
+												renderSysMsg('ys error!');
 	    									}
 	    								}
 	    		    			});
