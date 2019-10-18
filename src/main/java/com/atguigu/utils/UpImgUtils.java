@@ -120,6 +120,9 @@ public class UpImgUtils {
         }
         //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+        String newfilenamestr = getCatefilename(lineEnd);
+        //解决上传文件中文名字乱码
+        filename = newfilenamestr;
         //解决上传文件中文名字乱码
         filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -182,7 +185,22 @@ public class UpImgUtils {
         }
     
     
-    /*	
+    private static String getCatefilename(String cateid) {
+		Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+		int year = c.get(Calendar.YEAR);  
+		 int month = c.get(Calendar.MONTH);   
+		int date = c.get(Calendar.DATE);    
+		int hour = c.get(Calendar.HOUR_OF_DAY);   
+		int minute = c.get(Calendar.MINUTE);   
+		int second = c.get(Calendar.SECOND);    
+		System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+		String newfilename = "cateid"+ cateid +"time"+date+hour+minute+second+".jpg";
+		System.out.println(newfilename);
+		return newfilename;
+	}
+
+
+	/*	
 	 *  2.0	keepProductFile
      *  1、从request当中获取流信息
      *  2、新建一个临时文件,用输出流指向这个文件
@@ -288,6 +306,9 @@ public class UpImgUtils {
          }
          //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+         String newfilenamestr = getProfilename(lineEnd);
+         //解决上传文件中文名字乱码
+         filename = newfilenamestr;
          //解决上传文件中文名字乱码
          filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -350,7 +371,22 @@ public class UpImgUtils {
          }
      
      
-     /*	
+     private static String getProfilename(String proid) {
+    	 Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+		int year = c.get(Calendar.YEAR);  
+		 int month = c.get(Calendar.MONTH);   
+		int date = c.get(Calendar.DATE);    
+		int hour = c.get(Calendar.HOUR_OF_DAY);   
+		int minute = c.get(Calendar.MINUTE);   
+		int second = c.get(Calendar.SECOND);    
+		System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+		String newfilename = "proid"+ proid +"time"+date+hour+minute+second+".jpg";
+		System.out.println(newfilename);
+		return newfilename;
+	}
+
+
+	/*	
  	  *  3.0	keepProductImgAllFile
       *  1、从request当中获取流信息
       *  2、新建一个临时文件,用输出流指向这个文件
@@ -457,6 +493,9 @@ public class UpImgUtils {
           }
           //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+          String newfilenamestr = getProImgfilename(productIdstr,productimgSortIdstr);
+          //解决上传文件中文名字乱码
+          filename = newfilenamestr;
           //解决上传文件中文名字乱码
           filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -518,7 +557,22 @@ public class UpImgUtils {
           return returnurl;
           }
       
-      /*	
+      private static String getProImgfilename(String productIdstr, String productimgSortIdstr) {
+    	  Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+    	  int year = c.get(Calendar.YEAR);  
+    	  int month = c.get(Calendar.MONTH);   
+    	  int date = c.get(Calendar.DATE);    
+    	  int hour = c.get(Calendar.HOUR_OF_DAY);   
+    	  int minute = c.get(Calendar.MINUTE);   
+    	  int second = c.get(Calendar.SECOND);    
+    	  System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+    	  String newfilename = "productId"+ productIdstr +"SortId"+productimgSortIdstr+"time"+date+hour+minute+second+".jpg";
+    	  System.out.println(newfilename);
+    	  return newfilename;
+	}
+
+
+	/*	
   	   *  4.0	keepShowAreaFile
        *  1、从request当中获取流信息
        *  2、新建一个临时文件,用输出流指向这个文件
@@ -621,6 +675,9 @@ public class UpImgUtils {
            }
            //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+           String newfilenamestr = getShowAreafilename(lineEnd);
+           //解决上传文件中文名字乱码
+           filename = newfilenamestr;
            //解决上传文件中文名字乱码
            filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -682,7 +739,22 @@ public class UpImgUtils {
            return returnurl;
            }
        
-       /*	
+       private static String getShowAreafilename(String ShowAreaid) {
+    	   	Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+			int year = c.get(Calendar.YEAR);  
+			int month = c.get(Calendar.MONTH);   
+			int date = c.get(Calendar.DATE);    
+			int hour = c.get(Calendar.HOUR_OF_DAY);   
+			int minute = c.get(Calendar.MINUTE);   
+			int second = c.get(Calendar.SECOND);    
+			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+			String newfilename = "ShowAreaid"+ ShowAreaid +"time"+date+hour+minute+second+".jpg";
+			System.out.println(newfilename);
+			return newfilename;
+	}
+
+
+		/*	
    	    *  5.0.1	keepActShowProWapFile
         *  1、从request当中获取流信息
         *  2、新建一个临时文件,用输出流指向这个文件
@@ -785,6 +857,9 @@ public class UpImgUtils {
             }
             //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+            String newfilenamestr = getActShowProWapfilename(lineEnd);
+            //解决上传文件中文名字乱码
+            filename = newfilenamestr;
             //解决上传文件中文名字乱码
             filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -846,7 +921,22 @@ public class UpImgUtils {
             return returnurl;
        }
         
-        /*	
+        private static String getActShowProWapfilename(String ActShowProWap) {
+        	Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+ 			int year = c.get(Calendar.YEAR);  
+ 			int month = c.get(Calendar.MONTH);   
+ 			int date = c.get(Calendar.DATE);    
+ 			int hour = c.get(Calendar.HOUR_OF_DAY);   
+ 			int minute = c.get(Calendar.MINUTE);   
+ 			int second = c.get(Calendar.SECOND);    
+ 			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+ 			String newfilename = "actShowProWap"+ ActShowProWap +"time"+date+hour+minute+second+".jpg";
+ 			System.out.println(newfilename);
+ 			return newfilename;
+		}
+
+
+		/*	
     	 *  5.0.2	keepActShowProPcFile
          *  1、从request当中获取流信息
          *  2、新建一个临时文件,用输出流指向这个文件
@@ -949,6 +1039,9 @@ public class UpImgUtils {
              }
              //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+             String newfilenamestr = getActShowProPcfilename(lineEnd);
+             //解决上传文件中文名字乱码
+             filename = newfilenamestr;
              //解决上传文件中文名字乱码
              filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -1009,6 +1102,20 @@ public class UpImgUtils {
              String returnurl = reaUrl+"%"+lineEnd;
              return returnurl;
         }
+         
+         private static String getActShowProPcfilename(String ActShowProPcIdstr) {
+ 			Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+ 			int year = c.get(Calendar.YEAR);  
+ 			 int month = c.get(Calendar.MONTH);   
+ 			int date = c.get(Calendar.DATE);    
+ 			int hour = c.get(Calendar.HOUR_OF_DAY);   
+ 			int minute = c.get(Calendar.MINUTE);   
+ 			int second = c.get(Calendar.SECOND);    
+ 			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+ 			String newfilename = "actShowProPcId"+ ActShowProPcIdstr +"time"+date+hour+minute+second+".jpg";
+ 			System.out.println(newfilename);
+ 			return newfilename;
+ 		}
          
          
          /*	
@@ -1119,7 +1226,7 @@ public class UpImgUtils {
              //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
              
-             String newfilenamestr = getfilename(reviewIdstr,reviewimgSortIdstr);
+             String newfilenamestr = getReviewImgfilename(reviewIdstr,reviewimgSortIdstr);
              //解决上传文件中文名字乱码
              filename = newfilenamestr;
              filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
@@ -1183,7 +1290,7 @@ public class UpImgUtils {
              }
 
 		
-		private static String getfilename(String reviewIdstr, String reviewimgSortIdstr) {
+		private static String getReviewImgfilename(String reviewIdstr, String reviewimgSortIdstr) {
 			Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
 			int year = c.get(Calendar.YEAR);  
 			 int month = c.get(Calendar.MONTH);   
@@ -1301,6 +1408,9 @@ public class UpImgUtils {
             }
             //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+            String newfilenamestr = getCouponWapfilename(lineEnd);
+            //解决上传文件中文名字乱码
+            filename = newfilenamestr;
             //解决上传文件中文名字乱码
             filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -1361,7 +1471,22 @@ public class UpImgUtils {
        }
 
 	        
-        /*	
+        private static String getCouponWapfilename(String couponWapid) {
+        	Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+  			int year = c.get(Calendar.YEAR);  
+  			int month = c.get(Calendar.MONTH);   
+  			int date = c.get(Calendar.DATE);    
+  			int hour = c.get(Calendar.HOUR_OF_DAY);   
+  			int minute = c.get(Calendar.MINUTE);   
+  			int second = c.get(Calendar.SECOND);    
+  			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+  			String newfilename = "couponWapid"+ couponWapid +"time"+date+hour+minute+second+".jpg";
+  			System.out.println(newfilename);
+  			return newfilename;
+		}
+
+
+		/*	
     	 *  7.0.2	keepCouponPcFile
          *  1、从request当中获取流信息
          *  2、新建一个临时文件,用输出流指向这个文件
@@ -1464,6 +1589,9 @@ public class UpImgUtils {
              }
              //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+             String newfilenamestr = getCouponPcfilename(lineEnd);
+             //解决上传文件中文名字乱码
+             filename = newfilenamestr;
              //解决上传文件中文名字乱码
              filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -1523,7 +1651,22 @@ public class UpImgUtils {
              return returnurl;
         }
 
-         /*	
+         private static String getCouponPcfilename(String CouponPcid) {
+        	 Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+   			int year = c.get(Calendar.YEAR);  
+   			int month = c.get(Calendar.MONTH);   
+   			int date = c.get(Calendar.DATE);    
+   			int hour = c.get(Calendar.HOUR_OF_DAY);   
+   			int minute = c.get(Calendar.MINUTE);   
+   			int second = c.get(Calendar.SECOND);    
+   			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+   			String newfilename = "CouponPcid"+ CouponPcid +"time"+date+hour+minute+second+".jpg";
+   			System.out.println(newfilename);
+   			return newfilename;
+		}
+
+
+		/*	
      	  *  8.0.1	keepSlideWapFile
           *  1、从request当中获取流信息
           *  2、新建一个临时文件,用输出流指向这个文件
@@ -1626,6 +1769,9 @@ public class UpImgUtils {
               }
               //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+              
+              String newfilenamestr = getSlidewapfilename(lineEnd);
+              filename = newfilenamestr;
               //解决上传文件中文名字乱码
               filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -1684,6 +1830,20 @@ public class UpImgUtils {
               String returnurl = reaUrl+"%"+lineEnd;
               return returnurl;
          }
+        
+        private static String getSlidewapfilename(String slideIdstr) {
+			Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+			int year = c.get(Calendar.YEAR);  
+			 int month = c.get(Calendar.MONTH);   
+			int date = c.get(Calendar.DATE);    
+			int hour = c.get(Calendar.HOUR_OF_DAY);   
+			int minute = c.get(Calendar.MINUTE);   
+			int second = c.get(Calendar.SECOND);    
+			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+			String newfilename = "slidewapId"+ slideIdstr +"time"+date+hour+minute+second+".jpg";
+			System.out.println(newfilename);
+			return newfilename;
+		}
 
   	        
           /*	
@@ -1789,6 +1949,9 @@ public class UpImgUtils {
                }
                //经过上面的这几步，我们就已经获取到了文件名，我们还需要解决一下中文名乱码的问题
 
+               String newfilenamestr = getSlidepcfilename(lineEnd);
+               //解决上传文件中文名字乱码
+               filename = newfilenamestr;
                //解决上传文件中文名字乱码
                filename = new String(filename.getBytes("ISO-8859-1"), "UTF-8");
 
@@ -1847,5 +2010,19 @@ public class UpImgUtils {
                String returnurl = reaUrl+"%"+lineEnd;
                return returnurl;
           }
+          
+          private static String getSlidepcfilename(String slideIdstr) {
+  			Calendar c = Calendar.getInstance();//可以对每个时间域单独修改   对时间进行加减操作等
+  			int year = c.get(Calendar.YEAR);  
+  			int month = c.get(Calendar.MONTH);   
+  			int date = c.get(Calendar.DATE);    
+  			int hour = c.get(Calendar.HOUR_OF_DAY);   
+  			int minute = c.get(Calendar.MINUTE);   
+  			int second = c.get(Calendar.SECOND);    
+  			System.out.println(year + "/" + month + "/" + date + " " +hour + ":" +minute + ":" + second);    
+  			String newfilename = "slidepcId"+ slideIdstr +"time"+date+hour+minute+second+".jpg";
+  			System.out.println(newfilename);
+  			return newfilename;
+  		}
 
 }
