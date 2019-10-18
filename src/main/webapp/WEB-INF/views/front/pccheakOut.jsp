@@ -1467,7 +1467,8 @@
 							
 							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
 							// console.log(resData)/*89898*/
-							alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
+							// alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
+							renderErrorMsg("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
 							$(".coed_inp").val("");
 							
 						}
@@ -1616,56 +1617,64 @@
 				// }
 				if(firstnamestr==null||firstnamestr==''){
 					flag = 1;
-					alert("firstnamestr is empty");
+					// alert("firstnamestr is empty");
+					renderSysMsg('firstnamestr is empty')
 					$(".firstname").addClass("error_br");
 					$(".firstname").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(lastnamestr==null||lastnamestr==''){
 					flag = 1;
-					alert("lastnamestr is empty");
+					// alert("lastnamestr is empty");
+					renderSysMsg('lastnamestr is empty')
 					$(".lastname").addClass("error_br");
 					$(".lastname").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(emailstr==null||emailstr==''){
 					flag = 1;
-					alert("emailstr is empty");
+					// alert("emailstr is empty");
+					renderSysMsg('emailstr is empty')
 					$(".email").addClass("error_br");
 					$(".email").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(phonestr==null||phonestr==''){
 					flag = 1;
-					alert("phonestr is empty");
+					// alert("phonestr is empty");
+					renderSysMsg('phonestr is empty')
 					$(".phone").addClass("error_br");
 					$(".phone").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(addressstr==null||addressstr==''){
 					flag = 1;
-					alert("addressstr is empty");
+					// alert("addressstr is empty");
+					renderSysMsg('addressstr is empty')
 					$(".addressstr").addClass("error_br");
 					$(".addressstr").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(codestr==null||codestr==''){
 					flag = 1;
-					alert("codestr is empty");
+					// alert("codestr is empty");
+					renderSysMsg('codestr is empty')
 					$(".codestr").addClass("error_br");
 					$(".codestr").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(country_address==null||country_address==''||country_address=='select the Country'){
 					flag = 1;
-					alert("countrystr is empty");
+					// alert("countrystr is empty");
+					renderSysMsg('countrystr is empty')
 					$("#country").addClass("error_br");
 					$("#country").focus(function(){
 						$(this).removeClass("error_br")
 					})
 				}else if(provincestr==null||provincestr==''){
 					flag = 1;
-					alert("provincestr is empty");
+					// alert("provincestr is empty");
+					renderSysMsg('provincestr is empty')
 					$(".province").addClass("error_br");
 					$(".province").focus(function(){
 						$(this).removeClass("error_br")
