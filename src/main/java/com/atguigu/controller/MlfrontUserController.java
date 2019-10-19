@@ -212,6 +212,8 @@ public class MlfrontUserController {
 			mlfrontUserreq.setUserCouponidstr("1,2,3");
 			mlfrontUserreq.setUserCreatetime(nowtime);
 			mlfrontUserreq.setUserLastonlinetime(nowtime);
+			mlfrontUserreq.setUserVipLevel(0);
+			mlfrontUserreq.setUserTimes(0);
 			int intResult = mlfrontUserService.insertSelective(mlfrontUserreq);
 			System.out.println(intResult);
 			//用账号把它查回来
