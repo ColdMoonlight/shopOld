@@ -18,6 +18,9 @@
     <result column="user_lastonlineTime" jdbcType="VARCHAR" property="userLastonlinetime" />
     <result column="user_point" jdbcType="INTEGER" property="userPoint" />
     <result column="user_couponidStr" jdbcType="VARCHAR" property="userCouponidstr" />
+    <result column="user_times" jdbcType="INTEGER" property="userTimes" />
+    <result column="user_vipLevel" jdbcType="INTEGER" property="userVipLevel" />
+    
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,7 +84,7 @@
     user_id, user_email, user_password, user_telephone, user_address_country, user_address_province, 
     user_address_city, user_address_streetaddress, user_address_postalcode, user_firstName, 
     user_lastName, user_createTime, user_motifyTime, user_lastonlineTime, user_point, 
-    user_couponidStr
+    user_couponidStr, user_times, user_vipLevel
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlfrontUserExample" resultMap="BaseResultMap">
     select
@@ -119,13 +122,13 @@
       user_address_city, user_address_streetaddress, 
       user_address_postalcode, user_firstName, user_lastName, 
       user_createTime, user_motifyTime, user_lastonlineTime, 
-      user_point, user_couponidStr)
+      user_point, user_couponidStr, user_times, user_vipLevel)
     values (#{userId,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
       #{userTelephone,jdbcType=VARCHAR}, #{userAddressCountry,jdbcType=VARCHAR}, #{userAddressProvince,jdbcType=VARCHAR}, 
       #{userAddressCity,jdbcType=VARCHAR}, #{userAddressStreetaddress,jdbcType=VARCHAR}, 
       #{userAddressPostalcode,jdbcType=VARCHAR}, #{userFirstname,jdbcType=VARCHAR}, #{userLastname,jdbcType=VARCHAR}, 
       #{userCreatetime,jdbcType=VARCHAR}, #{userMotifytime,jdbcType=VARCHAR}, #{userLastonlinetime,jdbcType=VARCHAR}, 
-      #{userPoint,jdbcType=INTEGER}, #{userCouponidstr,jdbcType=VARCHAR})
+      #{userPoint,jdbcType=INTEGER}, #{userCouponidstr,jdbcType=VARCHAR},#{userTimes,jdbcType=INTEGER}, #{userVipLevel,jdbcType=INTEGER})
   </insert>
   
   <select id="countByExample" parameterType="com.atguigu.bean.MlfrontUserExample" resultType="java.lang.Long">
@@ -185,6 +188,12 @@
       <if test="record.userCouponidstr != null">
         user_couponidStr = #{record.userCouponidstr,jdbcType=VARCHAR},
       </if>
+      <if test="record.userTimes != null">
+        user_times = #{record.userTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.userVipLevel != null">
+        user_vipLevel = #{record.userVipLevel,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,7 +216,9 @@
       user_motifyTime = #{record.userMotifytime,jdbcType=VARCHAR},
       user_lastonlineTime = #{record.userLastonlinetime,jdbcType=VARCHAR},
       user_point = #{record.userPoint,jdbcType=INTEGER},
-      user_couponidStr = #{record.userCouponidstr,jdbcType=VARCHAR}
+      user_couponidStr = #{record.userCouponidstr,jdbcType=VARCHAR},
+      user_times = #{record.userTimes,jdbcType=INTEGER},
+      user_vipLevel = #{record.userVipLevel,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -279,7 +290,9 @@
       user_motifyTime = #{userMotifytime,jdbcType=VARCHAR},
       user_lastonlineTime = #{userLastonlinetime,jdbcType=VARCHAR},
       user_point = #{userPoint,jdbcType=INTEGER},
-      user_couponidStr = #{userCouponidstr,jdbcType=VARCHAR}
+      user_couponidStr = #{userCouponidstr,jdbcType=VARCHAR},
+      user_times = #{userTimes,jdbcType=INTEGER},
+      user_vipLevel = #{userVipLevel,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   
@@ -337,6 +350,12 @@
       <if test="userCouponidstr != null">
         user_couponidStr,
       </if>
+      <if test="userTimes != null">
+        user_times,
+      </if>
+      <if test="userVipLevel != null">
+        user_vipLevel,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -386,6 +405,12 @@
       </if>
       <if test="userCouponidstr != null">
         #{userCouponidstr,jdbcType=VARCHAR},
+      </if>
+      <if test="userTimes != null">
+        #{userTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userVipLevel != null">
+        #{userVipLevel,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -453,6 +478,12 @@
       <if test="userCouponidstr != null">
         user_couponidStr = #{userCouponidstr,jdbcType=VARCHAR},
       </if>
+      <if test="userTimes != null">
+        user_times = #{userTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userVipLevel != null">
+        user_vipLevel = #{userVipLevel,jdbcType=INTEGER},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -505,6 +536,12 @@
       </if>
       <if test="userCouponidstr != null">
         user_couponidStr = #{userCouponidstr,jdbcType=VARCHAR},
+      </if>
+      <if test="userTimes != null">
+        user_times = #{userTimes,jdbcType=INTEGER},
+      </if>
+      <if test="userVipLevel != null">
+        user_vipLevel = #{userVipLevel,jdbcType=INTEGER},
       </if>
   </select>
   <!-- selectAll使用中 -->
