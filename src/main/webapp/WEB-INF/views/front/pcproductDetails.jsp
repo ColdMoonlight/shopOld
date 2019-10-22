@@ -306,7 +306,7 @@
 			    var productNameStr = productData.productName;
 			    var productMetaDescStr =productData.productMetaDesc;
 			    var productSeoStr =productData.productSeo;
-			    var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+			    var urlStr = 'https://megalook.com/'+productSeoStr+'.html';
 			    var imageStr =productData.productMainimgurl;
 			    var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
 			    var productIdStr =productData.productId;
