@@ -30,6 +30,8 @@ import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.service.PaypalService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtils;
+import com.atguigu.utils.EmailUtilshtml;
+import com.atguigu.utils.EmailUtilshtmlCustomer;
 import com.atguigu.utils.URLUtils;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -77,6 +79,12 @@ public class PaypalController {
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
     	
+    	String Shopdiscount = getCouponMoney(session);
+    	
+    	String addressMoney = getAddressMoney(session);
+    	
+
+    	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
     	
     	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
@@ -86,6 +94,8 @@ public class PaypalController {
     	Double moneyDouble = Double.parseDouble(moneyStr);
     	String moneyTypeStr = toPaypalInfo.getMoneyType();
     	String payDes = toPaypalInfo.getPaymentDescription();
+    	
+
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
@@ -98,6 +108,8 @@ public class PaypalController {
                     PaypalPaymentMethod.paypal, //paypal
                     PaypalPaymentIntent.sale,//paypal
                     payDes,//"payment description", 
+                    Shopdiscount,//"CouponMoney", 
+                    addressMoney,//shopping
                     cancelUrl, 
                     successUrl);
             for(Links links : payment.getLinks()){
@@ -112,7 +124,20 @@ public class PaypalController {
         return "redirect:/";
     }
     
-    /**1.1
+    private String getAddressMoney(HttpSession session) {
+		// TODO Auto-generated method stub
+    	String addressMoney = (String) session.getAttribute("addressMoney");
+    	System.out.println("addressMoney:"+addressMoney);
+		return addressMoney;
+	}
+
+	private String getCouponMoney(HttpSession session) {
+    	String Shopdiscount = (String) session.getAttribute("CouponCodeMoney");
+    	System.out.println("Shopdiscount:"+Shopdiscount);
+		return Shopdiscount;
+	}
+
+	/**1.1
      * 组装参数,PC端发起真实的支付
      * paypal/ppay
      * */
@@ -121,6 +146,10 @@ public class PaypalController {
     	System.out.println("into**********/paypal/ppay**********");
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
+    	
+    	String Shopdiscount = getCouponMoney(session);
+    	
+    	String addressMoney = getAddressMoney(session);
     	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
     	
@@ -143,6 +172,8 @@ public class PaypalController {
                     PaypalPaymentMethod.paypal, //paypal
                     PaypalPaymentIntent.sale,//paypal
                     payDes,//"payment description", 
+                    Shopdiscount,//"CouponMoney", 
+                    addressMoney,//shopping
                     cancelUrl, 
                     successUrl);
             for(Links links : payment.getLinks()){
@@ -169,7 +200,7 @@ public class PaypalController {
             
             toUpdatePayInfoSuccess(session,payerId,paymentId);
             
-            sendResultEmail(session);
+//            sendResultEmail(session);
             
             System.out.println(payment.toJSON());
             
@@ -200,7 +231,7 @@ public class PaypalController {
             
             toUpdatePayInfoSuccess(session,payerId,paymentId);
             
-            sendResultEmail(session);
+ //           sendResultEmail(session);
             
             System.out.println(payment.toJSON());
             
@@ -218,9 +249,11 @@ public class PaypalController {
         }
     }
     
-    private void sendResultEmail(HttpSession session) {
+    private void sendResultEmail(HttpSession session,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
     	try {
     		//从payID，查oid，
+        	
+        	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
     		
     		MlfrontUser loginUser =(MlfrontUser) session.getAttribute("loginUser");
     		
@@ -239,7 +272,8 @@ public class PaypalController {
 			//测试方法
 			String getToEmail = userEmail;
 			String Message = "pay Success</br>,已收到您的付款,会尽快给您安排发货,注意留意发货通知.祝您购物愉快";
-			EmailUtils.readyEmailPaySuccess(getToEmail, Message);
+			EmailUtilshtml.readyEmailPaySuccess(getToEmail, Message,mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
+			EmailUtilshtmlCustomer.readyEmailPaySuccessCustomer(getToEmail, Message,mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -262,7 +296,7 @@ public class PaypalController {
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfoIOne.setPayinfoMotifytime(nowTime);
 		//增加生成字段信息
-		//  MLH
+		//  ML
 		String payInfoTime = DateUtil.getDateTime();
 		
 		String payinfoIdStr = payinfoId+"";
@@ -280,7 +314,7 @@ public class PaypalController {
 		}else if(orderlen==1){
 			payinfoIdStr = "000000"+payinfoIdStr;
 		}
-		String payinfoPlateNum = "MLH"+payInfoTime+payinfoIdStr;
+		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
 		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
 		
@@ -301,6 +335,11 @@ public class PaypalController {
 		//将付款成功的参数successPayinfoId,successOrderId放入session中
 		session.setAttribute("successPayinfoId", payinfoId);
 		session.setAttribute("successOrderId", orderId);
+		
+		String addressMoney = getAddressMoney(session);
+		
+		sendResultEmail(session,mlfrontPayInfoIOne, mlfrontOrderResOne,addressMoney);
+		
 	}
 
 	/**2.0
@@ -377,7 +416,7 @@ public class PaypalController {
 		String toPayUserlastname = mlfrontAddressToPay.getAddressUserlastname();
 		//拼接参数
 		String toPayDesc = " ";
-		toPayDesc=toPayDesc+toPayEmail+",";
+//		toPayDesc=toPayDesc+toPayEmail+",";
 		toPayDesc+=toPayTelephone+",";
 		toPayDesc+=toPayCountry+",";
 		toPayDesc+=toPayProvince+",";

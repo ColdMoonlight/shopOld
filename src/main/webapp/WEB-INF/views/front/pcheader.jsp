@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/new.css">
 	
 	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
-<!-- 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
+ 	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
@@ -176,9 +176,9 @@
 				<button class="tt-btn-search" type="submit"></button>
 			</div>
 			<ul class="show_ul">
-				<li>sdsdfsdfsdf</li>
-				<li>sdsdfsdfsdf</li>
-				<li>sdsdfsdfsdf</li>
+				<li>bob</li>
+				<li>wigs</li>
+				<li>bundle</li>
 			</ul>
 		</div>
 		
@@ -404,38 +404,26 @@
 		  if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/topcProductDetailPage?productId=" + id;
 		}
 /*******搜索****************************************/
-		    function list_li (parent,data){
-				  var html=""
-				  for(var i=0, len=data.length; i < len; i += 1){
-					  html += '<li>' + data[i].productName + '</li>';
-				  }
-			    parent.html(html);
-			  }
-		     function serch_box (productName){
-				   $.ajax({
-				   	url: "${APP_PATH}/MlbackProduct/searchProductLike",
-				   	data: "productName=" + productName,
-				   	type: "POST",
-				   	success: function (data) {
-						// console.log(data)
-						if(data.code==100){
-							var resultlist = data.extend.mlbackProductResList;
-							 list_li($('.show_ul'), resultlist);
-							 $(".show_ul").show();
-						}
-				   	}
-				   });
-			   }
-				$('.tt-search-input').bind('input propertychange', function(data) {  
-				    var keywords = $(this).val();
-				    if (keywords == '') {
-				        $('.show_ul').hide();
-				        return
-				    };
-					if(keywords.length>3){
-							// serch_box(1)
-					}
-				}) 
+		   $(".tt-btn-search").click(function(){
+		     var seaProductName = $(this).parents(".tt-col").find("input.tt-search-input").val();
+		     if(seaProductName==""){
+		          alert("Please enter keywords;")
+		     }else{
+		         window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+		     }
+		   });
+				$(".show_ul li").click(function(){
+				  var seaProductName =$(this).html();
+								window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+				 });
+				  $('body').keydown(function(){
+					 if (event.keyCode == 13) {    
+						 $('.tt-btn-search').click();
+					 };            
+				 })
+				$(".tt-search-input").focus(function(){
+					 $(".serch_box").find("ul.show_ul").slideDown(200);
+				})
 				
 				$('body').delegate('.show_ul li','click',function(e){
 					var val = $(this).text();

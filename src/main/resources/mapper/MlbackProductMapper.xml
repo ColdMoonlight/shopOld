@@ -724,9 +724,12 @@
   
   <!-- select	ProductLike使用中 -->
   <select id="selectMlbackProductLike" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
-    select 
-	product_id, product_name,  product_seo from tb_mlback_product
-    where product_name like concat(concat("%",#{productName}),"%") AND product_status = 1 limit 5
+    select 	
+	product_id, product_name, product_seo,  product_mainimgurl, product_originalPrice, 
+    product_haveSaleNum, product_status, product_lable, product_firsth, product_actoffId, 
+    product_actoffOff, product_actoffif, product_reviewNum	
+	from tb_mlback_product
+    where product_name like concat(concat("%",#{productName}),"%") AND product_status = 1
   </select>
   
   <select id="selectMlbackProductLikeNum" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">

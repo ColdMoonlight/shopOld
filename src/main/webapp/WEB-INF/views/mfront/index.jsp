@@ -65,7 +65,12 @@
     <!-- countDownArea date -->
     <div id="countdown-area"> </div>
     <!-- product intro -->
-    <div id="hot-product"></div>
+    <div id="hot-product">
+		<div class="swiper-wrapper">
+			
+		</div>
+		<div class="swiper-pagination swiper-pagination7"></div>
+	</div>
     <!-- product show -->
     <div id="product-block"></div>
   </div>
@@ -82,13 +87,13 @@
       for (var i = 0; i < data.length; i += 1) {
 		   var actshowprolei = data[i].actshowproIfproORcate;
 		  if(actshowprolei==0){
-			  html += '<div class="banner">' +
+			  html += '<div class="swiper-slide">' +
 			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
 			  					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  '</a>' +
 			  '</div>';
 		  }else if(actshowprolei==1){
-			  html += '<div class="banner">' +
+			  html += '<div class="swiper-slide">' +
 			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
 			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  '</a>' +
@@ -106,10 +111,24 @@
       type: "POST",
       success: function (data) {
         if (data.code === 100) {
-			console.log(data)
+			// console.log(data)
         	var resData = data.extend.mlbackActShowProList;
             console.log(resData);/*banban*/
-          rednerHotProduct($('#hot-product'), resData)
+          rednerHotProduct($('#hot-product .swiper-wrapper'), resData)
+		  new Swiper('#hot-product', {
+				freeMode: true,
+				 slidesPerView : 1.5,  
+				 // loop : true,
+				  autoplay: {
+				     disableOnInteraction: false,
+				   },
+					pagination: {
+						el: '.swiper-pagination7',
+						clickable: true
+					}
+		    })
+		  
+		  
         } else {
           renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
         }
@@ -199,7 +218,9 @@
           '</a>' +
           '</div>' +
           '<div class="product-desc">' +
-          '<div class="product-title">' + data[i].productName + '</div>' +
+          '<div class="product-title">' + 
+		  '<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
+		  '</div>' +
           '<div class="product-type"></div>' +
           '<div class="product-data">' +
           '<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
@@ -369,7 +390,7 @@
 						// console.log(data)/***data**/
 						if (JSON.parse(data).code === 100) {
 						  var resData = JSON.parse(data).extend.mlbackSlideList;
-						  console.log(resData)
+						  // console.log(resData)
 							rednertop(bannerfirst, resData);
 							  new Swiper('#ban_silder', {
 								freeMode: true,
@@ -424,7 +445,7 @@
 							// console.log(data)/***data**/
 							if (JSON.parse(data).code === 100) {
 							  var resData = JSON.parse(data).extend.mlbackSlideList;;
-							  console.log(resData);
+							  // console.log(resData);
 					         rednerCoupon(bannercoupon,resData)
 							} else {
 							  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
@@ -434,10 +455,12 @@
 					
 	   
   </script>
-  <!-- megalookhair 
-  <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-  <!-- huashuohair -->
-  <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
+  	<!-- megalook-->
+  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+	<!-- megalookhair 
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  	<!-- huashuohair -->
+  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

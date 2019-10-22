@@ -272,7 +272,7 @@
 				   var productNameStr = productData.productName;
 				   var productMetaDescStr =productData.productMetaDesc;
 				   var productSeoStr =productData.productSeo;
-				   var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+				   var urlStr = 'https://megalook.com/'+productSeoStr+'.html';
 				   var imageStr =productData.productMainimgurl;
 				   var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
 				   var productIdStr =productData.productId;
@@ -625,18 +625,25 @@
 					var originalPrice = prodcutDpriceText.data('price') + calOverPrice();
 					if (productNum.val() <= 1) {
 						productNum.val(1);
-						calPrice(originalPrice.toFixed(2), (originalPrice * discount).toFixed(2));
+						calPrice(
+								originalPrice.toFixed(2),
+								(originalPrice * discount).toFixed(2)
+						);
 					} else {
 						productNum.val(parseInt(productNum.val()) - 1);
-						calPrice((productNum.val() * originalPrice).toFixed(2), (productNum.val() * originalPrice * discount)
-							.toFixed(2));
+						calPrice(
+								(productNum.val() * originalPrice).toFixed(2),
+								(productNum.val() *  parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
+						);
 					}
 				});
 				add.on('click', function () {
 					var originalPrice = prodcutDpriceText.data('price') + calOverPrice();
 					productNum.val(parseInt(productNum.val()) + 1);
-					calPrice((productNum.val() * originalPrice).toFixed(2), (productNum.val() * originalPrice * discount)
-						.toFixed(2));
+					calPrice(
+							(productNum.val() * originalPrice).toFixed(2),
+							(productNum.val() * parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
+					);
 				})
 			}
 
@@ -672,7 +679,7 @@
 				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
-				console.log(reqData);
+				// console.log(reqData);
 
 				// name, id, price
 				function getSkuData(els) {
@@ -712,7 +719,7 @@
 			}
 
 			function generateOrder(reqData) {
-				// console.log(reqData)
+				// console.log(reqData)/***111111111111111*****/
 				var fbpid=reqData.cartitemProductId;
 				var fbprice=reqData.cartitemProductOriginalprice;
 				$.ajax({
@@ -724,7 +731,7 @@
 					success: function (data) {
 						var resData = JSON.parse(data);
 						if (resData.code === 100) {
-							// console.log(resData)
+							// console.log(resData)/*****5555555555555**********/
 							//追踪'添加购物车'事件		facebook广告插件可以注释掉，但不要删除
 							fbq('track', 'AddToCart', {
 								  content_ids: fbpid,
@@ -737,6 +744,8 @@
 							$(".mask5").show();
 							setTimeout(function() {
 								window.location.href = '${APP_PATH}/myCart.html';
+								$(".mask5").hide();
+								$(".sys-box").hide();
 							}, 5000);
 						}
 					},
@@ -747,6 +756,16 @@
 			}
 			
 			function selectCartOrCheckout(product) {
+				var allskuMoneystr = product.cartitemProductskuMoneystr;
+				var  arrynum= new Array();
+				arrynum =allskuMoneystr.split(",");
+				// console.log(arrynum)
+				function getSum(total, num) {
+				    return total*1 + num*1;
+				}
+				var sku_numall =arrynum.reduce(getSum);
+               var tc_price = (((product.cartitemProductOriginalprice*1 + sku_numall*1) * product.cartitemProductActoff * product.cartitemProductNumber) / 10).toFixed(2)  
+				
 		    	var elBox = $('<div class="modal sys-box" style="display: block;"></div>');
 		    	
 		    	var html = '<div class="sys-title" style="background: #000; color: #fff;">' +
@@ -756,7 +775,7 @@
 		    		'<img src="'+ product.cartitemProductMainimgurl +'" style="display: block; width:100px; height:100px;">' +
 		    		'<div class="content" style="width: 70%; padding-left: 10px; text-align: left;">'+
 		    			'<h4>'+ product.cartitemProductName +'</h4>'+
-		    			'<div style="margin: 12px 0;">PRICE: $'+ (product.cartitemProductOriginalprice * product.cartitemProductActoff * product.cartitemProductNumber / 10).toFixed(2) +'</div>' +
+		    			'<div style="margin: 12px 0;">PRICE: $'+ tc_price +'</div>' +
 		    			'<a href="${APP_PATH}/myCart.html" class="btn btn-red" style="padding: 8px; border-radius: 0;">view cart</a>' +
 		    			'<button class="btn btn-pink buy-now2" style="padding: 8px; margin-left: 1em; border-radius: 0;">checkout</button>' +
 		    		'</div>'+
@@ -789,7 +808,7 @@
 				reqData.cartitemProductskuNamestr = skuData.itemName.join(',');
 				reqData.cartitemProductskuMoneystr = skuData.price.join(',');
 				reqData.cartitemProductNumber = productNum.val();
-				// console.log(data);
+				// console.log(data);/**88888888888888*/
 				
 				//fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
 				fbq('track', 'InitiateCheckout', {
@@ -1087,10 +1106,12 @@
 		      }
 		    }
 	</script>
+	<!-- megalook-->
+  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
   	<!-- huashuohair -->
-  	<script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
+  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

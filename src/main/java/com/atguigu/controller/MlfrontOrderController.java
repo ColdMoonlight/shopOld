@@ -43,6 +43,8 @@ import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtils;
+import com.atguigu.utils.EmailUtilshtml;
+import com.atguigu.utils.EmailUtilshtmlCustomer;
 
 
 @Controller
@@ -192,7 +194,11 @@ public class MlfrontOrderController {
 		//拿到优惠码Code,
 		String CouponCode = mlfrontOrder.getOrderCouponCode();
 		//查询该优惠码的优惠价格
-		BigDecimal CouponCodeMoney = getCouponCodeMoney("0");
+		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode);
+		
+		String CouponCodeMoneyStr= df1.format(CouponCodeMoney);
+		
+		session.setAttribute("CouponCodeMoney", CouponCodeMoneyStr);
 		//加上优惠券减掉的
 		totalprice = totalprice.subtract(CouponCodeMoney);
 		//计算该订单的实际价格
@@ -413,12 +419,17 @@ public class MlfrontOrderController {
 		}
 		//查询英文名,查询该英文名的价格运费价格
 		Integer addressMoney = getAddressMoney(AddressId);
+		
+		String addressMoneyStr= df1.format(addressMoney);
+		session.setAttribute("addressMoney", addressMoneyStr);
 		//2.2加上地区快递费
 		totalprice = totalprice.add(new BigDecimal(addressMoney));
 		//拿到优惠码Code,
 		String CouponCode = mlfrontOrder.getOrderCouponCode();
 		//查询该优惠码的优惠价格
 		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode);
+		String CouponCodeMoneyStr= df1.format(CouponCodeMoney);
+		session.setAttribute("CouponCodeMoney", CouponCodeMoneyStr);
 		//加上优惠券减掉的
 		totalprice = totalprice.subtract(CouponCodeMoney);
 		//计算该订单的实际价格
@@ -866,13 +877,13 @@ public class MlfrontOrderController {
 		MlfrontOrder mlfrontOrderRes = mlfrontOrderResList.get(0);
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
 		
-		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber);
+		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId);
 		
 		return Msg.success().add("Msg", "更新成功");
 	}
 
 
-	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber) {
+	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
 		
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
 		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
@@ -886,7 +897,8 @@ public class MlfrontOrderController {
 			//测试方法
 			String getToEmail = userEmail;
 			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
-			EmailUtils.readyEmailRegister(getToEmail, Message);
+			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,orderLogisticsnumber,orderLogisticsname,orderId);
+			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,orderLogisticsnumber,orderLogisticsname,orderId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

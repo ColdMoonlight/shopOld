@@ -44,8 +44,9 @@ import com.atguigu.service.MlfrontUserService;
 import com.atguigu.service.SysUserService;
 import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.EmailUtil;
 import com.atguigu.utils.EmailUtils;
+import com.atguigu.utils.EmailUtilshtml;
+import com.atguigu.utils.EmailUtilshtmlCustomer;
 import com.atguigu.utils.ExcelUtils;
 import com.atguigu.utils.HttpUtil;
 
@@ -211,6 +212,8 @@ public class MlfrontUserController {
 			mlfrontUserreq.setUserCouponidstr("1,2,3");
 			mlfrontUserreq.setUserCreatetime(nowtime);
 			mlfrontUserreq.setUserLastonlinetime(nowtime);
+			mlfrontUserreq.setUserVipLevel(0);
+			mlfrontUserreq.setUserTimes(0);
 			int intResult = mlfrontUserService.insertSelective(mlfrontUserreq);
 			System.out.println(intResult);
 			//用账号把它查回来
@@ -224,7 +227,8 @@ public class MlfrontUserController {
 				//测试方法
 				String getToEmail = userEmail;
 				String Message = "Welcome to Register In Megalook.";
-				EmailUtils.readyEmailRegister(getToEmail, Message);
+				EmailUtilshtml.readyEmailRegister(getToEmail, Message,mlfrontUserafterIn);
+				EmailUtilshtmlCustomer.readyEmailRegisterCustomer(getToEmail, Message,mlfrontUserafterIn);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

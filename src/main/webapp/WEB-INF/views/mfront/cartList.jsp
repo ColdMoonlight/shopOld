@@ -73,6 +73,14 @@
 			</div>
 		</div>
 	</div>
+	<!--*****热品推荐**********************-->
+	<div class="hot_box_product clearfix" style="display: none;">
+		   <h3>YOU MIGTH ALSO LIKE</h3>
+		   <div class="hot_box_product_cont">
+		   	<div class="swiper-wrapper"></div>
+		   	<div class="swiper-pagination swiper-pagination2"></div>
+		   </div>
+	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
@@ -99,8 +107,7 @@
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				cartitemMap[data[i].cartitemId] = data[i];
-				var hasStorageItem = cartObj[data[i].cartitemId];
-				html += '<div class="cart-item bd-b bd-t" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
+				html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
 				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '" data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' +
 					/* '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' + */
@@ -117,9 +124,9 @@
 					html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
 						': ' + skuNameArr[j] + '</div>';
 				}
-				html += '<span class="sku-edit" style="position: absolute; top: 0; right: 0; color: #ff6f5e;" onclick="skuEdit(event);"> EDIT </span>';
-				var dataPrice = getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i]
-				.cartitemProductActoff);
+				html += '<span class="sku-edit" style="position: absolute; top:-20px; right: 0; color: #ff6f5e;" onclick="skuEdit(event);"> EDIT </span>';
+				var dataPrice = getPrice(data[i].cartitemProductOriginalprice, skuPriceArr, data[i].cartitemProductActoff);
+				
 				html += '</div>' +
 					'</div>' +
 					'<div class="num" data-cartitemid="' + data[i].cartitemId + '" data-cartid="' + data[i].cartitemCartId +
@@ -129,7 +136,7 @@
 					'<span class="icon delete"  onclick="deleteCartItem(event)">' + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
-					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + (hasStorageItem ? cartObj[data[i].cartitemId].num : data[i].cartitemProductNumber) +
+					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + data[i].cartitemProductNumber +
 					'">' +
 					'<span class="input-group-addon"  id="product-num-add" onclick="addNum(event)"><i class="icon plus"></i></span>' +
 					'</div>' +
@@ -193,7 +200,8 @@
 	    					var resData = data.extend;
 
 	    					if (data.code !== 100) {
-	    						alert('sys error!')
+	    						// alert('sys error!')
+								renderSysMsg('sys error!');
 	    					} else {
 	    						// repeat generate order
 	    		    			var skuIdstr = [];
@@ -231,7 +239,8 @@
 	    									if (resData.code === 100) {
     							    		window.location.href = window.location.href;
 	    									} else {
-	    										alert('sys error!');
+	    										// alert('sys error!');
+												renderSysMsg('ys error!');
 	    									}
 	    								}
 	    		    			});
@@ -325,13 +334,109 @@
 
 		function renderProductNone(parent) {
 			var html = '';
-			html += '<div class="box-none">' +
-				'<img src="${APP_PATH}/static/m/img/index/cart-none.png" alt="">' +
-				'<p>The shopping cart is empty. Come and fill it up!</p>' +
-				'<a href="${APP_PATH}/index.html" class="btn btn-pink"> Shop Now</a>' +
+			html += 
+			    '<div class="box_nogoods">'+
+					'<div class="box-none">' +
+					'<img src="${APP_PATH}/static/m/img/index/cart-none.png" alt="">' +
+					'<p>The shopping cart is empty. Come and fill it up!</p>' +
+					'<a href="${APP_PATH}/index.html" class="btn btn-pink"> Shop Now</a>' +
+					'</div>'+
 				'</div>';
 			parent.html(html)
 		}
+		
+		/*******hot_box_product********************************/
+		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
+		 function rednerProduct(parent, data) {
+		 	var html = '';
+		 		for (var i = 0; i < data.length; i += 1) {
+		 			 var productactoffif = data[i].productActoffIf;
+		 			// console.log(productactoffif)
+		 			var productactoffid  =  data[i].productActoffid;
+		 			 // console.log(productactoffid)  
+		 			var cp_icon = "";
+		 			var showspan = "";
+		 			if(productactoffif == 1){
+		 						  if(productactoffid==1){
+		 							   showspan ="showactive1"
+		 						  }else if(productactoffid==2){
+		 							   showspan ="showactive2"
+		 						  }else if(productactoffid==3){
+		 							   showspan ="showactive3"
+		 						  }else if(productactoffid==4){
+		 							   showspan ="showactive4"
+		 						  }
+		 						  
+		 			}else{
+		 						   showspan ="hideactive"
+		 			}
+		 			html += '<div class="swiper-slide">' +
+		 				'<div class="product-item" data-productid="'+ data[i].productId +'">' +
+		 			    '<span class="hui_icon '+showspan+'"></span>'+
+		 				'<div class="product-img">' +
+		 				'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+		 				'<img src="' + data[i].productMainimgurl + '" alt="">' +
+		 				'</a>' +
+		 				'</div>' +
+		 				'<div class="product-desc">' +
+		 				'<div class="product-title">' + data[i].productName + '</div>' +
+		 				'<div class="product-type"></div>' +
+		 				'<div class="product-data">' +
+		 				'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+		 				'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+		 				' Review(s)</span>' +
+		 				'</div>' +
+		 				'<div class="product-price">' +
+		 				'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+		 					.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+		 				'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+		 				'</span>' +
+		 				'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+		 				'</div>' +
+		 				'</div>' +
+		 				'</div>'+
+		 				'</div>';
+		 		}
+		 
+		 		parent.html(html);
+		 }
+		$.ajax({
+			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+				data: JSON.stringify({
+			   "slideArea": 3
+			 }),
+			 type: 'post',
+			 dataType: 'JSON',
+			 contentType: 'application/json',
+			 success: function (data) {
+					// console.log(data)/***data**/
+					if (JSON.parse(data).code === 100) {
+					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					  // console.log(resData);
+					 rednerProduct(hot_pic,resDataProduct);
+					 new Swiper('.hot_box_product_cont', {
+						observer: true,//修改swiper自己或子元素时，自动初始化swiper
+						observeParents: true,//修改swiper的父元素时，自动初始化swiper
+					    slidesPerView: 2,
+					    spaceBetween:5,
+					    freeMode: true,
+						loop:true,
+					   autoplay: {
+					       disableOnInteraction: false,
+					     },
+					 	pagination: {
+					 		el: '.swiper-pagination2',
+					 		clickable: true
+					 	}
+					 })
+					 
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					}
+				  }
+		});	
+		
+		
 
 		function addNum(e) {
 			e.stopPropagation();
@@ -463,6 +568,7 @@
 							// console.log(data);
 							var resData = data.extend.mlfrontCartItemListRes;
 							if (resData.length > 0) {
+								$(".hot_box_product").remove();
 								// clearData
 								clearData(resData);
 								// render cartlist
@@ -475,29 +581,31 @@
 								toProductDetails();
 							} else {
 								renderProductNone(cartBox);
+								$(".hot_box_product").show();
 							}
 						}
 					})
 				} else {
 					renderProductNone(cartBox);
+					$(".hot_box_product").show();
 				}
 			}
 		})
 
 		function toProductDetails() {			
 			$(".cart-item").each(function(){
-				var textlink =$(this).children(".content").children(".text").find(".title");
-				// var imglink =$(this).find(".img");
-				textlink.on('click', function () {
-					var product_id = $(this).parents(".content").parents(".cart-item").data('productid');
-					// alert(product_id)
-				     toProductItem(product_id)
-				});
-				// imglink.on('click', function () {
-				// 	var product_id = $(this).prev(".checkbox").data('productid');
+				// var textlink =$(this).children(".content").children(".text").find(".title");
+				var imglink =$(this).find(".img");
+				// textlink.on('click', function () {
+				// 	var product_id = $(this).parents(".content").parents(".cart-item").data('productid');
 				// 	// alert(product_id)
 				//      toProductItem(product_id)
 				// });
+				imglink.on('click', function () {
+					// alert(111)
+					var product_id = $(this).parents(".cart-item").data('productid');
+				     toProductItem(product_id)
+				});
 			}, true)
 		}
 
@@ -521,6 +629,7 @@
 			if (cartNum <= 0) {
 				cartText.text(0);
 				renderProductNone(cartBox);
+				$(".hot_box_product").show();
 			} else {
 				cartText.text(cartNum);
 			}
@@ -541,7 +650,6 @@
 							//1，删除成功。  不alert，刷新 
 							//alert('删除成功')
 							delete cartObj[cartitemid];
-							window.localStorage.setItem('cartlist', JSON.stringify(cartObj));
 							window.location.href = '${APP_PATH}/myCart.html';
 							
 						}

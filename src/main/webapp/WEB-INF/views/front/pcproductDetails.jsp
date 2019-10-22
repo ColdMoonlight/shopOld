@@ -306,7 +306,7 @@
 			    var productNameStr = productData.productName;
 			    var productMetaDescStr =productData.productMetaDesc;
 			    var productSeoStr =productData.productSeo;
-			    var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+			    var urlStr = 'https://megalook.com/'+productSeoStr+'.html';
 			    var imageStr =productData.productMainimgurl;
 			    var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
 			    var productIdStr =productData.productId;
@@ -712,18 +712,25 @@
 					var originalPrice = prodcutDpriceText.data('price') + calOverPrice();
 					if (productNum.val() <= 1) {
 						productNum.val(1);
-						calPrice(originalPrice.toFixed(2), (originalPrice * discount).toFixed(2));
+						calPrice(
+								originalPrice.toFixed(2),
+								(originalPrice * discount).toFixed(2)
+						);
 					} else {
 						productNum.val(parseInt(productNum.val()) - 1);
-						calPrice((productNum.val() * originalPrice).toFixed(2), (productNum.val() * originalPrice * discount)
-							.toFixed(2));
+						calPrice(
+								(productNum.val() * originalPrice).toFixed(2),
+								(productNum.val() *  parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
+						);
 					}
 				});
 				add.on('click', function () {
 					var originalPrice = prodcutDpriceText.data('price') + calOverPrice();
 					productNum.val(parseInt(productNum.val()) + 1);
-					calPrice((productNum.val() * originalPrice).toFixed(2), (productNum.val() * originalPrice * discount)
-						.toFixed(2));
+					calPrice(
+							(productNum.val() * originalPrice).toFixed(2),
+							(productNum.val() * parseFloat((originalPrice * discount).toFixed(2))).toFixed(2)
+					);
 				})
 			}
 
@@ -1167,9 +1174,11 @@
 			})
 		}
 	</script>
+	<!-- megalook-->
+  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
 	<!-- megalookhair 
-    <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-    <!-- huashuohair -->
-    <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  	<!-- huashuohair -->
+  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 </html>
