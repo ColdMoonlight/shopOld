@@ -33,8 +33,8 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
+	//fbq('init', '246433859565492');
+	  fbq('init', '667403967094866');
 	</script>
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
 	<!-- End Facebook Pixel Code -->
@@ -272,7 +272,7 @@
 				   var productNameStr = productData.productName;
 				   var productMetaDescStr =productData.productMetaDesc;
 				   var productSeoStr =productData.productSeo;
-				   var urlStr = 'https://megalookhair.com/'+productSeoStr+'.html';
+				   var urlStr = 'https://megalook.com/'+productSeoStr+'.html';
 				   var imageStr =productData.productMainimgurl;
 				   var amountStr = (productData.productOriginalprice * productData.productActoffoff / 100).toFixed(2);
 				   var productIdStr =productData.productId;

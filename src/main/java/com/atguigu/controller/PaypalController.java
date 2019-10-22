@@ -296,7 +296,7 @@ public class PaypalController {
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfoIOne.setPayinfoMotifytime(nowTime);
 		//增加生成字段信息
-		//  MLH
+		//  ML
 		String payInfoTime = DateUtil.getDateTime();
 		
 		String payinfoIdStr = payinfoId+"";
@@ -314,7 +314,7 @@ public class PaypalController {
 		}else if(orderlen==1){
 			payinfoIdStr = "000000"+payinfoIdStr;
 		}
-		String payinfoPlateNum = "MLH"+payInfoTime+payinfoIdStr;
+		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
 		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
 		
@@ -416,7 +416,7 @@ public class PaypalController {
 		String toPayUserlastname = mlfrontAddressToPay.getAddressUserlastname();
 		//拼接参数
 		String toPayDesc = " ";
-		toPayDesc=toPayDesc+toPayEmail+",";
+//		toPayDesc=toPayDesc+toPayEmail+",";
 		toPayDesc+=toPayTelephone+",";
 		toPayDesc+=toPayCountry+",";
 		toPayDesc+=toPayProvince+",";
