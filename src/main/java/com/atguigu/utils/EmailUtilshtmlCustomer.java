@@ -42,8 +42,8 @@ public class EmailUtilshtmlCustomer {
 		
 	}
 	
-	public static void readyEmailSendSuccessCustomer(String getToEmail, String Message, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
-		sendEmildeliverCustomer(getToEmail, Message, orderLogisticsname, orderLogisticsnumber,orderId);
+	public static void readyEmailSendSuccessCustomer(String getToEmail, String Message, String toCustomerInfoStr) {
+		sendEmildeliverCustomer(getToEmail, Message, toCustomerInfoStr);
 	}
 	
 	public static void sendEmilRegisterCustomer(String to, String message,MlfrontUser mlfrontUserafterIn) {
@@ -193,7 +193,7 @@ public class EmailUtilshtmlCustomer {
 	
 	
 	
-	public static void sendEmildeliverCustomer(String to, String message, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
+	public static void sendEmildeliverCustomer(String to, String message, String toCustomerInfoStr) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -218,18 +218,15 @@ public class EmailUtilshtmlCustomer {
                 }
             });
             
-            
-            String content="The order of Id is ："+orderId+",had Delivery completed"+
-            "The Courier Services Company is "+ orderLogisticsnumber +
-            ",and The Courier number is "+ orderLogisticsname;
+            String content=toCustomerInfoStr;
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //                  msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
-            msg.setSubject("new costomer of Send Success.");
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+            msg.setSubject("Delivery Notice of MegaLook.");
             
             Multipart mp = new MimeMultipart("related"); 
             BodyPart bodyPart = new MimeBodyPart(); 
@@ -238,12 +235,13 @@ public class EmailUtilshtmlCustomer {
             msg.setContent(mp);// 设置邮件内容对象 
             
             //设置邮件消息
-            msg.setText(message);
+            //msg.setText(message);
             //设置发送的日期
             msg.setSentDate(new Date());
             //调用Transport的send方法去发送邮件
             Transport.send(msg);
-            System.out.println("给"+to+"客户,发送邮件完毕,"+"邮件内容为"+message);
+            
+            System.out.println("给"+to+"客户,发送邮件完毕,"+"邮件内容为"+content);
         } catch (Exception e) {
             e.printStackTrace();
         }

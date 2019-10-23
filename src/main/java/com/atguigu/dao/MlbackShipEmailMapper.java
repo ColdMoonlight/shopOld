@@ -37,5 +37,7 @@ public interface MlbackShipEmailMapper {
 	List<MlbackShipEmail> selectMlbackShipEmailGetAll();
 
 	List<MlbackShipEmail> selectMlbackShowAreaByNumthAndStatus(MlbackShipEmail mlbackShowArea);
+	//用值查询信息
+	List<MlbackShipEmail> selectMlbackShipEmailByshipemailNameth(MlbackShipEmail mlbackShipEmail);
     
 }

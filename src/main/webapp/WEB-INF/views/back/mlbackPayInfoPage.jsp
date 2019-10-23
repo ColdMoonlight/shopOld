@@ -425,18 +425,15 @@
 					'<label class="col-sm-4 control-label">物流:</label>' +
 					'<div class="col-sm-6">' +
 					'<select class="ship-name form-control">' +
-					'<option value ="英国专线-4PX">英国专线-4PX</option>' +
-					'<option value ="华磊物流通测试">华磊物流通测试</option>' +
-					'<option value ="FBA">FBA</option>' +
-					'<option value ="AliExpress无忧物流-标准">AliExpress无忧物流-标准</option>' +
-					'<option value ="ARAMEX">ARAMEX</option>' +
-					'<option value ="UPS">UPS</option>' +
-					'<option value ="TNT">TNT</option>' +
-					'<option value ="顺丰">顺丰</option>' +
-					'<option value ="FedEx">FedEx</option>' +
-					'<option value ="E邮宝">E邮宝</option>' +
-					'<option value ="DPEX">DPEX</option>' +
-					'<option value ="DHL">DHL</option>' +
+					'<option value ="1">UPS</option>' +
+					'<option value ="2">FEDEX</option>' +
+					'<option value ="3">4PX</option>' +
+					'<option value ="4">DHL</option>' +
+					'<option value ="5">ARAMEX</option>' +
+					'<option value ="6">TNT</option>' +
+					'<option value ="7">DPEX</option>' +
+					'<option value ="8">华磊</option>' +
+					'<option value ="9">其他(联系技术人员添加)</option>' +
 					// '<option value ="挂号">挂号</option>' +
 					// '<option value ="中国邮政挂号小包">天天</option>' +
 					'</select>' +
