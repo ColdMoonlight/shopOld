@@ -171,7 +171,7 @@ public class EmailUtilshtmlCustomer {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-            msg.setSubject("You have received an order of ID is : "+mlfrontOrderResOne.getOrderId());
+            msg.setSubject("Please confirm Your order of ID is : "+mlfrontOrderResOne.getOrderId());
             
             Multipart mp = new MimeMultipart("related");
             BodyPart bodyPart = new MimeBodyPart(); 

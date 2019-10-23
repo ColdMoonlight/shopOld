@@ -56,7 +56,8 @@
 		<table tableName="tb_mlback_productViewDetail" domainObjectName="MlbackProductViewDetail"></table>
 		<table tableName="tb_mlback_addcartviewdetail" domainObjectName="MlbackAddCartViewDetail"></table>
 		<table tableName="tb_mlback_addorderviewdetail" domainObjectName="MlbackAddOrderViewDetail"></table>
-		<table tableName="tb_mlback_addcheakoutviewdetail" domainObjectName="MlbackAddCheakoutViewDetail"></table>-->
+		<table tableName="tb_mlback_addcheakoutviewdetail" domainObjectName="MlbackAddCheakoutViewDetail"></table>
+		<table tableName="tb_mlback_shipemail" domainObjectName="MlbackShipEmail"></table>-->
 		
 		<!--
 		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>
