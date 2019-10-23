@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackCoupon;
+import com.atguigu.bean.MlbackShipEmail;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontCart;
 import com.atguigu.bean.MlfrontCartItem;
@@ -35,6 +36,7 @@ import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackCouponService;
+import com.atguigu.service.MlbackShipEmailService;
 import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.service.MlfrontCartItemService;
 import com.atguigu.service.MlfrontCartService;
@@ -77,6 +79,9 @@ public class MlfrontOrderController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlbackShipEmailService mlbackShipEmailService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -893,15 +898,48 @@ public class MlfrontOrderController {
 		System.out.println(mlfrontAddressRes.toString());
 		String userEmail = mlfrontAddressRes.getAddressEmail();
 		
+		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsname,orderLogisticsnumber,orderId);
 		try {
 			//测试方法
 			String getToEmail = userEmail;
 			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
-			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,orderLogisticsnumber,orderLogisticsname,orderId);
-			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,orderLogisticsnumber,orderLogisticsname,orderId);
+			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,toCustomerInfoStr,orderId);
+			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,toCustomerInfoStr);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
+
+
+	private String getToCustomerDriverInfo(String orderLogisticsname, String orderLogisticsnumber, Integer orderId) {
+		
+		String Message ="";
+		MlbackShipEmail mlbackShipEmail = new MlbackShipEmail();
+		mlbackShipEmail.setShipemailNameth(Integer.parseInt(orderLogisticsname));
+		List<MlbackShipEmail> mlbackShipEmailList = mlbackShipEmailService.selectMlbackShipEmailByshipemailNameth(mlbackShipEmail);
+		MlbackShipEmail mlbackShipEmailOne = mlbackShipEmailList.get(0);
+		
+		String shipemailName = mlbackShipEmailOne.getShipemailName();
+		String shipemailDay = mlbackShipEmailOne.getShipemailDay();
+		String shipemailWwwlink = mlbackShipEmailOne.getShipemailWwwlink();
+		String shipemailTeam = mlbackShipEmailOne.getShipemailTeam();
+		String shipemailTeamemail = mlbackShipEmailOne.getShipemailTeamemail();
+		String shipemailTeamwhatsapp = mlbackShipEmailOne.getShipemailTeamwhatsapp();
+		String shipemailTeamtelphone = mlbackShipEmailOne.getShipemailTeamtelphone();
+		Message =Message+"Hi,"+"<br><br>";
+		Message=Message+"This is Megalook Hair. Your order # ("+orderId+") has been shipped, And the tracking number is "+shipemailName+" : ("+orderLogisticsnumber+").<br><br><br>";
+		Message=Message+"Expected to be delivered within "+shipemailDay+" working days.<br><br>";
+		Message=Message+"You can track the parcel through this link on "+shipemailName+"( "+shipemailWwwlink+" )<br><br><br>";
+		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
+		Message=Message+"Nice Day!<br><br>";
+		Message=Message+"-----------------------------------<br><br>";
+		Message=Message+shipemailTeam+"<br>";
+		Message=Message+"Email : "+shipemailTeamemail+"<br>";
+		Message=Message+"Whatsapp : "+shipemailTeamwhatsapp+"<br>";
+		Message=Message+"Telephone/SMS : "+shipemailTeamtelphone+"<br>";
+		return Message;
+	}
+
+
 }

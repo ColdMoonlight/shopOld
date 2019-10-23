@@ -82,4 +82,15 @@ public class MlbackShipEmailService {
 		return mlbackShipEmailList;
 	}
 	
+	/**6
+	 * @author Shinelon
+	 * @param 
+	 * @exception 查看全部用户信息
+	 * 
+	 * */
+	public List<MlbackShipEmail> selectMlbackShipEmailByshipemailNameth(MlbackShipEmail mlbackShipEmail) {
+		List<MlbackShipEmail>  mlbackShipEmailList = mlbackShipEmailMapper.selectMlbackShipEmailByshipemailNameth(mlbackShipEmail);
+		return mlbackShipEmailList;
+	}
+	
 }

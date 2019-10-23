@@ -328,5 +328,11 @@
     select *
     from tb_mlback_shipemail order by shipEmail_id desc
   </select>
+  <!-- selectMlbackShipEmailByshipemailNameth使用中 -->
+  <select id="selectMlbackShipEmailByshipemailNameth" parameterType="com.atguigu.bean.MlbackShipEmail" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_shipemail 
+    where shipEmail_nameth = #{shipemailNameth,jdbcType=INTEGER}
+  </select>
   
 </mapper>

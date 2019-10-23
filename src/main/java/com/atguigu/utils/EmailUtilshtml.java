@@ -42,8 +42,8 @@ public class EmailUtilshtml {
 		
 	}
 	
-	public static void readyEmailSendSuccess(String getToEmail, String Message, String orderLogisticsnumber, String orderLogisticsname,Integer orderId) {
-		sendEmilSend(getToEmail, Message, orderLogisticsnumber,  orderLogisticsname,orderId);
+	public static void readyEmailSendSuccess(String getToEmail, String Message, String toCustomerInfoStr, Integer orderId) {
+		sendEmilSend(getToEmail, Message, toCustomerInfoStr,orderId);
 	}
 	
 	public static void sendEmilRegister(String to, String message,MlfrontUser mlfrontUserafterIn) {
@@ -186,7 +186,7 @@ public class EmailUtilshtml {
 	
 	
 	
-	public static void sendEmilSend(String to, String message, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
+	public static void sendEmilSend(String to, String message, String toCustomerInfoStr,Integer orderId) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -212,9 +212,7 @@ public class EmailUtilshtml {
             });
             
             
-            String content="The order of Id is ："+orderId+",had Delivery completed"+
-            "The Courier Services Company is "+ orderLogisticsnumber +
-            ",and The Courier number is "+ orderLogisticsname;
+            String content=toCustomerInfoStr;
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
@@ -222,7 +220,8 @@ public class EmailUtilshtml {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
-            msg.setSubject("new costomer of Send Success.");
+            String sub="The order of Id is "+orderId+" has been shipped successful ";
+            msg.setSubject(sub);
             
             Multipart mp = new MimeMultipart("related"); 
             BodyPart bodyPart = new MimeBodyPart(); 
