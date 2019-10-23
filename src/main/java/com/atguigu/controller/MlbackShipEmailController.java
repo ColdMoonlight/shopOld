@@ -93,7 +93,7 @@ public class MlbackShipEmailController {
 		}else if(shipemailNameth==7){
 			shipemailName="DPEX";
 		}else if(shipemailNameth==8){
-			shipemailName="华磊";
+			shipemailName="ges";
 		}else if(shipemailNameth==9){
 			shipemailName="更多";
 		}
