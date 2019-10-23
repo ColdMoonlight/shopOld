@@ -32,7 +32,11 @@ public class MlfrontUser {
     private Integer userPoint;
 
     private String userCouponidstr;
-
+    
+    private Integer userTimes;	//购买次数
+    
+    private Integer userVipLevel;	//VIP等级
+    
     public Integer getUserId() {
         return userId;
     }
@@ -160,4 +164,21 @@ public class MlfrontUser {
     public void setUserCouponidstr(String userCouponidstr) {
         this.userCouponidstr = userCouponidstr == null ? null : userCouponidstr.trim();
     }
+
+	public Integer getUserVipLevel() {
+		return userVipLevel;
+	}
+
+	public void setUserVipLevel(Integer userVipLevel) {
+		this.userVipLevel = userVipLevel;
+	}
+
+	public Integer getUserTimes() {
+		return userTimes;
+	}
+
+	public void setUserTimes(Integer userTimes) {
+		this.userTimes = userTimes;
+	}
+    
 }

@@ -120,255 +120,745 @@
 					<div class="form-group">
 						<label for="addressCountry" class="form-label required">Country</label>
 						<div class="form-input">
-							<!-- <input type="text" name="addressCountry" class="form-control"> -->
 							<select name="addressCountry" class="form-control" id="country">
-								<option value="Afghanistan">Afghanistan</option>
-								<option value="Åland Islands">Åland Islands</option>
-								<option value="Albania">Albania</option>
-								<option value="Algeria">Algeria</option>
-								<option value="American Samoa">American Samoa</option>
-								<option value="Andorra">Andorra</option>
-								<option value="Angola">Angola</option>
-								<option value="Anguilla">Anguilla</option>
-								<option value="Antarctica">Antarctica</option>
-								<option value="Antigua and Barbuda">Antigua and Barbuda</option>
-								<option value="Argentina">Argentina</option>
-								<option value="Armenia">Armenia</option>
-								<option value="Aruba">Aruba</option>
-								<option value="Australia">Australia</option>
-								<option value="Austria">Austria</option>
-								<option value="Azerbaijan">Azerbaijan</option>
-								<option value="Bahamas">Bahamas</option>
-								<option value="Bahrain">Bahrain</option>
-								<option value="Bangladesh">Bangladesh</option>
-								<option value="Barbados">Barbados</option>
-								<option value="Belarus">Belarus</option>
-								<option value="Belgium">Belgium</option>
-								<option value="Belize">Belize</option>
-								<option value="Benin">Benin</option>
-								<option value="Bermuda">Bermuda</option>
-								<option value="Bhutan">Bhutan</option>
-								<option value="Bolivia">Bolivia</option>
-								<option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-								<option value="Botswana">Botswana</option>
-								<option value="Bouvet Island">Bouvet Island</option>
-								<option value="Brazil">Brazil</option>
-								<option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
-								<option value="British Virgin Islands">British Virgin Islands</option>
-								<option value="Brunei">Brunei</option>
-								<option value="Bulgaria">Bulgaria</option>
-								<option value="Burkina Faso">Burkina Faso</option>
-								<option value="Burundi">Burundi</option>
-								<option value="Cambodia">Cambodia</option>
-								<option value="Cameroon">Cameroon</option>
-								<option value="Canada">Canada</option>
-								<option value="Cape Verde">Cape Verde</option>
-								<option value="Cayman Islands">Cayman Islands</option>
-								<option value="Central African Republic">Central African Republic</option>
-								<option value="Chad">Chad</option>
-								<option value="Chile">Chile</option>
-								<option value="China">China</option>
-								<option value="Christmas Island">Christmas Island</option>
-								<option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
-								<option value="Colombia">Colombia</option>
-								<option value="Comoros">Comoros</option>
-								<option value="Congo - Brazzaville">Congo - Brazzaville</option>
-								<option value="Congo - Kinshasa">Congo - Kinshasa</option>
-								<option value="Cook Islands">Cook Islands</option>
-								<option value="Costa Rica">Costa Rica</option>
-								<option value="Cote Ivoire">Cote Ivoire</option>
-								<option value="Croatia">Croatia</option>
-								<option value="Cuba">Cuba</option>
-								<option value="Cyprus">Cyprus</option>
-								<option value="Czech Republic">Czech Republic</option>
-								<option value="Denmark">Denmark</option>
-								<option value="Djibouti">Djibouti</option>
-								<option value="Dominica">Dominica</option>
-								<option value="Dominican Republic">Dominican Republic</option>
-								<option value="Ecuador">Ecuador</option>
-								<option value="Egypt">Egypt</option>
-								<option value="El Salvador">El Salvador</option>
-								<option value="Equatorial Guinea">Equatorial Guinea</option>
-								<option value="Eritrea">Eritrea</option>
-								<option value="Estonia">Estonia</option>
-								<option value="Ethiopia">Ethiopia</option>
-								<option value="Falkland Islands">Falkland Islands</option>
-								<option value="Faroe Islands">Faroe Islands</option>
-								<option value="Fiji">Fiji</option>
-								<option value="Finland">Finland</option>
-								<option value="France">France</option>
-								<option value="French Guiana">French Guiana</option>
-								<option value="French Polynesia">French Polynesia</option>
-								<option value="French Southern Territories">French Southern Territories</option>
-								<option value="Gabon">Gabon</option>
-								<option value="Gambia">Gambia</option>
-								<option value="Georgia">Georgia</option>
-								<option value="Germany">Germany</option>
-								<option value="Ghana">Ghana</option>
-								<option value="Gibraltar">Gibraltar</option>
-								<option value="Greece">Greece</option>
-								<option value="Greenland">Greenland</option>
-								<option value="Grenada">Grenada</option>
-								<option value="Guadeloupe">Guadeloupe</option>
-								<option value="Guam">Guam</option>
-								<option value="Guatemala">Guatemala</option>
-								<option value="Guernsey">Guernsey</option>
-								<option value="Guinea">Guinea</option>
-								<option value="Guinea-Bissau">Guinea-Bissau</option>
-								<option value="Guyana">Guyana</option>
-								<option value="Haiti">Haiti</option>
-								<option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
-								<option value="Honduras">Honduras</option>
-								<option value="Hong Kong SAR China">Hong Kong SAR China</option>
-								<option value="Hungary">Hungary</option>
-								<option value="Iceland">Iceland</option>
-								<option value="India">India</option>
-								<option value="Indonesia">Indonesia</option>
-								<option value="Iran">Iran</option>
-								<option value="Iraq">Iraq</option>
-								<option value="Ireland">Ireland</option>
-								<option value="Isle of Man">Isle of Man</option>
-								<option value="Israel">Israel</option>
-								<option value="Italy">Italy</option>
-								<option value="Jamaica">Jamaica</option>
-								<option value="Japan">Japan</option>
-								<option value="Jersey">Jersey</option>
-								<option value="Jordan">Jordan</option>
-								<option value="Kazakhstan">Kazakhstan</option>
-								<option value="Kenya">Kenya</option>
-								<option value="Kiribati">Kiribati</option>
-								<option value="Kuwait">Kuwait</option>
-								<option value="Kyrgyzstan">Kyrgyzstan</option>
-								<option value="Laos">Laos</option>
-								<option value="Latvia">Latvia</option>
-								<option value="Lebanon">Lebanon</option>
-								<option value="Lesotho">Lesotho</option>
-								<option value="Liberia">Liberia</option>
-								<option value="Libya">Libya</option>
-								<option value="Liechtenstein">Liechtenstein</option>
-								<option value="Lithuania">Lithuania</option>
-								<option value="Luxembourg">Luxembourg</option>
-								<option value="Macau SAR China">Macau SAR China</option>
-								<option value="Macedonia">Macedonia</option>
-								<option value="Madagascar">Madagascar</option>
-								<option value="Malawi">Malawi</option>
-								<option value="Malaysia">Malaysia</option>
-								<option value="Maldives">Maldives</option>
-								<option value="Mali">Mali</option>
-								<option value="Malta">Malta</option>
-								<option value="Marshall Islands">Marshall Islands</option>
-								<option value="Martinique">Martinique</option>
-								<option value="Mauritania">Mauritania</option>
-								<option value="Mauritius">Mauritius</option>
-								<option value="Mayotte">Mayotte</option>
-								<option value="Mexico">Mexico</option>
-								<option value="Micronesia">Micronesia</option>
-								<option value="Moldova">Moldova</option>
-								<option value="Monaco">Monaco</option>
-								<option value="Mongolia">Mongolia</option>
-								<option value="Montenegro">Montenegro</option>
-								<option value="Montserrat">Montserrat</option>
-								<option value="Morocco">Morocco</option>
-								<option value="Mozambique">Mozambique</option>
-								<option value="Myanmar (Burma)">Myanmar (Burma)</option>
-								<option value="Namibia">Namibia</option>
-								<option value="Nauru">Nauru</option>
-								<option value="Nepal">Nepal</option>
-								<option value="Netherlands">Netherlands</option>
-								<option value="Netherlands Antilles">Netherlands Antilles</option>
-								<option value="New Caledonia">New Caledonia</option>
-								<option value="New Zealand">New Zealand</option>
-								<option value="Nicaragua">Nicaragua</option>
-								<option value="Niger">Niger</option>
-								<option value="Nigeria">Nigeria</option>
-								<option value="Niue">Niue</option>
-								<option value="Norfolk Island">Norfolk Island</option>
-								<option value="Northern Mariana Islands">Northern Mariana Islands</option>
-								<option value="North">North Korea</option>
-								<option value="Norway">Norway</option>
-								<option value="Oman">Oman</option>
-								<option value="Pakistan">Pakistan</option>
-								<option value="Palau">Palau</option>
-								<option value="Palestinian Territories">Palestinian Territories</option>
-								<option value="Panama">Panama</option>
-								<option value="Papua New Guinea">Papua New Guinea</option>
-								<option value="Paraguay">Paraguay</option>
-								<option value="Peru">Peru</option>
-								<option value="Philippines">Philippines</option>
-								<option value="Pitcairn Islands">Pitcairn Islands</option>
-								<option value="Poland">Poland</option>
-								<option value="Portugal">Portugal</option>
-								<option value="Puerto Rico">Puerto Rico</option>
-								<option value="Qatar">Qatar</option>
-								<option value="Reunion">Reunion</option>
-								<option value="Romania">Romania</option>
-								<option value="Russia">Russia</option>
-								<option value="Rwanda">Rwanda</option>
-								<option value="Saint Barthelemy">Saint Barthelemy</option>
-								<option value="Saint Helena">Saint Helena</option>
-								<option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-								<option value="Saint Lucia">Saint Lucia</option>
-								<option value="Saint Martin">Saint Martin</option>
-								<option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
-								<option value="Samoa">Samoa</option>
-								<option value="San Marino">San Marino</option>
-								<option value="Sao Tome and Principe">Sao Tome and Principe</option>
-								<option value="Saudi Arabia">Saudi Arabia</option>
-								<option value="Senegal">Senegal</option>
-								<option value="Serbia">Serbia</option>
-								<option value="Seychelles">Seychelles</option>
-								<option value="Sierra Leone">Sierra Leone</option>
-								<option value="Singapore">Singapore</option>
-								<option value="Slovakia">Slovakia</option>
-								<option value="Slovenia">Slovenia</option>
-								<option value="Solomon Islands">Solomon Islands</option>
-								<option value="Somalia">Somalia</option>
-								<option value="South Africa">South Africa</option>
-								<option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands
+								<option value="AF">
+									Afghanistan
 								</option>
-								<option value="South Korea">South Korea</option>
-								<option value="Spain">Spain</option>
-								<option value="Sri Lanka">Sri Lanka</option>
-								<option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
-								<option value="Sudan">Sudan</option>
-								<option value="Suriname">Suriname</option>
-								<option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
-								<option value="Swaziland">Swaziland</option>
-								<option value="Sweden">Sweden</option>
-								<option value="Switzerland">Switzerland</option>
-								<option value="Syria">Syria</option>
-								<option value="Taiwan">Taiwan</option>
-								<option value="Tajikistan">Tajikistan</option>
-								<option value="Tanzania">Tanzania</option>
-								<option value="Thailand">Thailand</option>
-								<option value="Timor-Leste">Timor-Leste</option>
-								<option value="Togo">Togo</option>
-								<option value="Tokelau">Tokelau</option>
-								<option value="Tonga">Tonga</option>
-								<option value="Trinidad and Tobago">Trinidad and Tobago</option>
-								<option value="Tunisia">Tunisia</option>
-								<option value="Turkey">Turkey</option>
-								<option value="Turkmenistan">Turkmenistan</option>
-								<option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
-								<option value="Tuvalu">Tuvalu</option>
-								<option value="Uganda">Uganda</option>
-								<option value="Ukraine">Ukraine</option>
-								<option value="United Arab Emirates">United Arab Emirates</option>
-								<option value="United Kingdom">United Kingdom</option>
-								<option value="United States" selected="selected">United States</option>
-								<option value="Uruguay">Uruguay</option>
-								<option value="U.S. Outlying Islands">U.S. Outlying Islands</option>
-								<option value="U.S. Virgin Islands">U.S. Virgin Islands</option>
-								<option value="Uzbekistan">Uzbekistan</option>
-								<option value="Vanuatu">Vanuatu</option>
-								<option value="Vatican City">Vatican City</option>
-								<option value="Venezuela">Venezuela</option>
-								<option value="Vietnam">Vietnam</option>
-								<option value="Wallis and Futuna">Wallis and Futuna</option>
-								<option value="Western Sahara">Western Sahara</option>
-								<option value="Yemen">Yemen</option>
-								<option value="Zambia">Zambia</option>
-								<option value="Zimbabwe">Zimbabwe</option>
+								<option value="AX">
+									Åland Islands
+								</option>
+								<option value="AL">
+									Albania
+								</option>
+								<option value="DZ">
+									Algeria
+								</option>
+								<option value="AS">
+									American Samoa
+								</option>
+								<option value="AD">
+									Andorra
+								</option>
+								<option value="AO">
+									Angola
+								</option>
+								<option value="AI">
+									Anguilla
+								</option>
+								<option value="AQ">
+									Antarctica
+								</option>
+								<option value="AG">
+									Antigua and Barbuda
+								</option>
+								<option value="AR">
+									Argentina
+								</option>
+								<option value="AM">
+									Armenia
+								</option>
+								<option value="AW">
+									Aruba
+								</option>
+								<option value="AU">
+									Australia
+								</option>
+								<option value="AT">
+									Austria
+								</option>
+								<option value="AZ">
+									Azerbaijan
+								</option>
+								<option value="BS">
+									Bahamas
+								</option>
+								<option value="BH">
+									Bahrain
+								</option>
+								<option value="BD">
+									Bangladesh
+								</option>
+								<option value="BB">
+									Barbados
+								</option>
+								<option value="BY">
+									Belarus
+								</option>
+								<option value="BE">
+									Belgium
+								</option>
+								<option value="BZ">
+									Belize
+								</option>
+								<option value="BJ">
+									Benin
+								</option>
+								<option value="BM">
+									Bermuda
+								</option>
+								<option value="BT">
+									Bhutan
+								</option>
+								<option value="BO">
+									Bolivia
+								</option>
+								<option value="BA">
+									Bosnia and Herzegovina
+								</option>
+								<option value="BW">
+									Botswana
+								</option>
+								<option value="BV">
+									Bouvet Island
+								</option>
+								<option value="BR">
+									Brazil
+								</option>
+								<option value="IO">
+									British Indian Ocean Territory
+								</option>
+								<option value="VG">
+									British Virgin Islands
+								</option>
+								<option value="BN">
+									Brunei
+								</option>
+								<option value="BG">
+									Bulgaria
+								</option>
+								<option value="BF">
+									Burkina Faso
+								</option>
+								<option value="BI">
+									Burundi
+								</option>
+								<option value="KH">
+									Cambodia
+								</option>
+								<option value="CM">
+									Cameroon
+								</option>
+								<option value="CA">
+									Canada
+								</option>
+								<option value="CV">
+									Cape Verde
+								</option>
+								<option value="KY">
+									Cayman Islands
+								</option>
+								<option value="CF">
+									Central African Republic
+								</option>
+								<option value="TD">
+									Chad
+								</option>
+								<option value="CL">
+									Chile
+								</option>
+								<option value="CN">
+									China
+								</option>
+								<option value="CX">
+									Christmas Island
+								</option>
+								<option value="CC">
+									Cocos (Keeling) Islands
+								</option>
+								<option value="CO">
+									Colombia
+								</option>
+								<option value="KM">
+									Comoros
+								</option>
+								<option value="CG">
+									Congo - Brazzaville
+								</option>
+								<option value="CD">
+									Congo - Kinshasa
+								</option>
+								<option value="CK">
+									Cook Islands
+								</option>
+								<option value="CR">
+									Costa Rica
+								</option>
+								<option value="CI">
+									Côte d’Ivoire
+								</option>
+								<option value="HR">
+									Croatia
+								</option>
+								<option value="CU">
+									Cuba
+								</option>
+								<option value="CY">
+									Cyprus
+								</option>
+								<option value="CZ">
+									Czech Republic
+								</option>
+								<option value="DK">
+									Denmark
+								</option>
+								<option value="DJ">
+									Djibouti
+								</option>
+								<option value="DM">
+									Dominica
+								</option>
+								<option value="DO">
+									Dominican Republic
+								</option>
+								<option value="EC">
+									Ecuador
+								</option>
+								<option value="EG">
+									Egypt
+								</option>
+								<option value="SV">
+									El Salvador
+								</option>
+								<option value="GQ">
+									Equatorial Guinea
+								</option>
+								<option value="ER">
+									Eritrea
+								</option>
+								<option value="EE">
+									Estonia
+								</option>
+								<option value="ET">
+									Ethiopia
+								</option>
+								<option value="FK">
+									Falkland Islands
+								</option>
+								<option value="FO">
+									Faroe Islands
+								</option>
+								<option value="FJ">
+									Fiji
+								</option>
+								<option value="FI">
+									Finland
+								</option>
+								<option value="FR">
+									France
+								</option>
+								<option value="GF">
+									French Guiana
+								</option>
+								<option value="PF">
+									French Polynesia
+								</option>
+								<option value="TF">
+									French Southern Territories
+								</option>
+								<option value="GA">
+									Gabon
+								</option>
+								<option value="GM">
+									Gambia
+								</option>
+								<option value="GE">
+									Georgia
+								</option>
+								<option value="DE">
+									Germany
+								</option>
+								<option value="GH">
+									Ghana
+								</option>
+								<option value="GI">
+									Gibraltar
+								</option>
+								<option value="GR">
+									Greece
+								</option>
+								<option value="GL">
+									Greenland
+								</option>
+								<option value="GD">
+									Grenada
+								</option>
+								<option value="GP">
+									Guadeloupe
+								</option>
+								<option value="GU">
+									Guam
+								</option>
+								<option value="GT">
+									Guatemala
+								</option>
+								<option value="GG">
+									Guernsey
+								</option>
+								<option value="GN">
+									Guinea
+								</option>
+								<option value="GW">
+									Guinea-Bissau
+								</option>
+								<option value="GY">
+									Guyana
+								</option>
+								<option value="HT">
+									Haiti
+								</option>
+								<option value="HM">
+									Heard &amp; McDonald Islands
+								</option>
+								<option value="HN">
+									Honduras
+								</option>
+								<option value="HK">
+									Hong Kong SAR China
+								</option>
+								<option value="HU">
+									Hungary
+								</option>
+								<option value="IS">
+									Iceland
+								</option>
+								<option value="IN">
+									India
+								</option>
+								<option value="ID">
+									Indonesia
+								</option>
+								<option value="IR">
+									Iran
+								</option>
+								<option value="IQ">
+									Iraq
+								</option>
+								<option value="IE">
+									Ireland
+								</option>
+								<option value="IM">
+									Isle of Man
+								</option>
+								<option value="IL">
+									Israel
+								</option>
+								<option value="IT">
+									Italy
+								</option>
+								<option value="JM">
+									Jamaica
+								</option>
+								<option value="JP">
+									Japan
+								</option>
+								<option value="JE">
+									Jersey
+								</option>
+								<option value="JO">
+									Jordan
+								</option>
+								<option value="KZ">
+									Kazakhstan
+								</option>
+								<option value="KE">
+									Kenya
+								</option>
+								<option value="KI">
+									Kiribati
+								</option>
+								<option value="KW">
+									Kuwait
+								</option>
+								<option value="KG">
+									Kyrgyzstan
+								</option>
+								<option value="LA">
+									Laos
+								</option>
+								<option value="LV">
+									Latvia
+								</option>
+								<option value="LB">
+									Lebanon
+								</option>
+								<option value="LS">
+									Lesotho
+								</option>
+								<option value="LR">
+									Liberia
+								</option>
+								<option value="LY">
+									Libya
+								</option>
+								<option value="LI">
+									Liechtenstein
+								</option>
+								<option value="LT">
+									Lithuania
+								</option>
+								<option value="LU">
+									Luxembourg
+								</option>
+								<option value="MO">
+									Macau SAR China
+								</option>
+								<option value="MK">
+									Macedonia
+								</option>
+								<option value="MG">
+									Madagascar
+								</option>
+								<option value="MW">
+									Malawi
+								</option>
+								<option value="MY">
+									Malaysia
+								</option>
+								<option value="MV">
+									Maldives
+								</option>
+								<option value="ML">
+									Mali
+								</option>
+								<option value="MT">
+									Malta
+								</option>
+								<option value="MH">
+									Marshall Islands
+								</option>
+								<option value="MQ">
+									Martinique
+								</option>
+								<option value="MR">
+									Mauritania
+								</option>
+								<option value="MU">
+									Mauritius
+								</option>
+								<option value="YT">
+									Mayotte
+								</option>
+								<option value="MX">
+									Mexico
+								</option>
+								<option value="FM">
+									Micronesia
+								</option>
+								<option value="MD">
+									Moldova
+								</option>
+								<option value="MC">
+									Monaco
+								</option>
+								<option value="MN">
+									Mongolia
+								</option>
+								<option value="ME">
+									Montenegro
+								</option>
+								<option value="MS">
+									Montserrat
+								</option>
+								<option value="MA">
+									Morocco
+								</option>
+								<option value="MZ">
+									Mozambique
+								</option>
+								<option value="MM">
+									Myanmar (Burma)
+								</option>
+								<option value="NA">
+									Namibia
+								</option>
+								<option value="NR">
+									Nauru
+								</option>
+								<option value="NP">
+									Nepal
+								</option>
+								<option value="NL">
+									Netherlands
+								</option>
+								<option value="AN">
+									Netherlands Antilles
+								</option>
+								<option value="NC">
+									New Caledonia
+								</option>
+								<option value="NZ">
+									New Zealand
+								</option>
+								<option value="NI">
+									Nicaragua
+								</option>
+								<option value="NE">
+									Niger
+								</option>
+								<option value="NG">
+									Nigeria
+								</option>
+								<option value="NU">
+									Niue
+								</option>
+								<option value="NF">
+									Norfolk Island
+								</option>
+								<option value="MP">
+									Northern Mariana Islands
+								</option>
+								<option value="KP">
+									North Korea
+								</option>
+								<option value="NO">
+									Norway
+								</option>
+								<option value="OM">
+									Oman
+								</option>
+								<option value="PK">
+									Pakistan
+								</option>
+								<option value="PW">
+									Palau
+								</option>
+								<option value="PS">
+									Palestinian Territories
+								</option>
+								<option value="PA">
+									Panama
+								</option>
+								<option value="PG">
+									Papua New Guinea
+								</option>
+								<option value="PY">
+									Paraguay
+								</option>
+								<option value="PE">
+									Peru
+								</option>
+								<option value="PH">
+									Philippines
+								</option>
+								<option value="PN">
+									Pitcairn Islands
+								</option>
+								<option value="PL">
+									Poland
+								</option>
+								<option value="PT">
+									Portugal
+								</option>
+								<option value="PR">
+									Puerto Rico
+								</option>
+								<option value="QA">
+									Qatar
+								</option>
+								<option value="RE">
+									Réunion
+								</option>
+								<option value="RO">
+									Romania
+								</option>
+								<option value="RU">
+									Russia
+								</option>
+								<option value="RW">
+									Rwanda
+								</option>
+								<option value="BL">
+									Saint Barthélemy
+								</option>
+								<option value="SH">
+									Saint Helena
+								</option>
+								<option value="KN">
+									Saint Kitts and Nevis
+								</option>
+								<option value="LC">
+									Saint Lucia
+								</option>
+								<option value="MF">
+									Saint Martin
+								</option>
+								<option value="PM">
+									Saint Pierre and Miquelon
+								</option>
+								<option value="WS">
+									Samoa
+								</option>
+								<option value="SM">
+									San Marino
+								</option>
+								<option value="ST">
+									São Tomé and Príncipe
+								</option>
+								<option value="SA">
+									Saudi Arabia
+								</option>
+								<option value="SN">
+									Senegal
+								</option>
+								<option value="RS">
+									Serbia
+								</option>
+								<option value="SC">
+									Seychelles
+								</option>
+								<option value="SL">
+									Sierra Leone
+								</option>
+								<option value="SG">
+									Singapore
+								</option>
+								<option value="SK">
+									Slovakia
+								</option>
+								<option value="SI">
+									Slovenia
+								</option>
+								<option value="SB">
+									Solomon Islands
+								</option>
+								<option value="SO">
+									Somalia
+								</option>
+								<option value="ZA">
+									South Africa
+								</option>
+								<option value="GS">
+									South Georgia &amp; South Sandwich Islands
+								</option>
+								<option value="KR">
+									South Korea
+								</option>
+								<option value="ES">
+									Spain
+								</option>
+								<option value="LK">
+									Sri Lanka
+								</option>
+								<option value="VC">
+									St. Vincent &amp; Grenadines
+								</option>
+								<option value="SD">
+									Sudan
+								</option>
+								<option value="SR">
+									Suriname
+								</option>
+								<option value="SJ">
+									Svalbard and Jan Mayen
+								</option>
+								<option value="SZ">
+									Swaziland
+								</option>
+								<option value="SE">
+									Sweden
+								</option>
+								<option value="CH">
+									Switzerland
+								</option>
+								<option value="SY">
+									Syria
+								</option>
+								<option value="TW">
+									Taiwan
+								</option>
+								<option value="TJ">
+									Tajikistan
+								</option>
+								<option value="TZ">
+									Tanzania
+								</option>
+								<option value="TH">
+									Thailand
+								</option>
+								<option value="TL">
+									Timor-Leste
+								</option>
+								<option value="TG">
+									Togo
+								</option>
+								<option value="TK">
+									Tokelau
+								</option>
+								<option value="TO">
+									Tonga
+								</option>
+								<option value="TT">
+									Trinidad and Tobago
+								</option>
+								<option value="TN">
+									Tunisia
+								</option>
+								<option value="TR">
+									Turkey
+								</option>
+								<option value="TM">
+									Turkmenistan
+								</option>
+								<option value="TC">
+									Turks and Caicos Islands
+								</option>
+								<option value="TV">
+									Tuvalu
+								</option>
+								<option value="UG">
+									Uganda
+								</option>
+								<option value="UA">
+									Ukraine
+								</option>
+								<option value="AE">
+									United Arab Emirates
+								</option>
+								<option value="GB">
+									United Kingdom
+								</option>
+								<option value="US" selected="selected">
+									United States
+								</option>
+								<option value="UY">
+									Uruguay
+								</option>
+								<option value="UM">
+									U.S. Outlying Islands
+								</option>
+								<option value="VI">
+									U.S. Virgin Islands
+								</option>
+								<option value="UZ">
+									Uzbekistan
+								</option>
+								<option value="VU">
+									Vanuatu
+								</option>
+								<option value="VA">
+									Vatican City
+								</option>
+								<option value="VE">
+									Venezuela
+								</option>
+								<option value="VN">
+									Vietnam
+								</option>
+								<option value="WF">
+									Wallis and Futuna
+								</option>
+								<option value="EH">
+									Western Sahara
+								</option>
+								<option value="YE">
+									Yemen
+								</option>
+								<option value="ZM">
+									Zambia
+								</option>
+								<option value="ZW">
+									Zimbabwe
+								</option>
 							</select>
 						</div>
 					</div>
@@ -386,7 +876,7 @@
 				<span class="save">save it</span>
 			</div> -->
 		</div>
-		<div class="shipping">SHIPPING: <span>$0</span></div>
+		<div class="shipping">SHIPPING COST: <span>$0</span></div>
 		<div class="tit_numtt">
 			<span>2</span><b>Checkout Review</b>
 		</div>
@@ -408,7 +898,7 @@
 						<div class="tit_numtt"><span>4</span><b>PAYMENT METHOD</b></div>	
 						<div class="group-details pay-method active">
 							<div class="coupon-item">
-								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox">
+								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox active">
 								<img src="${APP_PATH }/static/m/img/other/paypal.jpg">
 							</div>
 						</div>
@@ -480,19 +970,16 @@
 		var orderItemArr = [];
 		var productNumArr = [];
 		var payplate = 0;
+		var couponPriceOld =0;
+		
 		
 		var addressIdIntInt;
-		
 		$("#country").bind("change",function(){
 			var radio_zt =$(".coupons .coupon-item input[type='radio']");
-			 couponPriceText.text('-$' + 0);
-			   if(radio_zt.is(":checked")){
-				  radio_zt.removeAttr("checked");
-				 couponPriceText.text('-$' + 0);
-			   }
+			$(".coupons .coupon-item input[type=radio]").removeClass("active");
+			   couponPriceText.text('-$' + 0);
 			   $(".coed_inp").val("");
-			   $(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
-			
+			   $(".without-data").text("Enter coupon code to get a discount!");
 			 var dataname = $(this).val();
 			 $.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -506,16 +993,12 @@
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
-					// console.log("resareafreightMoney:"+resareafreightMoney)
-					$('.shipping').find('span').text(dataname + ' of $' + resareafreightMoney);
+					$('.shipping').find('span').text(' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
-					
-					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
+					var prototalnum =$(".c-prototal .cal-price-num").text().slice(1)
 					resDataMoney = resareafreightMoney;
-
-					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-					
-					subtotalPriceText.text('$' + totalPrice);
+					var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
+					subtotalPriceText.text('$' + totalPriceselect);
 					
 				  }
 				});
@@ -523,7 +1006,7 @@
 
 		function renderAddressDetail(data) {
 			// console.log(data)
-	        $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
+	    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
 			$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
@@ -535,7 +1018,6 @@
 			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 			
 		}
-
 		/* 初始化地址模块 */
 		$.ajax({
 			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
@@ -554,24 +1036,49 @@
 				if (resDataAddress) {
 					renderAddressDetail(resDataAddress);
 					$('.address-id').val(resDataAddress.addressId);
-					$('.shipping').find('span').text(resDataAddress.addressCountry + ' of $' + resDataMoney);
+					$('.shipping').find('span').text(' of $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 					$(".address").addClass("active")
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text('United States'+ ' of $' + resDataMoney);
-					if($("#country").val="United States"){
-						shippingPriceText.text('$' + resDataMoney)
-					}
+					$('.shipping').find('span').text(' of $' + resDataMoney);
+					shippingPriceText.text('$' + resDataMoney)
 				}
 
 				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
 
-				subtotalPriceText.text(subtotalText);
+				subtotalPriceText.text('$' + subtotalText);
 				
 			}
 		});
-          
+          function datalocation (){
+          	var dataname = $("#country").val();
+          	$.ajax({
+          		  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
+          		  data: JSON.stringify({
+          			"addressCountry": dataname
+          		  }),
+          		  type: 'post',
+          		  dataType: 'JSON',
+          		  contentType: 'application/json',
+          		  success: function (data) {
+          			// console.log(data)
+          			var resData = JSON.parse(data);
+          			var resareafreightMoney = resData.extend.areafreightMoney;
+          			// console.log("resareafreightMoney:"+resareafreightMoney)
+          			// $('.shipping').find('span').text(' of $' + resareafreightMoney);
+          			// shippingPriceText.text('$' + resareafreightMoney)
+					couponPriceText.text('-$' + 0);
+          			totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
+          			resDataMoney = resareafreightMoney;
+          			totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
+          			subtotalPriceText.text('$' + totalPrice);
+          		  }
+          		});
+          }
+          datalocation ();
+			
+			
 			
 		$('.address-box .cancel').on('click', function () {
 			$('.address-box').hide();
@@ -665,50 +1172,12 @@
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
 				
 				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoney).toFixed(2);
+
 				subtotalPriceText.text('$' + totalPrice);
 			}
 		})
 
-		function addNum(e) {
-			e.stopPropagation();
-			var item  = $(e.target);
-			var productNum = item.parent().parent().find('input');
-			var productNumText = parseInt(productNum.val());
-			productNumText += 1;
-			productNum.val(productNumText);
 
-			reCalPrice(item, true);
-
-			updateOrderItemNum(item, productNumText);
-		}
-
-		function subNum(e) {
-			e.stopPropagation();
-			var item  = $(e.target);
-			var productNum = item.parent().parent().find('input');
-			var productNumText = parseInt(productNum.val());
-
-			if (productNumText > 1) {
-				productNumText -= 1;
-				reCalPrice(item, false);
-				productNum.val(productNumText);
-				updateOrderItemNum(item, productNumText);
-			}
-		}
-		
-		function reCalPrice(item, flag) {
-			var parentEl = $(item).parents('.num');
-			var prototalEl = $('.c-prototal>.cal-price-num');
-			var subtotalEl = $('.c-subtotal>.cal-price-num');
-			var currentPrice = parseFloat(parentEl.find('.price').text());
-			if (flag) {
-				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) + currentPrice).toFixed(2));
-			} else {
-				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				subtotalEl.text('$' + (parseFloat(subtotalEl.text().slice(1)) - currentPrice).toFixed(2));
-			}
-		}
 
 		function updateOrderItemNum(el, num) {
 			var orderItem = el.parents('.cart-item');
@@ -716,7 +1185,7 @@
 				orderitemId: orderItem.data('orderitemid'),
 				orderitemPskuNumber: num
 			}
-			// console.table(reqData);
+			// console.table(reqData);/***1111****/
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
@@ -724,6 +1193,7 @@
 				dataType: 'JSON',
 				contentType: 'application/json',
 				success: function (data) {
+					// console.log(data);/**222*******/
 					console.info('success')
 				},
 				error: function () {
@@ -750,7 +1220,7 @@
 				success: function (data) {
 					//renderSysMsg('Delete success.');
 					var jsondate = JSON.parse(data);
-					console.log(JSON.parse(data));
+					// console.log(JSON.parse(data));
 					
 					var isDelSuccess = jsondate.extend.isDelSuccess;
 					var orginalItemNum = jsondate.extend.orginalItemNum;
@@ -790,9 +1260,10 @@
 					return (price + parseFloat(item))
 				}, originalPrice);
 				// console.log(data[i])
-				var singleNumPrice = singlePrice * data[i].orderitemPskuNumber;
-				allOriginPrice = parseFloat((allOriginPrice + singleNumPrice).toFixed(2));
-				allSubtotalPrice = parseFloat((allSubtotalPrice + singleNumPrice * discount).toFixed(2));
+				var originSinglePrice = parseFloat(singlePrice.toFixed(2));
+				var currentSinglePrice = parseFloat((singlePrice * discount).toFixed(2));
+				allOriginPrice = parseFloat((allOriginPrice + originSinglePrice * data[i].orderitemPskuNumber).toFixed(2));
+				allSubtotalPrice = parseFloat((allSubtotalPrice + currentSinglePrice * data[i].orderitemPskuNumber).toFixed(2));
 			}
 			return {
 				allOriginPrice: allOriginPrice,
@@ -821,61 +1292,72 @@
 
 		function renderCoupons(parent, userType, data) {
 			var html = '';
-			if (userType === 0) {
+			if (userType === 0||userType === 1) {
 				html = '<div class="input-group">' +
 					'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
-					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!(Please enter uppercase)</p></div>';
+					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 			}
 			/* MlbackCoupon/getOneMlbackCouponDetailByUId
 			无参数  post */
 
-			if (userType === 1) {
-				$.ajax({
-					url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
-					type: 'post',
-					dataType: 'JSON',
-					async: false,
-					success: function (data) {
-						// console.log(data);
-						var resData = JSON.parse(data).extend.mlbackCouponReturnList;
-						var len = resData.length
-						for (var i = 0; i < len; i += 1) {
-							counponDataList[resData[i].couponId] = resData[i];
-							html += '<div class="coupon-item">' +
-								'<span class="price">$' + resData[i].couponPrice + '</span>' +
-								'<span class="name">' + resData[i].couponName + '</span>' +
-								'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
-								'" onclick="selectCoupon(event)" class="checkbox">' +
-								'</div>';
-						}
-					}
-				});
-			}
+			// if (userType === 1) {
+			// 	$.ajax({
+			// 		url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
+			// 		type: 'post',
+			// 		dataType: 'JSON',
+			// 		async: false,
+			// 		success: function (data) {
+			// 			// console.log(data);
+			// 			var resData = JSON.parse(data).extend.mlbackCouponReturnList;
+			// 			var len = resData.length
+			// 			for (var i = 0; i < len; i += 1) {
+			// 				counponDataList[resData[i].couponId] = resData[i];
+			// 				html += '<div class="coupon-item">' +
+			// 					'<span class="price">$' + resData[i].couponPrice + '</span>' +
+			// 					'<span class="name">' + resData[i].couponName + '</span>' +
+			// 					'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
+			// 					'" onclick="selectCoupon(event)" class="checkbox">' +
+			// 					'</div>';
+			// 			}
+			// 		}
+			// 	});
+			// }
 			parent.html(html);
 		}
-		var couponPrice = 0;
+		var couponPriceold2 = 0;
 
-		function selectCoupon(e) {
-			var targetEl = $(e.target);
-			var id = targetEl.data('couponid');
-			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-			if (parseFloat(totalPrice) >= counponDataList[id].couponPriceBaseline) {
-				var couponPrice = counponDataList[id].couponPrice;
-				priceInfo.text('-$' + couponPrice);
-				
-				couponPriceText.text('-$' + couponPrice);
-				subtotalPriceText.text('$' + (totalPrice - couponPrice).toFixed(2));
-
-				couponCode = counponDataList[id].couponCode;
-				couponId = counponDataList[id].couponId;
-			} else {
-				targetEl[0].checked = false;   
-				priceInfo.text("Cann't use this Coupon!");
-				couponPriceText.text('-$' + 0);
-				subtotalPriceText.text('$' + totalPrice);
-			}
-		}
+// 		function selectCoupon(e) {
+// 			var targetEl = $(e.target);
+// 			var id = targetEl.data('couponid');
+// 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
+// 			targetEl.addClass("active");
+// 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
+// 			var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+// 			// console.log(abwq);
+// 			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+// 			// console.log(shopnum);
+// 			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
+//             // console.log(totalPricecou2)			
+// 			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
+// 				var couponPrice = counponDataList[id].couponPrice;
+// 				couponPriceold2 =couponPrice;
+// 				priceInfo.text('-$' + couponPrice);
+// 				
+// 				couponPriceText.text('-$' + couponPrice);
+// 				subtotalPriceText.text('$' + (totalPricecou2 - couponPrice).toFixed(2));
+//                 // console.log(totalPricecou2);
+// 
+// 
+// 				couponCode = counponDataList[id].couponCode;
+// 				couponId = counponDataList[id].couponId;
+// 			} else {
+// 				targetEl[0].checked = false;   
+// 				priceInfo.text("Cann't use this Coupon!");
+// 				couponPriceText.text('-$' + 0);
+// 				subtotalPriceText.text('$' + totalPricecou2);
+// 			}
+// 		}
 
 		function selectPay(e) {
 			var targetEl = $(e.target);
@@ -901,18 +1383,31 @@
 					// console.log(resData);
 					if (resData) {
 						// console.log(totalPrice, totalPrice - resData.couponPriceBaseline)
-						if (totalPrice >= resData.couponPriceBaseline) {
-							// console.log(totalPrice, resData.couponPrice)
+						var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+						// console.log(abwq);
+						var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+						// console.log(shopnum);
+						var  totalPricecou =c_prototalnum*1+shopingnum*1;
+						
+						if (totalPricecou >= resData.couponPriceBaseline) {
+							// console.log(totalPrice2121, resData.couponPrice)
 							// totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
-							
 							couponPriceText.text('-$' + resData.couponPrice);
-							subtotalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
-
+							subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+							couponPriceOld = resData.couponPrice;
+							
 							couponId = resData.couponId;
 							couponCode = couponCode2;
 							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 						} else {
-							renderErrorMsg(couponErrorBox, resData.couponName + '，Unusable!')
+							
+							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
+							// console.log(resData)/*89898*/
+							// alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
+							// renderErrorMsg("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
+							renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
+							$(".coed_inp").val("");
+							
 						}
 					} else {
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
@@ -920,6 +1415,57 @@
 				}
 			})
 		}
+		
+		function addNum(e) {
+			e.stopPropagation();
+			var item  = $(e.target);
+			var productNum = item.parent().parent().find('input');
+			var productNumText = parseInt(productNum.val());
+			productNumText += 1;
+			productNum.val(productNumText);
+			reCalPrice(item, true);
+			updateOrderItemNum(item, productNumText);
+		}
+		
+		function subNum(e) {
+			e.stopPropagation();
+			var item  = $(e.target);
+			var productNum = item.parent().parent().find('input');
+			var productNumText = parseInt(productNum.val());
+		
+			if (productNumText > 1) {
+				productNumText -= 1;
+				reCalPrice(item, false);
+				productNum.val(productNumText);
+				updateOrderItemNum(item, productNumText);
+			}
+		}
+		
+		function reCalPrice(item, flag) {
+			
+			var parentEl = $(item).parents('.num');
+			var prototalEl = $('.c-prototal>.cal-price-num');
+			var subtotalEl = $('.c-subtotal>.cal-price-num');
+			var currentPrice = parseFloat(parentEl.find('.price').text());
+			if (flag) {
+				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				subtotalEl.text('$' + totalPrice.toFixed(2));
+				
+			} else {
+				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld+couponPriceold2);
+				couponPriceold2 =0;
+				couponPriceOld = 0;
+				couponPriceText.text('-$' + 0);
+				$(".coed_inp").val("");
+				$(".without-data").text("Enter coupon code to get a discount!");
+				subtotalEl.text('$' + totalPrice.toFixed(2));
+				$(".coupons .coupon-item input[type=radio]").removeClass("active");
+				
+			}
+		}
+		
 		//MlfrontOrder/orderToPayInfo
 		//这5个参数，json格式
 		/*  private Integer orderId;  //1  都一样，随便从一条取出就行了
@@ -1056,63 +1602,72 @@
 			
 			if(firstnamestr==null||firstnamestr==''){
 				flag = 1;
-				alert("firstnamestr is empty");
+				// alert("firstnamestr is empty");
+				renderSysMsg('firstnamestr is empty')
 				$(".firstname").addClass("error_br");
 				$(".firstname").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(lastnamestr==null||lastnamestr==''){
 				flag = 1;
-				alert("lastnamestr is empty");
+				// alert("lastnamestr is empty");
+				renderSysMsg('lastnamestr is empty')
 				$(".lastname").addClass("error_br");
 				$(".lastname").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(emailstr==null||emailstr==''){
 				flag = 1;
-				alert("emailstr is empty");
+				// alert("emailstr is empty");
+				renderSysMsg('emailstr is empty')
 				$(".email").addClass("error_br");
 				$(".email").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(phonestr==null||phonestr==''){
 				flag = 1;
-				alert("phonestr is empty");
+				// alert("phonestr is empty");
+				renderSysMsg('phonestr is empty')
 				$(".phone").addClass("error_br");
 				$(".phone").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(addressstr==null||addressstr==''){
 				flag = 1;
-				alert("addressstr is empty");
+				// alert("addressstr is empty");
+				renderSysMsg('addressstr is empty')
 				$(".addreNo").addClass("error_br");
 				$(".addreNo").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(codestr==null||codestr==''){
 				flag = 1;
-				alert("codestr is empty");
+				// alert("codestr is empty");
+				renderSysMsg('codestr is empty')
 				$(".codestr").addClass("error_br");
 				$(".codestr").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(citystr==null||citystr==''){
 				flag = 1;
-				alert("citystr is empty");
+				// alert("citystr is empty");
+				renderSysMsg('citystr is empty')
 				$(".city").addClass("error_br");
 				$(".city").focus(function(){
 					$(this).removeClass("error_br")
 				})	
 			}else if(countrystr==null||countrystr==''||countrystr=='select the Country'){
 				flag = 1;
-				alert("countrystr is empty");
+				// alert("countrystr is empty");
+				renderSysMsg('countrystr is empty')
 				$("#country").addClass("error_br");
 				$("#country").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}else if(provincestr==null||provincestr==''){
 				flag = 1;
-				alert("provincestr is empty");
+				// alert("provincestr is empty");
+				renderSysMsg('provincestr is empty')
 				$(".province").addClass("error_br");
 				$(".province").focus(function(){
 					$(this).removeClass("error_br")
@@ -1122,11 +1677,13 @@
 		}
 		
 	</script>
-
+	
+	<!-- megalook-->
+  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
   	<!-- huashuohair -->
-  	<script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
+  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

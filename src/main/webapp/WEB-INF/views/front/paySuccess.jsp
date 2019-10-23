@@ -62,8 +62,8 @@
     <div class="box-none">
       <img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
       <p>Successful Payment Of Orders</p>
-
-      <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-gray">Check The Order Details</a>
+      <h3>The order details have been sent to your email.</h3>
+      <!-- <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-gray">Check The Order Details</a> -->
       <a href="${APP_PATH}/index.html" class="btn btn-pink">ConTine Shopping</a>
     </div>
   </div>
@@ -98,6 +98,7 @@
 				if (result.code == 100) {
 					var resData = result.extend;
 					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
+					console.log(resDataOrderItemList)
 					// console.log(mlfrontOrderItemList);
 					//拼接所需参数:content_ids
 					stridsContent=toFbidsPurchase(resDataOrderItemList);

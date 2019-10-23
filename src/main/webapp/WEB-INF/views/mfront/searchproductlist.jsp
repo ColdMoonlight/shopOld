@@ -49,10 +49,21 @@
 
 	<!-- main -->
 	<div class="main">
-		<div class="condition select">
+<!-- 		<div class="condition select">
 			<select class="select-item select-category" data-type="category"></select>
-		</div>
+		</div> -->
 		<div class="product-list"></div>
+		<div class="hot_box_product clearfix" style="display:none">
+			   <h3>YOU MIGTH ALSO LIKE</h3>
+			   <div class="swiper-container hot_box_product_cont">
+			   	<div class="swiper-wrapper"></div>
+			   	<div class="swiper-pagination swiper-pagination2"></div>
+				<div class="swiper-button-nextcc"></div>
+				<div class="swiper-button-prevcc"></div>
+			   </div>
+		</div>
+		
+		
 	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
@@ -60,75 +71,42 @@
 	<script>
 		var condition = $('.select');
 		var productList = $('.product-list');
-		var sessionScopecategoryId = '${sessionScope.categoryId}';
+		var sessionScopeSearchName = '${sessionScope.productName}';
+		var Search;
+		// console.log(sessionScopeSearchName)
 		//var cidA = window.location.href.split('?')[1].split('=');
-		var cidA = sessionScopecategoryId;
-
-		//default codition
-		getProductList({
-			"productCategoryid": cidA
-		});
+		// var cidA = sessionScopecategoryId;
 
 		/* category condition */
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			type: "GET",
+			url: "${APP_PATH}/MlbackProduct/searchProductLike",
+			data: "productName=" + sessionScopeSearchName,
+			type: "POST",
 			success: function (data) {
-				if (data.code === 100) {
-					var resData = data.extend.mlbackCategorydownEr;
-					console.log(resData);
-					renderCondition($('.select-item.select-category'), resData)
-					$('.select-item').each(function (i, item) {
-						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
-							$(item).on('change', function () {
-								//console.log($('.select-category').val(), $('.select-color').val());
-								getProductList({
-									"productCategoryid": $('.select-category').val() || cidA[1]
-								});
-							})
-
-						}
-					})
-
-				} else {
-					renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+				console.log(data)
+				if(data.code==100){
+					var resultlist = data.extend.mlbackProductResList;
+					var  resultlistlength = resultlist.length
+					// console.log(resultlistlength);
+					var name =data.extend.productName;
+					Search = name;
+					// console.log(resultlist);
+					rednerProductmm(productList,resultlist)
+					if(resultlistlength==0){
+						$(".hot_box_product").show();
+					}else{
+						$(".hot_box_product").hide();
+					}
+					
 				}
 			}
 		});
-		/* product list for category */
-		function getProductList(data) {
-			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
-				data: JSON.stringify(data),
-				dataType: "JSON",
-				contentType: 'application/json',
-				type: "POST",
-				success: function (data) {
-					// console.log(data)
-					var data = JSON.parse(data);
-					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
-					} else {
-						renderErrorMsg(productList, 'No product-related data was obtained');
-					}
-				},
-				error: function (error) {
-					if (error.status === 400) {
-						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
-						setTimeout(function () {
-							window.location.href = "${APP_PATH}/index/isMobileOrPc";
-						}, 3000);
-					}
-				}
-			});
-		}
-
 
 		function renderErrorMsg(parent, msg) {
-			parent.html('<p>' + msg + '</p>');
+			parent.html('<p class="notfind">' + msg + '</p>');
 		}
 
-		function rednerProduct(parent, data) {
+		function rednerProductmm(parent, data) {
 			var html = '';
 			if (data.length > 0) {
 				for (var i = 0; i < data.length; i += 1) {
@@ -161,9 +139,7 @@
 						'</a>' +
 						'</div>' +
 						'<div class="product-desc">' +
-						'<div class="product-title">' +
-						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
-						'</div>' +
+						'<div class="product-title">' + data[i].productName + '</div>' +
 						'<div class="product-type"></div>' +
 						'<div class="product-data">' +
 						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
@@ -183,7 +159,7 @@
 
 				parent.html(html);
 			} else {
-				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
+				renderErrorMsg(parent, 'did not find----- “'+ Search+'”');
 			}
 		}
 
@@ -202,6 +178,99 @@
 
 			parent.html(html);
 		}
+		
+		/****************/
+		var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
+		 function rednerProduct(parent, data) {
+		 	var html = '';
+		 		for (var i = 0; i < data.length; i += 1) {
+		 			 var productactoffif = data[i].productActoffIf;
+		 			// console.log(productactoffif)
+		 			var productactoffid  =  data[i].productActoffid;
+		 			 // console.log(productactoffid)  
+		 			var cp_icon = "";
+		 			var showspan = "";
+		 			if(productactoffif == 1){
+		 						  if(productactoffid==1){
+		 							   showspan ="showactive1"
+		 						  }else if(productactoffid==2){
+		 							   showspan ="showactive2"
+		 						  }else if(productactoffid==3){
+		 							   showspan ="showactive3"
+		 						  }else if(productactoffid==4){
+		 							   showspan ="showactive4"
+		 						  }
+		 						  
+		 			}else{
+		 						   showspan ="hideactive"
+		 			}
+		 			html += '<div class="swiper-slide">' +
+		 				'<div class="product-item" data-productid="'+ data[i].productId +'">' +
+		 			    '<span class="hui_icon '+showspan+'"></span>'+
+		 				'<div class="product-img">' +
+		 				'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+		 				'<img src="' + data[i].productMainimgurl + '" alt="">' +
+		 				'</a>' +
+		 				'</div>' +
+		 				'<div class="product-desc">' +
+		 				'<div class="product-title">' + data[i].productName + '</div>' +
+		 				'<div class="product-type"></div>' +
+		 				'<div class="product-data">' +
+		 				'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+		 				'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+		 				' Review(s)</span>' +
+		 				'</div>' +
+		 				'<div class="product-price">' +
+		 				'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
+		 					.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+		 				'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
+		 				'</span>' +
+		 				'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
+		 				'</div>' +
+		 				'</div>' +
+		 				'</div>'+
+		 				'</div>';
+		 		}
+		 
+		 		parent.html(html);
+		 }
+		$.ajax({
+			 url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+				data: JSON.stringify({
+			   "slideArea": 3
+			 }),
+			 type: 'post',
+			 dataType: 'JSON',
+			 contentType: 'application/json',
+			 success: function (data) {
+					// console.log(data)/***data**/
+					if (JSON.parse(data).code === 100) {
+					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					  // console.log(resData);
+					 rednerProduct(hot_pic,resDataProduct);
+					 new Swiper('.hot_box_product_cont', {
+					          	  slidesPerView: 2,
+					    spaceBetween:5,
+					    freeMode: true,
+						observer: true,//修改swiper自己或子元素时，自动初始化swiper
+						observeParents: true,//修改swiper的父元素时，自动初始化swiper
+						loop:true,
+					   autoplay: {
+					       disableOnInteraction: false,
+					     },
+					 	pagination: {
+					 		el: '.swiper-pagination2',
+					 		clickable: true
+					 	}
+					 })
+					 
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					}
+				  }
+		});	
+		
+		
 	</script>
 	<!-- megalook-->
   	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>

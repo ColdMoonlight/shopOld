@@ -40,4 +40,6 @@ public interface MlbackCategoryMapper {
     int updateByPrimaryKeySelective(MlbackCategory record);
     //删除本条
     int deleteByPrimaryKey(Integer groupId);
+
+	List<MlbackCategory> selectMenuMlbackCategoryGetAll();
 }

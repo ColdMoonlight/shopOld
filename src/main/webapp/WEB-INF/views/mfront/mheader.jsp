@@ -68,13 +68,13 @@
 	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
 	  	<div id="adv_silder">
 	  		<div class="swiper-wrapper">
-	  			
 	  		</div>
 	  	</div>
 	  </div>
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
+	  <a href="TEL:(501)7226336" class="icon myphone"></a>
       <a href="${APP_PATH}/index.html">
 	      <div class="logo">
 	        <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
@@ -98,7 +98,21 @@
     </div>
   </div>
   
-
+   <div class="serch_cont">
+      <div class="serch_box">
+        <span class="close_serch">X</span>
+        <p class="serch_tit">What are you Looking for?</p>
+        <div class="tt-col">
+          <input type="text" class="tt-search-input" placeholder="Search Products..." />
+          <button class="tt-btn-search" type="submit">Search</button>
+        </div>
+        <ul class="show_ul">
+          <li>bob</li>
+          <li>wigs</li>
+          <li>bundle</li>
+        </ul>
+      </div>
+    </div>
 
   <script>
     var categoryActiveNum = 1;
@@ -198,7 +212,8 @@
     var categoryData = {};
     // 获取全部的category信息,文件信息
     $.ajax({
-      url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
+      //url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
+      url: '${APP_PATH}/MlbackCategory/getMenuMlbackCategory',
       method: 'GET',
       success: function (data) {
 		  var resData = data.extend.mlbackCategorydownList;
@@ -334,10 +349,11 @@
 					// console.log(data)/***1111111111data**/
 					if (JSON.parse(data).code === 100) {
 					  var resData = JSON.parse(data).extend.mlbackSlideList;
-					  console.log(resData)/****************首页广告******/
+					  // console.log(resData)/****************首页广告******/
 						rednertop(banneradv, resData);
 						  new Swiper('#adv_silder', {
 							freeMode: true,
+							loop:true,
 							autoplay: {
 							    disableOnInteraction: false,
 							  },
@@ -350,6 +366,39 @@
 				  }
 		});
 	
+	  /************************/
+	        $(".tt-btn-search").click(function(){
+	           var seaProductName = $(this).parents(".tt-col").find("input.tt-search-input").val();
+			   if(seaProductName==""){
+				   alert("Please enter keywords;")
+			   }else{
+				    window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+			   }
+	        });
+			  $(".show_ul li").click(function(){
+			    var seaProductName =$(this).html();
+				window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+	           });
+	    /**************搜索*************************/
+	        $(".tt-search-input").focus(function(){
+	          $(".serch_box").find("ul.show_ul").show()
+	        });
+	        $('body').delegate('.show_ul li','click',function(e){
+	          var val = $(this).text();
+	          $(".tt-col").find("input.tt-search-input").val(val);
+	          $(".serch_box").find("ul.show_ul").hide()
+	          e.stopPropagation();
+	        });
+	        $("body").on('click', '.search',function() {
+	            $('.serch_cont').show()
+	        })
+	        $("body").on('click', '.close_serch',function() {
+	            $('.serch_cont').hide()
+	        })
+	
+	
+	
+
 	
   </script>
 </body>

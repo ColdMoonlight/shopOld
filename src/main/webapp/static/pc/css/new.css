@@ -88,7 +88,7 @@
 .showactive1{background:url(../../../../../ShopTemplate/static/pc/img/sale6.png) no-repeat center; background-size: 50px;}
 /* .showactive2{background:url(../../../../../ShopTemplate/static/pc/img/sale2.png) no-repeat center; background-size: 50px;} */
 .showactive3{background:url(../../../../../ShopTemplate/static/pc/img/sale3.png) no-repeat center; background-size: 50px;}
-.showactive4{background:url(../../../../../ShopTemplate/static/pc/img/62-off.png) no-repeat center; background-size: 50px;}
+.showactive4{background:url(../../../../../ShopTemplate/static/pc/img/4z.png) no-repeat center; background-size: 50px;}
 
 .showactive5{background:url(../../../../../ShopTemplate/static/pc/img/sale5.png) no-repeat center; background-size: 50px;}
 .showactive6{background:url(../../../../../ShopTemplate/static/pc/img/sale6.png) no-repeat center; background-size: 50px;}
@@ -106,7 +106,7 @@
  */
 .btn.add-product{background:#ccc;border: 1px solid #eeeee1;color: #999;}
 .op .btn.add-product:hover{background: #ccc;}
-
+.notfind{font-size:36px;color:#333}
 
 
 /*********************************************/
@@ -152,7 +152,7 @@ div.zoomMask{position:absolute;cursor:move;z-index:1;}
 .tt-search-input{width: 100%; height: 50px;border:1px solid #EEEEE1;margin: 10px 0 0; padding:0 2%;}
 .tt-col{width: 100%; height: 70px; position: relative;float: left;}
 .show_ul{display: none;width: 100%; height: 150px; padding:2%; position: absolute; top: 130px; left: 0; background: #fff;box-shadow: 0 0 5px #888;}
-.show_ul li{width: 100%; height: 20px; line-height: 20px; color: #333; cursor: pointer;}
+.show_ul li{background: url(../../../../../ShopTemplate/static/m/img/index/hot.png) no-repeat left center; background-size: 20px; height: 20px; line-height: 20px; color: #333; cursor: pointer;float: left; margin: 3px 8px 5px 0; padding: 2px 8px 2px 25px;}
 .search_btn{display: -moz-inline-box;vertical-align: top;width: 30px; height: 30px;}
 .search_btn i{font-size: 20px;color: #333;}
 /*****************************/

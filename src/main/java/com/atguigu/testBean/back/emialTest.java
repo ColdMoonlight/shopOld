@@ -21,7 +21,6 @@ import com.atguigu.dao.GroupDisplayMapper;
 import com.atguigu.dao.MlbackCouponMapper;
 import com.atguigu.dao.MlfrontUserMapper;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.EmailUtil;
 import com.atguigu.utils.UUIDUtils;
 
 /**

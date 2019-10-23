@@ -316,4 +316,35 @@ public class MlbackCategoryController {
 	}
 	
 	
+	/**
+	 * 8.0	UseNow	0522
+	 * 获取全部类目，以便于下拉选择
+	 * @param MlbackCategory
+	 * @return 
+	 */
+	@SuppressWarnings("null")
+	@RequestMapping(value="/getMenuMlbackCategory",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getMenuMlbackCategory(HttpServletResponse rep,HttpServletRequest res){
+		
+		//查询全部的category信息，便于下拉选择
+//		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
+		
+		//查询全部的category信息，便于下拉选择
+		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMenuMlbackCategoryGetAll();
+		System.out.println(mlbackCategorydownList);
+		
+		List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
+		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
+			Integer categoryParentId = mlbackCategoryOne.getCategoryParentId();
+			if(categoryParentId>0){
+				mlbackCategorydownEr.add(mlbackCategoryOne);
+			}
+		}
+		
+		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
+					.add("mlbackCategorydownList", mlbackCategorydownList).add("mlbackCategorydownEr", mlbackCategorydownEr);
+	}
+	
+	
 }

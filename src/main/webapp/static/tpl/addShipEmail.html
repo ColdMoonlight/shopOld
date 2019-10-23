@@ -1,0 +1,67 @@
+<div class="op">
+	<a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 新增/编辑</a>
+	<button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
+</div>
+<form class="form-horizontal">
+	<ul id="categoryTab" class="nav nav-tabs">
+		<li class="active"><a data-href="#general" data-toggle="tab">基本</a></li>
+	</ul>
+	<div id="categoryTabContent" class="tab-content">
+		<input type="text" style="display: none;" placeholder="shipemailId" name="shipemailId">
+		<div class="tab-pane in active" id="general">
+			<div class="form-group">
+				<label for="shipemailNameth" class="col-sm-2 control-label">物流名称:</label>
+				<div class="col-sm-10">
+					<select name="shipemailNameth" class="form-control">
+						<option value="1" selected="selected">UPS</option>
+						<option value="2">FEDEX</option>
+						<option value="3">4PX</option>
+						<option value="4">DHL</option>
+						<option value="5">Aramex</option>
+						<option value="6">TNT</option>
+						<option value="7">DPEX</option>
+						<option value="8">华磊</option>
+						<option value="9">更多请联系技术人员</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shipemailDay" class="col-sm-2 control-label">物流时效:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="shipemailDay" name="shipemailDay">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shipemailWwwlink" class="col-sm-2 control-label">物流官网网址:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="shipemailWwwlink" name="shipemailWwwlink">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shipemailTeam" class="col-sm-2 control-label">团队name:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="shipemailTeam" name="shipemailTeam">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shipemailTeamemail" class="col-sm-2 control-label">官方email:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="shipemailTeamemail" name="shipemailTeamemail">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shipemailTeamwhatsapp" class="col-sm-2 control-label">Whatsapp:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="shipemailTeamwhatsapp" name="shipemailTeamwhatsapp">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="shipemailTeamtelphone" class="col-sm-2 control-label">官方tel:</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" placeholder="shipemailTeamtelphone" name="shipemailTeamtelphone">
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</form>

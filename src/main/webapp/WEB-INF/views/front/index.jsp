@@ -9,6 +9,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	
+	
 	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
 	<script>
 	  !function(f,b,e,v,n,t,s)
@@ -87,13 +88,13 @@
 				  if(actshowprolei==0){
 							html += '<div class="swiper-slide">' +
 									'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 									'</a>' +
 									'</div>';
 				  }else if(actshowprolei==1){
 							  html += '<div class="swiper-slide">' +
 							   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
-									'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 							  '</a>' +
 							  '</div>';
 				  }
@@ -109,7 +110,7 @@
         // console.log("mlbackActShowProList");
         if (data.code === 100) {
         	var resData = data.extend.mlbackActShowProList;
-          // console.log(resData);
+          console.log(resData);
           renderHotProduct($('#hot-product .swiper-wrapper'), resData);
           new Swiper('#hot-product', {
         	  slidesPerView: 4,
@@ -394,10 +395,12 @@
 	   						  }
 	   	   });	
   </script>
-  <!-- megalookhair 
-  <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-  <!-- huashuohair -->
-  <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script>
+  	<!-- megalook-->
+  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+	<!-- megalookhair 
+  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+  	<!-- huashuohair -->
+  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>
