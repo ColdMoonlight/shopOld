@@ -987,7 +987,7 @@
 		$(".coupons .coupon-item input[type=radio]").removeClass("active");
 		   couponPriceText.text('-$' + 0);
 		   $(".coed_inp").val("");
-		   $(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
+		   $(".without-data").text("Enter coupon code to get a discount!");
 		 var dataname = $(this).val();
 		 $.ajax({
 			  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -1236,7 +1236,7 @@
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				$(".coed_inp").val("");
-				$(".without-data").text("Enter coupon code to get a discount!(Please enter uppercase)");
+				$(".without-data").text("Enter coupon code to get a discount!");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				$(".coupons .coupon-item input[type=radio]").removeClass("active");
 				
@@ -1355,72 +1355,72 @@
 		var counponDataList = {};
 			function renderCoupons(parent, userType, data) {
 				var html = '';
-				if (userType === 0) {
+				if (userType === 0||userType === 1) {
 					html = '<div class="input-group">' +
 						'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 						'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
-						'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!(Please enter uppercase)</p></div>';
+						'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 				}
 				/* MlbackCoupon/getOneMlbackCouponDetailByUId
 				无参数  post */
-				if (userType === 1) {
-					$.ajax({
-						url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
-						type: 'post',
-						dataType: 'text',
-						async: false,
-						success: function (data) {
-							// console.log(data);
-							var resData = JSON.parse(data).extend.mlbackCouponReturnList;
-							var len = resData.length
-							for (var i = 0; i < len; i += 1) {
-								counponDataList[resData[i].couponId] = resData[i];
-								html += '<div class="coupon-item">' +
-									'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
-									'" onclick="selectCoupon(event)" class="checkbox">' +
-									'<span class="price">$' + resData[i].couponPrice + '</span>' +
-									'<span class="name">' + resData[i].couponName + '</span>' +
-									
-									'</div>';
-							}
-						}
-					});
-				}
+				// if (userType === 1) {
+				// 	$.ajax({
+				// 		url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
+				// 		type: 'post',
+				// 		dataType: 'text',
+				// 		async: false,
+				// 		success: function (data) {
+				// 			// console.log(data);
+				// 			var resData = JSON.parse(data).extend.mlbackCouponReturnList;
+				// 			var len = resData.length
+				// 			for (var i = 0; i < len; i += 1) {
+				// 				counponDataList[resData[i].couponId] = resData[i];
+				// 				html += '<div class="coupon-item">' +
+				// 					'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
+				// 					'" onclick="selectCoupon(event)" class="checkbox">' +
+				// 					'<span class="price">$' + resData[i].couponPrice + '</span>' +
+				// 					'<span class="name">' + resData[i].couponName + '</span>' +
+				// 					
+				// 					'</div>';
+				// 			}
+				// 		}
+				// 	});
+				// }
 				parent.html(html);
 			}
 		var couponPriceold2 = 0;
 
-		function selectCoupon(e) {
-			var targetEl = $(e.target);
-			var id = targetEl.data('couponid');
-			$(".coupons .coupon-item input[type=radio]").removeClass("active");
-			targetEl.addClass("active");
-			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-			var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-			// console.log(abwq);
-			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-			// console.log(shopnum);
-			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
-            // console.log(totalPricecou2)			
-			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
-				var couponPrice = counponDataList[id].couponPrice;
-				couponPriceold2 =couponPrice;
-				priceInfo.text('-$' + couponPrice);
-				
-				couponPriceText.text('-$' + couponPrice);
-				subtotalPriceText.text('$' + (totalPricecou2 - couponPrice).toFixed(2));
-                // console.log(totalPricecou2);
-
-
-				couponCode = counponDataList[id].couponCode;
-				couponId = counponDataList[id].couponId;
-			} else {
-				targetEl[0].checked = false;   
-				priceInfo.text("Cann't use this Coupon!");
-				couponPriceText.text('-$' + 0);
-				subtotalPriceText.text('$' + totalPricecou2);
-			}
-		}
+// 		function selectCoupon(e) {
+// 			var targetEl = $(e.target);
+// 			var id = targetEl.data('couponid');
+// 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
+// 			targetEl.addClass("active");
+// 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
+// 			var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+// 			// console.log(abwq);
+// 			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+// 			// console.log(shopnum);
+// 			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
+//             // console.log(totalPricecou2)			
+// 			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
+// 				var couponPrice = counponDataList[id].couponPrice;
+// 				couponPriceold2 =couponPrice;
+// 				priceInfo.text('-$' + couponPrice);
+// 				
+// 				couponPriceText.text('-$' + couponPrice);
+// 				subtotalPriceText.text('$' + (totalPricecou2 - couponPrice).toFixed(2));
+//                 // console.log(totalPricecou2);
+// 
+// 
+// 				couponCode = counponDataList[id].couponCode;
+// 				couponId = counponDataList[id].couponId;
+// 			} else {
+// 				targetEl[0].checked = false;   
+// 				priceInfo.text("Cann't use this Coupon!");
+// 				couponPriceText.text('-$' + 0);
+// 				subtotalPriceText.text('$' + totalPricecou2);
+// 			}
+// 		}
 		
 		
 		
@@ -1468,7 +1468,8 @@
 							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
 							// console.log(resData)/*89898*/
 							// alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
-							renderErrorMsg("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
+							renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+resData.couponPriceBaseline)
+							// renderErrorMsg("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
 							$(".coed_inp").val("");
 							
 						}
