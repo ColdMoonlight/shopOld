@@ -167,12 +167,17 @@ var aside_data = [
 	},
 	{
 		url: 'javascript:;',
-		name:'邮件管理',
+		name:'通知管理',
 		icon: "glyphicon-chevron-right",
 		children: [
 			{
 				url: '/ShopTemplate/MlbackEmail/toMlbackEmailPage',
 				name:'邮件管理列表',
+				icon: "glyphicon-stats"
+			},
+			{
+				url: '/ShopTemplate/MlbackShipEmail/toMlbackShipEmailPage',
+				name:'物流管理列表',
 				icon: "glyphicon-stats"
 			}
 		]
