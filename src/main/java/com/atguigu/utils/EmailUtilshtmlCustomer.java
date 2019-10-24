@@ -77,7 +77,7 @@ public class EmailUtilshtmlCustomer {
                 }
             });
             
-            String content="Thank you for your registr in MegalookHair,Here is your account number and password：<br><br><br>  "+
+            String content="Thank you for your registr in Megalook ,Here is your account number and password：<br><br><br>  "+
             "Account number:"+mlfrontUserafterIn.getUserEmail()+" <br>"+
             "password:"+mlfrontUserafterIn.getUserPassword()+" <br><br>"+
             "Wishing you a pleasant shopping trip. <br><br>";
