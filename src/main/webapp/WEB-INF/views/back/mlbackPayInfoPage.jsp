@@ -513,7 +513,7 @@
 								// console.log(postData)/**********/
 							function updatepayinfostu(postData){
 								$.ajax({
-									url: '${APP_PATH}/MlfrontPayInfo/save',
+									url: '${APP_PATH}/MlfrontPayInfo/updateShipStatus',
 									data: JSON.stringify(postData),
 									type: "POST",
 									dataType: "json",
