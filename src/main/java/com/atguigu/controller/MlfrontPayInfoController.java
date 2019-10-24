@@ -291,4 +291,29 @@ public class MlfrontPayInfoController {
 		}
 	}
 	
+	/**10.0	useOn	0505
+	 * MlfrontPayInfo	insert
+	 * @param MlfrontPayInfo
+	 */
+	@RequestMapping(value="/updateShipStatus",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateShipStatus(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlfrontPayInfo mlfrontPayInfo){
+		//接受参数信息
+		System.out.println("mlfrontPayInfo:"+mlfrontPayInfo);
+		//取出id
+		Integer payinfoIdIn = mlfrontPayInfo.getPayinfoId();
+		String nowTime = DateUtil.strTime14s();
+		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
+		mlfrontPayInfo.setPayinfoStatus(2);//0未支付		1已支付		2已发货
+		//有id，update
+		int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
+		
+		MlfrontPayInfo mlfrontPayInfoOne = new MlfrontPayInfo();
+		mlfrontPayInfoOne.setPayinfoId(payinfoIdIn);
+		List<MlfrontPayInfo> mlfrontPayInfoList = mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoOne);
+		MlfrontPayInfo mlfrontPayInfoResOne = mlfrontPayInfoList.get(0);
+		System.out.println(intResult);
+		return Msg.success().add("resMsg", "更新成功").add("mlfrontPayInfoOne", mlfrontPayInfoResOne);
+	}
+	
 }
