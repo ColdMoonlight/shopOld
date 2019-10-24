@@ -46,6 +46,12 @@ public class EmailUtilshtmlCustomer {
 		sendEmildeliverCustomer(getToEmail, Message, toCustomerInfoStr);
 	}
 	
+	
+	/*
+	 * Register通知Customer
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
 	public static void sendEmilRegisterCustomer(String to, String message,MlfrontUser mlfrontUserafterIn) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
@@ -70,8 +76,6 @@ public class EmailUtilshtmlCustomer {
                     return new PasswordAuthentication(username, password);
                 }
             });
-/*            String content="尊敬的客户，您好：<br>    您的退换货申请已由博乐宝客服受理，现需您将机器故障照片及检测结果等附件直接回复至此邮箱。我们收到您的邮件后会尽快为您处理。<br>如有任何问题，请致电。感谢您的配合与支持！"+
-            		"<img src='http://www.megalookhair.com:80/ShopTemplate/static/img/Slide/anniversary-red-3.jpg'>";*/
             
             String content="Thank you for your registr in MegalookHair,Here is your account number and password：<br><br><br>  "+
             "Account number:"+mlfrontUserafterIn.getUserEmail()+" <br>"+
@@ -84,7 +88,6 @@ public class EmailUtilshtmlCustomer {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-//            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));//这是
             msg.setSubject("Welcome to Register Megalook.");
             
             Multipart mp = new MimeMultipart("related"); 
@@ -107,8 +110,11 @@ public class EmailUtilshtmlCustomer {
         }
     }
 	
-	
-	
+	/*
+	 * Pay通知Customer
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
 	public static void sendEmilPayCustomer(String to, String message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
@@ -159,7 +165,7 @@ public class EmailUtilshtmlCustomer {
             "Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>"+
             "Best Regards,<br>"+
             "------------------------------------------<br>"+
-            "Jason-Megalook hair team <br>"+
+            "Megalook team.<br>"+
             "Email:service@megalook.com <br>"+
             "Whatsapp:+86 18903740682<br>"+
             "Telephone/SMS:+1 5017226336<br>";
@@ -192,7 +198,11 @@ public class EmailUtilshtmlCustomer {
     }
 	
 	
-	
+	/*
+	 * Ship通知Customer
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
 	public static void sendEmildeliverCustomer(String to, String message, String toCustomerInfoStr) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());

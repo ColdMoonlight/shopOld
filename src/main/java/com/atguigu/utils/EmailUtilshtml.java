@@ -43,9 +43,15 @@ public class EmailUtilshtml {
 	}
 	
 	public static void readyEmailSendSuccess(String getToEmail, String Message, String toCustomerInfoStr, Integer orderId) {
-		sendEmilSend(getToEmail, Message, toCustomerInfoStr,orderId);
+		sendEmilShip(getToEmail, Message, toCustomerInfoStr,orderId);
 	}
 	
+	
+	/*
+	 * Register通知官方
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
 	public static void sendEmilRegister(String to, String message,MlfrontUser mlfrontUserafterIn) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
@@ -70,8 +76,6 @@ public class EmailUtilshtml {
                     return new PasswordAuthentication(username, password);
                 }
             });
-/*            String content="尊敬的客户，您好：<br>    您的退换货申请已由博乐宝客服受理，现需您将机器故障照片及检测结果等附件直接回复至此邮箱。我们收到您的邮件后会尽快为您处理。<br>如有任何问题，请致电。感谢您的配合与支持！"+
-            		"<img src='http://www.megalookhair.com:80/ShopTemplate/static/img/Slide/anniversary-red-3.jpg'>";*/
             
             String content="A new customer has signed up：<br><br><br>  "+
             "First Name:"+mlfrontUserafterIn.getUserFirstname()+" <br>"+
@@ -84,7 +88,8 @@ public class EmailUtilshtml {
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megalookweb@outlook.com", false));
+            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
             msg.setSubject("new costomer of "+ mlfrontUserafterIn.getUserId() +" Register Success.");
             
             Multipart mp = new MimeMultipart("related"); 
@@ -107,8 +112,11 @@ public class EmailUtilshtml {
         }
     }
 	
-	
-	
+	/*
+	 * Pay通知官方
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
 	public static void sendEmilPay(String to, String message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
@@ -163,7 +171,8 @@ public class EmailUtilshtml {
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megalookweb@outlook.com", false));
+            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
             msg.setSubject("You have received an order of ID is : "+mlfrontOrderResOne.getOrderId());
             
             Multipart mp = new MimeMultipart("related"); 
@@ -184,9 +193,12 @@ public class EmailUtilshtml {
         }
     }
 	
-	
-	
-	public static void sendEmilSend(String to, String message, String toCustomerInfoStr,Integer orderId) {
+	/*
+	 * Ship通知官方
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
+	public static void sendEmilShip(String to, String message, String toCustomerInfoStr,Integer orderId) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -211,7 +223,6 @@ public class EmailUtilshtml {
                 }
             });
             
-            
             String content=toCustomerInfoStr;
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
@@ -219,7 +230,8 @@ public class EmailUtilshtml {
 //          msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megalookweb@outlook.com", false));
+            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
             String sub="The order of Id is "+orderId+" has been shipped successful ";
             msg.setSubject(sub);
             
