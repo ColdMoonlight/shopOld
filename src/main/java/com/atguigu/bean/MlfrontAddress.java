@@ -16,7 +16,9 @@ public class MlfrontAddress {
     private String addressUserlastname;//必传
     
     private String addressCountry;//必传
-
+    
+    private String addressCountryAll;//必传
+    
     private String addressProvince;//必传
 
     private String addressCity;//必传
@@ -92,8 +94,16 @@ public class MlfrontAddress {
     public void setAddressCountry(String addressCountry) {
         this.addressCountry = addressCountry;
     }
+    
+    public String getAddressCountryAll() {
+		return addressCountryAll;
+	}
 
-    public String getAddressProvince() {
+	public void setAddressCountryAll(String addressCountryAll) {
+		this.addressCountryAll = addressCountryAll == null ? null : addressCountryAll.trim();
+	}
+
+	public String getAddressProvince() {
         return addressProvince;
     }
 
