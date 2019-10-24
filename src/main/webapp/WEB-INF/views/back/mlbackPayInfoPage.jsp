@@ -101,7 +101,7 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					//console.log(result);
+					// console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -111,22 +111,30 @@
 				}
 			});
 		}
-
+		// var payinfoIdcd;
+		// var payinfoStatuscd=0;
 		function build_task_table(result) {
 			// console.log(result)
 			//清空table表格
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
+			console.log(task);
 			$.each(task, function (index, item) {
 				var payinfoId = $("<td></td>").append(item.payinfoId);
+				
+				// console.log(payinfoStatuscd);
 				var payinfoOid = $("<td></td>").append(item.payinfoOid);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoMoney = $("<td></td>").append(parseFloat(item.payinfoMoney));
-				if(item.payinfoStatus ===1){
-					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
-				}else{
-					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
+				if(item.payinfoStatus ===0){
+					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');//红
+				}else if(item.payinfoStatus ===1){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//绿
+				}else if(item.payinfoStatus ===2){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已发货</b>');//蓝
 				}
+				
+				// console.log(payinfoStatuscd)/**/
 				var payinfoPlateNum = $("<td></td>").append(item.payinfoPlateNum);
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
 				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
@@ -226,7 +234,7 @@
 		//新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
-			// console.log(data)
+			console.log(data)
 			data = data.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
@@ -255,13 +263,16 @@
 		});
 		var orderId;
 		var shipName;
-
+                var payinfoIdcd;
+				var payinfoStatus;
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
 				// fetch data
 				var reqData = {
 					"payinfoId": payid
 				};
+				
+				// console.log(reqData)/*********/
 				$.ajax({
 					url: "${APP_PATH}/MlfrontPayInfo/getOneMlfrontPayInfoDetail",
 					data: reqData,
@@ -269,8 +280,13 @@
 					success: function (result) {
 						if (result.code == 100) {
 							var resData = result.extend;
-							console.log(resData);
+							// console.log(resData);
 							var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
+							// console.log(resDataPayInfoOne)/**2222*/
+							payinfoIdcd =resDataPayInfoOne.payinfoId;
+							payinfoStatus =resDataPayInfoOne.payinfoStatus;
+							
+							
 							var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
@@ -468,6 +484,7 @@
 		    String orderLogisticsnumber;//物流单号 
 		dataType: jsonSting
     */
+      
 
 		function shipSave(e) {
 			var parent = $(e.target).parents('.ship-box');
@@ -489,7 +506,25 @@
 					success: function (data) {
 						// console.log(data)
 						if (data.code === 100) {
-							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							var postData={
+									"payinfoId":payinfoIdcd,
+									"payinfoStatus":payinfoStatus
+								}
+								// console.log(postData)/**********/
+							function updatepayinfostu(postData){
+								$.ajax({
+									url: '${APP_PATH}/MlfrontPayInfo/save',
+									data: JSON.stringify(postData),
+									type: "POST",
+									dataType: "json",
+									contentType: 'application/json',
+										success: function (postData) {
+											console.log(success)
+										}
+								});
+							}
+							 updatepayinfostu(postData)
+							// window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
