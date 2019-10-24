@@ -131,7 +131,7 @@
 				}else if(item.payinfoStatus ===1){
 					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//绿
 				}else if(item.payinfoStatus ===2){
-					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已发货</b>');//蓝
+					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
 				}
 				
 				// console.log(payinfoStatuscd)/**/
