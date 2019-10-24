@@ -10,6 +10,7 @@
     <result column="address_userFirstName" jdbcType="VARCHAR" property="addressUserfirstname" />
     <result column="address_userLastName" jdbcType="VARCHAR" property="addressUserlastname" />
     <result column="address_country" jdbcType="VARCHAR" property="addressCountry" />
+    <result column="address_countryAll" jdbcType="VARCHAR" property="addressCountryAll" />
     <result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
     <result column="address_city" jdbcType="VARCHAR" property="addressCity" />
     <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     address_id, address_uid, address_ip, address_email, address_telephone, address_userFirstName, 
-    address_userLastName, address_country, address_province, address_city, address_detail, 
+    address_userLastName, address_country, address_countryAll, address_province, address_city, address_detail, 
     address_post, address_createTime, address_motifyTime
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlfrontAddressExample" resultMap="BaseResultMap">
@@ -110,12 +111,12 @@
   <insert id="insert" parameterType="com.atguigu.bean.MlfrontAddress">
     insert into tb_mlfront_address (address_id, address_uid, address_ip, 
       address_email, address_telephone, address_userFirstName, 
-      address_userLastName, address_country, address_province, 
+      address_userLastName, address_country, address_countryAll, address_province, 
       address_city, address_detail, address_post, 
       address_createTime, address_motifyTime)
     values (#{addressId,jdbcType=INTEGER}, #{addressUid,jdbcType=INTEGER}, #{addressIp,jdbcType=VARCHAR}, 
       #{addressEmail,jdbcType=VARCHAR}, #{addressTelephone,jdbcType=VARCHAR}, #{addressUserfirstname,jdbcType=VARCHAR}, 
-      #{addressUserlastname,jdbcType=VARCHAR}, #{addressCountry,jdbcType=INTEGER}, #{addressProvince,jdbcType=VARCHAR}, 
+      #{addressUserlastname,jdbcType=VARCHAR}, #{addressCountry,jdbcType=VARCHAR}, #{addressCountryAll,jdbcType=VARCHAR}, #{addressProvince,jdbcType=VARCHAR}, 
       #{addressCity,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, #{addressPost,jdbcType=VARCHAR}, 
       #{addressCreatetime,jdbcType=VARCHAR}, #{addressMotifytime,jdbcType=VARCHAR})
   </insert>
@@ -153,6 +154,9 @@
       <if test="record.addressCountry != null">
         address_country = #{record.addressCountry,jdbcType=VARCHAR},
       </if>
+      <if test="record.addressCountryAll != null">
+        address_countryAll = #{record.addressCountryAll,jdbcType=VARCHAR},
+      </if>
       <if test="record.addressProvince != null">
         address_province = #{record.addressProvince,jdbcType=VARCHAR},
       </if>
@@ -186,6 +190,7 @@
       address_userFirstName = #{record.addressUserfirstname,jdbcType=VARCHAR},
       address_userLastName = #{record.addressUserlastname,jdbcType=VARCHAR},
       address_country = #{record.addressCountry,jdbcType=INTEGER},
+      address_countryAll = #{record.addressCountryAll,jdbcType=VARCHAR},
       address_province = #{record.addressProvince,jdbcType=VARCHAR},
       address_city = #{record.addressCity,jdbcType=VARCHAR},
       address_detail = #{record.addressDetail,jdbcType=VARCHAR},
@@ -206,6 +211,7 @@
       address_userFirstName = #{addressUserfirstname,jdbcType=VARCHAR},
       address_userLastName = #{addressUserlastname,jdbcType=VARCHAR},
       address_country = #{addressCountry,jdbcType=VARCHAR},
+      address_countryAll = #{addressCountryAll,jdbcType=VARCHAR},
       address_province = #{addressProvince,jdbcType=VARCHAR},
       address_city = #{addressCity,jdbcType=VARCHAR},
       address_detail = #{addressDetail,jdbcType=VARCHAR},
@@ -244,6 +250,9 @@
       </if>
       <if test="addressCountry != null">
         address_country,
+      </if>
+      <if test="addressCountryAll != null">
+        address_countryAll,
       </if>
       <if test="addressProvince != null">
         address_province,
@@ -289,6 +298,9 @@
       <if test="addressCountry != null">
         #{addressCountry,jdbcType=VARCHAR},
       </if>
+      <if test="addressCountryAll != null">
+		address_countryAll = #{addressCountryAll,jdbcType=VARCHAR},
+	  </if>
       <if test="addressProvince != null">
         #{addressProvince,jdbcType=VARCHAR},
       </if>
@@ -339,6 +351,9 @@
       <if test="addressCountry != null">
         address_country = #{addressCountry,jdbcType=VARCHAR},
       </if>
+      <if test="addressCountryAll != null">
+		address_countryAll = #{addressCountryAll,jdbcType=VARCHAR},
+	  </if>
       <if test="addressProvince != null">
         address_province = #{addressProvince,jdbcType=VARCHAR},
       </if>

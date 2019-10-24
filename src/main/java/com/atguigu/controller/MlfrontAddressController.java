@@ -63,8 +63,10 @@ public class MlfrontAddressController {
 		//查询本条
 		List<MlbackAreafreight> mlbackAreafreightResList =mlbackAreafreightService.selectMlbackAreafreightByEng(mlbackAreafreightReq);
 		Integer areafreightMoney = 0;
+		String addressCountryAll ="";
 		if(mlbackAreafreightResList.size()>0){
 			areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
+			addressCountryAll = mlbackAreafreightResList.get(0).getAreafreightCountry();
 		}
 		//取出id
 		System.out.println(1);
@@ -78,7 +80,8 @@ public class MlfrontAddressController {
 		}else{
 			usertype = 1;//注册用户
 		}
-		
+		//addressCountryAll
+		mlfrontAddress.setAddressCountryAll(addressCountryAll);
 		int realAddressId = 0;
 		if(loginUser==null){
 			String sessionId = session.getId();
