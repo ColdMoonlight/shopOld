@@ -529,8 +529,6 @@
 									contentType: 'application/json',
 										success: function (postData) {
 											alert("物流信息发送完毕")
-											
-											
 										}
 								});
 							}
