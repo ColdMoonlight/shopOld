@@ -999,7 +999,8 @@
 					resDataMoney = resareafreightMoney;
 					var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPriceselect);
-					
+					couponPriceold2 =0;
+					couponPriceOld = 0;
 				  }
 				});
 		});
@@ -1598,8 +1599,11 @@
 			// var countrystr = $("#country").val();
 			var countrystr=$('#country option:checked').text()
 			var provincestr = $(".province").val();
-			
-			
+			// if(!$("input[name='addressEmail']").val().match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
+			// 	flag = 1;
+			// 	 renderSysMsg('Email format is incorrect! Please re-enter')
+			// 	return flag;
+			// }
 			if(firstnamestr==null||firstnamestr==''){
 				flag = 1;
 				// alert("firstnamestr is empty");

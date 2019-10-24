@@ -1007,6 +1007,8 @@
 				resDataMoney = resareafreightMoney;
 				var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 				subtotalPriceText.text('$' + totalPriceselect);
+				couponPriceold2 =0;
+				couponPriceOld = 0;
 				
 			  }
 			});
@@ -1137,8 +1139,8 @@
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				orderItemArr.push(data[i].orderitemId);
 				productNumArr.push(data[i].orderitemPskuNumber);
-				html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +
-					data[i].orderitemPid + ')">' +
+				// html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +data[i].orderitemPid + ')">' +
+					html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '">' +
 					'<img class="img" src="' + data[i].orderitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
 					'<div class="text">' +
