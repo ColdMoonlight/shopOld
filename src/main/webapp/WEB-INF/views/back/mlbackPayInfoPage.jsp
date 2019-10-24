@@ -285,8 +285,7 @@
 							// console.log(resDataPayInfoOne)/**2222*/
 							payinfoIdcd =resDataPayInfoOne.payinfoId;
 							payinfoStatus =resDataPayInfoOne.payinfoStatus;
-							
-							
+							console.log(payinfoStatus)/**3333**/
 							var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
@@ -356,26 +355,35 @@
 
 		function renderOrderInfo(data) {
 			var statusDetail = "仅发起，未付款";
+			var colorspan=""
 			if (data.orderStatus == 0) {
 				statusDetail = "仅发起，未付款";
+				colorspan ="colorspan1"
 			} else if (data.orderStatus == 1) {
 				statusDetail = "付款成功，待发货";
+				colorspan ="colorspan2"
 			} else if (data.orderStatus == 2) {
 				statusDetail = "付款失败";
+				colorspan ="colorspan3"
 			} else if (data.orderStatus == 3) {
 				statusDetail = "已发货，待接收";
+				colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
 			}
 			var headerHtml = '';
 			// console.log(data)
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
 			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
-				'<span>订单状态 ：' + statusDetail + '</span>';
+				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
 			if (data.orderStatus === 1 || data.orderStatus === 3) {
 				headerHtml += '<span class="shipping">';
 			} else {
 				headerHtml += '<span class="shipping hide">';
 			}
+			if( data.orderStatus === 3){
+				headerHtml += '<span class="shipping active">';
+			}
+			
 			if (data.orderLogisticsnumber) {
 				headerHtml += '<span class="ship-number">物流单号：' + data.orderLogisticsnumber + ' </span>' +
 					'<span style="margin: 0 1em;"> 发货时间 ：' + data.orderSendtime + '</span>' +
@@ -511,6 +519,7 @@
 									"payinfoStatus":payinfoStatus
 								}
 								// console.log(postData)/**********/
+								
 							function updatepayinfostu(postData){
 								$.ajax({
 									url: '${APP_PATH}/MlfrontPayInfo/updateShipStatus',
@@ -519,12 +528,14 @@
 									dataType: "json",
 									contentType: 'application/json',
 										success: function (postData) {
-											console.log(success)
+											alert("物流信息发送完毕")
+											
+											
 										}
 								});
 							}
 							 updatepayinfostu(postData)
-							// window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
