@@ -86,7 +86,7 @@
 							<div class="form-group">
 								<label for="addressEmail" class="form-label required">Email Adress</label>
 								<div class="form-input">
-									<input type="text" name="addressEmail" class="form-control email">
+									<input type="text" placeholder="eg:@gmail.com,and so on" name="addressEmail" class="form-control email">
 								</div>
 							</div>
 							<!-- telephone -->
@@ -1007,6 +1007,8 @@
 				resDataMoney = resareafreightMoney;
 				var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 				subtotalPriceText.text('$' + totalPriceselect);
+				couponPriceold2 =0;
+				couponPriceOld = 0;
 				
 			  }
 			});
@@ -1137,8 +1139,8 @@
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				orderItemArr.push(data[i].orderitemId);
 				productNumArr.push(data[i].orderitemPskuNumber);
-				html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +
-					data[i].orderitemPid + ')">' +
+				// html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +data[i].orderitemPid + ')">' +
+					html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '">' +
 					'<img class="img" src="' + data[i].orderitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
 					'<div class="text">' +
@@ -1616,6 +1618,8 @@
 				// 	flag = 1;
 				// 	alert("优惠券未使用")
 				// }
+
+				
 				if(firstnamestr==null||firstnamestr==''){
 					flag = 1;
 					// alert("firstnamestr is empty");

@@ -124,15 +124,18 @@
 }
 .yzf_bg b{background:#55da27; color: #FFF;padding: 5px;}
 .wzf_bg b{background:#da2727; color: #fff;padding: 5px;}
+.yfh_bg b{background:#4832ef; color: #fff;padding: 5px;}
+
 .clear_img{display: block; width: 30px; height: 30px;z-index: 2;font-size: 16px; line-height: 30px; text-align: center; position: absolute; top: 0; right: 0; color: #f00; background: #FFF;}
 .upload-img-btn{ position: relative;}
 .upload-img-btn em img{height: 200px;width: 200px;}
 .upload-img-btn em{height: 200px;width: 200px;}
 /* .upload-img-btn .upload-img-fu{background: } */
-
-
-
-
+.active .edit-shipping{display:none;}
+.colorspan4{color:#4832ef;}
+.colorspan3{color:#da2727;}
+.colorspan2{color:#55da27;}
+.colorspan1{color:#da2727;}
 
 
 
