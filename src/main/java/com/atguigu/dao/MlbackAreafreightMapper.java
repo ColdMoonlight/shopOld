@@ -2,8 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackAreafreightExample;
-import com.atguigu.bean.MlbackCoupon;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

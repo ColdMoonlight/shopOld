@@ -2,8 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontOrderExample;
-import com.atguigu.bean.MlfrontOrderItem;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

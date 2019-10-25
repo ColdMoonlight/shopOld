@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackProductImgExample;
 import java.util.List;

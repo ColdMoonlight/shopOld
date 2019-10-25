@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackFootNav;
 import com.atguigu.bean.MlbackFootNavExample;
 import java.util.List;
