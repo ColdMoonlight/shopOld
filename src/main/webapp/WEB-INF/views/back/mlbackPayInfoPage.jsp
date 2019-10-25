@@ -501,6 +501,7 @@
     */
       
 
+    
 		function shipSave(e) {
 			var parent = $(e.target).parents('.ship-box');
 			var shipId = parent.find('.ship-id').val();
