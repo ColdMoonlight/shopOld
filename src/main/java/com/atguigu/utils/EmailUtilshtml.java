@@ -153,7 +153,7 @@ public class EmailUtilshtml {
             	
             }
             
-            String content="You have received an order.：<br><br><br>  "+
+            String content="You received an order.：<br><br><br>  "+
             "Order ID :"+mlfrontOrderItemList.get(0).getOrderId()+" <br>"+
             "Date Added :"+mlfrontOrderItemList.get(0).getOrderitemMotifytime()+" <br>"+
             "Order Status : Complete <br><br>"+
