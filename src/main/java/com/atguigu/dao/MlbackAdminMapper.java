@@ -2,8 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAdminExample;
-import com.atguigu.bean.SysUser;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

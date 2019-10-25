@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontOrderItemExample;
 import java.util.List;

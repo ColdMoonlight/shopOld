@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlfrontCart;
 import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.MlfrontPayInfoExample;
 import java.util.List;

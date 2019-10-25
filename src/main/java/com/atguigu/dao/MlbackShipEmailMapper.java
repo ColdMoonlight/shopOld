@@ -2,8 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlbackShipEmail;
 import com.atguigu.bean.MlbackShipEmailExample;
-import com.atguigu.bean.MlbackShowArea;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

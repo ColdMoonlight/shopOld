@@ -1,7 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackCategoryExample;
 import java.util.List;
