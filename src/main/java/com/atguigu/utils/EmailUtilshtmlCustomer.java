@@ -80,7 +80,13 @@ public class EmailUtilshtmlCustomer {
             String content="Thank you for your registr in Megalook ,Here is your account number and password：<br><br><br>  "+
             "Account number:"+mlfrontUserafterIn.getUserEmail()+" <br>"+
             "password:"+mlfrontUserafterIn.getUserPassword()+" <br><br>"+
-            "Wishing you a pleasant shopping trip. <br><br>";
+            "Wishing you a pleasant shopping trip. <br><br>"+
+            "Best Regards,<br>"+
+            "------------------------------------------<br>"+
+            "Megalook team.<br>"+
+            "Email:service@megalook.com <br>"+
+            "Whatsapp:+86 18903740682<br>"+
+            "Telephone/SMS:+1 5017226336<br>";
             //通过会话,得到一个邮件,用于发送
             MimeMessage  msg = new MimeMessage(session);
             //设置发件人
@@ -152,10 +158,10 @@ public class EmailUtilshtmlCustomer {
             }
             
             String content="Hi gorgeous girl.<br><br>  "+
-            "Here is Jason from Megalook Hair Team. We have received your order and confirmed your payment.：<br><br>  "+
-            "Order ID :"+mlfrontOrderItemList.get(0).getOrderId()+" <br>"+
+            "Here is Megalook Hair . We have received your order and confirmed your payment.：<br><br>  "+
+            "Order ID :"+mlfrontPayInfoIOne.getPayinfoPlateNum()+" <br>"+
             "Date Added :"+mlfrontOrderItemList.get(0).getOrderitemMotifytime()+" <br>"+
-            "Order Status : Complete <br><br>"+
+            "Order Status : Payment completed, order processing... <br><br>"+
             "Products:<br><br> "+
             pdetail+"<br> "+
             "Totals :<br><br> "+
@@ -177,12 +183,12 @@ public class EmailUtilshtmlCustomer {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-            msg.setSubject("Please confirm Your order of ID is : "+mlfrontOrderResOne.getOrderId());
+            msg.setSubject("Please confirm Your order of ID is : "+mlfrontPayInfoIOne.getPayinfoPlateNum());
             
             Multipart mp = new MimeMultipart("related");
-            BodyPart bodyPart = new MimeBodyPart(); 
+            BodyPart bodyPart = new MimeBodyPart();
             bodyPart.setDataHandler(new DataHandler(content,"text/html;charset=UTF-8"));
-            mp.addBodyPart(bodyPart); 
+            mp.addBodyPart(bodyPart);
             msg.setContent(mp);// 设置邮件内容对象 
             
             //设置邮件消息

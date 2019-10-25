@@ -77,7 +77,7 @@ public class EmailUtilshtml {
                 }
             });
             
-            String content="A new customer has signed up：<br><br><br>  "+
+            String content="New customer has signed up：<br><br><br>  "+
             "First Name:"+mlfrontUserafterIn.getUserFirstname()+" <br>"+
             "Last Name:"+mlfrontUserafterIn.getUserLastname()+" <br>"+
             "E-Mail:"+mlfrontUserafterIn.getUserEmail()+" <br>"+
@@ -88,8 +88,8 @@ public class EmailUtilshtml {
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megalookweb@outlook.com", false));
-            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+//          msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
             msg.setSubject("new costomer of "+ mlfrontUserafterIn.getUserId() +" Register Success.");
             
             Multipart mp = new MimeMultipart("related"); 
@@ -153,8 +153,8 @@ public class EmailUtilshtml {
             	
             }
             
-            String content="You have received an order.：<br><br><br>  "+
-            "Order ID :"+mlfrontOrderItemList.get(0).getOrderId()+" <br>"+
+            String content="You received an order.：<br><br><br>  "+
+            "Order ID :"+mlfrontPayInfoIOne.getPayinfoPlateNum()+" <br>"+
             "Date Added :"+mlfrontOrderItemList.get(0).getOrderitemMotifytime()+" <br>"+
             "Order Status : Complete <br><br>"+
             "Products:<br><br> "+
@@ -171,9 +171,9 @@ public class EmailUtilshtml {
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megalookweb@outlook.com", false));
-            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
-            msg.setSubject("You have received an order of ID is : "+mlfrontOrderResOne.getOrderId());
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+//          msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
+            msg.setSubject("You received an order of ID is : "+mlfrontPayInfoIOne.getPayinfoPlateNum());
             
             Multipart mp = new MimeMultipart("related"); 
             BodyPart bodyPart = new MimeBodyPart(); 
@@ -230,8 +230,8 @@ public class EmailUtilshtml {
 //          msg.setFrom(new InternetAddress("发件人邮箱"));
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megalookweb@outlook.com", false));
-            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("mingyueqingl@163.com", false));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+//            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
             String sub="The order of Id is "+orderId+" has been shipped successful ";
             msg.setSubject(sub);
             

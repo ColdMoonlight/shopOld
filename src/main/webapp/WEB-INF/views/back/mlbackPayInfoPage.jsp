@@ -129,8 +129,10 @@
 				if(item.payinfoStatus ===0){
 					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');//红
 				}else if(item.payinfoStatus ===1){
-					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//绿
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//黄
 				}else if(item.payinfoStatus ===2){
+					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已审核</b>');//绿
+				}else if(item.payinfoStatus ===3){
 					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
 				}
 				
@@ -354,19 +356,23 @@
 			$('.buyer-info').html(html);
 		}
 
-		function renderOrderInfo(data) {
+		function renderOrderInfo(data) {//红
 			var statusDetail = "仅发起，未付款";
 			var colorspan=""
-			if (data.orderStatus == 0) {
+			if (data.orderStatus == 0) {//红
 				statusDetail = "仅发起，未付款";
 				colorspan ="colorspan1"
-			} else if (data.orderStatus == 1) {
-				statusDetail = "付款成功，待发货";
+			} else if (data.orderStatus == 1) {//黄
+				statusDetail = "付款成功，待审单";
 				colorspan ="colorspan2"
 			} else if (data.orderStatus == 2) {
 				statusDetail = "付款失败";
 				colorspan ="colorspan3"
-			} else if (data.orderStatus == 3) {
+			} else if (data.orderStatus == 3) {//绿		现出来一个按钮，ajax 返回后刷新页面
+				statusDetail = "已审单，待发货";
+				colorspan ="colorspan4"
+				ifsend = data.orderLogisticsid;
+			} else if (data.orderStatus == 4) {//紫
 				statusDetail = "已发货，待接收";
 				colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
@@ -495,6 +501,7 @@
     */
       
 
+    
 		function shipSave(e) {
 			var parent = $(e.target).parents('.ship-box');
 			var shipId = parent.find('.ship-id').val();
