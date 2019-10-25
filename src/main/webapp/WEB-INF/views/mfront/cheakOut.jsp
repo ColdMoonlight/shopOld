@@ -83,7 +83,7 @@
 					<div class="form-group">
 						<label for="addressEmail" class="form-label required">Email Adress</label>
 						<div class="form-input">
-							<input type="text" name="addressEmail" class="form-control email">
+							<input type="text" name="addressEmail" placeholder="eg:@gmail.com,and so on" class="form-control email">
 						</div>
 					</div>
 					<!-- telephone -->
@@ -1680,13 +1680,7 @@
 						$(this).removeClass("error_br")
 					})
 					 renderSysMsg('Email format is incorrect! Please re-enter')
-			}else{
-					if(!$("input[name='addressEmail']").val().match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
-						flag = 1;
-						 renderSysMsg('Email format is incorrect! Please re-enter')
-						return flag;
-					}
-				}
+			}
 			
 			return flag;
 		}
