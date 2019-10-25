@@ -37,6 +37,10 @@ public class EmailUtilshtml {
 		sendEmilRegister(getToEmail, Message, mlfrontUserafterIn);
 	}
 	
+	public static void readyEmailVerifySuccess(String getToEmail, String message, String toCustomerVerifyInfoStr, String payinfoPlateNum) {
+		sendEmilVerify(getToEmail, message, toCustomerVerifyInfoStr,payinfoPlateNum);
+	}
+	
 	public static void readyEmailPaySuccess(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
 		sendEmilPay(getToEmail, Message, mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
 		
@@ -111,6 +115,66 @@ public class EmailUtilshtml {
             e.printStackTrace();
         }
     }
+	
+	/*
+	 * Verify通知官方
+	 * megalookweb@outlook.com
+	 * mingyueqingl@163.com
+	 * */
+	private static void sendEmilVerify(String to, String message, String toCustomerVerifyInfoStr, String payinfoPlateNum) {
+		try {
+            Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+            //设置邮件会话参数
+            Properties props = new Properties();
+            //邮箱的发送服务器地址
+            props.setProperty("mail.smtp.host", "smtp.138mail.net");
+            props.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+            props.setProperty("mail.smtp.socketFactory.fallback", "false");
+            //邮箱发送服务器端口,这里设置为465端口
+            props.setProperty("mail.smtp.port", "465");
+            props.setProperty("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.auth", "true");
+            /*final String username = "发送者邮箱用户名";
+            final String password = "发送者邮箱密码或者邮箱授权码";*/
+            final String username = "service@megalook.com";
+            final String password = "DfcorpKXl6CbH1It";
+            //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
+            Session session = Session.getDefaultInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+            
+            String content=toCustomerVerifyInfoStr;
+            //通过会话,得到一个邮件,用于发送
+            MimeMessage msg = new MimeMessage(session);
+            //设置发件人
+//          msg.setFrom(new InternetAddress("发件人邮箱"));
+            msg.setFrom(new InternetAddress("service@megalook.com"));
+            //设置收件人,to为收件人,cc为抄送,bcc为密送
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
+//            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
+            String sub="The order of Id is "+payinfoPlateNum+" has been shipped successful ";
+            msg.setSubject(sub);
+            
+            Multipart mp = new MimeMultipart("related"); 
+            BodyPart bodyPart = new MimeBodyPart(); 
+            bodyPart.setDataHandler(new DataHandler(content,"text/html;charset=UTF-8"));
+            mp.addBodyPart(bodyPart); 
+            msg.setContent(mp);// 设置邮件内容对象 
+            
+            //设置邮件消息
+//            msg.setText(message);
+            //设置发送的日期
+            msg.setSentDate(new Date());
+            //调用Transport的send方法去发送邮件
+            Transport.send(msg);
+            System.out.println("给"+to+"客户,发送邮件完毕,"+"邮件内容为"+message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
 	
 	/*
 	 * Pay通知官方
@@ -252,6 +316,8 @@ public class EmailUtilshtml {
             e.printStackTrace();
         }
     }
+
+	
 
 	
 }

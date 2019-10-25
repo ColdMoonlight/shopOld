@@ -304,7 +304,7 @@ public class MlfrontPayInfoController {
 		Integer payinfoIdIn = mlfrontPayInfo.getPayinfoId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
-		mlfrontPayInfo.setPayinfoStatus(2);//0未支付		1已支付		2已发货
+		mlfrontPayInfo.setPayinfoStatus(3);//0未支付		1已支付	2已审核	3已发货
 		//有id，update
 		int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
 		

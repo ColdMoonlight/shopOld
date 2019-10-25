@@ -872,7 +872,7 @@ public class MlfrontOrderController {
 		mlfrontOrderReq.setOrderLogisticsname(orderLogisticsname);
 		mlfrontOrderReq.setOrderLogisticsnumber(orderLogisticsnumber);
 		String nowTime = DateUtil.strTime14s();
-		mlfrontOrderReq.setOrderStatus(3);
+		mlfrontOrderReq.setOrderStatus(4);//1支付失败 //2支付成功 //3审单完毕 //4发货完毕
 		mlfrontOrderReq.setOrderSendtime(nowTime);
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
 		
@@ -881,13 +881,13 @@ public class MlfrontOrderController {
 		List<MlfrontOrder> mlfrontOrderResList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq2);
 		MlfrontOrder mlfrontOrderRes = mlfrontOrderResList.get(0);
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
-		
+		//10.1
 		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId);
 		
 		return Msg.success().add("Msg", "更新成功");
 	}
 
-
+	//10.1
 	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
 		
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
@@ -897,7 +897,7 @@ public class MlfrontOrderController {
 		mlfrontAddressRes = mlfrontAddressResList.get(0);
 		System.out.println(mlfrontAddressRes.toString());
 		String userEmail = mlfrontAddressRes.getAddressEmail();
-		
+		//10.1.1
 		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsname,orderLogisticsnumber,orderId);
 		try {
 			//测试方法
@@ -911,7 +911,7 @@ public class MlfrontOrderController {
 		
 	}
 
-
+	//10.1.1
 	private String getToCustomerDriverInfo(String orderLogisticsname, String orderLogisticsnumber, Integer orderId) {
 		
 		String Message ="";
@@ -939,6 +939,104 @@ public class MlfrontOrderController {
 		Message=Message+"Whatsapp : "+shipemailTeamwhatsapp+"<br>";
 		Message=Message+"Telephone/SMS : "+shipemailTeamtelphone+"<br>";
 		return Message;
+	}
+	
+	/**
+	 * 11.0	UseNow	0505
+	 * to	全部待付款—订单
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/updateOrderReady",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderReady(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
+
+		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
+		
+		Integer orderId = mlfrontOrder.getOrderId();
+		
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();
+		
+		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		MlfrontOrder mlfrontOrderReq2 = new MlfrontOrder();
+		mlfrontOrderReq.setOrderId(orderId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontOrderReq.setOrderStatus(3);//1支付失败 //2支付成功 //3审单完毕 //4发货完毕
+		mlfrontOrderReq.setOrderSendtime(nowTime);
+		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		
+		
+		//通过orderId查询用户地址信息
+		mlfrontOrderReq2.setOrderId(orderId);
+		List<MlfrontOrder> mlfrontOrderResList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq2);
+		MlfrontOrder mlfrontOrderRes = mlfrontOrderResList.get(0);
+		Integer addressId = mlfrontOrderRes.getAddressinfoId();
+		//通过用户地址信息查询Email
+		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
+		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
+		mlfrontAddressReq.setAddressId(addressId);
+		List<MlfrontAddress> mlfrontAddressResList = mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
+		mlfrontAddressRes = mlfrontAddressResList.get(0);
+		String userEmail = mlfrontAddressRes.getAddressEmail();
+		
+		//通过payInfoId查询订单号如:ML201910250000321
+		MlfrontPayInfo mlfrontPayInfo = new MlfrontPayInfo();
+		MlfrontPayInfo mlfrontPayInfoRes = new MlfrontPayInfo();
+		List<MlfrontPayInfo> mlfrontPayInfoResList = new ArrayList<MlfrontPayInfo>();
+		mlfrontPayInfo.setPayinfoId(payInfoId);
+		
+		mlfrontPayInfoResList = mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfo);
+		mlfrontPayInfoRes = mlfrontPayInfoResList.get(0);
+		String payinfoPlateNum = mlfrontPayInfoRes.getPayinfoPlateNum();
+		
+		//11.1
+		String toCustomerVerifyInfoStr = getToCustomerVerifyEmail(payinfoPlateNum);
+		try {
+			//提醒客户准备发货
+			String getToEmail = userEmail;
+			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+payinfoPlateNum+"的快件.";
+			EmailUtilshtml.readyEmailVerifySuccess(getToEmail, Message,toCustomerVerifyInfoStr,payinfoPlateNum);
+			EmailUtilshtmlCustomer.readyEmailVerifyCustomer(getToEmail, Message,toCustomerVerifyInfoStr,payinfoPlateNum);
+			//11.2
+			updatePayInfostatus(payInfoId);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return Msg.success().add("Msg", "更新成功");
+	}
+
+
+	//11.1
+	private String getToCustomerVerifyEmail(String payinfoPlateNum) {
+		// TODO Auto-generated method stub
+		String Message ="";
+		Message =Message+"Hi gorgeous girl ,"+"<br><br>";
+		Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
+		Message=Message+"The hair you ordered is in stock and is expected to be shipped within 24-48 hours .<br><br>";
+		Message=Message+"We will send the parcel tracking number to you through email & SMS after delivery, and you can also view it on the PayPal bill.<br><br><br>";
+		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
+		Message=Message+"Best Regards,<br><br>";
+		Message=Message+"-----------------------------------<br><br>";
+		Message=Message+"Megalook hair <br>";
+		Message=Message+"Email:service@megalook.com <br>";
+		Message=Message+"Whatsapp:+86 18903740682 <br>";
+		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+		return Message;
+	}
+	
+	//11.2
+	private void updatePayInfostatus(Integer payInfoId) {
+		//取出id
+		MlfrontPayInfo mlfrontPayInfo = new MlfrontPayInfo();
+		mlfrontPayInfo.setPayinfoId(payInfoId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
+		mlfrontPayInfo.setPayinfoStatus(2);//0未支付		1已支付	2已审核	3已发货
+		//更新状态未已发货状态
+		int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
+		
 	}
 
 
