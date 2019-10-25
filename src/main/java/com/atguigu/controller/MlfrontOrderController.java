@@ -849,8 +849,8 @@ public class MlfrontOrderController {
 	}
 	
 	/**
-	 * 10.0	UseNow	0505
-	 * to	全部待付款—订单
+	 * 11.0	UseNow	0505
+	 * to	更新订单状态-发送物流邮件
 	 * @param jsp
 	 * @return 
 	 * */
@@ -860,11 +860,10 @@ public class MlfrontOrderController {
 
 		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
 		
-//		Integer addressId = (Integer) session.getAttribute("sendAddressinfoId");
-		//Integer Uid = loginUser.getUserId();
 		Integer orderId = mlfrontOrder.getOrderId();
 		String orderLogisticsname =mlfrontOrder.getOrderLogisticsname();	//物流名字
 		String orderLogisticsnumber =  mlfrontOrder.getOrderLogisticsnumber();//物流单号
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();
 		
 		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
 		MlfrontOrder mlfrontOrderReq2 = new MlfrontOrder();
@@ -882,13 +881,13 @@ public class MlfrontOrderController {
 		MlfrontOrder mlfrontOrderRes = mlfrontOrderResList.get(0);
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
 		//10.1
-		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId);
+		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
 		
 		return Msg.success().add("Msg", "更新成功");
 	}
 
 	//10.1
-	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId) {
+	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId,Integer payInfoId) {
 		
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
 		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
@@ -897,8 +896,19 @@ public class MlfrontOrderController {
 		mlfrontAddressRes = mlfrontAddressResList.get(0);
 		System.out.println(mlfrontAddressRes.toString());
 		String userEmail = mlfrontAddressRes.getAddressEmail();
+		
+		//通过payInfoId查询订单号如:ML201910250000321
+		MlfrontPayInfo mlfrontPayInfo = new MlfrontPayInfo();
+		MlfrontPayInfo mlfrontPayInfoRes = new MlfrontPayInfo();
+		List<MlfrontPayInfo> mlfrontPayInfoResList = new ArrayList<MlfrontPayInfo>();
+		mlfrontPayInfo.setPayinfoId(payInfoId);
+		
+		mlfrontPayInfoResList = mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfo);
+		mlfrontPayInfoRes = mlfrontPayInfoResList.get(0);
+		String payinfoPlateNum = mlfrontPayInfoRes.getPayinfoPlateNum();
+		
 		//10.1.1
-		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsname,orderLogisticsnumber,orderId);
+		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsname,orderLogisticsnumber,orderId,payinfoPlateNum);
 		try {
 			//测试方法
 			String getToEmail = userEmail;
@@ -912,7 +922,7 @@ public class MlfrontOrderController {
 	}
 
 	//10.1.1
-	private String getToCustomerDriverInfo(String orderLogisticsname, String orderLogisticsnumber, Integer orderId) {
+	private String getToCustomerDriverInfo(String orderLogisticsname, String orderLogisticsnumber, Integer orderId,String payinfoPlateNum) {
 		
 		String Message ="";
 		MlbackShipEmail mlbackShipEmail = new MlbackShipEmail();
@@ -928,7 +938,7 @@ public class MlfrontOrderController {
 		String shipemailTeamwhatsapp = mlbackShipEmailOne.getShipemailTeamwhatsapp();
 		String shipemailTeamtelphone = mlbackShipEmailOne.getShipemailTeamtelphone();
 		Message =Message+"Hi,"+"<br><br>";
-		Message=Message+"This is Megalook Hair. Your order # ("+orderId+") has been shipped, And the tracking number is "+shipemailName+" : ("+orderLogisticsnumber+").<br><br><br>";
+		Message=Message+"This is Megalook Hair. Your order # ("+payinfoPlateNum+") has been shipped, And the tracking number is "+shipemailName+" : ("+orderLogisticsnumber+").<br><br><br>";
 		Message=Message+"Expected to be delivered within "+shipemailDay+" working days.<br><br>";
 		Message=Message+"You can track the parcel through this link on "+shipemailName+"( "+shipemailWwwlink+" )<br><br><br>";
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
