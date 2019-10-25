@@ -37,6 +37,11 @@ public class EmailUtilshtmlCustomer {
 		sendEmilRegisterCustomer(getToEmail, Message, mlfrontUserafterIn);
 	}
 	
+	public static void readyEmailVerifyCustomer(String getToEmail, String message, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
+		// TODO Auto-generated method stub
+		sendEmilVerifyCustomer(getToEmail, message, toCustomerVerifyInfoStr,payinfoPlateNum);
+	}
+	
 	public static void readyEmailPaySuccessCustomer(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
 		sendEmilPayCustomer(getToEmail, Message, mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
 		
@@ -46,13 +51,6 @@ public class EmailUtilshtmlCustomer {
 		sendEmildeliverCustomer(getToEmail, Message, toCustomerInfoStr);
 	}
 	
-	public static void readyEmailVerifyCustomer(String getToEmail, String message, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
-		// TODO Auto-generated method stub
-		sendEmilVerifyCustomer(getToEmail, message, toCustomerVerifyInfoStr,payinfoPlateNum);
-	}
-	
-
-
 	/*
 	 * Register通知Customer
 	 * megalookweb@outlook.com
@@ -161,7 +159,7 @@ public class EmailUtilshtmlCustomer {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-            msg.setSubject("Delivery Notice of MegaLook.");
+            msg.setSubject("Your order is ready to leave the warehouse.");
             
             Multipart mp = new MimeMultipart("related"); 
             BodyPart bodyPart = new MimeBodyPart(); 

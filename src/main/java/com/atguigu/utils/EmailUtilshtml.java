@@ -155,7 +155,7 @@ public class EmailUtilshtml {
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
-            String sub="The order of Id is "+payinfoPlateNum+" has been shipped successful ";
+            String sub="The order of Id is "+payinfoPlateNum+" has Verifyed ";
             msg.setSubject(sub);
             
             Multipart mp = new MimeMultipart("related"); 
