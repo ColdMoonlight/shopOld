@@ -114,11 +114,11 @@
 		// var payinfoIdcd;
 		// var payinfoStatuscd=0;
 		function build_task_table(result) {
-			// console.log(result)
+			console.log(result)
 			//清空table表格
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
-			console.log(task);
+			// console.log(task);
 			$.each(task, function (index, item) {
 				var payinfoId = $("<td></td>").append(item.payinfoId);
 				
@@ -274,7 +274,7 @@
 					"payinfoId": payid
 				};
 				
-				// console.log(reqData)/*********/
+				console.log(reqData)/***2222222222******/
 				$.ajax({
 					url: "${APP_PATH}/MlfrontPayInfo/getOneMlfrontPayInfoDetail",
 					data: reqData,
@@ -496,12 +496,13 @@
 			shipBox.removeClass('hide');
 		}
 		
-		payinfoIdcd=payinfoId;
-		console.log(payinfoIdcd)/*eeee*/
+		// payinfoIdcd=payinfoId;
+		// console.log(payinfoIdcd)/*eeee*/
+		orderCouponId =payinfoIdcd;
         function check_order(){
 			var reqData = {
 				"orderId":orderId,
-				"orderCouponId":payInfoIdcd,
+				"orderCouponId":payinfoIdcd,
 			}
 			console.log(reqData);
 			$.ajax({
@@ -511,7 +512,8 @@
 				dataType: "json",
 				contentType: 'application/json',
 					success: function (reqData) {
-						alert("wwewe")
+						alert("已审核")
+						window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 					}
 			});
 			
@@ -542,7 +544,7 @@
 				orderLogisticsname: shipName,
 				orderLogisticsnumber: shipId
 			}
-			// console.log(reqData)
+			console.log(reqData)
 			if (shipId.trim().length) {
 				$.ajax({
 					url: '${APP_PATH}/MlfrontOrder/updateOrderDetail',
@@ -551,7 +553,7 @@
 					dataType: "json",
 					contentType: 'application/json',
 					success: function (data) {
-						// console.log(data)
+						console.log(data)
 						if (data.code === 100) {
 							var postData={
 									"payinfoId":payinfoIdcd,
@@ -572,7 +574,7 @@
 								});
 							}
 							 updatepayinfostu(postData)
-							// window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
