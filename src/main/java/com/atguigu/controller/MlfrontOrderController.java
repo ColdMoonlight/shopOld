@@ -913,7 +913,7 @@ public class MlfrontOrderController {
 			//测试方法
 			String getToEmail = userEmail;
 			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
-			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,toCustomerInfoStr,orderId);
+			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,toCustomerInfoStr,orderId,payinfoPlateNum);
 			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,toCustomerInfoStr);
 		} catch (Exception e) {
 			e.printStackTrace();

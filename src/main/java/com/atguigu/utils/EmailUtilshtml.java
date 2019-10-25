@@ -46,8 +46,8 @@ public class EmailUtilshtml {
 		
 	}
 	
-	public static void readyEmailSendSuccess(String getToEmail, String Message, String toCustomerInfoStr, Integer orderId) {
-		sendEmilShip(getToEmail, Message, toCustomerInfoStr,orderId);
+	public static void readyEmailSendSuccess(String getToEmail, String Message, String toCustomerInfoStr, Integer orderId,String payinfoPlateNum) {
+		sendEmilShip(getToEmail, Message, toCustomerInfoStr,orderId,payinfoPlateNum);
 	}
 	
 	
@@ -262,7 +262,7 @@ public class EmailUtilshtml {
 	 * megalookweb@outlook.com
 	 * mingyueqingl@163.com
 	 * */
-	public static void sendEmilShip(String to, String message, String toCustomerInfoStr,Integer orderId) {
+	public static void sendEmilShip(String to, String message, String toCustomerInfoStr,Integer orderId,String payinfoPlateNum) {
         try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -296,7 +296,7 @@ public class EmailUtilshtml {
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
-            String sub="The order of Id is "+orderId+" has been shipped successful ";
+            String sub="The order of Id is "+payinfoPlateNum+" has been shipped successful ";
             msg.setSubject(sub);
             
             Multipart mp = new MimeMultipart("related"); 
