@@ -504,7 +504,7 @@
 				"orderId":orderId,
 				"orderCouponId":payinfoIdcd,
 			}
-			console.log(reqData);
+			// console.log(reqData);
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderReady',
 				data: JSON.stringify(reqData),
@@ -576,7 +576,7 @@
 								});
 							}
 							 updatepayinfostu(postData)
-							// window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
