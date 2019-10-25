@@ -131,7 +131,7 @@
 				}else if(item.payinfoStatus ===1){
 					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//黄
 				}else if(item.payinfoStatus ===2){
-					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已审核</b>');//绿
+					var payinfoStatus = $("<td class='ysh_bg'></td>").append('<b>已审核</b>');//绿
 				}else if(item.payinfoStatus ===3){
 					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
 				}
@@ -265,8 +265,8 @@
 		});
 		var orderId;
 		var shipName;
-                var payinfoIdcd;
-				var payinfoStatus;
+		var payinfoIdcd;
+		var payinfoStatus;
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
 				// fetch data
@@ -286,6 +286,7 @@
 							var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 							// console.log(resDataPayInfoOne)/**2222*/
 							payinfoIdcd =resDataPayInfoOne.payinfoId;
+							console.log(payinfoIdcd);/****/
 							payinfoStatus =resDataPayInfoOne.payinfoStatus;
 							console.log(payinfoStatus)/**3333**/
 							var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
@@ -361,20 +362,20 @@
 			var colorspan=""
 			if (data.orderStatus == 0) {//红
 				statusDetail = "仅发起，未付款";
-				colorspan ="colorspan1"
-			} else if (data.orderStatus == 1) {//黄
+				// colorspan ="colorspan1"
+			} else if (data.orderStatus == 1) {//黄现出来一个按钮，ajax 返回后刷新页面
 				statusDetail = "付款成功，待审单";
-				colorspan ="colorspan2"
+				// colorspan ="colorspan2"
 			} else if (data.orderStatus == 2) {
 				statusDetail = "付款失败";
-				colorspan ="colorspan3"
-			} else if (data.orderStatus == 3) {//绿		现出来一个按钮，ajax 返回后刷新页面
+				// colorspan ="colorspan3"
+			} else if (data.orderStatus == 3) {//绿		
 				statusDetail = "已审单，待发货";
-				colorspan ="colorspan4"
+				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
 			} else if (data.orderStatus == 4) {//紫
 				statusDetail = "已发货，待接收";
-				colorspan ="colorspan4"
+				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
 			}
 			var headerHtml = '';
@@ -382,13 +383,16 @@
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
 			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
+			if(data.orderStatus == 1){
+				headerHtml += '<span class="btn btn-danger check_order" onclick="check_order()">审核</span>';
+			}
 			if (data.orderStatus === 1 || data.orderStatus === 3) {
 				headerHtml += '<span class="shipping">';
 			} else {
 				headerHtml += '<span class="shipping hide">';
 			}
-			if( data.orderStatus === 3){
-				headerHtml += '<span class="shipping active">';
+			if( data.orderStatus === 1){
+				headerHtml += '<span class="shipping hide">';
 			}
 			
 			if (data.orderLogisticsnumber) {
@@ -400,6 +404,8 @@
 					'<span style="margin: 0 1em;">发货时间 ：' + '暂无 ' + '</span>' +
 					'<a class="btn btn-danger edit-shipping" onclick="editShipping(2)">添加</a></span>';
 			}
+			
+			
 
 			$('.order-info .table-header').html(headerHtml);
 
@@ -489,6 +495,31 @@
 			}
 			shipBox.removeClass('hide');
 		}
+		
+		payinfoIdcd=payinfoId;
+		console.log(payinfoIdcd)/*eeee*/
+        function check_order(){
+			var reqData = {
+				"orderId":orderId,
+				"orderCouponId":payInfoIdcd,
+			}
+			console.log(reqData);
+			$.ajax({
+				url: '${APP_PATH}/MlfrontOrder/updateOrderReady',
+				data: JSON.stringify(reqData),
+				type: "POST",
+				dataType: "json",
+				contentType: 'application/json',
+					success: function (reqData) {
+						alert("wwewe")
+					}
+			});
+			
+		}
+		 
+	  
+
+
 
 		/*
 		url: MlfrontOrder/updateOrderDetail
@@ -526,7 +557,7 @@
 									"payinfoId":payinfoIdcd,
 									"payinfoStatus":payinfoStatus
 								}
-								// console.log(postData)/**********/
+								console.log(postData)/**********/
 								
 							function updatepayinfostu(postData){
 								$.ajax({
@@ -541,7 +572,7 @@
 								});
 							}
 							 updatepayinfostu(postData)
-							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							// window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
