@@ -114,7 +114,7 @@
 		// var payinfoIdcd;
 		// var payinfoStatuscd=0;
 		function build_task_table(result) {
-			console.log(result)
+			// console.log(result)
 			//清空table表格
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
@@ -236,7 +236,7 @@
 		//新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
-			console.log(data)
+			// console.log(data)
 			data = data.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
@@ -274,7 +274,7 @@
 					"payinfoId": payid
 				};
 				
-				console.log(reqData)/***2222222222******/
+				// console.log(reqData)/***2222222222******/
 				$.ajax({
 					url: "${APP_PATH}/MlfrontPayInfo/getOneMlfrontPayInfoDetail",
 					data: reqData,
@@ -286,7 +286,7 @@
 							var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 							// console.log(resDataPayInfoOne)/**2222*/
 							payinfoIdcd =resDataPayInfoOne.payinfoId;
-							console.log(payinfoIdcd);/****/
+							// console.log(payinfoIdcd);/****/
 							payinfoStatus =resDataPayInfoOne.payinfoStatus;
 							console.log(payinfoStatus)/**3333**/
 							var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
@@ -540,11 +540,13 @@
 			var shipId = parent.find('.ship-id').val();
 			shipName = parent.find('.ship-name').val();
 			var reqData = {
+				orderCouponId:payinfoIdcd,
 				orderId: parseInt(orderId),
 				orderLogisticsname: shipName,
 				orderLogisticsnumber: shipId
+				
 			}
-			console.log(reqData)
+			// console.log(reqData)/*******/
 			if (shipId.trim().length) {
 				$.ajax({
 					url: '${APP_PATH}/MlfrontOrder/updateOrderDetail',
@@ -559,7 +561,7 @@
 									"payinfoId":payinfoIdcd,
 									"payinfoStatus":payinfoStatus
 								}
-								console.log(postData)/**********/
+								// console.log(postData)/**********/
 								
 							function updatepayinfostu(postData){
 								$.ajax({
@@ -574,7 +576,7 @@
 								});
 							}
 							 updatepayinfostu(postData)
-							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							// window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
