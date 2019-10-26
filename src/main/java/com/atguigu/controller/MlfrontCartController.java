@@ -254,7 +254,25 @@ public class MlfrontCartController {
 			MlfrontCartReq.setCartUid(uid);
 			MlfrontCartReq.setCartStatus(0);
 			List<MlfrontCart> MlfrontCartResList = mlfrontCartService.selectMlfrontCartByUidAndStatus(MlfrontCartReq);
+			Integer ifHave = 1;
 			if(MlfrontCartResList.size()>0){
+				String cartitemIdstrUser = MlfrontCartResList.get(0).getCartitemIdstr();
+				if(cartitemIdstrUser.length()>0){
+					ifHave = 1;
+				}else{
+					//名下有购物车,但是为空
+					Integer cartId = MlfrontCartResList.get(0).getCartId();
+					MlfrontCart MlfrontCartdelRep = new MlfrontCart();
+					MlfrontCartdelRep.setCartId(cartId);
+					mlfrontCartService.deleteByPrimaryKey(cartId);
+					ifHave = 0;
+					//此时要删掉这个为空的购物车
+				}
+			}else{
+				//如果名下没购物车
+				ifHave = 0;
+			}
+			if(ifHave==1){
 				//如果有，获取该购物车的itemStr,
 				MlfrontCart mlfrontCartUser = MlfrontCartResList.get(0);
 				String cartitemIdstrUser = mlfrontCartUser.getCartitemIdstr();
@@ -762,7 +780,7 @@ public class MlfrontCartController {
 	
 	
 	/**
-	 * 14.0	UseNow	0505
+	 * 9.0	UseNow	0505
 	 * to	MlfrontOrder列表页面
 	 * @param jsp
 	 * @return 
@@ -796,7 +814,7 @@ public class MlfrontCartController {
 	}
 	
 	/**
-	 * 15.0	useOn	0505
+	 * 10.0	useOn	0505
 	 * 查看单条类目的详情细节
 	 * @param mlfrontOrderOne
 	 * @return 
@@ -819,7 +837,7 @@ public class MlfrontCartController {
 	}
 	
 	/**
-	 * 19.0	UseNow	0505
+	 * 11.0	UseNow	0505
 	 * to	MlfrontOrder列表页面
 	 * @param jsp
 	 * @return 
@@ -841,7 +859,7 @@ public class MlfrontCartController {
 	}
 	
 	/**
-	 * 18.0	useOn	0505
+	 * 12.0	useOn	0505
 	 * to	MlfrontCart列表页面
 	 * @param jsp
 	 * @return  
@@ -853,7 +871,7 @@ public class MlfrontCartController {
 	}
 	
 	/**
-	 * 19.0	UseNow	0505
+	 * 13.0	UseNow	0505
 	 * to	MlfrontOrder列表页面
 	 * @param jsp
 	 * @return 
@@ -878,7 +896,7 @@ public class MlfrontCartController {
 	
 	
 	/**
-	 * 20.0	useOn	0530
+	 * 14.0	useOn	0530
 	 * 加购+提交订单，全部一步生成to	BuyNow
 	 * @param Msg
 	 * @return 
@@ -1142,7 +1160,7 @@ public class MlfrontCartController {
 	
 	/**
 	 * 方法
-	 * 无碰
+	 * 勿碰
 	 * 购买中的任务
 	 * */
 	public void BuyNowAndcartToOrder(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody List<MlfrontCartItem> mlfrontCartItemList) throws Exception{
