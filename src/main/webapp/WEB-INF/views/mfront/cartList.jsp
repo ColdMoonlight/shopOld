@@ -69,7 +69,7 @@
 			</div>
 			<div class="op">
 				<a href="${APP_PATH}/index.html" class="btn btn-default add-product">Continue Shopping</a>
-				<a href="javascript:;" class="btn btn-black calc-price">Checkout</a>
+				<a href="javascript:;" class="btn btn-black calc-price" id="clickCheckoutGooGle">Checkout</a>
 			</div>
 		</div>
 	</div>
