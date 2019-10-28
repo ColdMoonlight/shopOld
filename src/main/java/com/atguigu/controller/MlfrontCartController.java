@@ -929,7 +929,26 @@ public class MlfrontCartController {
 			MlfrontCartReq.setCartIp(Userip);
 			MlfrontCartReq.setCartStatus(0);
 			List<MlfrontCart> MlfrontCartResList = mlfrontCartService.selectMlfrontCartByIp(MlfrontCartReq);
+			Integer ifHave = 1;
 			if(MlfrontCartResList.size()>0){
+				String cartitemIdstrUser = MlfrontCartResList.get(0).getCartitemIdstr();
+				if(cartitemIdstrUser.length()>0){
+					ifHave = 1;
+				}else{
+					//名下有购物车,但是为空
+					Integer cartId = MlfrontCartResList.get(0).getCartId();
+					MlfrontCart MlfrontCartdelRep = new MlfrontCart();
+					MlfrontCartdelRep.setCartId(cartId);
+					mlfrontCartService.deleteByPrimaryKey(cartId);
+					ifHave = 0;
+					//此时要删掉这个为空的购物车
+				}
+			}else{
+				//如果名下没购物车
+				ifHave = 0;
+			}
+			if(ifHave==1){
+//			if(MlfrontCartResList.size()>0){
 				//如果有，获取该购物车的itemStr,
 				MlfrontCart mlfrontCartUser = MlfrontCartResList.get(0);
 				String cartitemIdstrUser = mlfrontCartUser.getCartitemIdstr();
@@ -1043,7 +1062,26 @@ public class MlfrontCartController {
 			MlfrontCartReq.setCartUid(uid);
 			MlfrontCartReq.setCartStatus(0);
 			List<MlfrontCart> MlfrontCartResList = mlfrontCartService.selectMlfrontCartByUidAndStatus(MlfrontCartReq);
+			Integer ifHave = 1;
 			if(MlfrontCartResList.size()>0){
+				String cartitemIdstrUser = MlfrontCartResList.get(0).getCartitemIdstr();
+				if(cartitemIdstrUser.length()>0){
+					ifHave = 1;
+				}else{
+					//名下有购物车,但是为空
+					Integer cartId = MlfrontCartResList.get(0).getCartId();
+					MlfrontCart MlfrontCartdelRep = new MlfrontCart();
+					MlfrontCartdelRep.setCartId(cartId);
+					mlfrontCartService.deleteByPrimaryKey(cartId);
+					ifHave = 0;
+					//此时要删掉这个为空的购物车
+				}
+			}else{
+				//如果名下没购物车
+				ifHave = 0;
+			}
+			if(ifHave==1){
+//			if(MlfrontCartResList.size()>0){
 				//如果有，获取该购物车的itemStr,
 				MlfrontCart mlfrontCartUser = MlfrontCartResList.get(0);
 				String cartitemIdstrUser = mlfrontCartUser.getCartitemIdstr();
