@@ -5,7 +5,6 @@
 .clearfix{*zoom:1;}
 .fl{float:left;}
 .fr{float:right;}
-#tidio-chat-iframe{height: 200px !important;}
 
 .list_homeselect{display: flex;flex-wrap:wrap; position: relative;height: 50px;}
 .list_homeselect .select-item{float: right; margin: 1em 0 0; padding: 5px 0;}
