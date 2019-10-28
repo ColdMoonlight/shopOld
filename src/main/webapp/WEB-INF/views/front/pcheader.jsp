@@ -416,11 +416,11 @@
 				  var seaProductName =$(this).html();
 								window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
 				 });
-				  $('body').keydown(function(){
-					 if (event.keyCode == 13) {    
-						 $('.tt-btn-search').click();
-					 };            
-				 })
+				 //  $('body').keydown(function(){
+					//  if (event.keyCode == 13) {    
+					// 	 $('.tt-btn-search').click();
+					//  };            
+				 // })
 				$(".tt-search-input").focus(function(){
 					 $(".serch_box").find("ul.show_ul").slideDown(200);
 				})
