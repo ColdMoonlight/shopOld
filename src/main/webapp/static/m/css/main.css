@@ -386,7 +386,7 @@ a:focus {
 /*hot*/.category .category-item.classimg1:before{content: ""; width:35px; height:25px; position: absolute; top: 10px; left:50%;background:url(../../../../../ShopTemplate/static/m/img/firstpage/hot.png) no-repeat center top; background-size:35px 25px;}
 /*new*/.category .category-item.classimg2:before{content: "";  width:35px; height:25px;position: absolute; top: 10px; left:50%;background:url(../../../../../ShopTemplate/static/m/img/firstpage/new.png) no-repeat center top; background-size:35px 25px;}
 /*Sale*/.category .category-item.classimg3:before{content: ""; width:64px; height:25px; position: absolute; top:10px; left:50%;background:url(../../../../../ShopTemplate/static/m/img/firstpage/4off.png) no-repeat center top; background-size:64px 25px;}
-/*Double Drawn*/.category .category-item.classimg4:before{content: ""; width:20px; height:20px; position: absolute; top: 0; left:50%;background:url(../../../../../ShopTemplate/static/m/img/firstpage/dd.gif) no-repeat center top; background-size:35px 25px;}
+/*Double Drawn*/.category .category-item.classimg4:before{content: ""; width:100px; height:25px; position: absolute; top: 0; left:50%;background:url(../../../../../ShopTemplate/static/m/img/firstpage/double.png) no-repeat center top; background-size:100px 25px;}
 
 
 
