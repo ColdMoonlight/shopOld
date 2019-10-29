@@ -1,6 +1,8 @@
 package com.atguigu.utils;
 
+import java.math.BigDecimal;
 import java.security.Security;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -161,6 +163,16 @@ public class EmailUtilshtmlCustomer {
             	
             }
             
+            String SubTotal = getSubTotal(mlfrontPayInfoIOne.getPayinfoMoney(),addressMoney,mlfrontOrderResOne.getOrderCouponPrice());
+            
+            String CouponCodeStr ="";
+            
+            if(mlfrontOrderResOne.getOrderCouponCode()!=null){
+            	CouponCodeStr = "Coupon"+" ( "+mlfrontOrderResOne.getOrderCouponCode()+" ) : -$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>";
+            }else{
+            	CouponCodeStr ="";
+            }
+            
             String content="Hi gorgeous girl.<br><br>  "+
             "Here is Megalook Hair . We have received your order and confirmed your payment.：<br><br>  "+
             "Order ID :"+mlfrontPayInfoIOne.getPayinfoPlateNum()+" <br>"+
@@ -168,11 +180,11 @@ public class EmailUtilshtmlCustomer {
             "Order Status : Payment completed, order processing... <br><br>"+
             "Products:<br><br> "+
             pdetail+"<br> "+
-            "Totals :<br><br> "+
-            "Sub-Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+",+$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>"+
+            "payment details :<br><br> "+
+            "products-Total: $"+SubTotal+" <br>"+
             "Free Shipping: $"+addressMoney+"<br>"+
-            "Coupon"+" ( "+mlfrontOrderResOne.getOrderCouponCode()+" ) : -$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>"+
-            "Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>"+
+            CouponCodeStr +
+            "Sub-Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>"+
             "Best Regards,<br>"+
             "------------------------------------------<br>"+
             "Megalook team.<br>"+
@@ -207,6 +219,17 @@ public class EmailUtilshtmlCustomer {
         }
     }
 	
+	private static String getSubTotal(BigDecimal payinfoMoney, String addressMoney, BigDecimal orderCouponPrice) {
+		//总钱数=物价+运费-优惠
+		//原价=总价+优惠-运费
+		BigDecimal SubTotal = payinfoMoney.add(orderCouponPrice);
+		BigDecimal addressMoneyBig = new BigDecimal(addressMoney);
+		SubTotal=SubTotal.subtract(addressMoneyBig);
+		DecimalFormat df1 = new DecimalFormat("0.00");
+		String SubTotalStr = df1.format(SubTotal);
+		return SubTotalStr;
+	}
+
 	/*
 	 * Verify通知Customer
 	 * megalookweb@outlook.com

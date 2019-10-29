@@ -1,6 +1,8 @@
 package com.atguigu.utils;
 
+import java.math.BigDecimal;
 import java.security.Security;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -217,17 +219,27 @@ public class EmailUtilshtml {
             	
             }
             
+            String SubTotal = getSubTotal(mlfrontPayInfoIOne.getPayinfoMoney(),addressMoney,mlfrontOrderResOne.getOrderCouponPrice());
+            
+            String CouponCodeStr ="";
+            
+            if(mlfrontOrderResOne.getOrderCouponCode()!=null){
+            	CouponCodeStr = "Coupon"+" ( "+mlfrontOrderResOne.getOrderCouponCode()+" ) : -$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>";
+            }else{
+            	CouponCodeStr ="";
+            }
+            
             String content="You received an order.：<br><br><br>  "+
             "Order ID :"+mlfrontPayInfoIOne.getPayinfoPlateNum()+" <br>"+
             "Date Added :"+mlfrontOrderItemList.get(0).getOrderitemMotifytime()+" <br>"+
             "Order Status : Complete <br><br>"+
             "Products:<br><br> "+
             pdetail+"<br> "+
-            "Totals :<br><br> "+
-            "Sub-Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+",+$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>"+
+            "payment details :<br><br> "+
+            "products-Total: $"+SubTotal+" <br>"+
             "Free Shipping: $"+addressMoney+"<br>"+
-            "Coupon"+" ( "+mlfrontOrderResOne.getOrderCouponCode()+" ) : -$"+mlfrontOrderResOne.getOrderCouponPrice()+" <br>"+
-            "Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>";
+            CouponCodeStr+
+            "Sub-Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>";
             
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
@@ -256,6 +268,17 @@ public class EmailUtilshtml {
             e.printStackTrace();
         }
     }
+	
+	private static String getSubTotal(BigDecimal payinfoMoney, String addressMoney, BigDecimal orderCouponPrice) {
+		//总钱数=物价+运费-优惠
+		//原价=总价+优惠-运费
+		BigDecimal SubTotal = payinfoMoney.add(orderCouponPrice);
+		BigDecimal addressMoneyBig = new BigDecimal(addressMoney);
+		SubTotal=SubTotal.subtract(addressMoneyBig);
+		DecimalFormat df1 = new DecimalFormat("0.00");
+		String SubTotalStr = df1.format(SubTotal);
+		return SubTotalStr;
+	}
 	
 	/*
 	 * Ship通知官方
