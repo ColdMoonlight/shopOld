@@ -315,6 +315,7 @@ public class PaypalController {
 			payinfoIdStr = "000000"+payinfoIdStr;
 		}
 		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
+//		String payinfoPlateNum = "HS"+payInfoTime+payinfoIdStr;
 		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
 		
@@ -335,6 +336,8 @@ public class PaypalController {
 		//将付款成功的参数successPayinfoId,successOrderId放入session中
 		session.setAttribute("successPayinfoId", payinfoId);
 		session.setAttribute("successOrderId", orderId);
+		session.setAttribute("payinfoIdStr", payinfoIdStr);
+		
 		
 		String addressMoney = getAddressMoney(session);
 		
@@ -374,7 +377,7 @@ public class PaypalController {
 		mlfrontPayInfoNew.setPayinfoStatus(0);
 		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
 		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
-		mlfrontPayInfoIOne.setPayinfoStatus(2);//0未支付1已支付2,支付失败3,已发货;
+		mlfrontPayInfoIOne.setPayinfoStatus(0);//0未支付;1已支付;2支付失败;3已审核;4已发货;
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfoIOne.setPayinfoMotifytime(nowTime);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
@@ -388,7 +391,7 @@ public class PaypalController {
 		List<MlfrontOrder> mlfrontOrderList =  mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderPayReq);
 		MlfrontOrder mlfrontOrderResOne = mlfrontOrderList.get(0);
 		//准备更新数据
-		mlfrontOrderResOne.setOrderStatus(2);//0未支付;1已支付;2支付失败;3已发货;
+		mlfrontOrderResOne.setOrderStatus(0);//0未支付;1已支付;2支付失败;3已审核;4已发货;
 		mlfrontOrderResOne.setOrderMotifytime(nowTime);
 		mlfrontOrderResOne.setOrderPaytime(nowTime);
 		//执行更新
