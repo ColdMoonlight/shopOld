@@ -557,7 +557,8 @@
 					success: function (data) {
 						//var data = JSON.parse(data);
 						if (data.code === 100) {
-							window.location.href = '${APP_PATH}/MlbackCart/topcCheakOut';
+							//window.location.href = '${APP_PATH}/MlbackCart/topcCheakOut';
+							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
 						}
 					},
 					error: function (data) {

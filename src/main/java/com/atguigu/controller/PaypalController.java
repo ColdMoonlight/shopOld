@@ -231,11 +231,7 @@ public class PaypalController {
             
             toUpdatePayInfoSuccess(session,payerId,paymentId);
             
- //           sendResultEmail(session);
-            
             System.out.println(payment.toJSON());
-            
-            
             
             if(payment.getState().equals("approved")){
                 return "front/paySuccess";
