@@ -69,7 +69,7 @@ public class MlfrontAddressController {
 			addressCountryAll = mlbackAreafreightResList.get(0).getAreafreightCountry();
 		}
 		//取出id
-		System.out.println(1);
+		System.out.println("save address");
 		Integer addressId = mlfrontAddress.getAddressId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontAddress.setAddressMotifytime(nowTime);
