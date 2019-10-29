@@ -1027,6 +1027,7 @@
 				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
 				// console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
+				// console.log(resDataAddress)/******/
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
@@ -1037,6 +1038,7 @@
 				if (resDataAddress) {
 					renderAddressDetail(resDataAddress);
 					$('.address-id').val(resDataAddress.addressId);
+					// console.log(resDataAddress.addressId)/******/
 					$('.shipping').find('span').text(' of $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 					$(".address").addClass("active")
@@ -1085,35 +1087,7 @@
 			$('.address-box').hide();
 		});
 		 
-		function savr_address(){
-			//var returnaddressId;
-			var formData = $('.address-box form').serializeArray();
-			var reqData = formData.reduce(function (obj, item) {
-				obj[item.name] = item.value;
-				return obj
-			}, {});
-			//if (!inputCheck(reqData)) return;
-			// console.log("*****savr_address*******")
-			// console.log(reqData)
-			reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-			 $.ajax({
-				url: '${APP_PATH}/MlfrontAddress/save',
-				type: 'post',
-				dataType: 'JSON',
-				data: JSON.stringify(reqData),
-				contentType: 'application/json',
-				success: function (data) {
-					// console.log(data)
-					var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-					addressId = resDataAddress.addressId;
-					addressIdIntInt = resDataAddress.addressId;
-					returnaddressId = addressIdIntInt;
-					// console.log("addressIdIntInt:"+addressIdIntInt);
-					var addressBox = $('.address');
-					$('.address-id').val(resDataAddress.addressId);
-				}
-			})
-		}
+
        
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
@@ -1299,66 +1273,9 @@
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
 					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 			}
-			/* MlbackCoupon/getOneMlbackCouponDetailByUId
-			无参数  post */
-
-			// if (userType === 1) {
-			// 	$.ajax({
-			// 		url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
-			// 		type: 'post',
-			// 		dataType: 'JSON',
-			// 		async: false,
-			// 		success: function (data) {
-			// 			// console.log(data);
-			// 			var resData = JSON.parse(data).extend.mlbackCouponReturnList;
-			// 			var len = resData.length
-			// 			for (var i = 0; i < len; i += 1) {
-			// 				counponDataList[resData[i].couponId] = resData[i];
-			// 				html += '<div class="coupon-item">' +
-			// 					'<span class="price">$' + resData[i].couponPrice + '</span>' +
-			// 					'<span class="name">' + resData[i].couponName + '</span>' +
-			// 					'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
-			// 					'" onclick="selectCoupon(event)" class="checkbox">' +
-			// 					'</div>';
-			// 			}
-			// 		}
-			// 	});
-			// }
 			parent.html(html);
 		}
 		var couponPriceold2 = 0;
-
-// 		function selectCoupon(e) {
-// 			var targetEl = $(e.target);
-// 			var id = targetEl.data('couponid');
-// 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
-// 			targetEl.addClass("active");
-// 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-// 			var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-// 			// console.log(abwq);
-// 			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-// 			// console.log(shopnum);
-// 			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
-//             // console.log(totalPricecou2)			
-// 			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
-// 				var couponPrice = counponDataList[id].couponPrice;
-// 				couponPriceold2 =couponPrice;
-// 				priceInfo.text('-$' + couponPrice);
-// 				
-// 				couponPriceText.text('-$' + couponPrice);
-// 				subtotalPriceText.text('$' + (totalPricecou2 - couponPrice).toFixed(2));
-//                 // console.log(totalPricecou2);
-// 
-// 
-// 				couponCode = counponDataList[id].couponCode;
-// 				couponId = counponDataList[id].couponId;
-// 			} else {
-// 				targetEl[0].checked = false;   
-// 				priceInfo.text("Cann't use this Coupon!");
-// 				couponPriceText.text('-$' + 0);
-// 				subtotalPriceText.text('$' + totalPricecou2);
-// 			}
-// 		}
 
 		function selectPay(e) {
 			var targetEl = $(e.target);
@@ -1383,16 +1300,10 @@
 					var couponErrorBox = $('.coupon-error');
 					// console.log(resData);
 					if (resData) {
-						// console.log(totalPrice, totalPrice - resData.couponPriceBaseline)
 						var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-						// console.log(abwq);
 						var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-						// console.log(shopnum);
 						var  totalPricecou =c_prototalnum*1+shopingnum*1;
-						
 						if (totalPricecou >= resData.couponPriceBaseline) {
-							// console.log(totalPrice2121, resData.couponPrice)
-							// totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
 							couponPriceText.text('-$' + resData.couponPrice);
 							subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
 							couponPriceOld = resData.couponPrice;
@@ -1401,11 +1312,6 @@
 							couponCode = couponCode2;
 							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 						} else {
-							
-							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
-							// console.log(resData)/*89898*/
-							// alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
-							// renderErrorMsg("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
 							renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
 							$(".coed_inp").val("");
 							
@@ -1481,52 +1387,87 @@
 				return;
 			} else{
 				
-				savr_address();  // addres 保存
-				var addressIdInt = $('.address-id').val();
-	
-				var reqData = {
-					"orderId": orderId,
-					"orderOrderitemidstr": orderItemArr.join(','),
-					"orderCouponId": couponId,
-					"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-					"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-					"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-					"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-					"addressinfoId": addressIdInt,
-				};
-				
-				var reqDataUp = {
-						"orderId": orderId,
-						"orderOrderitemidstr": orderItemArr.join(','),
-						"orderCouponId": couponId,
-						"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-						"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-						"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-						"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-						"addressinfoId": addressIdInt,
-					};
-	
-				// console.log(reqData)
-			    // console.log(reqDataUp)
-				// console.log(checkAddress(reqDataUp))
-				if (checkAddress(reqDataUp)) {
-					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
-					$.ajax({
-						url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
-						data: JSON.stringify(reqData),
+				// savr_address();  // addres 保存
+				// function savr_address(){
+					var returnaddressId;
+					var formData = $('.address-box form').serializeArray();
+					var reqData = formData.reduce(function (obj, item) {
+						obj[item.name] = item.value;
+						return obj
+					}, {});
+					//if (!inputCheck(reqData)) return;
+					// console.log("*****savr_address*******")
+					// console.log(reqData)
+					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+					 $.ajax({
+						url: '${APP_PATH}/MlfrontAddress/save',
 						type: 'post',
 						dataType: 'JSON',
+						data: JSON.stringify(reqData),
 						contentType: 'application/json',
 						success: function (data) {
-							var resData = JSON.parse(data).extend;
 							// console.log(data)
-							$(".loading").show();
-							window.location.href = '${APP_PATH }/paypal/mpay';
+							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
+							addressId = resDataAddress.addressId;
+							// console.log("addressId:"+addressId);
+							addressIdIntInt = resDataAddress.addressId;
+							returnaddressId = addressIdIntInt;
+							// console.log("addressIdIntInt:"+addressIdIntInt);
+							var addressBox = $('.address');
+							$('.address-id').val(resDataAddress.addressId);
+							/******/
+							var addressIdInt = $('.address-id').val();
+							 // console.log("addressIdInt:"+addressIdInt);
+							  // console.log(returnaddressId);
+							var reqData = {
+								"orderId": orderId,
+								"orderOrderitemidstr": orderItemArr.join(','),
+								"orderCouponId": couponId,
+								"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+								"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+								"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+								"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+								"addressinfoId": addressIdInt,
+							};
+							// console.log(reqData)
+							var reqDataUp = {
+									"orderId": orderId,
+									"orderOrderitemidstr": orderItemArr.join(','),
+									"orderCouponId": couponId,
+									"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+									"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+									"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+									"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+									"addressinfoId": addressIdInt,
+								};
+			// console.log(reqDataUp)
+			
+							// console.log(reqData)
+			 // console.log(reqDataUp)
+							// console.log(checkAddress(reqDataUp))
+							if (checkAddress(reqDataUp)) {
+								fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+								$.ajax({
+									url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
+									data: JSON.stringify(reqData),
+									type: 'post',
+									dataType: 'JSON',
+									contentType: 'application/json',
+									success: function (data) {
+										var resData = JSON.parse(data).extend;
+										// console.log(data)
+										$(".loading").show();
+										window.location.href = '${APP_PATH }/paypal/mpay';
+									}
+								})
+							} else {
+								renderSysMsg('Please fill in the shipping address And save it ')
+							 }
+							
 						}
 					})
-				} else {
-					renderSysMsg('Please fill in the shipping address And save it ')
-				 }
+				// }
+				
 			}
 			
 		})
