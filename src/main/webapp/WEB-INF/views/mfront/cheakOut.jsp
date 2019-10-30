@@ -1614,13 +1614,6 @@
 				$(".province").focus(function(){
 					$(this).removeClass("error_br")
 				})
-			}else if(!$("input[name='addressEmail']").val().match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
-					flag = 1;
-					$(".email").addClass("error_br");
-					$(".email").focus(function(){
-						$(this).removeClass("error_br")
-					})
-					 renderSysMsg('Email format is incorrect! Please re-enter')
 			}
 			
 			return flag;
