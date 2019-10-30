@@ -915,7 +915,6 @@ public class MlfrontCartController {
 		session.setAttribute("mlfrontCartItem", mlfrontCartItem);
 		String sessionId = session.getId();
 		//获取ip地址
-		//String Userip = IpUtils.getIp(res);
 		String Userip =sessionId;
 		session.setAttribute("Userip", Userip);
 		String nowTime = DateUtil.strTime14s();
