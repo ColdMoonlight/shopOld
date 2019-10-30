@@ -99,6 +99,11 @@ public class PaypalController {
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
+        
+        //放置session信息
+        Integer payFailTimes = 0;
+        session.setAttribute("payFailTimes", payFailTimes);
+        
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -125,7 +130,6 @@ public class PaypalController {
     }
     
     private String getAddressMoney(HttpSession session) {
-		// TODO Auto-generated method stub
     	String addressMoney = (String) session.getAttribute("addressMoney");
     	System.out.println("addressMoney:"+addressMoney);
 		return addressMoney;
@@ -163,6 +167,11 @@ public class PaypalController {
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_P_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_P_URL;
+        
+        //放置session信息
+        Integer payFailTimes = 0;
+        session.setAttribute("payFailTimes", payFailTimes);
+        
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -200,11 +209,7 @@ public class PaypalController {
             
             toUpdatePayInfoSuccess(session,payerId,paymentId);
             
-//            sendResultEmail(session);
-            
             System.out.println(payment.toJSON());
-            
-            
             
             if(payment.getState().equals("approved")){
                 return "mfront/paySuccess";
@@ -348,6 +353,10 @@ public class PaypalController {
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_M_URLIn)
     public String cancelPay(HttpSession session){
 		
+		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
+		payFailTimes+=1;
+        session.setAttribute("payFailTimes", payFailTimes);
+		
 		toUpdatePayInfoFail(session);
 		
         return "mfront/payFail";
@@ -359,6 +368,10 @@ public class PaypalController {
      * */
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_P_URLIn)
     public String pcancelPay(HttpSession session){
+		
+		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
+		payFailTimes+=1;
+        session.setAttribute("payFailTimes", payFailTimes);
 		
 		toUpdatePayInfoFail(session);
 		
