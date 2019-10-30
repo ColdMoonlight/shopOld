@@ -906,7 +906,7 @@ public class MlfrontCartController {
 		
 		String nowViewTime = DateUtil.strTime14s();
 		System.out.println("nowViewTime:"+nowViewTime);
-		
+		//记录加购数量
 		insertAddCartViewBuyNow(mlfrontCartItem,session);
 		
 		insertAddCheckOutViewBuyNow(mlfrontCartItem,session);
