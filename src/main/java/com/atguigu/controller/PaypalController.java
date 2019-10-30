@@ -83,8 +83,6 @@ public class PaypalController {
     	
     	String addressMoney = getAddressMoney(session);
     	
-
-    	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
     	
     	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
@@ -287,7 +285,7 @@ public class PaypalController {
     	//修改支付单状态
     	MlfrontPayInfo mlfrontPayInfoNew = new MlfrontPayInfo();
 		mlfrontPayInfoNew.setPayinfoId(payinfoId);
-		mlfrontPayInfoNew.setPayinfoStatus(0);
+//		mlfrontPayInfoNew.setPayinfoStatus(0);
 		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
 		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
 		mlfrontPayInfoIOne.setPayinfoStatus(1);//付款成功
