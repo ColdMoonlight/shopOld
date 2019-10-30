@@ -89,12 +89,12 @@ public class MlfrontCartController {
 	 * @param jsp
 	 * @return 
 	 * */
-	@RequestMapping("/topcCheakOut")
-	public String topcCheakOut() throws Exception{
-	
-		return "front/pccheakOut";
-	}
-	
+//	@RequestMapping("/topcCheakOut")
+//	public String topcCheakOut() throws Exception{
+//	
+//		return "front/pccheakOut";
+//	}
+//	
 	/**
 	 * 2.0	useOn	0530
 	 * 添加产品项进购物车toAddToCart
@@ -105,12 +105,10 @@ public class MlfrontCartController {
 	@ResponseBody
 	public Msg toAddToCart(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
 		String nowViewTime = DateUtil.strTime14s();
-		System.out.println("nowViewTime:"+nowViewTime);
+		System.out.println("toAddToCart	nowViewTime:"+nowViewTime);
 		
 		insertAddCartView(mlfrontCartItem,session);
 		
-		//接收传递进来的参数
-		System.out.println(mlfrontCartItem);
 		//放回响应域中
 		session.setAttribute("mlfrontCartItem", mlfrontCartItem);
 		
@@ -380,8 +378,9 @@ public class MlfrontCartController {
 		return Msg.success().add("resMsg", "添加成功");
 	}	
 	
+	
+	//记录加购数量
 	private void insertAddCartView(MlfrontCartItem mlfrontCartItem, HttpSession session) {
-		// TODO Auto-generated method stub
 		Integer productId = mlfrontCartItem.getCartitemProductId();
 		
 		MlbackProduct mlbackProductrep = new MlbackProduct();
