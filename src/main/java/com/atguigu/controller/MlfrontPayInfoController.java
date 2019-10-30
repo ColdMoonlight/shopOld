@@ -316,4 +316,20 @@ public class MlfrontPayInfoController {
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontPayInfoOne", mlfrontPayInfoResOne);
 	}
 	
+	
+	/**11.0	useOn	0505
+	 * MlfrontPayInfo	getFailTimes
+	 * @param MlfrontPayInfo
+	 */
+	@RequestMapping(value="/getFailTimes",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getFailTimes(HttpServletResponse rep,HttpServletRequest res,HttpSession session){
+		
+		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
+		//接受参数信息
+		System.out.println("session.getId():"+session.getId()+"payFailTimes:"+payFailTimes);
+		
+		return Msg.success().add("resMsg", "查询payFailTimes成功").add("payFailTimes", payFailTimes);
+	}
+	
 }
