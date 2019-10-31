@@ -800,7 +800,7 @@ public class MlfrontCartController {
 	
 	/**
 	 * 11.0	UseNow	0505
-	 * to	MlfrontOrder列表页面
+	 * to	MlfrontCartItem列表页面
 	 * @param jsp
 	 * @return 
 	 * */
@@ -832,17 +832,16 @@ public class MlfrontCartController {
 		return "back/mlbackCartPage";
 	}
 	
+	
 	/**
 	 * 13.0	UseNow	0505
-	 * to	MlfrontOrder列表页面
+	 * to	MlfrontCart列表页面
 	 * @param jsp
 	 * @return 
 	 * */
 	@RequestMapping(value="/getMlfrontCartByPage",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getMlfrontCartByPage(
-			@RequestParam(value = "pn", defaultValue = "1") Integer pn
-			,HttpSession session) {
+	public Msg getMlfrontCartByPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
