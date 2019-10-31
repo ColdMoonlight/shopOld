@@ -1806,14 +1806,14 @@ a:focus {
 	display: flex;
 	flex-direction: column;
 	align-items:center;
-	padding: 3em 0;
+	margin: 0 0 10px;
 }
 
 .box-none img {
 	display: block;
-	width: 160px;
-	height: 160px;
-	margin-top: 1em;
+	width: 60px;
+	height: 60px;
+	margin: 1em;
 }
 
 .box-none p {
@@ -2549,4 +2549,31 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .search_btn{display: -moz-inline-box;vertical-align: top;width: 30px; height: 30px;}
 .search_btn i{font-size: 20px;color: #333;}
 
-
+/**************************/
+.clearfix:after,
+.clearfix:before{content: "";display: table;}
+.clearfix:after{clear: both;}
+.clearfix{*zoom:1;}
+.order-info{width: 100%}
+.cp_img{width:78%; float: left;padding:0 1%;}
+.lefttp{float: left;width: 22%; text-align: center; margin: 0 0 10px;}
+.lefttp img{display: inline-block;width: 80px; height:80px;border: 1px solid #ccc;}
+.rightw{float: left;width:85%;font-size: 14px; color: #000;line-height: 20px;margin: 0 1% ;}
+.td-item{width:100%;float: left; color: #666;font-size: 12px;margin: 0 0 5px;padding: 0 1%;}
+.td-item span{}
+.td-item span:nth-of-type(1){font-size: 12px; color: #333;}
+.orderid{margin: 0 0 10px;color: #333;font-size: 14px;}
+.cal-info{border-top:1px solid #CCC}
+.listnum{margin: 0 0 5px;display: flex;flex-direction: row;justify-content: space-between;font-size: 14px;}
+.numhong{color:#ff186e;margin: 5px 0 0;text-align:right;font-size: 12px;}
+.danjia{width: 100%; float: left;}
+.cal-info{width: 100%; float: left;padding: 10px 2% 0;}
+.info_one {float: left;width:96%;margin:0 2%; padding: 0 2%; border: 1px solid #ccc;border-radius:2px; }
+.info_one li {font-size: 14px; float: left;width:100%; margin: 0 0 5px; line-height: 20px;}
+.info_one li span{color: #666;}
+.info_one li span:nth-of-type(1){color: #000;}
+.masage_cont {font-weight:bold;font-size: 16px; line-height: 24px; margin: 5px 0;}
+.btnContinue{float: left;border-radius:3px; width:96%; margin: 20px 2%; height: 40px; line-height: 40px; text-align: center; display: block;background: #ff186e; color: #fff;font-size: 16px;}
+.revceiver-info{margin: 0 0 10px;}
+.shop_contimg {border-top: 1px solid #ccc; padding: 10px 0 0;}
+.item_cont{float: left;width:75%;}
