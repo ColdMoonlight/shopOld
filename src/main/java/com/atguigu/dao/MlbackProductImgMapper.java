@@ -41,4 +41,6 @@ public interface MlbackProductImgMapper {
 	//查询本条图片否存在
 	List<MlbackProductImg> selectMlbackProductImgByPIdAndImgSort(MlbackProductImg example);
 	
+	List<MlbackProductImg> selectMlbackProductImgByProductImgId(Integer productimgId);
+	
 }
