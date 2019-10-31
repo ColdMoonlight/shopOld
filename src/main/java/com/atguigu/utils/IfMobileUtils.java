@@ -3,20 +3,19 @@ package com.atguigu.utils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
 public class IfMobileUtils {
 	
 	/**
 	 * 返回信息
 	 * */
 	public static String  isMobileOrPc(HttpServletResponse reponse,HttpServletRequest request){
+		String nowTime = DateUtil.strTime14s();
 		String requestHeader = request.getHeader("user-agent");
 		if(isMobileDevice(requestHeader)){
-			System.out.println("使用手机浏览器");
+			System.out.println("nowTime:"+nowTime+"使用手机浏览器");
 			return "1";
 		}else{
-			System.out.println("使用web浏览器");
+			System.out.println("nowTime:"+nowTime+"使用web浏览器");
 			return "0";//真实PC首页
 		}
 	}
@@ -42,6 +41,5 @@ public class IfMobileUtils {
         }
         return false;
 	}
-
 
 }

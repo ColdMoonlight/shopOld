@@ -140,7 +140,7 @@ public class MlfrontCartController {
 				String skuIdnamestr = mlfrontCartItem.getCartitemProductskuIdnamestr();
 				String skuNamestr =mlfrontCartItem.getCartitemProductskuNamestr();
 				int proNumberNew =mlfrontCartItem.getCartitemProductNumber();
-				String pidStr = pid+"";
+			//	String pidStr = pid+"";
 				String[] aa = cartitemIdstrUser.split(",");
 				int number = 0;
 				for(int i=0;i<aa.length;i++){
@@ -227,7 +227,6 @@ public class MlfrontCartController {
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
-				System.out.println(mlfrontCartItem);
 			}
 		}else{
 			//获取uid信息，去cart中用uid查询，是否有该uid的购物车
@@ -266,7 +265,7 @@ public class MlfrontCartController {
 				String skuIdnamestr = mlfrontCartItem.getCartitemProductskuIdnamestr();
 				String skuNamestr =mlfrontCartItem.getCartitemProductskuNamestr();
 				int proNumberNew =mlfrontCartItem.getCartitemProductNumber();
-				String pidStr = pid+"";
+				//String pidStr = pid+"";
 				String[] aa = cartitemIdstrUser.split(",");
 				int number = 0;
 				for(int i=0;i<aa.length;i++){
@@ -355,9 +354,7 @@ public class MlfrontCartController {
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
-				System.out.println(mlfrontCartItem);
 			}
-			
 		}
 		return Msg.success().add("resMsg", "添加成功");
 	}	
@@ -365,19 +362,16 @@ public class MlfrontCartController {
 	
 	//记录加购数量
 	private void insertAddCartView(MlfrontCartItem mlfrontCartItem, HttpSession session) {
+		//获取该产品id
 		Integer productId = mlfrontCartItem.getCartitemProductId();
-		
+		//通过pid查回该产品
 		MlbackProduct mlbackProductrep = new MlbackProduct();
 		mlbackProductrep.setProductId(productId);
-		
 		List<MlbackProduct> mlbackProductresList = mlbackProductService.selectMlbackProduct(mlbackProductrep);
 		MlbackProduct mlbackProductres = mlbackProductresList.get(0);
-		
+		//拿到seo名字+产品名
 		String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
 		String addcartviewdetailProname = mlbackProductres.getProductName();
-		
-		
-		
 		//准备参数信息
 		MlbackAddCartViewDetail mlbackAddCartViewDetailreq = new MlbackAddCartViewDetail();
 		//浏览对象
@@ -392,14 +386,10 @@ public class MlfrontCartController {
 		mlbackAddCartViewDetailreq.setAddcartviewdetailMotifytime(nowTime);
 		mlbackAddCartViewDetailreq.setAddcartviewdetailActNum(0); //计数用户行为，0纯加购	，1点buyNow附带的加购
 		mlbackProductViewDetailService.insertSelective(mlbackAddCartViewDetailreq);
-		
 	}
 	
-	
-	
-
 	/**3.0	useOn	0505
-	 * getCartProductNumber	get
+	 * getCartProductNumber	POST
 	 * @param 
 	 */
 	@RequestMapping(value="/getCartProductNumber",method=RequestMethod.POST)
@@ -499,7 +489,6 @@ public class MlfrontCartController {
 				mlfrontCartItemListRes.add(mlfrontCartItemListFor.get(0));
 			}
 		}
-		System.out.println(mlfrontCartItemListRes.size());
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontCartItemListRes", mlfrontCartItemListRes);
 	}
 	
@@ -515,14 +504,9 @@ public class MlfrontCartController {
 	@RequestMapping(value="/cartToOrder",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg cartToOrder(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody List<MlfrontCartItem> mlfrontCartItemList) throws Exception{
-		//接收传递进来的参数
-		System.out.println(mlfrontCartItemList);
-		
-		String nowViewTime = DateUtil.strTime14s();
-		System.out.println("nowViewTime:"+nowViewTime);
-		
+		//计算cart到boynow的加购次数
 		calcFormCartListToCheakoutPage(mlfrontCartItemList,session);
-		
+		//接收传递进来的参数
 		System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
 		//从其中一个中获取cartId
 		Integer cartId = 0;
@@ -599,7 +583,6 @@ public class MlfrontCartController {
 				mlfrontOrderItemOldone.setOrderId(orderId);
 				mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemOldone);
 			}
-
 		}else{
 			//loginUser不为null
 			Integer Uid = loginUser.getUserId();
@@ -647,7 +630,6 @@ public class MlfrontCartController {
 			orderItemIdStr = orderItemIdStr.substring(1);
 			MlfrontOrder mlfrontOrderNew  = new MlfrontOrder();
 			mlfrontOrderNew.setOrderOrderitemidstr(orderItemIdStr);
-			//mlfrontOrderNew.setOrderIp(Userip);
 			mlfrontOrderNew.setOrderUid(Uid);//这是登录用户，存错登录状态
 			mlfrontOrderNew.setOrderStatus(0);//cart To Order
 			mlfrontOrderNew.setOrderCreatetime(nowTime);
@@ -671,8 +653,7 @@ public class MlfrontCartController {
 		return Msg.success().add("resMsg", "订单提交成功");
 	}
 	
-
-
+	
 	/**
 	 * 7.0	zsh 0615
 	 * 删除购物车中的项delCartItem
@@ -683,7 +664,6 @@ public class MlfrontCartController {
 	@ResponseBody
 	public Msg delCartItem(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
 		//接收传递进来的参数
-		System.out.println(mlfrontCartItem);
 		Integer cartItemIdOriginal = mlfrontCartItem.getCartitemId();
 		int isDelSuccess = 0;
 		if(cartItemIdOriginal==null){
@@ -739,14 +719,13 @@ public class MlfrontCartController {
 	/**
 	 * 8.0	zsh 0624
 	 * 添加产品项进购物车updateCartItemSkuNum
-	 * @param Msggenggai
-	 * @return 
+	 * @param
+	 * @return Msg
 	 * */
 	@RequestMapping(value="/updateCartItemSkuNum",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg updateCartItemSkuNum(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
 		//接收传递进来的参数
-		System.out.println(mlfrontCartItem);
 		Integer cartItemIdOriginal = mlfrontCartItem.getCartitemId();
 		Integer number = mlfrontCartItem.getCartitemProductNumber();
 		
@@ -758,7 +737,7 @@ public class MlfrontCartController {
 		//2删除该条CartItem信息
 		mlfrontCartItemService.updateByPrimaryKeySelective(MlfrontCartItemUpdate);
 		
-		return Msg.success().add("resMsg", "添加成功");
+		return Msg.success().add("resMsg", "mlfrontCartItemUpdate successful");
 	}
 	
 	
@@ -942,7 +921,7 @@ public class MlfrontCartController {
 				String skuIdnamestr = mlfrontCartItem.getCartitemProductskuIdnamestr();
 				String skuNamestr =mlfrontCartItem.getCartitemProductskuNamestr();
 				int proNumberNew =mlfrontCartItem.getCartitemProductNumber();
-				String pidStr = pid+"";
+				//String pidStr = pid+"";
 				String[] aa = cartitemIdstrUser.split(",");
 				int number = 0;
 				for(int i=0;i<aa.length;i++){
@@ -1075,7 +1054,7 @@ public class MlfrontCartController {
 				String skuIdnamestr = mlfrontCartItem.getCartitemProductskuIdnamestr();
 				String skuNamestr =mlfrontCartItem.getCartitemProductskuNamestr();
 				int proNumberNew =mlfrontCartItem.getCartitemProductNumber();
-				String pidStr = pid+"";
+				//String pidStr = pid+"";
 				String[] aa = cartitemIdstrUser.split(",");
 				int number = 0;
 				for(int i=0;i<aa.length;i++){
@@ -1427,7 +1406,6 @@ public class MlfrontCartController {
 			
 			MlbackProduct mlbackProductrep = new MlbackProduct();
 			mlbackProductrep.setProductId(productId);
-			
 			List<MlbackProduct> mlbackProductresList = mlbackProductService.selectMlbackProduct(mlbackProductrep);
 			MlbackProduct mlbackProductres = mlbackProductresList.get(0);
 			
