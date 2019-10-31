@@ -314,4 +314,10 @@
     where product_id = #{productId,jdbcType=INTEGER} and productImg_sort_order = #{productimgSortOrder,jdbcType=INTEGER}
   </select>
   
+  <!-- selectMlbackProductImgByProductImgId使用中 -->
+  <select id="selectMlbackProductImgByProductImgId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_productimg 
+    where productImg_id = #{productimgId,jdbcType=INTEGER}
+  </select>
 </mapper>

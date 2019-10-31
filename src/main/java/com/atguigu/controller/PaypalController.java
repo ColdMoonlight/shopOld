@@ -123,6 +123,8 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            System.out.println(e.getMessage());
+            System.out.println(1);
         }
         return "redirect:/";
     }
@@ -381,7 +383,7 @@ public class PaypalController {
     	//修改支付单状态
     	MlfrontPayInfo mlfrontPayInfoNew = new MlfrontPayInfo();
 		mlfrontPayInfoNew.setPayinfoId(payinfoId);
-		mlfrontPayInfoNew.setPayinfoStatus(0);
+//		mlfrontPayInfoNew.setPayinfoStatus(0);
 		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
 		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
 		mlfrontPayInfoIOne.setPayinfoStatus(0);//0未支付;1已支付;2支付失败;3已审核;4已发货;

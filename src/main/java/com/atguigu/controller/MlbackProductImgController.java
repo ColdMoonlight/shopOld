@@ -53,9 +53,18 @@ public class MlbackProductImgController {
 	public Msg delete(@RequestBody MlbackProductImg mlbackProductImg){
 		//接收id信息
 		Integer productimgId = mlbackProductImg.getProductimgId();
-		int intResult = mlbackProductImgService.deleteByPrimaryKey(productimgId);
-		System.out.println(intResult);
-		return Msg.success().add("resMsg", "delete success");
+		
+		List<MlbackProductImg> mbackProductImgResList =mlbackProductImgService.selectMlbackProductImgByProductImgId(productimgId);
+		if(mbackProductImgResList.size()>0){
+			//本条存在,执行删除
+			int intResult = mlbackProductImgService.deleteByPrimaryKey(productimgId);
+			
+			return Msg.success().add("resMsg", "delete success");
+		}else{
+			//本条不存在,仅此而已
+			System.out.println("本条不存在,刷新后重试");
+			return Msg.success().add("resMsg", "本条不存在,刷新后重试");
+		}
 	}
 	
 }

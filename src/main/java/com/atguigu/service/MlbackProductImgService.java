@@ -106,5 +106,16 @@ public class MlbackProductImgService {
 		return mlbackProductImgList;
 	}
 	
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 用productimgId,查看MlbackProductImg信息
+	 * 
+	 * */
+	public List<MlbackProductImg> selectMlbackProductImgByProductImgId(Integer productimgId) {
+		List<MlbackProductImg>  mlbackProductImgList = mlbackProductImgMapper.selectMlbackProductImgByProductImgId(productimgId);
+		return mlbackProductImgList;
+	}
+	
 	
 }

@@ -19,7 +19,6 @@ import com.atguigu.bean.MlbackAddCartViewDetail;
 import com.atguigu.bean.MlbackAddCheakoutViewDetail;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackProduct;
-import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.MlfrontCart;
 import com.atguigu.bean.MlfrontCartItem;
 import com.atguigu.bean.MlfrontOrder;
@@ -30,7 +29,6 @@ import com.atguigu.bean.PageTimeVo;
 import com.atguigu.service.MlbackAddCartViewDetailService;
 import com.atguigu.service.MlbackAddCheakoutViewDetailService;
 import com.atguigu.service.MlbackProductService;
-import com.atguigu.service.MlbackProductViewDetailService;
 import com.atguigu.service.MlfrontCartItemService;
 import com.atguigu.service.MlfrontCartService;
 import com.atguigu.service.MlfrontOrderItemService;
@@ -84,18 +82,6 @@ public class MlfrontCartController {
 	}
 	
 	/**
-	 * 1.1	useOn	0505
-	 * 前台移动端解算页面mfront/cheakOut
-	 * @param jsp
-	 * @return 
-	 * */
-//	@RequestMapping("/topcCheakOut")
-//	public String topcCheakOut() throws Exception{
-//	
-//		return "front/pccheakOut";
-//	}
-//	
-	/**
 	 * 2.0	useOn	0530
 	 * 添加产品项进购物车toAddToCart
 	 * @param Msg
@@ -113,8 +99,6 @@ public class MlfrontCartController {
 		session.setAttribute("mlfrontCartItem", mlfrontCartItem);
 		
 		String sessionId = session.getId();
-		//获取ip地址
-		//String Userip = IpUtils.getIp(res);
 		String Userip =sessionId;
 		session.setAttribute("Userip", Userip);
 		String nowTime = DateUtil.strTime14s();
