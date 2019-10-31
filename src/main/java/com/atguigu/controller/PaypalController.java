@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlfrontAddress;
@@ -270,7 +271,8 @@ public class PaypalController {
      * wap端页面处理toUpdatePayInfoSuccess
      * 
      * */
-    @RequestMapping(method = RequestMethod.POST, value = "tomUpdatePayInfoSuccess")
+    @RequestMapping(value = "/tomUpdatePayInfoSuccess",method = RequestMethod.POST)
+    @ResponseBody
     public Msg msuccessPage(HttpSession session,@RequestParam("pageStr") String pageStr){
     	
     	String paymentId = (String) session.getAttribute("successpaymentId");
