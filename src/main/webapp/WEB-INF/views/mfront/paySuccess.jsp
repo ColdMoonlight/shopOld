@@ -46,7 +46,7 @@
 	
 </head>
 
-<body style="background: #Fff;">
+<body style="">
 
   <jsp:include page="mheader.jsp"></jsp:include>
 
@@ -59,14 +59,17 @@
     <img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_pay.jpg">
 
     <div class="box-none">
-      <img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
-	  <div class="revceiver-info"> </div>
-	    <div class="info_order"> </div>
-	  <div class="info_one"></div>
-	 
+		<div class="box-none_cont">
+			<div class="right_head">
+					<img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
+					  <div class="revceiver-info"> </div>
+					  <div class="info_order"> </div>
+				</div>
+			<div class="info_one"></div>
+		</div>
     </div>
 	<div class="order-info">
-		<div class="product_shop">
+		<div class="product_shop clearfix">
 			
 			
 		</div>
@@ -83,37 +86,36 @@
   <script type="text/javascript">
 	  var sessionaddressMoney = '${sessionScope.addressMoney}';
 	  console.log(sessionaddressMoney)
-	  
-	  
 	   var reqmUpdatePayInfoData = {
-      "pageStr": "pageStr"
-    };
-	  
+		  "pageStr": "pageStr"
+		};
 	  $.ajax({
-	    url: '${APP_PATH }/paypal/tomUpdatePayInfoSuccess',
-	  	data: reqmUpdatePayInfoData,
-	    type: "POST",
-	    success: function (data) {
-	      console.log(data)
-	    }
-  });
-	  
-	$.ajax({
-		url: '${APP_PATH }/MlfrontPayInfo/getsuccessPayinfo',
-		type: "POST",
-		success: function (data) {
-			// console.log(data)
-			var mlfrontOrderOne = data.extend.mlfrontOrderOne;
-			var payinfoId = data.extend.payinfoId;
-			var orderMoney = mlfrontOrderOne.orderMoney;
-			// console.log(mlfrontOrderOne);
-			//console.log("orderMoney:"+orderMoney);
-			getPayInfo(payinfoId,orderMoney);
-			
-			$(".order-id").val(mlfrontOrderOne.orderId);
-			
-		}
-	});
+			url: '${APP_PATH }/paypal/tomUpdatePayInfoSuccess',
+			data: reqmUpdatePayInfoData,
+			type: "POST",
+			success: function (data) {
+			  getsuccessinfo()
+			}
+	  });
+	  function getsuccessinfo(){
+		  $.ajax({
+		  	url: '${APP_PATH }/MlfrontPayInfo/getsuccessPayinfo',
+		  	type: "POST",
+		  	success: function (data) {
+		  		console.log(data)
+		  		var mlfrontOrderOne = data.extend.mlfrontOrderOne;
+		  		var payinfoId = data.extend.payinfoId;
+		  		var orderMoney = mlfrontOrderOne.orderMoney;
+		  		// console.log(mlfrontOrderOne);
+		  		//console.log("orderMoney:"+orderMoney);
+		  		getPayInfo(payinfoId,orderMoney);
+		  		
+		  		$(".order-id").val(mlfrontOrderOne.orderId);
+		  		
+		  	}
+		  });
+	  }
+
 	
 	function getPayInfo(payinfoId,orderMoney){
 		
@@ -184,16 +186,7 @@
 				}
 			}
 		});
-		var resDataMoneyold;
-		$.ajax({
-			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
-			type: 'post',
-			success: function (data) {
-				var resDataMoney = data.extend.areafreightMoney;
-			    resDataMoney =resDataMoneyold;
-				console.log(resDataMoneyold)/************/
-			}
-		});
+
 		
 	}
 	
@@ -263,8 +256,7 @@
 				var skuNameArr = data.list[i].orderitemPskuNamestr.split(',');
 				var skuItemNameArr = data.list[i].orderitemPskuIdnamestr.split(',');
 				for (var j = 0, len2 = skuItemNameArr.length; j < len2; j += 1) {
-					tbodyHtml += '<div class="td-item"><span>' + skuItemNameArr[j] + '</span>:<span>' + skuNameArr[j] +
-						'</span></div>';
+					tbodyHtml += '<div class="td-item"><span>' + skuNameArr[j] +'</span>,</div>';
 				}
 				tbodyHtml += '</div>';
 				tbodyHtml += '</div>';
@@ -281,21 +273,14 @@
 
    /**************/
 	function renderReceiverinfo(data) {
-		var htmlname = '<div>Thank you '+ data.addressUserfirstname +'</div>';
+		var htmlname = '<div classs="info_name">Thank You <b>'+ data.addressUserfirstname +' </b>' + data.addressTelephone + '</div>';
 		// var htmlorder '<div class="orderid">Your Order ID : '+data.payinfoPlateNum+'</div>';
 		$('.revceiver-info').html(htmlname);
 		// $('.info_order').html(htmlname);
 		var htmlinfo='';
-	    	htmlinfo= '<div class="masage_cont">coustomer information</div>'+
+	    	htmlinfo= '<div class="masage_cont">AddressDetail</div>'+
 			            '<ul>'+
-						'<li><span>Phone : </span><span>' + data.addressTelephone + '</span></li>'+
-						'<li><span>AddressDetail : </span><span>' + data.addressDetail + '</span></li>'+
-						'<li><span>Email : </span><span>'+ data.addressEmail+'</span></li>'+
-						'<li><span>PddressPost : </span><span>' + data.addressPost + '</span></li>'+
-						'<li><span>AddressCountryAll : </span><span>' + data.addressCountryAll + '</span> </li>'+
-						'<li><span>AddressCountry : </span><span>' + data.addressCountry+ '</span> </li>'+
-						'<li><span>AddressProvince : </span><span>' + data.addressProvince + '</span></li>'+
-						'<li><span>AddressCity : </span><span>' + data.addressCity + '</span></li>'+
+						'<li>' + data.addressCountryAll + ' ' + data.addressProvince + ' ' + data.addressCity + ' ' + data.addressDetail + '</li>'+
 					'</ul>';
 		$(".info_one").html(htmlinfo);		
 		

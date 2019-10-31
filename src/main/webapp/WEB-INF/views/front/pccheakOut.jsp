@@ -1099,39 +1099,6 @@
 		}
 		datalocation ();
 		
-				function savr_address(){
-					//var returnaddressId;
-					var formData = $('.address-box form').serializeArray();
-					var reqData = formData.reduce(function (obj, item) {
-						obj[item.name] = item.value;
-						return obj
-					}, {});
-					//if (!inputCheck(reqData)) return;
-					// console.log("************")
-					// console.log(reqData)
-					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-					$.ajax({
-						url: '${APP_PATH}/MlfrontAddress/save',
-						type: 'post',
-						dataType: 'text',
-						data: JSON.stringify(reqData),
-						contentType: 'application/json',
-						success: function (data) {
-							 // console.log(data)
-							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-							 // var resDataAddress = data.extend.mlfrontAddress;
-							 // console.log(resDataAddress)
-							addressId = resDataAddress.addressId;
-							addressIdIntInt = resDataAddress.addressId;
-							returnaddressId = addressIdIntInt;
-							// console.log("addressIdIntInt:"+addressIdIntInt);
-							var addressBox = $('.address');
-							$('.address-id').val(resDataAddress.addressId);
-						}
-					})
-					//return returnaddressId;
-				}
-
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
 			var html = '';
@@ -1497,52 +1464,79 @@
 				return ;
 			} else{
 				
-				savr_address();  // addres 保存
-				var addressIdInt = $('.address-id').val();
-			
-				var reqData = {
-					"orderId": orderId,
-					"orderOrderitemidstr": orderItemArr.join(','),
-					"orderCouponId": couponId,
-					"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-					"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-					"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-					"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-					"addressinfoId": addressIdInt,
-				};
-				
-				var reqDataUp = {
-						"orderId": orderId,
-						"orderOrderitemidstr": orderItemArr.join(','),
-						"orderCouponId": couponId,
-						"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-						"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-						"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-						"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-						"addressinfoId": addressIdInt,
-					};
-			
-				// console.log(reqData)
-			    // console.log(reqDataUp)
-				// console.log(checkAddress(reqDataUp))
-				if (checkAddress(reqDataUp)) {
-					fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+				// savr_address();  // addres 保存
+					var formData = $('.address-box form').serializeArray();
+					var reqData = formData.reduce(function (obj, item) {
+						obj[item.name] = item.value;
+						return obj
+					}, {});
+					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
 					$.ajax({
-						url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
-						data: JSON.stringify(reqData),
+						url: '${APP_PATH}/MlfrontAddress/save',
 						type: 'post',
 						dataType: 'text',
+						data: JSON.stringify(reqData),
 						contentType: 'application/json',
 						success: function (data) {
-							var resData = JSON.parse(data).extend;
-							// console.log(data)
-							$(".loading").show();
-							window.location.href = '${APP_PATH }/paypal/ppay';
+							 // console.log(data)
+							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
+							 // var resDataAddress = data.extend.mlfrontAddress;
+							 // console.log(resDataAddress)
+							addressId = resDataAddress.addressId;
+							addressIdIntInt = resDataAddress.addressId;
+							returnaddressId = addressIdIntInt;
+							// console.log("addressIdIntInt:"+addressIdIntInt);
+							var addressBox = $('.address');
+							$('.address-id').val(resDataAddress.addressId);
+							var addressIdInt = $('.address-id').val();
+							var reqData = {
+								"orderId": orderId,
+								"orderOrderitemidstr": orderItemArr.join(','),
+								"orderCouponId": couponId,
+								"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+								"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+								"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+								"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+								"addressinfoId": addressIdInt,
+							};
+							
+							var reqDataUp = {
+									"orderId": orderId,
+									"orderOrderitemidstr": orderItemArr.join(','),
+									"orderCouponId": couponId,
+									"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+									"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+									"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+									"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+									"addressinfoId": addressIdInt,
+								};
+										
+							// console.log(reqData)
+							// console.log(reqDataUp)
+							// console.log(checkAddress(reqDataUp))
+							if (checkAddress(reqDataUp)) {
+								fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+								$.ajax({
+									url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
+									data: JSON.stringify(reqData),
+									type: 'post',
+									dataType: 'text',
+									contentType: 'application/json',
+									success: function (data) {
+										var resData = JSON.parse(data).extend;
+										// console.log(data)
+										$(".loading").show();
+										window.location.href = '${APP_PATH }/paypal/ppay';
+									}
+								})
+							} else {
+								renderSysMsg('Please fill in the shipping address ')
+							 }
+							
+							
 						}
 					})
-				} else {
-					renderSysMsg('Please fill in the shipping address ')
-				 }
+				
 			}
 			
 		})
