@@ -44,13 +44,12 @@ import com.paypal.base.rest.PayPalRESTException;
 @Controller
 @RequestMapping("/paypal")
 public class PaypalController {
-		
+	//wap端相关路径
 	public static final String PAYPAL_SUCCESS_M_URL = "paypal/msuccess";
     public static final String PAYPAL_CANCEL_M_URL = "paypal/mcancel";
     public static final String PAYPAL_SUCCESS_M_URLIn = "msuccess";
     public static final String PAYPAL_CANCEL_M_URLIn = "mcancel";
-    
-    
+    //pc端相关路径
     public static final String PAYPAL_SUCCESS_P_URL = "paypal/psuccess";
     public static final String PAYPAL_CANCEL_P_URL = "paypal/pcancel";
     public static final String PAYPAL_SUCCESS_P_URLIn = "psuccess";
@@ -78,16 +77,16 @@ public class PaypalController {
 
     /**1.0
      * 组装参数,WAP端发起真实的支付
-     * paypal/pay
+     * paypal/mpay
      * */
     @RequestMapping(method = RequestMethod.GET, value = "mpay")
     public String pay(HttpServletRequest request,HttpSession session){
     	System.out.println("into**********/paypal/mpay**********");
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
-    	
+    	//从session中获取优惠券减去额度
     	String Shopdiscount = getCouponMoney(session);
-    	
+    	//从session中获取地址运费
     	String addressMoney = getAddressMoney(session);
     	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
@@ -136,12 +135,14 @@ public class PaypalController {
         return "redirect:/";
     }
     
+    //从session中获取地址运费
     private String getAddressMoney(HttpSession session) {
     	String addressMoney = (String) session.getAttribute("addressMoney");
     	System.out.println("addressMoney:"+addressMoney);
 		return addressMoney;
 	}
-
+    
+    //从session中获取优惠券减去额度
 	private String getCouponMoney(HttpSession session) {
     	String Shopdiscount = (String) session.getAttribute("CouponCodeMoney");
     	System.out.println("Shopdiscount:"+Shopdiscount);
@@ -157,9 +158,9 @@ public class PaypalController {
     	System.out.println("into**********/paypal/ppay**********");
     	//读取参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
-    	
+    	//从session中获取优惠券减去额度
     	String Shopdiscount = getCouponMoney(session);
-    	
+    	//从session中获取地址运费
     	String addressMoney = getAddressMoney(session);
     	
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
@@ -205,7 +206,7 @@ public class PaypalController {
     }
     
     /**2.0
-     * 返回成功页面
+     * wap端返回成功页面
      * mfront/paySuccess
      * */
     @RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_M_URLIn)
@@ -217,12 +218,9 @@ public class PaypalController {
             session.setAttribute("successpaymentId", paymentId);
             session.setAttribute("successpayerId", payerId);
             session.setAttribute("successpayment", payment);
-            
             //toUpdatePayInfoSuccess(session,payerId,paymentId);
             
             System.out.println(payment.toJSON());
-            
-            
             
             if(payment.getState().equals("approved")){
                 return "mfront/paySuccess";
@@ -238,7 +236,37 @@ public class PaypalController {
     }
     
     
-    /**2.1.1
+    /**2.1
+     * PC成功页面
+     * front/paySuccess
+     * */
+    @RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_P_URLIn)
+    public String pcsuccessPay(HttpSession session,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
+
+    	try {
+            Payment payment = paypalService.executePayment(paymentId, payerId);
+            
+            session.setAttribute("successpaymentId", paymentId);
+            session.setAttribute("successpayerId", payerId);
+            session.setAttribute("successpayment", payment);
+            
+            toUpdatePayInfoSuccess(session,payerId,paymentId);
+            
+            System.out.println(payment.toJSON());
+            
+            if(payment.getState().equals("approved")){
+                return "front/paySuccess";
+            }else{
+            	return "front/payFail";
+            }
+        } catch (PayPalRESTException e) {
+            log.error(e.getMessage());
+            System.out.println(e.getMessage());
+            return "front/payFail";
+        }
+    }
+    
+    /**3.0
      * wap端页面处理toUpdatePayInfoSuccess
      * 
      * */
@@ -249,21 +277,24 @@ public class PaypalController {
     	String payerId = (String) session.getAttribute("successpayerId");
     	//
     	Payment payment = (Payment) session.getAttribute("successpayment"); 
-    	
+    	//3.0.1wap端处理toUpdatePayInfoSuccess
     	toUpdatePayInfoSuccess(session,payerId,paymentId);
     	
     	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();
     	
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
-    	
-    	insertPaypalReturnAddredd(PayerInfo,payinfoId,paymentId);
+    	//3.0.2wap端处理insertPaypalReturnAddress
+    	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);
     	
     	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");
     }
     
-    
+    /**
+     * 3.0.2wap端处理
+     * insertPaypalReturnAddress
+     * */
     @SuppressWarnings("deprecation")
-	private void insertPaypalReturnAddredd(PayerInfo payerInfo, Integer payinfoId, String paymentId) {
+	private void insertPaypalReturnAddress(PayerInfo payerInfo, Integer payinfoId, String paymentId) {
     	
     	
     	String email =  payerInfo.getEmail();
@@ -292,71 +323,17 @@ public class PaypalController {
     	mlPaypalShipAddressService.insertSelective(mlPaypalShipAddress);
     	
 	}
-
-	/**2.1
-     * 返回PC成功页面
-     * front/paySuccess
-     * */
-    @RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_P_URLIn)
-    public String pcsuccessPay(HttpSession session,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
-
-    	try {
-            Payment payment = paypalService.executePayment(paymentId, payerId);
-            
-            toUpdatePayInfoSuccess(session,payerId,paymentId);
-            
-            System.out.println(payment.toJSON());
-            
-            if(payment.getState().equals("approved")){
-                return "front/paySuccess";
-            }else{
-            	return "front/payFail";
-            }
-        } catch (PayPalRESTException e) {
-            log.error(e.getMessage());
-            System.out.println(e.getMessage());
-            return "front/payFail";
-        }
-    }
     
-    private void sendResultEmail(HttpSession session,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
-    	try {
-    		//从payID，查oid，
-        	
-        	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
-    		
-    		MlfrontUser loginUser =(MlfrontUser) session.getAttribute("loginUser");
-    		
-    		Integer addressId = (Integer) session.getAttribute("sendAddressinfoId");
-    				
-    		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
-    		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
-    		mlfrontAddressReq.setAddressId(addressId);
-    		
-    		List<MlfrontAddress> mlfrontAddressResList = mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
-    		
-    		mlfrontAddressRes = mlfrontAddressResList.get(0);
-    		System.out.println(mlfrontAddressRes.toString());
-    		String userEmail = mlfrontAddressRes.getAddressEmail();
-    		
-			//测试方法
-			String getToEmail = userEmail;
-			String Message = "pay Success</br>,已收到您的付款,会尽快给您安排发货,注意留意发货通知.祝您购物愉快";
-			EmailUtilshtml.readyEmailPaySuccess(getToEmail, Message,mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
-			EmailUtilshtmlCustomer.readyEmailPaySuccessCustomer(getToEmail, Message,mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-
+    /**
+     * 
+     * 3.0.1wap端处理toUpdatePayInfoSuccess
+     * */
 	private void toUpdatePayInfoSuccess(HttpSession session, String payerId, String paymentId) {
     	
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
     	//修改支付单状态
     	MlfrontPayInfo mlfrontPayInfoNew = new MlfrontPayInfo();
 		mlfrontPayInfoNew.setPayinfoId(payinfoId);
-//		mlfrontPayInfoNew.setPayinfoStatus(0);
 		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
 		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
 		mlfrontPayInfoIOne.setPayinfoStatus(1);//付款成功
@@ -408,15 +385,46 @@ public class PaypalController {
 		session.setAttribute("successOrderId", orderId);
 		session.setAttribute("payinfoIdStr", payinfoIdStr);
 		
-		
 		String addressMoney = getAddressMoney(session);
-		
+		//3.0.1.1	wap+pc同时处理邮件
 		sendResultEmail(session,mlfrontPayInfoIOne, mlfrontOrderResOne,addressMoney);
 		
 	}
 
-	/**2.0
-     * 返回失败页面
+	
+    /**
+     * 3.0.1.1	wap+pc同时处理邮件
+     * */
+    private void sendResultEmail(HttpSession session,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
+    	try {
+        	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
+    		
+    		Integer addressId = (Integer) session.getAttribute("sendAddressinfoId");
+    				
+    		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
+    		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
+    		mlfrontAddressReq.setAddressId(addressId);
+    		
+    		List<MlfrontAddress> mlfrontAddressResList = mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
+    		
+    		mlfrontAddressRes = mlfrontAddressResList.get(0);
+    		System.out.println(mlfrontAddressRes.toString());
+    		String userEmail = mlfrontAddressRes.getAddressEmail();
+    		
+			//测试方法
+			String getToEmail = userEmail;
+			String Message = "pay Success</br>,已收到您的付款,会尽快给您安排发货,注意留意发货通知.祝您购物愉快";
+			EmailUtilshtml.readyEmailPaySuccess(getToEmail, Message,mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
+			EmailUtilshtmlCustomer.readyEmailPaySuccessCustomer(getToEmail, Message,mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+    
+
+	/**4.0
+     * 返回wap失败页面
      * mfront/payFail
      * */
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_M_URLIn)
@@ -425,13 +433,13 @@ public class PaypalController {
 		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
 		payFailTimes+=1;
         session.setAttribute("payFailTimes", payFailTimes);
-		
+		//4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
         return "mfront/payFail";
     }
 	
-	/**2.0
+	/**4.1
      * 返回PC失败页面
      * front/payFail
      * */
@@ -441,18 +449,21 @@ public class PaypalController {
 		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
 		payFailTimes+=1;
         session.setAttribute("payFailTimes", payFailTimes);
-		
+        //4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
         return "front/payFail";
     }
     
+	/**
+	 * 
+	 * 4.0.1更新失败所需修改的表
+	 * */
     private void toUpdatePayInfoFail(HttpSession session) {
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
     	//修改支付单状态
     	MlfrontPayInfo mlfrontPayInfoNew = new MlfrontPayInfo();
 		mlfrontPayInfoNew.setPayinfoId(payinfoId);
-//		mlfrontPayInfoNew.setPayinfoStatus(0);
 		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
 		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
 		mlfrontPayInfoIOne.setPayinfoStatus(0);//0未支付;1已支付;2支付失败;3已审核;4已发货;
@@ -478,8 +489,7 @@ public class PaypalController {
 	}
 
 	/**
-     * 内部调用,获取发送信息
-     * 
+     * 内部调用,封装toPaypalInfo
      * */
     private ToPaypalInfo getPayInfo(HttpSession session) {
     	//从session中获取对象
@@ -511,11 +521,17 @@ public class PaypalController {
 		return toPaypalInfo;
 	}
 	
+    /**
+     * 内部调用,获取getMlfrontAddress
+     * */
     private MlfrontAddress getMlfrontAddress(HttpSession session) {
     	MlfrontAddress mlfrontAddressToPay = (MlfrontAddress) session.getAttribute("mlfrontAddressToPay");
 		return mlfrontAddressToPay;
 	}
     
+    /**
+     * 内部调用,获取getMlfrontOrderItemList
+     * */
     private List<MlfrontOrderItem> getMlfrontOrderItemList(HttpSession session) {
     	Integer orderId = (Integer) session.getAttribute("orderId");
     	
