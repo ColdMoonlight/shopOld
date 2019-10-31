@@ -70,5 +70,10 @@
 		<table tableName="tb_mlfront_payInfo" domainObjectName="MlfrontPayInfo"></table>
 		<table tableName="tb_mlfront_review" domainObjectName="MlfrontReview"></table>-->
 		
+		
+		<!--
+		<table tableName="tb_paypal_shippingAddress" domainObjectName="MlPaypalShipAddress"></table>-->
+
+		
 	</context>
 </generatorConfiguration>
