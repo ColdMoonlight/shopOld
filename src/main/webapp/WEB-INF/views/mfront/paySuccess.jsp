@@ -83,6 +83,21 @@
   <script type="text/javascript">
 	  var sessionaddressMoney = '${sessionScope.addressMoney}';
 	  console.log(sessionaddressMoney)
+	  
+	  
+	   var reqmUpdatePayInfoData = {
+      "pageStr": "pageStr"
+    };
+	  
+	  $.ajax({
+	    url: '${APP_PATH }/paypal/tomUpdatePayInfoSuccess',
+	  	data: reqmUpdatePayInfoData,
+	    type: "POST",
+	    success: function (data) {
+	      console.log(data)
+	    }
+  });
+	  
 	$.ajax({
 		url: '${APP_PATH }/MlfrontPayInfo/getsuccessPayinfo',
 		type: "POST",
