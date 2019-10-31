@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.MlfrontUser;
+import com.atguigu.bean.Msg;
 import com.atguigu.bean.ToPaypalInfo;
 import com.atguigu.enumC.PaypalPaymentIntent;
 import com.atguigu.enumC.PaypalPaymentMethod;
+import com.atguigu.service.MlPaypalShipAddressService;
 import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
@@ -34,6 +37,7 @@ import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
 import com.atguigu.utils.URLUtils;
 import com.paypal.api.payments.Links;
+import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
@@ -68,6 +72,9 @@ public class PaypalController {
     
     @Autowired
     MlfrontAddressService mlfrontAddressService;
+    
+    @Autowired
+    MlPaypalShipAddressService mlPaypalShipAddressService;
 
     /**1.0
      * 组装参数,WAP端发起真实的支付
@@ -207,9 +214,15 @@ public class PaypalController {
     	try {
             Payment payment = paypalService.executePayment(paymentId, payerId);
             
-            toUpdatePayInfoSuccess(session,payerId,paymentId);
+            session.setAttribute("successpaymentId", paymentId);
+            session.setAttribute("successpayerId", payerId);
+            session.setAttribute("successpayment", payment);
+            
+            //toUpdatePayInfoSuccess(session,payerId,paymentId);
             
             System.out.println(payment.toJSON());
+            
+            
             
             if(payment.getState().equals("approved")){
                 return "mfront/paySuccess";
@@ -219,12 +232,68 @@ public class PaypalController {
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
             System.out.println(e.getMessage());
-            return "mfront/payFail";
+            //return "mfront/payFail";
         }
-       // return "redirect:/";
+        return "redirect:/";
     }
     
-    /**2.1
+    
+    /**2.1.1
+     * wap端页面处理toUpdatePayInfoSuccess
+     * 
+     * */
+    @RequestMapping(method = RequestMethod.POST, value = "tomUpdatePayInfoSuccess")
+    public Msg msuccessPage(HttpSession session,@RequestParam("pageStr") String pageStr){
+    	
+    	String paymentId = (String) session.getAttribute("successpaymentId");
+    	String payerId = (String) session.getAttribute("successpayerId");
+    	//
+    	Payment payment = (Payment) session.getAttribute("successpayment"); 
+    	
+    	toUpdatePayInfoSuccess(session,payerId,paymentId);
+    	
+    	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();
+    	
+    	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
+    	
+    	insertPaypalReturnAddredd(PayerInfo,payinfoId,paymentId);
+    	
+    	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");
+    }
+    
+    
+    @SuppressWarnings("deprecation")
+	private void insertPaypalReturnAddredd(PayerInfo payerInfo, Integer payinfoId, String paymentId) {
+    	
+    	
+    	String email =  payerInfo.getEmail();
+    	String RecipientName =  payerInfo.getShippingAddress().getRecipientName();
+    	String Line1 =  payerInfo.getShippingAddress().getLine1();
+    	String Line2 =  payerInfo.getShippingAddress().getLine2();
+    	String City =  payerInfo.getShippingAddress().getCity();
+    	String countryCode =  payerInfo.getShippingAddress().getCountryCode();
+    	String PostalCode =  payerInfo.getShippingAddress().getPostalCode();
+    	String State =  payerInfo.getShippingAddress().getState();
+    	
+    	String payinfoIdStr =  payinfoId+"";
+    	
+    	MlPaypalShipAddress mlPaypalShipAddress = new MlPaypalShipAddress();
+    	mlPaypalShipAddress.setShippingaddressPayinfoid(payinfoIdStr);
+    	mlPaypalShipAddress.setShippingaddressPaymentid(paymentId);
+    	mlPaypalShipAddress.setShippingaddressEmail(email);
+    	mlPaypalShipAddress.setShippingaddressRecipientName(RecipientName);
+    	mlPaypalShipAddress.setShippingaddressLine1(Line1);
+    	mlPaypalShipAddress.setShippingaddressLine2(Line2);
+    	mlPaypalShipAddress.setShippingaddressCity(City);
+    	mlPaypalShipAddress.setShippingaddressCountryCode(countryCode);
+    	mlPaypalShipAddress.setShippingaddressPostalCode(PostalCode);
+    	mlPaypalShipAddress.setShippingaddressState(State);
+    	
+    	mlPaypalShipAddressService.insertSelective(mlPaypalShipAddress);
+    	
+	}
+
+	/**2.1
      * 返回PC成功页面
      * front/paySuccess
      * */
