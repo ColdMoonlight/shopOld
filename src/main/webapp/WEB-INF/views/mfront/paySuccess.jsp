@@ -66,6 +66,7 @@
 					  <div class="info_order"> </div>
 				</div>
 			<div class="info_one"></div>
+			<div class="info_two"></div>
 		</div>
     </div>
 	<div class="order-info">
@@ -135,9 +136,8 @@
 					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 					var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
 					var resDataAddressOne = result.extend.mlfrontAddressOne;
-					
-					
-					
+					var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
+					// console.log(mlPaypalShipAddressOne)
 					var orderData = resDataOrderPayOne;
 					orderData.list = resDataOrderItemList;
 					orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
@@ -146,8 +146,10 @@
 					renderOrderInfo(orderData);
 					
 			    	var receiveData = resDataAddressOne;
-					
+					var receiveDataaddress = mlPaypalShipAddressOne;
 				    renderReceiverinfo(receiveData);
+					renderPaypaladdress(receiveDataaddress);
+					 
 					 
 					//console.log(resDataOrderItemList);
 					//拼接所需参数:content_ids
@@ -273,25 +275,29 @@
 
    /**************/
 	function renderReceiverinfo(data) {
-		var htmlname = '<div classs="info_name">Thank You <b>'+ data.addressUserfirstname +' </b>' + data.addressTelephone + '</div>';
+		var htmlname = '<div classs="info_name">Thank You <b>'+ data.addressUserfirstname +' </b></div>';
 		// var htmlorder '<div class="orderid">Your Order ID : '+data.payinfoPlateNum+'</div>';
 		$('.revceiver-info').html(htmlname);
 		// $('.info_order').html(htmlname);
 		var htmlinfo='';
-	    	htmlinfo= '<div class="masage_cont">AddressDetail</div>'+
+	    	htmlinfo= '<div class="masage_cont">Shipping Address</div>'+
 			            '<ul>'+
-						'<li>' + data.addressCountryAll + ' ' + data.addressProvince + ' ' + data.addressCity + ' ' + data.addressDetail + '</li>'+
+						 '<li>Phone : '+data.addressTelephone+'</li>'+
+						 '<li>' + data.addressCountryAll + ' ' + data.addressProvince + ' ' + data.addressCity + ' ' + data.addressDetail + '</li>'+
 					'</ul>';
 		$(".info_one").html(htmlinfo);		
 		
 	}
-
-
-
-
-
-
-
+	function renderPaypaladdress(data){
+		var html="";
+		html= '<div class="masage_cont">Billing Address</div>'+
+			        '<ul>'+
+						'<li>' + data.shippingaddressCountryCode + ' ' + data.shippingaddressCity + ' ' + data.shippingaddressLine1 + '</li>'+
+					   '<li>Postcodes : '+data.shippingaddressPostalCode+'</li>'+
+					'</ul>';
+		$(".info_two").html(html);		
+	}
+	
 
 		/* single */
 		function getPrice(originalePrice, skuPriceArr, discount) {
