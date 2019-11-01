@@ -292,6 +292,8 @@
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 							var resDataUserOne = result.extend.mlfrontUserOne;
+							var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
+							
 							/* console.log('********resDataPayInfoOne********');
 							console.table(resDataPayInfoOne);
 							console.log('********resDataOrderPayOne********');
@@ -312,8 +314,8 @@
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							shipName = orderData.orderLogisticsname;
-							
-							
+							var receiveDataaddress = mlPaypalShipAddressOne;
+							renderPaypaladdress(receiveDataaddress);
 							renderOrderInfo(orderData);
 
 							var receiveData = resDataAddressOne;
@@ -351,7 +353,8 @@
 					'<div><span>用户姓名：</span><span>' + data.userFirstname + " " + data.userLastname + '</span></div>' +
 					'<div><span>用户电话：</span><span>' + data.userTelephone + '</span></div>' +
 					'<div><span>用户邮箱：</span><span>' + data.userEmail + '</span></div>' +
-					'<div><span>历史购买次数：</span><span>' + 0 + '</span></div>';
+					'<div><span>用户vip等级：</span><span>' + data.userVipLevel + '</span></div>' +
+					'<div><span>历史购买次数：</span><span>' + data.userTimes + '</span></div>';
 			}
 			$('.buyer-info').html(html);
 		}
@@ -593,7 +596,8 @@
 
 		function renderReceiverinfo(data) {
 			var html = '';
-			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
+			html ='<h3>Shipping Address</h3>' +
+			    '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 			    '<div><span>优惠码：</span><span>' + data.orderCouponCode + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
 				'<div><span>收货人firstname：</span><span id="fza_txt">' + data.addressUserfirstname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fza" value="复制文本" /></div>' +
@@ -740,6 +744,33 @@
 			    console.log(e);
 			});
 		}
+		/************************************************************************/
+		function renderPaypaladdress(data){
+			var html="";
+			html= '<h3>Billing Address</h3>' +
+				        '<ul>'+
+						   '<li>shippingaddressCity : '+data.shippingaddressCity+'</li>'+
+						   '<li>shippingaddressLine1 : '+data.shippingaddressLine1+'</li>'+
+						    '<li>shippingaddressLine2 : '+data.shippingaddressLine2+'</li>'+
+						    '<li>shippingaddressEmail : '+data.shippingaddressEmail+'</li>'+
+							  '<li>shippingaddressPaymentid : '+data.shippingaddressPaymentid+'</li>'+
+							   '<li>shippingaddressPostalCode : '+data.shippingaddressPostalCode+'</li>'+
+								 '<li>shippingaddressRecipientName : '+data.shippingaddressRecipientName+'</li>'+
+								  '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
+						'</ul>';
+			$(".info_two").html(html);		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		/* single */
 		function getPrice(originalePrice, skuPriceArr, discount) {
