@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackCategory;
@@ -28,6 +29,7 @@ import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.atguigu.service.MlPaypalShipAddressService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackCategoryService;
@@ -63,6 +65,9 @@ public class MlfrontPayInfoController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlPaypalShipAddressService mlPaypalShipAddressService;
 	
 	/**
 	 * 1.0	UseNow	0505
@@ -257,10 +262,16 @@ public class MlfrontPayInfoController {
 			List<MlfrontUser> mlfrontUserList = mlfrontUserService.selectMlfrontUser(mlfrontUserReq);
 			mlfrontUserOne = mlfrontUserList.get(0);
 		}
+		//3.获取本payinfoid的paypal_shippingaddress地址;
+		MlPaypalShipAddress mlPaypalShipAddressReq = new MlPaypalShipAddress();
+		String shippingaddressPayinfoid=payinfoId+"";
+		mlPaypalShipAddressReq.setShippingaddressPayinfoid(shippingaddressPayinfoid);
+		MlPaypalShipAddress mlPaypalShipAddressRes =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
+		//完毕回传
 		return Msg.success().add("resMsg", "查看单条mlfrontPayInfoOne的详情细节完毕")
 					.add("mlfrontPayInfoOne", mlfrontPayInfoOne).add("mlfrontOrderPayOneRes", mlfrontOrderPayOneRes)
 					.add("mlfrontAddressOne", mlfrontAddressOne).add("mlfrontOrderItemList", mlfrontOrderItemList)
-					.add("mlfrontUserOne", mlfrontUserOne);
+					.add("mlfrontUserOne", mlfrontUserOne).add("mlPaypalShipAddressOne", mlPaypalShipAddressRes);
 	}
 	
 	

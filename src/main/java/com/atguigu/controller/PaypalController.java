@@ -2,6 +2,7 @@ package com.atguigu.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -251,7 +252,7 @@ public class PaypalController {
             session.setAttribute("successpayerId", payerId);
             session.setAttribute("successpayment", payment);
             
-            toUpdatePayInfoSuccess(session,payerId,paymentId);
+            //toUpdatePayInfoSuccess(session,payerId,paymentId);
             
             System.out.println(payment.toJSON());
             
@@ -263,8 +264,9 @@ public class PaypalController {
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
             System.out.println(e.getMessage());
-            return "front/payFail";
+            //return "front/payFail";
         }
+    	return "redirect:/";
     }
     
     /**3.0
@@ -288,8 +290,57 @@ public class PaypalController {
     	//3.0.2wap端处理insertPaypalReturnAddress
     	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);
     	
+    	// 获取session中所有的键值  
+    	Enumeration<String> attrs = session.getAttributeNames();  
+    	// 遍历attrs中的
+    	while(attrs.hasMoreElements()){
+    	// 获取session键值
+    	    String name = attrs.nextElement().toString();
+    	    // 根据键值取session中的值  
+    	    Object vakue = session.getAttribute(name);
+    	    // 打印结果 
+    	    System.out.println("------" + name + ":" + vakue +"--------\n");
+    	    }
+    	
     	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");
     }
+    
+    /**3.1
+     * pc端页面处理toUpdatePayInfoSuccess
+     * 
+     * */
+    @RequestMapping(value = "/topUpdatePayInfoSuccess",method = RequestMethod.POST)
+    @ResponseBody
+    public Msg psuccessPage(HttpSession session,@RequestParam("pageStr") String pageStr){
+    	
+    	String paymentId = (String) session.getAttribute("successpaymentId");
+    	String payerId = (String) session.getAttribute("successpayerId");
+    	//
+    	Payment payment = (Payment) session.getAttribute("successpayment"); 
+    	//3.0.1wap端处理toUpdatePayInfoSuccess
+    	toUpdatePayInfoSuccess(session,payerId,paymentId);
+    	
+    	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();
+    	
+    	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
+    	//3.0.2wap端处理insertPaypalReturnAddress
+    	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);
+    	
+    	// 获取session中所有的键值  
+    	Enumeration<String> attrs = session.getAttributeNames();  
+    	// 遍历attrs中的
+    	while(attrs.hasMoreElements()){
+    	// 获取session键值
+    	    String name = attrs.nextElement().toString();
+    	    // 根据键值取session中的值  
+    	    Object vakue = session.getAttribute(name);
+    	    // 打印结果 
+    	    System.out.println("------" + name + ":" + vakue +"--------\n");
+    	    }
+    	
+    	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");
+    }
+    
     
     /**
      * 3.0.2wap端处理
