@@ -138,7 +138,8 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println(1);
         }
-        return "redirect:/";
+//        return "redirect:/";
+        return "redirect:/MlbackCart/toCheakOut";
     }
     
     //从session中获取地址运费
