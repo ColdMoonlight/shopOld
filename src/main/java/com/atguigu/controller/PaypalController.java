@@ -32,6 +32,7 @@ import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
+import com.atguigu.service.MlfrontUserService;
 import com.atguigu.service.PaypalService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtils;
@@ -76,6 +77,9 @@ public class PaypalController {
     
     @Autowired
     MlPaypalShipAddressService mlPaypalShipAddressService;
+    
+	@Autowired
+	MlfrontUserService mlfrontUserService;
 
     /**1.0
      * 组装参数,WAP端发起真实的支付
@@ -441,6 +445,24 @@ public class PaypalController {
 		String addressMoney = getAddressMoney(session);
 		//3.0.1.1	wap+pc同时处理邮件
 		sendResultEmail(session,mlfrontPayInfoIOne, mlfrontOrderResOne,addressMoney);
+		
+		//更新用户的vip等级+购买次数
+		MlfrontUser mlfrontUser= (MlfrontUser) session.getAttribute("loginUser");
+		if(mlfrontUser==null){
+			System.out.println("次购买为非注册用户,不对mlfrontUser进行任何操作");
+		}else{
+			MlfrontUser mlfrontUserafter = new MlfrontUser();
+			Integer uid = mlfrontUser.getUserId();
+			Integer userTimesOld = mlfrontUser.getUserTimes();
+			Integer userTimesafter =userTimesOld+1;
+			Integer userVipLevelOld =mlfrontUser.getUserVipLevel();
+			Integer userVipLevelafter = userVipLevelOld+1;
+			
+			mlfrontUserafter.setUserId(uid);
+			mlfrontUserafter.setUserTimes(userTimesafter);
+			mlfrontUserafter.setUserVipLevel(userVipLevelafter);
+			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserafter);
+		}
 		
 	}
 
