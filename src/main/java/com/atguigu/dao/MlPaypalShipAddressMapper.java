@@ -32,6 +32,6 @@ public interface MlPaypalShipAddressMapper {
     //改
     int updateByPrimaryKeySelective(MlPaypalShipAddress record);
     //通过Payinfoid查询
-    MlPaypalShipAddress selectMlPaypalShipAddressByPayinfoid(MlPaypalShipAddress record);
+    List<MlPaypalShipAddress> selectMlPaypalShipAddressByPayinfoid(MlPaypalShipAddress record);
     
 }
