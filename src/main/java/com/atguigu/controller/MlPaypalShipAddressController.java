@@ -37,7 +37,7 @@ public class MlPaypalShipAddressController {
 		//接受信息
 		MlPaypalShipAddress mlPaypalShipAddressReq = new MlPaypalShipAddress();
 		mlPaypalShipAddressReq.setShippingaddressPayinfoid(shippingaddressPayinfoid);
-		MlPaypalShipAddress mlPaypalShipAddressRes =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
+		List<MlPaypalShipAddress> mlPaypalShipAddressRes =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
 		return Msg.success().add("resMsg", "查看单条优惠券的详情细节完毕")
 					.add("mlPaypalShipAddressOne", mlPaypalShipAddressRes);
 	}

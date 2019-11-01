@@ -266,7 +266,8 @@ public class MlfrontPayInfoController {
 		MlPaypalShipAddress mlPaypalShipAddressReq = new MlPaypalShipAddress();
 		String shippingaddressPayinfoid=payinfoId+"";
 		mlPaypalShipAddressReq.setShippingaddressPayinfoid(shippingaddressPayinfoid);
-		MlPaypalShipAddress mlPaypalShipAddressRes =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
+		List<MlPaypalShipAddress> mlPaypalShipAddressResList =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
+		MlPaypalShipAddress mlPaypalShipAddressRes = mlPaypalShipAddressResList.get(0);
 		//完毕回传
 		return Msg.success().add("resMsg", "查看单条mlfrontPayInfoOne的详情细节完毕")
 					.add("mlfrontPayInfoOne", mlfrontPayInfoOne).add("mlfrontOrderPayOneRes", mlfrontOrderPayOneRes)

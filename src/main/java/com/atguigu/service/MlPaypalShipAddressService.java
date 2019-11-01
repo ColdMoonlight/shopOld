@@ -67,8 +67,8 @@ public class MlPaypalShipAddressService {
 	 * @exception 查看用户信息是否存在
 	 * 
 	 * */
-	public MlPaypalShipAddress selectMlPaypalShipAddressByPayinfoid(MlPaypalShipAddress mlPaypalShipAddress) {
-		MlPaypalShipAddress  mlPaypalShipAddressRes = mlPaypalShipAddresstMapper.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddress);
+	public List<MlPaypalShipAddress> selectMlPaypalShipAddressByPayinfoid(MlPaypalShipAddress mlPaypalShipAddress) {
+		List<MlPaypalShipAddress>  mlPaypalShipAddressRes = mlPaypalShipAddresstMapper.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddress);
 		return mlPaypalShipAddressRes;
 	}
 
