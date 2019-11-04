@@ -304,13 +304,13 @@ public class PaypalController {
     	String payerId = (String) session.getAttribute("successpayerId");
     	//
     	Payment payment = (Payment) session.getAttribute("successpayment"); 
-    	//3.0.1wap端处理toUpdatePayInfoSuccess
+    	//3.0.1wap+pc端处理toUpdatePayInfoSuccess
     	toUpdatePayInfoSuccess(session,payerId,paymentId);
     	
     	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();
     	
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
-    	//3.0.2wap端处理insertPaypalReturnAddress
+    	//3.0.2wap+pc端处理insertPaypalReturnAddress
     	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);
     	
     	// 获取session中所有的键值  
@@ -340,13 +340,13 @@ public class PaypalController {
     	String payerId = (String) session.getAttribute("successpayerId");
     	//
     	Payment payment = (Payment) session.getAttribute("successpayment"); 
-    	//3.0.1wap端处理toUpdatePayInfoSuccess
+    	//3.0.1wap+pc端处理toUpdatePayInfoSuccess
     	toUpdatePayInfoSuccess(session,payerId,paymentId);
     	
     	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();
     	
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
-    	//3.0.2wap端处理insertPaypalReturnAddress
+    	//3.0.2wap+pc端处理insertPaypalReturnAddress
     	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);
     	
     	// 获取session中所有的键值  
@@ -468,17 +468,23 @@ public class PaypalController {
 		if(mlfrontUser==null){
 			System.out.println("次购买为非注册用户,不对mlfrontUser进行任何操作");
 		}else{
-			MlfrontUser mlfrontUserafter = new MlfrontUser();
-			Integer uid = mlfrontUser.getUserId();
-			Integer userTimesOld = mlfrontUser.getUserTimes();
+			//获取session中的mlfrontUser信息，从中获取userEmail
+			String userEmail = mlfrontUser.getUserEmail();
+			//拿到userEmail,准备信息
+			MlfrontUser mlfrontUserByEmail = new MlfrontUser();
+			mlfrontUserByEmail.setUserEmail(userEmail);
+			List<MlfrontUser> mlfrontUserByEmailListres =  mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserByEmail);
+			MlfrontUser mlfrontUserByEmailres = mlfrontUserByEmailListres.get(0);
+			Integer uid = mlfrontUserByEmailres.getUserId();
+			Integer userTimesOld = mlfrontUserByEmailres.getUserTimes();
 			Integer userTimesafter =userTimesOld+1;
-			Integer userVipLevelOld =mlfrontUser.getUserVipLevel();
+			Integer userVipLevelOld =mlfrontUserByEmailres.getUserVipLevel();
 			Integer userVipLevelafter = userVipLevelOld+1;
 			
-			mlfrontUserafter.setUserId(uid);
-			mlfrontUserafter.setUserTimes(userTimesafter);
-			mlfrontUserafter.setUserVipLevel(userVipLevelafter);
-			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserafter);
+			mlfrontUserByEmailres.setUserId(uid);
+			mlfrontUserByEmailres.setUserTimes(userTimesafter);
+			mlfrontUserByEmailres.setUserVipLevel(userVipLevelafter);
+			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserByEmailres);
 		}
 		
 	}
