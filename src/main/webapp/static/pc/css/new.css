@@ -428,6 +428,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .numhong{color:#ff186e;margin: 5px 5px 0;text-align:right;font-size: 12px;}
 .danjia{width: 100%; float: left;}
 
+.small_tips{text-align: center;font-size: 14px;color:#ff186e;}
+.btnContinue{float: left;border-radius:3px; width:90%; margin: 20px 5%; height: 40px; line-height: 40px; text-align: center; display: block;background: #000; color: #fff;font-size: 16px;}
 
 
 

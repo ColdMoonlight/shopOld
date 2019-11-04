@@ -79,6 +79,7 @@
 			<div class="info_two"></div>
 		</div>
     </div>
+	<p class="small_tips">If there's any questions, plz contact the customer service </p>
 	<a href="###" class="btnContinue">Continue Shopping</a>
   </div>
 

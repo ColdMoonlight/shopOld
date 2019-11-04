@@ -69,6 +69,8 @@
 				<div class="info_one"></div>
 				<div class="info_two"></div>
 			</div>
+			<p class="small_tips">If there's any questions, plz contact the customer service </p>
+			<a href="###" class="btnContinue">Continue Shopping</a>
        	</div>  
    		<div class="right_ship">
    			<div class="order-info clearfix">
