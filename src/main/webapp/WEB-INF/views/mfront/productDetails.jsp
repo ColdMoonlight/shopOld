@@ -810,10 +810,22 @@
 				reqData.cartitemProductNumber = productNum.val();
 				// console.log(data);/**88888888888888*/
 				
+				var InitiateCheckout = getnowproductMoney(cartitemProductActoff,cartitemProductOriginalprice,cartitemProductskuMoneystr);
+				
+				function getnowproductMoney(cartitemProductActoff,cartitemProductOriginalprice,cartitemProductskuMoneystr){
+					var reallymoney=0;
+					
+					
+					return reallymoney;
+					
+				}
+				
 				//fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
 				fbq('track', 'InitiateCheckout', {
 					  content_ids: reqData.cartitemProductId,
-					  content_type: 'product'
+					  content_type: 'product',
+					  value: transaction_value,
+					  currency: "USD",
 					});
 				// name, id, price
 				function getSkuData(els) {
