@@ -57,30 +57,29 @@
 
     <!-- purechase step -->
     <img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_pay.jpg">
-
-    <div class="box-none">
-		<div class="box-none_cont">
-			<div class="right_head">
-					<img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
-					  <div class="revceiver-info"> </div>
-					  <div class="info_order"> </div>
-				</div>
+	<div class="cart_shop clearfix">
+		<div class="leftww clearfix">
+			<em><span class="icon cart"></span></em> <em>Show order summary</em> <b></b>
+		</div> 
+	</div>
+		<div class="order-info clearfix" style="display: none;">
+			<div class="product_shop clearfix">
+			</div>
+			<div class="cal-info clearfix">
+			</div>
+		</div>
+		<div class="right_head clearfix">
+			<img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
+			  <div class="revceiver-info"> </div>
+			  <div class="info_order"> </div>
+		</div>
+    <div class="box-none box_info_address clearfix">
+		<div class="box-none_cont clearfix">
 			<div class="info_one"></div>
 			<div class="info_two"></div>
 		</div>
     </div>
-	<div class="order-info">
-		<div class="product_shop clearfix">
-			
-			
-		</div>
-		<div class="cal-info">
-			
-		</div>
-		<a href="/ShopTemplate/index.html" class="btnContinue">Continue Shopping</a>
-	</div>
-	
-	
+	<a href="###" class="btnContinue">Continue Shopping</a>
   </div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
@@ -191,7 +190,6 @@
 
 		
 	}
-	
 	function toFbidsPurchase(resDataOrderItemList){
 		var infoStrlids = '';
 		var infoRelids = '';
@@ -239,7 +237,6 @@
 		return JSON.parse(infoRel);
 	}
 /************************/
-
 		function renderOrderInfo(data) {//红
 		var htmlorder = '<div class="orderid">Your Order ID : '+data.payinfoPlateNum+'</div>';
 		$('.info_order').html(htmlorder);
@@ -268,11 +265,25 @@
 			calInfoHtml = '<div class="listnum"><span>prototal：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)-parseFloat(sessionaddressMoney) ) + '</span></div>' +
 				'<div class="listnum"><span>shipping：</span><span>' + sessionaddressMoney + '</span></div>' +
 				'<div class="listnum"><span>coupon：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
-				'<div class="listnum"><span>subtotal：</span><span>$' + data.payinfoMoney + '</span></div>';
+				'<div class="listnum subtotalcont"><span>subtotal：</span><span>$' + data.payinfoMoney + '</span></div>';
 			$('.order-info .cal-info').html(calInfoHtml);
+			var paymoney ='<span>$' + data.payinfoMoney + '</span>'
+			$('.leftww b').html(paymoney);
+			
 		}
-
-
+	$(".cart_shop").click(function(){
+		var elt =$(".order-info");
+		if(elt.css("display")=="none"){
+			elt.show();
+			$(".leftww").find("em").eq(1).text("Hide order summary")
+			$(".leftww").addClass("active")
+		}else{
+			elt.hide();
+			$(".leftww").find("em").eq(1).text("Show order summary")
+			$(".leftww").removeClass("active")
+		}
+		
+	})
    /**************/
 	function renderReceiverinfo(data) {
 		var htmlname = '<div classs="info_name">Thank You <b>'+ data.addressUserfirstname +' </b></div>';
@@ -283,7 +294,7 @@
 	    	htmlinfo= '<div class="masage_cont">Shipping Address</div>'+
 			            '<ul>'+
 						 '<li>Phone : '+data.addressTelephone+'</li>'+
-						 '<li>' + data.addressCountryAll + ' ' + data.addressProvince + ' ' + data.addressCity + ' ' + data.addressDetail + '</li>'+
+						 '<li>' + data.addressCountry+ ' ' + data.addressProvince + ' ' + data.addressCity + ' ' + data.addressDetail + '</li>'+
 					'</ul>';
 		$(".info_one").html(htmlinfo);		
 		
@@ -316,6 +327,12 @@
 	
 	
 </script>
+<!-- megalook-->
+    <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+  <!-- megalookhair 
+    <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+    <!-- huashuohair -->
+    <!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>
