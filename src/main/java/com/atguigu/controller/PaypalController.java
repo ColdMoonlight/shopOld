@@ -135,8 +135,13 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            System.out.println("----------/paypal/mpay/Exception----------");
+            System.out.println("---------e.getMessage()-----begin------");
             System.out.println(e.getMessage());
-            System.out.println(1);
+            System.out.println("---------e.getMessage()------end-------");
+            System.out.println("---------e.getDetails()-----begin------");
+            System.out.println(e.getDetails());
+            System.out.println("---------e.getDetails()------end------");
         }
 //        return "redirect:/";
         return "redirect:/MlbackCart/toCheakOut";
@@ -208,8 +213,16 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            System.out.println("----------/paypal/ppay/Exception----------");
+            System.out.println("---------e.getMessage()-----begin------");
+            System.out.println(e.getMessage());
+            System.out.println("---------e.getMessage()------end-------");
+            System.out.println("---------e.getDetails()-----begin------");
+            System.out.println(e.getDetails());
+            System.out.println("---------e.getDetails()------end------");
         }
-        return "redirect:/";
+        //return "redirect:/";
+        return "redirect:/MlbackCart/toCheakOut";
     }
     
     /**2.0
@@ -236,8 +249,10 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            System.out.println("----------/wap端返回成功/Exception----------");
+            System.out.println("---------e.getMessage()-----begin------");
             System.out.println(e.getMessage());
-            //return "mfront/payFail";
+            System.out.println("---------e.getMessage()-----end------");
         }
         return "redirect:/";
     }
@@ -268,7 +283,10 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
+            System.out.println("----------/PC成功/Exception----------");
+            System.out.println("---------e.getMessage()-----begin------");
             System.out.println(e.getMessage());
+            System.out.println("---------e.getMessage()-----end------");
             //return "front/payFail";
         }
     	return "redirect:/";
@@ -353,7 +371,6 @@ public class PaypalController {
      * */
     @SuppressWarnings("deprecation")
 	private void insertPaypalReturnAddress(PayerInfo payerInfo, Integer payinfoId, String paymentId) {
-    	
     	
     	String email =  payerInfo.getEmail();
     	String RecipientName =  payerInfo.getShippingAddress().getRecipientName();
