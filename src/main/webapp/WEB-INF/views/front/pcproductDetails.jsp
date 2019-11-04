@@ -909,8 +909,35 @@
 				reqData.cartitemProductNumber = productNum.val();
 				// console.log(reqData);
 				
-				fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
+				var InitiateCheckoutMoney = getnowproductMoney(reqData.cartitemProductActoff,reqData.cartitemProductOriginalprice,reqData.cartitemProductskuMoneystr);
 				
+				function getnowproductMoney(cartitemProductActoff,cartitemProductOriginalprice,cartitemProductskuMoneystr){
+					var reallymoney=0;
+					var skuMoneyArr = cartitemProductskuMoneystr.split(',');
+					reallymoney = (getPrice(cartitemProductOriginalprice, skuMoneyArr, cartitemProductActoff*10).current)
+					return reallymoney;
+				}
+				function getPrice(originalePrice, skuPriceArr, discount) {
+					var singlePrice = parseFloat(originalePrice);
+					for (var k = 0, len = skuPriceArr.length; k < len; k += 1) {
+						singlePrice += (parseFloat(skuPriceArr[k]) ? parseFloat(skuPriceArr[k]) : 0);
+					}
+					// console.log(singlePrice, discount)
+
+					return {
+						origin: parseFloat(singlePrice).toFixed(2),
+						current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
+					}
+				}
+				
+				//fbq('track', 'InitiateCheckout');//追踪'发起结账'事件		facebook广告插件可以注释掉，但不要删除
+				fbq('track', 'InitiateCheckout', {
+					  content_ids: reqData.cartitemProductId,
+					  content_type: 'product',
+					  value: InitiateCheckoutMoney,
+					  currency: "USD",
+					  product_catalog_id:reqData.cartitemProductId
+					});
 				// name, id, price
 				function getSkuData(els) {
 					var data = {
