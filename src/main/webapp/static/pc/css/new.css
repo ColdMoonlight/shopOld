@@ -393,11 +393,40 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 			        box-shadow: 0 1em 0 -.2em currentcolor;
 			    }
 			}
+/************************************************/
+.box-none_success{width: 100%; height: auto;display: flex;flex-direction: row;justify-content: space-between;}
+.left_location{width:50%; height: 500px;}
+.right_head{width: 100%;background: #fff;}
+.right_head img{float: left;width: 100px; height: 100px; margin:0 10px 0 0;}
+
+.info_one,.info_two {float: left;width:100%;border-radius:2px; }
+
+.info_one li,.info_two li {font-size: 14px; float: left;color: #888; width:100%;line-height: 30px;word-wrap:break-word}
+.info_one li span,.info_two li span{color: #666;}
+.info_one li span:nth-of-type(1),.info_two li span:nth-of-type(1){color: #000;}
+.masage_cont {font-weight:bold;font-size: 14px; line-height: 24px; color: #000;}
 
 
 
+.right_ship{ width: 50%; height: auto; background: #f0f0f0; border:1px solid #ccc ;}
+.product_shop{width: 96%; margin:10px 2% 0;}
+.cal-info{width:96%; float: left;padding: 10px 0 0;margin: 0 2% 10px;border-top:1px solid #ccc;}
+.order-info{width: 100%}
+.cp_img{width:75%; float: left;padding:0 1%;}
+.lefttp{float: left;width: 25%; text-align: center; margin: 0 0 10px;}
+.lefttp img{display: inline-block;width: 80px; height:80px;border: 1px solid #ccc;}
+.rightw{float: left;width:85%;font-size: 14px; height: 40px;overflow: hidden; color: #000;line-height: 20px;margin: 0 2% 0 0;}
+.td-item{float: left; color: #666;font-size: 12px;margin: 0 0 5px;padding: 0 1%;}
+.td-item span{}
+.td-item span:nth-of-type(1){font-size: 12px;}
+.orderid{color: #333;font-size: 16px;}
+.info_name,.revceiver-info{font-size: 16px;}
+.revceiver-info{margin: 30px 0 10px;}
 
-
+/* .cal-info{border-top:1px solid #CCC} */
+.listnum{margin: 0 0 5px;display: flex;flex-direction: row;justify-content: space-between;font-size: 14px;}
+.numhong{color:#ff186e;margin: 5px 5px 0;text-align:right;font-size: 12px;}
+.danjia{width: 100%; float: left;}
 
 
 
