@@ -35,7 +35,6 @@ import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.service.MlfrontUserService;
 import com.atguigu.service.PaypalService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.EmailUtils;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
 import com.atguigu.utils.URLUtils;
@@ -104,7 +103,6 @@ public class PaypalController {
     	Double moneyDouble = Double.parseDouble(moneyStr);
     	String moneyTypeStr = toPaypalInfo.getMoneyType();
     	String payDes = toPaypalInfo.getPaymentDescription();
-    	
 
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
@@ -143,7 +141,6 @@ public class PaypalController {
             System.out.println(e.getDetails());
             System.out.println("---------e.getDetails()------end------");
         }
-//        return "redirect:/";
         return "redirect:/MlbackCart/toCheakOut";
     }
     
@@ -174,9 +171,9 @@ public class PaypalController {
     	String Shopdiscount = getCouponMoney(session);
     	//从session中获取地址运费
     	String addressMoney = getAddressMoney(session);
-    	
+    	//从session中获取地址运费
     	MlfrontAddress mlfrontAddress = getMlfrontAddress(session);
-    	
+    	//从session中获取地址运费
     	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
     	
     	BigDecimal money = toPaypalInfo.getMoneyNum();
@@ -221,7 +218,6 @@ public class PaypalController {
             System.out.println(e.getDetails());
             System.out.println("---------e.getDetails()------end------");
         }
-        //return "redirect:/";
         return "redirect:/MlbackCart/toCheakOut";
     }
     
@@ -238,7 +234,9 @@ public class PaypalController {
             session.setAttribute("successpaymentId", paymentId);
             session.setAttribute("successpayerId", payerId);
             session.setAttribute("successpayment", payment);
-            //toUpdatePayInfoSuccess(session,payerId,paymentId);
+            //3.0.1wap+pc端处理toUpdatePayInfoStateSuccess
+            //仅仅生成支付号+更改payinfo的状态
+        	toUpdatePayInfoStateSuccess(session,payerId,paymentId);
             
             System.out.println(payment.toJSON());
             
@@ -272,7 +270,8 @@ public class PaypalController {
             session.setAttribute("successpayerId", payerId);
             session.setAttribute("successpayment", payment);
             
-            //toUpdatePayInfoSuccess(session,payerId,paymentId);
+            //3.0.1wap+pc端处理toUpdatePayInfoStateSuccess//仅仅生成支付号
+        	toUpdatePayInfoStateSuccess(session,payerId,paymentId);
             
             System.out.println(payment.toJSON());
             
@@ -292,7 +291,45 @@ public class PaypalController {
     	return "redirect:/";
     }
     
-    /**3.0
+    //wap+pc端处理toUpdatePayInfoStateSuccess//仅仅生成支付号
+    private void toUpdatePayInfoStateSuccess(HttpSession session, String payerId, String paymentId) {
+    	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
+    	//修改支付单状态
+    	MlfrontPayInfo mlfrontPayInfoNew = new MlfrontPayInfo();
+		mlfrontPayInfoNew.setPayinfoId(payinfoId);
+		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
+		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
+		mlfrontPayInfoIOne.setPayinfoStatus(1);//付款成功
+		mlfrontPayInfoIOne.setPayinfoPlatformserialcode(payerId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontPayInfoIOne.setPayinfoMotifytime(nowTime);
+		//增加生成字段信息
+		String payinfoIdStr = payinfoId+"";
+		Integer orderlen = payinfoIdStr.length();
+		if(orderlen==6){
+			payinfoIdStr = "0"+payinfoIdStr;
+		}else if(orderlen==5){
+			payinfoIdStr = "00"+payinfoIdStr;
+		}else if(orderlen==4){
+			payinfoIdStr = "000"+payinfoIdStr;
+		}else if(orderlen==3){
+			payinfoIdStr = "0000"+payinfoIdStr;
+		}else if(orderlen==2){
+			payinfoIdStr = "00000"+payinfoIdStr;
+		}else if(orderlen==1){
+			payinfoIdStr = "000000"+payinfoIdStr;
+		}
+		String payInfoTime = DateUtil.getDateTime();
+		//  ML(megalook)	HS(huashuohair)
+		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
+//		String payinfoPlateNum = "HSH"+payInfoTime+payinfoIdStr;
+		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
+		session.setAttribute("mlfrontPayInfoIOne", mlfrontPayInfoIOne);
+		session.setAttribute("payinfoIdStr", payinfoIdStr);
+	}
+
+	/**3.0
      * wap端页面处理toUpdatePayInfoSuccess
      * 
      * */
@@ -405,40 +442,9 @@ public class PaypalController {
 	private void toUpdatePayInfoSuccess(HttpSession session, String payerId, String paymentId) {
     	
     	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
-    	//修改支付单状态
-    	MlfrontPayInfo mlfrontPayInfoNew = new MlfrontPayInfo();
-		mlfrontPayInfoNew.setPayinfoId(payinfoId);
-		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
-		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
-		mlfrontPayInfoIOne.setPayinfoStatus(1);//付款成功
-		System.out.println("paymentId:"+paymentId);
-		System.out.println("payerId:"+payerId);
-		mlfrontPayInfoIOne.setPayinfoPlatformserialcode(payerId);
-		String nowTime = DateUtil.strTime14s();
-		mlfrontPayInfoIOne.setPayinfoMotifytime(nowTime);
-		//增加生成字段信息
-		//  ML
-		String payInfoTime = DateUtil.getDateTime();
-		
-		String payinfoIdStr = payinfoId+"";
-		Integer orderlen = payinfoIdStr.length();
-		if(orderlen==6){
-			payinfoIdStr = "0"+payinfoIdStr;
-		}else if(orderlen==5){
-			payinfoIdStr = "00"+payinfoIdStr;
-		}else if(orderlen==4){
-			payinfoIdStr = "000"+payinfoIdStr;
-		}else if(orderlen==3){
-			payinfoIdStr = "0000"+payinfoIdStr;
-		}else if(orderlen==2){
-			payinfoIdStr = "00000"+payinfoIdStr;
-		}else if(orderlen==1){
-			payinfoIdStr = "000000"+payinfoIdStr;
-		}
-		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
-//		String payinfoPlateNum = "HS"+payInfoTime+payinfoIdStr;
-		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
-		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
+    	
+    	MlfrontPayInfo mlfrontPayInfoIOne = (MlfrontPayInfo) session.getAttribute("mlfrontPayInfoIOne");
+    	String nowTime = DateUtil.strTime14s();
 		
 		//修改order单状态
 		Integer orderId = mlfrontPayInfoIOne.getPayinfoOid();
@@ -457,7 +463,6 @@ public class PaypalController {
 		//将付款成功的参数successPayinfoId,successOrderId放入session中
 		session.setAttribute("successPayinfoId", payinfoId);
 		session.setAttribute("successOrderId", orderId);
-		session.setAttribute("payinfoIdStr", payinfoIdStr);
 		
 		String addressMoney = getAddressMoney(session);
 		//3.0.1.1	wap+pc同时处理邮件
@@ -486,7 +491,6 @@ public class PaypalController {
 			mlfrontUserByEmailres.setUserVipLevel(userVipLevelafter);
 			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserByEmailres);
 		}
-		
 	}
 
 	
@@ -496,7 +500,6 @@ public class PaypalController {
     private void sendResultEmail(HttpSession session,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney) {
     	try {
         	List<MlfrontOrderItem> mlfrontOrderItemList = getMlfrontOrderItemList(session);
-    		
     		Integer addressId = (Integer) session.getAttribute("sendAddressinfoId");
     				
     		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
@@ -517,9 +520,7 @@ public class PaypalController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-    
 
 	/**4.0
      * 返回wap失败页面
