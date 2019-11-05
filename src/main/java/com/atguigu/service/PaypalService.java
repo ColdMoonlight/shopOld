@@ -181,8 +181,6 @@ public class PaypalService {
 		
 		Double amountTotalDou = subMoneyDou - shopdiscountDou + addressMoneyDou;
 		
-		//String amountTotalDouStr = amountTotalDou+"";
-		
 		String amountTotalDouStr = (String.format("%.2f", amountTotalDou));
 		
 		return amountTotalDouStr;
