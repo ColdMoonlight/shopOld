@@ -103,7 +103,7 @@
 		  	url: '${APP_PATH }/MlfrontPayInfo/getsuccessPayinfo',
 		  	type: "POST",
 		  	success: function (data) {
-		  		console.log(data)
+		  		//console.log(data)
 		  		var mlfrontOrderOne = data.extend.mlfrontOrderOne;
 		  		var payinfoId = data.extend.payinfoId;
 		  		var orderMoney = mlfrontOrderOne.orderMoney;
@@ -131,7 +131,7 @@
 			success: function (result) {
 				if (result.code == 100) {
 					var resData = result.extend;
-					console.log(resData)
+					//console.log(resData)
 					var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 					var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
