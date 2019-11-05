@@ -80,7 +80,7 @@
 		</div>
     </div>
 	<p class="small_tips">If there's any questions, plz contact the customer service </p>
-	<a href="###" class="btnContinue">Continue Shopping</a>
+	<a href="${APP_PATH}/index.html" class="btnContinue">Continue Shopping</a>
   </div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
