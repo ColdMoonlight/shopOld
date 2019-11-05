@@ -974,6 +974,32 @@
 		
 		
 		var addressIdIntInt;
+		function datalocation (){
+			var dataname = $("#country").val();
+			$.ajax({
+				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
+				  data: JSON.stringify({
+					"addressCountry": dataname
+				  }),
+				  type: 'post',
+				  dataType: 'JSON',
+				  contentType: 'application/json',
+				  success: function (data) {
+					// console.log(data)
+					var resData = JSON.parse(data);
+					var resareafreightMoney = resData.extend.areafreightMoney;
+					// console.log("resareafreightMoney:"+resareafreightMoney)
+					// $('.shipping').find('span').text(' of $' + resareafreightMoney);
+					// shippingPriceText.text('$' + resareafreightMoney)
+							couponPriceText.text('-$' + 0);
+					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
+					resDataMoney = resareafreightMoney;
+					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
+					subtotalPriceText.text('$' + totalPrice);
+				  }
+				});
+		}
+		datalocation ();
 		$("#country").bind("change",function(){
 			var radio_zt =$(".coupons .coupon-item input[type='radio']");
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
@@ -1054,32 +1080,7 @@
 				
 			}
 		});
-          function datalocation (){
-          	var dataname = $("#country").val();
-          	$.ajax({
-          		  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
-          		  data: JSON.stringify({
-          			"addressCountry": dataname
-          		  }),
-          		  type: 'post',
-          		  dataType: 'JSON',
-          		  contentType: 'application/json',
-          		  success: function (data) {
-          			// console.log(data)
-          			var resData = JSON.parse(data);
-          			var resareafreightMoney = resData.extend.areafreightMoney;
-          			// console.log("resareafreightMoney:"+resareafreightMoney)
-          			// $('.shipping').find('span').text(' of $' + resareafreightMoney);
-          			// shippingPriceText.text('$' + resareafreightMoney)
-					couponPriceText.text('-$' + 0);
-          			totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
-          			resDataMoney = resareafreightMoney;
-          			totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-          			subtotalPriceText.text('$' + totalPrice);
-          		  }
-          		});
-          }
-          datalocation ();
+         
 			
 			
 			
@@ -1146,7 +1147,8 @@
 				var allPriceObj = calAllProductPrice(resData);
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
 				
-				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoney).toFixed(2);
+				var resDataMoneym =shippingPriceText.text().slice(1)*1;
+				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
 
 				subtotalPriceText.text('$' + totalPrice);
 			}
