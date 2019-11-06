@@ -1132,13 +1132,15 @@
 			}
 			parent.html(html)
 		}
-
+       var shopidlist;
+  
 		$.ajax({
 			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
 			type: 'get',
 			success: function (data) {
 				var resData = data.extend.mlfrontOrderItemList;
-				// console.log(resData);
+				console.log(resData);
+				shopidlist = toFbidsPurchase(resData);
 				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
 				var cartList = $('.cart-list');
 				cartList.attr('data-id', resData.orderId);
@@ -1448,7 +1450,19 @@
 			 // console.log(reqDataUp)
 							// console.log(checkAddress(reqDataUp))
 							if (checkAddress(reqDataUp)) {
-								fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+								//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+								
+								stridsContent=shopidlist;
+								orderMoney = subtotalPriceText.text().slice(1)
+								
+								console.log(stridsContent)
+								fbq('track', 'AddPaymentInfo', {
+								              content_ids: [stridsContent],
+								              //contents: [strContent],
+								              content_type: 'product',
+								              value: orderMoney,
+								              currency: 'USD'
+								            });
 								$.ajax({
 									url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 									data: JSON.stringify(reqData),
@@ -1473,7 +1487,18 @@
 			}
 			
 		})
-
+/******************************************************/
+       function toFbidsPurchase(resData){
+       	var infoStrlids = '';
+       	var infoRelids = '';
+       	for(var i=0;i<resData.length;i++){
+       		infoStrlids=infoStrlids+resData[i].orderitemPid+',';
+       	}
+       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
+       	//console.log("infoRelids:"+infoRelids);
+       	return infoRelids;
+       }
+/******************************************************/
 		function checkAddress(reqDataUp) {
 			var flag = false;
 			$.ajax({
