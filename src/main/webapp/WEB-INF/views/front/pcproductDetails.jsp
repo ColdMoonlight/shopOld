@@ -935,8 +935,7 @@
 					  content_ids: reqData.cartitemProductId,
 					  content_type: 'product',
 					  value: InitiateCheckoutMoney,
-					  currency: "USD",
-					  product_catalog_id:reqData.cartitemProductId
+					  currency: "USD"
 					});
 				// name, id, price
 				function getSkuData(els) {
