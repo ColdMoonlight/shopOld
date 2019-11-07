@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackCategory;
@@ -28,6 +29,7 @@ import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.atguigu.service.MlPaypalShipAddressService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackCategoryService;
@@ -63,6 +65,9 @@ public class MlfrontPayInfoController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlPaypalShipAddressService mlPaypalShipAddressService;
 	
 	/**
 	 * 1.0	UseNow	0505
@@ -257,10 +262,22 @@ public class MlfrontPayInfoController {
 			List<MlfrontUser> mlfrontUserList = mlfrontUserService.selectMlfrontUser(mlfrontUserReq);
 			mlfrontUserOne = mlfrontUserList.get(0);
 		}
+		//3.获取本payinfoid的paypal_shippingaddress地址;
+		MlPaypalShipAddress mlPaypalShipAddressReq = new MlPaypalShipAddress();
+		String shippingaddressPayinfoid=payinfoId+"";
+		mlPaypalShipAddressReq.setShippingaddressPayinfoid(shippingaddressPayinfoid);
+		List<MlPaypalShipAddress> mlPaypalShipAddressResList =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
+		MlPaypalShipAddress mlPaypalShipAddressRes = new MlPaypalShipAddress();
+		if(mlPaypalShipAddressResList.size()==0){
+			System.out.println("老数据,没有payment的返回地址");
+		}else{
+			mlPaypalShipAddressRes = mlPaypalShipAddressResList.get(0);
+		}
+		//完毕回传
 		return Msg.success().add("resMsg", "查看单条mlfrontPayInfoOne的详情细节完毕")
 					.add("mlfrontPayInfoOne", mlfrontPayInfoOne).add("mlfrontOrderPayOneRes", mlfrontOrderPayOneRes)
 					.add("mlfrontAddressOne", mlfrontAddressOne).add("mlfrontOrderItemList", mlfrontOrderItemList)
-					.add("mlfrontUserOne", mlfrontUserOne);
+					.add("mlfrontUserOne", mlfrontUserOne).add("mlPaypalShipAddressOne", mlPaypalShipAddressRes);
 	}
 	
 	
@@ -302,9 +319,9 @@ public class MlfrontPayInfoController {
 		System.out.println("mlfrontPayInfo:"+mlfrontPayInfo);
 		//取出id
 		Integer payinfoIdIn = mlfrontPayInfo.getPayinfoId();
-		String nowTime = DateUtil.strTime14s();
-		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
-		mlfrontPayInfo.setPayinfoStatus(2);//0未支付		1已支付		2已发货
+//		String nowTime = DateUtil.strTime14s();
+//		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
+		mlfrontPayInfo.setPayinfoStatus(3);//0未支付		1已支付	2已审核	3已发货
 		//有id，update
 		int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
 		
@@ -314,6 +331,22 @@ public class MlfrontPayInfoController {
 		MlfrontPayInfo mlfrontPayInfoResOne = mlfrontPayInfoList.get(0);
 		System.out.println(intResult);
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontPayInfoOne", mlfrontPayInfoResOne);
+	}
+	
+	
+	/**11.0	useOn	0505
+	 * MlfrontPayInfo	getFailTimes
+	 * @param MlfrontPayInfo
+	 */
+	@RequestMapping(value="/getFailTimes",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getFailTimes(HttpServletResponse rep,HttpServletRequest res,HttpSession session){
+		
+		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
+		//接受参数信息
+		System.out.println("session.getId():"+session.getId()+"payFailTimes:"+payFailTimes);
+		
+		return Msg.success().add("resMsg", "查询payFailTimes成功").add("payFailTimes", payFailTimes);
 	}
 	
 }

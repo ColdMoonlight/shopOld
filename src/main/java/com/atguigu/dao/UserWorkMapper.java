@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.AppuserInfo;
 import com.atguigu.bean.UserWork;
 import com.atguigu.bean.UserWorkExample;
 import java.util.List;

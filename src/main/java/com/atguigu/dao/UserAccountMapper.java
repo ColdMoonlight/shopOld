@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.UserAccount;
 import com.atguigu.bean.UserAccountExample;
 import java.util.List;

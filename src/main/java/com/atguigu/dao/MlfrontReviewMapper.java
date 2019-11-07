@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlfrontReview;
 import com.atguigu.bean.MlfrontReviewExample;
 import java.util.List;

@@ -46,47 +46,80 @@
 	
 </head>
 
-<body>
+<body style="">
 
   <jsp:include page="mheader.jsp"></jsp:include>
 
   <!-- main -->
-  <div class="main">
+  <div class="main clearfix">
   
   	<input type="hidden" class="order-id" name="orderId">
 
     <!-- purechase step -->
     <img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_pay.jpg">
-
-    <div class="box-none">
-      <img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
-      <p>Successful Payment Of Orders</p>
-      <h3>The order details have been sent to your email.</h3>
-      <!-- <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-gray">Check The Order Details</a> -->
-      <a href="${APP_PATH}/index.html" class="btn btn-pink">Continue Shopping</a>
+	<div class="cart_shop clearfix">
+		<div class="leftww clearfix">
+			<em><span class="icon cart"></span></em> <em>Show order summary</em> <b></b>
+		</div> 
+	</div>
+		<div class="order-info clearfix" style="display: none;">
+			<div class="product_shop clearfix">
+			</div>
+			<div class="cal-info clearfix">
+			</div>
+		</div>
+		<div class="right_head clearfix">
+			<img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
+			  <div class="revceiver-info"> </div>
+			  <div class="info_order"> </div>
+		</div>
+    <div class="box-none box_info_address clearfix">
+		<div class="box-none_cont clearfix">
+			<div class="info_one"></div>
+			<div class="info_two"></div>
+		</div>
     </div>
+	<p class="small_tips">If there's any questions, plz contact the customer service </p>
+	<a href="${APP_PATH}/index.html" class="btnContinue">Continue Shopping</a>
   </div>
 
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script type="text/javascript">
-	$.ajax({
-		url: '${APP_PATH }/MlfrontPayInfo/getsuccessPayinfo',
-		type: "POST",
-		success: function (data) {
-			// console.log(data)
-			var mlfrontOrderOne = data.extend.mlfrontOrderOne;
-			var payinfoId = data.extend.payinfoId;
-			var orderMoney = mlfrontOrderOne.orderMoney;
-			// console.log(mlfrontOrderOne);
-			//console.log("orderMoney:"+orderMoney);
-			getPayInfo(payinfoId,orderMoney);
-			
-			$(".order-id").val(mlfrontOrderOne.orderId);
-			
-		}
-	});
+	  var sessionaddressMoney = '${sessionScope.addressMoney}';
+	  console.log(sessionaddressMoney)
+	   var reqmUpdatePayInfoData = {
+		  "pageStr": "pageStr"
+		};
+	  $.ajax({
+			url: '${APP_PATH }/paypal/tomUpdatePayInfoSuccess',
+			data: reqmUpdatePayInfoData,
+			type: "POST",
+			success: function (data) {
+			  getsuccessinfo()
+			}
+	  });
+	  function getsuccessinfo(){
+		  $.ajax({
+		  	url: '${APP_PATH }/MlfrontPayInfo/getsuccessPayinfo',
+		  	type: "POST",
+		  	success: function (data) {
+		  		//console.log(data)
+		  		var mlfrontOrderOne = data.extend.mlfrontOrderOne;
+		  		var payinfoId = data.extend.payinfoId;
+		  		var orderMoney = mlfrontOrderOne.orderMoney;
+		  		// console.log(mlfrontOrderOne);
+		  		//console.log("orderMoney:"+orderMoney);
+		  		getPayInfo(payinfoId,orderMoney);
+		  		
+		  		$(".order-id").val(mlfrontOrderOne.orderId);
+		  		
+		  	}
+		  });
+	  }
+
 	
 	function getPayInfo(payinfoId,orderMoney){
+		
 		var reqData = {
 				"payinfoId": payinfoId
 			};
@@ -98,8 +131,26 @@
 			success: function (result) {
 				if (result.code == 100) {
 					var resData = result.extend;
+					//console.log(resData)
 					var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 					var resDataOrderItemList = result.extend.mlfrontOrderItemList;
+					var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
+					var resDataAddressOne = result.extend.mlfrontAddressOne;
+					var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
+					// console.log(mlPaypalShipAddressOne)
+					var orderData = resDataOrderPayOne;
+					orderData.list = resDataOrderItemList;
+					orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
+					orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
+					
+					renderOrderInfo(orderData);
+					
+			    	var receiveData = resDataAddressOne;
+					var receiveDataaddress = mlPaypalShipAddressOne;
+				    renderReceiverinfo(receiveData);
+					renderPaypaladdress(receiveDataaddress);
+					 
+					 
 					//console.log(resDataOrderItemList);
 					//拼接所需参数:content_ids
 					stridsContent=toFbidsPurchase(resDataOrderItemList);
@@ -137,8 +188,9 @@
 				}
 			}
 		});
+
+		
 	}
-	
 	function toFbidsPurchase(resDataOrderItemList){
 		var infoStrlids = '';
 		var infoRelids = '';
@@ -185,8 +237,103 @@
 		//console.log(JSON.parse(infoRel));
 		return JSON.parse(infoRel);
 	}
+/************************/
+		function renderOrderInfo(data) {//红
+		var htmlorder = '<div class="orderid">Your Order ID : '+data.payinfoPlateNum+'</div>';
+		$('.info_order').html(htmlorder);
+			var tbodyHtml = ''
+			for (var i = 0, len = data.list.length; i < len; i += 1) {
+				var imgurl = data.list[i].orderitemProductMainimgurl;
+				var image = '<img src=' + imgurl + '>';
+				tbodyHtml += '<div class="shop_contimg clearfix">'+ 
+					'<div class="lefttp">' + image + '</div>' +
+					 '<div class="cp_img">'+ 
+					'<div class="rightw">' + data.list[i].orderitemPname + '</div>'+
+					'<div class="listnum numhong"><span>× ' + data.list[i].orderitemPskuNumber + '</span></div>'+
+					'<div class="listnum numhong"><span> '+ (getPrice(data.list[i].orderitemProductOriginalprice, data.list[i].orderitemPskuMoneystr.split(','),data.list[i].orderitemProductAccoff).current) + '</span></div>'+
+					'</div>';
+				tbodyHtml += '<div class="item_cont clearfix">';
+				var skuNameArr = data.list[i].orderitemPskuNamestr.split(',');
+				var skuItemNameArr = data.list[i].orderitemPskuIdnamestr.split(',');
+				for (var j = 0, len2 = skuItemNameArr.length; j < len2; j += 1) {
+					tbodyHtml += '<div class="td-item"><span>' + skuNameArr[j] +'</span>,</div>';
+				}
+				tbodyHtml += '</div>';
+				tbodyHtml += '</div>';
+			}
+			$('.order-info .product_shop').html(tbodyHtml);
+			var calInfoHtml = '';
+			calInfoHtml = '<div class="listnum"><span>prototal：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)-parseFloat(sessionaddressMoney) ) + '</span></div>' +
+				'<div class="listnum"><span>shipping：</span><span>' + sessionaddressMoney + '</span></div>' +
+				'<div class="listnum"><span>coupon：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
+				'<div class="listnum subtotalcont"><span>subtotal：</span><span>$' + data.payinfoMoney + '</span></div>';
+			$('.order-info .cal-info').html(calInfoHtml);
+			var paymoney ='<span>$' + data.payinfoMoney + '</span>'
+			$('.leftww b').html(paymoney);
+			
+		}
+	$(".cart_shop").click(function(){
+		var elt =$(".order-info");
+		if(elt.css("display")=="none"){
+			elt.show();
+			$(".leftww").find("em").eq(1).text("Hide order summary")
+			$(".leftww").addClass("active")
+		}else{
+			elt.hide();
+			$(".leftww").find("em").eq(1).text("Show order summary")
+			$(".leftww").removeClass("active")
+		}
+		
+	})
+   /**************/
+	function renderReceiverinfo(data) {
+		var htmlname = '<div classs="info_name">Thank You <b>'+ data.addressUserfirstname +' </b></div>';
+		// var htmlorder '<div class="orderid">Your Order ID : '+data.payinfoPlateNum+'</div>';
+		$('.revceiver-info').html(htmlname);
+		// $('.info_order').html(htmlname);
+		var htmlinfo='';
+	    	htmlinfo= '<div class="masage_cont">Shipping Address</div>'+
+			            '<ul>'+
+						 '<li>Phone : '+data.addressTelephone+'</li>'+
+						 '<li>' + data.addressCountry+ ' ' + data.addressProvince + ' ' + data.addressCity + ' ' + data.addressDetail + '</li>'+
+					'</ul>';
+		$(".info_one").html(htmlinfo);		
+		
+	}
+	function renderPaypaladdress(data){
+		var html="";
+		html= '<div class="masage_cont">Billing Address</div>'+
+			        '<ul>'+
+						'<li>' + data.shippingaddressCountryCode + ' ' + data.shippingaddressCity + ' ' + data.shippingaddressLine1 + '</li>'+
+					   '<li>Postcodes : '+data.shippingaddressPostalCode+'</li>'+
+					'</ul>';
+		$(".info_two").html(html);		
+	}
+	
+
+		/* single */
+		function getPrice(originalePrice, skuPriceArr, discount) {
+			var singlePrice = parseFloat(originalePrice);
+			for (var k = 0, len = skuPriceArr.length; k < len; k += 1) {
+				singlePrice += (parseFloat(skuPriceArr[k]) ? parseFloat(skuPriceArr[k]) : 0);
+			}
+
+			return {
+				origin: parseFloat(singlePrice).toFixed(2),
+				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
+			}
+		}
+	
+	
+	
 	
 </script>
+<!-- megalook-->
+    <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+  <!-- megalookhair 
+    <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
+    <!-- huashuohair -->
+    <!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

@@ -74,8 +74,7 @@
 		$("#UEmailSession").html(adminAccname);
 	</script>
 	
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
+	
 
 	<script type="text/javascript">
 		$('.nicescroll').each(function(i, item) {
@@ -118,7 +117,7 @@
 			//清空table表格
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
-			console.log(task);
+			// console.log(task);
 			$.each(task, function (index, item) {
 				var payinfoId = $("<td></td>").append(item.payinfoId);
 				
@@ -131,7 +130,7 @@
 				}else if(item.payinfoStatus ===1){
 					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//黄
 				}else if(item.payinfoStatus ===2){
-					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已审核</b>');//绿
+					var payinfoStatus = $("<td class='ysh_bg'></td>").append('<b>已审核</b>');//绿
 				}else if(item.payinfoStatus ===3){
 					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
 				}
@@ -236,7 +235,7 @@
 		//新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
 			var data = $('form').serializeArray();
-			console.log(data)
+			// console.log(data)
 			data = data.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
@@ -265,8 +264,8 @@
 		});
 		var orderId;
 		var shipName;
-                var payinfoIdcd;
-				var payinfoStatus;
+		var payinfoIdcd;
+		var payinfoStatus;
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
 				// fetch data
@@ -274,7 +273,7 @@
 					"payinfoId": payid
 				};
 				
-				// console.log(reqData)/*********/
+				// console.log(reqData)/***2222222222******/
 				$.ajax({
 					url: "${APP_PATH}/MlfrontPayInfo/getOneMlfrontPayInfoDetail",
 					data: reqData,
@@ -286,12 +285,15 @@
 							var resDataPayInfoOne = result.extend.mlfrontPayInfoOne;
 							// console.log(resDataPayInfoOne)/**2222*/
 							payinfoIdcd =resDataPayInfoOne.payinfoId;
+							// console.log(payinfoIdcd);/****/
 							payinfoStatus =resDataPayInfoOne.payinfoStatus;
 							console.log(payinfoStatus)/**3333**/
 							var resDataOrderPayOne = result.extend.mlfrontOrderPayOneRes;
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 							var resDataUserOne = result.extend.mlfrontUserOne;
+							var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
+							
 							/* console.log('********resDataPayInfoOne********');
 							console.table(resDataPayInfoOne);
 							console.log('********resDataOrderPayOne********');
@@ -312,8 +314,8 @@
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							shipName = orderData.orderLogisticsname;
-							
-							
+							var receiveDataaddress = mlPaypalShipAddressOne;
+							renderPaypaladdress(receiveDataaddress);
 							renderOrderInfo(orderData);
 
 							var receiveData = resDataAddressOne;
@@ -351,7 +353,8 @@
 					'<div><span>用户姓名：</span><span>' + data.userFirstname + " " + data.userLastname + '</span></div>' +
 					'<div><span>用户电话：</span><span>' + data.userTelephone + '</span></div>' +
 					'<div><span>用户邮箱：</span><span>' + data.userEmail + '</span></div>' +
-					'<div><span>历史购买次数：</span><span>' + 0 + '</span></div>';
+					'<div><span>用户vip等级：</span><span>' + data.userVipLevel + '</span></div>' +
+					'<div><span>历史购买次数：</span><span>' + data.userTimes + '</span></div>';
 			}
 			$('.buyer-info').html(html);
 		}
@@ -361,20 +364,20 @@
 			var colorspan=""
 			if (data.orderStatus == 0) {//红
 				statusDetail = "仅发起，未付款";
-				colorspan ="colorspan1"
-			} else if (data.orderStatus == 1) {//黄
+				// colorspan ="colorspan1"
+			} else if (data.orderStatus == 1) {//黄现出来一个按钮，ajax 返回后刷新页面
 				statusDetail = "付款成功，待审单";
-				colorspan ="colorspan2"
+				// colorspan ="colorspan2"
 			} else if (data.orderStatus == 2) {
 				statusDetail = "付款失败";
-				colorspan ="colorspan3"
-			} else if (data.orderStatus == 3) {//绿		现出来一个按钮，ajax 返回后刷新页面
+				// colorspan ="colorspan3"
+			} else if (data.orderStatus == 3) {//绿		
 				statusDetail = "已审单，待发货";
-				colorspan ="colorspan4"
+				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
 			} else if (data.orderStatus == 4) {//紫
 				statusDetail = "已发货，待接收";
-				colorspan ="colorspan4"
+				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
 			}
 			var headerHtml = '';
@@ -382,13 +385,16 @@
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
 			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
+			if(data.orderStatus == 1){
+				headerHtml += '<span class="btn btn-danger check_order" onclick="check_order()">审核</span>';
+			}
 			if (data.orderStatus === 1 || data.orderStatus === 3) {
 				headerHtml += '<span class="shipping">';
 			} else {
 				headerHtml += '<span class="shipping hide">';
 			}
-			if( data.orderStatus === 3){
-				headerHtml += '<span class="shipping active">';
+			if( data.orderStatus === 1){
+				headerHtml += '<span class="shipping hide">';
 			}
 			
 			if (data.orderLogisticsnumber) {
@@ -400,6 +406,8 @@
 					'<span style="margin: 0 1em;">发货时间 ：' + '暂无 ' + '</span>' +
 					'<a class="btn btn-danger edit-shipping" onclick="editShipping(2)">添加</a></span>';
 			}
+			
+			
 
 			$('.order-info .table-header').html(headerHtml);
 
@@ -489,6 +497,33 @@
 			}
 			shipBox.removeClass('hide');
 		}
+		
+		// payinfoIdcd=payinfoId;
+		// console.log(payinfoIdcd)/*eeee*/
+		orderCouponId =payinfoIdcd;
+        function check_order(){
+			var reqData = {
+				"orderId":orderId,
+				"orderCouponId":payinfoIdcd,
+			}
+			// console.log(reqData);
+			$.ajax({
+				url: '${APP_PATH}/MlfrontOrder/updateOrderReady',
+				data: JSON.stringify(reqData),
+				type: "POST",
+				dataType: "json",
+				contentType: 'application/json',
+					success: function (reqData) {
+						alert("已审核")
+						window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+					}
+			});
+			
+		}
+		 
+	  
+
+
 
 		/*
 		url: MlfrontOrder/updateOrderDetail
@@ -501,16 +536,19 @@
     */
       
 
+    
 		function shipSave(e) {
 			var parent = $(e.target).parents('.ship-box');
 			var shipId = parent.find('.ship-id').val();
 			shipName = parent.find('.ship-name').val();
 			var reqData = {
+				orderCouponId:payinfoIdcd,
 				orderId: parseInt(orderId),
 				orderLogisticsname: shipName,
 				orderLogisticsnumber: shipId
+				
 			}
-			// console.log(reqData)
+			// console.log(reqData)/*******/
 			if (shipId.trim().length) {
 				$.ajax({
 					url: '${APP_PATH}/MlfrontOrder/updateOrderDetail',
@@ -519,7 +557,7 @@
 					dataType: "json",
 					contentType: 'application/json',
 					success: function (data) {
-						// console.log(data)
+						console.log(data)
 						if (data.code === 100) {
 							var postData={
 									"payinfoId":payinfoIdcd,
@@ -558,7 +596,8 @@
 
 		function renderReceiverinfo(data) {
 			var html = '';
-			html = '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
+			html ='<h3>Shipping Address</h3>' +
+			    '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 			    '<div><span>优惠码：</span><span>' + data.orderCouponCode + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
 				'<div><span>收货人firstname：</span><span id="fza_txt">' + data.addressUserfirstname + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fza" value="复制文本" /></div>' +
@@ -705,6 +744,33 @@
 			    console.log(e);
 			});
 		}
+		/************************************************************************/
+		function renderPaypaladdress(data){
+			var html="";
+			html= '<h3>Billing Address</h3>' +
+				        '<ul>'+
+						   '<li>shippingaddressCity : '+data.shippingaddressCity+'</li>'+
+						   '<li>shippingaddressLine1 : '+data.shippingaddressLine1+'</li>'+
+						    '<li>shippingaddressLine2 : '+data.shippingaddressLine2+'</li>'+
+						    '<li>shippingaddressEmail : '+data.shippingaddressEmail+'</li>'+
+							  '<li>shippingaddressPaymentid : '+data.shippingaddressPaymentid+'</li>'+
+							   '<li>shippingaddressPostalCode : '+data.shippingaddressPostalCode+'</li>'+
+								 '<li>shippingaddressRecipientName : '+data.shippingaddressRecipientName+'</li>'+
+								  '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
+						'</ul>';
+			$(".info_two").html(html);		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		/* single */
 		function getPrice(originalePrice, skuPriceArr, discount) {

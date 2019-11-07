@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.MlfrontUserTemporary;
 import com.atguigu.bean.MlfrontUserTemporaryExample;
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontAddressExample;
 import java.util.List;

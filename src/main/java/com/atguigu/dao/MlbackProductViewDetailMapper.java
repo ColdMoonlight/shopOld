@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.MlbackProductViewDetailExample;
 import java.util.List;

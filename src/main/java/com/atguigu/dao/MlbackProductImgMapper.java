@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackProductImgExample;
 import java.util.List;
@@ -41,5 +40,7 @@ public interface MlbackProductImgMapper {
 	
 	//查询本条图片否存在
 	List<MlbackProductImg> selectMlbackProductImgByPIdAndImgSort(MlbackProductImg example);
+	
+	List<MlbackProductImg> selectMlbackProductImgByProductImgId(Integer productimgId);
 	
 }

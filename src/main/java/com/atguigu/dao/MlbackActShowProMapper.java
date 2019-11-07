@@ -2,8 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackActShowProExample;
-import com.atguigu.bean.MlbackCategory;
-
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

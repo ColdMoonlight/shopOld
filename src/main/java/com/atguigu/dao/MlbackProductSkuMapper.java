@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductSku;
 import com.atguigu.bean.MlbackProductSkuExample;
 import java.util.List;

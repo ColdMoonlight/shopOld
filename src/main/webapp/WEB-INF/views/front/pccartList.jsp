@@ -75,7 +75,7 @@
 						</div>
 						<div class="op">
 							<a href="${APP_PATH}/index.html" class="btn add-product">Continue To Add</a>
-							<a href="javascript:;" class="btn calc-price">calculate Price</a>
+							<a href="javascript:;" class="btn calc-price" id="clickCheckoutGooGle">calculate Price</a>
 						</div>
 					</div>
 			</div>
@@ -557,7 +557,8 @@
 					success: function (data) {
 						//var data = JSON.parse(data);
 						if (data.code === 100) {
-							window.location.href = '${APP_PATH}/MlbackCart/topcCheakOut';
+							//window.location.href = '${APP_PATH}/MlbackCart/topcCheakOut';
+							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
 						}
 					},
 					error: function (data) {
