@@ -364,7 +364,7 @@ public class PaypalController {
     	    // 根据键值取session中的值  
     	    Object vakue = session.getAttribute(name);
     	    // 打印结果 
-    	    System.out.println("------" + name + ":" + vakue +"--------\n");
+    	    //System.out.println("------" + name + ":" + vakue +"--------\n");
     	    }
     	
     	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");
@@ -400,7 +400,7 @@ public class PaypalController {
     	    // 根据键值取session中的值  
     	    Object vakue = session.getAttribute(name);
     	    // 打印结果 
-    	    System.out.println("------" + name + ":" + vakue +"--------\n");
+    	   // System.out.println("------" + name + ":" + vakue +"--------\n");
     	    }
     	
     	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");

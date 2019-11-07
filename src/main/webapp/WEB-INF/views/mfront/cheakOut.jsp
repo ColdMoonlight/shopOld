@@ -1463,6 +1463,9 @@
 								              value: orderMoney,
 								              currency: 'USD'
 								            });
+								console.log("----------------------");
+								console.log(stridsContent);
+								console.log("=========================");
 								$.ajax({
 									url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 									data: JSON.stringify(reqData),
