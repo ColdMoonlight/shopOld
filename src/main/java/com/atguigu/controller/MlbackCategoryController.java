@@ -343,5 +343,29 @@ public class MlbackCategoryController {
 					.add("mlbackCategorydownList", mlbackCategorydownList).add("mlbackCategorydownEr", mlbackCategorydownEr);
 	}
 	
+	/**
+	 * 9.0	UseNow	20191106
+	 * 前台移动端获取详情页面mfront/Categorylists
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/toprolistBycategorySeo",method=RequestMethod.GET)
+	public String toprolistBycategorySeoPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "categorySeo") String categorySeo) throws Exception{
+		//接收传递进来的参数
+		String categorySeoReq = categorySeo;
+		
+		//放回响应域中
+		res.setAttribute("categorySeo", categorySeoReq);
+		//放回session域中
+		session.setAttribute("categorySeo", categorySeoReq);
+		//判断请求设备
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		//返回视图
+		if(ifMobile.equals("1")){	//1手机0PC
+			  return "mfront/prolistBycategorySeo";
+		  }else{
+			  return "front/pcprolistBycategorySeo";
+		  }
+	}
 	
 }
