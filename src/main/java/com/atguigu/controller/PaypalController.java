@@ -112,8 +112,9 @@ public class PaypalController {
         Integer payFailTimes = 0;
         session.setAttribute("payFailTimes", payFailTimes);
         
+        Payment payment = new Payment();
         try {
-            Payment payment = paypalService.createPayment(
+            payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
             		moneyTypeStr, //"USD",  
             		mlfrontAddress,//mlfrontAddress
@@ -447,7 +448,8 @@ public class PaypalController {
     	String nowTime = DateUtil.strTime14s();
 		
 		//修改order单状态
-		Integer orderId = mlfrontPayInfoIOne.getPayinfoOid();
+    	Integer orderId = (Integer) session.getAttribute("orderId");
+		//Integer orderId = mlfrontPayInfoIOne.getPayinfoOid();
 		//封装req
 		MlfrontOrder mlfrontOrderPayReq = new MlfrontOrder();
 		mlfrontOrderPayReq.setOrderId(orderId);
