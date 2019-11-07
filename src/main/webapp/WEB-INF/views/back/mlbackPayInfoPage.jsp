@@ -750,13 +750,14 @@
 			html= '<h3>Billing Address</h3>' +
 				        '<ul>'+
 						   '<li>shippingaddressCity : '+data.shippingaddressCity+'</li>'+
+						    '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
+						   '<li>shippingaddressCity : '+data.shippingaddressCountryCode+'</li>'+
 						   '<li>shippingaddressLine1 : '+data.shippingaddressLine1+'</li>'+
 						    '<li>shippingaddressLine2 : '+data.shippingaddressLine2+'</li>'+
 						    '<li>shippingaddressEmail : '+data.shippingaddressEmail+'</li>'+
 							  '<li>shippingaddressPaymentid : '+data.shippingaddressPaymentid+'</li>'+
 							   '<li>shippingaddressPostalCode : '+data.shippingaddressPostalCode+'</li>'+
 								 '<li>shippingaddressRecipientName : '+data.shippingaddressRecipientName+'</li>'+
-								  '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
 						'</ul>';
 			$(".info_two").html(html);		
 		}
