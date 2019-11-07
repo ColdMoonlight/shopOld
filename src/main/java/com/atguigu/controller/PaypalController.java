@@ -59,8 +59,8 @@ public class PaypalController {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private PaypalService paypalService;
+//    @Autowired
+//    private PaypalService paypalService;
     
     @Autowired
 	MlfrontPayInfoService mlfrontPayInfoService;
@@ -113,6 +113,7 @@ public class PaypalController {
         session.setAttribute("payFailTimes", payFailTimes);
         
         Payment payment = new Payment();
+        PaypalService paypalService = new PaypalService();
         try {
             payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -190,6 +191,7 @@ public class PaypalController {
         Integer payFailTimes = 0;
         session.setAttribute("payFailTimes", payFailTimes);
         
+        PaypalService paypalService = new PaypalService();
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -230,6 +232,7 @@ public class PaypalController {
     public String successPay(HttpSession session,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
 
     	try {
+    		PaypalService paypalService = new PaypalService();
             Payment payment = paypalService.executePayment(paymentId, payerId);
             
             session.setAttribute("successpaymentId", paymentId);
@@ -265,7 +268,8 @@ public class PaypalController {
     public String pcsuccessPay(HttpSession session,@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId){
 
     	try {
-            Payment payment = paypalService.executePayment(paymentId, payerId);
+    		PaypalService paypalService = new PaypalService();
+    		Payment payment = paypalService.executePayment(paymentId, payerId);
             
             session.setAttribute("successpaymentId", paymentId);
             session.setAttribute("successpayerId", payerId);
@@ -598,7 +602,7 @@ public class PaypalController {
     	BigDecimal totalprice = (BigDecimal) session.getAttribute("totalprice");
     	ToPaypalInfo toPaypalInfo = new ToPaypalInfo();
 		//从对象中获取参数
-		String toPayEmail = mlfrontAddressToPay.getAddressEmail();
+//		String toPayEmail = mlfrontAddressToPay.getAddressEmail();
 		String toPayTelephone = mlfrontAddressToPay.getAddressTelephone();
 		String toPayCountry = mlfrontAddressToPay.getAddressCountry();
 		String toPayProvince = mlfrontAddressToPay.getAddressProvince();
