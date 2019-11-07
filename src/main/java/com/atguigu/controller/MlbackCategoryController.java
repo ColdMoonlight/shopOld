@@ -353,6 +353,7 @@ public class MlbackCategoryController {
 	public String toprolistBycategorySeoPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "categorySeo") String categorySeo) throws Exception{
 		//接收传递进来的参数
 		String categorySeoReq = categorySeo;
+		
 		//放回响应域中
 		res.setAttribute("categorySeo", categorySeoReq);
 		//放回session域中
