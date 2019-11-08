@@ -290,6 +290,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 
 .order-list .content .num{-webkit-box-flex:1;/* min-width:150px; height:100%; position:absolute;right:20px;top:0 */ width: 100%;}
 .order-list .content .num span{height:100%; display: flex;align-items:center;}
+.list-group-item .sale_copen{margin: 0 0 1em;width: 100%;}
+
 
 /* .cart-item>.content .num{-webkit-box-flex:1;min-width:150px; height:100%; position:absolute;right:0;top:0}
 .cart-item>.content .num span{height:100%; display: flex;align-items:center;}*/
