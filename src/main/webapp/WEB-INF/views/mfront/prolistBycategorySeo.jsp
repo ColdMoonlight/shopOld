@@ -60,22 +60,27 @@
 	<script>
 		var condition = $('.select');
 		var productList = $('.product-list');
-		var sessionScopecategoryId = '${sessionScope.categoryId}';
+		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
 		//var cidA = window.location.href.split('?')[1].split('=');
-		var cidA = sessionScopecategoryId;
+		var categorySeo = sessionScopecategorySeo;
 
 		//default codition
 		getProductList({
-			"productCategoryid": cidA
+			"categorySeo": categorySeo
 		});
 
 		/* category condition */
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			type: "GET",
+			url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
+			data: JSON.stringify({
+				"categorySeo": categorySeo
+			}),
+			type: 'post',
+			dataType: 'JSON',
+			contentType: 'application/json',
 			success: function (data) {
 				if (data.code === 100) {
-					var resData = data.extend.mlbackCategorydownEr;
+					var resData = data.extend.mlbackProductResList;
 					console.log(resData);
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {

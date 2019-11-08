@@ -40,4 +40,6 @@ public interface MlbackCategoryMapper {
     int deleteByPrimaryKey(Integer groupId);
 
 	List<MlbackCategory> selectMenuMlbackCategoryGetAll();
+	//通过CategoryBySeo查找该类的详情
+	List<MlbackCategory> selectMlbackCategoryBySeo(MlbackCategory mlbackCategory);
 }

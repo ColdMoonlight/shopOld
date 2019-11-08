@@ -62,5 +62,7 @@ public interface MlbackProductMapper {
 	
 	//查询全部登陆用户00
 	List<MlbackProduct> selectMlbackProductlast();
+
+	List<MlbackProduct> selectMlbackProductbyCategorySeo(MlbackProduct mlbackProductReq);
     
 }

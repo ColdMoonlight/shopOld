@@ -106,5 +106,15 @@ public class MlbackCategoryService {
 		int  intReslut = mlbackCategoryMapper.updateByPrimaryKeySelective(mlbackCategory);
 		return intReslut;
 	}
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 通过CategoryBySeo查找该类的详情
+	 * 
+	 * */
+	public List<MlbackCategory> selectMlbackCategoryBySeo(MlbackCategory mlbackCategory) {
+		List<MlbackCategory>  mlbackCategoryList = mlbackCategoryMapper.selectMlbackCategoryBySeo(mlbackCategory);
+		return mlbackCategoryList;
+	}
 
 }

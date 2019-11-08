@@ -482,4 +482,10 @@
     delete from tb_mlback_category
     where category_id = #{categoryId,jdbcType=INTEGER}
   </delete>
+  <!-- 使用中selectMlbackCategoryBySeo -->
+  <select id="selectMlbackCategoryBySeo" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_category
+    where category_seo = #{categorySeo,jdbcType=VARCHAR}
+  </select>
 </mapper>
