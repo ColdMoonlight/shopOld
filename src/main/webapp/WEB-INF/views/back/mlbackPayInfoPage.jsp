@@ -266,6 +266,8 @@
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
+		var userid;
+		var Userjudge
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
 				// fetch data
@@ -292,6 +294,8 @@
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 							var resDataUserOne = result.extend.mlfrontUserOne;
+							// console.log(resDataUserOne)
+							Userjudge =resDataUserOne;
 							var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
 							
 							/* console.log('********resDataPayInfoOne********');
@@ -305,8 +309,8 @@
 							console.log('********resDataUserOne********');
 							console.log(resDataUserOne); */
 
-							renderBuyerInfo(resDataUserOne)
-
+							renderBuyerInfo(resDataUserOne);
+                            returnshow(resDataUserOne);
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
@@ -317,13 +321,15 @@
 							var receiveDataaddress = mlPaypalShipAddressOne;
 							renderPaypaladdress(receiveDataaddress);
 							renderOrderInfo(orderData);
-
+                            
 							var receiveData = resDataAddressOne;
 							console.log(receiveData)
+							receiveData.addressUid = resDataAddressOne.addressUid;
+							userid = receiveData.addressUid;
+							
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
 							receiveData.orderCouponCode = resDataOrderPayOne.orderCouponCode;	//**优惠码****
-						
 							
 							receiveData.payinfoPlatform = resDataPayInfoOne.payinfoPlatform;
 							receiveData.payinfoCreatetime = resDataPayInfoOne.payinfoCreatetime;
@@ -335,6 +341,55 @@
 						}
 					}
 				});
+				/*****/
+				var myid;
+				var userStrtext;
+				function returnshow(data){
+					if(data==null){
+						$(".remark_info").hide();
+						$(".userstart").hide();
+					}else{
+						$(".user_rating").html(data.userStr)
+						$(".userstart").show();
+						$(".remark_info textarea").val(data.userStr);
+						var userodid = data.userId;
+						myid =userodid;
+					}
+				}
+				$(".remark_info input").click(function(){
+					var haveData = {
+						"userStr":$(".remark_info textarea").val(),
+						"userId":myid,
+					}
+					console.log(haveData);
+					$.ajax({
+						url: "${APP_PATH}/MlfrontUser/update",
+						data: JSON.stringify(haveData),
+						type: "POST",
+						dataType: 'json',
+						contentType: 'application/json',
+						success: function (data) {
+							if (data.code === 100) {
+								var textw=$(".remark_info textarea").val();
+								$(".remark_info").hide();
+								$(".mask").hide();
+								$(".user_rating").html(textw)
+							}
+						}
+					})
+				});
+				$(".closetc").click(function(){
+					$(".remark_info").hide();
+					$(".mask").hide();
+				});
+				$(".userstart b").click(function(){
+					$(".remark_info").show();
+					$(".mask").show();
+				})
+				
+				
+				
+				
 			});
 		}
 
@@ -597,6 +652,7 @@
 		function renderReceiverinfo(data) {
 			var html = '';
 			html ='<h3>Shipping Address</h3>' +
+		    	'<div><span>留言：</span><span class="wordly">' + data.orderBuyMess + '</span></div>' +
 			    '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 			    '<div><span>优惠码：</span><span>' + data.orderCouponCode + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
@@ -609,7 +665,6 @@
 				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountryAll + '</span> 简称：' + data.addressCountry +'  <input class="btn_fz btn btn-info" type="button" name="" id="fzg" value="复制文本" /></div>' +
 				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzh" value="复制文本" /></div>' +
 				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzi" value="复制文本" /></div>' +
-				'<div><span>留言：</span><span>' + data.orderBuyMess + '</span></div>' +
 				'<div><span>购买时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 				'<div><span>支付时间：</span><span>' + data.payinfoCreatetime + '</span></div>';
 			$('.revceiver-info').html(html);
@@ -751,7 +806,7 @@
 				        '<ul>'+
 						   '<li>shippingaddressCity : '+data.shippingaddressCity+'</li>'+
 						    '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
-						   '<li>shippingaddressCity : '+data.shippingaddressCountryCode+'</li>'+
+						   '<li>shippingaddressCountryCode : '+data.shippingaddressCountryCode+'</li>'+
 						   '<li>shippingaddressLine1 : '+data.shippingaddressLine1+'</li>'+
 						    '<li>shippingaddressLine2 : '+data.shippingaddressLine2+'</li>'+
 						    '<li>shippingaddressEmail : '+data.shippingaddressEmail+'</li>'+
