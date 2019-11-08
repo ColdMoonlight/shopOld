@@ -275,7 +275,8 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .bottom_list_account{-webkit-box-flex: 1;flex-grow: 1; display:flex; float: left;width: 100%; padding:0 8%}
 .right_allcont .order-cal .cal-price-item{margin: 15px 0;font-size:14px}
 .right_allcont .order-cal .cal-price-item span.cal-price-num{float: right;color:#ff1671}
-.right_allcont .order-cal .btn{margin: 20px 0 0;background: #000;}
+.right_allcont .order-cal .btn{margin: 20px 0 0;background:#ff1671; border-color:#ff1671;}
+
 .login-register .btn.sigin{line-height: 40px;padding: 0;}
 .login-register .btn.sigin:hover{background: #000;}
 
@@ -495,6 +496,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .big_img .swiper-pagination2 span {
 	margin: 0 .05rem
 }
+
+
 
 .big_img .swiper-button-next, .big_img .swiper-button-prev{z-index: 10002;}
 .close_box{width:100%; height: 20px; position: relative;z-index: 10003;}

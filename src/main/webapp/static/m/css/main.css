@@ -2531,7 +2531,7 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .order_box .cart-item>.content .input-group{margin: 0 20px; position: relative;}
 .order_box .cart-item>.content .delete{position: absolute; right: 0; top: 0;}
 .cart-item>.content { position: relative;}
-
+.place-order{background:#ff1671; border-color:#ff1671;}
 
 /************************************/
 .fixed_footer{position: fixed; bottom: 0; left: 0;width: 100%;}
