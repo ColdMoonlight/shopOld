@@ -368,4 +368,44 @@ public class MlbackCategoryController {
 		  }
 	}
 	
+	/**
+	  * 10.0 UseNow 0505
+	  * 通过产品名查看单条产品的详情
+	  * @param productId
+	  * @return 
+	  */
+	 @RequestMapping(value="/searchBycategorySeo",method=RequestMethod.POST)
+	 @ResponseBody
+	 public Msg searchBycategorySeo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlbackCategory mlbackCategory){
+		 //接受信息
+		 String categorySeoReq = mlbackCategory.getCategorySeo();
+		 MlbackCategory mlbackCategoryReq = new MlbackCategory();
+		 mlbackCategoryReq.setCategorySeo(categorySeoReq);
+		 List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
+		 
+		 MlbackCategory mlbackCategoryres = mlbackCategoryList.get(0);
+	 
+		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
+		
+		 String productidsStrArr [] =CategoryProductIdsStr.split(",");
+		 String productidStr ="";
+		 Integer productidInt =0;
+		 List<MlbackProduct> mlbackProductReqList = new ArrayList<MlbackProduct>();
+		 List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
+		 MlbackProduct mlbackProductResOne = new MlbackProduct();
+		 for(int i=0;i<productidsStrArr.length;i++){
+			 productidStr = productidsStrArr[i];
+			 productidInt = Integer.parseInt(productidStr);
+			 //查询白pid的产品详情
+			 MlbackProduct mlbackProductReq = new MlbackProduct();
+			 mlbackProductReq.setProductId(productidInt);
+			 mlbackProductReqList =mlbackProductService.selectMlbackProductbyCategorySeo(mlbackProductReq);
+			 if(mlbackProductReqList.size()>0){
+				 mlbackProductResOne = mlbackProductReqList.get(0);
+				 mlbackProductResList.add(mlbackProductResOne);
+			 }
+		 }
+	   return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
+	     .add("mlbackProductResList", mlbackProductResList);
+	 }
 }
