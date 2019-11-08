@@ -405,7 +405,19 @@ public class MlbackCategoryController {
 				 mlbackProductResList.add(mlbackProductResOne);
 			 }
 		 }
+		 
+		//查询全部的category信息，便于下拉选择
+		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
+		//System.out.println(mlbackCategorydownList);
+			
+		List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
+		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
+			Integer categoryParentId = mlbackCategoryOne.getCategoryParentId();
+			if(categoryParentId>0){
+				mlbackCategorydownEr.add(mlbackCategoryOne);
+			}
+		}
 	   return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
-	     .add("mlbackProductResList", mlbackProductResList);
+	     .add("mlbackProductResList", mlbackProductResList).add("mlbackCategorydownEr", mlbackCategorydownEr);
 	 }
 }
