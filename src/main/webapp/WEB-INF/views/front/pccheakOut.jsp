@@ -936,7 +936,7 @@
 									<span class="cal-price-num"></span>
 								</div>
 							</div>
-							<div class="btn btn-black place-order">Place Order</div>
+							<div class="btn btn-black place-order">Pay Securely Now</div>
 						</div>
 					</div>
 				</div>
