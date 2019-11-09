@@ -179,6 +179,8 @@
 				<li>bob</li>
 				<li>wigs</li>
 				<li>bundle</li>
+				<li>wig 613</li>
+				<li>Water Wave</li>
 			</ul>
 		</div>
 		
