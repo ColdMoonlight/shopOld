@@ -61,14 +61,10 @@
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
-		//var cidA = window.location.href.split('?')[1].split('=');
 		var categorySeo = sessionScopecategorySeo;
-
-		//default codition
 		getProductList({
 			"categorySeo": categorySeo
 		});
-
 		/* category condition */
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
@@ -79,22 +75,21 @@
 			dataType: 'JSON',
 			contentType: 'application/json',
 			success: function (data) {
+					// console.log(data)
+					var data = JSON.parse(data);
 				if (data.code === 100) {
-					var resData = data.extend.mlbackProductResList;
-					console.log(resData);
+					var resData = data.extend.mlbackCategorydownEr;
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
 							$(item).on('change', function () {
-								//console.log($('.select-category').val(), $('.select-color').val());
 								getProductList({
-									"productCategoryid": $('.select-category').val() || cidA[1]
+									"categorySeo": $('.select-category').val() || sessionScopecategorySeo
 								});
 							})
-
+					
 						}
 					})
-
 				} else {
 					renderErrorMsg(prodcutBox, 'No product-related data was obtained');
 				}
@@ -103,16 +98,17 @@
 		/* product list for category */
 		function getProductList(data) {
 			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
+				url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 				data: JSON.stringify(data),
 				dataType: "JSON",
 				contentType: 'application/json',
 				type: "POST",
 				success: function (data) {
-					// console.log(data)
 					var data = JSON.parse(data);
+					// console.log(data)
 					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
+						var resData2 = data.extend.mlbackProductResList;
+						rednerProduct(productList,resData2);
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
@@ -197,14 +193,12 @@
 			html += ''
 
 			for (var i = 0, len = data.length; i < len; i += 1) {
-				if (data[i].categoryId === parseInt(cidA[1])) {
-					// console.log("*********")
-					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
+				if (data[i].categorySeo === sessionScopecategorySeo) {
+					html = '<option value="' + data[i].categorySeo + '">' + data[i].categoryName + '</option>' + html;
 				} else {
-					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
+					html += '<option value="' + data[i].categorySeo + '">' + data[i].categoryName + '</option>';
 				}
 			}
-
 			parent.html(html);
 		}
 	</script>
