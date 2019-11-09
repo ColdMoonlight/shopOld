@@ -66,27 +66,23 @@
 		var reviewId = null;
 		var condition = $('.select');
 		var productList = $('.product-list');
-		var sessionScopecategoryId = '${sessionScope.categoryId}';
-		console.log("sessionScopecategoryId:"+sessionScopecategoryId);
-		//var cidA = window.location.href.split('?')[1].split('=');
-		var cidA = sessionScopecategoryId;
-		var productCategoryid = cidA;
-
-		//default codition
-		/* getProductList({
-			"productCategoryid": cidA
-		}); */
+		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
+		var categorySeo = sessionScopecategorySeo;
 		
-		// getProductList(productCategoryid,1);
-	to_page(1);
+    	to_page(1);
 		/* category condition */
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			type: "GET",
+			url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
+			data: JSON.stringify({
+				"categorySeo": categorySeo
+			}),
+			type: 'post',
+			dataType: 'JSON',
+			contentType: 'application/json',
 			success: function (data) {
 				if (data.code === 100) {
 					var resData = data.extend.mlbackCategorydownEr;
-					//console.log(resData);
+					console.log(resData);/**/
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
@@ -95,7 +91,7 @@
 								/* getProductList({
 									"productCategoryid": $('.select-category').val() || cidA[1]
 								}); */
-								productCategoryid = $('.select-category').val() || cidA;
+								categorySeo = $('.select-category').val() || sessionScopecategorySeo;
 								to_page(1);
 							})
 
@@ -109,12 +105,15 @@
 		});
 		
 		function to_page(pn) {
+			var resData2= {
+						"categorySeo": categorySeo,
+						"pn": pn
+				  };
 			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListAndpn',
-				data: {
-     			"categoryId": productCategoryid,
-     			"pn": pn
-   		  },
+				url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
+				data: JSON.stringify(resData2),
+				dataType: "JSON",
+				contentType: 'application/json',
 				type: "POST",
 				success: function (data) {
 					// console.log(data)
@@ -135,9 +134,9 @@
 				error: function (error) {
 					if (error.status === 400) {
 						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
-						setTimeout(function () {
-							window.location.href = "${APP_PATH}/index/isMobileOrPc";
-						}, 3000);
+						// setTimeout(function () {
+						// 	window.location.href = "${APP_PATH}/index/isMobileOrPc";
+						// }, 3000);
 					}
 				}
 			});
@@ -265,10 +264,10 @@
 			html += ''
 
 			for (var i = 0, len = data.length; i < len; i += 1) {
-				if (data[i].categoryId === parseInt(cidA[1])) {
-					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
+				if (data[i].categorySeo === sessionScopecategorySeo) {
+					html = '<option value="' + data[i].categorySeo + '">' + data[i].categoryName + '</option>' + html;
 				} else {
-					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
+					html += '<option value="' + data[i].categorySeo + '">' + data[i].categoryName + '</option>';
 				}
 			}
 
