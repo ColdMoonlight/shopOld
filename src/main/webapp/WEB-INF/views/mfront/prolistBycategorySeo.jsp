@@ -117,7 +117,7 @@
 					if (error.status === 400) {
 						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
 						setTimeout(function () {
-							window.location.href = "${APP_PATH}/index/isMobileOrPc";
+							window.location.href = "${APP_PATH}/index.html";
 						}, 3000);
 					}
 				}
