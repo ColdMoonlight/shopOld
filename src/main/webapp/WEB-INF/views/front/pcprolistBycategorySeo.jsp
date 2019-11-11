@@ -68,9 +68,10 @@
 		var productList = $('.product-list');
 		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
 		var categorySeo = sessionScopecategorySeo;
-		
-    	to_page(1);
-		/* category condition */
+		getProductList({
+			"categorySeo": categorySeo
+		});
+    
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 			data: JSON.stringify({
@@ -82,17 +83,14 @@
 			success: function (data) {
 				if (data.code === 100) {
 					var resData = data.extend.mlbackCategorydownEr;
-					console.log(resData);/**/
+					// console.log(resData);/**/
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
 							$(item).on('change', function () {
-								//console.log($('.select-category').val(), $('.select-color').val());
-								/* getProductList({
-									"productCategoryid": $('.select-category').val() || cidA[1]
-								}); */
-								categorySeo = $('.select-category').val() || sessionScopecategorySeo;
-								to_page(1);
+								getProductList({
+									"categorySeo": $('.select-category').val() || sessionScopecategorySeo
+								});
 							})
 
 						}
@@ -103,30 +101,19 @@
 				}
 			}
 		});
-		
-		function to_page(pn) {
-			var resData2= {
-						"categorySeo": categorySeo,
-						"pn": pn
-				  };
+		function getProductList(data) {
 			$.ajax({
 				url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
-				data: JSON.stringify(resData2),
+				data: JSON.stringify(data),
 				dataType: "JSON",
 				contentType: 'application/json',
 				type: "POST",
 				success: function (data) {
-					// console.log(data)
 					// var data = JSON.parse(data);
+					// console.log(data)
 					if (data.code === 100) {
-						var reviewTextData =  data.extend.mlbackProductResList;
-						console.log(reviewTextData)
-						rednerProduct(productList,reviewTextData);
-						var pageInfo = data.extend.pageInfo;
-						console.log("************pageInfo*************");
-						console.log(pageInfo);
-						console.log("************pageInfo*************");
-						render_page_nav($('.page-info-area'), pageInfo)
+						var resData2 = data.extend.mlbackProductResList;
+						rednerProduct(productList,resData2);
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
@@ -134,69 +121,12 @@
 				error: function (error) {
 					if (error.status === 400) {
 						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
-						// setTimeout(function () {
-						// 	window.location.href = "${APP_PATH}/index/isMobileOrPc";
-						// }, 3000);
+						setTimeout(function () {
+							window.location.href = "${APP_PATH}/index.html";
+						}, 3000);
 					}
 				}
 			});
-		}
-		
-		// var pageInfo
-
-		// render page nav
-		function render_page_nav(parent, pageInfo) {
-			//page_nav_area
-			parent.empty();
-			var ul = $("<ul></ul>").addClass("pagination");
-
-			//构建元素
-			var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
-			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
-			if (pageInfo.hasPreviousPage == false) {
-				firstPageLi.addClass("disabled");
-				prePageLi.addClass("disabled");
-			} else {
-				//为元素添加点击翻页的事件
-				firstPageLi.click(function () {
-					to_page(1);
-				});
-				prePageLi.click(function () {
-					to_page(pageInfo.pageNum - 1);
-				});
-			}
-
-			var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
-			var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
-			if (pageInfo.hasNextPage == false) {
-				nextPageLi.addClass("disabled");
-				lastPageLi.addClass("disabled");
-			} else {
-				nextPageLi.click(function () {
-					to_page(pageInfo.pageNum + 1);
-				});
-				lastPageLi.click(function () {
-					to_page(pageInfo.pages);
-				});
-			}
-
-			//添加首页和前一页 的提示
-			ul.append(firstPageLi).append(prePageLi);
-			//1,2，3遍历给ul中添加页码提示
-			$.each(pageInfo.navigatepageNums, function (index, item) {
-
-				var numLi = $("<li></li>").append($("<a></a>").append(item));
-				if (pageInfo.pageNum == item) {
-					numLi.addClass("active");
-				}
-				numLi.click(function () {
-					to_page(item);
-					
-				});
-				ul.append(numLi);
-			});
-			//添加下一页和末页 的提示
-			ul.append(nextPageLi).append(lastPageLi).appendTo(parent);
 		}
 
  		function renderErrorMsg(parent, msg) {
