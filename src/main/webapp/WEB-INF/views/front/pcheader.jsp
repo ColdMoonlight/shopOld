@@ -239,6 +239,7 @@
 
 		function renderMainCategory(parent, data) {
 			
+			
 			var html = '';
 			for (var i in data) {
 				var categoryLableInt = data[i].categoryLable;
@@ -254,12 +255,19 @@
 				}else if(categoryLableInt == 4){
 					classimg = "classimg4";
 				}
-				html += '<li class="dropdown megamenu '+classimg+'">' +
-					'<a href="javascript:;" data-categoryid=' + data[i].categoryId + '>' + data[i].categoryName + '</a>' +
-					'<div class="dropdown-menu">' +
+				var iddata =data[i].categoryId;
+				var no_show=""
+				if(iddata==7){
+						no_show="hide";
+						html += '<li class="dropdown megamenu '+classimg+'">'+
+						'<a href="${APP_PATH}/Category/49.html">' + data[i].categoryName + '</a>';
+				}else{
+					html += '<li class="dropdown megamenu '+classimg+'">'+
+					'<a href="${APP_PATH}/search/' + data[i].categorySeo + '.html">' + data[i].categoryName + '</a>';
+				}
+				html +='<div class="dropdown-menu '+no_show+'">' +
 					'<div class="row">' +
 					'<div class="left col-sm-9">';
-
 				if (data[i].list && data[i].list.length) {
 					html += '<ul class="tt-megamenu-submenu">';
 					for (var j = 0; j < data[i].list.length; j += 1) {
@@ -281,12 +289,6 @@
 					'</div>';
 			}
 			parent.html(html);
-			var firstli =$(".dropdown").eq(0);
-			firstli.find(".dropdown-menu").addClass("noshow")
-			firstli.click(function(){
-				 window.location.href = "${APP_PATH }/Category/49.html";
-			})
-			
 			
 		}
 		var mainCategory = $('.tt-desctop-menu ul');
@@ -297,7 +299,7 @@
 			method: 'GET',
 			success: function (data) {
 				var resData = data.extend.mlbackCategorydownList;
-				// console.log(resData);/**********resData*********/
+				console.log(resData);/**********resData*********/
 				if (data.code === 100) {
 					categoryData = resData.reduce(function (obj, item) {
 						if (item.categoryParentId === -1) {
@@ -334,6 +336,10 @@
 		      activeItem = $(this);
 		      var data = categoryData[$(this).data('id')];
 		      renderSubCategory(subCategory, data);
+			 	//  var iddata =data.categoryId;
+				 // if(iddata==7){
+					// window.location.href = "${APP_PATH }/Category/49.html";
+				 // }
 		    })
 		  })
 		}
