@@ -92,10 +92,7 @@
     from tb_paypal_stateprovince
     where stateprovince_id = #{stateprovinceId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_paypal_stateprovince
-    where stateprovince_id = #{stateprovinceId,jdbcType=INTEGER}
-  </delete>
+  
   <delete id="deleteByExample" parameterType="com.atguigu.bean.MlPaypalStateprovinceExample">
     delete from tb_paypal_stateprovince
     <if test="_parameter != null">
@@ -112,6 +109,68 @@
       #{stateprovinceCountry,jdbcType=VARCHAR}, #{stateprovinceCreatetime,jdbcType=VARCHAR}, 
       #{stateprovinceMotifytime,jdbcType=VARCHAR})
   </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.MlPaypalStateprovinceExample" resultType="java.lang.Long">
+    select count(*) from tb_paypal_stateprovince
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_paypal_stateprovince
+    <set>
+      <if test="record.stateprovinceId != null">
+        stateprovince_id = #{record.stateprovinceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stateprovinceNameCode != null">
+        stateprovince_name_code = #{record.stateprovinceNameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateprovinceName != null">
+        stateprovince_name = #{record.stateprovinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateprovinceCountryCode != null">
+        stateprovince_country_code = #{record.stateprovinceCountryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateprovinceCountry != null">
+        stateprovince_country = #{record.stateprovinceCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateprovinceCreatetime != null">
+        stateprovince_createTime = #{record.stateprovinceCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stateprovinceMotifytime != null">
+        stateprovince_motifyTime = #{record.stateprovinceMotifytime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_paypal_stateprovince
+    set stateprovince_id = #{record.stateprovinceId,jdbcType=INTEGER},
+      stateprovince_name_code = #{record.stateprovinceNameCode,jdbcType=VARCHAR},
+      stateprovince_name = #{record.stateprovinceName,jdbcType=VARCHAR},
+      stateprovince_country_code = #{record.stateprovinceCountryCode,jdbcType=VARCHAR},
+      stateprovince_country = #{record.stateprovinceCountry,jdbcType=VARCHAR},
+      stateprovince_createTime = #{record.stateprovinceCreatetime,jdbcType=VARCHAR},
+      stateprovince_motifyTime = #{record.stateprovinceMotifytime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlPaypalStateprovince">
+    update tb_paypal_stateprovince
+    set stateprovince_name_code = #{stateprovinceNameCode,jdbcType=VARCHAR},
+      stateprovince_name = #{stateprovinceName,jdbcType=VARCHAR},
+      stateprovince_country_code = #{stateprovinceCountryCode,jdbcType=VARCHAR},
+      stateprovince_country = #{stateprovinceCountry,jdbcType=VARCHAR},
+      stateprovince_createTime = #{stateprovinceCreatetime,jdbcType=VARCHAR},
+      stateprovince_motifyTime = #{stateprovinceMotifytime,jdbcType=VARCHAR}
+    where stateprovince_id = #{stateprovinceId,jdbcType=INTEGER}
+  </update>
+  
+  <!--insertSelective-->
   <insert id="insertSelective" parameterType="com.atguigu.bean.MlPaypalStateprovince">
     insert into tb_paypal_stateprovince
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -161,54 +220,12 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.atguigu.bean.MlPaypalStateprovinceExample" resultType="java.lang.Long">
-    select count(*) from tb_paypal_stateprovince
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_paypal_stateprovince
-    <set>
-      <if test="record.stateprovinceId != null">
-        stateprovince_id = #{record.stateprovinceId,jdbcType=INTEGER},
-      </if>
-      <if test="record.stateprovinceNameCode != null">
-        stateprovince_name_code = #{record.stateprovinceNameCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stateprovinceName != null">
-        stateprovince_name = #{record.stateprovinceName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stateprovinceCountryCode != null">
-        stateprovince_country_code = #{record.stateprovinceCountryCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stateprovinceCountry != null">
-        stateprovince_country = #{record.stateprovinceCountry,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stateprovinceCreatetime != null">
-        stateprovince_createTime = #{record.stateprovinceCreatetime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.stateprovinceMotifytime != null">
-        stateprovince_motifyTime = #{record.stateprovinceMotifytime,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_paypal_stateprovince
-    set stateprovince_id = #{record.stateprovinceId,jdbcType=INTEGER},
-      stateprovince_name_code = #{record.stateprovinceNameCode,jdbcType=VARCHAR},
-      stateprovince_name = #{record.stateprovinceName,jdbcType=VARCHAR},
-      stateprovince_country_code = #{record.stateprovinceCountryCode,jdbcType=VARCHAR},
-      stateprovince_country = #{record.stateprovinceCountry,jdbcType=VARCHAR},
-      stateprovince_createTime = #{record.stateprovinceCreatetime,jdbcType=VARCHAR},
-      stateprovince_motifyTime = #{record.stateprovinceMotifytime,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+  <!--deleteByPrimaryKey-->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_paypal_stateprovince
+    where stateprovince_id = #{stateprovinceId,jdbcType=INTEGER}
+  </delete>
+  <!--updateByPrimaryKeySelective-->
   <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlPaypalStateprovince">
     update tb_paypal_stateprovince
     <set>
@@ -233,14 +250,10 @@
     </set>
     where stateprovince_id = #{stateprovinceId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlPaypalStateprovince">
-    update tb_paypal_stateprovince
-    set stateprovince_name_code = #{stateprovinceNameCode,jdbcType=VARCHAR},
-      stateprovince_name = #{stateprovinceName,jdbcType=VARCHAR},
-      stateprovince_country_code = #{stateprovinceCountryCode,jdbcType=VARCHAR},
-      stateprovince_country = #{stateprovinceCountry,jdbcType=VARCHAR},
-      stateprovince_createTime = #{stateprovinceCreatetime,jdbcType=VARCHAR},
-      stateprovince_motifyTime = #{stateprovinceMotifytime,jdbcType=VARCHAR}
-    where stateprovince_id = #{stateprovinceId,jdbcType=INTEGER}
-  </update>
+  <!--selectMlPaypalStateprovinceByCountryCode-->
+  <select id="selectMlPaypalStateprovinceByCountryCode" parameterType="com.atguigu.bean.MlPaypalStateprovince" resultMap="BaseResultMap">
+    select stateprovince_name
+    from tb_paypal_stateprovince  where stateprovince_country_code = #{stateprovinceCountryCode,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

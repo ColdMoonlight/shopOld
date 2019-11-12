@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.bean.MlPaypalStateprovince;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackCategory;
@@ -25,6 +26,7 @@ import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.atguigu.service.MlPaypalStateprovinceService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackCategoryService;
@@ -44,6 +46,9 @@ public class MlfrontAddressController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlPaypalStateprovinceService mlPaypalStateprovinceService;
 	
 	/**1.0	UseNow	0505
 	 * MlfrontAddress	insert
@@ -177,7 +182,11 @@ public class MlfrontAddressController {
 		}else{
 			usertype = 1;//注册用户
 		}
-		return Msg.success().add("resMsg", "查询运费成功").add("areafreightMoney", areafreightMoney).add("areafreightCountry", areafreightCountry).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
+		//查询该国家的二级省份
+		MlPaypalStateprovince mlPaypalStateprovinceReq = new MlPaypalStateprovince();
+		mlPaypalStateprovinceReq.setStateprovinceCountryCode(areafreightCountryEnglish);
+		List<MlPaypalStateprovince> mlPaypalStateprovinceList =  mlPaypalStateprovinceService.selectMlPaypalStateprovinceByCountryCode(mlPaypalStateprovinceReq);
+		return Msg.success().add("resMsg", "查询运费成功").add("areafreightMoney", areafreightMoney).add("areafreightCountry", areafreightCountry).add("usertype", usertype).add("mlPaypalStateprovinceList", mlPaypalStateprovinceList);//新增以后，返回去的这里，有id，你从这里拿
 	}
 	
 	/**2.0	useOn	0505
