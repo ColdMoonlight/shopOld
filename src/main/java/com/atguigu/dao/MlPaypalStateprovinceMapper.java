@@ -1,5 +1,6 @@
 package com.atguigu.dao;
 
+import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlPaypalStateprovince;
 import com.atguigu.bean.MlPaypalStateprovinceExample;
 import java.util.List;
@@ -10,11 +11,7 @@ public interface MlPaypalStateprovinceMapper {
 
     int deleteByExample(MlPaypalStateprovinceExample example);
 
-    int deleteByPrimaryKey(Integer stateprovinceId);
-
     int insert(MlPaypalStateprovince record);
-
-    int insertSelective(MlPaypalStateprovince record);
 
     List<MlPaypalStateprovince> selectByExample(MlPaypalStateprovinceExample example);
 
@@ -24,7 +21,16 @@ public interface MlPaypalStateprovinceMapper {
 
     int updateByExample(@Param("record") MlPaypalStateprovince record, @Param("example") MlPaypalStateprovinceExample example);
 
-    int updateByPrimaryKeySelective(MlPaypalStateprovince record);
-
     int updateByPrimaryKey(MlPaypalStateprovince record);
+    
+    
+    //增
+    int insertSelective(MlPaypalStateprovince record);
+    //删
+    int deleteByPrimaryKey(Integer stateprovinceId);
+    //改
+    int updateByPrimaryKeySelective(MlPaypalStateprovince record);
+    //通过CountryCode查询
+    List<MlPaypalStateprovince> selectMlPaypalStateprovinceByCountryCode(MlPaypalStateprovince record);
+    
 }
