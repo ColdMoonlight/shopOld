@@ -72,7 +72,8 @@
 		
 		
 		<!--
-		<table tableName="tb_paypal_shippingAddress" domainObjectName="MlPaypalShipAddress"></table>-->
+		<table tableName="tb_paypal_shippingAddress" domainObjectName="MlPaypalShipAddress"></table>
+		<table tableName="tb_paypal_stateprovince" domainObjectName="MlPaypalStateprovince"></table>-->
 
 		
 	</context>
