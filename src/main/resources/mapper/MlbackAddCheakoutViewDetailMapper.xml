@@ -309,7 +309,7 @@
       </if>
     </trim>
   </insert>
-  
+  <!-- deleteByPrimaryKey -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_mlback_addcheakoutviewdetail
     where addcheakoutviewDetail_id = #{addcheakoutviewdetailId,jdbcType=INTEGER}
