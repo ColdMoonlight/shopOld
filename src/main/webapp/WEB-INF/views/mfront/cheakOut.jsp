@@ -102,22 +102,8 @@
 								class="form-control address addreNo">
 						</div>
 					</div>
-					<!-- Zip/Postal code -->
-					<div class="form-group">
-						<label for="addressPost" class="form-label required">Zip/Postal code</label>
-						<div class="form-input">
-							<input type="text" name="addressPost" class="form-control code">
-						</div>
-					</div>
-					<!-- city -->
-					<div class="form-group">
-						<label for="addressCity" class="form-label required">City</label>
-						<div class="form-input">
-							<input type="text" name="addressCity" class="form-control city">
-						</div>
-					</div>
 					<!-- country -->
-					<div class="form-group">
+					<div class="form-group form-groupcountry">
 						<label for="addressCountry" class="form-label required">Country</label>
 						<div class="form-input">
 							<select name="addressCountry" class="form-control" id="country">
@@ -862,13 +848,35 @@
 							</select>
 						</div>
 					</div>
-					<!-- State/Province -->
-					<div class="form-group">
+<!-- 					State/Province
+					<div class="form-group form-group_inp">
 						<label for="addressProvince" class="form-label required">State/Province</label>
 						<div class="form-input">
 							<input type="text" name="addressProvince" class="form-control province">
 						</div>
+					</div> -->
+					<!-- stateprovinceName -->
+					<div class="form-group form-group_select" style="display: none;">
+						<label for="addressProvince" class="form-label required">State/Province</label>
+						<div class="form-input">
+							<select name="addressProvince" class="select-province form-control"></select>
+						</div>
 					</div>
+					<!-- city -->
+					<div class="form-group form-group2">
+						<label for="addressCity" class="form-label required">City</label>
+						<div class="form-input">
+							<input type="text" name="addressCity" class="form-control city">
+						</div>
+					</div>
+					<!-- Zip/Postal code -->
+					<div class="form-group">
+						<label for="addressPost" class="form-label required">Zip/Postal code</label>
+						<div class="form-input">
+							<input type="text" name="addressPost" class="form-control code">
+						</div>
+					</div>
+					
 				</form>
 			</div>
 		<!-- 	<div class="win-box-title">
@@ -979,9 +987,10 @@
 		var productNumArr = [];
 		var payplate = 0;
 		var couponPriceOld =0;
-		
+		var provinceList;
 		
 		var addressIdIntInt;
+		
 		function datalocation (){
 			var dataname = $("#country").val();
 			$.ajax({
@@ -996,6 +1005,19 @@
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
+					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
+					var lengthprov =mlPaypalStateprovinceList.length;
+					console.log(lengthprov);
+					console.log("****mlPaypalStateprovinceList****");
+					console.log(mlPaypalStateprovinceList)
+                    if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						$(".form-group_select").show();
+						$(".form-groupcountry").css("width","50%")
+					  } else {
+					   $(".form-group_select").hide();
+					   $(".form-groupcountry").css("width","100%")
+					  }				
 					// console.log("resareafreightMoney:"+resareafreightMoney)
 					// $('.shipping').find('span').text(' of $' + resareafreightMoney);
 					// shippingPriceText.text('$' + resareafreightMoney)
@@ -1027,6 +1049,20 @@
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
+					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
+					var lengthprov =mlPaypalStateprovinceList.length;
+					console.log(lengthprov);
+					provinceList =lengthprov;
+					console.log("****provinceList****");
+					console.log(provinceList)
+					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						$(".form-group_select").show();
+						$(".form-groupcountry").css("width","50%")
+					  } else {
+					   $(".form-group_select").hide();
+					   $(".form-groupcountry").css("width","100%")
+					  }	
 					$('.shipping').find('span').text(' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
 					var prototalnum =$(".c-prototal .cal-price-num").text().slice(1)
@@ -1038,7 +1074,16 @@
 				  }
 				});
 		});
-
+/*******************/
+		function renderCondition(parent, data, defaultHtml) {
+			var html = defaultHtml || '';
+			html += ''
+			for (var i = 0, len = data.length; i < len; i += 1) {
+					html = '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>' + html;
+			}
+			parent.html(html);
+		}
+/*******************/
 		function renderAddressDetail(data) {
 			// console.log(data)
 	    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
@@ -1050,7 +1095,9 @@
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 			$("input.province").val(data.addressProvince ? data.addressProvince : '');
 			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
 			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
+			
 			
 		}
 		/* 初始化地址模块 */
@@ -1147,7 +1194,7 @@
 			type: 'get',
 			success: function (data) {
 				var resData = data.extend.mlfrontOrderItemList;
-				console.log(resData);
+				// console.log(resData);
 				shopidlist = toFbidsPurchase(resData);
 				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
 				var cartList = $('.cart-list');
@@ -1483,8 +1530,9 @@
 									success: function (data) {
 										var resData = JSON.parse(data).extend;
 										// console.log(data)
-										$(".loading").show();
-										window.location.href = '${APP_PATH }/paypal/mpay';
+										// $(".loading").show();
+										// window.location.href = '${APP_PATH }/paypal/mpay';
+										window.location.href = '${APP_PATH }/index.html';
 									}
 								})
 							} else {
@@ -1577,7 +1625,9 @@
 			var citystr = $(".city").val();
 			// var countrystr = $("#country").val();
 			var countrystr=$('#country option:checked').text()
-			var provincestr = $(".province").val();
+			// var provincestr = $(".province").val();
+			var provincestr = $(".form-group_select option:checked").text()
+			
 			
 			
 			if(firstnamestr==null||firstnamestr==''){
@@ -1648,8 +1698,8 @@
 				flag = 1;
 				// alert("provincestr is empty");
 				renderSysMsg('provincestr is empty')
-				$(".province").addClass("error_br");
-				$(".province").focus(function(){
+				$(".form-group_select").addClass("error_br");
+				$(".form-group_select").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}
