@@ -266,8 +266,7 @@
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
-		var userid;
-		var Userjudge
+		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
 				// fetch data
@@ -295,7 +294,6 @@
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 							var resDataUserOne = result.extend.mlfrontUserOne;
 							// console.log(resDataUserOne)
-							Userjudge =resDataUserOne;
 							var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
 							
 							/* console.log('********resDataPayInfoOne********');
@@ -343,22 +341,21 @@
 				});
 				/*****/
 				var myid;
-				var userStrtext;
 				function returnshow(data){
 					if(data==null){
-						$(".remark_info").hide();
+						$(".remark_info1").hide();
 						$(".userstart").hide();
 					}else{
 						$(".user_rating").html(data.userStr)
 						$(".userstart").show();
-						$(".remark_info textarea").val(data.userStr);
+						$(".remark_info1 textarea").val(data.userStr);
 						var userodid = data.userId;
 						myid =userodid;
 					}
 				}
-				$(".remark_info input").click(function(){
+				$(".remark_info1 input").click(function(){
 					var haveData = {
-						"userStr":$(".remark_info textarea").val(),
+						"userStr":$(".remark_info1 textarea").val(),
 						"userId":myid,
 					}
 					console.log(haveData);
@@ -370,8 +367,8 @@
 						contentType: 'application/json',
 						success: function (data) {
 							if (data.code === 100) {
-								var textw=$(".remark_info textarea").val();
-								$(".remark_info").hide();
+								var textw=$(".remark_info1 textarea").val();
+								$(".remark_info1").hide();
 								$(".mask").hide();
 								$(".user_rating").html(textw)
 							}
@@ -379,11 +376,13 @@
 					})
 				});
 				$(".closetc").click(function(){
-					$(".remark_info").hide();
+					$(".remark_info1").hide();
+					$(".remark_info2").hide();
+					$(".remark_info3").hide();
 					$(".mask").hide();
 				});
 				$(".userstart b").click(function(){
-					$(".remark_info").show();
+					$(".remark_info1").show();
 					$(".mask").show();
 				})
 				
@@ -408,10 +407,80 @@
 					'<div><span>用户姓名：</span><span>' + data.userFirstname + " " + data.userLastname + '</span></div>' +
 					'<div><span>用户电话：</span><span>' + data.userTelephone + '</span></div>' +
 					'<div><span>用户邮箱：</span><span>' + data.userEmail + '</span></div>' +
-					'<div><span>用户vip等级：</span><span>' + data.userVipLevel + '</span></div>' +
-					'<div><span>历史购买次数：</span><span>' + data.userTimes + '</span></div>';
+					'<div class="vipdiv"><span>用户vip等级：</span><span class="uservip">' + data.userVipLevel + '</span><em></em><b class="vipnum">编辑</b></div>' +
+					'<div class="timediv"><span>历史购买次数：</span><span class="usertime">' + data.userTimes + '</span><em></em><b class="timenum">编辑</b></div>';
 			}
 			$('.buyer-info').html(html);
+			/***************/
+				var myid;
+			$(".vipnum").click(function(){
+				$(".remark_info2").show();
+				$(".mask").show();
+			})
+			$(".timenum").click(function(){
+				$(".remark_info3").show();
+				$(".mask").show();
+			})
+			var userodid = data.userId;
+			myid =userodid;
+			$(".remark_info2 input").click(function(){
+				var haveData2 = {
+					"userVipLevel":$(".remark_info2 textarea").val(),
+					"userId":myid,
+				}
+				console.log(haveData2);
+				$.ajax({
+					url: "${APP_PATH}/MlfrontUser/update",
+					data: JSON.stringify(haveData2),
+					type: "POST",
+					dataType: 'json',
+					contentType: 'application/json',
+					success: function (data) {
+						if (data.code === 100) {
+							var textw=$(".remark_info2 textarea").val();
+							$(".remark_info2").hide();
+							$(".mask").hide();
+							$(".vipdiv .uservip") .html(textw)
+						}
+					}
+				})
+			});
+			$(".remark_info3 input").click(function(){
+				var haveData2 = {
+					"userTimes":$(".remark_info3 textarea").val(),
+					"userId":myid,
+				}
+				console.log(haveData2);
+				$.ajax({
+					url: "${APP_PATH}/MlfrontUser/update",
+					data: JSON.stringify(haveData2),
+					type: "POST",
+					dataType: 'json',
+					contentType: 'application/json',
+					success: function (data) {
+						if (data.code === 100) {
+							var textw=$(".remark_info3 textarea").val();
+							$(".remark_info3").hide();
+							$(".mask").hide();
+							$(".timediv .usertime") .html(textw)
+						}
+					}
+				})
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 
 		function renderOrderInfo(data) {//红
