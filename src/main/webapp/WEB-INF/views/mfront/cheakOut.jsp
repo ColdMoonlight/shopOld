@@ -107,6 +107,7 @@
 						<label for="addressCountry" class="form-label required">Country</label>
 						<div class="form-input">
 							<select name="addressCountry" class="form-control" id="country">
+								<option value="US" selected="selected">United States</option>
 								<option value="AF">
 									Afghanistan
 								</option>
@@ -803,7 +804,7 @@
 								<option value="GB">
 									United Kingdom
 								</option>
-								<option value="US" selected="selected">
+								<option value="US">
 									United States
 								</option>
 								<option value="UY">
@@ -856,7 +857,7 @@
 						</div>
 					</div> -->
 					<!-- stateprovinceName -->
-					<div class="form-group form-group_select" style="display: none;">
+					<div class="form-group form-group_select selectActive" style="display: none;">
 						<label for="addressProvince" class="form-label required">State/Province</label>
 						<div class="form-input">
 							<select name="addressProvince" class="select-province form-control"></select>
@@ -987,12 +988,12 @@
 		var productNumArr = [];
 		var payplate = 0;
 		var couponPriceOld =0;
-		var provinceList;
-		
 		var addressIdIntInt;
+		var jiecountry;
 		
-		function datalocation (){
-			var dataname = $("#country").val();
+		
+		
+		function datalocation (dataname){
 			$.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
 				  data: JSON.stringify({
@@ -1002,14 +1003,12 @@
 				  dataType: 'JSON',
 				  contentType: 'application/json',
 				  success: function (data) {
-					// console.log(data)
+					console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
-					var lengthprov =mlPaypalStateprovinceList.length;
-					console.log(lengthprov);
-					console.log("****mlPaypalStateprovinceList****");
 					console.log(mlPaypalStateprovinceList)
+					console.log(mlPaypalStateprovinceList.length)
                     if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
@@ -1029,7 +1028,8 @@
 				  }
 				});
 		}
-		datalocation ();
+		var dataname="US";
+		datalocation (dataname)
 		$("#country").bind("change",function(){
 			var radio_zt =$(".coupons .coupon-item input[type='radio']");
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
@@ -1050,17 +1050,16 @@
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
-					var lengthprov =mlPaypalStateprovinceList.length;
-					console.log(lengthprov);
-					provinceList =lengthprov;
-					console.log("****provinceList****");
-					console.log(provinceList)
+					console.log(mlPaypalStateprovinceList)
+					console.log(mlPaypalStateprovinceList.length)
 					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
+						$(".form-group_select").addClass("selectActive")
 						$(".form-groupcountry").css("width","50%")
 					  } else {
 					   $(".form-group_select").hide();
+					    $(".form-group_select").removeClass("selectActive")
 					   $(".form-groupcountry").css("width","100%")
 					  }	
 					$('.shipping').find('span').text(' of $' + resareafreightMoney);
@@ -1081,11 +1080,12 @@
 			for (var i = 0, len = data.length; i < len; i += 1) {
 					html = '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>' + html;
 			}
+			html ='<option value="" selected="selected">province</option>' +html;
 			parent.html(html);
 		}
 /*******************/
 		function renderAddressDetail(data) {
-			// console.log(data)
+			console.log(data)
 	    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -1093,12 +1093,33 @@
 			$("input.address").val(data.addressDetail ? data.addressDetail : '');
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
-			$("input.province").val(data.addressProvince ? data.addressProvince : '');
+			
+			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
 			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-			$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
+			var dataprov =data.addressProvince;
+			// var datacountry =data.addressCountryAll;
+			 jiecountry =data.addressCountry;
+			$("#country option:checked").attr("value",jiecountry);
+			$("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			$("#country").attr("data-name",jiecountry);
+			// $("#country").attr("data-country",datacountry);
+			var dataname =$("#country").data("name");
+			datalocation (dataname)
+			console.log("***dataprov****");
+			console.log(dataprov);
+			console.log("***dataprov****");
+			if(dataprov==null||dataprov==""){
+				$(".form-group_select").hide();
+				 $(".form-group_select").removeClass("selectActive")
+				$(".form-groupcountry").css("width","100%")
+			}else{
+				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
+				$(".select-province option:checked").attr("value",dataprov);
+				// $(".select-province").val(data.addressCountry ? data.addressCountry : ''); 
+				$(".form-group_select").addClass("selectActive");
+				$(".form-groupcountry").css("width","50%");
+			}
 			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
-			
-			
 		}
 		/* 初始化地址模块 */
 		$.ajax({
@@ -1106,9 +1127,9 @@
 			type: 'post',
 			success: function (data) {
 				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				// console.log(data)
+				console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				// console.log(resDataAddress)/******/
+				console.log(resDataAddress)/******/
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
@@ -1456,7 +1477,7 @@
 					}, {});
 					//if (!inputCheck(reqData)) return;
 					// console.log("*****savr_address*******")
-					// console.log(reqData)
+					console.log(reqData)
 					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
 					 $.ajax({
 						url: '${APP_PATH}/MlfrontAddress/save',
@@ -1626,8 +1647,9 @@
 			// var countrystr = $("#country").val();
 			var countrystr=$('#country option:checked').text()
 			// var provincestr = $(".province").val();
-			var provincestr = $(".form-group_select option:checked").text()
-			
+			// var provincestr = $(".selectActive .select-province option:checked").text();
+			// var provincestr = $("body").find(".selectActive").val();
+			var provincestr = $(".selectActive .select-province option:checked").text();
 			
 			
 			if(firstnamestr==null||firstnamestr==''){
@@ -1694,12 +1716,12 @@
 				$("#country").focus(function(){
 					$(this).removeClass("error_br")
 				})
-			}else if(provincestr==null||provincestr==''){
+			}else if(provincestr=='province'){
 				flag = 1;
 				// alert("provincestr is empty");
 				renderSysMsg('provincestr is empty')
-				$(".form-group_select").addClass("error_br");
-				$(".form-group_select").focus(function(){
+				$(".selectActive").addClass("error_br");
+				$(".selectActive").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}
