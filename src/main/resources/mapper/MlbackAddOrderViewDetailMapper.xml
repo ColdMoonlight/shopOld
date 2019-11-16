@@ -6,7 +6,9 @@
     <result column="addorderViewDetail_sessionid" jdbcType="VARCHAR" property="addorderviewdetailSessionid" />
     <result column="addorderViewDetail_name" jdbcType="VARCHAR" property="addorderviewdetailName" />
     <result column="addorderViewDetail_proid" jdbcType="INTEGER" property="addorderviewdetailProid" />
+    <result column="addorderViewDetail_proItemid" jdbcType="INTEGER" property="addorderviewdetailProItemid" />
     <result column="addorderViewDetail_proname" jdbcType="VARCHAR" property="addorderviewdetailProname" />
+    <result column="addorderViewDetail_proskunamestr" jdbcType="VARCHAR" property="addorderviewdetailProskunamestr" />
     <result column="addorderViewDetail_seoname" jdbcType="VARCHAR" property="addorderviewdetailSeoname" />
     <result column="addorderViewDetail_actnum" jdbcType="INTEGER" property="addorderviewdetailActnum" />
     <result column="addorderViewDetail_createTime" jdbcType="VARCHAR" property="addorderviewdetailCreatetime" />
@@ -73,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    addorderViewDetail_id, addorderViewDetail_sessionid, addorderViewDetail_name, addorderViewDetail_proid, 
-    addorderViewDetail_proname, addorderViewDetail_seoname, addorderViewDetail_actnum, 
+    addorderViewDetail_id, addorderViewDetail_sessionid, addorderViewDetail_name, addorderViewDetail_proid, addorderViewDetail_proItemid,
+    addorderViewDetail_proname, addorderViewDetail_proskunamestr, addorderViewDetail_seoname, addorderViewDetail_actnum, 
     addorderViewDetail_createTime, addorderViewDetail_motifyTime, addorderViewDetail_starttime, 
     addorderViewDetail_endtime
   </sql>
@@ -107,14 +109,14 @@
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail">
     insert into tb_mlback_addorderviewdetail (addorderViewDetail_id, addorderViewDetail_sessionid, 
-      addorderViewDetail_name, addorderViewDetail_proid, 
-      addorderViewDetail_proname, addorderViewDetail_seoname, 
+      addorderViewDetail_name, addorderViewDetail_proid, addorderViewDetail_proItemid, 
+      addorderViewDetail_proname, addorderViewDetail_proskunamestr, addorderViewDetail_seoname, 
       addorderViewDetail_actnum, addorderViewDetail_createTime, 
       addorderViewDetail_motifyTime, addorderViewDetail_starttime, 
       addorderViewDetail_endtime)
     values (#{addorderviewdetailId,jdbcType=INTEGER}, #{addorderviewdetailSessionid,jdbcType=VARCHAR}, 
-      #{addorderviewdetailName,jdbcType=VARCHAR}, #{addorderviewdetailProid,jdbcType=INTEGER}, 
-      #{addorderviewdetailProname,jdbcType=VARCHAR}, #{addorderviewdetailSeoname,jdbcType=VARCHAR}, 
+      #{addorderviewdetailName,jdbcType=VARCHAR}, #{addorderviewdetailProid,jdbcType=INTEGER}, #{addorderviewdetailProItemid,jdbcType=INTEGER}, 
+      #{addorderviewdetailProname,jdbcType=VARCHAR}, #{addorderviewdetailProskunamestr,jdbcType=VARCHAR}, #{addorderviewdetailSeoname,jdbcType=VARCHAR}, 
       #{addorderviewdetailActnum,jdbcType=INTEGER}, #{addorderviewdetailCreatetime,jdbcType=VARCHAR}, 
       #{addorderviewdetailMotifytime,jdbcType=VARCHAR}, #{addorderviewdetailStarttime,jdbcType=VARCHAR}, 
       #{addorderviewdetailEndtime,jdbcType=VARCHAR})
@@ -141,8 +143,14 @@
       <if test="record.addorderviewdetailProid != null">
         addorderViewDetail_proid = #{record.addorderviewdetailProid,jdbcType=INTEGER},
       </if>
+      <if test="record.addorderviewdetailProItemid != null">
+        addorderViewDetail_proItemid = #{record.addorderviewdetailProItemid,jdbcType=INTEGER},
+      </if>
       <if test="record.addorderviewdetailProname != null">
         addorderViewDetail_proname = #{record.addorderviewdetailProname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addorderviewdetailProskunamestr != null">
+        addorderViewDetail_proskunamestr = #{record.addorderviewdetailProskunamestr,jdbcType=VARCHAR},
       </if>
       <if test="record.addorderviewdetailSeoname != null">
         addorderViewDetail_seoname = #{record.addorderviewdetailSeoname,jdbcType=VARCHAR},
@@ -173,7 +181,9 @@
       addorderViewDetail_sessionid = #{record.addorderviewdetailSessionid,jdbcType=VARCHAR},
       addorderViewDetail_name = #{record.addorderviewdetailName,jdbcType=VARCHAR},
       addorderViewDetail_proid = #{record.addorderviewdetailProid,jdbcType=INTEGER},
+      addorderViewDetail_proItemid = #{record.addorderviewdetailProItemid,jdbcType=INTEGER},
       addorderViewDetail_proname = #{record.addorderviewdetailProname,jdbcType=VARCHAR},
+      addorderViewDetail_proskunamestr = #{record.addorderviewdetailProskunamestr,jdbcType=VARCHAR},
       addorderViewDetail_seoname = #{record.addorderviewdetailSeoname,jdbcType=VARCHAR},
       addorderViewDetail_actnum = #{record.addorderviewdetailActnum,jdbcType=INTEGER},
       addorderViewDetail_createTime = #{record.addorderviewdetailCreatetime,jdbcType=VARCHAR},
@@ -196,9 +206,15 @@
       <if test="addorderviewdetailProid != null">
         addorderViewDetail_proid = #{addorderviewdetailProid,jdbcType=INTEGER},
       </if>
+      <if test="addorderviewdetailProItemid != null">
+        addorderViewDetail_proItemid = #{addorderviewdetailProItemid,jdbcType=INTEGER},
+      </if>
       <if test="addorderviewdetailProname != null">
         addorderViewDetail_proname = #{addorderviewdetailProname,jdbcType=VARCHAR},
       </if>
+      <if test="addorderviewdetailProskunamestr != null">
+    	addorderViewDetail_proskunamestr = #{addorderviewdetailProskunamestr,jdbcType=VARCHAR},
+	  </if>
       <if test="addorderviewdetailSeoname != null">
         addorderViewDetail_seoname = #{addorderviewdetailSeoname,jdbcType=VARCHAR},
       </if>
@@ -225,7 +241,9 @@
     set addorderViewDetail_sessionid = #{addorderviewdetailSessionid,jdbcType=VARCHAR},
       addorderViewDetail_name = #{addorderviewdetailName,jdbcType=VARCHAR},
       addorderViewDetail_proid = #{addorderviewdetailProid,jdbcType=INTEGER},
+      addorderViewDetail_proItemid = #{addorderviewdetailProItemid,jdbcType=INTEGER},
       addorderViewDetail_proname = #{addorderviewdetailProname,jdbcType=VARCHAR},
+      addorderViewDetail_proskunamestr = #{addorderviewdetailProskunamestr,jdbcType=VARCHAR},
       addorderViewDetail_seoname = #{addorderviewdetailSeoname,jdbcType=VARCHAR},
       addorderViewDetail_actnum = #{addorderviewdetailActnum,jdbcType=INTEGER},
       addorderViewDetail_createTime = #{addorderviewdetailCreatetime,jdbcType=VARCHAR},
@@ -251,9 +269,15 @@
       <if test="addorderviewdetailProid != null">
         addorderViewDetail_proid,
       </if>
+      <if test="addorderviewdetailProItemid != null">
+        addorderViewDetail_proItemid,
+      </if>
       <if test="addorderviewdetailProname != null">
         addorderViewDetail_proname,
       </if>
+      <if test="addorderviewdetailProskunamestr != null">
+    	addorderViewDetail_proskunamestr,
+	  </if>
       <if test="addorderviewdetailSeoname != null">
         addorderViewDetail_seoname,
       </if>
@@ -286,9 +310,15 @@
       <if test="addorderviewdetailProid != null">
         #{addorderviewdetailProid,jdbcType=INTEGER},
       </if>
+      <if test="addorderviewdetailProItemid != null">
+        #{addorderviewdetailProItemid,jdbcType=INTEGER},
+      </if>
       <if test="addorderviewdetailProname != null">
         #{addorderviewdetailProname,jdbcType=VARCHAR},
       </if>
+      <if test="addorderviewdetailProskunamestr != null">
+    	#{addorderviewdetailProskunamestr,jdbcType=VARCHAR},
+	  </if>
       <if test="addorderviewdetailSeoname != null">
         #{addorderviewdetailSeoname,jdbcType=VARCHAR},
       </if>
@@ -309,17 +339,20 @@
       </if>
     </trim>
   </insert>
-  
   <!-- deleteByPrimaryKey -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_mlback_addorderviewdetail
     where addorderViewDetail_id = #{addorderviewdetailId,jdbcType=INTEGER}
   </delete>
-  
-    <!-- selectMlbackAddOrderViewDetailByTime -->
+  <!-- selectMlbackAddOrderViewDetailByTime -->
   <select id="selectMlbackAddOrderViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail" resultMap="BaseResultMap">
-  	select addorderViewDetail_id, addorderViewDetail_seoname, addorderViewDetail_actnum, addorderViewDetail_createTime from tb_mlback_addorderviewdetail where
+  	select addorderViewDetail_id, addorderViewDetail_proname, addorderViewDetail_seoname, addorderViewDetail_proskunamestr ,addorderViewDetail_actnum, addorderViewDetail_createTime from tb_mlback_addorderviewdetail where
    	addorderViewDetail_createTime between #{addorderviewdetailStarttime,jdbcType=VARCHAR} and #{addorderviewdetailEndtime,jdbcType=VARCHAR} order by addorderViewDetail_seoname
+  </select>
+  <!-- selectMlbackAddOrderViewDetailByoItemid -->
+  <select id="selectMlbackAddOrderViewDetailByoItemid" parameterType="com.atguigu.bean.MlbackAddOrderViewDetail" resultMap="BaseResultMap">
+  	select addorderViewDetail_id, addorderViewDetail_proname, addorderViewDetail_proItemid from tb_mlback_addorderviewdetail where
+   	addorderViewDetail_proItemid = #{addorderviewdetailProItemid,jdbcType=INTEGER}
   </select>
   
   

@@ -55,4 +55,15 @@ public class MlbackAddOrderViewDetailService {
 		return mlbackProductViewDetailList;
 	}
 
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 通过oitemid查询是否本条已经被添加了
+	 * 
+	 * */
+	public List<MlbackAddOrderViewDetail> selectMlbackAddOrderViewDetailByoItemid(MlbackAddOrderViewDetail mlbackAddOrderViewDetailReq) {
+		List<MlbackAddOrderViewDetail>  mlbackProductViewDetailList = mlbackAddOrderViewDetailMapper.selectMlbackAddOrderViewDetailByoItemid(mlbackAddOrderViewDetailReq);
+		return mlbackProductViewDetailList;
+	}
+
 }
