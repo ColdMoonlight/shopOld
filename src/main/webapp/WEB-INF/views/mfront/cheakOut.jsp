@@ -1551,9 +1551,9 @@
 									success: function (data) {
 										var resData = JSON.parse(data).extend;
 										// console.log(data)
-										// $(".loading").show();
-										// window.location.href = '${APP_PATH }/paypal/mpay';
-										window.location.href = '${APP_PATH }/index.html';
+										$(".loading").show();
+										window.location.href = '${APP_PATH }/paypal/mpay';
+										// window.location.href = '${APP_PATH }/index.html';
 									}
 								})
 							} else {
