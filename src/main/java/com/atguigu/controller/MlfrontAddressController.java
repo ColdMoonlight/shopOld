@@ -60,19 +60,35 @@ public class MlfrontAddressController {
 		//接受参数信息
 		System.out.println("mlfrontAddress:"+mlfrontAddress);
 		
+		//拿到国家的code
 		String areafreightCountryEnglish = mlfrontAddress.getAddressCountry();
 		
-		//接受categoryId
+		//封装国家code
 		MlbackAreafreight mlbackAreafreightReq = new MlbackAreafreight();
 		mlbackAreafreightReq.setAreafreightCountryEnglish(areafreightCountryEnglish);
-		//查询本条
+		//查询该国家的全称
 		List<MlbackAreafreight> mlbackAreafreightResList =mlbackAreafreightService.selectMlbackAreafreightByEng(mlbackAreafreightReq);
 		Integer areafreightMoney = 0;
 		String addressCountryAll ="";
 		if(mlbackAreafreightResList.size()>0){
 			areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
-			addressCountryAll = mlbackAreafreightResList.get(0).getAreafreightCountry();
+			addressCountryAll = mlbackAreafreightResList.get(0).getAreafreightCountry();//拿到国家全称
 		}
+		//拿到国家的code
+		String addressProvinceAll = mlfrontAddress.getAddressProvince();
+		
+		//封装国家code
+		MlPaypalStateprovince mlPaypalStateprovinceReq = new MlPaypalStateprovince();
+		mlPaypalStateprovinceReq.setStateprovinceCountryCode(areafreightCountryEnglish);
+		mlPaypalStateprovinceReq.setStateprovinceName(addressProvinceAll);
+		
+		List<MlPaypalStateprovince> mlPaypalStateprovinceList =  mlPaypalStateprovinceService.selectMlPaypalStateprovinceByCountryCodeAndProvince(mlPaypalStateprovinceReq);
+		String stateprovinceNameCode ="";
+		if(mlPaypalStateprovinceList.size()>0){
+			stateprovinceNameCode =mlPaypalStateprovinceList.get(0).getStateprovinceNameCode();//拿到国家全称
+		}
+		//将省份code放入地址对象中
+		mlfrontAddress.setAddressProvinceCode(stateprovinceNameCode);
 		//取出id
 		System.out.println("save address");
 		Integer addressId = mlfrontAddress.getAddressId();

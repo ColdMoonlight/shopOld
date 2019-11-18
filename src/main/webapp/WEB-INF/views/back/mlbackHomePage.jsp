@@ -58,7 +58,7 @@
 						</div>
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list num_box_list">
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"  class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
+								<a href="/ShopTemplate/MlbackAddPayinfoViewDetail/toMlbackAddPayinfoViewDetailPage" title="成交金额"  class="model-item PayinfoSuccessNum"><div class="model-text">成交num</div><div class="model-num">0</div></a>
 								<span class="model-item addcart_box">
 									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
 									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
@@ -179,6 +179,7 @@
 		/*****初始化时间*****************/
 		var startime =minDate22;
 		var endtime =maxDate;
+		/****************************************************第1行**************************************************/
 		/*****初始调取浏览量*****************/
 		$.ajax({
 			url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
@@ -265,9 +266,27 @@
 					  },
 				  
 				});
-				/****************购物车结算**************************************************/
+				/****************实际OrderItem出单详情**************************************************/
 				$.ajax({
 					  url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
+					  data: JSON.stringify({
+					  "addorderviewdetailStarttime": startime,
+				      "addorderviewdetailEndtime": endtime,
+					  }),
+					  type: 'post',
+					  dataType: 'JSON',
+					  contentType: 'application/json',
+					  success: function (data) {
+						console.log(data);
+						var resData = data.extend.toDayNum;
+						$(".addorder_num .model-num").html(resData);
+					  },
+				  
+				});
+				/****************************************************第二行**************************************************/
+				/****************实际OrderItem出单详情**************************************************/
+				$.ajax({
+					  url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
 					  data: JSON.stringify({
 					  "addorderviewdetailStarttime": startime,
 				      "addorderviewdetailEndtime": endtime,

@@ -73,4 +73,9 @@ public class MlPaypalStateprovinceService {
 		return mlPaypalStateprovinceRes;
 	}
 
+	public List<MlPaypalStateprovince> selectMlPaypalStateprovinceByCountryCodeAndProvince(MlPaypalStateprovince mlPaypalStateprovinceReq) {
+		List<MlPaypalStateprovince>  mlPaypalStateprovinceRes = mlPaypalStateprovinceMapper.selectMlPaypalStateprovinceByCountryCodeAndProvince(mlPaypalStateprovinceReq);
+		return mlPaypalStateprovinceRes;
+	}
+
 }

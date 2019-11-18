@@ -20,6 +20,8 @@ public class MlfrontAddress {
     private String addressCountryAll;//必传
     
     private String addressProvince;//必传
+    
+    private String addressProvinceCode;//必传
 
     private String addressCity;//必传
 
@@ -110,8 +112,16 @@ public class MlfrontAddress {
     public void setAddressProvince(String addressProvince) {
         this.addressProvince = addressProvince == null ? null : addressProvince.trim();
     }
+    
+    public String getAddressProvinceCode() {
+		return addressProvinceCode;
+	}
 
-    public String getAddressCity() {
+	public void setAddressProvinceCode(String addressProvinceCode) {
+		this.addressProvinceCode = addressProvinceCode == null ? null : addressProvinceCode.trim();
+	}
+
+	public String getAddressCity() {
         return addressCity;
     }
 
@@ -158,7 +168,7 @@ public class MlfrontAddress {
 
 	public MlfrontAddress(Integer addressId, Integer addressUid, String addressIp, String addressEmail,
 			String addressTelephone, String addressUserfirstname, String addressUserlastname, String addressCountry,
-			String addressProvince, String addressCity, String addressDetail, String addressPost,
+			String addressProvince, String addressProvinceCode, String addressCity, String addressDetail, String addressPost,
 			String addressCreatetime, String addressMotifytime) {
 		super();
 		this.addressId = addressId;
@@ -170,6 +180,7 @@ public class MlfrontAddress {
 		this.addressUserlastname = addressUserlastname;
 		this.addressCountry = addressCountry;
 		this.addressProvince = addressProvince;
+		this.addressProvinceCode = addressProvinceCode;
 		this.addressCity = addressCity;
 		this.addressDetail = addressDetail;
 		this.addressPost = addressPost;
@@ -182,8 +193,8 @@ public class MlfrontAddress {
 		return "MlfrontAddress [addressId=" + addressId + ", addressUid=" + addressUid + ", addressIp=" + addressIp
 				+ ", addressEmail=" + addressEmail + ", addressTelephone=" + addressTelephone
 				+ ", addressUserfirstname=" + addressUserfirstname + ", addressUserlastname=" + addressUserlastname
-				+ ", addressCountry=" + addressCountry + ", addressProvince=" + addressProvince + ", addressCity="
-				+ addressCity + ", addressDetail=" + addressDetail + ", addressPost=" + addressPost
+				+ ", addressCountry=" + addressCountry + ", addressProvince=" + addressProvince+ ", addressProvinceCode=" + addressProvinceCode
+				+ ", addressCity="+ addressCity + ", addressDetail=" + addressDetail + ", addressPost=" + addressPost
 				+ ", addressCreatetime=" + addressCreatetime + ", addressMotifytime=" + addressMotifytime + "]";
 	}
     

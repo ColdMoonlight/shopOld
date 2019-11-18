@@ -32,5 +32,7 @@ public interface MlPaypalStateprovinceMapper {
     int updateByPrimaryKeySelective(MlPaypalStateprovince record);
     //通过CountryCode查询
     List<MlPaypalStateprovince> selectMlPaypalStateprovinceByCountryCode(MlPaypalStateprovince record);
+    //通过CountryCode+province全称查询该条信息
+	List<MlPaypalStateprovince> selectMlPaypalStateprovinceByCountryCodeAndProvince(MlPaypalStateprovince mlPaypalStateprovinceReq);
     
 }
