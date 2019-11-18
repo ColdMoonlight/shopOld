@@ -31,15 +31,15 @@ public class PaypalService {
 	
 	
 	//开发环境
-	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
-	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
-	String mode="sandbox";
+//	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
+//	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
+//	String mode="sandbox";
 	
 	
 //	//mogalook环境
-//	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
-//	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
-//    String mode="live";
+	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
+	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
+    String mode="live";
 	
     
 	//陈鹏账户
@@ -118,7 +118,7 @@ public class PaypalService {
   	  	//地址参数
         ShippingAddress shippingAddress = getShippingAddress(mlfrontAddress);
 //  		ShippingAddress shippingAddress = getShippingAddressSDK(mlfrontAddress);
-//        itemList.setShippingAddress(shippingAddress); 		
+        itemList.setShippingAddress(shippingAddress); 		
   		
   		Details details = new Details();
   		details.setShipping("0");
@@ -254,16 +254,17 @@ public class PaypalService {
 	}
 	
 	private ShippingAddress getShippingAddress(MlfrontAddress mlfrontAddress) {
+		
 		ShippingAddress shippingAddress = new ShippingAddress();
 		String RecipientName = mlfrontAddress.getAddressUserfirstname()+" "+mlfrontAddress.getAddressUserlastname();
 		shippingAddress.setRecipientName(RecipientName);
-		String Line1 =mlfrontAddress.getAddressProvince();
+		String Line1 =mlfrontAddress.getAddressDetail();
 		shippingAddress.setLine1(Line1);
-		String Line2 =mlfrontAddress.getAddressDetail();
-		shippingAddress.setLine2(Line2);
 		String City = mlfrontAddress.getAddressCity();
 		shippingAddress.setCity(City);
-		shippingAddress.setState("CA");
+		//String state =mlfrontAddress.getAddressProvince();
+		String state = mlfrontAddress.getAddressProvinceCode();
+		shippingAddress.setState(state);
 		String Phone = mlfrontAddress.getAddressTelephone();
 		shippingAddress.setPhone(Phone);
 		String PostalCode = mlfrontAddress.getAddressPost();
