@@ -1003,7 +1003,7 @@
 				  dataType: 'JSON',
 				  contentType: 'application/json',
 				  success: function (data) {
-					console.log(data)
+					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
@@ -1078,9 +1078,9 @@
 			var html = defaultHtml || '';
 			html += ''
 			for (var i = 0, len = data.length; i < len; i += 1) {
-					html = '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>' + html;
+					html =html+ '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
 			}
-			html ='<option value="" selected="selected">province</option>' +html;
+			html =html+'<option value="" selected="selected">province</option>';
 			parent.html(html);
 		}
 /*******************/
@@ -1100,7 +1100,7 @@
 			// var datacountry =data.addressCountryAll;
 			 jiecountry =data.addressCountry;
 			$("#country option:checked").attr("value",jiecountry);
-			$("#country option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : ''); 
 			$("#country").attr("data-name",jiecountry);
 			// $("#country").attr("data-country",datacountry);
 			var dataname =$("#country").data("name");
