@@ -253,7 +253,7 @@
   <!--selectMlPaypalStateprovinceByCountryCode-->
   <select id="selectMlPaypalStateprovinceByCountryCode" parameterType="com.atguigu.bean.MlPaypalStateprovince" resultMap="BaseResultMap">
     select stateprovince_name
-    from tb_paypal_stateprovince  where stateprovince_country_code = #{stateprovinceCountryCode,jdbcType=VARCHAR}
+    from tb_paypal_stateprovince  where stateprovince_country_code = #{stateprovinceCountryCode,jdbcType=VARCHAR} order by stateprovince_name ASC
   </select>
   <!--selectMlPaypalStateprovinceByCountryCodeAndProvince-->
   <select id="selectMlPaypalStateprovinceByCountryCodeAndProvince" parameterType="com.atguigu.bean.MlPaypalStateprovince" resultMap="BaseResultMap">
