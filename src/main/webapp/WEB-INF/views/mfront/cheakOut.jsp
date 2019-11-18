@@ -860,7 +860,11 @@
 					<div class="form-group form-group_select selectActive" style="display: none;">
 						<label for="addressProvince" class="form-label required">State/Province</label>
 						<div class="form-input">
-							<select name="addressProvince" class="select-province form-control"></select>
+							<select name="addressProvince" class="select-province form-control">
+								<!-- <optgroup label="province"> </optgroup> -->
+								<option value="" selected="selected">province</option>
+								<optgroup label="" class="qwqw"> </optgroup>
+							</select>
 						</div>
 					</div>
 					<!-- city -->
@@ -1010,7 +1014,7 @@
 					console.log(mlPaypalStateprovinceList)
 					console.log(mlPaypalStateprovinceList.length)
                     if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
-						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						renderCondition($('.qwqw'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-groupcountry").css("width","50%")
 					  } else {
@@ -1053,7 +1057,7 @@
 					console.log(mlPaypalStateprovinceList)
 					console.log(mlPaypalStateprovinceList.length)
 					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
-						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						renderCondition($('.qwqw'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-group_select").addClass("selectActive")
 						$(".form-groupcountry").css("width","50%")
@@ -1074,15 +1078,7 @@
 				});
 		});
 /*******************/
-		function renderCondition(parent, data, defaultHtml) {
-			var html = defaultHtml || '';
-			html += ''
-			for (var i = 0, len = data.length; i < len; i += 1) {
-					html =html+ '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
-			}
-			html =html+'<option value="" selected="selected">province</option>';
-			parent.html(html);
-		}
+
 /*******************/
 		function renderAddressDetail(data) {
 			console.log(data)
@@ -1109,13 +1105,13 @@
 			console.log(dataprov);
 			console.log("***dataprov****");
 			if(dataprov==null||dataprov==""){
-				$(".form-group_select").hide();
+				 $(".form-group_select").hide();
 				 $(".form-group_select").removeClass("selectActive")
-				$(".form-groupcountry").css("width","100%")
+				 $(".form-groupcountry").css("width","100%")
 			}else{
 				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
 				$(".select-province option:checked").attr("value",dataprov);
-				// $(".select-province").val(data.addressCountry ? data.addressCountry : ''); 
+				$(".select-province").val(data.addressProvince ? data.addressProvince : ''); 
 				$(".form-group_select").addClass("selectActive");
 				$(".form-groupcountry").css("width","50%");
 			}
@@ -1164,7 +1160,14 @@
 			$('.address-box').hide();
 		});
 		 
-
+		function renderCondition(parent, data, defaultHtml) {
+			var html = defaultHtml || '';
+			html += ''
+			for (var i = 0, len = data.length; i < len; i += 1) {
+					html = '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>' + html;
+			}
+			parent.html(html);
+		}
        
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
