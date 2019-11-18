@@ -862,8 +862,7 @@
 						<div class="form-input">
 							<select name="addressProvince" class="select-province form-control">
 								<!-- <optgroup label="province"> </optgroup> -->
-								<option value="" selected="selected">province</option>
-								<optgroup label="" class="qwqw"> </optgroup>
+								<!-- <optgroup label="province" class="qwqw"> </optgroup> -->
 							</select>
 						</div>
 					</div>
@@ -1014,7 +1013,7 @@
 					console.log(mlPaypalStateprovinceList)
 					console.log(mlPaypalStateprovinceList.length)
                     if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
-						renderCondition($('.qwqw'), mlPaypalStateprovinceList)
+						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-groupcountry").css("width","50%")
 					  } else {
@@ -1057,7 +1056,7 @@
 					console.log(mlPaypalStateprovinceList)
 					console.log(mlPaypalStateprovinceList.length)
 					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
-						renderCondition($('.qwqw'), mlPaypalStateprovinceList)
+						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-group_select").addClass("selectActive")
 						$(".form-groupcountry").css("width","50%")
@@ -1164,8 +1163,9 @@
 			var html = defaultHtml || '';
 			html += ''
 			for (var i = 0, len = data.length; i < len; i += 1) {
-					html = '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>' + html;
+					html =  html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
 			}
+		    html =html+'<option value="" selected="selected">province</option>';
 			parent.html(html);
 		}
        
