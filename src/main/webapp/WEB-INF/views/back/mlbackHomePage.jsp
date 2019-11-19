@@ -56,6 +56,7 @@
 								<a href="/ShopTemplate/MlbackAddOrderViewDetail/toMlbackAddOrderViewDetailPage" title="order出品量" class="model-item addorder_num"><div class="model-text">出单产品量</div><div class="model-num">0</div></a>
 							</div>
 						</div>
+						<hr style="border-color: #ccc;" />
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list num_box_list">
 								<a href="/ShopTemplate/MlbackAddPayinfoViewDetail/toMlbackAddPayinfoViewDetailPage" title="成交金额"  class="model-item PayinfoSuccessNum"><div class="model-text">成交num</div><div class="model-num">0</div></a>
@@ -72,7 +73,7 @@
 						</div>
 					</div>
 					<!-- pie -->
-					<div class="model today-details" data-type="pay">
+					<div class="model today-details" data-type="pay" style="display: none;">
 						<div class="model-h">
 							<span class="model-name">今日订单明细</span>
 							<div></div>
