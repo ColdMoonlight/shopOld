@@ -395,6 +395,7 @@
 		function renderBuyerInfo(data) {
 			var strdetails = "";
 			var html = '';
+			var myid;
 			if (data == null) {
 				strdetails = "此单为游客购买,无该信息";
 				html = '<div><span>用户账号：</span><span>' + strdetails + '</span></div>' +
@@ -409,10 +410,12 @@
 					'<div><span>用户邮箱：</span><span>' + data.userEmail + '</span></div>' +
 					'<div class="vipdiv"><span>用户vip等级：</span><span class="uservip">' + data.userVipLevel + '</span><em></em><b class="vipnum">编辑</b></div>' +
 					'<div class="timediv"><span>历史购买次数：</span><span class="usertime">' + data.userTimes + '</span><em></em><b class="timenum">编辑</b></div>';
+			var userodid = data.userId;
+			myid =userodid;
 			}
 			$('.buyer-info').html(html);
 			/***************/
-				var myid;
+				
 			$(".vipnum").click(function(){
 				$(".remark_info2").show();
 				$(".mask").show();
@@ -421,8 +424,7 @@
 				$(".remark_info3").show();
 				$(".mask").show();
 			})
-			var userodid = data.userId;
-			myid =userodid;
+			
 			$(".remark_info2 input").click(function(){
 				var haveData2 = {
 					"userVipLevel":$(".remark_info2 textarea").val(),
