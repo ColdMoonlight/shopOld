@@ -13,6 +13,7 @@ textarea{-webkit-appearance: none;}
     src: url(../../font/Futura-LT-Book.ttf);
 }
 
+
 html {
   -webkit-text-size-adjust: none;
   -webkit-font-smoothing: antialiased
@@ -2414,6 +2415,8 @@ a:focus {
 .address-details{ }
 
 .form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e;}
+
+
 .go_re{z-index: 9999999; width: 300px; height: 300px; position:fixed;top:50%; left: 50%; margin: -150px 0 0 -150px; background: #fff; border-radius:5px;}
 .go_re a{display: block; position:relative;}
 .go_re a img{max-width: 100%;border-radius:3px;}
@@ -2599,8 +2602,9 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .leftww em:nth-of-type(2){padding: 0 25px 0 0;}
 .leftww em:nth-of-type(2):after{content: "";position: absolute; top:5px; right: 0; width: 15px; height: 15px;background:url(../../../../../ShopTemplate/static/m/img/firstpage/xjt.png) no-repeat center;background-size:15px; }
 .leftww.active em:nth-of-type(2):after{content: "";position: absolute; top:5px; right: 0; width: 15px; height: 15px;background:url(../../../../../ShopTemplate/static/m/img/firstpage/sjt.png) no-repeat center;background-size:15px; }
-
 .leftww b{float: right;font-size: 14px; line-height: 32px;}
+.errortips{display: none; background: #f9f9f9; width: 100%; border-radius:2px; padding: 8px; border:1px solid #ff1671;font-size: 12px;}
+.errortips span{display: block;padding: 0 0 0 30px; color: #666;background:url(../../../../../ShopTemplate/static/m/img/index/cw.png) no-repeat center left; background-size:20px;}
 
 
 

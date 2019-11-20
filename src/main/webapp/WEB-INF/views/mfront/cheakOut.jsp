@@ -880,8 +880,8 @@
 							<input type="text" name="addressPost" class="form-control code">
 						</div>
 					</div>
-					
 				</form>
+				<div class="errortips"><span>A match of the shipping Address city,State and Postal Code failed.</span></div>
 			</div>
 		<!-- 	<div class="win-box-title">
 				<span class="cancel">cancel</span>
@@ -977,9 +977,21 @@
 	</script>
 	<script>
 	
-	
+	    var tips;
 	 	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
-	
+		   tips=PaypalErrorName;
+		   console.log(tips)
+	    if(tips==="VALIDATION_ERROR"){
+			$(".errortips").show();
+		}else{
+			$(".errortips").hide();
+		}
+		$(".select-province,.form-group .city,.form-group .code").click(function(){
+			$(".errortips").hide();
+		})
+         
+		 
+		
 	
 		var totalPrice = 0;
 		var resDataMoney = 0; // 邮费
@@ -1167,10 +1179,11 @@
 		function renderCondition(parent, data, defaultHtml) {
 			var html = defaultHtml || '';
 			html += ''
+			html =html+'<option value="" selected="selected">province</option>';
 			for (var i = 0, len = data.length; i < len; i += 1) {
 					html =  html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
 			}
-		    html =html+'<option value="" selected="selected">province</option>';
+		    
 			parent.html(html);
 		}
        
