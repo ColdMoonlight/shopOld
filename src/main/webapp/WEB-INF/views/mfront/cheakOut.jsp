@@ -976,6 +976,11 @@
 		$("#newDate_zsh").html(newDate_zsh);
 	</script>
 	<script>
+	
+	
+	 	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
+	
+	
 		var totalPrice = 0;
 		var resDataMoney = 0; // 邮费
 		// var totalPriceText = $('.total-price').find('.text');

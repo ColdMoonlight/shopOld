@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -38,6 +39,7 @@ import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
 import com.atguigu.utils.URLUtils;
+import com.paypal.api.payments.ErrorDetails;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
@@ -140,7 +142,32 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
-            System.out.println(e.getDetails());
+            System.out.println(e.getDetails().getName());
+            String PaypalErrorName = e.getDetails().getName();
+            session.setAttribute("PaypalErrorName", PaypalErrorName);
+            ListIterator<ErrorDetails> errorDetailslist = null;
+            
+            errorDetailslist =  e.getDetails().getDetails().listIterator();
+            String regularName ="";
+//            while(errorDetailslist.hasNext()){//正序遍历     hasNext()：判断集合中是否还有下一个元素
+//            	System.out.print(errorDetailslist.next()+",");//返回值：狗娃,晶晶,亮亮,美美,铁蛋,
+//            	String regularNameOne ="";
+//            	regularNameOne = errorDetailslist.next().getField();
+//            	if(("city").equals(regularNameOne)){
+//            		regularName+=" "+regularNameOne+" ";
+//            	}
+//            	if(("state").equals(regularNameOne)){
+//            		regularName+=" "+regularNameOne+" ";
+//            	}
+//            	if(("zip").equals(regularNameOne)){
+//            		regularName+=" zip/PostalCode ";
+//            	}
+//            }
+            regularName+= " is not match";
+            session.setAttribute("PaypalError", regularName);
+//            System.out.println(e.getDetails().getDetails());
+            System.out.println("regularName : "+regularName);
+            
             System.out.println("---------e.getDetails()------end------");
         }
         return "redirect:/MlbackCart/toCheakOut";
@@ -366,11 +393,11 @@ public class PaypalController {
         	//3.0.1wap+pc端处理toUpdatePayInfoSuccess(更新order表的状态+发送邮件+更新user表的vip等级)
         	toUpdatePayInfoSuccess(session,payerId,paymentId);
         	
-        	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
+        	//PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
         	
         	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
         	//3.0.2wap+pc端处理insertPaypalReturnAddress
-        	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
+        	//insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
         	session.setAttribute("lastSuccessPayinfoid", payinfoId+"");
         	
         	// 获取session中所有的键值  
@@ -400,11 +427,11 @@ public class PaypalController {
             	//3.0.1wap+pc端处理toUpdatePayInfoSuccess(更新order表的状态+发送邮件+更新user表的vip等级)
             	toUpdatePayInfoSuccess(session,payerId,paymentId);
             	
-            	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
+            	//PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
             	
             	payinfoId = (Integer) session.getAttribute("payinfoId");
             	//3.0.2wap+pc端处理insertPaypalReturnAddress
-            	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
+            	//insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
             	session.setAttribute("lastSuccessPayinfoid", payinfoId+"");
     		}
     		
