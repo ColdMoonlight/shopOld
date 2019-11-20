@@ -1118,8 +1118,33 @@
 			$("input.address").val(data.addressDetail ? data.addressDetail : '');
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
-			$("input.province").val(data.addressProvince ? data.addressProvince : '');
+			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
 			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
+			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			var dataprov =data.addressProvince;
+			// var datacountry =data.addressCountryAll;
+			 jiecountry =data.addressCountry;
+			$("#country option:checked").attr("value",jiecountry);
+			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : ''); 
+			$("#country").attr("data-name",jiecountry);
+			// $("#country").attr("data-country",datacountry);
+			var dataname =$("#country").data("name");
+			datalocation (dataname)
+			console.log("***dataprov****");
+			console.log(dataprov);
+			console.log("***dataprov****");
+			if(dataprov==null||dataprov==""){
+				 $(".form-group_select").hide();
+				 $(".form-group_select").removeClass("selectActive")
+				 $(".form-groupcountry").css("width","100%")
+			}else{
+				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
+				$(".select-province option:checked").attr("value",dataprov);
+				$(".select-province").val(data.addressProvince ? data.addressProvince : ''); 
+				$(".form-group_select").addClass("selectActive");
+				$(".form-groupcountry").css("width","50%");
+			}
 			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 			
 		}
