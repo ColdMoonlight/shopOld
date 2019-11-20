@@ -1,0 +1,118 @@
+/***/
+.hd_ban{width: 100%; height:auto; position: relative; overflow: hidden; margin: 160px 0 0;}
+/* .hd_ban img{width: 1920px; height: 734px; position: absolute; top: 0; left:50%; margin: 0 0 0 -960px;} */
+.hd_ban img{display: block; margin: 0 auto; max-width: 100%;}
+.con_ban{width: 100%; height: auto; text-align: center; overflow: hidden;}
+.con_ban img{display: block; margin: 0 auto; max-width: 100%;}
+.box_con1{width: 100%; height: auto; min-height: 2970px; position: relative; background: url(../../../../../ShopTemplate/static/pc/huodong/hbg_02.jpg) repeat-y center top;}
+.word1{width: 100%; height: auto;}
+.word1 img{display: block; margin: 0 auto; max-width: 100%;}
+.zs_link{width: 100%; height: auto;}
+.zs_link img{display: block; margin: 0 auto; max-width: 100%;}
+.xia_two{width:1400px; height: auto; margin: 0 auto;}
+/*******/
+.zss_link{width: 50%; height: auto; float: left;}
+.zss_link img{display: block; margin: 0 auto; max-width: 100%;}
+.zxx_link{width: 50%; height: auto; float: left;}
+.zxx_link img{display: block; margin: 0 auto; max-width: 100%;}
+/*****/
+.word2{width: 100%; height: auto;}   
+.word2 img{display: block; margin: 0 auto; max-width: 100%;}
+.five_5cont{z-index: 2; width: 1400px; height: 450px; margin: 0 auto; background: #fff; position: absolute; left: 50%; margin: 0 0 0 -700px; bottom:-160px;}
+.hongbg{position: relative; width: 100%; height: auto;min-height: 1561px; margin: 0 auto; background: url(../../../../../ShopTemplate/static/pc/huodong/hbgt_02.jpg) no-repeat center top;}
+.dwbox{ z-index: 3; position: absolute;  top:160px; left: 50%; margin: 0 0 0 -702px; width: 1405px; height: auto; min-height:1550px; }
+.product_box_cont{width: 1405px; height: auto; margin: 0 auto; min-height:1550px; background: url(../../../../../ShopTemplate/static/pc/huodong/cpk_03.png) no-repeat center top; background-size:100% auto;}
+.kong{width: 100%;min-height: 160px; margin: 0 auto;}
+.word3{width: 100%; height: auto; margin:190px 0 0;}
+.word3 img{display: block; margin: 0 auto; max-width: 100%;}
+.lei_cont{width: 100%;height: auto; padding: 100px 0; background: url(../../../../../ShopTemplate/static/pc/huodong/cont_22.png) no-repeat center top; background-size:100% auto;}  
+.lei_cont ul{width: 1736px;height: auto; margin: 0 auto;display: flex; flex-wrap:wrap;}
+.lei_cont ul li {width: 25%;height: auto;} 
+.lei_cont ul li a{display: block;}
+.lei_cont ul li a img{max-width: 100%;}
+
+
+
+
+
+
+@media screen and (max-width:1440px) {
+	.xia_two{width: 100%;}
+	.five_5cont{width: 100%;margin:0; left: 0;}
+	.product_box_cont{width: 100%;margin:0; left: 0;}
+	.lei_cont ul{width: 100%;}
+	.lei_cont{padding:20px 0;}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
