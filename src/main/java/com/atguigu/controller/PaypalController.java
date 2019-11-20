@@ -116,6 +116,14 @@ public class PaypalController {
         
         Payment payment = new Payment();
         PaypalService paypalService = new PaypalService();
+        
+        String PaypalErrorName="";
+        PaypalErrorName = (String) session.getAttribute("PaypalErrorName");
+        if(("").equals(PaypalErrorName)){
+        	System.out.println("这是初始化的PaypalErrorName ： "+PaypalErrorName+" .");
+        }else{
+        	session.removeAttribute("PaypalErrorName");
+        }
         try {
             payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -143,7 +151,7 @@ public class PaypalController {
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
             System.out.println(e.getDetails().getName());
-            String PaypalErrorName = e.getDetails().getName();
+            PaypalErrorName = e.getDetails().getName();
             session.setAttribute("PaypalErrorName", PaypalErrorName);
             ListIterator<ErrorDetails> errorDetailslist = null;
             
@@ -393,11 +401,11 @@ public class PaypalController {
         	//3.0.1wap+pc端处理toUpdatePayInfoSuccess(更新order表的状态+发送邮件+更新user表的vip等级)
         	toUpdatePayInfoSuccess(session,payerId,paymentId);
         	
-        	//PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
+        	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
         	
         	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
         	//3.0.2wap+pc端处理insertPaypalReturnAddress
-        	//insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
+        	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
         	session.setAttribute("lastSuccessPayinfoid", payinfoId+"");
         	
         	// 获取session中所有的键值  
@@ -427,11 +435,11 @@ public class PaypalController {
             	//3.0.1wap+pc端处理toUpdatePayInfoSuccess(更新order表的状态+发送邮件+更新user表的vip等级)
             	toUpdatePayInfoSuccess(session,payerId,paymentId);
             	
-            	//PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
+            	PayerInfo PayerInfo = payment.getPayer().getPayerInfo();//临时注释，必须放开
             	
             	payinfoId = (Integer) session.getAttribute("payinfoId");
             	//3.0.2wap+pc端处理insertPaypalReturnAddress
-            	//insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
+            	insertPaypalReturnAddress(PayerInfo,payinfoId,paymentId);//临时注释，必须放开
             	session.setAttribute("lastSuccessPayinfoid", payinfoId+"");
     		}
     		
