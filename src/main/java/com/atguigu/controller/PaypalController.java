@@ -175,6 +175,7 @@ public class PaypalController {
             session.setAttribute("PaypalError", regularName);
 //            System.out.println(e.getDetails().getDetails());
             System.out.println("regularName : "+regularName);
+            
             System.out.println("---------e.getDetails()------end------");
         }
         return "redirect:/MlbackCart/toCheakOut";
