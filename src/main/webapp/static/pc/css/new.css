@@ -172,8 +172,8 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .sale_copen p{font-size: 14px;margin: 0; color: #eb8378;}
 .sale_copen ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}
 .sale_copen ul li span{ color: #d90b22;}
-
-
+.errortips{display: none; background: #f9f9f9; width: 96%; margin: 0 2%; border-radius:2px; padding: 8px; border:1px solid #ff1671;font-size: 12px;}
+.errortips span{display: block;padding: 0 0 0 30px; color: #666;background:url(../../../../../ShopTemplate/static/m/img/index/cw.png) no-repeat center left; background-size:20px;}
 
 
 
