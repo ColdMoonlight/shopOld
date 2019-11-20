@@ -175,7 +175,6 @@ public class PaypalController {
             session.setAttribute("PaypalError", regularName);
 //            System.out.println(e.getDetails().getDetails());
             System.out.println("regularName : "+regularName);
-            
             System.out.println("---------e.getDetails()------end------");
         }
         return "redirect:/MlbackCart/toCheakOut";
@@ -227,6 +226,14 @@ public class PaypalController {
         session.setAttribute("payFailTimes", payFailTimes);
         
         PaypalService paypalService = new PaypalService();
+        
+        String PaypalErrorName="";
+        PaypalErrorName = (String) session.getAttribute("PaypalErrorName");
+        if(("").equals(PaypalErrorName)){
+        	System.out.println("这是初始化的PaypalErrorName ： "+PaypalErrorName+" .");
+        }else{
+        	session.removeAttribute("PaypalErrorName");
+        }
         try {
             Payment payment = paypalService.createPayment(
             		moneyDouble,// 888.00, 
@@ -253,7 +260,31 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
-            System.out.println(e.getDetails());
+            System.out.println(e.getDetails().getName());
+            PaypalErrorName = e.getDetails().getName();
+            session.setAttribute("PaypalErrorName", PaypalErrorName);
+            ListIterator<ErrorDetails> errorDetailslist = null;
+            
+            errorDetailslist =  e.getDetails().getDetails().listIterator();
+            String regularName ="";
+//            while(errorDetailslist.hasNext()){//正序遍历     hasNext()：判断集合中是否还有下一个元素
+//            	System.out.print(errorDetailslist.next()+",");//返回值：狗娃,晶晶,亮亮,美美,铁蛋,
+//            	String regularNameOne ="";
+//            	regularNameOne = errorDetailslist.next().getField();
+//            	if(("city").equals(regularNameOne)){
+//            		regularName+=" "+regularNameOne+" ";
+//            	}
+//            	if(("state").equals(regularNameOne)){
+//            		regularName+=" "+regularNameOne+" ";
+//            	}
+//            	if(("zip").equals(regularNameOne)){
+//            		regularName+=" zip/PostalCode ";
+//            	}
+//            }
+            regularName+= " is not match";
+            session.setAttribute("PaypalError", regularName);
+//            System.out.println(e.getDetails().getDetails());
+            System.out.println("regularName : "+regularName);
             System.out.println("---------e.getDetails()------end------");
         }
         return "redirect:/MlbackCart/toCheakOut";
