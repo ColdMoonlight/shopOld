@@ -105,20 +105,6 @@
 										class="form-control address addreNo">
 								</div>
 							</div>
-							<!-- Zip/Postal code -->
-							<div class="form-group">
-								<label for="addressPost" class="form-label required">Zip/Postal code</label>
-								<div class="form-input">
-									<input type="text" name="addressPost" class="form-control code">
-								</div>
-							</div>
-							<!-- city -->
-							<div class="form-group">
-								<label for="addressCity" class="form-label required">City</label>
-								<div class="form-input">
-									<input type="text" name="addressCity" class="form-control city">
-								</div>
-							</div>
 							<!-- country -->
 							<div class="form-group form-groupcountry">
 								<label for="addressCountry" class="form-label required">Country</label>
@@ -1197,7 +1183,6 @@
 			for (var i = 0, len = data.length; i < len; i += 1) {
 					html =  html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
 			}
-		    
 			parent.html(html);
 		}
 
@@ -1736,7 +1721,8 @@
 				var codestr = $(".code").val();
 				var citystr = $(".city").val();
 				// var countrystr = $("#country").val();
-				var provincestr = $(".province").val();
+				// var provincestr = $(".province").val();
+			    var provincestr = $(".selectActive .select-province option:checked").text();
 				var country_address = $("#country option:checked").text(); 
 				// var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
 				// if(radio_zt_copn==null||radio_zt_copn==''){
