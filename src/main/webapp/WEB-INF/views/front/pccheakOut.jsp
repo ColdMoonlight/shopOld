@@ -120,7 +120,7 @@
 								</div>
 							</div>
 							<!-- country -->
-							<div class="form-group">
+							<div class="form-group form-groupcountry">
 								<label for="addressCountry" class="form-label required">Country</label>
 								<div class="form-input">
 								<select name="addressCountry" class="form-control" id="country">
@@ -865,14 +865,32 @@
 								</select>
 								</div>
 							</div>
-							<!-- State/Province -->
-							<div class="form-group">
+							<!-- stateprovinceName -->
+							<div class="form-group form-group_select selectActive" style="display: none;">
 								<label for="addressProvince" class="form-label required">State/Province</label>
 								<div class="form-input">
-									<input type="text" name="addressProvince" class="form-control province">
+									<select name="addressProvince" class="select-province form-control">
+										<!-- <optgroup label="province"> </optgroup> -->
+										<!-- <optgroup label="province" class="qwqw"> </optgroup> -->
+									</select>
+								</div>
+							</div>
+							<!-- city -->
+							<div class="form-group form-group2">
+								<label for="addressCity" class="form-label required">City</label>
+								<div class="form-input">
+									<input type="text" name="addressCity" class="form-control city">
+								</div>
+							</div>
+							<!-- Zip/Postal code -->
+							<div class="form-group">
+								<label for="addressPost" class="form-label required">Zip/Postal code</label>
+								<div class="form-input">
+									<input type="text" name="addressPost" class="form-control code">
 								</div>
 							</div>
 						</form>
+					<div class="errortips"><span>A match of the shipping Address city,State and Postal Code failed.</span></div>
 					</div>
 					<div class="shipping">SHIPPING COST: <span>$0</span></div>
 				</div>
@@ -990,7 +1008,22 @@
 	var addressIdIntInt;
 	var couponPriceOld =0;
 	
-	function datalocation (){
+	var tips;
+	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
+	   tips=PaypalErrorName;
+	   console.log(tips)
+	if(tips==="VALIDATION_ERROR"){
+		$(".errortips").show();
+	}else{
+		$(".errortips").hide();
+	}
+	$(".select-province,.form-group .city,.form-group .code").click(function(){
+		$(".errortips").hide();
+	})
+	
+	
+	
+	function datalocation (dataname){
 		var dataname = $("#country").val();
 		$.ajax({
 			  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -1004,6 +1037,17 @@
 				// console.log(data)
 				var resData = JSON.parse(data);
 				var resareafreightMoney = resData.extend.areafreightMoney;
+				var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
+				console.log(mlPaypalStateprovinceList)
+				console.log(mlPaypalStateprovinceList.length)
+				if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+					renderCondition($('.select-province'), mlPaypalStateprovinceList)
+					$(".form-group_select").show();
+					$(".form-groupcountry").css("width","50%")
+				  } else {
+				   $(".form-group_select").hide();
+				   $(".form-groupcountry").css("width","100%")
+				  }	
 				// console.log(resareafreightMoney)/***sdfsdfsdf*/
 				// console.log("resareafreightMoney:"+resareafreightMoney)
 				// $('.shipping').find('span').text(' of $' + resareafreightMoney+'w1');
@@ -1016,7 +1060,8 @@
 			  }
 			});
 	}
-	datalocation ();
+       var dataname="US";
+		datalocation (dataname)
 	
 	$("#country").bind("change",function(){
 		var radio_zt =$(".coupons .coupon-item input[type='radio']");
@@ -1037,6 +1082,20 @@
 				// console.log(data)
 				var resData = JSON.parse(data);
 				var resareafreightMoney = resData.extend.areafreightMoney;
+				var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
+				console.log(mlPaypalStateprovinceList)
+				console.log(mlPaypalStateprovinceList.length)
+				if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+					renderCondition($('.select-province'), mlPaypalStateprovinceList)
+					$(".form-group_select").show();
+					$(".form-group_select").addClass("selectActive")
+					$(".form-groupcountry").css("width","50%")
+				  } else {
+				   $(".form-group_select").hide();
+				    $(".form-group_select").removeClass("selectActive")
+				   $(".form-groupcountry").css("width","100%")
+				  }	
+				
 				$('.shipping').find('span').text(' of $' + resareafreightMoney);
 				shippingPriceText.text('$' + resareafreightMoney)
 				var prototalnum =$(".c-prototal .cal-price-num").text().slice(1)
@@ -1106,7 +1165,16 @@
 				
 			}
 		});
-		
+		function renderCondition(parent, data, defaultHtml) {
+			var html = defaultHtml || '';
+			html += ''
+			html =html+'<option value="" selected="selected">province</option>';
+			for (var i = 0, len = data.length; i < len; i += 1) {
+					html =  html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
+			}
+		    
+			parent.html(html);
+		}
 
 		
 		/* 所购商品列表 */
@@ -1708,7 +1776,7 @@
 					$("#country").focus(function(){
 						$(this).removeClass("error_br")
 					})
-				}else if(provincestr==null||provincestr==''){
+				}else if(provincestr=='province'){
 					flag = 1;
 					// alert("provincestr is empty");
 					renderSysMsg('provincestr is empty')
