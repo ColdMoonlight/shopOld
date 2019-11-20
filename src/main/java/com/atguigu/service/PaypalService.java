@@ -116,7 +116,7 @@ public class PaypalService {
   	  	//地址参数
         ShippingAddress shippingAddress = getShippingAddress(mlfrontAddress);
 //  		ShippingAddress shippingAddress = getShippingAddressSDK(mlfrontAddress);
-//        itemList.setShippingAddress(shippingAddress); 		
+        itemList.setShippingAddress(shippingAddress); 		
   		
   		Details details = new Details();
   		details.setShipping("0");
