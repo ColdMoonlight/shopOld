@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.MlbackAddPayinfoViewDetailMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.MlbackAddPayinfoViewDetail">
+    <id column="addpayinfoViewDetail_id" jdbcType="INTEGER" property="addpayinfoviewdetailId" />
+    <result column="addpayinfoViewDetail_sessionid" jdbcType="VARCHAR" property="addpayinfoviewdetailSessionid" />
+    <result column="addpayinfoViewDetail_payinfoid" jdbcType="VARCHAR" property="addpayinfoviewdetailPayinfoid" />
+    <result column="addpayinfoViewDetail_payinfoshipnum" jdbcType="VARCHAR" property="addpayinfoviewdetailPayinfoshipnum" />
+    <result column="addpayinfoViewDetail_payinfoMoney" jdbcType="VARCHAR" property="addpayinfoviewdetailPayinfomoney" />
+    <result column="addpayinfoViewDetail_payinfoaddressid" jdbcType="INTEGER" property="addpayinfoviewdetailPayinfoaddressid" />
+    <result column="addpayinfoViewDetail_payinfoaddressidname" jdbcType="VARCHAR" property="addpayinfoviewdetailPayinfoaddressidname" />
+    <result column="addpayinfoViewDetail_createTime" jdbcType="VARCHAR" property="addpayinfoviewdetailCreatetime" />
+    <result column="addpayinfoViewDetail_motifyTime" jdbcType="VARCHAR" property="addpayinfoviewdetailMotifytime" />
+    <result column="addpayinfoViewDetail_starttime" jdbcType="VARCHAR" property="addpayinfoviewdetailStarttime" />
+    <result column="addpayinfoViewDetail_endtime" jdbcType="VARCHAR" property="addpayinfoviewdetailEndtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    addpayinfoViewDetail_id, addpayinfoViewDetail_sessionid, addpayinfoViewDetail_payinfoid, 
+    addpayinfoViewDetail_payinfoshipnum, addpayinfoViewDetail_payinfoMoney, addpayinfoViewDetail_payinfoaddressid, 
+    addpayinfoViewDetail_payinfoaddressidname, addpayinfoViewDetail_createTime, addpayinfoViewDetail_motifyTime, 
+    addpayinfoViewDetail_starttime, addpayinfoViewDetail_endtime
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_mlback_addpayinfoviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_mlback_addpayinfoviewdetail
+    where addpayinfoViewDetail_id = #{addpayinfoviewdetailId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetailExample">
+    delete from tb_mlback_addpayinfoviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetail">
+    insert into tb_mlback_addpayinfoviewdetail (addpayinfoViewDetail_id, addpayinfoViewDetail_sessionid, 
+      addpayinfoViewDetail_payinfoid, addpayinfoViewDetail_payinfoshipnum, 
+      addpayinfoViewDetail_payinfoMoney, addpayinfoViewDetail_payinfoaddressid, 
+      addpayinfoViewDetail_payinfoaddressidname, addpayinfoViewDetail_createTime, 
+      addpayinfoViewDetail_motifyTime, addpayinfoViewDetail_starttime, 
+      addpayinfoViewDetail_endtime)
+    values (#{addpayinfoviewdetailId,jdbcType=INTEGER}, #{addpayinfoviewdetailSessionid,jdbcType=VARCHAR}, 
+      #{addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR}, #{addpayinfoviewdetailPayinfoshipnum,jdbcType=VARCHAR}, 
+      #{addpayinfoviewdetailPayinfomoney,jdbcType=VARCHAR}, #{addpayinfoviewdetailPayinfoaddressid,jdbcType=INTEGER}, 
+      #{addpayinfoviewdetailPayinfoaddressidname,jdbcType=VARCHAR}, #{addpayinfoviewdetailCreatetime,jdbcType=VARCHAR}, 
+      #{addpayinfoviewdetailMotifytime,jdbcType=VARCHAR}, #{addpayinfoviewdetailStarttime,jdbcType=VARCHAR}, 
+      #{addpayinfoviewdetailEndtime,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetailExample" resultType="java.lang.Long">
+    select count(*) from tb_mlback_addpayinfoviewdetail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_mlback_addpayinfoviewdetail
+    <set>
+      <if test="record.addpayinfoviewdetailId != null">
+        addpayinfoViewDetail_id = #{record.addpayinfoviewdetailId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addpayinfoviewdetailSessionid != null">
+        addpayinfoViewDetail_sessionid = #{record.addpayinfoviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailPayinfoid != null">
+        addpayinfoViewDetail_payinfoid = #{record.addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailPayinfoshipnum != null">
+        addpayinfoViewDetail_payinfoshipnum = #{record.addpayinfoviewdetailPayinfoshipnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailPayinfomoney != null">
+        addpayinfoViewDetail_payinfoMoney = #{record.addpayinfoviewdetailPayinfomoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailPayinfoaddressid != null">
+        addpayinfoViewDetail_payinfoaddressid = #{record.addpayinfoviewdetailPayinfoaddressid,jdbcType=INTEGER},
+      </if>
+      <if test="record.addpayinfoviewdetailPayinfoaddressidname != null">
+        addpayinfoViewDetail_payinfoaddressidname = #{record.addpayinfoviewdetailPayinfoaddressidname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailCreatetime != null">
+        addpayinfoViewDetail_createTime = #{record.addpayinfoviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailMotifytime != null">
+        addpayinfoViewDetail_motifyTime = #{record.addpayinfoviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailStarttime != null">
+        addpayinfoViewDetail_starttime = #{record.addpayinfoviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addpayinfoviewdetailEndtime != null">
+        addpayinfoViewDetail_endtime = #{record.addpayinfoviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_mlback_addpayinfoviewdetail
+    set addpayinfoViewDetail_id = #{record.addpayinfoviewdetailId,jdbcType=INTEGER},
+      addpayinfoViewDetail_sessionid = #{record.addpayinfoviewdetailSessionid,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoid = #{record.addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoshipnum = #{record.addpayinfoviewdetailPayinfoshipnum,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoMoney = #{record.addpayinfoviewdetailPayinfomoney,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoaddressid = #{record.addpayinfoviewdetailPayinfoaddressid,jdbcType=INTEGER},
+      addpayinfoViewDetail_payinfoaddressidname = #{record.addpayinfoviewdetailPayinfoaddressidname,jdbcType=VARCHAR},
+      addpayinfoViewDetail_createTime = #{record.addpayinfoviewdetailCreatetime,jdbcType=VARCHAR},
+      addpayinfoViewDetail_motifyTime = #{record.addpayinfoviewdetailMotifytime,jdbcType=VARCHAR},
+      addpayinfoViewDetail_starttime = #{record.addpayinfoviewdetailStarttime,jdbcType=VARCHAR},
+      addpayinfoViewDetail_endtime = #{record.addpayinfoviewdetailEndtime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetail">
+    update tb_mlback_addpayinfoviewdetail
+    <set>
+      <if test="addpayinfoviewdetailSessionid != null">
+        addpayinfoViewDetail_sessionid = #{addpayinfoviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoid != null">
+        addpayinfoViewDetail_payinfoid = #{addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoshipnum != null">
+        addpayinfoViewDetail_payinfoshipnum = #{addpayinfoviewdetailPayinfoshipnum,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfomoney != null">
+        addpayinfoViewDetail_payinfoMoney = #{addpayinfoviewdetailPayinfomoney,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoaddressid != null">
+        addpayinfoViewDetail_payinfoaddressid = #{addpayinfoviewdetailPayinfoaddressid,jdbcType=INTEGER},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoaddressidname != null">
+        addpayinfoViewDetail_payinfoaddressidname = #{addpayinfoviewdetailPayinfoaddressidname,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailCreatetime != null">
+        addpayinfoViewDetail_createTime = #{addpayinfoviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailMotifytime != null">
+        addpayinfoViewDetail_motifyTime = #{addpayinfoviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailStarttime != null">
+        addpayinfoViewDetail_starttime = #{addpayinfoviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailEndtime != null">
+        addpayinfoViewDetail_endtime = #{addpayinfoviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addpayinfoViewDetail_id = #{addpayinfoviewdetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetail">
+    update tb_mlback_addpayinfoviewdetail
+    set addpayinfoViewDetail_sessionid = #{addpayinfoviewdetailSessionid,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoid = #{addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoshipnum = #{addpayinfoviewdetailPayinfoshipnum,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoMoney = #{addpayinfoviewdetailPayinfomoney,jdbcType=VARCHAR},
+      addpayinfoViewDetail_payinfoaddressid = #{addpayinfoviewdetailPayinfoaddressid,jdbcType=INTEGER},
+      addpayinfoViewDetail_payinfoaddressidname = #{addpayinfoviewdetailPayinfoaddressidname,jdbcType=VARCHAR},
+      addpayinfoViewDetail_createTime = #{addpayinfoviewdetailCreatetime,jdbcType=VARCHAR},
+      addpayinfoViewDetail_motifyTime = #{addpayinfoviewdetailMotifytime,jdbcType=VARCHAR},
+      addpayinfoViewDetail_starttime = #{addpayinfoviewdetailStarttime,jdbcType=VARCHAR},
+      addpayinfoViewDetail_endtime = #{addpayinfoviewdetailEndtime,jdbcType=VARCHAR}
+    where addpayinfoViewDetail_id = #{addpayinfoviewdetailId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- insertSelective -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetail">
+    insert into tb_mlback_addpayinfoviewdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addpayinfoviewdetailId != null">
+        addpayinfoViewDetail_id,
+      </if>
+      <if test="addpayinfoviewdetailSessionid != null">
+        addpayinfoViewDetail_sessionid,
+      </if>
+      <if test="addpayinfoviewdetailPayinfoid != null">
+        addpayinfoViewDetail_payinfoid,
+      </if>
+      <if test="addpayinfoviewdetailPayinfoshipnum != null">
+        addpayinfoViewDetail_payinfoshipnum,
+      </if>
+      <if test="addpayinfoviewdetailPayinfomoney != null">
+        addpayinfoViewDetail_payinfoMoney,
+      </if>
+      <if test="addpayinfoviewdetailPayinfoaddressid != null">
+        addpayinfoViewDetail_payinfoaddressid,
+      </if>
+      <if test="addpayinfoviewdetailPayinfoaddressidname != null">
+        addpayinfoViewDetail_payinfoaddressidname,
+      </if>
+      <if test="addpayinfoviewdetailCreatetime != null">
+        addpayinfoViewDetail_createTime,
+      </if>
+      <if test="addpayinfoviewdetailMotifytime != null">
+        addpayinfoViewDetail_motifyTime,
+      </if>
+      <if test="addpayinfoviewdetailStarttime != null">
+        addpayinfoViewDetail_starttime,
+      </if>
+      <if test="addpayinfoviewdetailEndtime != null">
+        addpayinfoViewDetail_endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addpayinfoviewdetailId != null">
+        #{addpayinfoviewdetailId,jdbcType=INTEGER},
+      </if>
+      <if test="addpayinfoviewdetailSessionid != null">
+        #{addpayinfoviewdetailSessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoid != null">
+        #{addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoshipnum != null">
+        #{addpayinfoviewdetailPayinfoshipnum,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfomoney != null">
+        #{addpayinfoviewdetailPayinfomoney,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoaddressid != null">
+        #{addpayinfoviewdetailPayinfoaddressid,jdbcType=INTEGER},
+      </if>
+      <if test="addpayinfoviewdetailPayinfoaddressidname != null">
+        #{addpayinfoviewdetailPayinfoaddressidname,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailCreatetime != null">
+        #{addpayinfoviewdetailCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailMotifytime != null">
+        #{addpayinfoviewdetailMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailStarttime != null">
+        #{addpayinfoviewdetailStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="addpayinfoviewdetailEndtime != null">
+        #{addpayinfoviewdetailEndtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- deleteByPrimaryKey -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_mlback_addpayinfoviewdetail
+    where addpayinfoViewDetail_id = #{addpayinfoviewdetailId,jdbcType=INTEGER}
+  </delete>
+  <!-- selectMlbackAddPayinfoViewDetailByTime -->
+  <select id="selectMlbackAddPayinfoViewDetailByTime" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetail" resultMap="BaseResultMap">
+  	select addpayinfoViewDetail_id, addpayinfoViewDetail_payinfoid, addpayinfoViewDetail_payinfoMoney, addpayinfoViewDetail_payinfoshipnum, addpayinfoViewDetail_createTime from tb_mlback_addpayinfoviewdetail where
+   	addpayinfoViewDetail_createTime between #{addpayinfoviewdetailStarttime,jdbcType=VARCHAR} and #{addpayinfoviewdetailEndtime,jdbcType=VARCHAR} order by addpayinfoViewDetail_createTime desc
+  </select>
+  
+  <!-- selectMlbackAddPayinfoViewDetailByPayinfoid -->
+  <select id="selectMlbackAddPayinfoViewDetailByPayinfoid" parameterType="com.atguigu.bean.MlbackAddPayinfoViewDetail" resultMap="BaseResultMap">
+  	select addpayinfoViewDetail_id, addpayinfoViewDetail_payinfoid, addpayinfoViewDetail_payinfoMoney from tb_mlback_addpayinfoviewdetail where
+   	addpayinfoViewDetail_payinfoid = #{addpayinfoviewdetailPayinfoid,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

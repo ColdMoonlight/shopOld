@@ -172,8 +172,8 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .sale_copen p{font-size: 14px;margin: 0; color: #eb8378;}
 .sale_copen ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}
 .sale_copen ul li span{ color: #d90b22;}
-
-
+.errortips{display: none; background: #f9f9f9; width: 96%; margin: 0 2%; border-radius:2px; padding: 8px; border:1px solid #ff1671;font-size: 12px;}
+.errortips span{display: block;padding: 0 0 0 30px; color: #666;background:url(../../../../../ShopTemplate/static/m/img/index/cw.png) no-repeat center left; background-size:20px;}
 
 
 
@@ -275,7 +275,8 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .bottom_list_account{-webkit-box-flex: 1;flex-grow: 1; display:flex; float: left;width: 100%; padding:0 8%}
 .right_allcont .order-cal .cal-price-item{margin: 15px 0;font-size:14px}
 .right_allcont .order-cal .cal-price-item span.cal-price-num{float: right;color:#ff1671}
-.right_allcont .order-cal .btn{margin: 20px 0 0;background: #000;}
+.right_allcont .order-cal .btn{margin: 20px 0 0;background:#ff1671; border-color:#ff1671;}
+
 .login-register .btn.sigin{line-height: 40px;padding: 0;}
 .login-register .btn.sigin:hover{background: #000;}
 
@@ -289,6 +290,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 
 .order-list .content .num{-webkit-box-flex:1;/* min-width:150px; height:100%; position:absolute;right:20px;top:0 */ width: 100%;}
 .order-list .content .num span{height:100%; display: flex;align-items:center;}
+.list-group-item .sale_copen{margin: 0 0 1em;width: 100%;}
+
 
 /* .cart-item>.content .num{-webkit-box-flex:1;min-width:150px; height:100%; position:absolute;right:0;top:0}
 .cart-item>.content .num span{height:100%; display: flex;align-items:center;}*/
@@ -495,6 +498,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .big_img .swiper-pagination2 span {
 	margin: 0 .05rem
 }
+
+
 
 .big_img .swiper-button-next, .big_img .swiper-button-prev{z-index: 10002;}
 .close_box{width:100%; height: 20px; position: relative;z-index: 10003;}

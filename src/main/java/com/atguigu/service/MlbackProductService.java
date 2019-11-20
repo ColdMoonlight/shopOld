@@ -147,6 +147,11 @@ public class MlbackProductService {
 	public List<MlbackProduct> selectMlbackProductlast() {
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductlast();
 		return mlbackProductList;
+	}
+	
+	public List<MlbackProduct> selectMlbackProductbyCategorySeo(MlbackProduct mlbackProductReq) {
+		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductbyCategorySeo(mlbackProductReq);
+		return mlbackProductList;
 	}	
 
 }

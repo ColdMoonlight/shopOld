@@ -20,6 +20,7 @@
     <result column="user_couponidStr" jdbcType="VARCHAR" property="userCouponidstr" />
     <result column="user_times" jdbcType="INTEGER" property="userTimes" />
     <result column="user_vipLevel" jdbcType="INTEGER" property="userVipLevel" />
+    <result column="user_str" jdbcType="VARCHAR" property="userStr" />
     
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -84,7 +85,7 @@
     user_id, user_email, user_password, user_telephone, user_address_country, user_address_province, 
     user_address_city, user_address_streetaddress, user_address_postalcode, user_firstName, 
     user_lastName, user_createTime, user_motifyTime, user_lastonlineTime, user_point, 
-    user_couponidStr, user_times, user_vipLevel
+    user_couponidStr, user_times, user_vipLevel, user_str
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlfrontUserExample" resultMap="BaseResultMap">
     select
@@ -106,10 +107,6 @@
     from tb_mlfront_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-<!--   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_mlfront_user
-    where user_id = #{userId,jdbcType=INTEGER}
-  </delete> -->
   <delete id="deleteByExample" parameterType="com.atguigu.bean.MlfrontUserExample">
     delete from tb_mlfront_user
     <if test="_parameter != null">
@@ -122,13 +119,13 @@
       user_address_city, user_address_streetaddress, 
       user_address_postalcode, user_firstName, user_lastName, 
       user_createTime, user_motifyTime, user_lastonlineTime, 
-      user_point, user_couponidStr, user_times, user_vipLevel)
+      user_point, user_couponidStr, user_times, user_vipLevel, user_str)
     values (#{userId,jdbcType=INTEGER}, #{userEmail,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
       #{userTelephone,jdbcType=VARCHAR}, #{userAddressCountry,jdbcType=VARCHAR}, #{userAddressProvince,jdbcType=VARCHAR}, 
       #{userAddressCity,jdbcType=VARCHAR}, #{userAddressStreetaddress,jdbcType=VARCHAR}, 
       #{userAddressPostalcode,jdbcType=VARCHAR}, #{userFirstname,jdbcType=VARCHAR}, #{userLastname,jdbcType=VARCHAR}, 
       #{userCreatetime,jdbcType=VARCHAR}, #{userMotifytime,jdbcType=VARCHAR}, #{userLastonlinetime,jdbcType=VARCHAR}, 
-      #{userPoint,jdbcType=INTEGER}, #{userCouponidstr,jdbcType=VARCHAR},#{userTimes,jdbcType=INTEGER}, #{userVipLevel,jdbcType=INTEGER})
+      #{userPoint,jdbcType=INTEGER}, #{userCouponidstr,jdbcType=VARCHAR},#{userTimes,jdbcType=INTEGER}, #{userVipLevel,jdbcType=INTEGER}, #{userStr,jdbcType=VARCHAR})
   </insert>
   
   <select id="countByExample" parameterType="com.atguigu.bean.MlfrontUserExample" resultType="java.lang.Long">
@@ -194,6 +191,9 @@
       <if test="record.userVipLevel != null">
         user_vipLevel = #{record.userVipLevel,jdbcType=INTEGER},
       </if>
+      <if test="record.userStr != null">
+        user_str = #{record.userStr,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -218,62 +218,12 @@
       user_point = #{record.userPoint,jdbcType=INTEGER},
       user_couponidStr = #{record.userCouponidstr,jdbcType=VARCHAR},
       user_times = #{record.userTimes,jdbcType=INTEGER},
-      user_vipLevel = #{record.userVipLevel,jdbcType=INTEGER}
+      user_vipLevel = #{record.userVipLevel,jdbcType=INTEGER},
+      user_str = #{record.userStr,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <!-- <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlfrontUser">
-    update tb_mlfront_user
-    <set>
-      <if test="userEmail != null">
-        user_email = #{userEmail,jdbcType=VARCHAR},
-      </if>
-      <if test="userPassword != null">
-        user_password = #{userPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="userTelephone != null">
-        user_telephone = #{userTelephone,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddressCountry != null">
-        user_address_country = #{userAddressCountry,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddressProvince != null">
-        user_address_province = #{userAddressProvince,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddressCity != null">
-        user_address_city = #{userAddressCity,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddressStreetaddress != null">
-        user_address_streetaddress = #{userAddressStreetaddress,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddressPostalcode != null">
-        user_address_postalcode = #{userAddressPostalcode,jdbcType=VARCHAR},
-      </if>
-      <if test="userFirstname != null">
-        user_firstName = #{userFirstname,jdbcType=VARCHAR},
-      </if>
-      <if test="userLastname != null">
-        user_lastName = #{userLastname,jdbcType=VARCHAR},
-      </if>
-      <if test="userCreatetime != null">
-        user_createTime = #{userCreatetime,jdbcType=VARCHAR},
-      </if>
-      <if test="userMotifytime != null">
-        user_motifyTime = #{userMotifytime,jdbcType=VARCHAR},
-      </if>
-      <if test="userLastonlinetime != null">
-        user_lastonlineTime = #{userLastonlinetime,jdbcType=VARCHAR},
-      </if>
-      <if test="userPoint != null">
-        user_point = #{userPoint,jdbcType=INTEGER},
-      </if>
-      <if test="userCouponidstr != null">
-        user_couponidStr = #{userCouponidstr,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update> -->
   <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlfrontUser">
     update tb_mlfront_user
     set user_email = #{userEmail,jdbcType=VARCHAR},
@@ -292,12 +242,10 @@
       user_point = #{userPoint,jdbcType=INTEGER},
       user_couponidStr = #{userCouponidstr,jdbcType=VARCHAR},
       user_times = #{userTimes,jdbcType=INTEGER},
-      user_vipLevel = #{userVipLevel,jdbcType=INTEGER}
+      user_vipLevel = #{userVipLevel,jdbcType=INTEGER},
+      user_str = #{userStr,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  
-
-  
   <!-- insert使用中 -->
   <insert id="insertSelective" parameterType="com.atguigu.bean.MlfrontUser">
     insert into tb_mlfront_user
@@ -356,6 +304,9 @@
       <if test="userVipLevel != null">
         user_vipLevel,
       </if>
+      <if test="userStr != null">
+        user_str,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -411,6 +362,9 @@
       </if>
       <if test="userVipLevel != null">
         #{userVipLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userStr != null">
+        #{userStr,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -484,6 +438,9 @@
       <if test="userVipLevel != null">
         user_vipLevel = #{userVipLevel,jdbcType=INTEGER},
       </if>
+      <if test="userStr != null">
+        user_str = #{userStr,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -542,6 +499,9 @@
       </if>
       <if test="userVipLevel != null">
         user_vipLevel = #{userVipLevel,jdbcType=INTEGER},
+      </if>
+      <if test="userStr != null">
+        user_str = #{userStr,jdbcType=VARCHAR},
       </if>
   </select>
   <!-- selectAll使用中 -->
