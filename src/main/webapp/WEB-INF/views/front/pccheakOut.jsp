@@ -110,6 +110,7 @@
 								<label for="addressCountry" class="form-label required">Country</label>
 								<div class="form-input">
 								<select name="addressCountry" class="form-control" id="country">
+									<option value="US" selected="selected">United States</option>
 									<option value="AF">
 										Afghanistan
 									</option>
@@ -806,7 +807,7 @@
 									<option value="GB">
 										United Kingdom
 									</option>
-									<option value="US" selected="selected">
+									<option value="US">
 										United States
 									</option>
 									<option value="UY">
@@ -998,14 +999,20 @@
 	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
 	   tips=PaypalErrorName;
 	   console.log(tips)
-	if(tips==="VALIDATION_ERROR"){
-		$(".errortips").show();
-	}else{
-		$(".errortips").hide();
-	}
-	$(".select-province,.form-group .city,.form-group .code").click(function(){
-		$(".errortips").hide();
-	})
+		if(tips==="VALIDATION_ERROR"){
+			$(".errortips").show();
+		}else if(tips==="PAYMENT_ALREADY_DONE"){
+			$(".errortips").show();
+			$(".errortips").html("Payment has been done already for this cart.")
+			setTimeout(function(){
+				window.location.href = "${APP_PATH}/index.html";	
+			}, 3000);
+		}else{
+			$(".errortips").hide();
+		}
+		$(".select-province,.form-group .city,.form-group .code").click(function(){
+			$(".errortips").hide();
+		})
 	
 	
 	
