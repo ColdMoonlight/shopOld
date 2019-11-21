@@ -546,8 +546,26 @@
 					});
 				}
 			})
+			function toFbidsPurchase(resData){
+		       	var infoStrlids = '';
+		       	var infoRelids = '';
+		       	for(var i=0;i<resData.length;i++){
+		       		infoStrlids=infoStrlids+resData[i].cartitemProductId+',';
+		       	}
+		       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
+		       	return infoRelids;
+		       }
 			if (cartItemArr.length) {
 				// console.log(cartItemArr)
+				orderMoney = subTotal.text().slice(1);
+				 var shopidlist = toFbidsPurchase(cartItemArr);
+				 // console.log(shopidlist)
+				 fbq('track', 'InitiateCheckout', {
+		              content_ids: [shopidlist],
+		              content_type: 'product',
+		              value: orderMoney,
+		              currency: 'USD'
+		            });
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/cartToOrder',
 					data: JSON.stringify(cartItemArr),
