@@ -165,8 +165,10 @@ public class MlfrontOrderController {
 			Integer accoff = mlfrontOrderItemRes.getOrderitemProductAccoff();
 			String PskuMoneystr[] = OrderitemPskuMoneystr.split(",");
 			BigDecimal pskuMoneyOne = new BigDecimal(0);
+			String pskuTrimStr="";
 			for(int j =0;j<PskuMoneystr.length;j++){
-				pskuMoneyOne = new BigDecimal(PskuMoneystr[j]);
+				pskuTrimStr = PskuMoneystr[j].trim();
+				pskuMoneyOne = new BigDecimal(pskuTrimStr);
 				oneAllprice = oneAllprice.add(pskuMoneyOne);
 			}
 			oneAllprice=oneAllprice.add(ItemProductOriginalprice);
@@ -391,8 +393,10 @@ public class MlfrontOrderController {
 			Integer accoff = mlfrontOrderItemRes.getOrderitemProductAccoff();
 			String PskuMoneystr[] = OrderitemPskuMoneystr.split(",");
 			BigDecimal pskuMoneyOne = new BigDecimal(0);
+			String pskuTrimStr="";
 			for(int j =0;j<PskuMoneystr.length;j++){
-				pskuMoneyOne = new BigDecimal(PskuMoneystr[j]);
+				pskuTrimStr = PskuMoneystr[j].trim();
+				pskuMoneyOne = new BigDecimal(pskuTrimStr);
 				oneAllprice = oneAllprice.add(pskuMoneyOne);
 			}
 			oneAllprice=oneAllprice.add(ItemProductOriginalprice);
