@@ -44,7 +44,7 @@ public class MlfrontActiveTyController {
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		  
 		if(ifMobile.equals("1")){
-			return "mfront/index";
+			return "mfront/mActiveindex";
 		}else{
 			return "front/pcActiveindex";
 		}
