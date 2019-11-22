@@ -8,6 +8,7 @@
 
 <body>
   <!-- footer -->
+  <div class="fixed_link"><a href="${APP_PATH }/MlActive/ActiveIndex"></a></div>
   <div class="footer">
 		<div class="footer-logo"></div>
     <div class="container">

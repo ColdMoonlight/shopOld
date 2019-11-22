@@ -50,10 +50,10 @@
 		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_02.jpg"/></div>	
 		<div class="box_con1 clearfix">
 			<div class="word1 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_03.png" /></div>
-			<div class="zs_link clearfix"><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hdm_04.png" ></a></div>	
+			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hdm_04.png" ></a></div>	
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_02.png" ></a></div>
-				<div class="zxx_link clearfix"><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_03.png" ></a></div>	
+				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_02.png" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_03.png" ></a></div>	
 			</div>
 		   <div class="word2 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_07.png" /></div>
 			<div class="five_5cont clearfix">
@@ -61,37 +61,37 @@
 		</div>	
 		<div class="hongbg clearfix">
 			<div class="dwbox">
-				<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_15.png" ></div>
+				<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
 				<div class="product_box_cont clearfix">
 					<div id="product-block2"></div>
 				</div>
-				<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_19.png" ></div>
+				<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
 			</div>
 		</div>
 		<div class="box_con1 clearfix">
 			 <div class="word3 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_09.png" /></div>
 			<div class="lei_cont clearfix">
 				<ul class="clearfix">
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_05.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_06.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_08.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_09.png" ></a></li>
+					<li><a href="${APP_PATH}/search/360-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_05.png" ></a></li>
+					<li><a href="${APP_PATH}/search/Full-Lace-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_06.png" ></a></li>
+					<li><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_08.png" ></a></li>
+					<li><a href="${APP_PATH}/search/Bob-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_09.png" ></a></li>
 				</ul>
 			</div>
 			<div class="cont_mybox">
 				<div class="dwbox">
-						<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_15.png" ></div>
+						<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
 						<div class="product_box_cont clearfix">
 						  <div id="product-block3"></div>
 						</div>
-						<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_19.png" ></div>
+						<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
 				</div>
 				<div class="dwbox">
-					<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_15.png" ></div>
+					<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
 						<div class="product_box_cont clearfix">
 						<div id="product-block4"></div>
 						</div>
-					<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_19.png" ></div>
+					<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
 				</div>
 			</div>
 			
@@ -145,11 +145,6 @@
 		  '<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
 		  '</div>' +
           '<div class="product-type"></div>' +
-          '<div class="product-data">' +
-          '<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
-          '<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
-          ' Review(s)</span>' +
-          '</div>' +
           '<div class="product-price">' +
           '<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
             .productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
@@ -157,6 +152,7 @@
           '</span>' +
           '<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
           '</div>' +
+		   '<div class="buynew"><span>BUY NEW </span></div>' +
           '</div>' +
           '</div>';
       }

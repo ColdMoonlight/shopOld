@@ -41,10 +41,10 @@
 		<div class="con_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/ban_04.png"/></div>	
 		<div class="box_con1 clearfix">
 			<div class="word1 clearfix"><img src="${APP_PATH}/static/pc/huodong/shan.gif" /></div>
-			<div class="zs_link clearfix"><img src="${APP_PATH }/static/pc/huodong/mu_05.png" ></div>	
+			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/huodong/mu_05.png" ></a></div>	
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><img src="${APP_PATH}/static/pc/huodong/mu_08.png" ></div>
-				<div class="zxx_link clearfix"><img src="${APP_PATH}/static/pc/huodong/um_05.png" ></div>	
+				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/pc/huodong/mu_08.png" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/huodong/um_05.png" ></a></div>	
 			</div>
 		   <div class="word2 clearfix"><img src="${APP_PATH}/static/pc/huodong/cont_16.png" /></div>
 			<div class="five_5cont clearfix"> <div id="product-block"></div></div>	
@@ -63,10 +63,10 @@
 			 <div class="word3 clearfix"><img src="${APP_PATH}/static/pc/huodong/cont_20.png" /></div>
 			<div class="lei_cont clearfix">
 				<ul class="clearfix">
-					<li><a href="###"><img src="${APP_PATH}/static/pc/huodong/nk_03.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/pc/huodong/nk_05.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/pc/huodong/nk_06.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/pc/huodong/nk_07.png" ></a></li>
+					<li><a href="${APP_PATH}/search/360-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_03.png" ></a></li>
+					<li><a href="${APP_PATH}/search/Full-Lace-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_05.png" ></a></li>
+					<li><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_06.png" ></a></li>
+					<li><a href="${APP_PATH}/search/Bob-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_07.png" ></a></li>
 				</ul>
 			</div>
 			<div class="cont_mybox">
