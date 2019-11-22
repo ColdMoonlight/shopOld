@@ -77,11 +77,13 @@ public class MlbackCategoryController {
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
-		if(ifMobile.equals("1")){	//1手机0PC
-			  return "mfront/productlist";
-		  }else{
-			  return "front/pcproductlist";
-		  }
+		if(ifMobile.equals("1")){	
+			//1手机
+			return "mfront/productlist";
+		}else{
+			//0PC
+			return "front/pcproductlist";
+		}
 	}
 	
 	/**2.0	UseNow	0505
@@ -91,15 +93,13 @@ public class MlbackCategoryController {
 	 */
 	@RequestMapping(value="/getMlbackCategoryByPage")
 	@ResponseBody
-	public Msg getGroupDisplayWithJson(
-			@RequestParam(value = "pn", defaultValue = "1") Integer pn
-			,HttpSession session) {
+	public Msg getGroupDisplayWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
 //		}else{
-			int PagNum = 20;
+			int PagNum = 30;
 			PageHelper.startPage(pn, PagNum);
 			List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryGetAll();
 			PageInfo page = new PageInfo(mlbackCategoryList, PagNum);
