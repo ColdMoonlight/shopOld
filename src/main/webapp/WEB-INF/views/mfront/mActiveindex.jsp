@@ -47,50 +47,53 @@
   <jsp:include page="mheader.jsp"></jsp:include>
   <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/m/css/active.css"/>
 	<!-- main -->
-		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/ban_02.png" /></div>
-		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/ban_04.png"/></div>	
+		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_01.jpg" /></div>
+		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_02.jpg"/></div>	
 		<div class="box_con1 clearfix">
-			<div class="word1 clearfix"><img src="${APP_PATH}/static/m/img/huodong/shan.gif" /></div>
-			<div class="zs_link clearfix"><img src="${APP_PATH}/static/m/img/huodong/mu_05.png" ></div>	
+			<div class="word1 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_03.png" /></div>
+			<div class="zs_link clearfix"><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hdm_04.png" ></a></div>	
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><img src="${APP_PATH}/static/m/img/huodong/mu_08.png" ></div>
-				<div class="zxx_link clearfix"><img src="${APP_PATH}/static/m/img/huodong/um_05.png" ></div>	
+				<div class="zss_link clearfix"><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_02.png" ></a></div>
+				<div class="zxx_link clearfix"><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_03.png" ></a></div>	
 			</div>
-		   <div class="word2 clearfix"><img src="${APP_PATH}/static/m/img/huodong/cont_16.png" /></div>
-			<div class="five_5cont clearfix"> <div id="product-block"></div></div>	
+		   <div class="word2 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_07.png" /></div>
+			<div class="five_5cont clearfix">
+				<div id="product-block"></div>
 		</div>	
 		<div class="hongbg clearfix">
-			<div class="kong clearfix"></div>
 			<div class="dwbox">
+				<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_15.png" ></div>
 				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 225px auto;">
-						<div id="product-block2"></div>
-					</div>
+					<div id="product-block2"></div>
 				</div>
+				<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_19.png" ></div>
 			</div>
 		</div>
 		<div class="box_con1 clearfix">
-			 <div class="word3 clearfix"><img src="${APP_PATH}/static/m/img/huodong/cont_20.png" /></div>
+			 <div class="word3 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_09.png" /></div>
 			<div class="lei_cont clearfix">
 				<ul class="clearfix">
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/nk_03.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/nk_05.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/nk_06.png" ></a></li>
-					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/nk_07.png" ></a></li>
+					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_05.png" ></a></li>
+					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_06.png" ></a></li>
+					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_08.png" ></a></li>
+					<li><a href="###"><img src="${APP_PATH}/static/m/img/huodong/hwt_09.png" ></a></li>
 				</ul>
 			</div>
 			<div class="cont_mybox">
-				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 225px auto;">
-				    	<div id="product-block3"></div>
-					</div>
+				<div class="dwbox">
+						<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_15.png" ></div>
+						<div class="product_box_cont clearfix">
+						  <div id="product-block3"></div>
+						</div>
+						<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_19.png" ></div>
 				</div>
-				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 225px auto;">
-				    	<div id="product-block4"></div>
-					</div>
+				<div class="dwbox">
+					<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_15.png" ></div>
+						<div class="product_box_cont clearfix">
+						<div id="product-block4"></div>
+						</div>
+					<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/hdm_19.png" ></div>
 				</div>
-				
 			</div>
 			
 		</div>
@@ -106,7 +109,6 @@
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <script>
 
-
     /*------rednerProduct----------*/
     function rednerProduct(data) {
       var html = '';
@@ -114,43 +116,41 @@
 		  var productactoffif = data[i].productActoffIf;
 		  // console.log(productactoffif)
 		  var productactoffid  =  data[i].productActoffid;
-           // console.log(productactoffid)  
+		   // console.log(productactoffid)  
+		  var cp_icon = "";
 		  var showspan = "";
 		  if(productactoffif == 1){
-			  if(productactoffid==1){
-				   showspan ="showactive1"
-			  }else if(productactoffid==2){
-				   showspan ="showactive2"
-			  }else if(productactoffid==3){
-				   showspan ="showactive3"
-			  }else if(productactoffid==4){
-				   showspan ="showactive4"
-			  }
-			  
+		  			  if(productactoffid==1){
+		  				   showspan ="showactive1"
+		  			  }else if(productactoffid==2){
+		  				   showspan ="showactive2"
+		  			  }else if(productactoffid==3){
+		  				   showspan ="showactive3"
+		  			  }else if(productactoffid==4){
+		  				   showspan ="showactive4"
+		  			  }
+		  			  
 		  }else{
-			   showspan ="hideactive"
+		  			   showspan ="hideactive"
 		  }
 		  
-        html += '<div class="product-item col-lg-3">' +
-		          '<span class="hui_icon '+showspan+'"></span>'+
-          		'<div class="product-img">' +
-          		'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-          		'<img src="' + data[i].productMainimgurl + '" alt="">' +
-          		'</a>' +
-          		/* '<div class="product-item col-lg-3">' +
-          		'<div class="product-img">' +
-          		'<a href="${APP_PATH}/MlbackProduct/topcProductDetailPage?productId=' + data[i].productId + '">' +
-          		'<img src="' + data[i].productMainimgurl + '" alt="">' +
-          		'</a>' + */
+        html += '<div class="product-item">' +
+		 '<span class="hui_icon '+showspan+'"></span>'+
+          '<div class="product-img">' +
+          '<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+          '<img src="' + data[i].productMainimgurl + '" alt="">' +
+          '</a>' +
           '</div>' +
           '<div class="product-desc">' +
-          '<div class="product-title">' + data[i].productName + '</div>' +
+          '<div class="product-title">' + 
+		  '<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
+		  '</div>' +
           '<div class="product-type"></div>' +
-          // '<div class="product-data">' +
-          // '<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
-          // '<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
-          // ' Review(s)</span>' +
-          // '</div>' +
+          '<div class="product-data">' +
+          '<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+          '<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
+          ' Review(s)</span>' +
+          '</div>' +
           '<div class="product-price">' +
           '<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
             .productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
@@ -158,7 +158,6 @@
           '</span>' +
           '<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
           '</div>' +
-		  '<div class="buynew"><span>BUY NEW </span></div>' +
           '</div>' +
           '</div>';
       }
@@ -170,24 +169,22 @@
     /*---------------product block--------*/
     	var productBlock = $('#product-block');
     	// product
-   	 	$.ajax({
-         url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
-         data: "productLable=" +1,
-         type: "POST",
-         async: false,
-         success: function (data) {
-           // console.log(productList1)
-           if (data.code === 100) {
-             var productData = data.extend.mlbackProductResList;
-             // number5Times(productData.length,productData);
-             // console.log(productData);
-             // productBlock.append(rednerProduct(productData));
-			 productBlock.append(rednerProduct(number5Times(productData.length,productData)));
-           } else {
-             renderErrorMsg(prodcutBox, 'Not acquired product-related data');
-           }
-         }
-       });
+		$.ajax({
+				 url: '${APP_PATH}/MlbackProduct/getMlbackProductLableList',
+				 data: "productLable=" + 1,
+				 type: "POST",
+				 async: false,
+				 success: function (data) {
+				   // console.log(productList1)
+				   if (data.code === 100) {
+					 var resData = data.extend.mlbackProductResList;
+					 console.log(resData);
+					 productBlock.append(rednerProduct(resData));
+				   } else {
+					 renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+				   }
+				 }
+			   });
 	   function number5Times(len,productData) {
 	       var lens=parseInt(len-(len%5));
 	   	return productData.slice(0,lens);
