@@ -33,4 +33,8 @@
         <from>^/CheakOut.html</from>
         <to>/MlbackCart/toCheakOut</to>
     </rule>
+    <rule>
+        <from>^/Friday.html</from>
+        <to>/MlActive/ActiveIndex</to>
+    </rule>
 </urlrewrite>
