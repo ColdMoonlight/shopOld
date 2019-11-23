@@ -23,9 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
@@ -35,13 +32,10 @@ import com.atguigu.bean.SysUser;
 import com.atguigu.bean.UserWork;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackProductViewDetailService;
-import com.atguigu.service.SysUserService;
-import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.ExcelUtils;
 import com.atguigu.utils.HttpUtil;
@@ -139,19 +133,14 @@ public class MlbackProductController {
 	 public String tomfbProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
 	  
 	  String nowTime = DateUtil.strTime14s();
-	  System.out.println("nowTime:"+nowTime);
-	  
-	  //接收传递进来的参数
-	  String StringReq = productSeo;
+	  System.out.println("有访客进入落地页-nowTime:"+nowTime);
 	  
 	  //准备封装参数
 	  MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
 	  mlbackProductrepBySeo.setProductSeo(productSeo);
-	  
+	  //记录落地页信息insertProView
 	  insertProView(productSeo,session);
 
-
-	  
 	  MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
 	  
 	  String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
@@ -176,7 +165,11 @@ public class MlbackProductController {
 		  }
 	  	}
 	 }
-	
+	/**3内部方法.0	UseNow	0505
+	 * 记录落地页信息insertProView
+	 * @param pn
+	 * @return
+	 */
 	private void insertProView(String productSeo,HttpSession session) {
 		  
 		//准备参数信息
@@ -242,32 +235,28 @@ public class MlbackProductController {
 		if(Actoffid==null){
 			Actoffid = 10;
 		}
-		System.out.println("Actoffid:"+Actoffid);
+//		System.out.println("Actoffid:"+Actoffid);
 		Integer Actoffoff= Actoffid*10;
 		//获取折扣力度
-		System.out.println("Actoffoff:"+Actoffoff);
+//		System.out.println("Actoffoff:"+Actoffoff);
 		mlbackProduct.setProductActoffoff(Actoffoff);
 		if(productId==null){
 			//无id，insert
 			int intResult = mlbackProductService.insertSelective(mlbackProduct);
-			System.out.println(intResult);
+			System.out.println("后台操作，折扣码:Actoffoff"+Actoffoff);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//先对这个产品选择的一些类，进行productIdStr的清理,
 			//有id，update
-			System.out.println(4);
-			//1.0从中读取categoryIdsStr,切割得到每一个categoryId,遍历，把productId,填充再每个查回来的categort中的proidStr拼上
 			String categoryIdsStr = mlbackProduct.getProductCategoryIdsStr();
+			//5.1从中读取categoryIdsStr,切割得到每一个categoryId,遍历，把productId,填充再每个查回来的categort中的proidStr拼上
 			UpdateCategoryProductIdStr(categoryIdsStr,productId,productName);
 			//更新本条product的新数据
 			int intResult = mlbackProductService.updateByPrimaryKeySelective(mlbackProduct);
-			
-			System.out.println(intResult);
+			//System.out.println(intResult);
 			return Msg.success().add("resMsg", "更新成功");
-			
 		}		
 	}
-	
 	
 	/**
 	 * 5.1
@@ -289,12 +278,9 @@ public class MlbackProductController {
 			mlbackProductReq.setProductCategoryIdsStr("");
 			mlbackProductReq.setProductCategoryNamesStr("");
 			mlbackProductService.updateByPrimaryKeySelective(mlbackProductReq);
-			
 		}else{
-			
 			//先清理老的数据
 			ProductCategoryIdsStrUpdateOld(productId,categoryIdsStr);
-			
 			//从中读取categoryIdsStr,切割得到每一个categoryId,
 			String categoryIdsStrArr [] = categoryIdsStr.split(",");
 			String categoryIdStr = "";
@@ -366,7 +352,6 @@ public class MlbackProductController {
 
 	//清理每条的新产品信息
 	private void ProductCategoryIdsStrUpdateOld(Integer productId,String categoryIdsStrNew) {
-		// TODO Auto-generated method stub
 		MlbackProduct mlbackProductReq = new MlbackProduct();
 		MlbackProduct mlbackProductRes = new MlbackProduct();
 		mlbackProductReq.setProductId(productId);
@@ -449,7 +434,7 @@ public class MlbackProductController {
 		//接收id信息
 		Integer productIdInt = mlbackProduct.getProductId();
 		int intResult = mlbackProductService.deleteByPrimaryKey(productIdInt);
-		System.out.println(intResult);
+		System.out.println("delete success-productIdInt:"+productIdInt);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -468,8 +453,7 @@ public class MlbackProductController {
 		mlbackProductReq.setProductId(productId);
 		List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProduct(mlbackProductReq);
 		MlbackProduct mlbackProductOne =mlbackProductResList.get(0);
-		return Msg.success().add("resMsg", "查看单个类目的详情细节完毕")
-					.add("mlbackProductOne", mlbackProductOne);
+		return Msg.success().add("resMsg", "查看单个类目的详情细节完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
 	/**
