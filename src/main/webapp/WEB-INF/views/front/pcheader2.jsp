@@ -35,16 +35,9 @@
 </head>
 
 <body>
-	<div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a></div>
 	<header>
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
-			<div class="img_show">
-				<a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/bantt.png" />/a> 
-				<div class="img_show_cont">
-					<a href="javascript:;"></a>
-				</div>
-			</div>
 			<!-- account tip language -->
 			<div class="tt-status">
 				<div class="container">
@@ -199,13 +192,6 @@
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>
        $(function(){
-		   $(".img_show_cont a").click(function(){
-			 $(".img_show").animate({ 
-			    height: "0", 
-			  }, 100);
-		   })
-		   
-		   
 		   		$(".go_top").click(function(){
 					$("body,html").animate({scrollTop:0},500);  
 					   return false;

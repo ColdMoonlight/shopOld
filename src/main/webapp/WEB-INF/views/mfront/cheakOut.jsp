@@ -48,7 +48,7 @@
 
 <body>
 
-	<jsp:include page="mheader.jsp"></jsp:include>
+	<jsp:include page="mheader2.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
@@ -979,10 +979,17 @@
 	
 	    var tips;
 	 	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
+		// PAYMENT_ALREADY_DONE
 		   tips=PaypalErrorName;
 		   console.log(tips)
 	    if(tips==="VALIDATION_ERROR"){
 			$(".errortips").show();
+		}else if(tips==="PAYMENT_ALREADY_DONE"){
+			$(".errortips").show();
+			$(".errortips").html("Payment has been done already for this cart.")
+			setTimeout(function(){
+				window.location.href = "${APP_PATH}/index.html";	
+			}, 3000);
 		}else{
 			$(".errortips").hide();
 		}

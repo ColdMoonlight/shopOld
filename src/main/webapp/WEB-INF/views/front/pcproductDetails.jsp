@@ -40,7 +40,7 @@
 </head>
 
 <body>
-	<jsp:include page="pcheader.jsp"></jsp:include>
+	<jsp:include page="pcheader2.jsp"></jsp:include>
 	<script src="${APP_PATH }/static/pc/js/jquery.jqzoom-core.js"></script>
     <link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
