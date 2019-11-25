@@ -35,6 +35,7 @@
 
 <body>
   <jsp:include page="pcheader2.jsp"></jsp:include>
+  
   <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/pc/css/active.css"/>
 	<!-- main -->
 		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/ban21.jpg" /></div>
