@@ -53,8 +53,9 @@
 			<div class="kong clearfix"></div>
 			<div class="dwbox">
 				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 225px auto;">
+					<div class="" style="width:1325px; margin: 200px auto 0">
 						<div id="product-block2"></div>
+						<p class="morelink"><a href="###">VIEW MORE>></a></p>
 					</div>
 				</div>
 			</div>
@@ -71,13 +72,15 @@
 			</div>
 			<div class="cont_mybox">
 				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 225px auto;">
+					<div class="" style="width:1325px; margin: 200px auto 0">
 				    	<div id="product-block3"></div>
+						<p class="morelink"><a href="###">VIEW MORE>></a></p>
 					</div>
 				</div>
 				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 225px auto;">
+					<div class="" style="width:1325px; margin: 200px auto 0">
 				    	<div id="product-block4"></div>
+						<p class="morelink"><a href="###">VIEW MORE>></a></p>
 					</div>
 				</div>
 				
