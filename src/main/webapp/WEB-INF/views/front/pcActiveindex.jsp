@@ -39,7 +39,7 @@
   <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/pc/css/active.css"/>
 	<!-- main -->
 		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/ban21.jpg" /></div>
-		<div class="con_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/ban_04.png"/></div>	
+		<div class="con_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/banyh.png"/></div>	
 		<div class="box_con1 clearfix">
 			<div class="word1 clearfix"><img src="${APP_PATH}/static/pc/huodong/shan.gif" /></div>
 			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/huodong/mu_05.png" ></a></div>	
