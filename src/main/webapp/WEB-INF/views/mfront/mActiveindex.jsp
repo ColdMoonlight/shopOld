@@ -92,7 +92,7 @@
 					<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
 						<div class="product_box_cont clearfix">
 						<div id="product-block4"></div>
-						<p class="morelink"><a href="${APP_PATH}/search/B-3-Bundles-with-13x4-Frontal.html">VIEW MORE>></a></p>
+						<p class="morelink"><a href="${APP_PATH}/search/Bundle-With-Closure.html">VIEW MORE>></a></p>
 						</div>
 					<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
 				</div>

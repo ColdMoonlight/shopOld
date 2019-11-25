@@ -81,7 +81,7 @@
 				<div class="product_box_cont clearfix">
 					<div class="" style="width:1325px; margin: 200px auto 0">
 				    	<div id="product-block4"></div>
-						<p class="morelink"><a href="${APP_PATH}/search/B-3-Bundles-with-13x4-Frontal.html">VIEW MORE>></a></p>
+						<p class="morelink"><a href="${APP_PATH}/search/Bundle-With-Closure.html">VIEW MORE>></a></p>
 					</div>
 				</div>
 				
