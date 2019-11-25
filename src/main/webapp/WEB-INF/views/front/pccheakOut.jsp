@@ -893,9 +893,10 @@
 							<div class="sale_copen">
 								<p>Anuniversary Sale ！</h3> 
 								<ul>
-									<li><span>$3 off</span> upon order $3 with code：<b>HOT3</b></li>
-									<li><span>$10 off </span>upon order $99 with code：<b>HOT10</b></li>
-									<li><span>$15 off</span> upon order $180 with code：<b>HOT15</b></li>
+									<li><span>$10 off</span> upon order $99 with code：<b>BLACK10</b></li>
+									<li><span>$30 off</span> upon order $299 with code：<b>BLACK30</b></li>
+									<li><span>$50 off</span> upon order $499 with code：<b>BLACK50</b></li>
+									<li><span>$100 off</span> upon order $799 with code：<b>BLACK100</b></li>
 								</ul>
 							</div>
 							<div class="group-details coupons"></div>

@@ -67,7 +67,7 @@
     <div class="fixed_small"><a href="javascript:;"></a></div>
   <div class="header bd-b">
 	  <div class="img_show">
-	  <a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/banyu.jpg" /></a>	
+	  <a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/wap.png" /></a>	
 	  	<div class="img_show_cont">
 	  		<a href="javascript:;"></a>
 	  	</div>
