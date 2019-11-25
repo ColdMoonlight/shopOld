@@ -40,7 +40,7 @@
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
 			<div class="img_show">
-				<a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/bantt.png" />/a> 
+				<a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/pcban.png" /></a> 
 				<div class="img_show_cont">
 					<a href="javascript:;"></a>
 				</div>

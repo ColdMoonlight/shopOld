@@ -46,7 +46,7 @@
   <jsp:include page="mheader.jsp"></jsp:include>
   <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/m/css/active.css"/>
 	<!-- main -->
-		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_01.jpg" /></div>
+		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/ban22.jpg" /></div>
 		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_02.jpg"/></div>	
 		<div class="box_con1 clearfix">
 			<div class="word1 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_03.png" /></div>
@@ -92,7 +92,7 @@
 					<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
 						<div class="product_box_cont clearfix">
 						<div id="product-block4"></div>
-						<p class="morelink"><a href="${APP_PATH}/search/B-3-Bundles-with-13x4-Frontal">VIEW MORE>></a></p>
+						<p class="morelink"><a href="${APP_PATH}/search/B-3-Bundles-with-13x4-Frontal.html">VIEW MORE>></a></p>
 						</div>
 					<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
 				</div>
@@ -157,7 +157,11 @@
           '</span>' +
           '<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
           '</div>' +
-		   '<div class="buynew"><span>BUY NOW </span></div>' +
+		  '<div class="buynew">'+
+		  '<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
+		  '<span>BUY NOW</span>'+
+		  '</a>' +
+		  '</div>' +
           '</div>' +
           '</div>';
       }
