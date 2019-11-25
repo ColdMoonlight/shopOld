@@ -34,7 +34,7 @@
 </head>
 
 <body>
-  <jsp:include page="pcheader.jsp"></jsp:include>
+  <jsp:include page="pcheader2.jsp"></jsp:include>
   <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/pc/css/active.css"/>
 	<!-- main -->
 		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/ban_02.png" /></div>
@@ -55,7 +55,7 @@
 				<div class="product_box_cont clearfix">
 					<div class="" style="width:1325px; margin: 200px auto 0">
 						<div id="product-block2"></div>
-						<p class="morelink"><a href="###">VIEW MORE>></a></p>
+						<p class="morelink"><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html">VIEW MORE>></a></p>
 					</div>
 				</div>
 			</div>
@@ -74,19 +74,22 @@
 				<div class="product_box_cont clearfix">
 					<div class="" style="width:1325px; margin: 200px auto 0">
 				    	<div id="product-block3"></div>
-						<p class="morelink"><a href="###">VIEW MORE>></a></p>
+						<!-- <p class="morelink"><a href="###">VIEW MORE>></a></p> -->
 					</div>
 				</div>
 				<div class="product_box_cont clearfix">
 					<div class="" style="width:1325px; margin: 200px auto 0">
 				    	<div id="product-block4"></div>
-						<p class="morelink"><a href="###">VIEW MORE>></a></p>
+						<p class="morelink"><a href="${APP_PATH}/search/B-3-Bundles-with-13x4-Frontal">VIEW MORE>></a></p>
 					</div>
 				</div>
 				
 			</div>
-			
+			<div class="link_home"><a href="${APP_PATH}/index.html">BACK TO HOME!</a></div>
+			<br /><br /><br />
 		</div>
+		
+			
 		
 		
 	 
@@ -151,7 +154,7 @@
           '</span>' +
           '<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
           '</div>' +
-		  '<div class="buynew"><span>BUY NEW </span></div>' +
+		  '<div class="buynew"><span>BUY NOW </span></div>' +
           '</div>' +
           '</div>';
       }
