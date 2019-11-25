@@ -47,7 +47,7 @@
 
 <body>
 
-	<jsp:include page="mheader.jsp"></jsp:include>
+	<jsp:include page="mheader2.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main cart-box">

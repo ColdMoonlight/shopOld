@@ -85,21 +85,31 @@
     function rednerHotProduct(parent, data) {
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
-		   var actshowprolei = data[i].actshowproIfproORcate;
-		  if(actshowprolei==0){
+		  var actshowprolei = data[i].actshowproIfproORcate;
+		  if(i==0|i==1){
 			  html += '<div class="swiper-slide">' +
-			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-			  					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			   '<a href="${APP_PATH}/Friday.html">' +
+					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  '</a>' +
 			  '</div>';
-		  }else if(actshowprolei==1){
-			  html += '<div class="swiper-slide">' +
-			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
-			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-			  '</a>' +
-			  '</div>';
-			  
+		  }else{
+			  //var actshowprolei = data[i].actshowproIfproORcate;
+			  if(actshowprolei==0){
+			  			  html += '<div class="swiper-slide">' +
+			  			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+			  			  					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  			  '</a>' +
+			  			  '</div>';
+			  }else if(actshowprolei==1){
+			  			  html += '<div class="swiper-slide">' +
+			  			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+			  			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  			  '</a>' +
+			  			  '</div>';
+			  			  
+			  }
 		  }
+		  
 		  
         
       }
@@ -117,7 +127,7 @@
           rednerHotProduct($('#hot-product .swiper-wrapper'), resData)
 		  new Swiper('#hot-product', {
 				freeMode: true,
-				 slidesPerView : 1.5,  
+				 slidesPerView : 1,  
 				 // loop : true,
 				  autoplay: {
 				     disableOnInteraction: false,
@@ -360,6 +370,7 @@
 					  var html = '';
 					  for (var i = 0; i < data.length; i += 1) {
 						  var slideIfinto_click = data[i].slideIfinto;
+						  var slidenum =data[i].slideFirthNum;
 						  // console.log(slideIfinto_click);
 						  if(slideIfinto_click==0){
 						  	html += '<div class="swiper-slide">' +
@@ -367,6 +378,12 @@
 						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
 						  			'</a>' +
 						  		'</div>';
+						  }else if(slidenum==1){
+							     html += '<div class="swiper-slide">' +
+							 	  '<a href="${APP_PATH}/Friday.html">' +
+							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							 		'</a>' +
+							 	'</div>'; 
 						  }else{
 						  	html += '<div class="swiper-slide">' +
 						  		  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
@@ -374,6 +391,9 @@
 						  			'</a>' +
 						  		'</div>';
 						  }
+						  
+						  
+						  
 							
 					  }
 					  parent.html(html);

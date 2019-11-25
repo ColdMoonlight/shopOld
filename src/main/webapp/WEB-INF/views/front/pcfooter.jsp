@@ -11,7 +11,6 @@
 </head>
 <body>
 <!-- footer -->
-<div class="fixed_link"><a href="${APP_PATH }/MlActive/ActiveIndex"></a></div>
 <footer class="nomargin">
 	<div class="tt-footer-col tt-color-scheme-01">
 		<div class="container">		
