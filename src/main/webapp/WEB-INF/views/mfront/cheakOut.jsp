@@ -904,7 +904,7 @@
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
 						<div class="sale_copen">
-							<p>Anuniversary Sale ！</h3> 
+							<p>Black Friday Mega Sale! Go Crazy, Girls!</p> 
 							<ul>
 								<li><span>$10 off</span> upon order $99 with code：<b>BLACK10</b></li>
 								<li><span>$30 off</span> upon order $299 with code：<b>BLACK30</b></li>
