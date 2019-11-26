@@ -32,6 +32,7 @@
   <div class="main">
 
     <div class="box-none">
+		<br /><br /><br />
       <img src="${APP_PATH}/static/m/img/other/pay-fail.png" alt="">
       <p>The payment is Not Successful</p>
 
