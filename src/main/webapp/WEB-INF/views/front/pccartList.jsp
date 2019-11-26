@@ -560,6 +560,7 @@
 				orderMoney = subTotal.text().slice(1);
 				 var shopidlist = toFbidsPurchase(cartItemArr);
 				 // console.log(shopidlist)
+				 //追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 				 fbq('track', 'InitiateCheckout', {
 		              content_ids: [shopidlist],
 		              content_type: 'product',
@@ -589,7 +590,6 @@
 		}
 		$('.btn.calc-price').on('click', function () {
 			calcTotalPrice();
-			fbq('track', 'InitiateCheckout');
 		});
 		$.ajax({
 			url: '${APP_PATH}/MlbackCart/getCartProductNumber',
