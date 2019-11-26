@@ -1034,7 +1034,7 @@ a:focus {
 }
 
 .group-details {
-  padding: 1em 0;
+  padding: .5em 0;
 }
 
 .group-details.active {
@@ -1097,7 +1097,7 @@ a:focus {
 }
 
 .group-details.customer-message {
-	padding: 1em;
+	padding: .5em 1em;
 }
 
 .group-details.customer-message>textarea {
@@ -1704,13 +1704,13 @@ a:focus {
 
 .address-box .form-group {
   width: 50%;
-  padding: .5em .2rem;
+  padding: .5em .2em;
   box-sizing: border-box;
 }
 
 /* shipping */
 .shipping {
-	padding: 1em;
+	padding: 0 1rem .5em;
 	font-size: 14px;
 	background: #fff;
 }
@@ -1720,7 +1720,7 @@ a:focus {
 /* order */
 
 .order-title {
-	padding: .5em;
+	padding: .2em .5em;
 	display: flex;
 	align-items: center;
 	background: #Fff;
@@ -1790,7 +1790,7 @@ a:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .5em 1em;
+  padding: .2em 1em;
   margin: 0 1em;
   border: 1px solid #ccc;
 }
@@ -2401,7 +2401,7 @@ a:focus {
 .tit_numtt span{vertical-align: middle; margin: 0 15px; display: inline-block;width: 15px; height: 15px; background:#999;text-align: center; line-height: 15px; color: #fff;}
 .tit_numtt b{display: inline-block;line-height: 30px;font-size: 12px;}
 .order_box .group-details.coupons {padding: 10px 0 0;}
-.list-group-item .sale_copen{margin:10px 5% 0}
+.list-group-item .sale_copen{margin:10px 1% 0;width: 98%;}
 
 .order_box .coupons .coupon-error{padding: 0;}
 .address-details .address.icon_dz{background:url(../../../../../ShopTemplate/static/m/img/index/loa.png) no-repeat center;background-size:32px;}
