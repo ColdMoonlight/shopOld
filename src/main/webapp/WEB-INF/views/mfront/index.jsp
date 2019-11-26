@@ -77,7 +77,7 @@
    <div class="mask maskindex" style="display: none;"></div>
    <div class="go_re" style="display: none;">
 	   <span class="close">×</span> 
-	   <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/zctc.jpg"></a>
+	   <a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/img/hew.jpg"></a>
    </div>
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
