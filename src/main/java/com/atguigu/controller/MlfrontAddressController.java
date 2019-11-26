@@ -90,7 +90,6 @@ public class MlfrontAddressController {
 		//将省份code放入地址对象中
 		mlfrontAddress.setAddressProvinceCode(stateprovinceNameCode);
 		//取出id
-		System.out.println("save address");
 		Integer addressId = mlfrontAddress.getAddressId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontAddress.setAddressMotifytime(nowTime);
@@ -103,6 +102,18 @@ public class MlfrontAddressController {
 		}
 		//addressCountryAll
 		mlfrontAddress.setAddressCountryAll(addressCountryAll);
+		
+		//取出addressDetail,用" ",替换掉()
+		String addressDetailUserIn = mlfrontAddress.getAddressDetail();
+		String addressDetailStrbefore = addressDetailUserIn.replace("(", " ");
+		String addressDetailStr = addressDetailStrbefore.replace(")", " ");
+		mlfrontAddress.setAddressDetail(addressDetailStr);
+		
+		//取出邮箱,trim()掉空格
+		String addressEmailUserIn = mlfrontAddress.getAddressEmail();
+		String addressEmailStr=addressEmailUserIn.replace(" ", "");
+		mlfrontAddress.setAddressEmail(addressEmailStr);
+		
 		int realAddressId = 0;
 		if(loginUser==null){
 			String sessionId = session.getId();
