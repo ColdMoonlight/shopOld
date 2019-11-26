@@ -173,8 +173,6 @@ public class PaypalController {
 //            }
             regularName+= " is not match";
             session.setAttribute("PaypalError", regularName);
-//            System.out.println(e.getDetails().getDetails());
-            System.out.println("regularName : "+regularName);
             
             System.out.println("---------e.getDetails()------end------");
         }
@@ -576,6 +574,7 @@ public class PaypalController {
 		mlfrontOrderPayReq.setOrderId(orderId);
 		//查回结果
 		List<MlfrontOrder> mlfrontOrderList =  mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderPayReq);
+		System.out.println("mlfrontOrderList:"+mlfrontOrderList.toString());
 		MlfrontOrder mlfrontOrderResOne = mlfrontOrderList.get(0);
 		//准备更新数据
 		mlfrontOrderResOne.setOrderStatus(1);
