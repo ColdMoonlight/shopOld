@@ -288,7 +288,7 @@ public class MlfrontPayInfoController {
 		List<MlPaypalShipAddress> mlPaypalShipAddressResList =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
 		MlPaypalShipAddress mlPaypalShipAddressRes = new MlPaypalShipAddress();
 		if(mlPaypalShipAddressResList.size()==0){
-			System.out.println("老数据,没有payment的返回地址");
+			System.out.println("paypal那边返回的地址为null,没有payment的返回地址");
 		}else{
 			mlPaypalShipAddressRes = mlPaypalShipAddressResList.get(0);
 		}
