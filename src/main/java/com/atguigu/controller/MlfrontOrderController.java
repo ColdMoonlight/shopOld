@@ -132,7 +132,7 @@ public class MlfrontOrderController {
 //		}
 	}
 	
-	/**3.0.2.9	useOn	0505
+	/**3.0.2.9	useOff	0505
 	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
 	 * @param MlfrontOrder
 	 */
@@ -381,9 +381,12 @@ public class MlfrontOrderController {
 		DecimalFormat df1 = new DecimalFormat("0.00");
 		MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
 		MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
+		String orderitemidArri="";
 		for(int i=0;i<orderitemidArr.length;i++){
 			BigDecimal oneAllprice = new BigDecimal(0);
-			Integer orderItemId = Integer.parseInt(orderitemidArr[i]);
+			System.out.println("orderitemidArr[i]:"+orderitemidArr[i]);
+			orderitemidArri = orderitemidArr[i].trim();
+			Integer orderItemId = Integer.parseInt(orderitemidArri);
 			mlfrontOrderItemReq.setOrderitemId(orderItemId);
 			List<MlfrontOrderItem> mlfrontOrderItemList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemReq);
 			mlfrontOrderItemRes = mlfrontOrderItemList.get(0);
