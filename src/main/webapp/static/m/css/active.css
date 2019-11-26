@@ -54,6 +54,9 @@
 #product-block .product-now-price{font-size: 20px}
 #product-block .product-define-price{color: #999;}
 
+.product_box_cont .product-img{height: auto;}
+.five_5cont .product-img{height: auto;}
+
 .morelink{width: 100%; text-align: center;}
 .morelink a{height: 30px;display:inline-block; line-height: 30px;width: 200px; color: #fff; background:#ff1671; border-radius:3px;}
 
