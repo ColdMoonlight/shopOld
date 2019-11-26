@@ -43,7 +43,7 @@
 </head>
 
 <body>
-  <jsp:include page="mheader.jsp"></jsp:include>
+  <jsp:include page="mheader2.jsp"></jsp:include>
   <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/m/css/active.css"/>
 	<!-- main -->
 		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/ban22.jpg" /></div>
