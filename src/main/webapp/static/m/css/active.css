@@ -35,7 +35,7 @@
 .word3{width: 100%; height: auto; margin:0 auto;padding: 0 0 10px;}
 .word3 img{display: block; margin: 0 auto; max-width: 100%;}
 .lei_cont{width: 100%;height: auto;}  
-.lei_cont ul{width: 100%;height: auto; margin: 0 auto;display: flex; flex-wrap:wrap;}
+.lei_cont ul{width: 100%;height: auto; margin: 0 auto;}
 .lei_cont ul li {width:50%;height: auto;float: left;} 
 .lei_cont ul li a{display: block;}
 .lei_cont ul li a img{max-width: 100%;}

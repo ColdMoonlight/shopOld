@@ -8,10 +8,10 @@
 input{-webkit-appearance: none;}
 textarea{-webkit-appearance: none;}
 /* select{-webkit-appearance:none} */
-@font-face {
+/* @font-face {
     font-family: Futura;
     src: url(../../font/Futura-LT-Book.ttf);
-}
+} */
 
 
 html {

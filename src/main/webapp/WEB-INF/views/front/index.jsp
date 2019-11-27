@@ -307,10 +307,16 @@
 				}else if(slidenum==1){
 							     html += '<div class="swiper-slide">' +
 							 	  '<a href="${APP_PATH}/Friday.html">' +
-							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
 							 		'</a>' +
 							 	'</div>'; 
-				  }else{
+				  }else if(slidenum==2){
+							     html += '<div class="swiper-slide">' +
+							 	  '<a href="${APP_PATH}/Friday.html">' +
+							 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							 		'</a>' +
+							 	'</div>'; 
+				  } else{
 					html += '<div class="swiper-slide">' +
 						  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
 									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
