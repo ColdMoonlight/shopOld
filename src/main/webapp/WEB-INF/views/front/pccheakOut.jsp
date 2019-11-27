@@ -893,10 +893,10 @@
 							<div class="sale_copen">
 								<p>Black Friday Mega Sale! Go Crazy, Girls!</p> 
 								<ul>
+									<li><span>$5 off</span> upon order $49 with code：<b>BLACK5</b></li>
 									<li><span>$10 off</span> upon order $99 with code：<b>BLACK10</b></li>
+									<li><span>$20 off</span> upon order $199 with code：<b>BLACK20</b></li>
 									<li><span>$30 off</span> upon order $299 with code：<b>BLACK30</b></li>
-									<li><span>$50 off</span> upon order $499 with code：<b>BLACK50</b></li>
-									<li><span>$100 off</span> upon order $799 with code：<b>BLACK100</b></li>
 								</ul>
 							</div>
 							<div class="group-details coupons"></div>
