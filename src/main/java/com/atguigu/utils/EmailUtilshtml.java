@@ -339,8 +339,5 @@ public class EmailUtilshtml {
             e.printStackTrace();
         }
     }
-
-	
-
 	
 }
