@@ -807,7 +807,8 @@
 
 			function generateOrder(reqData) {
 				// console.log(reqData)
-				var fbpid=pidA;
+				var fbpid=reqData.cartitemProductId;
+				var fbprice=reqData.cartitemProductOriginalprice;
 				// alert(fbpid)
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/toAddToCart',
@@ -825,10 +826,12 @@
 								cartText.text(parseInt(cartText.text()) + 1);
 							},600)
 							//追踪'添加购物车'事件    facebook广告插件可以注释掉，但不要删除
-              fbq('track', 'AddToCart', {
-                  content_ids: fbpid,
-                  content_type: 'product'
-              });
+				fbq('track', 'AddToCart', {
+					content_ids: fbpid,
+					content_type: 'product',
+					value: fbprice,
+					currency: 'USD'
+				});
               // selectCartOrCheckout(reqData);
 							
 							// setTimeout(function() {

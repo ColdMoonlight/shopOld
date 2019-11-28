@@ -141,6 +141,26 @@
 .colorspan3{color:#da2727;}
 .colorspan2{color:#55da27;}
 .colorspan1{color:#da2727;}
+.remark_info{width:500px; height: 250px; position: fixed; top: 50%; left: 50%; margin: -150px 0 0 -150px; z-index: 99999; background: #fff; border:1px solid #ccc;}
+.remark_info textarea{width:100%; padding: 10px 2%; height: 180px;border:none; border-bottom:1px solid #ccc;  resize: none;}
+.userstart{background: #f0f0f0;line-height: 50px;}
+.mask {
+	position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: rgb(0,0,0,.5);
+}
+.remark_info input{ display: block; margin: 20px auto 0;color: #fff;font-weight: 600; border:none;background:#F23030;width: 200px; height: 30px;}
+.closetc{ position: absolute; top: -15px; right:-15px; border-radius:50%; width: 30px; height: 30px; line-height: 30px; text-align: center; background: #000; color: #fff;font-size: 16px;}
+.user_rating{color: #FF0000;}
+.userstart b{color: #0062CC;}
+.wordly{color: #F23030;}
+
+
+
 
 
 

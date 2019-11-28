@@ -6,10 +6,10 @@
   /* -webkit-tap-highlight-color: transparent */
 }
 
-@font-face {
+/* @font-face {
     font-family: Futura;
     src: url(../../font/Futura-LT-Book.ttf);
-}
+} */
 
 html {
   -webkit-text-size-adjust: none;
@@ -1123,7 +1123,7 @@ margin: 10px 0;
 .form-input>input,
 .form-input>select {
   width: 100%;
-  padding: .25em .5em;
+  padding: 7px .5em;
   box-sizing: border-box;
   outline: none;
   border: 1px solid #ccc;

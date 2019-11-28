@@ -101,7 +101,14 @@ public class MlbackAddOrderViewDetailController {
 		mlbackAddOrderViewDetailreq.setAddorderviewdetailEndtime(endtime);
 		mlbackAddOrderViewDetailreq.setAddorderviewdetailActnum(0);
 		List<MlbackAddOrderViewDetail> mlbackAddOrderViewDetailList = mlbackAddOrderViewDetailService.selectMlbackAddOrderViewDetailByTime(mlbackAddOrderViewDetailreq);
-		Integer toDayNum = mlbackAddOrderViewDetailList.size();
+		Integer toDayNum=0;
+		if(mlbackAddOrderViewDetailList.size()>0){
+			Integer oneNum=0;
+			for(MlbackAddOrderViewDetail mlbackAddOrderViewDetailOne:mlbackAddOrderViewDetailList){
+				oneNum = mlbackAddOrderViewDetailOne.getAddorderviewdetailActnum();
+				toDayNum = toDayNum+oneNum;
+			}
+		}
 		return Msg.success().add("mlbackAddOrderViewDetailList", mlbackAddOrderViewDetailList).add("toDayNum", toDayNum);
 	}
 	
@@ -120,7 +127,6 @@ public class MlbackAddOrderViewDetailController {
 		MlbackAddOrderViewDetail mlbackAddOrderViewDetailreq = new MlbackAddOrderViewDetail();
 		mlbackAddOrderViewDetailreq.setAddorderviewdetailStarttime(starttime);
 		mlbackAddOrderViewDetailreq.setAddorderviewdetailEndtime(endtime);
-		mlbackAddOrderViewDetailreq.setAddorderviewdetailActnum(0);	//用户行为，0纯加购	1点buyNow附带的加购
 		int PagNum = 20;
 		List<MlbackAddOrderViewDetail> mlbackAddOrderViewDetailList = mlbackAddOrderViewDetailService.selectMlbackAddOrderViewDetailByTime(mlbackAddOrderViewDetailreq);
 		
@@ -135,14 +141,17 @@ public class MlbackAddOrderViewDetailController {
 			MlbackAddOrderViewDetail mlbackAddOrderViewDetailOne = mlbackAddOrderViewDetailList.get(i);
 			if(proSeo.isEmpty()){
 				System.out.println("第一次来，都不记录");
-				proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailSeoname();
+				//proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailSeoname();
+				proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailProname();
 				SeoStringList.add(proSeo);
 			}else{
-				proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailStarttime();
+				proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailProname();
 				MlbackAddOrderViewDetail mlbackAddOrderViewDetailOneLast =mlbackAddOrderViewDetailList.get(i-1);
-				String lastSeo = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailSeoname();
+				//String lastSeo = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailSeoname();
+				String lastSeo = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailProname();
+				Integer nowPronum = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailActnum();
 				if(proSeo.equals(lastSeo)){
-					proSeoNum++;
+					proSeoNum=proSeoNum+nowPronum;
 				}else{
 					SeoStringList.add(proSeo);
 					proSeoNum = k-1;

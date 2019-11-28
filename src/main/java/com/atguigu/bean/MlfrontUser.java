@@ -37,6 +37,8 @@ public class MlfrontUser {
     
     private Integer userVipLevel;	//VIP等级
     
+    private String userStr;	//用户评价,骗子,难缠
+    
     public Integer getUserId() {
         return userId;
     }
@@ -180,5 +182,13 @@ public class MlfrontUser {
 	public void setUserTimes(Integer userTimes) {
 		this.userTimes = userTimes;
 	}
-    
+
+	public String getUserStr() {
+		return userStr;
+	}
+
+	public void setUserStr(String userStr) {
+		this.userStr = userStr == null ? null : userStr.trim();
+	}
+	
 }

@@ -266,6 +266,7 @@
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
+		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
 				// fetch data
@@ -292,6 +293,7 @@
 							var resDataAddressOne = result.extend.mlfrontAddressOne;
 							var resDataOrderItemList = result.extend.mlfrontOrderItemList;
 							var resDataUserOne = result.extend.mlfrontUserOne;
+							// console.log(resDataUserOne)
 							var mlPaypalShipAddressOne = result.extend.mlPaypalShipAddressOne;
 							
 							/* console.log('********resDataPayInfoOne********');
@@ -305,8 +307,8 @@
 							console.log('********resDataUserOne********');
 							console.log(resDataUserOne); */
 
-							renderBuyerInfo(resDataUserOne)
-
+							renderBuyerInfo(resDataUserOne);
+                            returnshow(resDataUserOne);
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
@@ -317,13 +319,15 @@
 							var receiveDataaddress = mlPaypalShipAddressOne;
 							renderPaypaladdress(receiveDataaddress);
 							renderOrderInfo(orderData);
-
+                            
 							var receiveData = resDataAddressOne;
 							console.log(receiveData)
+							receiveData.addressUid = resDataAddressOne.addressUid;
+							userid = receiveData.addressUid;
+							
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
 							receiveData.orderCouponCode = resDataOrderPayOne.orderCouponCode;	//**优惠码****
-						
 							
 							receiveData.payinfoPlatform = resDataPayInfoOne.payinfoPlatform;
 							receiveData.payinfoCreatetime = resDataPayInfoOne.payinfoCreatetime;
@@ -335,12 +339,63 @@
 						}
 					}
 				});
+				/*****/
+				var myid;
+				function returnshow(data){
+					if(data==null){
+						$(".remark_info1").hide();
+						$(".userstart").hide();
+					}else{
+						$(".user_rating").html(data.userStr)
+						$(".userstart").show();
+						$(".remark_info1 textarea").val(data.userStr);
+						var userodid = data.userId;
+						myid =userodid;
+					}
+				}
+				$(".remark_info1 input").click(function(){
+					var haveData = {
+						"userStr":$(".remark_info1 textarea").val(),
+						"userId":myid,
+					}
+					console.log(haveData);
+					$.ajax({
+						url: "${APP_PATH}/MlfrontUser/update",
+						data: JSON.stringify(haveData),
+						type: "POST",
+						dataType: 'json',
+						contentType: 'application/json',
+						success: function (data) {
+							if (data.code === 100) {
+								var textw=$(".remark_info1 textarea").val();
+								$(".remark_info1").hide();
+								$(".mask").hide();
+								$(".user_rating").html(textw)
+							}
+						}
+					})
+				});
+				$(".closetc").click(function(){
+					$(".remark_info1").hide();
+					$(".remark_info2").hide();
+					$(".remark_info3").hide();
+					$(".mask").hide();
+				});
+				$(".userstart b").click(function(){
+					$(".remark_info1").show();
+					$(".mask").show();
+				})
+				
+				
+				
+				
 			});
 		}
 
 		function renderBuyerInfo(data) {
 			var strdetails = "";
 			var html = '';
+			var myid;
 			if (data == null) {
 				strdetails = "此单为游客购买,无该信息";
 				html = '<div><span>用户账号：</span><span>' + strdetails + '</span></div>' +
@@ -353,10 +408,81 @@
 					'<div><span>用户姓名：</span><span>' + data.userFirstname + " " + data.userLastname + '</span></div>' +
 					'<div><span>用户电话：</span><span>' + data.userTelephone + '</span></div>' +
 					'<div><span>用户邮箱：</span><span>' + data.userEmail + '</span></div>' +
-					'<div><span>用户vip等级：</span><span>' + data.userVipLevel + '</span></div>' +
-					'<div><span>历史购买次数：</span><span>' + data.userTimes + '</span></div>';
+					'<div class="vipdiv"><span>用户vip等级：</span><span class="uservip">' + data.userVipLevel + '</span><em></em><b class="vipnum">编辑</b></div>' +
+					'<div class="timediv"><span>历史购买次数：</span><span class="usertime">' + data.userTimes + '</span><em></em><b class="timenum">编辑</b></div>';
+			var userodid = data.userId;
+			myid =userodid;
 			}
 			$('.buyer-info').html(html);
+			/***************/
+				
+			$(".vipnum").click(function(){
+				$(".remark_info2").show();
+				$(".mask").show();
+			})
+			$(".timenum").click(function(){
+				$(".remark_info3").show();
+				$(".mask").show();
+			})
+			
+			$(".remark_info2 input").click(function(){
+				var haveData2 = {
+					"userVipLevel":$(".remark_info2 textarea").val(),
+					"userId":myid,
+				}
+				console.log(haveData2);
+				$.ajax({
+					url: "${APP_PATH}/MlfrontUser/update",
+					data: JSON.stringify(haveData2),
+					type: "POST",
+					dataType: 'json',
+					contentType: 'application/json',
+					success: function (data) {
+						if (data.code === 100) {
+							var textw=$(".remark_info2 textarea").val();
+							$(".remark_info2").hide();
+							$(".mask").hide();
+							$(".vipdiv .uservip") .html(textw)
+						}
+					}
+				})
+			});
+			$(".remark_info3 input").click(function(){
+				var haveData2 = {
+					"userTimes":$(".remark_info3 textarea").val(),
+					"userId":myid,
+				}
+				console.log(haveData2);
+				$.ajax({
+					url: "${APP_PATH}/MlfrontUser/update",
+					data: JSON.stringify(haveData2),
+					type: "POST",
+					dataType: 'json',
+					contentType: 'application/json',
+					success: function (data) {
+						if (data.code === 100) {
+							var textw=$(".remark_info3 textarea").val();
+							$(".remark_info3").hide();
+							$(".mask").hide();
+							$(".timediv .usertime") .html(textw)
+						}
+					}
+				})
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 
 		function renderOrderInfo(data) {//红
@@ -597,6 +723,7 @@
 		function renderReceiverinfo(data) {
 			var html = '';
 			html ='<h3>Shipping Address</h3>' +
+		    	'<div><span>留言：</span><span class="wordly">' + data.orderBuyMess + '</span></div>' +
 			    '<div><span>支付方式：</span><span>' + data.payinfoPlatform + '</span></div>' +
 			    '<div><span>优惠码：</span><span>' + data.orderCouponCode + '</span></div>' +
 				'<div><span>付款交易码：</span><span>' + data.payinfoPlatformserialcode + '</span></div>' +
@@ -609,7 +736,6 @@
 				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountryAll + '</span> 简称：' + data.addressCountry +'  <input class="btn_fz btn btn-info" type="button" name="" id="fzg" value="复制文本" /></div>' +
 				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzh" value="复制文本" /></div>' +
 				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzi" value="复制文本" /></div>' +
-				'<div><span>留言：</span><span>' + data.orderBuyMess + '</span></div>' +
 				'<div><span>购买时间：</span><span>' + data.orderCreatetime + '</span></div>' +
 				'<div><span>支付时间：</span><span>' + data.payinfoCreatetime + '</span></div>';
 			$('.revceiver-info').html(html);
@@ -750,13 +876,14 @@
 			html= '<h3>Billing Address</h3>' +
 				        '<ul>'+
 						   '<li>shippingaddressCity : '+data.shippingaddressCity+'</li>'+
+						    '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
+						   '<li>shippingaddressCountryCode : '+data.shippingaddressCountryCode+'</li>'+
 						   '<li>shippingaddressLine1 : '+data.shippingaddressLine1+'</li>'+
 						    '<li>shippingaddressLine2 : '+data.shippingaddressLine2+'</li>'+
 						    '<li>shippingaddressEmail : '+data.shippingaddressEmail+'</li>'+
 							  '<li>shippingaddressPaymentid : '+data.shippingaddressPaymentid+'</li>'+
 							   '<li>shippingaddressPostalCode : '+data.shippingaddressPostalCode+'</li>'+
 								 '<li>shippingaddressRecipientName : '+data.shippingaddressRecipientName+'</li>'+
-								  '<li>shippingaddressState : '+data.shippingaddressState+'</li>'+
 						'</ul>';
 			$(".info_two").html(html);		
 		}

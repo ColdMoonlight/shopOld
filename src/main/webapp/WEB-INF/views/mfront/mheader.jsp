@@ -63,8 +63,16 @@
 <body>
   <!-- info -->
   <!--header  -->
+   <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a> <span class="close"></span></div>
+    <div class="fixed_small"><a href="javascript:;"></a></div>
   <div class="header bd-b">
-	  <div class="info_adv">
+	  <div class="img_show">
+	  <a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/wapq.png" /></a>	
+	  	<div class="img_show_cont">
+	  		<a href="javascript:;"></a>
+	  	</div>
+	  </div>
+	  <div class="info_adv" style="display: none;">
 	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
 	  	<div id="adv_silder">
 	  		<div class="swiper-wrapper">
@@ -110,11 +118,26 @@
           <li>bob</li>
           <li>wigs</li>
           <li>bundle</li>
+		  <li>wig 613</li>
+		  <li>Water Wave</li>
         </ul>
       </div>
     </div>
 
   <script>
+	  $(function(){
+	  	$(".fixed_link .close").click(function(){
+	  		$(".fixed_link").addClass("active");
+	  		$(".fixed_small").addClass("active");
+	  	});
+	  	$(".fixed_small").click(function(){
+	  		$(".fixed_link").removeClass("active");
+	  		$(this).removeClass("active");
+	  	})
+	  	
+	  	
+	  })
+	  
     var categoryActiveNum = 1;
     var iCart = $('.icon.cart');
     var iPerson = $('.icon.person');
@@ -352,11 +375,11 @@
 					  // console.log(resData)/****************首页广告******/
 						rednertop(banneradv, resData);
 						  new Swiper('#adv_silder', {
-							freeMode: true,
-							loop:true,
-							autoplay: {
-							    disableOnInteraction: false,
-							  },
+							// freeMode: true,
+							// loop:true,
+							// autoplay: {
+							//     disableOnInteraction: false,
+							//   },
 							})
 					  // console.log(resData);
 					 // rednertop(bannerfirst,resData)

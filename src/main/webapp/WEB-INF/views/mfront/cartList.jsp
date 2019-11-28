@@ -47,7 +47,7 @@
 
 <body>
 
-	<jsp:include page="mheader.jsp"></jsp:include>
+	<jsp:include page="mheader2.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main cart-box">
@@ -530,8 +530,27 @@
 						cartitemProductNumber: $(item).find('.input-group input').val()
 					});
 			});
+			function toFbidsPurchase(resData){
+		       	var infoStrlids = '';
+		       	var infoRelids = '';
+		       	for(var i=0;i<resData.length;i++){
+		       		infoStrlids=infoStrlids+resData[i].cartitemProductId+',';
+		       	}
+		       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
+		       	return infoRelids;
+		       }
 			if (cartItemArr.length) {
 				// console.log(cartItemArr)
+				 orderMoney = subTotal.text().slice(1);
+				 var shopidlist = toFbidsPurchase(cartItemArr);
+				 // console.log(shopidlist)
+				 //追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+				 fbq('track', 'InitiateCheckout', {
+		              content_ids: [shopidlist],
+		              content_type: 'product',
+		              value: orderMoney,
+		              currency: 'USD'
+		            });
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/cartToOrder',
 					data: JSON.stringify(cartItemArr),
@@ -554,7 +573,6 @@
 		}
 		$('.btn.calc-price').on('click', function () {
 			calcTotalPrice();
-			fbq('track', 'InitiateCheckout');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 		});
 		$.ajax({
 			url: '${APP_PATH}/MlbackCart/getCartProductNumber',

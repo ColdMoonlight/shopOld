@@ -8,8 +8,12 @@ public class MlbackAddOrderViewDetail {
     private String addorderviewdetailName;
 
     private Integer addorderviewdetailProid;
+    
+    private Integer addorderviewdetailProItemid;
 
     private String addorderviewdetailProname;
+    
+    private String addorderviewdetailProskunamestr;//proskunamestr串
 
     private String addorderviewdetailSeoname;
 
@@ -54,16 +58,32 @@ public class MlbackAddOrderViewDetail {
     public void setAddorderviewdetailProid(Integer addorderviewdetailProid) {
         this.addorderviewdetailProid = addorderviewdetailProid;
     }
+    
+    public Integer getAddorderviewdetailProItemid() {
+		return addorderviewdetailProItemid;
+	}
 
-    public String getAddorderviewdetailProname() {
+	public void setAddorderviewdetailProItemid(Integer addorderviewdetailProItemid) {
+		this.addorderviewdetailProItemid = addorderviewdetailProItemid;
+	}
+
+	public String getAddorderviewdetailProname() {
         return addorderviewdetailProname;
     }
 
     public void setAddorderviewdetailProname(String addorderviewdetailProname) {
         this.addorderviewdetailProname = addorderviewdetailProname == null ? null : addorderviewdetailProname.trim();
     }
+    
+    public String getAddorderviewdetailProskunamestr() {
+		return addorderviewdetailProskunamestr;
+	}
 
-    public String getAddorderviewdetailSeoname() {
+	public void setAddorderviewdetailProskunamestr(String addorderviewdetailProskunamestr) {
+		this.addorderviewdetailProskunamestr = addorderviewdetailProskunamestr == null ? null : addorderviewdetailProskunamestr.trim();
+	}
+
+	public String getAddorderviewdetailSeoname() {
         return addorderviewdetailSeoname;
     }
 

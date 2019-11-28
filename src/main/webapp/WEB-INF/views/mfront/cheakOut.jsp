@@ -48,7 +48,7 @@
 
 <body>
 
-	<jsp:include page="mheader.jsp"></jsp:include>
+	<jsp:include page="mheader2.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
@@ -102,25 +102,12 @@
 								class="form-control address addreNo">
 						</div>
 					</div>
-					<!-- Zip/Postal code -->
-					<div class="form-group">
-						<label for="addressPost" class="form-label required">Zip/Postal code</label>
-						<div class="form-input">
-							<input type="text" name="addressPost" class="form-control code">
-						</div>
-					</div>
-					<!-- city -->
-					<div class="form-group">
-						<label for="addressCity" class="form-label required">City</label>
-						<div class="form-input">
-							<input type="text" name="addressCity" class="form-control city">
-						</div>
-					</div>
 					<!-- country -->
-					<div class="form-group">
+					<div class="form-group form-groupcountry">
 						<label for="addressCountry" class="form-label required">Country</label>
 						<div class="form-input">
 							<select name="addressCountry" class="form-control" id="country">
+								<option value="US" selected="selected">United States</option>
 								<option value="AF">
 									Afghanistan
 								</option>
@@ -817,7 +804,7 @@
 								<option value="GB">
 									United Kingdom
 								</option>
-								<option value="US" selected="selected">
+								<option value="US">
 									United States
 								</option>
 								<option value="UY">
@@ -862,14 +849,39 @@
 							</select>
 						</div>
 					</div>
-					<!-- State/Province -->
-					<div class="form-group">
+<!-- 					State/Province
+					<div class="form-group form-group_inp">
 						<label for="addressProvince" class="form-label required">State/Province</label>
 						<div class="form-input">
 							<input type="text" name="addressProvince" class="form-control province">
 						</div>
+					</div> -->
+					<!-- stateprovinceName -->
+					<div class="form-group form-group_select selectActive" style="display: none;">
+						<label for="addressProvince" class="form-label required">State/Province</label>
+						<div class="form-input">
+							<select name="addressProvince" class="select-province form-control">
+								<!-- <optgroup label="province"> </optgroup> -->
+								<!-- <optgroup label="province" class="qwqw"> </optgroup> -->
+							</select>
+						</div>
+					</div>
+					<!-- city -->
+					<div class="form-group form-group2">
+						<label for="addressCity" class="form-label required">City</label>
+						<div class="form-input">
+							<input type="text" name="addressCity" class="form-control city">
+						</div>
+					</div>
+					<!-- Zip/Postal code -->
+					<div class="form-group">
+						<label for="addressPost" class="form-label required">Zip/Postal code</label>
+						<div class="form-input">
+							<input type="text" name="addressPost" class="form-control code">
+						</div>
 					</div>
 				</form>
+				<div class="errortips"><span>A match of the shipping Address city,State and Postal Code failed.</span></div>
 			</div>
 		<!-- 	<div class="win-box-title">
 				<span class="cancel">cancel</span>
@@ -891,6 +903,15 @@
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
+						<div class="sale_copen">
+							<p>Black Friday Mega Sale! Go Crazy, Girls!</p> 
+							<ul>
+								<li><span>$5 off</span> upon order $49 with code：<b>BLACK5</b></li>
+								<li><span>$10 off</span> upon order $99 with code：<b>BLACK10</b></li>
+								<li><span>$20 off</span> upon order $199 with code：<b>BLACK20</b></li>
+								<li><span>$30 off</span> upon order $299 with code：<b>BLACK30</b></li>
+							</ul>
+						</div>
 						<div class="group-details coupons active"></div>
 					</li>
 					<li class="list-group-item">
@@ -931,7 +952,7 @@
 							<span class="cal-price-num"></span>
 						</div>
 					</div>
-					<div class="btn btn-black place-order">Place Order</div>
+					<div class="btn btn-black place-order">Pay Securely Now</div>
 				</div>
 			</div>
 		</div>
@@ -956,6 +977,30 @@
 		$("#newDate_zsh").html(newDate_zsh);
 	</script>
 	<script>
+	
+	    var tips;
+	 	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
+		// PAYMENT_ALREADY_DONE
+		   tips=PaypalErrorName;
+		   console.log(tips)
+	    if(tips==="VALIDATION_ERROR"){
+			$(".errortips").show();
+		}else if(tips==="PAYMENT_ALREADY_DONE"){
+			$(".errortips").show();
+			$(".errortips").html("Payment has been done already for this cart.")
+			setTimeout(function(){
+				window.location.href = "${APP_PATH}/index.html";	
+			}, 3000);
+		}else{
+			$(".errortips").hide();
+		}
+		$(".select-province,.form-group .city,.form-group .code").click(function(){
+			$(".errortips").hide();
+		})
+         
+		 
+		
+	
 		var totalPrice = 0;
 		var resDataMoney = 0; // 邮费
 		// var totalPriceText = $('.total-price').find('.text');
@@ -971,11 +1016,12 @@
 		var productNumArr = [];
 		var payplate = 0;
 		var couponPriceOld =0;
-		
-		
 		var addressIdIntInt;
-		function datalocation (){
-			var dataname = $("#country").val();
+		var jiecountry;
+		
+		
+		
+		function datalocation (dataname){
 			$.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
 				  data: JSON.stringify({
@@ -988,6 +1034,17 @@
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
+					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
+					console.log(mlPaypalStateprovinceList)
+					console.log(mlPaypalStateprovinceList.length)
+                    if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						$(".form-group_select").show();
+						$(".form-groupcountry").css("width","50%")
+					  } else {
+					   $(".form-group_select").hide();
+					   $(".form-groupcountry").css("width","100%")
+					  }				
 					// console.log("resareafreightMoney:"+resareafreightMoney)
 					// $('.shipping').find('span').text(' of $' + resareafreightMoney);
 					// shippingPriceText.text('$' + resareafreightMoney)
@@ -999,7 +1056,8 @@
 				  }
 				});
 		}
-		datalocation ();
+		var dataname="US";
+		datalocation (dataname)
 		$("#country").bind("change",function(){
 			var radio_zt =$(".coupons .coupon-item input[type='radio']");
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
@@ -1019,6 +1077,19 @@
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
+					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
+					console.log(mlPaypalStateprovinceList)
+					console.log(mlPaypalStateprovinceList.length)
+					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						$(".form-group_select").show();
+						$(".form-group_select").addClass("selectActive")
+						$(".form-groupcountry").css("width","50%")
+					  } else {
+					   $(".form-group_select").hide();
+					    $(".form-group_select").removeClass("selectActive")
+					   $(".form-groupcountry").css("width","100%")
+					  }	
 					$('.shipping').find('span').text(' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
 					var prototalnum =$(".c-prototal .cal-price-num").text().slice(1)
@@ -1030,9 +1101,11 @@
 				  }
 				});
 		});
+/*******************/
 
+/*******************/
 		function renderAddressDetail(data) {
-			// console.log(data)
+			console.log(data)
 	    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -1040,10 +1113,33 @@
 			$("input.address").val(data.addressDetail ? data.addressDetail : '');
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
-			$("input.province").val(data.addressProvince ? data.addressProvince : '');
-			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 			
+			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
+			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			var dataprov =data.addressProvince;
+			// var datacountry =data.addressCountryAll;
+			 jiecountry =data.addressCountry;
+			$("#country option:checked").attr("value",jiecountry);
+			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : ''); 
+			$("#country").attr("data-name",jiecountry);
+			// $("#country").attr("data-country",datacountry);
+			var dataname =$("#country").data("name");
+			datalocation (dataname)
+			console.log("***dataprov****");
+			console.log(dataprov);
+			console.log("***dataprov****");
+			if(dataprov==null||dataprov==""){
+				 $(".form-group_select").hide();
+				 $(".form-group_select").removeClass("selectActive")
+				 $(".form-groupcountry").css("width","100%")
+			}else{
+				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
+				$(".select-province option:checked").attr("value",dataprov);
+				$(".select-province").val(data.addressProvince ? data.addressProvince : ''); 
+				$(".form-group_select").addClass("selectActive");
+				$(".form-groupcountry").css("width","50%");
+			}
+			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
 		}
 		/* 初始化地址模块 */
 		$.ajax({
@@ -1051,9 +1147,9 @@
 			type: 'post',
 			success: function (data) {
 				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				// console.log(data)
+				console.log(data)
 				var resDataAddress = data.extend.mlfrontAddressOne;
-				// console.log(resDataAddress)/******/
+				console.log(resDataAddress)/******/
 				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
@@ -1088,7 +1184,16 @@
 			$('.address-box').hide();
 		});
 		 
-
+		function renderCondition(parent, data, defaultHtml) {
+			var html = defaultHtml || '';
+			html += ''
+			html =html+'<option value="" selected="selected">province</option>';
+			for (var i = 0, len = data.length; i < len; i += 1) {
+					html =  html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
+			}
+		    
+			parent.html(html);
+		}
        
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
@@ -1139,7 +1244,7 @@
 			type: 'get',
 			success: function (data) {
 				var resData = data.extend.mlfrontOrderItemList;
-				console.log(resData);
+				// console.log(resData);
 				shopidlist = toFbidsPurchase(resData);
 				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
 				var cartList = $('.cart-list');
@@ -1401,7 +1506,7 @@
 					}, {});
 					//if (!inputCheck(reqData)) return;
 					// console.log("*****savr_address*******")
-					// console.log(reqData)
+					console.log(reqData)
 					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
 					 $.ajax({
 						url: '${APP_PATH}/MlfrontAddress/save',
@@ -1463,6 +1568,9 @@
 								              value: orderMoney,
 								              currency: 'USD'
 								            });
+								console.log("----------------------");
+								console.log(stridsContent);
+								console.log("=========================");
 								$.ajax({
 									url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
 									data: JSON.stringify(reqData),
@@ -1474,6 +1582,7 @@
 										// console.log(data)
 										$(".loading").show();
 										window.location.href = '${APP_PATH }/paypal/mpay';
+										// window.location.href = '${APP_PATH }/index.html';
 									}
 								})
 							} else {
@@ -1566,7 +1675,10 @@
 			var citystr = $(".city").val();
 			// var countrystr = $("#country").val();
 			var countrystr=$('#country option:checked').text()
-			var provincestr = $(".province").val();
+			// var provincestr = $(".province").val();
+			// var provincestr = $(".selectActive .select-province option:checked").text();
+			// var provincestr = $("body").find(".selectActive").val();
+			var provincestr = $(".selectActive .select-province option:checked").text();
 			
 			
 			if(firstnamestr==null||firstnamestr==''){
@@ -1633,12 +1745,12 @@
 				$("#country").focus(function(){
 					$(this).removeClass("error_br")
 				})
-			}else if(provincestr==null||provincestr==''){
+			}else if(provincestr=='province'){
 				flag = 1;
 				// alert("provincestr is empty");
 				renderSysMsg('provincestr is empty')
-				$(".province").addClass("error_br");
-				$(".province").focus(function(){
+				$(".selectActive").addClass("error_br");
+				$(".selectActive").focus(function(){
 					$(this).removeClass("error_br")
 				})
 			}

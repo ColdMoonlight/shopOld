@@ -296,6 +296,7 @@
 			var html = '';
 			for (var i=0, len=data.length; i<len; i+=1) {
 				var slideIfinto_click = data[i].slideIfinto;
+				  var slidenum =data[i].slideFirthNum;
 				// console.log(slideIfinto_click);
 				if(slideIfinto_click==0){
 					html += '<div class="swiper-slide">' +
@@ -303,7 +304,19 @@
 									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
 							'</a>' +
 						'</div>';
-				}else{
+				}else if(slidenum==1){
+							     html += '<div class="swiper-slide">' +
+							 	  '<a href="${APP_PATH}/Friday.html">' +
+							 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							 		'</a>' +
+							 	'</div>'; 
+				  }else if(slidenum==2){
+							     html += '<div class="swiper-slide">' +
+							 	  '<a href="${APP_PATH}/Friday.html">' +
+							 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							 		'</a>' +
+							 	'</div>'; 
+				  } else{
 					html += '<div class="swiper-slide">' +
 						  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
 									'<img src="' + data[i].slidePcimgurl + '" alt="">' +

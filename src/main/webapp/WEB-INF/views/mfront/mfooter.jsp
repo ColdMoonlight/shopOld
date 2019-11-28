@@ -8,6 +8,8 @@
 
 <body>
   <!-- footer -->
+ 
+  
   <div class="footer">
 		<div class="footer-logo"></div>
     <div class="container">
@@ -17,7 +19,6 @@
   </div>
   <script src="${APP_PATH }/static/m/js/sidenav.js"></script>
   <script>
-
     var footerData = [{
         "name": "Megalook_Hair",
         "icon": "plus",

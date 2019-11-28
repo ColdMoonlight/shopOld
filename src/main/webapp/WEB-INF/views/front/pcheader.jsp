@@ -35,9 +35,16 @@
 </head>
 
 <body>
+	<div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a></div>
 	<header>
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
+			<div class="img_show">
+				<a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/pcban.png" /></a> 
+				<div class="img_show_cont">
+					<a href="javascript:;"></a>
+				</div>
+			</div>
 			<!-- account tip language -->
 			<div class="tt-status">
 				<div class="container">
@@ -179,6 +186,8 @@
 				<li>bob</li>
 				<li>wigs</li>
 				<li>bundle</li>
+				<li>wig 613</li>
+				<li>Water Wave</li>
 			</ul>
 		</div>
 		
@@ -190,6 +199,13 @@
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>
        $(function(){
+		   $(".img_show_cont a").click(function(){
+			 $(".img_show").animate({ 
+			    height: "0", 
+			  }, 100);
+		   })
+		   
+		   
 		   		$(".go_top").click(function(){
 					$("body,html").animate({scrollTop:0},500);  
 					   return false;
@@ -237,6 +253,7 @@
 
 		function renderMainCategory(parent, data) {
 			
+			
 			var html = '';
 			for (var i in data) {
 				var categoryLableInt = data[i].categoryLable;
@@ -252,12 +269,19 @@
 				}else if(categoryLableInt == 4){
 					classimg = "classimg4";
 				}
-				html += '<li class="dropdown megamenu '+classimg+'">' +
-					'<a href="javascript:;" data-categoryid=' + data[i].categoryId + '>' + data[i].categoryName + '</a>' +
-					'<div class="dropdown-menu">' +
+				var iddata =data[i].categoryId;
+				var no_show=""
+				if(iddata==7){
+						no_show="hide";
+						html += '<li class="dropdown megamenu '+classimg+'">'+
+						'<a href="${APP_PATH}/Category/49.html">' + data[i].categoryName + '</a>';
+				}else{
+					html += '<li class="dropdown megamenu '+classimg+'">'+
+					'<a href="${APP_PATH}/search/' + data[i].categorySeo + '.html">' + data[i].categoryName + '</a>';
+				}
+				html +='<div class="dropdown-menu '+no_show+'">' +
 					'<div class="row">' +
 					'<div class="left col-sm-9">';
-
 				if (data[i].list && data[i].list.length) {
 					html += '<ul class="tt-megamenu-submenu">';
 					for (var j = 0; j < data[i].list.length; j += 1) {
@@ -279,12 +303,6 @@
 					'</div>';
 			}
 			parent.html(html);
-			var firstli =$(".dropdown").eq(0);
-			firstli.find(".dropdown-menu").addClass("noshow")
-			firstli.click(function(){
-				 window.location.href = "${APP_PATH }/Category/49.html";
-			})
-			
 			
 		}
 		var mainCategory = $('.tt-desctop-menu ul');
@@ -332,6 +350,10 @@
 		      activeItem = $(this);
 		      var data = categoryData[$(this).data('id')];
 		      renderSubCategory(subCategory, data);
+			 	//  var iddata =data.categoryId;
+				 // if(iddata==7){
+					// window.location.href = "${APP_PATH }/Category/49.html";
+				 // }
 		    })
 		  })
 		}
