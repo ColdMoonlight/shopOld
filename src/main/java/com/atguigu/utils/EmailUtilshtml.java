@@ -95,7 +95,7 @@ public class EmailUtilshtml {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
-//          msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
+//            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
             msg.setSubject("new costomer of "+ mlfrontUserafterIn.getUserId() +" Register Success.");
             
             Multipart mp = new MimeMultipart("related"); 
@@ -248,7 +248,7 @@ public class EmailUtilshtml {
             msg.setFrom(new InternetAddress("service@megalook.com"));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
-//          msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
+//            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
             msg.setSubject("You received an order of ID is : "+mlfrontPayInfoIOne.getPayinfoPlateNum());
             
             Multipart mp = new MimeMultipart("related"); 
@@ -339,8 +339,5 @@ public class EmailUtilshtml {
             e.printStackTrace();
         }
     }
-
-	
-
 	
 }
