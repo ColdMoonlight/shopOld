@@ -5,6 +5,7 @@ html,body {
     margin: 0;
     padding: 0;
 }
+.header{ background-color: #4a5060; color:#FFf}
 .container {
     position: relative;
     width: 100%;
@@ -51,7 +52,8 @@ html,body {
     width: 100%;
     height: 79px;
     border-bottom: 1px solid #cdcdcd;
-    background: #fff;
+    background-color: #4a5060;
+	color: #fff;
 }
 
 .header h2 {
@@ -129,6 +131,10 @@ html,body {
 .aside-bar .item .text {
 	padding-left: .5em;
 }
+.aside-bar .item.active .children {
+	display:block;
+}
+
 
 /* button */
 .btn>.glyphicon {
