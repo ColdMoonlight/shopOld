@@ -132,14 +132,14 @@
 					$.ajax({
 						method: 'POST',
 						contentType: "application/json;charset=utf-8",
-						url: '/ShopTemplate/MlbackAdmin/toCheakAdminUser',
+						url: '${APP_PATH}/MlbackAdmin/toCheakAdminUser',
 						data: JSON.stringify(formData),
 						dataType: 'json',
 						success: function (res) {
 							console.log(res);
 							if (res.code === 100) {
 								//window.location.href="/ShareNum/taskfrom/toProPage";
-								window.location.href = "/ShopTemplate/HomePage/toHomePage";
+								window.location.href = "${APP_PATH}/HomePage/toHomePage";
 							} else {
 								alert(res.extend.resMsg)
 								//window.location.href="/ShareNum/taskfrom/toProPage";
