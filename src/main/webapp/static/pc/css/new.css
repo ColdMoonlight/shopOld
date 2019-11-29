@@ -326,7 +326,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .pserson_box .integral-details {margin: 0 0 10px;}
 .pserson_box .integral-details .id-item {width: 21%;margin: 0 2%; border: 1px solid #ccc;}
 .pserson-center .person-info .signout:hover{background: #000000;}
-#product-block .product-title{font-weight: normal;line-height: 20px;color: #333;}
+#product-block .product-title{font-weight: normal;line-height: 20px;color: #333;width: 100%; height:40px; overflow: hidden;}
 .login-register .btn.go_home{display: block;width: 100%;height:40px;background-color:#fe186e;border-color:#fe186e ; color: #fff;padding: 0; line-height:40px;text-align:center;}
 .home_box{margin:0 20px;}
 /*****************************/
