@@ -812,7 +812,7 @@ public class MlfrontOrderController {
 	
 	/**
 	 * 9.0	UseNow	0505
-	 * to	全部已付款—订单
+	 * to	全部订单中————已付款
 	 * @param jsp
 	 * @return 
 	 * */
@@ -824,7 +824,7 @@ public class MlfrontOrderController {
 		Integer Uid = loginUser.getUserId();
 		MlfrontOrder mlfrontOrder = new MlfrontOrder();
 		mlfrontOrder.setOrderUid(Uid);
-		mlfrontOrder.setOrderStatus(1);
+		mlfrontOrder.setOrderStatus(1);		//0未支付 //1支付成功 //2支付失败 //3审单完毕 //4发货完毕
 		int PagNum = 20;
 		PageHelper.startPage(pn, PagNum);
 		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidAndStatus(mlfrontOrder);
@@ -834,7 +834,7 @@ public class MlfrontOrderController {
 	
 	/**
 	 * 10.0	UseNow	0505
-	 * to	全部待付款—订单
+	 * to	全部订单中————待付款
 	 * @param jsp
 	 * @return 
 	 * */
