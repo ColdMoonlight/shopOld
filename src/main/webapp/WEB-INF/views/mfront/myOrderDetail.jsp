@@ -30,6 +30,7 @@
 
 	<!-- main -->
 	<div class="main order-info">
+         <div class="goback"><a href="javascript:history.go(-1)">返回列表</a> </div>
 		<div class="address bd-t"></div>
 
 		<div class="order-list"></div>
