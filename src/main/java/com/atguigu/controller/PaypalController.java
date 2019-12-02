@@ -111,8 +111,8 @@ public class PaypalController {
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
         
         //放置session信息
-        Integer payFailTimes = 0;
-        session.setAttribute("payFailTimes", payFailTimes);
+//        Integer payFailTimes = 0;
+//        session.setAttribute("payFailTimes", payFailTimes);
         
         Payment payment = new Payment();
         PaypalService paypalService = new PaypalService();
@@ -221,8 +221,8 @@ public class PaypalController {
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_P_URL;
         
         //放置session信息
-        Integer payFailTimes = 0;
-        session.setAttribute("payFailTimes", payFailTimes);
+//        Integer payFailTimes = 0;
+//        session.setAttribute("payFailTimes", payFailTimes);
         
         PaypalService paypalService = new PaypalService();
         
@@ -651,9 +651,9 @@ public class PaypalController {
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_M_URLIn)
     public String cancelPay(HttpSession session){
 		
-		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
-		payFailTimes+=1;
-        session.setAttribute("payFailTimes", payFailTimes);
+//		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
+//		payFailTimes+=1;
+//        session.setAttribute("payFailTimes", payFailTimes);
 		//4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
@@ -667,9 +667,9 @@ public class PaypalController {
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_P_URLIn)
     public String pcancelPay(HttpSession session){
 		
-		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
-		payFailTimes+=1;
-        session.setAttribute("payFailTimes", payFailTimes);
+//		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
+//		payFailTimes+=1;
+//        session.setAttribute("payFailTimes", payFailTimes);
         //4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
