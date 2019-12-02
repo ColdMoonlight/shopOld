@@ -452,7 +452,13 @@ public class MlbackProductController {
 		MlbackProduct mlbackProductReq = new MlbackProduct();
 		mlbackProductReq.setProductId(productId);
 		List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProduct(mlbackProductReq);
-		MlbackProduct mlbackProductOne =mlbackProductResList.get(0);
+		MlbackProduct mlbackProductOne = new MlbackProduct();
+		if(mlbackProductResList.size()>0){
+			mlbackProductOne = mlbackProductResList.get(0);
+		}else{
+			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
+			mlbackProductOne = mlbackProductResList.get(0);
+		}
 		return Msg.success().add("resMsg", "查看单个类目的详情细节完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
