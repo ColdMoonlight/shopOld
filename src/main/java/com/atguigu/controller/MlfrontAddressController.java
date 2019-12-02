@@ -50,7 +50,7 @@ public class MlfrontAddressController {
 	@Autowired
 	MlPaypalStateprovinceService mlPaypalStateprovinceService;
 	
-	/**1.0	UseNow	0505
+	/**1.0	UseNow	1202
 	 * MlfrontAddress	insert
 	 * @param MlfrontAddress
 	 */
@@ -58,7 +58,7 @@ public class MlfrontAddressController {
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontAddress mlfrontAddress){
 		//接受参数信息
-		System.out.println("mlfrontAddress:"+mlfrontAddress);
+		System.out.println("接口接到的mlfrontAddress:"+mlfrontAddress);
 		
 		//拿到国家的code
 		String areafreightCountryEnglish = mlfrontAddress.getAddressCountry();
@@ -132,7 +132,7 @@ public class MlfrontAddressController {
 				
 				session.setAttribute("realAddressId", realAddressId);
 				
-				System.out.println(intResult);
+				System.out.println("游客第一次存的mlfrontAddress:"+mlfrontAddress);
 				
 				return Msg.success().add("resMsg", "游客地址信息插入成功").add("mlfrontAddress", mlfrontAddressLast).add("areafreightMoney", areafreightMoney).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
 			}else{
@@ -141,7 +141,7 @@ public class MlfrontAddressController {
 				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
 				
 				session.setAttribute("realAddressId", addressId);
-				System.out.println(intResult);
+				System.out.println("游客非第一次存的mlfrontAddress:"+mlfrontAddress);
 				//MlfrontAddress mlfrontAddressres = mlfrontAddressService.selectMlfrontAddressByIp(Userip);
 				return Msg.success().add("resMsg", "游客地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
 			}		
@@ -159,7 +159,7 @@ public class MlfrontAddressController {
 				
 				session.setAttribute("realAddressId", realAddressId);
 				
-				System.out.println(intResult);
+				System.out.println("注册用户第一次存的mlfrontAddress:"+mlfrontAddress);
 				
 				return Msg.success().add("resMsg", "登录用户地址信息插入成功").add("mlfrontAddress", mlfrontAddressLast).add("areafreightMoney", areafreightMoney).add("usertype", usertype);//新增以后，返回去的这里，有id，你从这里拿
 			}else{
@@ -168,8 +168,7 @@ public class MlfrontAddressController {
 				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
 				
 				session.setAttribute("realAddressId", addressId);
-				System.out.println(intResult);
-				//MlfrontAddress mlfrontAddressres = mlfrontAddressService.selectMlfrontAddressByIp(Userip);
+				System.out.println("注册用户非第一次存的mlfrontAddress:"+mlfrontAddress);
 				return Msg.success().add("resMsg", "登录用户地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
 			}	
 		}
