@@ -370,6 +370,26 @@
 						}
 					});
 				}
+				/**********************/
+				$(".open_1").hide();
+				$(".choose_coup select").change(function() {
+					if($(this).val() == 0 ) {
+							$(".open_1").hide();
+							$(".open_0").show();
+					}else if($(this).val() == 1) {
+							$(".open_1").show();
+							$(".open_0").hide();
+					}
+				})
+				
+				// console.log(csh_select);
+				// if(csh_select==0){
+				// 	$(".open_1").hide();
+				// }else{
+				// 	$(".open_1").show();
+				// }
+				
+				
 			});
 		}
 		
