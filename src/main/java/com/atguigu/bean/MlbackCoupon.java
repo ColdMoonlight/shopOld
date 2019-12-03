@@ -8,6 +8,8 @@ public class MlbackCoupon {
     private String couponName;//满100减10块   手动输入
 
     private BigDecimal couponPrice;// 5  手动输入
+    
+    private BigDecimal couponPriceOff;// 5  手动输入
 
     private BigDecimal couponPriceBaseline;//100     使用的底钱，，减前满100.   手动输入
 
@@ -62,6 +64,14 @@ public class MlbackCoupon {
     public void setCouponPrice(BigDecimal couponPrice) {
         this.couponPrice = couponPrice;
     }
+    
+    public BigDecimal getCouponPriceOff() {
+		return couponPriceOff;
+	}
+
+	public void setCouponPriceOff(BigDecimal couponPriceOff) {
+		this.couponPriceOff = couponPriceOff;
+	}
 
     public BigDecimal getCouponPriceBaseline() {
         return couponPriceBaseline;
