@@ -43,10 +43,15 @@
 										<th>优惠力度</th>
 										<th>适用范围</th>
 										<th>优惠码</th>
+										<th>优惠类型</th>
+										<th>已用次数</th>
+										<th>可用总次</th>
 										<th>展示位置</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>是否有效</th>
+										<th>适用时间</th>
+										<th>失效时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -103,7 +108,7 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					//console.log(result);
+					console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -124,6 +129,12 @@
 				var couponPrice = $("<td></td>").append(parseFloat(item.couponPrice));
 				var couponPriceBaseline = $("<td></td>").append(parseFloat(item.couponPriceBaseline));
 				var couponCode = $("<td></td>").append(item.couponCode);
+				
+				var couponType = $("<td></td>").append((item.couponType == 1 ? '折扣券' : '满减券'));
+				//var couponType = $("<td></td>").append((item.couponType));
+				console.log("item.couponType:"+item.couponType);
+				var couponTimes = $("<td></td>").append(item.couponTimes);
+				var couponAllTimes = $("<td></td>").append(item.couponAllTimes);
 				var couponStatus = $("<td></td>").append((item.couponStatus === 1 ? '已生效' : '未生效'));
 				
 				var couponAreaNumStr = "";
@@ -146,6 +157,10 @@
 				var imagepc = '<img src=' + imgurlpc + ' ' + 'width=50 height=50>';
 				var couponImgpcurl = $("<td></td>").append(imagepc);
 				
+
+				var couponStarttime = $("<td></td>").append(item.couponStarttime);
+				var couponEndtime = $("<td></td>").append(item.couponEndtime);
+				
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//为编辑按钮添加一个分类id
@@ -161,10 +176,15 @@
 					.append(couponPrice)
 					.append(couponPriceBaseline)
 					.append(couponCode)
+					.append(couponType)
+					.append(couponTimes)
+					.append(couponAllTimes)
 					.append(couponAreaNum)
 					.append(couponImgwapurl)
 					.append(couponImgpcurl)
 					.append(couponStatus)
+					.append(couponStarttime)
+					.append(couponEndtime)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -294,14 +314,20 @@
 
     // 回显数据
 		function tianchong(data) {
+    	
 			$(":input[name='couponId']").val(data.couponId);
 			$(":input[name='couponName']").val(data.couponName);
 			$(":input[name='couponPrice']").val(data.couponPrice);
 			$(":input[name='couponPriceBaseline']").val(data.couponPriceBaseline);
 			$(":input[name='couponCode']").val(data.couponCode);
+			$(":input[name='couponType']").val(data.couponType);
+			$(":input[name='couponTimes']").val(data.couponTimes);
+			$(":input[name='couponAllTimes']").val(data.couponAllTimes);
 			
 			$(":input[name='couponAreaNum']").val(data.couponAreaNum);
 			
+			$(":input[name='couponStarttime']").val(data.couponStarttime);
+			$(":input[name='couponEndtime']").val(data.couponEndtime);
 			
 			if (data.couponImgwapurl && data.couponImgwapurl.length) {
 				var el = $(".upload-img-btn.img");
