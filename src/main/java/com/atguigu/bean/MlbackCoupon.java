@@ -14,7 +14,13 @@ public class MlbackCoupon {
     private Integer couponStatus;//  0不生效,1生效中，，下拉选
 
     private String couponCode;  //优惠码  如  OFF15,,,,OFF15%    手动输入
-
+    
+    private String couponType;  //优惠码类型  0满减的,1百分比折扣的    手动输入
+    
+    private Integer couponTimes;  //优惠码已经使用次数  如  999,998次
+    
+    private Integer couponAllTimes;  //优惠码可以使用总次数  如  999,998次
+    
     private Integer couponAdminId;
 
     private String couponAdminOperatorname;
@@ -22,6 +28,10 @@ public class MlbackCoupon {
     private String couponCreatetime;
 
     private String couponMotifytime;
+    
+    private String couponStarttime;
+    
+    private String couponEndtime;
     
     private String couponImgwapurl;	//优惠券wap端图
 
@@ -76,6 +86,30 @@ public class MlbackCoupon {
     public void setCouponCode(String couponCode) {
         this.couponCode = couponCode == null ? null : couponCode.trim();
     }
+    
+	public String getCouponType() {
+		return couponType;
+	}
+
+	public void setCouponType(String couponType) {
+		this.couponType = couponType == null ? null : couponType.trim();
+	}
+
+	public Integer getCouponTimes() {
+		return couponTimes;
+	}
+
+	public void setCouponTimes(Integer couponTimes) {
+		this.couponTimes = couponTimes;
+	}
+	
+    public Integer getCouponAllTimes() {
+		return couponAllTimes;
+	}
+
+	public void setCouponAllTimes(Integer couponAllTimes) {
+		this.couponAllTimes = couponAllTimes;
+	}
 
     public Integer getCouponAdminId() {
         return couponAdminId;
@@ -108,6 +142,22 @@ public class MlbackCoupon {
     public void setCouponMotifytime(String couponMotifytime) {
         this.couponMotifytime = couponMotifytime == null ? null : couponMotifytime.trim();
     }
+    
+	public String getCouponStarttime() {
+		return couponStarttime;
+	}
+
+	public void setCouponStarttime(String couponStarttime) {
+		this.couponStarttime = couponStarttime == null ? null : couponStarttime.trim();
+	}
+
+	public String getCouponEndtime() {
+		return couponEndtime;
+	}
+
+	public void setCouponEndtime(String couponEndtime) {
+		this.couponEndtime = couponEndtime == null ? null : couponEndtime.trim();
+	}
 
 	public String getCouponImgwapurl() {
 		return couponImgwapurl;
