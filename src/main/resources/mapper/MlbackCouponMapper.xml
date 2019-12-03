@@ -5,6 +5,7 @@
     <id column="coupon_id" jdbcType="INTEGER" property="couponId" />
     <result column="coupon_name" jdbcType="VARCHAR" property="couponName" />
     <result column="coupon_price" jdbcType="DECIMAL" property="couponPrice" />
+    <result column="coupon_priceoff" jdbcType="DECIMAL" property="couponPriceOff" />
     <result column="coupon_price_baseline" jdbcType="DECIMAL" property="couponPriceBaseline" />
     <result column="coupon_status" jdbcType="INTEGER" property="couponStatus" />
     <result column="coupon_code" jdbcType="VARCHAR" property="couponCode" />
@@ -84,7 +85,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    coupon_id, coupon_name, coupon_price, coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes,
+    coupon_id, coupon_name, coupon_price, coupon_priceoff, coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes,
     coupon_admin_id, coupon_admin_operatorName, coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackCouponExample" resultMap="BaseResultMap">
@@ -115,11 +116,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackCoupon">
-    insert into tb_mlback_coupon (coupon_id, coupon_name, coupon_price, 
+    insert into tb_mlback_coupon (coupon_id, coupon_name, coupon_price, coupon_priceoff, 
       coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes, 
       coupon_admin_id, coupon_admin_operatorName, 
       coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum)
-    values (#{couponId,jdbcType=INTEGER}, #{couponName,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, 
+    values (#{couponId,jdbcType=INTEGER}, #{couponName,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, #{couponPriceOff,jdbcType=DECIMAL},  
       #{couponPriceBaseline,jdbcType=DECIMAL}, #{couponStatus,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, #{couponTimes,jdbcType=INTEGER}, #{couponAllTimes,jdbcType=INTEGER}, 
       #{couponAdminId,jdbcType=INTEGER}, #{couponAdminOperatorname,jdbcType=VARCHAR}, 
       #{couponCreatetime,jdbcType=VARCHAR}, #{couponMotifytime,jdbcType=VARCHAR}, #{couponStarttime,jdbcType=VARCHAR}, #{couponEndtime,jdbcType=VARCHAR}, 
@@ -143,6 +144,9 @@
       </if>
       <if test="record.couponPrice != null">
         coupon_price = #{record.couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.couponPriceOff != null">
+        coupon_priceoff = #{record.couponPriceOff,jdbcType=DECIMAL},
       </if>
       <if test="record.couponPriceBaseline != null">
         coupon_price_baseline = #{record.couponPriceBaseline,jdbcType=DECIMAL},
@@ -199,6 +203,7 @@
     set coupon_id = #{record.couponId,jdbcType=INTEGER},
       coupon_name = #{record.couponName,jdbcType=VARCHAR},
       coupon_price = #{record.couponPrice,jdbcType=DECIMAL},
+      coupon_priceoff = #{record.couponPriceOff,jdbcType=DECIMAL},
       coupon_price_baseline = #{record.couponPriceBaseline,jdbcType=DECIMAL},
       coupon_status = #{record.couponStatus,jdbcType=INTEGER},
       coupon_code = #{record.couponCode,jdbcType=VARCHAR},
@@ -223,6 +228,7 @@
     update tb_mlback_coupon
     set coupon_name = #{couponName,jdbcType=VARCHAR},
       coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      coupon_priceoff = #{couponPriceOff,jdbcType=DECIMAL},
       coupon_price_baseline = #{couponPriceBaseline,jdbcType=DECIMAL},
       coupon_status = #{couponStatus,jdbcType=INTEGER},
       coupon_code = #{couponCode,jdbcType=VARCHAR},
@@ -253,6 +259,9 @@
       </if>
       <if test="couponPrice != null">
         coupon_price,
+      </if>
+      <if test="couponPriceOff != null">
+        coupon_priceoff,
       </if>
       <if test="couponPriceBaseline != null">
         coupon_price_baseline,
@@ -309,6 +318,9 @@
       </if>
       <if test="couponPrice != null">
         #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="couponPriceOff != null">
+        #{couponPriceOff,jdbcType=DECIMAL},
       </if>
       <if test="couponPriceBaseline != null">
         #{couponPriceBaseline,jdbcType=DECIMAL},
@@ -372,6 +384,9 @@
       <if test="couponPrice != null">
         coupon_price = #{couponPrice,jdbcType=DECIMAL},
       </if>
+      <if test="couponPriceOff != null">
+        coupon_priceoff = #{couponPriceOff,jdbcType=DECIMAL},
+      </if>
       <if test="couponPriceBaseline != null">
         coupon_price_baseline = #{couponPriceBaseline,jdbcType=DECIMAL},
       </if>
@@ -430,6 +445,9 @@
       </if>
       <if test="couponPrice != null">
         coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="couponPriceOff != null">
+        coupon_priceoff = #{couponPriceOff,jdbcType=DECIMAL},
       </if>
       <if test="couponPriceBaseline != null">
         coupon_price_baseline = #{couponPriceBaseline,jdbcType=DECIMAL},
