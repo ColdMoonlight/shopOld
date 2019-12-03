@@ -201,7 +201,7 @@ public class MlfrontOrderController {
 		//拿到优惠码Code,
 		String CouponCode = mlfrontOrder.getOrderCouponCode();
 		//查询该优惠码的优惠价格
-		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode);
+		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode,totalprice);
 		
 		String CouponCodeMoneyStr= df1.format(CouponCodeMoney);
 		
@@ -439,7 +439,7 @@ public class MlfrontOrderController {
 		//拿到优惠码Code,
 		String CouponCode = mlfrontOrder.getOrderCouponCode();
 		//查询该优惠码的优惠价格
-		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode);
+		BigDecimal CouponCodeMoney = getCouponCodeMoney(CouponCode, totalprice);
 		String CouponCodeMoneyStr= df1.format(CouponCodeMoney);
 		session.setAttribute("CouponCodeMoney", CouponCodeMoneyStr);
 		//加上优惠券减掉的
@@ -527,8 +527,9 @@ public class MlfrontOrderController {
 	/**
 	 * 3.2查询该优惠码的优惠价格
 	 * getCouponCodeMoney
+	 * @param totalprice 
 	 * */
-	private BigDecimal getCouponCodeMoney(String couponCode) {
+	private BigDecimal getCouponCodeMoney(String couponCode, BigDecimal totalprice) {
 		
 		MlbackCoupon mlbackCouponReq = new MlbackCoupon();
 		mlbackCouponReq.setCouponCode(couponCode);
@@ -537,7 +538,17 @@ public class MlfrontOrderController {
 		BigDecimal mlbackCouponPrice = new BigDecimal(0.00);
 		if(mlbackCouponResList.size()>0){
 			MlbackCoupon mlbackCouponOne =mlbackCouponResList.get(0);
-			mlbackCouponPrice = mlbackCouponOne.getCouponPrice();
+			String couponType = mlbackCouponOne.getCouponType();
+			if("0".equals(couponType)){
+				//如果是0类满减券,直接取出;
+				mlbackCouponPrice = mlbackCouponOne.getCouponPrice();
+			}else{
+				//如果是1类折扣券,计算完取出取出;
+				BigDecimal mlbackCouponPriceOff = mlbackCouponOne.getCouponPriceOff();
+				BigDecimal mlbackCouponPricebaifenbi = new BigDecimal(0.01);
+				mlbackCouponPrice = totalprice.multiply(mlbackCouponPriceOff);
+				mlbackCouponPrice = mlbackCouponPrice.multiply(mlbackCouponPricebaifenbi);
+			}
 		}
 		return mlbackCouponPrice;
 	}
