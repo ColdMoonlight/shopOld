@@ -67,7 +67,7 @@
 	</div>
 
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
-	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script> -->
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
 
 	<script type="text/javascript">
