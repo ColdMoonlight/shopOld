@@ -113,7 +113,7 @@
 	</div>
 
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
-	<!-- <script src="${APP_PATH }/static/back/js/sidenav.js"></script> -->
+	<script src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<!-- <script src="${APP_PATH }/static/back/js/nav.js"></script> -->
 
 	<script src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
