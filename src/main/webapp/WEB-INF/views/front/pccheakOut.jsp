@@ -1512,38 +1512,54 @@
 				success: function (data) {
 					var resData = JSON.parse(data).extend.mlbackCouponOne;
 					var couponErrorBox = $('.coupon-error');
+					var couponType = resData.couponType;
 					// console.log(resData);
-					if (resData) {
-						// console.log(totalPrice, totalPrice - resData.couponPriceBaseline)
-						var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-						// console.log(abwq);
-						var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-						// console.log(shopnum);
-						var  totalPricecou =c_prototalnum*1+shopingnum*1;
-						
-						if (totalPricecou >= resData.couponPriceBaseline) {
-							// console.log(totalPrice2121, resData.couponPrice)
-							// totalPriceText.text('$' + (totalPrice - resData.couponPrice).toFixed(2));
-							couponPriceText.text('-$' + resData.couponPrice);
-							subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
-							couponPriceOld = resData.couponPrice;
-							
-							couponId = resData.couponId;
-							couponCode = couponCode2;
-							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
+					if(couponType==0){
+						if (resData) {
+							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+							var  totalPricecou =c_prototalnum*1+shopingnum*1;
+							if (totalPricecou >= resData.couponPriceBaseline) {
+								couponPriceText.text('-$' + resData.couponPrice);
+								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+								couponPriceOld = resData.couponPrice;
+								couponId = resData.couponId;
+								couponCode = couponCode2;
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
+							} else {
+								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+resData.couponPriceBaseline)
+								$(".coed_inp").val("");
+							}
 						} else {
-							
-							// renderErrorMsg(couponErrorBox, resData.couponName + '，未超过100不能使用!')
-							// console.log(resData)/*89898*/
-							// alert("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
-							renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+resData.couponPriceBaseline)
-							// renderErrorMsg("The minimum usage price of this coupon is "+resData.couponPriceBaseline)
-							$(".coed_inp").val("");
-							
+							renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 						}
-					} else {
-						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
+					}else if(couponType==1){
+						if (resData) {
+							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+							var  totalPricecou =(c_prototalnum*1+shopingnum*1).toFixed(2);
+							var offcoup = (resData.couponPriceOff)/100;
+							var cutoffcoup =(totalPricecou*offcoup).toFixed(2);
+							console.log(cutoffcoup);
+							if (totalPricecou >= resData.couponPriceBaseline) {
+								couponPriceText.text('-$' + cutoffcoup);
+								subtotalPriceText.text('$' + (totalPricecou - cutoffcoup));
+								couponPriceOld = cutoffcoup;
+								couponId = resData.couponId;
+								couponCode = couponCode2;
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
+							} else {
+								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
+								$(".coed_inp").val("");
+								
+							}
+						} else {
+							renderErrorMsg(couponErrorBox, "Coupons don't exist!");
+						}
 					}
+					
+					
+					
 				}
 			})
 		}

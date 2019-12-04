@@ -1435,13 +1435,13 @@
 						if (resData) {
 							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
 							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-							var  totalPricecou =c_prototalnum*1+shopingnum*1;
-							var offcoup = (resData.couponPrice)/100;
-							var cutoffcoup =totalPricecou*offcoup;
+							var  totalPricecou =(c_prototalnum*1+shopingnum*1).toFixed(2);
+							var offcoup = (resData.couponPriceOff)/100;
+							var cutoffcoup =(totalPricecou*offcoup).toFixed(2);
 							console.log(cutoffcoup);
 							if (totalPricecou >= resData.couponPriceBaseline) {
-								couponPriceText.text('-$' + (cutoffcoup).toFixed(2));
-								subtotalPriceText.text('$' + (totalPricecou - cutoffcoup).toFixed(2));
+								couponPriceText.text('-$' + cutoffcoup);
+								subtotalPriceText.text('$' + (totalPricecou - cutoffcoup));
 								couponPriceOld = cutoffcoup;
 								couponId = resData.couponId;
 								couponCode = couponCode2;
