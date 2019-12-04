@@ -41,6 +41,7 @@
 										<th>id</th>
 										<th>优惠券名字</th>
 										<th>优惠力度</th>
+										<th>优惠百分比</th>
 										<th>适用范围</th>
 										<th>优惠码</th>
 										<th>优惠类型</th>
@@ -127,6 +128,7 @@
 				var couponId = $("<td></td>").append(item.couponId);
 				var couponName = $("<td></td>").append(item.couponName);
 				var couponPrice = $("<td></td>").append(parseFloat(item.couponPrice));
+				var couponPriceOff = $("<td></td>").append(item.couponPriceOff+'%');
 				var couponPriceBaseline = $("<td></td>").append(parseFloat(item.couponPriceBaseline));
 				var couponCode = $("<td></td>").append(item.couponCode);
 				
@@ -174,6 +176,7 @@
 				$("<tr></tr>").append(couponId)
 					.append(couponName)
 					.append(couponPrice)
+					.append(couponPriceOff)
 					.append(couponPriceBaseline)
 					.append(couponCode)
 					.append(couponType)
@@ -318,9 +321,20 @@
 			$(":input[name='couponId']").val(data.couponId);
 			$(":input[name='couponName']").val(data.couponName);
 			$(":input[name='couponPrice']").val(data.couponPrice);
+			// $("select[name='couponPriceOff']").val(data.couponPriceOff);
+		    //$("select[name='couponPriceOff'] option:checked").text(data.couponPriceOff+'%'); 
+			$(":input[name='couponPriceOff']").val(data.couponPriceOff);
 			$(":input[name='couponPriceBaseline']").val(data.couponPriceBaseline);
 			$(":input[name='couponCode']").val(data.couponCode);
 			$(":input[name='couponType']").val(data.couponType);
+			var couponType = data.couponType;
+			if(couponType==1){
+				$(".open_1").show();
+				$(".open_0").hide();
+			}else if(couponType==0){
+				$(".open_1").hide();
+				$(".open_0").show();
+			}
 			$(":input[name='couponTimes']").val(data.couponTimes);
 			$(":input[name='couponAllTimes']").val(data.couponAllTimes);
 			
@@ -371,7 +385,6 @@
 					});
 				}
 				/**********************/
-				$(".open_1").hide();
 				$(".choose_coup select").change(function() {
 					if($(this).val() == 0 ) {
 							$(".open_1").hide();
