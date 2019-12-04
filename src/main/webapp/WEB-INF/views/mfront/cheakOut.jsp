@@ -1096,6 +1096,7 @@
 					resDataMoney = resareafreightMoney;
 					var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPriceselect);
+					couponPriceold2 =0;
 					couponPriceOld = 0;
 				  }
 				});
@@ -1383,6 +1384,7 @@
 			}
 			parent.html(html);
 		}
+		var couponPriceold2 = 0;
 
 		function selectPay(e) {
 			var targetEl = $(e.target);
@@ -1434,7 +1436,7 @@
 							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
 							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
 							var  totalPricecou =(c_prototalnum*1+shopingnum*1).toFixed(2);
-							var offcoup = (resData.couponPriceOff)/100;
+							var offcoup = (resData.couponPrice)/100;
 							var cutoffcoup =(totalPricecou*offcoup).toFixed(2);
 							console.log(cutoffcoup);
 							if (totalPricecou >= resData.couponPriceBaseline) {
@@ -1491,14 +1493,13 @@
 			var currentPrice = parseFloat(parentEl.find('.price').text());
 			if (flag) {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice+couponPriceOld);
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
 				subtotalEl.text('$' + totalPrice.toFixed(2));
-				couponPriceOld = 0;
-				couponPriceText.text('-$' + 0);
 				
 			} else {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld);
+				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld+couponPriceold2);
+				couponPriceold2 =0;
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				$(".coed_inp").val("");
