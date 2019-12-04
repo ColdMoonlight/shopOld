@@ -294,7 +294,7 @@ public class MlbackCategoryController {
 		
 		//查询全部的category信息，便于下拉选择
 		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
-		System.out.println("后台操作:mlbackCategorydownList");
+		System.out.println("操作说明:后端管理员查询-mlbackCategorydownList菜单");
 		
 		List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
 		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
@@ -322,7 +322,7 @@ public class MlbackCategoryController {
 		
 		//查询全部的category信息，便于下拉选择
 		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMenuMlbackCategoryGetAll();
-		System.out.println("后台操作:mlbackCategorydownList");
+		System.out.println("操作说明:前端客户查询-getMenuMlbackCategory-菜单");
 		
 		List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
 		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
@@ -379,6 +379,7 @@ public class MlbackCategoryController {
 		 List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
 		 
 		 MlbackCategory mlbackCategoryres = mlbackCategoryList.get(0);
+		 System.out.println("操作说明:前端客户点击菜单类-searchBycategorySeo");
 	 
 		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
 		
