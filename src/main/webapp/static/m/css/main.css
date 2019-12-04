@@ -2085,12 +2085,13 @@ a:focus {
  
 /* order list  */
 .order-info .order-list {
-	padding: 20px;
+	padding: 10px;
 }
 .order-info .order-item {
 	border: 1px solid #ccc;
 	border-radius: 6px;
 	overflow: hidden;
+	background: #fff;
 }
 .order-info .order-item+.order-item {
 	margin-top: .5em;
@@ -2105,7 +2106,7 @@ a:focus {
 	color: tomato;
 }
 .order-info .order-item-body {
-	padding: 6px 10px;
+	padding: 6px 0;
 	border-top: 1px solid #ccc;
 }
 .order-info .order-item-item {
@@ -2124,8 +2125,10 @@ a:focus {
 	margin-right: .5em;
 }
 .order-info .order-item-item .order-text {
-	width: 100%;
-	font: 14px/14px;
+	width: 98%;
+	margin: 0 2% 0 0;
+	font-size: 14px;
+	color: #333;
 }
 .order-info .order-item-item .order-text .sku {
 	margin-top: .5em;
@@ -2145,6 +2148,7 @@ a:focus {
 .order-info .order-item-footer {
 	padding: .5em 1em;
 	text-align: right;
+	font-size: 14px;
 }
 
 .order-info .order-item-footer .order-i-i {
@@ -2590,7 +2594,7 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .item_cont{float: left;width:75%;margin: 5px 0 0;}
 .info_name{color: #666;}
 .info_name b{font-weight: bold; color: #000;}
-.right_head{width: 100%;background: #fff; padding: 10px 2%; margin:0 0 10px;}
+.right_head{width: 100%;background: #fff; padding: 10px 2%;}
 .right_head img{float: left;width: 40px; height: 40px; margin:0 10px 0 0;}
 .box-none_cont{background: #fff;width: 100%;border-bottom: 1px solid #ccc;border-top: 1px solid #ccc;}
 .product_shop{width: 96%; margin:0 2%;}

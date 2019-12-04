@@ -63,16 +63,16 @@
 <body>
   <!-- info -->
   <!--header  -->
-   <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a> <span class="close"></span></div>
-    <div class="fixed_small"><a href="javascript:;"></a></div>
+<!--   <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a> <span class="close"></span></div>
+    <div class="fixed_small"><a href="javascript:;"></a></div> -->
   <div class="header bd-b">
-	  <div class="img_show">
+<!-- 	  <div class="img_show">
 	  <a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/wapq.png" /></a>	
 	  	<div class="img_show_cont">
 	  		<a href="javascript:;"></a>
 	  	</div>
-	  </div>
-	  <div class="info_adv" style="display: none;">
+	  </div> -->
+	  <div class="info_adv">
 	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
 	  	<div id="adv_silder">
 	  		<div class="swiper-wrapper">

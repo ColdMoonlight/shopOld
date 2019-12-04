@@ -86,14 +86,14 @@
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
 		  var actshowprolei = data[i].actshowproIfproORcate;
-		  if(i==0|i==1){
-			  html += '<div class="swiper-slide">' +
-			   '<a href="${APP_PATH}/Friday.html">' +
-					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-			  '</a>' +
-			  '</div>';
-		  }else{
-			  //var actshowprolei = data[i].actshowproIfproORcate;
+		  // if(i==0|i==1){
+			 //  html += '<div class="swiper-slide">' +
+			 //   '<a href="${APP_PATH}/Friday.html">' +
+				// 	'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			 //  '</a>' +
+			 //  '</div>';
+		  // }else{
+			  // var actshowprolei = data[i].actshowproIfproORcate;
 			  if(actshowprolei==0){
 			  			  html += '<div class="swiper-slide">' +
 			  			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
@@ -108,7 +108,7 @@
 			  			  '</div>';
 			  			  
 			  }
-		  }
+		  // }
 		  
 		  
         
@@ -378,19 +378,22 @@
 						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
 						  			'</a>' +
 						  		'</div>';
-						  }else if(slidenum==1){
-							     html += '<div class="swiper-slide">' +
-							 	  '<a href="${APP_PATH}/Friday.html">' +
-							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-							 		'</a>' +
-							 	'</div>'; 
-						  }else if(slidenum==2){
-							     html += '<div class="swiper-slide">' +
-							 	  '<a href="${APP_PATH}/Friday.html">' +
-							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-							 		'</a>' +
-							 	'</div>'; 
-						  } else{
+						  }
+						  // else if(slidenum==1){
+							 //     html += '<div class="swiper-slide">' +
+							 // 	  '<a href="${APP_PATH}/Friday.html">' +
+							 // 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							 // 		'</a>' +
+							 // 	'</div>'; 
+						  // }
+						  // else if(slidenum==2){
+							 //     html += '<div class="swiper-slide">' +
+							 // 	  '<a href="${APP_PATH}/Friday.html">' +
+							 // 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							 // 		'</a>' +
+							 // 	'</div>'; 
+						  // } 
+						  else{
 						  	html += '<div class="swiper-slide">' +
 						  		  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
 						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
