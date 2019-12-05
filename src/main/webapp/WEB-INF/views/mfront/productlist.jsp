@@ -104,7 +104,9 @@
 				contentType: 'application/json',
 				type: "POST",
 				success: function (data) {
-					// console.log(data)
+//					console.log("data.extend.mlbackProductResList");
+//					console.log(JSON.parse(data));
+//					console.log("data.extend.mlbackProductResList");
 					var data = JSON.parse(data);
 					if (data.code === 100) {
 						rednerProduct(productList, data.extend.mlbackProductResList);
