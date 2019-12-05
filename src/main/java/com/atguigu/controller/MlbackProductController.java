@@ -133,7 +133,7 @@ public class MlbackProductController {
 	 public String tomfbProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
 	  
 	  String nowTime = DateUtil.strTime14s();
-	  System.out.println("有访客进入落地页-nowTime:"+nowTime);
+	  System.out.println("有访客通过productSeo进入落地页-productSeo:"+productSeo+" ,nowTime:"+nowTime);
 	  
 	  //准备封装参数
 	  MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
@@ -193,9 +193,7 @@ public class MlbackProductController {
 	 */
 	@RequestMapping(value="/getMlbackProductByPage")
 	@ResponseBody
-	public Msg getMlbackProductWithJson(
-			@RequestParam(value = "pn", defaultValue = "1") Integer pn
-			,HttpSession session) {
+	public Msg getMlbackProductWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
@@ -235,15 +233,14 @@ public class MlbackProductController {
 		if(Actoffid==null){
 			Actoffid = 10;
 		}
-//		System.out.println("Actoffid:"+Actoffid);
 		Integer Actoffoff= Actoffid*10;
 		//获取折扣力度
-//		System.out.println("Actoffoff:"+Actoffoff);
 		mlbackProduct.setProductActoffoff(Actoffoff);
+		System.out.println("操作分析:管理员add/update产品信息mlbackProduct");
 		if(productId==null){
 			//无id，insert
 			int intResult = mlbackProductService.insertSelective(mlbackProduct);
-			System.out.println("后台操作，折扣码:Actoffoff"+Actoffoff);
+			System.out.println("操作分析:管理员add产品信息mlbackProduct");
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//先对这个产品选择的一些类，进行productIdStr的清理,
@@ -253,7 +250,7 @@ public class MlbackProductController {
 			UpdateCategoryProductIdStr(categoryIdsStr,productId,productName);
 			//更新本条product的新数据
 			int intResult = mlbackProductService.updateByPrimaryKeySelective(mlbackProduct);
-			//System.out.println(intResult);
+			System.out.println("操作分析:管理员update产品信息mlbackProduct");
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
@@ -434,7 +431,7 @@ public class MlbackProductController {
 		//接收id信息
 		Integer productIdInt = mlbackProduct.getProductId();
 		int intResult = mlbackProductService.deleteByPrimaryKey(productIdInt);
-		System.out.println("delete success-productIdInt:"+productIdInt);
+		System.out.println("操作说明：管理员delete success-productIdInt:"+productIdInt);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -459,6 +456,7 @@ public class MlbackProductController {
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
+		System.out.println("操作说明：查询单个产品-mlbackProductOne:"+mlbackProductOne.toString());
 		return Msg.success().add("resMsg", "查看单个类目的详情细节完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
@@ -479,8 +477,8 @@ public class MlbackProductController {
 		if(mlbackProductResList.size()>0){
 			mlbackProductOne =mlbackProductResList.get(0);
 		}
-		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
-					.add("mlbackProductOne", mlbackProductOne);
+		System.out.println("操作说明：通过产品名查询单个产品-mlbackProductOne:"+mlbackProductOne.toString());
+		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
 	/**
@@ -496,7 +494,6 @@ public class MlbackProductController {
 		//接受信息
 		MlbackProduct mlbackProductReq = new MlbackProduct();
 		mlbackProductReq.setProductLable(productLable);
-		//mlbackProductReq.setProductStatus(productStatus);
 		List<MlbackProduct> mlbackProductResList  = new ArrayList<MlbackProduct>();
 		List<MlbackProduct> mlbackProductResLimitList =mlbackProductService.selectMlbackProductByLable(mlbackProductReq);
 		if(mlbackProductResLimitList.size()>19){
@@ -647,7 +644,6 @@ public class MlbackProductController {
 	 		 		}
 	 		 	}
 	 		}
-	 		
 			
 	 		returnList = getPropnList(mlbackProductResList,pn);
 	 		
@@ -894,11 +890,11 @@ public class MlbackProductController {
 	  //接受信息
 	  MlbackProduct mlbackProductReq = new MlbackProduct();
 	  mlbackProductReq.setProductName(productName);
-	  System.out.println("productName:"+productName);
+	  System.out.println("操作说明:有客户搜索的产品名字productName:"+productName);
 	  List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProductLike(mlbackProductReq);
 	  List<MlbackProduct> mlbackProductResListnum =mlbackProductService.selectMlbackProductLikeNum(mlbackProductReq);
 	  Integer num = mlbackProductResListnum.size();
-	  System.out.println("mlbackProductResListnum.size():"+num);
+	  System.out.println("操作说明:有客户搜索的产品名字,查询结果mlbackProductResListnum.size():"+num);
 	  return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 	     .add("mlbackProductResList", mlbackProductResList).add("mlbackProductResListnum", num).add("productName", productName);
 	  
