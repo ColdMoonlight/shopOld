@@ -891,12 +891,10 @@
 						<li class="list-group-item">
 							<div class="group-title"><span>Choose Coupons</span> <!-- <span class="price-info"></span> --><!-- <iclass="icon right"></i> --></div>
 							<div class="sale_copen">
-								<p>Black Friday Mega Sale! Go Crazy, Girls!</p> 
+								<p>The Big Promotion of Winter for Beauty, All items is already 50% off, then PLUS</p> 
 								<ul>
-									<li><span>$5 off</span> upon order $49 with code：<b>BLACK5</b></li>
-									<li><span>$10 off</span> upon order $99 with code：<b>BLACK10</b></li>
-									<li><span>$20 off</span> upon order $199 with code：<b>BLACK20</b></li>
-									<li><span>$30 off</span> upon order $299 with code：<b>BLACK30</b></li>
+									<li><span>10%</span> off upon order $30 with code: <b>winter10</b></li>
+									<li><span>12%</span> off upon order $200 with code: <b>winter12</b></li>
 								</ul>
 							</div>
 							<div class="group-details coupons"></div>
@@ -1299,7 +1297,7 @@
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				subtotalEl.text('$' + totalPrice.toFixed(2));
-				
+				$(".without-data").text("Enter coupon code to get a discount!");
 			} else {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
 				var nowtotalPrice=subtotalEl.text().slice(1);
