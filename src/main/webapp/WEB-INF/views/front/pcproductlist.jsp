@@ -121,6 +121,12 @@
 					// var data = JSON.parse(data);
 					if (data.code === 100) {
 						var reviewTextData =  data.extend.mlbackProductResList;
+						//从类别中获取fb所需要的当前页面的类下产品
+						var shopidlist = toFbidsPurchase(data.extend.mlbackProductResList);
+						fbq('track', 'ViewCategory', {
+				              content_ids: [shopidlist],
+				              content_type: 'product'
+				            });
 						console.log(reviewTextData)
 						rednerProduct(productList,reviewTextData);
 						var pageInfo = data.extend.pageInfo;
@@ -142,6 +148,16 @@
 				}
 			});
 		}
+		//计算fb所需要的当前页面的类下产品
+		function toFbidsPurchase(resData){
+	       	var infoStrlids = '';
+	       	var infoRelids = '';
+	       	for(var i=0;i<resData.length;i++){
+	       		infoStrlids=infoStrlids+resData[i].productId+',';
+	       	}
+	       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
+	       	return infoRelids;
+	       }
 		
 		// var pageInfo
 
