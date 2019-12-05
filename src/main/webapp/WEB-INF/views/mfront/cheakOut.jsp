@@ -1021,8 +1021,7 @@
 		var addressIdIntInt;
 		var jiecountry;
 		
-		
-		
+
 		function datalocation (dataname){
 			$.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
