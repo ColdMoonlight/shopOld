@@ -1014,8 +1014,7 @@
 		$(".select-province,.form-group .city,.form-group .code").click(function(){
 			$(".errortips").hide();
 		})
-	
-	
+
 	
 	function datalocation (dataname){
 		var dataname = $("#country").val();
