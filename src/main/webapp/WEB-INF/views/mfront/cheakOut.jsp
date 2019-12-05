@@ -1489,8 +1489,20 @@
 			if (flag) {
 				console.log("获取当前的add");
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				var nowtotalPrice=subtotalEl.text().slice(1);
+				console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
+				console.log("获取当前的currentPrice:"+currentPrice);
+				console.log("获取当前的couponPriceOld:"+couponPriceOld);
+				//先把优惠券加回来,再加上一个原价
+				totalPrice = (parseFloat(nowtotalPrice) + currentPrice + parseFloat(couponPriceOld));
 				console.log("获取当前的totalPrice:"+totalPrice);
+				//清空掉又会减掉的钱
+				$(".coed_inp").val("");
+				//变量归0显示
+				couponPriceOld = 0;
+				couponPriceText.text('-$' + 0);
+				//显示未折扣的钱
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				
 			} else {
