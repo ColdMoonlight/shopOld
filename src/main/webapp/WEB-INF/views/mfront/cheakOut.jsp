@@ -1436,7 +1436,7 @@
 								couponPriceText.text('-$' + downPrice);
 								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
 								couponPriceOld = downPrice;
-								console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
+								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
 								couponId = resData.couponId;
 								couponCode = couponCode2;
 								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
@@ -1469,12 +1469,12 @@
 			var item  = $(e.target);
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
-			console.log("productNumText-early:"+productNumText);
+			// console.log("productNumText-early:"+productNumText);
 			if (productNumText > 1) {
 				productNumText -= 1;
 				reCalPrice(item, false);
 				productNum.val(productNumText);
-				console.log("productNumText-after:"+productNumText);
+				// console.log("productNumText-after:"+productNumText);
 				updateOrderItemNum(item, productNumText);
 			}
 		}
@@ -1485,18 +1485,18 @@
 			var prototalEl = $('.c-prototal>.cal-price-num');
 			var subtotalEl = $('.c-subtotal>.cal-price-num');
 			var currentPrice = parseFloat(parentEl.find('.price').text());
-			console.log("获取当前的currentPrice:"+currentPrice);
+			// console.log("获取当前的currentPrice:"+currentPrice);
 			if (flag) {
-				console.log("获取当前的add");
+				// console.log("获取当前的add");
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
 				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
 				var nowtotalPrice=subtotalEl.text().slice(1);
-				console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
-				console.log("获取当前的currentPrice:"+currentPrice);
-				console.log("获取当前的couponPriceOld:"+couponPriceOld);
+				// console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
+				// console.log("获取当前的currentPrice:"+currentPrice);
+				// console.log("获取当前的couponPriceOld:"+couponPriceOld);
 				//先把优惠券加回来,再加上一个原价
 				totalPrice = (parseFloat(nowtotalPrice) + currentPrice + parseFloat(couponPriceOld));
-				console.log("获取当前的totalPrice:"+totalPrice);
+				// console.log("获取当前的totalPrice:"+totalPrice);
 				//清空掉又会减掉的钱
 				$(".coed_inp").val("");
 				//变量归0显示
@@ -1506,16 +1506,16 @@
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				
 			} else {
-				console.log("获取当前的sub");
+				// console.log("获取当前的sub");
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				console.log("获取当前的currentPrice:"+currentPrice);
-				console.log("获取当前的couponPriceOld:"+couponPriceOld);
-				console.log("获取当前的subtotalEl.text().slice(1):"+subtotalEl.text().slice(1));
+				// console.log("获取当前的currentPrice:"+currentPrice);
+				// console.log("获取当前的couponPriceOld:"+couponPriceOld);
+				// console.log("获取当前的subtotalEl.text().slice(1):"+subtotalEl.text().slice(1));
 				var nowtotalPrice=subtotalEl.text().slice(1);
-				console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
+				// console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
 				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld);
 				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
-				console.log("获取当前的totalPrice:"+totalPrice);
+				// console.log("获取当前的totalPrice:"+totalPrice);
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				$(".coed_inp").val("");
