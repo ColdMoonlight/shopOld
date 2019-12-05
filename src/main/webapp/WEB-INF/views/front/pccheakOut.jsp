@@ -1287,30 +1287,32 @@
 		}
 		
 		function reCalPrice(item, flag) {
-			
 			var parentEl = $(item).parents('.num');
 			var prototalEl = $('.c-prototal>.cal-price-num');
 			var subtotalEl = $('.c-subtotal>.cal-price-num');
 			var currentPrice = parseFloat(parentEl.find('.price').text());
 			if (flag) {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				var nowtotalPrice=subtotalEl.text().slice(1);
+				totalPrice = (parseFloat(nowtotalPrice) + currentPrice + parseFloat(couponPriceOld));
+				$(".coed_inp").val("");
+				couponPriceOld = 0;
+				couponPriceText.text('-$' + 0);
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				
 			} else {
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld+couponPriceold2);
-				couponPriceold2 =0;
+				var nowtotalPrice=subtotalEl.text().slice(1);
+				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				$(".coed_inp").val("");
 				$(".without-data").text("Enter coupon code to get a discount!");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				$(".coupons .coupon-item input[type=radio]").removeClass("active");
-				
 			}
 		}
-
+		
 		function updateOrderItemNum(el, num) {
 			var orderItem = el.parents('.cart-item');
 			var reqData = {
@@ -1512,10 +1514,9 @@
 				success: function (data) {
 					var resData = JSON.parse(data).extend.mlbackCouponOne;
 					var couponErrorBox = $('.coupon-error');
-					var couponType = resData.couponType;
-					// console.log(resData);
-					if(couponType==0){
-						if (resData) {
+					if (resData) {
+						var couponType = resData.couponType;
+						if(couponType==0){
 							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
 							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
 							var  totalPricecou =c_prototalnum*1+shopingnum*1;
@@ -1523,28 +1524,27 @@
 								couponPriceText.text('-$' + resData.couponPrice);
 								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
 								couponPriceOld = resData.couponPrice;
+								console.log("满减券查回的couponPriceOld:"+couponPriceOld);
 								couponId = resData.couponId;
 								couponCode = couponCode2;
 								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 							} else {
-								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+resData.couponPriceBaseline)
+								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
 								$(".coed_inp").val("");
 							}
-						} else {
-							renderErrorMsg(couponErrorBox, "Coupons don't exist!");
-						}
-					}else if(couponType==1){
-						if (resData) {
+						}else{
 							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
 							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
 							var  totalPricecou =(c_prototalnum*1+shopingnum*1).toFixed(2);
-							var offcoup = (resData.couponPriceOff)/100;
-							var cutoffcoup =(totalPricecou*offcoup).toFixed(2);
-							console.log(cutoffcoup);
 							if (totalPricecou >= resData.couponPriceBaseline) {
-								couponPriceText.text('-$' + cutoffcoup);
-								subtotalPriceText.text('$' + (totalPricecou - cutoffcoup));
-								couponPriceOld = cutoffcoup;
+								//取出折扣
+								var offcoup = resData.couponPriceOff;
+								//计算减免力度(总价*折扣比)
+								var downPrice = (totalPricecou*offcoup/100).toFixed(2);
+								couponPriceText.text('-$' + downPrice);
+								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
+								couponPriceOld = downPrice;
+								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
 								couponId = resData.couponId;
 								couponCode = couponCode2;
 								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
@@ -1553,12 +1553,10 @@
 								$(".coed_inp").val("");
 								
 							}
-						} else {
-							renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 						}
+					} else {
+						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 					}
-					
-					
 					
 				}
 			})
