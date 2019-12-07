@@ -321,7 +321,7 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()-----end------");
         }
-        return "redirect:/";
+    	return "redirect:/MlbackCart/toCheakOut";
     }
     
     /**2.0
@@ -370,7 +370,7 @@ public class PaypalController {
             System.out.println("---------e.getMessage()-----end------");
             //return "front/payFail";
         }
-    	return "redirect:/";
+    	return "redirect:/MlbackCart/toCheakOut";
     }
     
     //wap+pc端处理toUpdatePayInfoStateSuccess//仅仅生成支付号
@@ -568,7 +568,10 @@ public class PaypalController {
 		
 		//修改order单状态
     	Integer orderId = (Integer) session.getAttribute("orderId");
-		//Integer orderId = mlfrontPayInfoIOne.getPayinfoOid();
+//    	if(orderId==null||orderId.equals("")){
+//    		orderId = mlfrontPayInfoIOne.getPayinfoOid();
+//    	}
+//    	Integer orderId = mlfrontPayInfoIOne.getPayinfoOid();
 		//封装req
 		MlfrontOrder mlfrontOrderPayReq = new MlfrontOrder();
 		mlfrontOrderPayReq.setOrderId(orderId);
@@ -657,7 +660,8 @@ public class PaypalController {
 		//4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
-        return "mfront/payFail";
+//		return "mfront/payFail";
+        return "redirect:/MlbackCart/toCheakOut";
     }
 	
 	/**4.1
@@ -673,7 +677,8 @@ public class PaypalController {
         //4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
-        return "front/payFail";
+//        return "front/payFail";
+		return "redirect:/MlbackCart/toCheakOut";
     }
     
 	/**
