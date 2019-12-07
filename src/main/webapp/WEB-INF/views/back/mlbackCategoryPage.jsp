@@ -22,7 +22,9 @@
 
 <body>
 	<div class="container">
-		<div class="aside-bar nicescroll"></div>
+		<div class="aside-bar nicescroll">
+			<jsp:include page="leftnav.jsp"></jsp:include>
+		</div>
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
@@ -74,7 +76,7 @@
 	
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script>
+	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
 	
 	<script type="text/javascript" type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';

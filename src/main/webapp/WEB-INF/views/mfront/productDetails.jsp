@@ -48,11 +48,10 @@
 		<!-- <input type="hidden" value="${productId}" id="productId"/> -->
 		<div class="product-details"> </div>
 	</div>
-	
-	<div class="win-box review-box hide">
+	<div class="maskreview"></div>
+	<div class="win-box review-box review-box-cont hide">
 		<div class="win-box-title">
-			<span class="review-cancel">cancel</span>
-			<span class="review-ok">publish</span>
+			<span class="review-cancel">x</span>
 		</div>
 		<div class="win-box-content">
 			<div class="review-box-item">
@@ -66,11 +65,11 @@
 			<div class="review-box-item">
 				<div class="name">RANTING</div>
 				<div class="stars-list review-star" data-star="0">
-					<i class="icon star" data-id="1"></i>
-					<i class="icon star" data-id="2"></i>
-					<i class="icon star" data-id="3"></i>
-					<i class="icon star" data-id="4"></i>
-					<i class="icon star" data-id="5"></i>
+					<i class="icon star2" data-id="1"></i>
+					<i class="icon star2" data-id="2"></i>
+					<i class="icon star2" data-id="3"></i>
+					<i class="icon star2" data-id="4"></i>
+					<i class="icon star2" data-id="5"></i>
 				</div>
 			</div>
 			<div class="review-box-item">
@@ -86,6 +85,7 @@
 					</div>
 					<div class="reviews-img-box"></div>
 				</div>
+				<span class="review-ok">publish</span>
 			</div>
 		</div>
 	</div>
@@ -196,6 +196,9 @@
 			}
 
 			function renderCondition(parent, data) {
+				console.log(data)
+				var productskuNameDetails = data.productskuNameDetails.split(',');
+				var lengthsku=productskuNameDetails.length;
 				var conditionEl = $('<div class="container product-d-length" data-name="' + data.productskuName +
 					'" data-id="' + data.productskuId + '"/>');
 				var html = '';
@@ -211,13 +214,14 @@
 				html += '<span class="sku-id-name">' + data.productskuName + ':</span>';
 				html += '<div class="list">';
 				for (var i = 0; i < len; i += 1) {
-					if (i === 0) {
+					if(lengthsku>1){
 						html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
 							.productskuNameDetails[i] + '</span>'
-					} else {
-						html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails[i]) + '">' + data
-							.productskuNameDetails[i] + '</span>'
+					}else{
+						html += '<span class="price-item" data-price="' + toNumber(data.productskuMoneyDetails) + '">' + data
+							.productskuNameDetails + '</span>'
 					}
+					
 				}
 				html += '</div>';
 				parent.append(conditionEl.html(html));
@@ -506,6 +510,7 @@
 					}
 				});
 				$('.review-box').removeClass('hide');
+				$(".maskreview").show();
 			});
 			// close review box
 			$('.review-cancel').on('click', function() {

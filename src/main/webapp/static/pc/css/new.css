@@ -33,7 +33,7 @@
 .cart-list .input-group{width: 200px;}
 .rightrule .input-group{width: 200px;}
 .tt-desktop-header{z-index: 9999; border-bottom: 1px solid #eeeee1; position: fixed; top:0; left:0;width: 100%; background: #fff;box-shadow: 0 0 5px #f1f1f1;}
-.main{margin: 199px 0 0;}
+.main{margin: 159px 0 0;}
 .product-d-length .list>span{min-width:17%;padding: 0 1%;}
 .product-d-title{ line-height:30px; border:none}
 .rightrule{width:660px;float:left;margin: 5px 0 0;}
@@ -326,7 +326,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .pserson_box .integral-details {margin: 0 0 10px;}
 .pserson_box .integral-details .id-item {width: 21%;margin: 0 2%; border: 1px solid #ccc;}
 .pserson-center .person-info .signout:hover{background: #000000;}
-#product-block .product-title{font-weight: normal;line-height: 20px;color: #333;}
+#product-block .product-title{font-weight: normal;line-height: 20px;color: #333;width: 100%; height:40px; overflow: hidden;}
 .login-register .btn.go_home{display: block;width: 100%;height:40px;background-color:#fe186e;border-color:#fe186e ; color: #fff;padding: 0; line-height:40px;text-align:center;}
 .home_box{margin:0 20px;}
 /*****************************/

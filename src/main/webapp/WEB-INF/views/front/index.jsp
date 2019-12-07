@@ -70,7 +70,7 @@
 	    <div id="product-block"></div>
 	    <!-- buyer show -->
 	    <div id="buyer-show">
-	    	<img src="${APP_PATH }/static/pc/buyer-show.jpg">
+	    	<img src="${APP_PATH }/static/pc/show.jpg">
 	    </div>
   	</div>
   </div>
@@ -304,19 +304,22 @@
 									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
 							'</a>' +
 						'</div>';
-				}else if(slidenum==1){
-							     html += '<div class="swiper-slide">' +
-							 	  '<a href="${APP_PATH}/Friday.html">' +
-							 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-							 		'</a>' +
-							 	'</div>'; 
-				  }else if(slidenum==2){
-							     html += '<div class="swiper-slide">' +
-							 	  '<a href="${APP_PATH}/Friday.html">' +
-							 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-							 		'</a>' +
-							 	'</div>'; 
-				  } else{
+				}
+				// else if(slidenum==1){
+				// 			     html += '<div class="swiper-slide">' +
+				// 			 	  '<a href="${APP_PATH}/Friday.html">' +
+				// 			 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+				// 			 		'</a>' +
+				// 			 	'</div>'; 
+				//   }
+				  // else if(slidenum==2){
+						// 	     html += '<div class="swiper-slide">' +
+						// 	 	  '<a href="${APP_PATH}/Friday.html">' +
+						// 	 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+						// 	 		'</a>' +
+						// 	 	'</div>'; 
+				  // }
+				   else{
 					html += '<div class="swiper-slide">' +
 						  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
 									'<img src="' + data[i].slidePcimgurl + '" alt="">' +

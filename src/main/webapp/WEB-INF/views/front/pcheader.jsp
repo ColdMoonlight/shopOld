@@ -35,16 +35,16 @@
 </head>
 
 <body>
-	<div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a></div>
+	<!-- <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a></div> -->
 	<header>
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
-			<div class="img_show">
+			<!-- <div class="img_show">
 				<a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/pcban.png" /></a> 
 				<div class="img_show_cont">
 					<a href="javascript:;"></a>
 				</div>
-			</div>
+			</div> -->
 			<!-- account tip language -->
 			<div class="tt-status">
 				<div class="container">

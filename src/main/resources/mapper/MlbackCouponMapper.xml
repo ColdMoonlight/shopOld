@@ -5,13 +5,22 @@
     <id column="coupon_id" jdbcType="INTEGER" property="couponId" />
     <result column="coupon_name" jdbcType="VARCHAR" property="couponName" />
     <result column="coupon_price" jdbcType="DECIMAL" property="couponPrice" />
+    <result column="coupon_priceoff" jdbcType="DECIMAL" property="couponPriceOff" />
     <result column="coupon_price_baseline" jdbcType="DECIMAL" property="couponPriceBaseline" />
     <result column="coupon_status" jdbcType="INTEGER" property="couponStatus" />
     <result column="coupon_code" jdbcType="VARCHAR" property="couponCode" />
+    <result column="coupon_type" jdbcType="VARCHAR" property="couponType" />
+    <result column="coupon_times" jdbcType="INTEGER" property="couponTimes" />
+    <result column="coupon_alltimes" jdbcType="INTEGER" property="couponAllTimes" />
+    
     <result column="coupon_admin_id" jdbcType="INTEGER" property="couponAdminId" />
     <result column="coupon_admin_operatorName" jdbcType="VARCHAR" property="couponAdminOperatorname" />
     <result column="coupon_createTime" jdbcType="VARCHAR" property="couponCreatetime" />
     <result column="coupon_motifyTime" jdbcType="VARCHAR" property="couponMotifytime" />
+    
+    <result column="coupon_startTime" jdbcType="VARCHAR" property="couponStarttime" />
+    <result column="coupon_endtime" jdbcType="VARCHAR" property="couponEndtime" />
+    
     <result column="couponImg_wapurl" jdbcType="VARCHAR" property="couponImgwapurl" />
     <result column="couponImg_pcurl" jdbcType="VARCHAR" property="couponImgpcurl" />
     <result column="coupon_AreaNum" jdbcType="INTEGER" property="couponAreaNum" />
@@ -76,8 +85,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    coupon_id, coupon_name, coupon_price, coupon_price_baseline, coupon_status, coupon_code, 
-    coupon_admin_id, coupon_admin_operatorName, coupon_createTime, coupon_motifyTime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum
+    coupon_id, coupon_name, coupon_price, coupon_priceoff, coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes,
+    coupon_admin_id, coupon_admin_operatorName, coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackCouponExample" resultMap="BaseResultMap">
     select
@@ -107,14 +116,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackCoupon">
-    insert into tb_mlback_coupon (coupon_id, coupon_name, coupon_price, 
-      coupon_price_baseline, coupon_status, coupon_code, 
+    insert into tb_mlback_coupon (coupon_id, coupon_name, coupon_price, coupon_priceoff, 
+      coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes, 
       coupon_admin_id, coupon_admin_operatorName, 
-      coupon_createTime, coupon_motifyTime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum)
-    values (#{couponId,jdbcType=INTEGER}, #{couponName,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, 
-      #{couponPriceBaseline,jdbcType=DECIMAL}, #{couponStatus,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, 
+      coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum)
+    values (#{couponId,jdbcType=INTEGER}, #{couponName,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, #{couponPriceOff,jdbcType=DECIMAL},  
+      #{couponPriceBaseline,jdbcType=DECIMAL}, #{couponStatus,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, #{couponTimes,jdbcType=INTEGER}, #{couponAllTimes,jdbcType=INTEGER}, 
       #{couponAdminId,jdbcType=INTEGER}, #{couponAdminOperatorname,jdbcType=VARCHAR}, 
-      #{couponCreatetime,jdbcType=VARCHAR}, #{couponMotifytime,jdbcType=VARCHAR}, 
+      #{couponCreatetime,jdbcType=VARCHAR}, #{couponMotifytime,jdbcType=VARCHAR}, #{couponStarttime,jdbcType=VARCHAR}, #{couponEndtime,jdbcType=VARCHAR}, 
       #{couponImgwapurl,jdbcType=VARCHAR}, #{couponImgpcurl,jdbcType=VARCHAR}, #{couponAreaNum,jdbcType=INTEGER})
   </insert>
   
@@ -136,6 +145,9 @@
       <if test="record.couponPrice != null">
         coupon_price = #{record.couponPrice,jdbcType=DECIMAL},
       </if>
+      <if test="record.couponPriceOff != null">
+        coupon_priceoff = #{record.couponPriceOff,jdbcType=DECIMAL},
+      </if>
       <if test="record.couponPriceBaseline != null">
         coupon_price_baseline = #{record.couponPriceBaseline,jdbcType=DECIMAL},
       </if>
@@ -144,6 +156,15 @@
       </if>
       <if test="record.couponCode != null">
         coupon_code = #{record.couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponType != null">
+        coupon_type = #{record.couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponTimes != null">
+        coupon_times = #{record.couponTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.couponAllTimes != null">
+        coupon_alltimes = #{record.couponAllTimes,jdbcType=INTEGER},
       </if>
       <if test="record.couponAdminId != null">
         coupon_admin_id = #{record.couponAdminId,jdbcType=INTEGER},
@@ -156,6 +177,12 @@
       </if>
       <if test="record.couponMotifytime != null">
         coupon_motifyTime = #{record.couponMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponStarttime != null">
+        coupon_startTime = #{record.couponStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponEndtime != null">
+        coupon_endtime = #{record.couponEndtime,jdbcType=VARCHAR},
       </if>
       <if test="record.couponImgwapurl != null">
         couponImg_wapurl = #{record.couponImgwapurl,jdbcType=VARCHAR},
@@ -176,13 +203,19 @@
     set coupon_id = #{record.couponId,jdbcType=INTEGER},
       coupon_name = #{record.couponName,jdbcType=VARCHAR},
       coupon_price = #{record.couponPrice,jdbcType=DECIMAL},
+      coupon_priceoff = #{record.couponPriceOff,jdbcType=DECIMAL},
       coupon_price_baseline = #{record.couponPriceBaseline,jdbcType=DECIMAL},
       coupon_status = #{record.couponStatus,jdbcType=INTEGER},
       coupon_code = #{record.couponCode,jdbcType=VARCHAR},
+      coupon_type = #{record.couponType,jdbcType=VARCHAR},
+      coupon_times = #{record.couponTimes,jdbcType=INTEGER},
+      coupon_alltimes = #{record.couponAllTimes,jdbcType=INTEGER},
       coupon_admin_id = #{record.couponAdminId,jdbcType=INTEGER},
       coupon_admin_operatorName = #{record.couponAdminOperatorname,jdbcType=VARCHAR},
       coupon_createTime = #{record.couponCreatetime,jdbcType=VARCHAR},
       coupon_motifyTime = #{record.couponMotifytime,jdbcType=VARCHAR},
+      coupon_startTime = #{record.couponStarttime,jdbcType=VARCHAR},
+      coupon_endtime = #{record.couponEndtime,jdbcType=VARCHAR},
       couponImg_wapurl = #{record.couponImgwapurl,jdbcType=VARCHAR},
       couponImg_pcurl = #{record.couponImgpcurl,jdbcType=VARCHAR},
       coupon_AreaNum = #{record.couponAreaNum,jdbcType=INTEGER}
@@ -195,13 +228,19 @@
     update tb_mlback_coupon
     set coupon_name = #{couponName,jdbcType=VARCHAR},
       coupon_price = #{couponPrice,jdbcType=DECIMAL},
+      coupon_priceoff = #{couponPriceOff,jdbcType=DECIMAL},
       coupon_price_baseline = #{couponPriceBaseline,jdbcType=DECIMAL},
       coupon_status = #{couponStatus,jdbcType=INTEGER},
       coupon_code = #{couponCode,jdbcType=VARCHAR},
+      coupon_type = #{couponType,jdbcType=VARCHAR},
+      coupon_times = #{couponTimes,jdbcType=INTEGER},
+      coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
       coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
       coupon_admin_operatorName = #{couponAdminOperatorname,jdbcType=VARCHAR},
       coupon_createTime = #{couponCreatetime,jdbcType=VARCHAR},
       coupon_motifyTime = #{couponMotifytime,jdbcType=VARCHAR},
+      coupon_startTime = #{couponStarttime,jdbcType=VARCHAR},
+      coupon_endtime = #{couponEndtime,jdbcType=VARCHAR},
       couponImg_wapurl = #{couponImgwapurl,jdbcType=VARCHAR},
       couponImg_pcurl = #{couponImgpcurl,jdbcType=VARCHAR},
       coupon_AreaNum = #{record.couponAreaNum,jdbcType=INTEGER}
@@ -221,6 +260,9 @@
       <if test="couponPrice != null">
         coupon_price,
       </if>
+      <if test="couponPriceOff != null">
+        coupon_priceoff,
+      </if>
       <if test="couponPriceBaseline != null">
         coupon_price_baseline,
       </if>
@@ -229,6 +271,15 @@
       </if>
       <if test="couponCode != null">
         coupon_code,
+      </if>
+      <if test="couponType != null">
+        coupon_type,
+      </if>
+      <if test="couponTimes != null">
+        coupon_times,
+      </if>
+      <if test="couponAllTimes != null">
+        coupon_alltimes,
       </if>
       <if test="couponAdminId != null">
         coupon_admin_id,
@@ -241,6 +292,12 @@
       </if>
       <if test="couponMotifytime != null">
         coupon_motifyTime,
+      </if>
+      <if test="couponStarttime != null">
+        coupon_startTime,
+      </if>
+      <if test="couponEndtime != null">
+        coupon_endtime,
       </if>
       <if test="couponImgwapurl != null">
         couponImg_wapurl,
@@ -262,6 +319,9 @@
       <if test="couponPrice != null">
         #{couponPrice,jdbcType=DECIMAL},
       </if>
+      <if test="couponPriceOff != null">
+        #{couponPriceOff,jdbcType=DECIMAL},
+      </if>
       <if test="couponPriceBaseline != null">
         #{couponPriceBaseline,jdbcType=DECIMAL},
       </if>
@@ -270,6 +330,15 @@
       </if>
       <if test="couponCode != null">
         #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null">
+        #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponTimes != null">
+        #{couponTimes,jdbcType=INTEGER},
+      </if>
+      <if test="couponAllTimes != null">
+        #{couponAllTimes,jdbcType=INTEGER},
       </if>
       <if test="couponAdminId != null">
         #{couponAdminId,jdbcType=INTEGER},
@@ -282,6 +351,12 @@
       </if>
       <if test="couponMotifytime != null">
         #{couponMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStarttime != null">
+        #{couponStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponEndtime != null">
+        #{couponEndtime,jdbcType=VARCHAR},
       </if>
       <if test="couponImgwapurl != null">
         #{couponImgwapurl,jdbcType=VARCHAR},
@@ -309,6 +384,9 @@
       <if test="couponPrice != null">
         coupon_price = #{couponPrice,jdbcType=DECIMAL},
       </if>
+      <if test="couponPriceOff != null">
+        coupon_priceoff = #{couponPriceOff,jdbcType=DECIMAL},
+      </if>
       <if test="couponPriceBaseline != null">
         coupon_price_baseline = #{couponPriceBaseline,jdbcType=DECIMAL},
       </if>
@@ -317,6 +395,15 @@
       </if>
       <if test="couponCode != null">
         coupon_code = #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null">
+        coupon_type = #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponTimes != null">
+        coupon_times = #{couponTimes,jdbcType=INTEGER},
+      </if>
+      <if test="couponAllTimes != null">
+        coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
       </if>
       <if test="couponAdminId != null">
         coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
@@ -329,6 +416,12 @@
       </if>
       <if test="couponMotifytime != null">
         coupon_motifyTime = #{couponMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStarttime != null">
+        coupon_startTime = #{couponStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponEndtime != null">
+        coupon_endtime = #{couponEndtime,jdbcType=VARCHAR},
       </if>
       <if test="couponImgwapurl != null">
         couponImg_wapurl = #{couponImgwapurl,jdbcType=VARCHAR},
@@ -353,6 +446,9 @@
       <if test="couponPrice != null">
         coupon_price = #{couponPrice,jdbcType=DECIMAL},
       </if>
+      <if test="couponPriceOff != null">
+        coupon_priceoff = #{couponPriceOff,jdbcType=DECIMAL},
+      </if>
       <if test="couponPriceBaseline != null">
         coupon_price_baseline = #{couponPriceBaseline,jdbcType=DECIMAL},
       </if>
@@ -361,6 +457,15 @@
       </if>
       <if test="couponCode != null">
         coupon_code = #{couponCode,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null">
+        coupon_type = #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponTimes != null">
+        coupon_times = #{couponTimes,jdbcType=INTEGER},
+      </if>
+      <if test="couponAllTimes != null">
+        coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
       </if>
       <if test="couponAdminId != null">
         coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
@@ -373,6 +478,12 @@
       </if>
       <if test="couponMotifytime != null">
         coupon_motifyTime = #{couponMotifytime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponStarttime != null">
+        coupon_startTime = #{couponStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="couponEndtime != null">
+        coupon_endtime = #{couponEndtime,jdbcType=VARCHAR},
       </if>
       <if test="couponImgwapurl != null">
         couponImg_wapurl = #{couponImgwapurl,jdbcType=VARCHAR},

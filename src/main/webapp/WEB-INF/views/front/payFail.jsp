@@ -38,7 +38,7 @@
       <p>The payment is Not Successful</p>
 
       <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-brown">View Reasons</a>
-      <a href="${APP_PATH}/index/isMobileOrPc" class="btn btn-pink">View order</a>
+      <a href="${APP_PATH}/MlbackCart/toCheakOut" class="btn btn-pink">View order</a>
     </div>
 
 

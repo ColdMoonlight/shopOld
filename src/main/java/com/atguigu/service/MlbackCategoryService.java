@@ -5,11 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.UserWork;
-import com.atguigu.dao.MlbackAdminMapper;
 import com.atguigu.dao.MlbackCategoryMapper;
 
 
@@ -90,7 +86,6 @@ public class MlbackCategoryService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int categoryId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackCategoryMapper.deleteByPrimaryKey(categoryId);
 		return intReslut;
 	}
@@ -102,7 +97,6 @@ public class MlbackCategoryService {
 	 * 
 	 * */
 	public int updateByPrimaryKeySelective(MlbackCategory mlbackCategory) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackCategoryMapper.updateByPrimaryKeySelective(mlbackCategory);
 		return intReslut;
 	}

@@ -48,7 +48,7 @@
 
 <body>
 
-	<jsp:include page="mheader2.jsp"></jsp:include>
+	<jsp:include page="mheader.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
@@ -904,12 +904,10 @@
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
 						<div class="sale_copen">
-							<p>Black Friday Mega Sale! Go Crazy, Girls!</p> 
+							<p>The Big Promotion of Winter for Beauty, All items is already 50% off, then PLUS</p> 
 							<ul>
-								<li><span>$5 off</span> upon order $49 with code：<b>BLACK5</b></li>
-								<li><span>$10 off</span> upon order $99 with code：<b>BLACK10</b></li>
-								<li><span>$20 off</span> upon order $199 with code：<b>BLACK20</b></li>
-								<li><span>$30 off</span> upon order $299 with code：<b>BLACK30</b></li>
+								<li><span>10%</span> off upon order $30 with code: <b>WT10</b></li>
+								<li><span>12%</span> off upon order $200 with code: <b>WT12</b></li>
 							</ul>
 						</div>
 						<div class="group-details coupons active"></div>
@@ -987,10 +985,12 @@
 			$(".errortips").show();
 		}else if(tips==="PAYMENT_ALREADY_DONE"){
 			$(".errortips").show();
-			$(".errortips").html("Payment has been done already for this cart.")
-			setTimeout(function(){
-				window.location.href = "${APP_PATH}/index.html";	
-			}, 3000);
+			$(".errortips").html("Please try again.Due to network problems, the link with PayPal payer could not be established successfully.")
+			//"Payment has been done already for this cart.")
+		}else if(tips==="INSTRUMENT_DECLINED"){
+			$(".errortips").show();
+			$(".errortips").html("Please try again.Due to network problems, the link with PayPal payer could not be established successfully.")
+			//The instrument presented  was either declined by the processor or bank, or it can't be used for this payment
 		}else{
 			$(".errortips").hide();
 		}
@@ -1019,8 +1019,7 @@
 		var addressIdIntInt;
 		var jiecountry;
 		
-		
-		
+
 		function datalocation (dataname){
 			$.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -1096,7 +1095,6 @@
 					resDataMoney = resareafreightMoney;
 					var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPriceselect);
-					couponPriceold2 =0;
 					couponPriceOld = 0;
 				  }
 				});
@@ -1384,7 +1382,6 @@
 			}
 			parent.html(html);
 		}
-		var couponPriceold2 = 0;
 
 		function selectPay(e) {
 			var targetEl = $(e.target);
@@ -1409,21 +1406,44 @@
 					var couponErrorBox = $('.coupon-error');
 					// console.log(resData);
 					if (resData) {
-						var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-						var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-						var  totalPricecou =c_prototalnum*1+shopingnum*1;
-						if (totalPricecou >= resData.couponPriceBaseline) {
-							couponPriceText.text('-$' + resData.couponPrice);
-							subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
-							couponPriceOld = resData.couponPrice;
-							
-							couponId = resData.couponId;
-							couponCode = couponCode2;
-							renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
-						} else {
-							renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
-							$(".coed_inp").val("");
-							
+						var couponType = resData.couponType;
+						if(couponType==0){
+							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+							var  totalPricecou =c_prototalnum*1+shopingnum*1;
+							if (totalPricecou >= resData.couponPriceBaseline) {
+								couponPriceText.text('-$' + resData.couponPrice);
+								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+								couponPriceOld = resData.couponPrice;
+								console.log("满减券查回的couponPriceOld:"+couponPriceOld);
+								couponId = resData.couponId;
+								couponCode = couponCode2;
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
+							} else {
+								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
+								$(".coed_inp").val("");
+							}
+						}else{
+							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
+							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
+							var  totalPricecou =(c_prototalnum*1+shopingnum*1).toFixed(2);
+							if (totalPricecou >= resData.couponPriceBaseline) {
+								//取出折扣
+								var offcoup = resData.couponPriceOff;
+								//计算减免力度(总价*折扣比)
+								var downPrice = (totalPricecou*offcoup/100).toFixed(2);
+								couponPriceText.text('-$' + downPrice);
+								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
+								couponPriceOld = downPrice;
+								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
+								couponId = resData.couponId;
+								couponCode = couponCode2;
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
+							} else {
+								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
+								$(".coed_inp").val("");
+								
+							}
 						}
 					} else {
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
@@ -1448,11 +1468,12 @@
 			var item  = $(e.target);
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
-		
+			// console.log("productNumText-early:"+productNumText);
 			if (productNumText > 1) {
 				productNumText -= 1;
 				reCalPrice(item, false);
 				productNum.val(productNumText);
+				// console.log("productNumText-after:"+productNumText);
 				updateOrderItemNum(item, productNumText);
 			}
 		}
@@ -1463,15 +1484,37 @@
 			var prototalEl = $('.c-prototal>.cal-price-num');
 			var subtotalEl = $('.c-subtotal>.cal-price-num');
 			var currentPrice = parseFloat(parentEl.find('.price').text());
+			// console.log("获取当前的currentPrice:"+currentPrice);
 			if (flag) {
+				// console.log("获取当前的add");
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
+				var nowtotalPrice=subtotalEl.text().slice(1);
+				// console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
+				// console.log("获取当前的currentPrice:"+currentPrice);
+				// console.log("获取当前的couponPriceOld:"+couponPriceOld);
+				//先把优惠券加回来,再加上一个原价
+				totalPrice = (parseFloat(nowtotalPrice) + currentPrice + parseFloat(couponPriceOld));
+				// console.log("获取当前的totalPrice:"+totalPrice);
+				//清空掉又会减掉的钱
+				$(".coed_inp").val("");
+				//变量归0显示
+				couponPriceOld = 0;
+				couponPriceText.text('-$' + 0);
+				//显示未折扣的钱
 				subtotalEl.text('$' + totalPrice.toFixed(2));
-				
+				$(".without-data").text("Enter coupon code to get a discount!");
 			} else {
+				// console.log("获取当前的sub");
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
-				totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld+couponPriceold2);
-				couponPriceold2 =0;
+				// console.log("获取当前的currentPrice:"+currentPrice);
+				// console.log("获取当前的couponPriceOld:"+couponPriceOld);
+				// console.log("获取当前的subtotalEl.text().slice(1):"+subtotalEl.text().slice(1));
+				var nowtotalPrice=subtotalEl.text().slice(1);
+				// console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
+				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld);
+				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
+				// console.log("获取当前的totalPrice:"+totalPrice);
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
 				$(".coed_inp").val("");
