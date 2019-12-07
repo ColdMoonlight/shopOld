@@ -69,7 +69,7 @@
 			</div>
 		</div>
 		<div class="right_head clearfix">
-			<img src="${APP_PATH}/static/m/img/other/pay-success.png" alt="">
+			<img src="${APP_PATH}/static/m/img/other/cg.png" alt="">
 			  <div class="revceiver-info"> </div>
 			  <div class="info_order"> </div>
 		</div>
