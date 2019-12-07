@@ -70,7 +70,7 @@
 	    <div id="product-block"></div>
 	    <!-- buyer show -->
 	    <div id="buyer-show">
-	    	<img src="${APP_PATH }/static/pc/buyer-show.jpg">
+	    	<img src="${APP_PATH }/static/pc/show.jpg">
 	    </div>
   	</div>
   </div>

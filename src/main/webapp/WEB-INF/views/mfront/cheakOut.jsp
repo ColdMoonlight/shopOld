@@ -906,8 +906,8 @@
 						<div class="sale_copen">
 							<p>The Big Promotion of Winter for Beauty, All items is already 50% off, then PLUS</p> 
 							<ul>
-								<li><span>10%</span> off upon order $30 with code: <b>winter10</b></li>
-								<li><span>12%</span> off upon order $200 with code: <b>winter12</b></li>
+								<li><span>10%</span> off upon order $30 with code: <b>WT10</b></li>
+								<li><span>12%</span> off upon order $200 with code: <b>WT12</b></li>
 							</ul>
 						</div>
 						<div class="group-details coupons active"></div>
