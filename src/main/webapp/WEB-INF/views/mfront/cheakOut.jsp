@@ -1534,11 +1534,10 @@
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
 		$('.place-order').on('click', function () {
-			// $(".loading").show();
 			if (inputCheck9()==1){
 				return;
 			} else{
-				
+				$(".loading").show();
 				// savr_address();  // addres 保存
 				// function savr_address(){
 					var returnaddressId;
@@ -1623,7 +1622,6 @@
 									success: function (data) {
 										var resData = JSON.parse(data).extend;
 										// console.log(data)
-										$(".loading").show();
 										window.location.href = '${APP_PATH }/paypal/mpay';
 										// window.location.href = '${APP_PATH }/index.html';
 									}

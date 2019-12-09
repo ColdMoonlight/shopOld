@@ -84,6 +84,7 @@
 						<i class="icon plus"></i>
 					</div>
 					<div class="reviews-img-box"></div>
+					<div class="maskdd"></div>
 				</div>
 				<span class="review-ok">publish</span>
 			</div>
@@ -528,11 +529,15 @@
 			});
 			// add reivew imgs
 			$('.review-img-add').on('click', function() {
-				if (imgCount > 5) {
-					renderSysMsg('Upload up to 5 review images');
-				} else {
+				if (imgCount ==5) {
+			     	$('.maskdd').show();
+				}else {
 					uploadfu($(this).parent(), $(this).find('input')[0]);
 				}
+				 
+			})
+			$('.maskdd').on('click', function() {
+				renderSysMsg('Upload up to 5 review images');
 			})
 			// save a reivew
 			$('.review-ok').on('click', function() {
