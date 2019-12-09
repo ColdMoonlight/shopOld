@@ -226,6 +226,11 @@
             <i class="glyphicon glyphicon-stats"></i>
             <span class="text">评论管理列表</span></a>
         </div>
+        <div class="item">
+          <a href="${APP_PATH }/MlfrontReview/toMlfrontReviewManage">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">评论管理2</span></a>
+        </div>
       </li>
     </ul>
   </li>
