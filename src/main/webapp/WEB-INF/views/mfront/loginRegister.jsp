@@ -58,30 +58,42 @@
 			</div>
 			<div class="tab-pane signin active">
 				<form id="signin">
-					<div class="input-group">
-						<label for="userEmail">e-mail</label>
+					<div class="input-group1">
+						<label for="userEmail">E-mail</label>
 						<input type="email" name="userEmail" placeholder="eamil" required>
 					</div>
-					<div class="input-group">
-						<label for="userPassword">password</label>
+					<div class="input-group1">
+						<label for="userPassword">Password</label>
 						<input type="password" name="userPassword" placeholder="password at least six figures">
 					</div>
 					
 				</form>
 				<a href="javascript:;" class="btn btn-black sigin"> SIGN IN </a>
-				<div class="input-group">
+				<div class="input-group1">
 					<p class="forget_pass"><a href="${APP_PATH }/MlfrontUser/tomForgetPassWord">Forget PassWord?</a></p>
 				</div>
 			</div>
 			<div class="tab-pane register">
 				<form id="register">
-					<div class="input-group">
-						<label for="userEmail">e-mail</label>
+					<div class="input-group1 input-group2">
+						<label for="FirstName">First Name</label>
+						<input type="text" name="FirstName" placeholder="First Name">
+					</div>
+					<div class="input-group1 input-group2">
+						<label for="LastName">Last Name</label>
+						<input type="text" name="LastName" placeholder="Last Name">
+					</div>
+					<div class="input-group1">
+						<label for="userEmail">E-mail</label>
 						<input type="email" name="userEmail" placeholder="please input eamil" required>
 					</div>
-					<div class="input-group">
-						<label for="userPassword">password</label>
+					<div class="input-group1 input-group2">
+						<label for="userPassword">Password</label>
 						<input type="password" name="userPassword" placeholder="password at least six figures">
+					</div>
+					<div class="input-group1 input-group2">
+						<label for="ConfirmPassword">ConfirmPassword</label>
+						<input type="password" name="ConfirmPassword" placeholder="ConfirmPassword">
 					</div>
 				</form>
 
@@ -131,7 +143,7 @@
 		reqData.userPassword = password;
 		// console.log(reqData);
 
-		if (inputCheck(reqData)) {
+		if (inputCheckSigin(reqData)) {
 			$.ajax({
 				url: "${APP_PATH }/MlfrontUser/login", //register
 				type: 'POST',
@@ -167,14 +179,17 @@
 
 	$('.btn.register').on('click', function () {
 		$(".loading").show();
+		var firstname = $('#register input[name=FirstName]').val();
+		var lastname = $('#register input[name=LastName]').val();
 		var email = $('#register input[name=userEmail]').val();
 		var password = $('#register input[name=userPassword]').val();
 		var reqData = {};
-		reqData.userEmail = email;
+		reqData.userFirstname = firstname;
+		reqData.userLastname = lastname;
+        reqData.userEmail = email;
 		reqData.userPassword = password;
-		// console.log(reqData);
 
-		if (inputCheck(reqData)) {
+		if (inputCheckRegister(reqData)) {
 			$.ajax({
 				url: "${APP_PATH }/MlfrontUser/register",
 				type: 'POST',
@@ -209,27 +224,89 @@
 			})
 		} else {
 			$(".loading").hide();
-			renderSysMsg('email or password format incorrect!');
+			// renderSysMsg('email or password format incorrect!');
 		}
 	})
-
-	function inputCheck(data) {
+/*******/
+	function inputCheckSigin(data) {
 		var flag = true;
 		for (var key in data) {
 			if (key === 'userEmail') {
 				var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (!pattern.test(data[key])) {
 					flag = !flag;
+						renderSysMsg('userEmail is empty')
 					break;
 				}
 			}
-
 			if (key === 'userPassword') {
 				if (data[key].trim().length < 6) {
 					flag = !flag;
+						renderSysMsg('userPassword is empty')
 					break;
 				}
 			}
+			
+			
+			
+			
+		}
+
+		return flag;
+	}
+
+	function inputCheckRegister(data) {
+		var flag = true;
+		for (var key in data) {
+			if (key === 'userFirstname') {
+				if (data[key]==""||data[key]=="null") {
+					flag = !flag;
+					renderSysMsg('firstnamestr is empty')
+					break;
+				}
+			}
+			if (key === 'userLastname') {
+				if (data[key]==""||data[key]=="null") {
+					flag = !flag;
+					renderSysMsg('userLastname is empty')
+					break;
+				}
+			}
+			if (key === 'userEmail') {
+				// var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				if (data[key]==""||data[key]=="null") {
+					flag = !flag;
+						renderSysMsg('userEmail is empty')
+					break;
+				}
+			}
+			if (key === 'userPassword') {
+				if (data[key].trim().length < 6) {
+					flag = !flag;
+						renderSysMsg('userPassword is empty')
+					break;
+				}
+			}
+			
+			var password = $('#register input[name=userPassword]').val();
+			var password2 = $('#register input[name=ConfirmPassword]').val();
+			if(password=="null"||password==""){
+				flag = !flag;
+				renderSysMsg('userPassword Not empty')
+				break;
+			}
+			if(password2=="null"||password2==""){
+				flag = !flag;
+				renderSysMsg('ConfirmPassword  Not empty')
+				break;
+			}
+			if(password != password2){
+				flag = !flag;
+				renderSysMsg('The two inputs are inconsistent')
+				break;
+			}
+			
+			
 		}
 
 		return flag;
