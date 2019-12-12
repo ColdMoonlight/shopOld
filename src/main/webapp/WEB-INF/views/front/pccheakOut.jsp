@@ -1000,14 +1000,8 @@
 	   console.log(tips)
 		if(tips==="VALIDATION_ERROR"){
 			$(".errortips").show();
-		}else if(tips==="PAYMENT_ALREADY_DONE"){
-			$(".errortips").show();
-			$(".errortips").html("Please try again.Due to network problems, the link with PayPal payer could not be established successfully.")
-			//"Payment has been done already for this cart.")
-		}else if(tips==="INSTRUMENT_DECLINED"){
-			$(".errortips").show();
-			$(".errortips").html("Please try again.Due to network problems, the link with PayPal payer could not be established successfully.")
-			//The instrument presented  was either declined by the processor or bank, or it can't be used for this payment
+		}else{
+			$(".errortips").hide();
 		}
 		$(".select-province,.form-group .city,.form-group .code").click(function(){
 			$(".errortips").hide();
