@@ -1345,7 +1345,7 @@ width: 100%;
   border: 0;
   border-radius: 5px 0 0 5px;
   outline: none;
-	background-color: #ccc;
+  border: 1px solid #ccc;
 }
 
 .login-register .btn {
@@ -1420,7 +1420,7 @@ width: 100%;
   border: 0;
   border-radius: 5px 0 0 5px;
   outline: none;
-	background-color: #ccc;
+	border: 1px solid #ccc;
 }
 
 .login-register .btn {
