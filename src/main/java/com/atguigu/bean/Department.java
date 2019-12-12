@@ -5,7 +5,6 @@ public class Department {
 
     private String deptName;
     
-    
     public Department() {
 		super();
 		// TODO Auto-generated constructor stub
