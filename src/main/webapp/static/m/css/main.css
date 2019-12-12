@@ -531,8 +531,8 @@ a:focus {
 	display: none;
 	
 }
-.review-ok{width:90%;display: block; margin: 1em 5% 0; height: 30px; color: #fff; background:#fe186e; line-height: 30px; text-align: center;font-size: 14px;}
-
+.review-ok{width:90%;display: block; margin: 1em 5% 0; height: 40px; color: #fff; background:#fe186e; line-height: 40px; text-align: center;font-size: 14px;}
+.review-box-item input{width: 100%;height: 40px; line-height: 40px;}
 .win-box {
 	background-color: #fff;
 }
@@ -550,7 +550,7 @@ a:focus {
 }
 
 
-.review-cancel{width: 30px; height: 30px;border-radius:50%;color: #fff;font-size: 20px; text-align: center; line-height: 27px; display: block; position: absolute; top: -10px; right: -10px;;background: #fe186e;}
+.review-cancel{width: 30px; height: 30px;border-radius:50%;color: #fff;font-size: 20px; text-align: center; line-height: 27px; display: block; position: absolute; top: -10px; right: -10px;;background: #000;}
 
 
 .win-box-content {
@@ -1198,6 +1198,7 @@ a:focus {
 	bottom: 0;
 	left: 0;
 	opacity: 0;
+	z-index: 2;
 }
 
 .reviews-img-list>.review-img-add>.icon {
@@ -2631,6 +2632,8 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 .img_show img{max-width: 100%;min-height: 40px;}
 
 .goback{font-size: 14px; padding: 20px;}
-
+/*********************/
+.maskdd{display: none; width: 68px; height: 68px; position: absolute; top: 0; left: 0; z-index: 3;}
+.reviews-img-list{position: relative;}
 
 

@@ -1573,7 +1573,7 @@
 			if (inputCheck9()==1){
 				return ;
 			} else{
-				
+				$(".loading").show();
 				// savr_address();  // addres 保存
 					var formData = $('.address-box form').serializeArray();
 					var reqData = formData.reduce(function (obj, item) {
@@ -1647,7 +1647,6 @@
 									success: function (data) {
 										var resData = JSON.parse(data).extend;
 										// console.log(data)
-										$(".loading").show();
 										window.location.href = '${APP_PATH }/paypal/ppay';
 									}
 								})
