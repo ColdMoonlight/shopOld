@@ -58,15 +58,15 @@
 			<div class="login-register">
 				<div class="tab-pane signin active">
 					<form id="chage_password">
-						<div class="input-group">
+						<div class="input-group1">
 							<label for="userEmail">e-mail address</label>
 							<input type="email" name="userEmail" placeholder="eamil">
 						</div>
-						<div class="input-group">
+						<div class="input-group1">
 							<label for="">password</label>
 							<input class="newpassword" type="password" name="userPassword" placeholder="password">
 						</div>
-						<div class="input-group">
+						<div class="input-group1">
 							<label for="">repeat password</label>
 							<input class="repassword" type="password" name="userPassword" placeholder="password">
 						</div>

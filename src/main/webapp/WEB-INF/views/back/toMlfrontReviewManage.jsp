@@ -67,27 +67,12 @@
 										</select>
 								    </div>
 								</div>
-								<div class="form-group cp_orlei" style="float: left;">
-								    <label class="control-label" style="float: left;">产品or类:</label>
-								    <div class="" style="float: left;">
-								        <select class="form-control">
-										  <option value ="0" selected="selected">产品</option>
-										  <option value ="1">类</option>
-										</select>
-								    </div>
-								</div>
 								<div class="form-group cp_select">
 								     <label for="actshowproProid" style="float: left;" class="control-label">产品名字:</label>
 								     <div class="" style="float: left;">
-								         <select id="" name="" class="form-control"></select>
+								         <select id="actshowproProid" name="actshowproProid" class="form-control"></select>
 								     </div>
 								 </div>
-								 <div class="form-group lei_select">
-								      <label for="actshowproCateid" style="float: left;" class="control-label">类:</label>
-								      <div class="" style="float: left;">
-								          <select id="" name="" class="form-control"></select>
-								      </div>
-								  </div>
 								   <div class="form-group btn_search">
 									   <input type="submit" id="" value="搜索" name="" />
 							       </div>
@@ -135,19 +120,121 @@
 			}).resize()
 		});
 		/******************************/
-	$(".lei_select").hide()
-	 $(".cp_orlei select").change(function() {
-		if($(this).val() == 0 ) {
-			$(".cp_select").show()
-			$(".lei_select").hide()
-		} else if($(this).val() == 1) {
-			$(".lei_select").show()
-			$(".cp_select").hide()
-			
+		getCategoryDown()
+		function getCategoryDown() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						function setCategoryDescSelect(el, data) {
+							var html = '<option value="-1">---无绑定产品---</option>';
+							for (var i = 0; i < data.length; i += 1) {
+								html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
+							}
+							el.html(html);
+						}
+						objparentList = result.extend.mlbackProductResList;
+						// console.log("objparentList");
+						 // console.log(objparentList);
+						var categoryIdSelect = $('#actshowproProid');
+						setCategoryDescSelect(categoryIdSelect, objparentList);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
 		}
-	})
-		
-		
+         /*****/
+		 
+		 				var targetInput = $('.date-timepicker');
+		 				var date = new Date();
+		 				var minDate = moment().set({
+		 						'date': date.getDate() - 1,
+		 						'hour': date.getHours(),
+		 						'minute': date.getMinutes(),
+		 						'second': date.getSeconds()
+		 					})
+		 					.format('YYYY-MM-DD HH:mm:ss');
+		 				var minDate2 = moment()
+		 					.set({
+		 						'date': date.getDate() - 1,
+		 						'hour': 23,
+		 						'minute': 59,
+		 						'second': 59
+		 					})
+		 					.format('YYYY-MM-DD HH:mm:ss');
+		 					
+		 					/****************************/
+		 					var minDate22 = moment()
+		 						.set({
+		 							'date': date.getDate(),
+		 							'hour': 0,
+		 							'minute': 0,
+		 							'second': 0
+		 						})
+		 						.format('YYYY-MM-DD HH:mm:ss');
+		 				var maxDate = moment()
+		 					.set({
+		 						'date': date.getDate(),
+		 						'hour': date.getHours(),
+		 						'minute': date.getMinutes(),
+		 						'second': date.getSeconds()
+		 					})
+		 					.format('YYYY-MM-DD HH:mm:ss');
+		 				function initHtml() {
+		 					var $input = targetInput.find('input');
+		 					$input.eq(0).val(minDate22);
+		 					$input.eq(1).val(maxDate);
+		 				}
+		 				
+		 /*******初始化显示*************/
+		               var startime =minDate22;
+		               var endtime =maxDate;
+		 		/***********************************************/
+		 				function initJs() {
+		 					targetInput.each(function (i, item) {
+		 						$(item).datePicker({
+		 							hasShortcut: true,
+		 							min: '2018-01-01 06:00:00',
+		 							max: maxDate,
+		 							isRange: true,
+		 							shortcutOptions: [{
+		 							 name: '昨天',
+		 							 day: '-1,-1',
+		 							 time: '00:00:00,23:59:59'
+		 							},{
+		 							 name: '最近一周',
+		 							 day: '-7,0',
+		 							 time:'00:00:00,'
+		 							}, {
+		 							 name: '最近一个月',
+		 							 day: '-30,0',
+		 							 time: '00:00:00,'
+		 							}, {
+		 							 name: '最近三个月',
+		 							 day: '-90, 0',
+		 							 time: '00:00:00,'
+		 							}],
+		 							hide: function (type) {
+		 								// console.log(1);
+		 								// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
+		 								var startime = this.$input.eq(0).val();
+		 								var endtime = this.$input.eq(1).val();
+		 								 $(".td_name").empty();
+		 								 $(".td_num").empty();
+		 								
+		 							}
+		 						})
+		 					})
+		 				}
+		 
+		/*****/
+		$(function () {
+			initHtml();
+			initJs();
+		});
 	</script>
 </body>
 
