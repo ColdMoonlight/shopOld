@@ -89,7 +89,7 @@
 				activeItem.removeClass('active');
 				$(this).addClass('active');
 				activeItem = $(this);
-				to_page(1, String($(this).data('id')));
+				to_page(i, String($(this).data('id')));
 			}
 		})
 	})
@@ -123,7 +123,7 @@
 					'<span class="order-status">' + (orderStatus[data[key].orderStatus]) + '</span>' +
 					'</div>' +
 					'<div class="order-item-body">';
-				var len = data[key].orderProNumStr.split(',').length;
+				var len = data[key].orderOrderitemidstr.split(',').length;
 				for (var i = 0; i < len; i++) {
 					var item = map.orderItemMap[map.orderMap[data[key].orderId][i]];
 					html += '<div class="order-item-item">' +
