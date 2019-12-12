@@ -246,17 +246,13 @@
 					break;
 				}
 			}
-			
-			
-			
-			
 		}
 
 		return flag;
 	}
-
 	function inputCheckRegister(data) {
 		var flag = true;
+		
 		for (var key in data) {
 			if (key === 'userFirstname') {
 				if (data[key]==""||data[key]=="null") {
@@ -265,6 +261,7 @@
 					break;
 				}
 			}
+			
 			if (key === 'userLastname') {
 				if (data[key]==""||data[key]=="null") {
 					flag = !flag;
@@ -272,6 +269,7 @@
 					break;
 				}
 			}
+			
 			if (key === 'userEmail') {
 				// var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (data[key]==""||data[key]=="null") {
@@ -290,16 +288,16 @@
 			
 			var password = $('#register input[name=userPassword]').val();
 			var password2 = $('#register input[name=ConfirmPassword]').val();
-			if(password=="null"||password==""){
-				flag = !flag;
-				renderSysMsg('userPassword Not empty')
-				break;
-			}
-			if(password2=="null"||password2==""){
-				flag = !flag;
-				renderSysMsg('ConfirmPassword  Not empty')
-				break;
-			}
+			// if(password=="null"||password==""){
+			// 	flag = !flag;
+			// 	renderSysMsg('userPassword Not empty')
+			// 	break;
+			// }
+			// if(password2=="null"||password2==""){
+			// 	flag = !flag;
+			// 	renderSysMsg('ConfirmPassword  Not empty')
+			// 	break;
+			// }
 			if(password != password2){
 				flag = !flag;
 				renderSysMsg('The two inputs are inconsistent')
