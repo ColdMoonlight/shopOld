@@ -36,12 +36,45 @@
 			<!-- <img src="" alt="" class="person-info-img"> -->
 			<div class="person-info-name" id="UHello_zsh">login in</div>
 			<h3 class="welcome">Welcome</h3>
-			<a href="javascript:;" class="btn signout">sign out</a>
+			<!-- <a href="javascript:;" class="btn signout">sign out</a> -->
 		</div>
 
 		<div class="integral-details">
-			<div class="id-title bd-b">My All Details</div>
-			<div class="id-list">
+			<ul class="gllist">
+				<li id="order_info">
+					<span><img src="${APP_PATH }/static/m/img/other/dingdan.png"></span>
+			    	<a href="###">My Order</a>
+				</li>
+				<li id="shopping-cart">
+					<span><img src="${APP_PATH }/static/m/img/other/gouwuch.png"></span>
+					<a href="###">Shopping Cart</a>
+				</li>
+				<li id="coupon_info">
+					<span><img src="${APP_PATH }/static/m/img/other/yhj.png"></span>
+					<a href="###">Coupon</a>
+				</li>
+				<li id="personal_info">
+					<span><img src="${APP_PATH }/static/m/img/other/grzx.png"></span>
+					<a href="###">Personal Info</a>
+				</li>
+				<li>
+					<span><img src="${APP_PATH }/static/m/img/other/jifen.png"></span>
+					<a href="###">Integral Details</a>
+				</li>
+				<li>
+					<span><img src="${APP_PATH }/static/m/img/other/gengduo.png"></span>
+					<a href="###">more</a>
+				</li>
+			</ul>
+			<ul class="gllist">
+				<li class="signout">
+					<span><img src="${APP_PATH }/static/m/img/other/tuichu.png"></span>
+					<a href="###">Drop Out</a>
+				</li>
+			</ul>
+			
+			
+			<!-- <div class="id-list">
 				<div class="id-item" id="order_info">
 					<img src="${APP_PATH }/static/m/img/other/My-Order.png" class="id-item-img">
 					<div class="id-item-name">My Order</div>
@@ -66,7 +99,7 @@
 					<img src="${APP_PATH }/static/m/img/other/Wish-List.png" class="id-item-img">
 					<div class="id-item-name">more</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -90,7 +123,7 @@
 </script>
 <script>
 	//  ${APP_PATH }/MlfrontUser/exit
-	$('.btn.signout').on('click', function () {
+	$('.signout').on('click', function () {
 		$.ajax({
 			url: "${APP_PATH }/MlfrontUser/exit",
 			type: 'POST',
