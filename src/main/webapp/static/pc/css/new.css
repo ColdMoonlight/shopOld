@@ -136,7 +136,7 @@
 div.zoomDiv{z-index:999;position:absolute;top:0px;left:0px;width:200px;height:200px;background:#ffffff;border:1px solid #CCCCCC;display:none;text-align:center;overflow:hidden;}
 div.zoomMask{position:absolute;cursor:move;z-index:1;}
 /***********/
-.fix_iconnav{width: 50px; height: 120px; position: fixed; top:25%;  right: 20px; z-index: 999;}
+.fix_iconnav{width: 50px; height: 120px; position: fixed; top:25%;  right: 20px; z-index: 9999999999;}
 .icon_nav{width: 50px; height:100%;}
 .icon_nav li{width: 50px; height: 50px;margin: 5px 0;background: #f1f1f1; position: relative;}
 .icon_nav li a{width: 100%;height: 100%;display: block;}
@@ -289,7 +289,10 @@ background: url(../../../../../ShopTemplate/static/pc/img/sdf.png) no-repeat 10p
 
 .login-register .btn.sigin{line-height: 40px;padding: 0;}
 .login-register .btn.sigin:hover{background: #000;}
-
+.register label{ position: relative;}
+.register label:after{content: "*"; color: #F23030; }
+.signin label{ position: relative;}
+.signin label:after{content: "*"; color: #F23030; }
 .login-register .btn.register{line-height: 40px;padding: 0;}
 .login-register .btn.register:hover{background: #000;}
 .login-register .btn.save_newpass:hover{background: #000;}
