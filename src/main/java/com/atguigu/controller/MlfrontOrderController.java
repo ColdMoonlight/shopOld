@@ -790,7 +790,7 @@ public class MlfrontOrderController {
 		Integer Uid = loginUser.getUserId();
 		MlfrontOrder mlfrontOrder = new MlfrontOrder();
 		mlfrontOrder.setOrderUid(Uid);
-		int PagNum = 20;
+		int PagNum = 20;//0未支付 //1支付成功 //2支付失败 //3审单完毕 //4发货完毕
 		PageHelper.startPage(pn, PagNum);
 		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidOnly(mlfrontOrder);
 		PageInfo page = new PageInfo(mlfrontOrderList, PagNum);
