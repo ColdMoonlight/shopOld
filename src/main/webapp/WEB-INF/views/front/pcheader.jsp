@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/new.css">
 	
-	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
+	<!-- Global site tag (gtag.js) - Google Analytics 生产-->
  	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
@@ -46,6 +46,9 @@
 				</div>
 			</div> -->
 			<!-- account tip language -->
+			<a class="logosmall" href="${APP_PATH}/index.html">
+				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
+			</a>
 			<div class="tt-status">
 				<div class="container">
 					<!-- tt-langue and tt-currency -->
@@ -92,6 +95,20 @@
 					</div>
 					<!-- /tt-account -->
 				</div>
+				<div class="serch_box serch_boxsmall">
+					<div class="tt-col">
+						<input type="text" class="tt-search-input" placeholder="Search Products...">
+						<button class="tt-btn-search" type="submit"></button>
+					</div>
+					<ul class="show_ul">
+						<li>bob</li>
+						<li>wigs</li>
+						<li>bundle</li>
+						<li>wig 613</li>
+						<li>Water Wave</li>
+					</ul>
+				</div>
+				
 			</div>
 			<div class="container">
 				<!-- search logo cart -->
@@ -204,13 +221,18 @@
 			    height: "0", 
 			  }, 100);
 		   })
-		   
-		   
 		   		$(".go_top").click(function(){
 					$("body,html").animate({scrollTop:0},500);  
 					   return false;
 				   });
 			   $(window).scroll(function(){
+				   var scrollhead=$(window).scrollTop();
+				   if(scrollhead>5){
+					   $(".tt-desktop-header").addClass("headActive")
+				   }else{
+					   $(".tt-desktop-header").removeClass("headActive")
+				   }
+				/**************************/
 				var winS=$(this).scrollTop();
 				if(winS>0){
 					$(".go_top").show();
@@ -456,9 +478,17 @@
 				$("body").on('click', '.search_btn',function() {
 				    $('.serch_cont').slideDown(200)
 				})
-			  $("body").on('click', '.close_serch',function() {
+			    $("body").on('click', '.close_serch',function() {
 				    $('.serch_cont').slideUp(200)
 				})
+				
+				
+				$(document).click(function(e){
+				    var target = $(e.target);
+				     if(target.closest(".tt-search-input").length != 0) return;
+				    $('ul.show_ul').slideUp(200)
+				})
+				
 		
 		
 	</script>

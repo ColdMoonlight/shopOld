@@ -42,15 +42,15 @@
 
 
 	<!-- main -->
-  <div class="main">
+	<!-- banner -->
+	<div id="banner" class="swiper-container">
+	  <div class="swiper-wrapper"></div>
+	  <div class="swiper-pagination"></div>
+	  <div class="swiper-button-nexta"></div>
+	  <div class="swiper-button-preva"></div>
+	</div>
+  <div class="main mainindex">
   	<div class="container">
-  		<!-- banner -->
-	    <div id="banner" class="swiper-container">
-	      <div class="swiper-wrapper"></div>
-	      <div class="swiper-pagination"></div>
-		  <div class="swiper-button-nexta"></div>
-          <div class="swiper-button-preva"></div>
-	    </div>
 	    <!-- discount -->
 		<div class="coupon_cont2">
 			
@@ -300,9 +300,7 @@
 				// console.log(slideIfinto_click);
 				if(slideIfinto_click==0){
 					html += '<div class="swiper-slide">' +
-						  '<a href="javascript:;">' +
-									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-							'</a>' +
+						  '<a href="javascript:;" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
 						'</div>';
 				}
 				// else if(slidenum==1){
@@ -321,9 +319,11 @@
 				  // }
 				   else{
 					html += '<div class="swiper-slide">' +
-						  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-									'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-							'</a>' +
+						 //  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
+							// 		'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							// '</a>' +
+							  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+							
 						'</div>';
 				}
 				
