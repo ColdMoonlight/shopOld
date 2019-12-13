@@ -126,6 +126,18 @@
 
   <script>
 	  $(function(){
+		  
+		  
+		  $(window).scroll(function(){
+			   var scrollhead=$(window).scrollTop();
+			   if(scrollhead>5){
+				   $(".header").addClass("headActive")
+			   }else{
+				   $(".header").removeClass("headActive")
+			   }
+		  });
+		  
+		  /*****************************/
 	  	$(".fixed_link .close").click(function(){
 	  		$(".fixed_link").addClass("active");
 	  		$(".fixed_small").addClass("active");
