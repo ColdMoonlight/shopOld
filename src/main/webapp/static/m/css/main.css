@@ -186,7 +186,12 @@ a:focus {
   top: 0;
   left: 0;
   z-index: 999;
+  -webkit-transition: background-color .3s ease, height .3s ease;
+  	transition: background-color .3s ease, height .3s ease;
+  
 }
+.headActive .info_adv{height: 0; overflow: hidden;}
+
 
 .header .container {
   display: flex;

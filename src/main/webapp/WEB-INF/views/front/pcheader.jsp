@@ -49,129 +49,41 @@
 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a>
-			<div class="tt-status">
-				<div class="container">
-					<!-- tt-langue and tt-currency -->
-					<div class="tt-desctop-parent-multi tt-parent-box">
-						<div class="tt-multi-obj tt-dropdown-obj" style="display: none;">
-							<button class="tt-dropdown-toggle " data-tooltip="Settings" data-tposition="bottom"><i
-									class="icon-f-79"></i></button>
-							<div class="tt-dropdown-menu">
-								<div class="tt-mobile-add">
-									<button class="tt-close">Close</button>
-								</div>
-								<div class="tt-dropdown-inner">
-									<ul>
-										<li class="active"><a href="#">English</a></li>
-										<li><a href="#">Deutsch</a></li>
-										<li><a href="#">Español</a></li>
-										<li><a href="#">Français</a></li>
-									</ul>
-									<ul>
-										<li class="active"><a href="#"><i class="icon-h-59"></i>USD - US Dollar</a></li>
-										<li><a href="#"><i class="icon-h-60"></i>EUR - Euro</a></li>
-										<li><a href="#"><i class="icon-h-61"></i>GBP - British Pound Sterling</a></li>
-									</ul>
-								</div>
+			<div class="alinktop"><a href="https://www.baidu.com/"><img src="${APP_PATH }/static/pc/img/sd.gif" ></a></div>
+			<div class="container head_box">
+				<!-- search logo cart -->
+				<div class="header_holder">
+					<div class="logo">
+						<a href="${APP_PATH}/index.html">
+							 <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
+						</a>
+					</div>
+					 <div class="serch_cont">
+					 	<div class="serch_box">
+					 		<div class="tt-col">
+					 			<input type="text" class="tt-search-input" placeholder="Search Products..." />
+					 			<button class="tt-btn-search" type="submit"></button>
+					 		</div>
+					 		<ul class="show_ul">
+					 			<li>bob</li>
+					 			<li>wigs</li>
+					 			<li>bundle</li>
+					 			<li>wig 613</li>
+					 			<li>Water Wave</li>
+					 		</ul>
+					 	</div>
+					 </div>
+					 <div class="loginbox">
+						<div class="tt-desctop-parent-account tt-parent-box person">
+							<div class="tt-account tt-dropdown-obj">
+								<button class="tt-dropdown-toggle" data-tooltip="My Account" data-tposition="bottom">
+									<i class="icon-f-94"></i>
+								</button>
 							</div>
 						</div>
-					</div>
-					<!-- /tt-langue and tt-currency -->
-					<!-- tt-tip -->
-					<div class="tt-tip">Free Shipping World Wide.</div>
-					<!-- /tt-tip -->
-					<!-- tt-account -->
-					<div class="tt-desctop-parent-account tt-parent-box person">
-						<div class="tt-account tt-dropdown-obj">
-							<button class="tt-dropdown-toggle" data-tooltip="My Account" data-tposition="bottom">
-								<i class="icon-f-94"></i>
-							</button>
-							<div class="tt-dropdown-menu">
-								<div class="tt-mobile-add">
-									<button class="tt-close">Close</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /tt-account -->
-				</div>
-				<div class="serch_box serch_boxsmall">
-					<div class="tt-col">
-						<input type="text" class="tt-search-input" placeholder="Search Products...">
-						<button class="tt-btn-search" type="submit"></button>
-					</div>
-					<ul class="show_ul">
-						<li>bob</li>
-						<li>wigs</li>
-						<li>bundle</li>
-						<li>wig 613</li>
-						<li>Water Wave</li>
-					</ul>
+					 </div>
 				</div>
 				
-			</div>
-			<div class="container">
-				<!-- search logo cart -->
-				<div class="tt-header-holder">
-					<!-- tt-search -->
-					<!-- <div class="tt-desctop-parent-search tt-parent-box">
-						<div class="tt-search tt-dropdown-obj">
-							<button class="tt-dropdown-toggle" data-tooltip="Search" data-tposition="bottom">
-								
-							</button>
-							<div class="tt-dropdown-menu">
-								<div class="container">
-									<form>
-										<div class="tt-col">
-											<input type="text" class="tt-search-input" placeholder="Search Products...">
-											<button class="tt-btn-search" type="submit"></button>
-										</div>
-										<div class="tt-col">
-											<button class="tt-btn-close icon-g-80"></button>
-										</div>
-										<div class="tt-info-text">
-											What are you Looking for?
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div> -->
-					<div class="search_btn">
-						<i class="icon-f-85"></i>
-					</div>
-					<!-- /tt-search -->
-					<!-- tt-logo -->
-					<a href="${APP_PATH}/index.html">
-					<div class="tt-logo">
-						   <div class="logo">
-							 <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
-						   </div>
-					</div>
-					 </a>
-					<!-- /tt-logo -->
-					<!-- tt-cart -->
-					<div class="tt-desctop-parent-cart tt-parent-box">
-						<div class="tt-cart tt-dropdown-obj" data-tooltip="Cart" data-tposition="bottom" style="display: none;">
-							<button class="tt-dropdown-toggle">
-								<i class="icon-f-39"></i>
-								<span class="tt-badge-cart">3</span>
-							</button>
-							<div class="tt-dropdown-menu">
-								<div class="tt-mobile-add">
-									<h6 class="tt-title">SHOPPING CART</h6>
-									<button class="tt-close">Close</button>
-								</div>
-								<div class="tt-dropdown-inner">
-									<div class="tt-cart-layout">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /tt-cart -->
-				</div>
-
 				<!-- tt-menu -->
 				<div class="tt-desctop-parent-menu tt-parent-box">
 					<div class="tt-desctop-menu">
@@ -191,24 +103,7 @@
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
 	</div>
-	<div class="serch_cont">
-		<div class="serch_box">
-			<span class="close_serch"></span>
-			<p class="serch_tit">What are you Looking for?</p>
-			<div class="tt-col">
-				<input type="text" class="tt-search-input" placeholder="Search Products..." />
-				<button class="tt-btn-search" type="submit"></button>
-			</div>
-			<ul class="show_ul">
-				<li>bob</li>
-				<li>wigs</li>
-				<li>bundle</li>
-				<li>wig 613</li>
-				<li>Water Wave</li>
-			</ul>
-		</div>
-		
-	</div>
+
 	
 	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
@@ -236,7 +131,7 @@
 				var winS=$(this).scrollTop();
 				if(winS>0){
 					$(".go_top").show();
-					$('.serch_cont').slideUp(200);
+					// $('.serch_cont').slideUp(200);
 				}else{
 					$(".go_top").hide();
 				}
@@ -460,11 +355,8 @@
 				  var seaProductName =$(this).html();
 								window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
 				 });
-				 //  $('body').keydown(function(){
-					//  if (event.keyCode == 13) {    
-					// 	 $('.tt-btn-search').click();
-					//  };            
-				 // })
+				
+				
 				$(".tt-search-input").focus(function(){
 					 $(".serch_box").find("ul.show_ul").slideDown(200);
 				})
@@ -475,9 +367,7 @@
 					$(".serch_box").find("ul.show_ul").slideUp(200)
 					e.stopPropagation();
 				});
-				$("body").on('click', '.search_btn',function() {
-				    $('.serch_cont').slideDown(200)
-				})
+				
 			    $("body").on('click', '.close_serch',function() {
 				    $('.serch_cont').slideUp(200)
 				})
