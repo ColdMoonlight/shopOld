@@ -43,63 +43,71 @@
 </head>
 
 <body>
-  <jsp:include page="mheader2.jsp"></jsp:include>
-  <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/m/css/active.css"/>
+  <jsp:include page="mheader.jsp"></jsp:include>
+  <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/m/css/sdj.css"/>
 	<!-- main -->
-		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/ban22.jpg" /></div>
-		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_02.jpg"/></div>	
+		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_01.jpg" /></div>
+		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_02.jpg"/></div>	
+		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_03.jpg"/></div>	
+		<div class="con_ban clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_04.jpg"/></div>	
+		
 		<div class="box_con1 clearfix">
-			<div class="word1 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_03.png" /></div>
-			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hdm_04.png" ></a></div>	
+			<div class="word1 clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_05.jpg" /></div>
+			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/sdj_06.jpg" ></a></div>	
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_02.png" ></a></div>
-				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_03.png" ></a></div>	
+				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/sdj_07.jpg" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/sdj_08.jpg" ></a></div>	
 			</div>
-		   <div class="word2 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_07.png" /></div>
+			<div class="xia_two clearfix">
+				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/sdj_09.jpg" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/sdj_10.jpg" ></a></div>	
+			</div>
+		   <div class="word2 clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_11.jpg" /></div>
 			<div class="five_5cont clearfix">
 				<div id="product-block"></div>
 		</div>	
 		<div class="hongbg clearfix">
 			<div class="dwbox">
-				<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
-				<div class="product_box_cont clearfix">
+				<div class="topbg"><img src="${APP_PATH}/static/m/img/shengdan/sdj_13.jpg" ></div>
+				<div class="product_box_cont productbg2 clearfix">
 					<div id="product-block2"></div>
 					<p class="morelink"><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html">VIEW MORE>></a></p>
 				</div>
-				<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
+				<!-- <div class="botbg"><img src="${APP_PATH}/static/m/img/shengdan/tg_04.png" ></div> -->
 			</div>
 		</div>
 		<div class="box_con1 clearfix">
-			 <div class="word3 clearfix"><img src="${APP_PATH}/static/m/img/huodong/hdm_09.png" /></div>
+			 <div class="word3 clearfix"><img src="${APP_PATH}/static/m/img/shengdan/sdj_15.jpg" /></div>
 			<div class="lei_cont clearfix">
 				<ul class="clearfix">
-					<li><a href="${APP_PATH}/search/360-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_05.png" ></a></li>
-					<li><a href="${APP_PATH}/search/Full-Lace-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_06.png" ></a></li>
-					<li><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_08.png" ></a></li>
-					<li><a href="${APP_PATH}/search/Bob-Wig.html"><img src="${APP_PATH}/static/m/img/huodong/hwt_09.png" ></a></li>
+					<li><a href="${APP_PATH}/search/360-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/ty_02.jpg" ></a></li>
+					<li><a href="${APP_PATH}/search/Full-Lace-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/ty_03.jpg" ></a></li>
+					<li><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/ty_04.jpg" ></a></li>
+					<li><a href="${APP_PATH}/search/Bob-Wig.html"><img src="${APP_PATH}/static/m/img/shengdan/ty_05.jpg" ></a></li>
 				</ul>
 			</div>
 			<div class="cont_mybox">
 				<div class="dwbox">
-						<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
-						<div class="product_box_cont clearfix">
+						<div class="topbg"><img src="${APP_PATH}/static/m/img/shengdan/sdj_17.jpg" ></div>
+						<div class="product_box_cont productbg3 clearfix">
 						  <div id="product-block3"></div>
 						  <!-- <p class="morelink"><a href="">VIEW MORE>></a></p> -->
 						</div>
-						<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
+						<!-- <div class="botbg"><img src="${APP_PATH}/static/m/img/shengdan/tg_04.png" ></div> -->
 				</div>
 				<div class="dwbox">
-					<div class="topbg"><img src="${APP_PATH}/static/m/img/huodong/tg_03.png" ></div>
-						<div class="product_box_cont clearfix">
+					<div class="topbg"><img src="${APP_PATH}/static/m/img/shengdan/sdj_13.jpg" ></div>
+						<div class="product_box_cont productbg4 clearfix">
 						<div id="product-block4"></div>
 						<p class="morelink"><a href="${APP_PATH}/search/Bundle-With-Closure.html">VIEW MORE>></a></p>
+						<br /><br />
+						<div class="link_home"><a href="${APP_PATH}/index.html">BACK TO HOME!</a></div>
+						<br /><br />
 						</div>
-					<div class="botbg"><img src="${APP_PATH}/static/m/img/huodong/tg_04.png" ></div>
+					<!-- <div class="botbg"><img src="${APP_PATH}/static/m/img/shengdan/tg_04.png" ></div> -->
 				</div>
 			</div>
-			<br /><br />
-			<div class="link_home"><a href="${APP_PATH}/index.html">BACK TO HOME!</a></div>
-			<br /><br />
+			
 		</div>
 		
 		
