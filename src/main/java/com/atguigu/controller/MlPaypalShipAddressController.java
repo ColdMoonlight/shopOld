@@ -34,8 +34,9 @@ public class MlPaypalShipAddressController {
 	@RequestMapping(value="/getOneMlfrontReviewDetailById",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg getOneMlPaypalShipAddressByPayinfoid(@RequestParam(value = "shippingaddressPayinfoid") String shippingaddressPayinfoid){
-		//接受信息
+		//接收信息
 		MlPaypalShipAddress mlPaypalShipAddressReq = new MlPaypalShipAddress();
+		//封装参数
 		mlPaypalShipAddressReq.setShippingaddressPayinfoid(shippingaddressPayinfoid);
 		List<MlPaypalShipAddress> mlPaypalShipAddressRes =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
 		return Msg.success().add("resMsg", "查看单条优惠券的详情细节完毕")

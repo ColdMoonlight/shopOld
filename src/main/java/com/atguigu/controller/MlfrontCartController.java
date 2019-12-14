@@ -71,14 +71,15 @@ public class MlfrontCartController {
 	 * */
 	@RequestMapping("/toCheakOut")
 	public String toCheakOut(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
-		
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//1手机0PC
 		if(ifMobile.equals("1")){
-			  return "mfront/cheakOut";
-		  }else{
-			  return "front/pccheakOut";
-		  }
+			System.out.println("操作说明:进入wap-CheakOut页面");
+			return "mfront/cheakOut";
+		}else{
+			System.out.println("操作说明:进入PC-CheakOut页面");
+			return "front/pccheakOut";
+		}
 	}
 	
 	/**
@@ -91,7 +92,6 @@ public class MlfrontCartController {
 	@ResponseBody
 	public Msg toAddToCart(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
 		String nowViewTime = DateUtil.strTime14s();
-		System.out.println("toAddToCart	nowViewTime:"+nowViewTime);
 		
 		insertAddCartView(mlfrontCartItem,session);
 		
@@ -362,6 +362,7 @@ public class MlfrontCartController {
 	
 	//记录加购数量
 	private void insertAddCartView(MlfrontCartItem mlfrontCartItem, HttpSession session) {
+		String nowViewTime = DateUtil.strTime14s();
 		//获取该产品id
 		Integer productId = mlfrontCartItem.getCartitemProductId();
 		//通过pid查回该产品
@@ -372,6 +373,7 @@ public class MlfrontCartController {
 		//拿到seo名字+产品名
 		String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
 		String addcartviewdetailProname = mlbackProductres.getProductName();
+		System.out.println("操作说明:nowViewTime,"+nowViewTime+",toAddToCart	:"+addcartviewdetailSeoname);
 		//准备参数信息
 		MlbackAddCartViewDetail mlbackAddCartViewDetailreq = new MlbackAddCartViewDetail();
 		//浏览对象
