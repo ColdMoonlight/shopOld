@@ -657,8 +657,8 @@ a:focus {
 }
 
 .product-title {
-  font: 13px/13px '';
-  font-weight: bold;
+  font: 14px/14px '';
+  /* font-weight: bold; */
   color: #333333;
   /* white-space: nowrap; */
   text-overflow: ellipsis;
