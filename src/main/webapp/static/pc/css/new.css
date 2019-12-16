@@ -589,6 +589,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 	 .product-details{max-width:98%; margin: 0 1%;}
     .product__details-banner{width: 400px; height: 400px;}
 	.rightrule{width: 550px;}
+	.tt-desctop-menu ul li{padding: 0 13px 0 0;}
 }
 
 @media (max-width: 1025px) {
