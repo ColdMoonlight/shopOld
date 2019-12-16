@@ -305,14 +305,14 @@
 				}
 				// else if(slidenum==1){
 				// 			     html += '<div class="swiper-slide">' +
-				// 			 	  '<a href="${APP_PATH}/Friday.html">' +
+				// 			 	  '<a href="${APP_PATH}/NowActivity.html">' +
 				// 			 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
 				// 			 		'</a>' +
 				// 			 	'</div>'; 
 				//   }
 				  // else if(slidenum==2){
 						// 	     html += '<div class="swiper-slide">' +
-						// 	 	  '<a href="${APP_PATH}/Friday.html">' +
+						// 	 	  '<a href="${APP_PATH}/NowActivity.html">' +
 						// 	 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
 						// 	 		'</a>' +
 						// 	 	'</div>'; 
