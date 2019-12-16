@@ -49,7 +49,7 @@
 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a>
-			<div class="alinktop"><a href="https://www.baidu.com/"><img src="${APP_PATH }/static/pc/img/sd.gif" ></a></div>
+			<div class="alinktop"><a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
 			<div class="container head_box">
 				<!-- search logo cart -->
 				<div class="header_holder">

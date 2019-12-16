@@ -191,6 +191,7 @@ a:focus {
   
 }
 .headActive .info_adv{height: 0; overflow: hidden;}
+.headActive .img_show{height: 0; overflow: hidden;}
 
 
 .header .container {

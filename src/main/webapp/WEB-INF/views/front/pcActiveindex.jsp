@@ -44,12 +44,12 @@
 			<div class="word1 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_03.jpg" /></div>
 			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/shengdan/sdhd_06.jpg" ></a></div>	
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_09.jpg" ></a></div>
-				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_11.jpg" ></a></div>	
+				<div class="zss_link clearfix"><a href="${APP_PATH}/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_09.jpg" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/B-13x4-613-Straight-Wave-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_11.jpg" ></a></div>	
 			</div>
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_15.jpg" ></a></div>
-				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_16.jpg" ></a></div>	
+				<div class="zss_link clearfix"><a href="${APP_PATH}/B-13x4-Straight-Wave-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_15.jpg" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_16.jpg" ></a></div>	
 			</div>
 			<br />	<br />	<br />	<br />	<br />
 		</div>	
