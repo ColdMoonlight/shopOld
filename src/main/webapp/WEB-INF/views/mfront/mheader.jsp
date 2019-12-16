@@ -63,8 +63,8 @@
 <body>
   <!-- info -->
   <!--header  -->
-<!--   <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a> <span class="close"></span></div>
-    <div class="fixed_small"><a href="javascript:;"></a></div> -->
+  <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a> <span class="close"></span></div>
+    <div class="fixed_small"><a href="javascript:;"></a></div>
   <div class="header bd-b">
 <!-- 	  <div class="img_show">
 	  <a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/wapq.png" /></a>	
