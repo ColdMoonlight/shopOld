@@ -1783,7 +1783,15 @@
 					$(".addressstr").focus(function(){
 						$(this).removeClass("error_br")
 					})
-				}else if(codestr==null||codestr==''){
+				}else if(addressstr.length>100){
+				flag = 1;
+				// alert("addressstr is empty");
+				renderSysMsg('Street Address" length must be equal or less than 100 characters !')
+				$(".addreNo").addClass("error_br");
+				$(".addreNo").focus(function(){
+					$(this).removeClass("error_br")
+				})
+			   }else if(codestr==null||codestr==''){
 					flag = 1;
 					// alert("codestr is empty");
 					renderSysMsg('codestr is empty')

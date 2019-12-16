@@ -34,60 +34,71 @@
 </head>
 
 <body>
-  <jsp:include page="pcheader2.jsp"></jsp:include>
+  <jsp:include page="pcheader.jsp"></jsp:include>
   
-  <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/pc/css/active.css"/>
+  <link rel="stylesheet" type="text/css" href="${APP_PATH}/static/pc/css/shengdan.css"/>
 	<!-- main -->
-		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/ban21.jpg" /></div>
-		<div class="con_ban clearfix"><img src="${APP_PATH}/static/pc/huodong/banyh.png"/></div>	
+		<div class="hd_ban clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_01.jpg" /></div>
+		<div class="con_ban clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_02.jpg"/></div>	
 		<div class="box_con1 clearfix">
-			<div class="word1 clearfix"><img src="${APP_PATH}/static/pc/huodong/shan.gif" /></div>
-			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/huodong/mu_05.png" ></a></div>	
+			<div class="word1 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_03.jpg" /></div>
+			<div class="zs_link clearfix"><a href="${APP_PATH}/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/shengdan/sdhd_06.jpg" ></a></div>	
 			<div class="xia_two clearfix">
-				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/pc/huodong/mu_08.png" ></a></div>
-				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/huodong/um_05.png" ></a></div>	
+				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_09.jpg" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_11.jpg" ></a></div>	
 			</div>
-		   <div class="word2 clearfix"><img src="${APP_PATH}/static/pc/huodong/cont_16.png" /></div>
-			<div class="five_5cont clearfix"> <div id="product-block"></div></div>	
+			<div class="xia_two clearfix">
+				<div class="zss_link clearfix"><a href="${APP_PATH}/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_15.jpg" ></a></div>
+				<div class="zxx_link clearfix"><a href="${APP_PATH}/search/13x6-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_16.jpg" ></a></div>	
+			</div>
+			<br />	<br />	<br />	<br />	<br />
 		</div>	
+		<div class="yellowbg">
+			<div class="word2 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_19.jpg" /></div>
+			<div class="five_5cont clearfix"> <div id="product-block"></div></div>	
+			<br />	<br />	<br />	<br />	<br />
+		</div>
 		<div class="hongbg clearfix">
-			<div class="kong clearfix"></div>
+			 <div class="word3 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_21.jpg" /></div>
 			<div class="dwbox">
 				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 200px auto 0">
 						<div id="product-block2"></div>
 						<p class="morelink"><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html">VIEW MORE>></a></p>
-					</div>
 				</div>
 			</div>
+			<br />	<br />	<br />
 		</div>
 		<div class="box_con1 clearfix">
-			 <div class="word3 clearfix"><img src="${APP_PATH}/static/pc/huodong/cont_20.png" /></div>
+			 <div class="word3 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_23.jpg" /></div>
 			<div class="lei_cont clearfix">
 				<ul class="clearfix">
-					<li><a href="${APP_PATH}/search/360-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_03.png" ></a></li>
-					<li><a href="${APP_PATH}/search/Full-Lace-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_05.png" ></a></li>
-					<li><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_06.png" ></a></li>
-					<li><a href="${APP_PATH}/search/Bob-Wig.html"><img src="${APP_PATH}/static/pc/huodong/nk_07.png" ></a></li>
+					<li><a href="${APP_PATH}/search/360-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_26.jpg" ></a></li>
+					<li><a href="${APP_PATH}/search/Full-Lace-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_28.jpg" ></a></li>
+					<li><a href="${APP_PATH}/search/13x4-Lace-Frontal-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_30.jpg" ></a></li>
+					<li><a href="${APP_PATH}/search/Bob-Wig.html"><img src="${APP_PATH}/static/pc/shengdan/sdhd_32.jpg" ></a></li>
 				</ul>
+				<br />	<br />	<br /><br />	<br />
 			</div>
 			<div class="cont_mybox">
-				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 200px auto 0">
+				 <div class="word3 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_38.jpg" /></div>
+				<div class="product_box_cont producthuang clearfix">
+					<div class="">
 				    	<div id="product-block3"></div>
 						<!-- <p class="morelink"><a href="###">VIEW MORE>></a></p> -->
 					</div>
+					<br />	<br />	<br /><br />	<br />
 				</div>
-				<div class="product_box_cont clearfix">
-					<div class="" style="width:1325px; margin: 200px auto 0">
+				 <div class="word3 clearfix"><img src="${APP_PATH}/static/pc/shengdan/sdhd_21.jpg" /></div>
+				<div class="product_box_cont producthong clearfix">
+					<div class="" style="">
 				    	<div id="product-block4"></div>
 						<p class="morelink"><a href="${APP_PATH}/search/Bundle-With-Closure.html">VIEW MORE>></a></p>
 					</div>
+					<br />	<br />	<br />
+					<div class="link_home"><a href="${APP_PATH}/index.html">BACK TO HOME!</a></div>
+					<br />	<br />	<br />
 				</div>
-				
 			</div>
-			<div class="link_home"><a href="${APP_PATH}/index.html">BACK TO HOME!</a></div>
-			<br /><br /><br />
 		</div>
 		
 			
