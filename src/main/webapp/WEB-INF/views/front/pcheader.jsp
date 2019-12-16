@@ -46,9 +46,9 @@
 				</div>
 			</div> -->
 			<!-- account tip language -->
-			<a class="logosmall" href="${APP_PATH}/index.html">
+<!-- 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
-			</a>
+			</a> -->
 			<div class="alinktop"><a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
 			<div class="container head_box">
 				<!-- search logo cart -->
@@ -92,6 +92,7 @@
 							</ul>
 						</nav>
 					</div>
+					<a class="logosmall" href="${APP_PATH}/index.html"><img src="${APP_PATH }/static/m/img/index/logo.png" alt=""></a>
 				</div>
 				<!-- /tt-menu -->
 			</div>
