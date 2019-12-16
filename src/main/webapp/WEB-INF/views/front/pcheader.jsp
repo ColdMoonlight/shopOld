@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<div class="fixed_link"><a href="${APP_PATH}/NowActivity.html"></a></div>
+	<!-- <div class="fixed_link"><a href="${APP_PATH}/NowActivity.html"></a></div> -->
 	<header>
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
