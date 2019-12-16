@@ -35,12 +35,12 @@
 </head>
 
 <body>
-	<!-- <div class="fixed_link"><a href="${APP_PATH}/Friday.html"></a></div> -->
+	<div class="fixed_link"><a href="${APP_PATH}/NowActivity.html"></a></div>
 	<header>
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
 			<!-- <div class="img_show">
-				<a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/huodong/pcban.png" /></a> 
+				<a href="${APP_PATH}/NowActivity.html"><img src="${APP_PATH }/static/pc/huodong/pcban.png" /></a> 
 				<div class="img_show_cont">
 					<a href="javascript:;"></a>
 				</div>
@@ -49,7 +49,7 @@
 <!-- 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a> -->
-			<div class="alinktop"><a href="${APP_PATH}/Friday.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
+			<div class="alinktop"><a href="${APP_PATH}/NowActivity.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
 			<div class="container head_box">
 				<!-- search logo cart -->
 				<div class="header_holder">
