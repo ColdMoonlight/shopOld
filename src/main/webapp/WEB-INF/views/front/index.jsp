@@ -35,7 +35,7 @@
 
 <body>
 
-  <jsp:include page="pcheader2.jsp"></jsp:include>
+  <jsp:include page="pcheader.jsp"></jsp:include>
 
 
 
@@ -85,19 +85,27 @@
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
 				  var actshowprolei = data[i].actshowproIfproORcate;
-				  if(actshowprolei==0){
-							html += '<div class="swiper-slide">' +
-									'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
-									'</a>' +
-									'</div>';
-				  }else if(actshowprolei==1){
-							  html += '<div class="swiper-slide">' +
-							   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
-									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
-							  '</a>' +
-							  '</div>';
-				  }
+				   if(i==0|i==1){
+					   html += '<div class="swiper-slide">' +
+					    '<a href="${APP_PATH}/NowActivity.html">' +
+					   					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+					   '</a>' +
+					   '</div>';
+				   }else{
+					   if(actshowprolei==0){
+					   							html += '<div class="swiper-slide">' +
+					   									'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+					   									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+					   									'</a>' +
+					   									'</div>';
+					   }else if(actshowprolei==1){
+					   							  html += '<div class="swiper-slide">' +
+					   							   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+					   									'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+					   							  '</a>' +
+					   							  '</div>';
+					   }
+				   }
 			}
       parent.html(html);
     }
@@ -297,27 +305,26 @@
 			for (var i=0, len=data.length; i<len; i+=1) {
 				var slideIfinto_click = data[i].slideIfinto;
 				  var slidenum =data[i].slideFirthNum;
-				// console.log(slideIfinto_click);
+				console.log(slideIfinto_click);
 				if(slideIfinto_click==0){
 					html += '<div class="swiper-slide">' +
 						  '<a href="javascript:;" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
 						'</div>';
-				}
-				// else if(slidenum==1){
-				// 			     html += '<div class="swiper-slide">' +
-				// 			 	  '<a href="${APP_PATH}/NowActivity.html">' +
-				// 			 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-				// 			 		'</a>' +
-				// 			 	'</div>'; 
-				//   }
-				  // else if(slidenum==2){
-						// 	     html += '<div class="swiper-slide">' +
-						// 	 	  '<a href="${APP_PATH}/NowActivity.html">' +
-						// 	 				'<img src="' + data[i].slidePcimgurl + '" alt="">' +
-						// 	 		'</a>' +
-						// 	 	'</div>'; 
-				  // }
-				   else{
+				}else if(slidenum==1){
+							     html += '<div class="swiper-slide">' +
+								 '<a href="${APP_PATH}/NowActivity.html" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+							 	 //  '<a href="${APP_PATH}/NowActivity.html">' +
+							 		// 		'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							 		// '</a>' +
+							 	'</div>'; 
+				  }else if(slidenum==2){
+							     html += '<div class="swiper-slide">' +
+								 '<a href="${APP_PATH}/NowActivity.html" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+							 	 //  '<a href="${APP_PATH}/NowActivity.html">' +
+							 		// 		'<img src="' + data[i].slidePcimgurl + '" alt="">' +
+							 		// '</a>' +
+							 	'</div>'; 
+				  }else{
 					html += '<div class="swiper-slide">' +
 						 //  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
 							// 		'<img src="' + data[i].slidePcimgurl + '" alt="">' +
@@ -326,7 +333,6 @@
 							
 						'</div>';
 				}
-				
 			}
 			parent.html(html);
 		}
