@@ -34,7 +34,7 @@
 			<div class="tab-item active" data-id="all">All orders</div>
 			<div class="tab-item" data-id="0">Unpaid</div>
 			<div class="tab-item" data-id="1">Paid</div>
-			<div class="tab-item" data-id="2">Payment failed</div>
+			<div class="tab-item" data-id="2">TobeShipped</div>
 			<div class="tab-item" data-id="3">Shipped</div>
 		</div>
 		<div class="tab-content">
@@ -46,7 +46,7 @@
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
-	// 0未支付1已支付2,支付失败3,已发货;
+	// 0未支付1已支付2,已审核3,已发货;
 
 	var mainBox = $(".main .tab-content");
 	var containerBox = mainBox.find(".order-list");
@@ -54,7 +54,7 @@
 	var orderStatus = {
 		0: 'Unpaid',
 		1: 'Paid',
-		2: 'Payment failed',
+		2: 'TobeShipped',
 		3: 'Shipped',
 	}
 	//去首页
@@ -89,7 +89,7 @@
 				activeItem.removeClass('active');
 				$(this).addClass('active');
 				activeItem = $(this);
-				to_page(1, String($(this).data('id')));
+				to_page(i, String($(this).data('id')));
 			}
 		})
 	})
@@ -123,7 +123,7 @@
 					'<span class="order-status">' + (orderStatus[data[key].orderStatus]) + '</span>' +
 					'</div>' +
 					'<div class="order-item-body">';
-				var len = data[key].orderProNumStr.split(',').length;
+				var len = data[key].orderOrderitemidstr.split(',').length;
 				for (var i = 0; i < len; i++) {
 					var item = map.orderItemMap[map.orderMap[data[key].orderId][i]];
 					html += '<div class="order-item-item">' +

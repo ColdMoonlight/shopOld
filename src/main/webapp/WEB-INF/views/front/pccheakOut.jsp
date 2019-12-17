@@ -891,11 +891,11 @@
 						<li class="list-group-item">
 							<div class="group-title"><span>Choose Coupons</span> <!-- <span class="price-info"></span> --><!-- <iclass="icon right"></i> --></div>
 							<div class="sale_copen">
-								<p>The Big Promotion of Winter for Beauty, All items is already 50% off, then PLUS</p> 
-								<ul>
-									<li><span>10%</span> off upon order $30 with code: <b>WT10</b></li>
-									<li><span>12%</span> off upon order $200 with code: <b>WT12</b></li>
-								</ul>
+								<p> Merry Christmas! New Year, New Look! Crazy SALE is waiting you!</p> 
+							 	<ul>
+							 		<li>Extra <span>12% </span>off No Limit with code: <b>MH12</b></li>
+							 		<li>Extra<span>15%</span> off upon order $150 with code: <b>MH15</b></li>
+							 	</ul>
 							</div>
 							<div class="group-details coupons"></div>
 						</li>
@@ -1000,14 +1000,8 @@
 	   console.log(tips)
 		if(tips==="VALIDATION_ERROR"){
 			$(".errortips").show();
-		}else if(tips==="PAYMENT_ALREADY_DONE"){
-			$(".errortips").show();
-			$(".errortips").html("Please try again.Due to network problems, the link with PayPal payer could not be established successfully.")
-			//"Payment has been done already for this cart.")
-		}else if(tips==="INSTRUMENT_DECLINED"){
-			$(".errortips").show();
-			$(".errortips").html("Please try again.Due to network problems, the link with PayPal payer could not be established successfully.")
-			//The instrument presented  was either declined by the processor or bank, or it can't be used for this payment
+		}else{
+			$(".errortips").hide();
 		}
 		$(".select-province,.form-group .city,.form-group .code").click(function(){
 			$(".errortips").hide();
@@ -1573,7 +1567,7 @@
 			if (inputCheck9()==1){
 				return ;
 			} else{
-				
+				$(".loading").show();
 				// savr_address();  // addres 保存
 					var formData = $('.address-box form').serializeArray();
 					var reqData = formData.reduce(function (obj, item) {
@@ -1647,7 +1641,6 @@
 									success: function (data) {
 										var resData = JSON.parse(data).extend;
 										// console.log(data)
-										$(".loading").show();
 										window.location.href = '${APP_PATH }/paypal/ppay';
 									}
 								})
@@ -1790,7 +1783,15 @@
 					$(".addressstr").focus(function(){
 						$(this).removeClass("error_br")
 					})
-				}else if(codestr==null||codestr==''){
+				}else if(addressstr.length>100){
+				flag = 1;
+				// alert("addressstr is empty");
+				renderSysMsg('Street Address length must less than 100 characters !')
+				$(".addreNo").addClass("error_br");
+				$(".addreNo").focus(function(){
+					$(this).removeClass("error_br")
+				})
+			   }else if(codestr==null||codestr==''){
 					flag = 1;
 					// alert("codestr is empty");
 					renderSysMsg('codestr is empty')

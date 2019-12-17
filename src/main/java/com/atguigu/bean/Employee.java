@@ -25,8 +25,6 @@ public class Employee {
     //希望查询员工的同时部门信息也是查询
     private Department department;
     
-
-    
     @Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", empName=" + empName

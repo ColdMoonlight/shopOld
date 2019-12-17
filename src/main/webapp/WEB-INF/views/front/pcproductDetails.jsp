@@ -51,11 +51,10 @@
 			<div class="product-details clearfix"> </div>
 		</div>
 	</div>
-	
-	<div class="win-box review-box hide">
+	<div class="maskreview"></div>
+	<div class="win-box review-box review-box-cont hide">
 		<div class="win-box-title">
-			<span class="review-cancel">cancel</span>
-			<span class="review-ok">publish</span>
+			<span class="review-cancel">x</span>
 		</div>
 		<div class="win-box-content">
 			<div class="review-box-item">
@@ -88,8 +87,10 @@
 						<i class="icon plus"></i>
 					</div>
 					<div class="reviews-img-box"></div>
+					<div class="maskdd"></div>
 				</div>
 			</div>
+			<span class="review-ok">publish</span>
 		</div>
 	</div>
 
@@ -586,6 +587,7 @@
 					}
 				});
 				$('.review-box').removeClass('hide');
+				$(".maskreview").show();
 			});
 			// close review box
 			$('.review-cancel').on('click', function() {
@@ -602,12 +604,22 @@
 				})
 			});
 			// add reivew imgs
+			// $('.review-img-add').on('click', function() {
+			// 	if (imgCount > 5) {
+			// 		renderSysMsg('Upload up to 5 review images');
+			// 	} else {
+			// 		uploadfu($(this).parent(), $(this).find('input')[0]);
+			// 	}
+			// })
 			$('.review-img-add').on('click', function() {
-				if (imgCount > 5) {
-					renderSysMsg('Upload up to 5 review images');
-				} else {
+				if (imgCount ==5) {
+			     	$('.maskdd').show();
+				}else {
 					uploadfu($(this).parent(), $(this).find('input')[0]);
 				}
+			})
+			$('.maskdd').on('click', function() {
+				renderSysMsg('Upload up to 5 review images');
 			})
 			// save a reivew
 			$('.review-ok').on('click', function() {

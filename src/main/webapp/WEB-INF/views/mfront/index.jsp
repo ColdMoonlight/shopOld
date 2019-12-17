@@ -44,7 +44,7 @@
 </head>
 
 <body>
-  <jsp:include page="mheader.jsp"></jsp:include>
+  <jsp:include page="mheader2.jsp"></jsp:include>
   <!-- main -->
   <div class="main">
     <!-- sale -->
@@ -77,7 +77,7 @@
    <div class="mask maskindex" style="display: none;"></div>
    <div class="go_re" style="display: none;">
 	   <span class="close">×</span> 
-	   <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/tyu.jpg"></a>
+	   <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a>
    </div>
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
@@ -86,14 +86,13 @@
       var html = '';
       for (var i = 0; i < data.length; i += 1) {
 		  var actshowprolei = data[i].actshowproIfproORcate;
-		  // if(i==0|i==1){
-			 //  html += '<div class="swiper-slide">' +
-			 //   '<a href="${APP_PATH}/Friday.html">' +
-				// 	'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-			 //  '</a>' +
-			 //  '</div>';
-		  // }else{
-			  // var actshowprolei = data[i].actshowproIfproORcate;
+		  if(i==0|i==1){
+			  html += '<div class="swiper-slide">' +
+			   '<a href="${APP_PATH}/Activty.html">' +
+					'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
+			  '</a>' +
+			  '</div>';
+		  }else{
 			  if(actshowprolei==0){
 			  			  html += '<div class="swiper-slide">' +
 			  			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
@@ -106,9 +105,8 @@
 			  			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 			  			  '</a>' +
 			  			  '</div>';
-			  			  
 			  }
-		  // }
+		  }
 		  
 		  
         
@@ -378,31 +376,25 @@
 						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
 						  			'</a>' +
 						  		'</div>';
-						  }
-						  // else if(slidenum==1){
-							 //     html += '<div class="swiper-slide">' +
-							 // 	  '<a href="${APP_PATH}/Friday.html">' +
-							 // 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-							 // 		'</a>' +
-							 // 	'</div>'; 
-						  // }
-						  // else if(slidenum==2){
-							 //     html += '<div class="swiper-slide">' +
-							 // 	  '<a href="${APP_PATH}/Friday.html">' +
-							 // 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-							 // 		'</a>' +
-							 // 	'</div>'; 
-						  // } 
-						  else{
+						  }else if(slidenum==1){
+							     html += '<div class="swiper-slide">' +
+							 	  '<a href="${APP_PATH}/Activty.html">' +
+							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							 		'</a>' +
+							 	'</div>'; 
+						  }else if(slidenum==2){
+							     html += '<div class="swiper-slide">' +
+							 	  '<a href="${APP_PATH}/Activty.html">' +
+							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
+							 		'</a>' +
+							 	'</div>'; 
+						  } else{
 						  	html += '<div class="swiper-slide">' +
 						  		  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
 						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
 						  			'</a>' +
 						  		'</div>';
 						  }
-						  
-						  
-						  
 							
 					  }
 					  parent.html(html);
@@ -424,8 +416,10 @@
 							  new Swiper('#ban_silder', {
 								freeMode: true,
 								autoplay: {
-								    disableOnInteraction: false,
-								  },
+								   delay: 5000,
+								   stopOnLastSlide: false,
+								   disableOnInteraction: false,
+								   },
 									pagination: {
 										el: '.swiper-pagination',
 										clickable: true

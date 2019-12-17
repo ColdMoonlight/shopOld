@@ -37,4 +37,8 @@
         <from>^/Friday.html</from>
         <to>/MlActive/ActiveIndex</to>
     </rule>
+    <rule>
+        <from>^/Activty.html</from>
+        <to>/MlActive/NowActiveIndex</to>
+    </rule>
 </urlrewrite>

@@ -460,13 +460,13 @@
   <!-- selectMlfrontOrderByUidAndStatus使用中 -->
   <select id="selectMlfrontOrderByUidAndStatus" parameterType="com.atguigu.bean.MlfrontOrder" resultMap="BaseResultMap">
     select *
-    from tb_mlfront_order where order_uid = #{orderUid,jdbcType=INTEGER} and #{orderStatus,jdbcType=INTEGER} order by order_id desc
+    from tb_mlfront_order where order_uid = #{orderUid,jdbcType=INTEGER} and #{orderStatus,jdbcType=INTEGER} and addressinfo_id>0 order by order_id desc
   </select>
   
   <!-- selectMlfrontOrderByUid使用中 -->
   <select id="selectMlfrontOrderByUidOnly" parameterType="com.atguigu.bean.MlfrontOrder" resultMap="BaseResultMap">
     select *
-    from tb_mlfront_order where order_uid = #{orderUid,jdbcType=INTEGER} order by order_id desc
+    from tb_mlfront_order where order_uid = #{orderUid,jdbcType=INTEGER} and addressinfo_id>0 order by order_id desc
   </select>
   
 </mapper>

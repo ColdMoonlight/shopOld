@@ -53,6 +53,18 @@ public class MlfrontReviewController {
 		return "back/mlbackReviewPage";
 	}
 	
+	/**
+	 * 1.1	useOn	0505
+	 * 后台toMlfrontReviewManage高级管理页面
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/toMlfrontReviewManage")
+	public String toMlfrontReviewManage() throws Exception{
+	
+		return "back/toMlfrontReviewManage";
+	}
+	
 	
 	/**2.0	useOn	0505
 	 * 分类MlbackCoupon列表分页list数据

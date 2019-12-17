@@ -29,7 +29,13 @@
 	<jsp:include page="mheader.jsp"></jsp:include>
 
 	<!-- main -->
-	<div class="main coupon-info"></div>
+	<div class="main">
+		<br />
+		<div class="coupon-info">
+			
+		</div>
+		
+	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>

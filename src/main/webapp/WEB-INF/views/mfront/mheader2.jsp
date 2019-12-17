@@ -63,14 +63,22 @@
 <body>
   <!-- info -->
   <!--header  -->
+  <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a> <span class="close"></span></div>
+    <div class="fixed_small"><a href="javascript:;"></a></div>
   <div class="header bd-b">
-	  <div class="info_adv">
-	  	<!-- <p style="text-align: center;">Free Shipping World Wide.</p> -->
+	  <div class="img_show">
+	  <a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
+	  	<div class="img_show_cont">
+	  		<a href="javascript:;"></a>
+	  	</div>
+	  </div>
+<!-- 	  <div class="info_adv">
+	  	<p style="text-align: center;">Free Shipping World Wide.</p>
 	  	<div id="adv_silder">
 	  		<div class="swiper-wrapper">
 	  		</div>
 	  	</div>
-	  </div>
+	  </div> -->
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
@@ -118,6 +126,18 @@
 
   <script>
 	  $(function(){
+		  
+		  
+		  $(window).scroll(function(){
+			   var scrollhead=$(window).scrollTop();
+			   if(scrollhead>5){
+				   $(".header").addClass("headActive")
+			   }else{
+				   $(".header").removeClass("headActive")
+			   }
+		  });
+		  
+		  /*****************************/
 	  	$(".fixed_link .close").click(function(){
 	  		$(".fixed_link").addClass("active");
 	  		$(".fixed_small").addClass("active");
@@ -367,11 +387,11 @@
 					  // console.log(resData)/****************首页广告******/
 						rednertop(banneradv, resData);
 						  new Swiper('#adv_silder', {
-							freeMode: true,
-							loop:true,
-							autoplay: {
-							    disableOnInteraction: false,
-							  },
+							// freeMode: true,
+							// loop:true,
+							// autoplay: {
+							//     disableOnInteraction: false,
+							//   },
 							})
 					  // console.log(resData);
 					 // rednertop(bannerfirst,resData)
