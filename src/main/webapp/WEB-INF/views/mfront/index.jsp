@@ -416,8 +416,10 @@
 							  new Swiper('#ban_silder', {
 								freeMode: true,
 								autoplay: {
-								    disableOnInteraction: false,
-								  },
+								   delay: 5000,
+								   stopOnLastSlide: false,
+								   disableOnInteraction: false,
+								   },
 									pagination: {
 										el: '.swiper-pagination',
 										clickable: true
