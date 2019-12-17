@@ -891,11 +891,11 @@
 						<li class="list-group-item">
 							<div class="group-title"><span>Choose Coupons</span> <!-- <span class="price-info"></span> --><!-- <iclass="icon right"></i> --></div>
 							<div class="sale_copen">
-								<p>The Big Promotion of Winter for Beauty, All items is already 50% off, then PLUS</p> 
-								<ul>
-									<li><span>10%</span> off upon order $30 with code: <b>WT10</b></li>
-									<li><span>12%</span> off upon order $200 with code: <b>WT12</b></li>
-								</ul>
+								<p> Merry Christmas! New Year, New Look! Crazy SALE is waiting you!</p> 
+							 	<ul>
+							 		<li>Extra <span>12% </span>off No Limit with code: <b>MH12</b></li>
+							 		<li>Extra<span>15%</span> off upon order $150 with code: <b>MH15</b></li>
+							 	</ul>
 							</div>
 							<div class="group-details coupons"></div>
 						</li>
