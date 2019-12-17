@@ -1786,7 +1786,7 @@
 				}else if(addressstr.length>100){
 				flag = 1;
 				// alert("addressstr is empty");
-				renderSysMsg('Street Address length must be equal or less than 100 characters !')
+				renderSysMsg('Street Address length must less than 100 characters !')
 				$(".addreNo").addClass("error_br");
 				$(".addreNo").focus(function(){
 					$(this).removeClass("error_br")
