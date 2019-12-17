@@ -358,10 +358,12 @@
 					},
 					 simulateTouch : false,//禁止鼠标模拟
 					 loop:true,
-					// autoplay: {delay: 3000,},
-					autoplay: {
-					    disableOnInteraction: false,
-					  },
+					   autoplay: {
+					      delay: 5000,
+					      stopOnLastSlide: false,
+					      disableOnInteraction: false,
+					      },
+					  
 					  navigation: {
 						nextEl: '.swiper-button-nexta',
 						prevEl: '.swiper-button-preva',
