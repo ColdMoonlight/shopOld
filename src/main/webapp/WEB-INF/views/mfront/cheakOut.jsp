@@ -1010,14 +1010,107 @@
 		var couponPriceOld =0;
 		var addressIdIntInt;
 		var jiecountry;
-		
+		var resttt;
 
+		/*******************/
+				function renderAddressDetail(data) {
+					// console.log("renderAddressDetail")		
+					// console.log(data)
+					// console.log("renderAddressDetail")	
+			    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
+					$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
+					$("input.email").val(data.addressEmail ? data.addressEmail : '');
+					$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
+					$("input.address").val(data.addressDetail ? data.addressDetail : '');
+					$("input.code").val(data.addressPost ? data.addressPost : '');
+					$("input.city").val(data.addressCity ? data.addressCity : '');
+					
+					// $("input.province").val(data.addressProvince ? data.addressProvince : '');
+					// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+					var dataprov =data.addressProvince;
+					// var datacountry =data.addressCountryAll;
+					 jiecountry =data.addressCountry;
+					$("#country option:checked").attr("value",jiecountry);
+					$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : ''); 
+					$("#country").attr("data-name",jiecountry);
+					// $("#country").attr("data-country",datacountry);
+					var dataname =$("#country").data("name");
+					datalocation (dataname)
+					// console.log("***dataprov****");
+					// console.log(dataprov);
+					// console.log("***dataprov****");
+					if(dataprov==null||dataprov==""){
+						 $(".form-group_select").hide();
+						 $(".form-group_select").removeClass("selectActive")
+						 $(".form-groupcountry").css("width","100%")
+					}else{
+						$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
+						$(".select-province option:checked").attr("value",dataprov);
+						$(".select-province").val(data.addressProvince ? data.addressProvince : ''); 
+						$(".form-group_select").addClass("selectActive");
+						$(".form-groupcountry").css("width","50%");
+					}
+					$("#country").val(data.addressCountry ? data.addressCountry : ''); 
+				}
+				/* 初始化地址模块 */
+				$.ajax({
+					url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
+					type: 'post',
+					async: false,
+					success: function (data) {
+						// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+						// console.log(data)
+						// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+						var resDataAddress = data.extend.mlfrontAddressOne;
+						resttt=resDataAddress;
+						// console.log("resDataAddress")
+						// console.log(resDataAddress)/******/
+						// console.log("resDataAddress")
+						var resDataUserType = data.extend.usertype;
+						addressId = resDataAddress ? resDataAddress.addressId : null;
+						resDataMoney = data.extend.areafreightMoney;
+						var addressBox = $('.address');
+						var couponBox = $('.coupons');
+						// console.log(data)
+						renderCoupons(couponBox, resDataUserType);
+						if (resDataAddress) {
+							renderAddressDetail(resDataAddress);
+							
+							$('.address-id').val(resDataAddress.addressId);
+							// console.log(resDataAddress.addressId)/******/
+							$('.shipping').find('span').text(' of $' + resDataMoney);
+							shippingPriceText.text('$' + resDataMoney)
+							$(".address").addClass("active")
+							var addProvince = resDataAddress.addressProvince;
+							var addProvinceCode = resDataAddress.addressProvinceCode;
+							// console.log("addProvince:"+addProvince);
+							// console.log("addProvinceCode:"+addProvinceCode);
+							if(!addProvinceCode){
+								 $(".form-groupcountry").css("width","100%");
+							}
+						} else {
+							// renderAddressAdd(addressBox);
+							$('.shipping').find('span').text(' of $' + resDataMoney);
+							shippingPriceText.text('$' + resDataMoney)
+						}
+		
+						var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+		
+						subtotalPriceText.text('$' + subtotalText);
+						
+					}
+				});
+			  if(resttt==null){
+				var dataname="US";
+				datalocation (dataname)  
+			  }
 		function datalocation (dataname){
 			$.ajax({
 				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
 				  data: JSON.stringify({
 					"addressCountry": dataname
 				  }),
+				  async: false,
 				  type: 'post',
 				  dataType: 'JSON',
 				  contentType: 'application/json',
@@ -1026,8 +1119,8 @@
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
-					console.log(mlPaypalStateprovinceList)
-					console.log(mlPaypalStateprovinceList.length)
+					// console.log(mlPaypalStateprovinceList)
+					// console.log(mlPaypalStateprovinceList.length)
                     if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
@@ -1047,8 +1140,7 @@
 				  }
 				});
 		}
-		var dataname="US";
-		datalocation (dataname)
+		
 		$("#country").bind("change",function(){
 			var radio_zt =$(".coupons .coupon-item input[type='radio']");
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
@@ -1069,8 +1161,8 @@
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
-					console.log(mlPaypalStateprovinceList)
-					console.log(mlPaypalStateprovinceList.length)
+					// console.log(mlPaypalStateprovinceList)
+					// console.log(mlPaypalStateprovinceList.length)
 					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
@@ -1093,82 +1185,6 @@
 		});
 /*******************/
 
-/*******************/
-		function renderAddressDetail(data) {
-			console.log(data)
-	    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
-			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
-			$("input.email").val(data.addressEmail ? data.addressEmail : '');
-			$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
-			$("input.address").val(data.addressDetail ? data.addressDetail : '');
-			$("input.code").val(data.addressPost ? data.addressPost : '');
-			$("input.city").val(data.addressCity ? data.addressCity : '');
-			
-			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
-			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-			var dataprov =data.addressProvince;
-			// var datacountry =data.addressCountryAll;
-			 jiecountry =data.addressCountry;
-			$("#country option:checked").attr("value",jiecountry);
-			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : ''); 
-			$("#country").attr("data-name",jiecountry);
-			// $("#country").attr("data-country",datacountry);
-			var dataname =$("#country").data("name");
-			datalocation (dataname)
-			console.log("***dataprov****");
-			console.log(dataprov);
-			console.log("***dataprov****");
-			if(dataprov==null||dataprov==""){
-				 $(".form-group_select").hide();
-				 $(".form-group_select").removeClass("selectActive")
-				 $(".form-groupcountry").css("width","100%")
-			}else{
-				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
-				$(".select-province option:checked").attr("value",dataprov);
-				$(".select-province").val(data.addressProvince ? data.addressProvince : ''); 
-				$(".form-group_select").addClass("selectActive");
-				$(".form-groupcountry").css("width","50%");
-			}
-			$("#country").val(data.addressCountry ? data.addressCountry : ''); 
-		}
-		/* 初始化地址模块 */
-		$.ajax({
-			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
-			type: 'post',
-			success: function (data) {
-				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				console.log(data)
-				var resDataAddress = data.extend.mlfrontAddressOne;
-				console.log(resDataAddress)/******/
-				var resDataUserType = data.extend.usertype;
-				addressId = resDataAddress ? resDataAddress.addressId : null;
-				resDataMoney = data.extend.areafreightMoney;
-				var addressBox = $('.address');
-				var couponBox = $('.coupons');
-				// console.log(data)
-				renderCoupons(couponBox, resDataUserType);
-				if (resDataAddress) {
-					renderAddressDetail(resDataAddress);
-					$('.address-id').val(resDataAddress.addressId);
-					// console.log(resDataAddress.addressId)/******/
-					$('.shipping').find('span').text(' of $' + resDataMoney);
-					shippingPriceText.text('$' + resDataMoney)
-					$(".address").addClass("active")
-				} else {
-					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text(' of $' + resDataMoney);
-					shippingPriceText.text('$' + resDataMoney)
-				}
-
-				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-
-				subtotalPriceText.text('$' + subtotalText);
-				
-			}
-		});
-         
-			
-			
 			
 		$('.address-box .cancel').on('click', function () {
 			$('.address-box').hide();
