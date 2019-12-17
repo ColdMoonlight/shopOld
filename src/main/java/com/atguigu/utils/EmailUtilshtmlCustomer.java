@@ -40,7 +40,6 @@ public class EmailUtilshtmlCustomer {
 	}
 	
 	public static void readyEmailVerifyCustomer(String getToEmail, String message, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
-		// TODO Auto-generated method stub
 		sendEmilVerifyCustomer(getToEmail, message, toCustomerVerifyInfoStr,payinfoPlateNum);
 	}
 	

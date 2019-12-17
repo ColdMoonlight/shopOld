@@ -28,15 +28,20 @@ import com.paypal.base.rest.PayPalRESTException;
 public class PaypalService {
 	
 	
-	//开发环境
-	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
-	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
-	String mode="sandbox";
+	//开发环境-shaohua
+//	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
+//	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
+//	String mode="sandbox";
+	
+	//开发环境-boss
+//	String clientId = "AZTtkPd6LowZG2KewtB3TAHIu3WeqcM6VCgp2xB4ShixmnAgOxskEgwdWEM9Qv0fc3Ln2DLVy6xPLPFN";
+//	String clientSecret = "EANTizGHYqb_0rWbPKlDD-otKQwi0k7RN6xvDiWtZNZY1gSyO71VrCpzvy6xTzGPVC5VxB6U66wjndYM";
+//	String mode="sandbox";
 	
 //	//mogalook环境
-//	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
-//	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
-//    String mode="live";
+	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
+	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
+    String mode="live";
     
 	//陈鹏账户
 //    String clientId="AbYhYseSfoEHsp02nyg6O3A1NowoKN00tWYvwAYErFKy0T7FDUkHENMMP7TTDqn0bP9LKISVJILgx3G5";
