@@ -52,8 +52,8 @@
 										<th>wap状态</th>
 										<th>PC图</th>
 										<th>pc状态</th>
-										<th>产品id</th>
-										<th>产品名字</th>
+										<th>产品/类/专题页</th>
+										<th>产品id/类id/</th>
 										<th>产品Seo</th>
 										<th>if可点进</th>
 										<th>修改时间</th>
@@ -158,8 +158,16 @@
 				var slidePcimgurl = $("<td></td>").append(imagepc);
 				var slidePcstatus = $("<td></td>").append((item.slidePcstatus === 1 ? '展示' : '不展示'));
 				
+				//var slideProname = $("<td width=400></td>").append(item.slideProname);
+				var slideIfproORcateORpage="单品";
+				if(item.slideIfproORcateORpage==1){
+					slideIfproORcateORpage = $("<td></td>").append("类");
+				}else if(item.slideIfproORcateORpage==2){
+					slideIfproORcateORpage = $("<td></td>").append("专题页");
+				}else{
+					slideIfproORcateORpage = $("<td></td>").append("单品")
+				}
 				var slideProid = $("<td></td>").append(item.slideProid);
-				var slideProname = $("<td width=400></td>").append(item.slideProname);
 				var slideSeoname = $("<td></td>").append(item.slideSeoname);
 				var slideIfinto = $("<td></td>").append((item.slideIfinto === 1 ? '可点进' : '不可点进'));
 				var slideMotifytime = $("<td></td>").append(item.slideMotifytime);
@@ -181,8 +189,9 @@
 					.append(slideWapstatus)
 					.append(slidePcimgurl)
 					.append(slidePcstatus)
+					.append(slideIfproORcateORpage)
 					.append(slideProid)
-					.append(slideProname)
+					//.append(slideProname)
 					.append(slideSeoname)
 					.append(slideIfinto)
 					.append(slideMotifytime)
@@ -383,6 +392,7 @@
 				$(":input[name='slideMotifytime']").val(data.slideMotifytime);
 				
 				var slideProid = $("<td></td>").append(data.slideProid);
+				$(":input[name='slideIfproORcateORpage']").val(data.slideIfproORcateORpage);
 				var slideIfinto = $("<td></td>").append((data.slideIfinto === 1 ? '可点进' : '不可点进'));
 				var slideMotifytime = $("<td></td>").append(data.slideMotifytime);
 			}
