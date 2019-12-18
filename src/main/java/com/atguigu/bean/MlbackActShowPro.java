@@ -17,6 +17,8 @@ public class MlbackActShowPro {
 
     private String actshowproCatename;	//产品名字
     
+    private String actshowproPageSeoname;	//活动seo路径名字
+    
     private Integer actshowproIfproORcate;	//产品Seo名字
 
     private String actshowproImgwapurl;	//活动品wap端图
@@ -95,6 +97,14 @@ public class MlbackActShowPro {
 		this.actshowproCatename = actshowproCatename == null ? null : actshowproCatename.trim();
 	}
 
+	public String getActshowproPageSeoname() {
+		return actshowproPageSeoname;
+	}
+
+	public void setActshowproPageSeoname(String actshowproPageSeoname) {
+		this.actshowproPageSeoname = actshowproPageSeoname == null ? null : actshowproPageSeoname.trim();
+	}
+
 	public Integer getActshowproIfproORcate() {
 		return actshowproIfproORcate;
 	}
@@ -157,9 +167,9 @@ public class MlbackActShowPro {
 
 	public MlbackActShowPro(Integer actshowproId, String actshowproName, Integer actshowproActnum,
 			Integer actshowproProid, String actshowproProname, String actshowproSeoname, Integer actshowproCateid,
-			String actshowproCatename, Integer actshowproIfproORcate, String actshowproImgwapurl,
-			String actshowproImgpcurl, Integer actshowproStatus, Integer actshowproOrderth, String actshowproCreatetime,
-			String actshowproMotifytime) {
+			String actshowproCatename, String actshowproPageSeoname, Integer actshowproIfproORcate,
+			String actshowproImgwapurl, String actshowproImgpcurl, Integer actshowproStatus, Integer actshowproOrderth,
+			String actshowproCreatetime, String actshowproMotifytime) {
 		super();
 		this.actshowproId = actshowproId;
 		this.actshowproName = actshowproName;
@@ -169,6 +179,7 @@ public class MlbackActShowPro {
 		this.actshowproSeoname = actshowproSeoname;
 		this.actshowproCateid = actshowproCateid;
 		this.actshowproCatename = actshowproCatename;
+		this.actshowproPageSeoname = actshowproPageSeoname;
 		this.actshowproIfproORcate = actshowproIfproORcate;
 		this.actshowproImgwapurl = actshowproImgwapurl;
 		this.actshowproImgpcurl = actshowproImgpcurl;
@@ -184,10 +195,11 @@ public class MlbackActShowPro {
 				+ ", actshowproActnum=" + actshowproActnum + ", actshowproProid=" + actshowproProid
 				+ ", actshowproProname=" + actshowproProname + ", actshowproSeoname=" + actshowproSeoname
 				+ ", actshowproCateid=" + actshowproCateid + ", actshowproCatename=" + actshowproCatename
-				+ ", actshowproIfproORcate=" + actshowproIfproORcate + ", actshowproImgwapurl=" + actshowproImgwapurl
-				+ ", actshowproImgpcurl=" + actshowproImgpcurl + ", actshowproStatus=" + actshowproStatus
-				+ ", actshowproOrderth=" + actshowproOrderth + ", actshowproCreatetime=" + actshowproCreatetime
-				+ ", actshowproMotifytime=" + actshowproMotifytime + "]";
+				+ ", actshowproPageSeoname=" + actshowproPageSeoname + ", actshowproIfproORcate="
+				+ actshowproIfproORcate + ", actshowproImgwapurl=" + actshowproImgwapurl + ", actshowproImgpcurl="
+				+ actshowproImgpcurl + ", actshowproStatus=" + actshowproStatus + ", actshowproOrderth="
+				+ actshowproOrderth + ", actshowproCreatetime=" + actshowproCreatetime + ", actshowproMotifytime="
+				+ actshowproMotifytime + "]";
 	}
 
 }
