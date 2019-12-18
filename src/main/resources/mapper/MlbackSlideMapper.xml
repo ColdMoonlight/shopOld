@@ -13,14 +13,12 @@
     <result column="slide_proid" jdbcType="INTEGER" property="slideProid" />
     <result column="slide_proname" jdbcType="VARCHAR" property="slideProname" />
     <result column="slide_seoname" jdbcType="VARCHAR" property="slideSeoname" />
-    
     <result column="slide_cateid" jdbcType="INTEGER" property="slideCateid" />
     <result column="slide_catename" jdbcType="VARCHAR" property="slideCatename" />
     <result column="slide_cateSeoname" jdbcType="VARCHAR" property="slideCateSeoname" />
     <result column="slide_ifproORcateORpage" jdbcType="INTEGER" property="slideIfproORcateORpage" />
     <result column="slide_pagename" jdbcType="VARCHAR" property="slidePagename" />
     <result column="slide_pageSeoname" jdbcType="VARCHAR" property="slidePageSeoname" />
-    
     <result column="slide_ifinto" jdbcType="INTEGER" property="slideIfinto" />
     <result column="slide_createTime" jdbcType="VARCHAR" property="slideCreatetime" />
     <result column="slide_motifyTime" jdbcType="VARCHAR" property="slideMotifytime" />
