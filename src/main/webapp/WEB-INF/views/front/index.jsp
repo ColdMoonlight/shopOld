@@ -85,15 +85,6 @@
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
 				  var actshowprolei = data[i].actshowproIfproORcate;
-				   // if(i==0|i==1){
-					  //  html += '<div class="swiper-slide">' +
-					  //   '<a href="${APP_PATH}/Activty.html">' +
-					  //  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
-					  //  '</a>' +
-					  //  '</div>';
-				   // }else{
-					   
-				   // }
 				   if(actshowprolei==0){
 						html += '<div class="swiper-slide">' +
 								'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
@@ -106,6 +97,12 @@
 							'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 					  '</a>' +
 					  '</div>';
+				   }else if(actshowprolei==2){
+					html += '<div class="swiper-slide">' +
+							'<a href="${APP_PATH}/' + data[i].actshowproPageSeoname + '.html">' +
+							'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+							'</a>' +
+							'</div>';
 				   }
 			}
       parent.html(html);

@@ -165,7 +165,17 @@
 				var actshowproImgpcurl = $("<td></td>").append(imagepc);
 				
 				var actshowproStatus = $("<td></td>").append((item.actshowproStatus === 1 ? '已上架' : '未上架'));
-				var actshowproIfproORcate = $("<td></td>").append((item.actshowproIfproORcate === 1 ? '类' : '产品'));
+				// var actshowproIfproORcate = $("<td></td>").append((item.actshowproIfproORcate === 1 ? '类' : '产品'));
+				var actshowproIfproORcate="单品";
+				if(item.actshowproIfproORcate==1){
+					actshowproIfproORcate = $("<td></td>").append("类");
+				}else if(item.actshowproIfproORcate==2){
+					actshowproIfproORcate = $("<td></td>").append("专题页");
+				}else{
+					actshowproIfproORcate = $("<td></td>").append("单品")
+				}
+				
+				
 				var actshowproOrderth = $("<td></td>").append(item.actshowproOrderth);
 				var actshowproCreatetime = $("<td></td>").append(item.actshowproCreatetime);
 				var actshowproMotifytime = $("<td></td>").append(item.actshowproMotifytime);
@@ -372,15 +382,21 @@
 				// 设置归属类
 				getCategoryDown();
 				getLeiDown()
-				$(".lei_select").hide()
-				 $(".cp_orlei select").change(function() {
+				$(".lei_select").hide();
+				$(".zt_select").hide();
+				$(".cp_orlei select").change(function() {
 					if($(this).val() == 0 ) {
-						$(".cp_select").show()
-						$(".lei_select").hide()
+						$(".cp_select").show();
+						$(".lei_select").hide();
+						$(".zt_select").hide();
 					} else if($(this).val() == 1) {
-					    $(".lei_select").show()
-						$(".cp_select").hide()
-						
+					    $(".lei_select").show();
+						$(".cp_select").hide();
+						$(".zt_select").hide();
+					}else if($(this).val() == 2){
+						$(".lei_select").hide();
+						$(".cp_select").hide();
+						$(".zt_select").show();
 					}
 				})
 				
@@ -420,6 +436,7 @@
 				$(":input[name='actshowproProid']").val(data.actshowproProid);
 				$(":input[name='actshowproCateid']").val(data.actshowproCateid);/*****************/
 				$(":input[name='actshowproProname']").val(data.actshowproProname);
+				$(":input[name='actshowproPageSeoname']").val(data.actshowproPageSeoname);
 				if (data.actshowproImgwapurl && data.actshowproImgwapurl.length) {
 					var el = $(".upload-img-btn.img");
 					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
@@ -432,11 +449,27 @@
 				}
 				$(":input[name='actshowproStatus']").val(data.actshowproStatus);
 				$(":input[name='actshowproOrderth']").val(data.actshowproOrderth);
+				// $(":input[name='actshowproIfproORcate']").val(data.actshowproIfproORcate);
+				// if(data.actshowproIfproORcate==1){
+				// 	$(".cp_select").hide();
+				// 	$(".lei_select").show();
+				// }
 				$(":input[name='actshowproIfproORcate']").val(data.actshowproIfproORcate);
-				if(data.actshowproIfproORcate==1){
+				if(data.actshowproIfproORcate==0){
+					$(".zt_select").hide();
+					$(".lei_select").hide();
+					$(".cp_select").show();
+				}else if(data.actshowproIfproORcate==1){
 					$(".cp_select").hide();
+					$(".zt_select").hide();
 					$(".lei_select").show();
+				}else if(data.actshowproIfproORcate==2){
+					$(".cp_select").hide();
+					$(".lei_select").hide();
+					$(".zt_select").show();
 				}
+				
+				
 			}
 
 		});
