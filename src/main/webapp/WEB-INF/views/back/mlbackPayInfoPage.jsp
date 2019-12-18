@@ -135,6 +135,8 @@
 					var payinfoStatus = $("<td class='ysh_bg'></td>").append('<b>已审核</b>');//绿
 				}else if(item.payinfoStatus ===3){
 					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
+				}else if(item.payinfoStatus ===4){
+					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已退款</b>');//黑
 				}
 				
 				// console.log(payinfoStatuscd)/**/
