@@ -370,26 +370,27 @@
 					  var html = '';
 					  for (var i = 0; i < data.length; i += 1) {
 						  var slideIfinto_click = data[i].slideIfinto;
-						  var slidenum =data[i].slideFirthNum;
-						  // console.log(slideIfinto_click);
+						 	var slideIfproORcateORpage =data[i].slideIfproORcateORpage;
 						  if(slideIfinto_click==0){
 						  	html += '<div class="swiper-slide">' +
 						  		  '<a href="javascript:;">' +
 						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
 						  			'</a>' +
 						  		'</div>';
-						  }else if(slidenum==1){
-							     html += '<div class="swiper-slide">' +
-							 	  '<a href="${APP_PATH}/Activty.html">' +
-							 				'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-							 		'</a>' +
-							 	'</div>'; 
 						  }else{
-						  	html += '<div class="swiper-slide">' +
-						  		  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-						  					'<img src="' + data[i].slideWapimgurl + '" alt="">' +
-						  			'</a>' +
-						  		'</div>';
+							  if(slideIfproORcateORpage==0){
+								  html += '<div class="swiper-slide">' +
+								  	  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +'<img src="' + data[i].slideWapimgurl + '" alt="">' +	'</a>' +
+								  	'</div>';
+							  }else if(slideIfproORcateORpage==1){
+								  html += '<div class="swiper-slide">' +
+								  	  '<a href="${APP_PATH}/search/' + data[i].slideCateSeoname + '.html">' +'<img src="' + data[i].slideWapimgurl + '" alt="">' +	'</a>' +
+								  	'</div>';
+							  }else if(slideIfproORcateORpage==2){
+								  html += '<div class="swiper-slide">' +
+								  	  '<a href="${APP_PATH}/' + data[i].slidePageSeoname + '.html">' +'<img src="' + data[i].slideWapimgurl + '" alt="">' +	'</a>' +
+								  	'</div>';
+							  }
 						  }
 							
 					  }
