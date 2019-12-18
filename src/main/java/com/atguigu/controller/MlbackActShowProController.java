@@ -123,6 +123,9 @@ public class MlbackActShowProController {
 			String Cname = mlbackCategoryRes.getCategoryName();
 			String CategoryDesc = mlbackCategoryRes.getCategoryDesc();
 			mlbackActShowPro.setActshowproCatename(CategoryDesc);//Cname
+		}else{
+			String pageSeoname = mlbackActShowPro.getActshowproPageSeoname();
+			mlbackActShowPro.setActshowproPageSeoname(pageSeoname);//pageSeoname
 		}
 		Integer actshowproId = mlbackActShowPro.getActshowproId();
 		
