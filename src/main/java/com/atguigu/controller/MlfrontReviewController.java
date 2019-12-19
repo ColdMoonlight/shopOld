@@ -87,9 +87,6 @@ public class MlfrontReviewController {
 			return Msg.success().add("pageInfo", page);
 //		}
 	}
-	
-	
-
 
 	/**3.0	useOn	0505
 	 * MlfrontReview	insert
@@ -139,8 +136,6 @@ public class MlfrontReviewController {
 			
 		}		
 	}
-	
-
 
 	/**3.1	useOn	0505
 	 * MlfrontReview	GetUImgUrlByUname
@@ -428,8 +423,6 @@ public class MlfrontReviewController {
 		return startNumList;
 	}
 	
-	
-	
 	/**9.0	useOn	0505
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
@@ -480,4 +473,34 @@ public class MlfrontReviewController {
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
+	
+	/**11.0	useOn	0505
+	 * 分类MlbackCoupon列表分页list数据
+	 * @param pn,
+	 * Integer reviewStatus;
+	 * Integer reviewProstarnum;
+	 * String reviewStarttime;
+	 * String reviewEndtime;
+	 * @return
+	 */
+	@RequestMapping(value="/selectMlfrontReviewListBySearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg selectMlfrontReviewListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "reviewPid") Integer reviewPid,
+			@RequestParam(value = "reviewStatus") Integer reviewStatus,@RequestParam(value = "reviewProstarnum") Integer reviewProstarnum,
+			@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
+			HttpSession session) {
+		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
+//		if(mlbackAdmin==null){
+//			//SysUsers对象为空
+//			return Msg.fail().add("resMsg", "session中adminuser对象为空");
+//		}else{
+			int PagNum = 50;
+			PageHelper.startPage(pn, PagNum);
+			MlfrontReview mlfrontReviewReq = new MlfrontReview();
+			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
+			
+			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
+			return Msg.success().add("pageInfo", page);
+//		}
+	}
 }
