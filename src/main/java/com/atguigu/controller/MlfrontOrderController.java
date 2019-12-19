@@ -366,7 +366,6 @@ public class MlfrontOrderController {
 	@RequestMapping(value="/orderToPayInfo",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg orderToPayInfo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder){
-//	public String orderToPayInfo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder){
 		//0.0接受参数信息
 		System.out.println("mlfrontOrder:"+mlfrontOrder);
 		Integer originalOrderId = mlfrontOrder.getOrderId();
@@ -790,7 +789,7 @@ public class MlfrontOrderController {
 		Integer Uid = loginUser.getUserId();
 		MlfrontOrder mlfrontOrder = new MlfrontOrder();
 		mlfrontOrder.setOrderUid(Uid);
-		int PagNum = 20;//0未支付 //1支付成功 //2支付失败 //3审单完毕 //4发货完毕
+		int PagNum = 20;//0未支付 //1支付成功 //2支付失败 //3审单完毕 //4发货完毕//5已退款
 		PageHelper.startPage(pn, PagNum);
 		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidOnly(mlfrontOrder);
 		PageInfo page = new PageInfo(mlfrontOrderList, PagNum);
@@ -835,7 +834,7 @@ public class MlfrontOrderController {
 		Integer Uid = loginUser.getUserId();
 		MlfrontOrder mlfrontOrder = new MlfrontOrder();
 		mlfrontOrder.setOrderUid(Uid);
-		mlfrontOrder.setOrderStatus(1);		//0未支付 //1支付成功 //2支付失败 //3审单完毕 //4发货完毕
+		mlfrontOrder.setOrderStatus(1);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
 		int PagNum = 20;
 		PageHelper.startPage(pn, PagNum);
 		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidAndStatus(mlfrontOrder);
@@ -889,7 +888,7 @@ public class MlfrontOrderController {
 		mlfrontOrderReq.setOrderLogisticsname(orderLogisticsname);
 		mlfrontOrderReq.setOrderLogisticsnumber(orderLogisticsnumber);
 		String nowTime = DateUtil.strTime14s();
-		mlfrontOrderReq.setOrderStatus(4);//1支付失败 //2支付成功 //3审单完毕 //4发货完毕
+		mlfrontOrderReq.setOrderStatus(4);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
 		mlfrontOrderReq.setOrderSendtime(nowTime);
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
 		
@@ -989,7 +988,7 @@ public class MlfrontOrderController {
 		MlfrontOrder mlfrontOrderReq2 = new MlfrontOrder();
 		mlfrontOrderReq.setOrderId(orderId);
 		String nowTime = DateUtil.strTime14s();
-		mlfrontOrderReq.setOrderStatus(3);//1支付失败 //2支付成功 //3审单完毕 //4发货完毕
+		mlfrontOrderReq.setOrderStatus(3);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
 		mlfrontOrderReq.setOrderSendtime(nowTime);
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
 		
@@ -1061,10 +1060,38 @@ public class MlfrontOrderController {
 		mlfrontPayInfo.setPayinfoId(payInfoId);
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
-		mlfrontPayInfo.setPayinfoStatus(2);//0未支付		1已支付	2已审核	3已发货
+		mlfrontPayInfo.setPayinfoStatus(2);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款
 		//更新状态未已发货状态
 		int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
 		
+	}
+	
+	/**
+	 * 12.0	UseNow	0505
+	 * to	订单-退款
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/updateOrderRefund",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderRefund(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
+		//接手参数
+		Integer orderId = mlfrontOrder.getOrderId();
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();//此处使用OrderCouponId字段暂时存储的payInfoId
+		//更新order为退款状态
+		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		mlfrontOrderReq.setOrderId(orderId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontOrderReq.setOrderStatus(5);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
+		mlfrontOrderReq.setOrderSendtime(nowTime);
+		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		//更新order为退款状态
+		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+		mlfrontPayInfoReq.setPayinfoId(payInfoId);
+		mlfrontPayInfoReq.setPayinfoStatus(4);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoReq);
+
+		return Msg.success().add("Msg", "更新成功");
 	}
 
 
