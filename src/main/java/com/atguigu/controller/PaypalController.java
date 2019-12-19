@@ -60,9 +60,6 @@ public class PaypalController {
     public static final String PAYPAL_CANCEL_P_URLIn = "pcancel";
 
     private Logger log = LoggerFactory.getLogger(getClass());
-
-//    @Autowired
-//    private PaypalService paypalService;
     
     @Autowired
 	MlfrontPayInfoService mlfrontPayInfoService;
@@ -109,10 +106,6 @@ public class PaypalController {
     	//封装paypal所需
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_M_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_M_URL;
-        
-        //放置session信息
-//        Integer payFailTimes = 0;
-//        session.setAttribute("payFailTimes", payFailTimes);
         
         Payment payment = new Payment();
         PaypalService paypalService = new PaypalService();
@@ -220,10 +213,6 @@ public class PaypalController {
         String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_P_URL;
         String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_P_URL;
         
-        //放置session信息
-//        Integer payFailTimes = 0;
-//        session.setAttribute("payFailTimes", payFailTimes);
-        
         PaypalService paypalService = new PaypalService();
         
         String PaypalErrorName="";
@@ -282,7 +271,6 @@ public class PaypalController {
 //            }
             regularName+= " is not match";
             session.setAttribute("PaypalError", regularName);
-//            System.out.println(e.getDetails().getDetails());
             System.out.println("regularName : "+regularName);
             System.out.println("---------e.getDetails()------end------");
         }
@@ -324,15 +312,14 @@ public class PaypalController {
     	return "redirect:/MlbackCart/toCheakOut";
     }
     
-    /**2.0
-     * wap端返回成功页面
-     * mfront/paySuccess
+    /**99.0
+     * wap端返回成功页面测试接口
+     * mfront/successPaytest
      * */
     @RequestMapping(method = RequestMethod.GET, value = "/successPaytest")
     public String successPaytest(HttpSession session){
 
        toUpdatePayInfoStateSuccess(session,"1111","2222");
-            
             
        return "mfront/paySuccess";
     }
@@ -521,7 +508,6 @@ public class PaypalController {
     	return Msg.success().add("resMsg", "UpdatePayInfoSuccess");
     }
     
-    
     /**
      * 3.0.2wap端处理
      * insertPaypalReturnAddress
@@ -654,13 +640,9 @@ public class PaypalController {
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_M_URLIn)
     public String cancelPay(HttpSession session){
 		
-//		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
-//		payFailTimes+=1;
-//        session.setAttribute("payFailTimes", payFailTimes);
 		//4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
-//		return "mfront/payFail";
         return "redirect:/MlbackCart/toCheakOut";
     }
 	
@@ -671,13 +653,9 @@ public class PaypalController {
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_P_URLIn)
     public String pcancelPay(HttpSession session){
 		
-//		Integer payFailTimes = (Integer) session.getAttribute("payFailTimes");
-//		payFailTimes+=1;
-//        session.setAttribute("payFailTimes", payFailTimes);
         //4.0.1更新失败所需修改的表
 		toUpdatePayInfoFail(session);
 		
-//        return "front/payFail";
 		return "redirect:/MlbackCart/toCheakOut";
     }
     
@@ -692,7 +670,7 @@ public class PaypalController {
 		mlfrontPayInfoNew.setPayinfoId(payinfoId);
 		List<MlfrontPayInfo> MlfrontPayInfoList =mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoNew);
 		MlfrontPayInfo mlfrontPayInfoIOne = MlfrontPayInfoList.get(0);
-		mlfrontPayInfoIOne.setPayinfoStatus(0);//0未支付;1已支付;2支付失败;3已审核;4已发货;
+		mlfrontPayInfoIOne.setPayinfoStatus(0);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfoIOne.setPayinfoMotifytime(nowTime);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
@@ -706,7 +684,7 @@ public class PaypalController {
 		List<MlfrontOrder> mlfrontOrderList =  mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderPayReq);
 		MlfrontOrder mlfrontOrderResOne = mlfrontOrderList.get(0);
 		//准备更新数据
-		mlfrontOrderResOne.setOrderStatus(0);//0未支付;1已支付;2支付失败;3已审核;4已发货;
+		mlfrontOrderResOne.setOrderStatus(0);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
 		mlfrontOrderResOne.setOrderMotifytime(nowTime);
 		mlfrontOrderResOne.setOrderPaytime(nowTime);
 		//执行更新
