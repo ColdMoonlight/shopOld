@@ -509,14 +509,19 @@
 				statusDetail = "已发货，待接收";
 				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
+			}else if(data.orderStatus == 5){
+				statusDetail = "已退款";
+				// colorspan ="colorspan4"
+				ifsend = data.orderLogisticsid;
 			}
+			
 			var headerHtml = '';
 			// console.log(data)
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
 			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
 			if(data.orderStatus == 1){
-				headerHtml += '<span class="btn btn-danger check_order" onclick="check_order()">审核</span>';
+				headerHtml += '<span class="btn btn-success check_order" onclick="check_order()">审核</span><span class="btn btn-danger return_order" onclick="return_order()" >退款</span>';
 			}
 			if (data.orderStatus === 1 || data.orderStatus === 3) {
 				headerHtml += '<span class="shipping">';
@@ -651,6 +656,25 @@
 			
 		}
 		 
+		     function return_order(){
+		       var reqData = {
+		         "orderId":orderId,
+		         "orderCouponId":payinfoIdcd,
+		       }
+		       $.ajax({
+		         url: '${APP_PATH}/MlfrontOrder/updateOrderRefund',
+		         data: JSON.stringify(reqData),
+		         type: "POST",
+		         dataType: "json",
+		         contentType: 'application/json',
+		           success: function (reqData) {
+		             alert("确认退款")
+		             window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+		           }
+		       });
+		       
+		       
+		     }
 	  
 
 
