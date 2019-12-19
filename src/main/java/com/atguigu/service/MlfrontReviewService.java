@@ -72,7 +72,7 @@ public class MlfrontReviewService {
 		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectMlfrontReviewGetAll();
 		return MlfrontReviewList;
 	}
-	/**5
+	/**6
 	 * @author Shinelon
 	 * @param MlfrontReview
 	 * @exception 查看全部的地址信息
@@ -80,6 +80,16 @@ public class MlfrontReviewService {
 	 * */
 	public List<MlfrontReview> selectMlfrontReviewListByPId(MlfrontReview mlfrontReview) {
 		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectMlfrontReviewListByPId(mlfrontReview);
+		return MlfrontReviewList;
+	}
+	/**7
+	 * @author Shinelon
+	 * @param selectMlfrontReviewListBySearch
+	 * @exception 条件搜索
+	 * 
+	 * */
+	public List<MlfrontReview> selectMlfrontReviewListBySearch(MlfrontReview mlfrontReview) {
+		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectMlfrontReviewListBySearch(mlfrontReview);
 		return MlfrontReviewList;
 	}
 	
