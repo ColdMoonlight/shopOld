@@ -162,13 +162,19 @@
 				var slideIfproORcateORpage="单品";
 				if(item.slideIfproORcateORpage==1){
 					slideIfproORcateORpage = $("<td></td>").append("类");
+					var slideProid = $("<td></td>").append('类'+item.slideCateid);
+					var slideSeoname = $("<td></td>").append(item.slideCateSeoname);
 				}else if(item.slideIfproORcateORpage==2){
 					slideIfproORcateORpage = $("<td></td>").append("专题页");
+					var slideProid = $("<td></td>").append('专题页'+item.slidePageSeoname);
+					var slideSeoname = $("<td></td>").append(item.slidePageSeoname);
 				}else{
 					slideIfproORcateORpage = $("<td></td>").append("单品")
+					var slideProid = $("<td></td>").append('单品'+item.slideProid);
+					var slideSeoname = $("<td></td>").append(item.slideSeoname);
 				}
-				var slideProid = $("<td></td>").append(item.slideProid);
-				var slideSeoname = $("<td></td>").append(item.slideSeoname);
+				
+				
 				var slideIfinto = $("<td></td>").append((item.slideIfinto === 1 ? '可点进' : '不可点进'));
 				var slideMotifytime = $("<td></td>").append(item.slideMotifytime);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
