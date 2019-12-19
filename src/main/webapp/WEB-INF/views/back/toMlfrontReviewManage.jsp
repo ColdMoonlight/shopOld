@@ -44,10 +44,10 @@
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 评论列表列表</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
-							<!-- <ul id="productTab" class="nav nav-tabs tabultop">
+							<ul id="productTab" class="nav nav-tabs tabultop">
 								<li class="active"><a data-href="#allreview" data-toggle="tab">全部评论</a></li>
 								<li><a data-href="#myreview" data-toggle="tab">我发布的品论</a></li>
-							</ul> -->
+							</ul>
 							<div class="choose_screen">
 								<div class="c-datepicker-date-editor date-timepicker" style="float: left; margin: 0 20px 0 0;">
 									<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
@@ -86,19 +86,14 @@
 									   <input type="submit" id="" value="搜索" name="" />
 							       </div>
 							</div>
-							<div class="tabreview_box">
-								
-								
-								
-							</div>
-							<!-- <div id="productTabContent" class="tabreview tab-content">
+							<div id="productTabContent" class="tabreview tab-content">
 								<div class="tab-pane in active" id="allreview">
 									111111111111111111111111111111111111
 								</div>
 								<div class="tab-pane in" id="myreview">
 									222222222222222222222222222222222222
 								</div>
-							</div> -->
+							</div>
 					</div>
 				</div>
 			</div>
@@ -133,18 +128,22 @@
 					enablekeyboard: false,
 			}).resize()
 		});
-		$(function () {
+		// $(function () {
 			//去首页
-			var reviewStarttime =minDate22;
-			var reviewEndtime =maxDate;
-			to_page(1,234,1,5,reviewStarttime,reviewEndtime);
-		});
+			$(".btn_search input").click(function(){
+				var reviewStarttime =minDatestar;
+				var reviewEndtime =maxDateend;
+				console.log(reviewStarttime)
+				console.log(reviewStarttime)
+				to_page(1,234,5,5,reviewStarttime,reviewEndtime);
+			})
 		/******************************/
 		var reviewStatus =$(".pinglun .selectpl").val();
 		var reviewProstarnum =$(".staricon .xing").val();
 		var reviewPid=$("#actshowproProid").val();
-		var reviewStarttime =minDate22;
-		var reviewEndtime =maxDate;
+		var reviewStarttime =minDatestar;
+		var reviewEndtime =maxDateend;
+		
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
 			 //   * Integer reviewProstarnum;
@@ -204,24 +203,9 @@
 		 
 		 				var targetInput = $('.date-timepicker');
 		 				var date = new Date();
-		 				var minDate = moment().set({
-		 						'date': date.getDate() - 1,
-		 						'hour': date.getHours(),
-		 						'minute': date.getMinutes(),
-		 						'second': date.getSeconds()
-		 					})
-		 					.format('YYYY-MM-DD HH:mm:ss');
-		 				var minDate2 = moment()
-		 					.set({
-		 						'date': date.getDate() - 1,
-		 						'hour': 23,
-		 						'minute': 59,
-		 						'second': 59
-		 					})
-		 					.format('YYYY-MM-DD HH:mm:ss');
-		 					
-		 					/****************************/
-		 					var minDate22 = moment()
+
+		 					/**1111**************************/
+		 					var minDatestar = moment()
 		 						.set({
 		 							'date': date.getDate(),
 		 							'hour': 0,
@@ -229,18 +213,21 @@
 		 							'second': 0
 		 						})
 		 						.format('YYYY-MM-DD HH:mm:ss');
-		 				var maxDate = moment()
-		 					.set({
-		 						'date': date.getDate(),
-		 						'hour': date.getHours(),
-		 						'minute': date.getMinutes(),
-		 						'second': date.getSeconds()
-		 					})
+						 /***11111111*************************/	
+						/***222222*************************/	
+							var maxDateend = moment()
+								.set({
+									'date': date.getDate(),
+									'hour': date.getHours(),
+									'minute': date.getMinutes(),
+									'second': date.getSeconds()
+								})
+						/***2222222*************************/	
 		 					.format('YYYY-MM-DD HH:mm:ss');
 		 				function initHtml() {
 		 					var $input = targetInput.find('input');
-		 					$input.eq(0).val(minDate22);
-		 					$input.eq(1).val(maxDate);
+		 					$input.eq(0).val(minDatestar);
+		 					$input.eq(1).val(maxDateend);
 		 				}
 		 				
 		 /*******初始化显示*************/
@@ -251,7 +238,7 @@
 		 						$(item).datePicker({
 		 							hasShortcut: true,
 		 							min: '2018-01-01 06:00:00',
-		 							max: maxDate,
+		 							max: maxDateend,
 		 							isRange: true,
 		 							shortcutOptions: [{
 		 							 name: '昨天',
@@ -271,13 +258,14 @@
 		 							 time: '00:00:00,'
 		 							}],
 		 							hide: function (type) {
-		 								// console.log(1);
-		 								// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
-		 								var reviewStarttime = this.$input.eq(0).val();
-		 								var reviewEndtime = this.$input.eq(1).val();
-		 								 $(".td_name").empty();
-		 								 $(".td_num").empty();
-		 								
+										var reviewStarttime = this.$input.eq(0).val();
+										var reviewEndtime = this.$input.eq(1).val();
+										console.log(reviewStarttime)
+										console.log(reviewStarttime)
+		 								// $(".btn_search input").click(function(){
+		 									// to_page(1,234,5,5,reviewStarttime,reviewEndtime);
+		 								// })
+										
 		 							}
 		 						})
 		 					})
