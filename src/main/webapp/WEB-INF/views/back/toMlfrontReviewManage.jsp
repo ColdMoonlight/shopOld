@@ -55,19 +55,19 @@
 									<span class="c-datepicker-range-separator">-</span>
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
-								<div class="form-group staricon" style="float: left;">
+								<div class="form-group pinglun" style="float: left;">
 								    <label class="control-label" style="float: left;">评论状态</label>
 								    <div class="" style="float: left;">
-								        <select class="form-control">
-										  <option value ="0" selected="selected">客户评论</option>
-										  <option value ="1">我的品论</option>
+								        <select class="form-control selectpl">
+										  <option value ="0" selected="selected">不生效</option>
+										  <option value ="1">生效</option>
 										</select>
 								    </div>
 								</div>
 								<div class="form-group staricon" style="float: left;">
 								    <label class="control-label" style="float: left;">星级:</label>
 								    <div class="" style="float: left;">
-								        <select class="form-control">
+								        <select class="form-control xing">
 										  <option value ="1" selected="selected">1颗星</option>
 										  <option value ="2">2颗星</option>
 										  <option value ="3">3颗星</option>
@@ -135,28 +135,36 @@
 		});
 		$(function () {
 			//去首页
-			
-			to_page(1,,,,,);
+			var reviewStarttime =minDate22;
+			var reviewEndtime =maxDate;
+			to_page(1,234,1,5,reviewStarttime,reviewEndtime);
 		});
 		/******************************/
-		function to_page(id) {
+		var reviewStatus =$(".pinglun .selectpl").val();
+		var reviewProstarnum =$(".staricon .xing").val();
+		var reviewPid=$("#actshowproProid").val();
+		var reviewStarttime =minDate22;
+		var reviewEndtime =maxDate;
+		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
 			 //   * Integer reviewProstarnum;
 			 //   * String reviewStarttime;
 			 //   * String reviewEndtime;
 		      $.ajax({
 		        url: "${APP_PATH}/MlfrontReview/selectMlfrontReviewListBySearch",
-		        data: {
-		          "pn": pn,
-				  "reviewStatus": reviewStatus,
-				  "reviewProstarnum":reviewProstarnum,
-				  "reviewStarttime":reviewStarttime,
-				  "reviewEndtime":reviewEndtime,
-		        },
+				data:{
+					"pn": pn,
+					"reviewPid": reviewPid,
+					"reviewStatus":reviewStatus,
+					"reviewProstarnum":reviewProstarnum,
+					"reviewStarttime":reviewStarttime,
+					"reviewEndtime":reviewEndtime
+				},
 		        type: "POST",
 		        success: function (result) {
 		          if (result.code == 100) {
-		            
+		            console.log(result)
+					
 		          } else {
 		            alert("联系管理员");
 		          }
@@ -236,8 +244,7 @@
 		 				}
 		 				
 		 /*******初始化显示*************/
-		               var startime =minDate22;
-		               var endtime =maxDate;
+		              
 		 		/***********************************************/
 		 				function initJs() {
 		 					targetInput.each(function (i, item) {
@@ -266,8 +273,8 @@
 		 							hide: function (type) {
 		 								// console.log(1);
 		 								// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
-		 								var startime = this.$input.eq(0).val();
-		 								var endtime = this.$input.eq(1).val();
+		 								var reviewStarttime = this.$input.eq(0).val();
+		 								var reviewEndtime = this.$input.eq(1).val();
 		 								 $(".td_name").empty();
 		 								 $(".td_num").empty();
 		 								
