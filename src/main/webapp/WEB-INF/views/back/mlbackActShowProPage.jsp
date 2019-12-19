@@ -47,14 +47,14 @@
 										<th>id</th>
 										<th>活动品name</th>
 										<th>活动品归属组</th>
-										<th>产品id</th>
+										<th>产品id/类/专题</th>
 										<th>产品SEO名称</th>
 										<th>类id</th>
 										<th>类SEO名称</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
-										<th>产品or类</th>
+										<th>产品or类or专题</th>
 										<th>同级别编号</th>
 										<th>更改时间</th>
 										<th>操作</th>
@@ -168,11 +168,14 @@
 				// var actshowproIfproORcate = $("<td></td>").append((item.actshowproIfproORcate === 1 ? '类' : '产品'));
 				var actshowproIfproORcate="单品";
 				if(item.actshowproIfproORcate==1){
-					actshowproIfproORcate = $("<td></td>").append("类");
+					actshowproIfproORcate = $("<td></td>").append("类"+item.actshowproProid);
+					var actshowproSeoname = $("<td></td>").append(item.actshowproCatename);
 				}else if(item.actshowproIfproORcate==2){
-					actshowproIfproORcate = $("<td></td>").append("专题页");
+					actshowproIfproORcate = $("<td></td>").append("专题页"+item.actshowproProid);
+					var actshowproSeoname = $("<td></td>").append(item.actshowproPageSeoname);
 				}else{
-					actshowproIfproORcate = $("<td></td>").append("单品")
+					actshowproIfproORcate = $("<td></td>").append("单品"+item.actshowproProid)
+					var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
 				}
 				
 				
