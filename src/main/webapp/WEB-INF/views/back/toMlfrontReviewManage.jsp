@@ -44,10 +44,10 @@
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 评论列表列表</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
-							<ul id="productTab" class="nav nav-tabs tabultop">
+							<!-- <ul id="productTab" class="nav nav-tabs tabultop">
 								<li class="active"><a data-href="#allreview" data-toggle="tab">全部评论</a></li>
 								<li><a data-href="#myreview" data-toggle="tab">我发布的品论</a></li>
-							</ul>
+							</ul> -->
 							<div class="choose_screen">
 								<div class="c-datepicker-date-editor date-timepicker" style="float: left; margin: 0 20px 0 0;">
 									<i class="c-datepicker-range__icon kxiconfont icon-clock"></i>
@@ -56,14 +56,23 @@
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
 								<div class="form-group staricon" style="float: left;">
+								    <label class="control-label" style="float: left;">评论状态</label>
+								    <div class="" style="float: left;">
+								        <select class="form-control">
+										  <option value ="0" selected="selected">客户评论</option>
+										  <option value ="1">我的品论</option>
+										</select>
+								    </div>
+								</div>
+								<div class="form-group staricon" style="float: left;">
 								    <label class="control-label" style="float: left;">星级:</label>
 								    <div class="" style="float: left;">
 								        <select class="form-control">
 										  <option value ="1" selected="selected">1颗星</option>
-										  <option value ="2" selected="selected">2颗星</option>
-										  <option value ="3" selected="selected">3颗星</option>
-										  <option value ="4" selected="selected">4颗星</option>
-										  <option value ="5" selected="selected">5颗星</option>
+										  <option value ="2">2颗星</option>
+										  <option value ="3">3颗星</option>
+										  <option value ="4">4颗星</option>
+										  <option value ="5">5颗星</option>
 										</select>
 								    </div>
 								</div>
@@ -77,14 +86,19 @@
 									   <input type="submit" id="" value="搜索" name="" />
 							       </div>
 							</div>
-							<div id="productTabContent" class="tabreview tab-content">
+							<div class="tabreview_box">
+								
+								
+								
+							</div>
+							<!-- <div id="productTabContent" class="tabreview tab-content">
 								<div class="tab-pane in active" id="allreview">
 									111111111111111111111111111111111111
 								</div>
 								<div class="tab-pane in" id="myreview">
 									222222222222222222222222222222222222
 								</div>
-							</div>
+							</div> -->
 					</div>
 				</div>
 			</div>
@@ -119,7 +133,39 @@
 					enablekeyboard: false,
 			}).resize()
 		});
+		$(function () {
+			//去首页
+			
+			to_page(1,,,,,);
+		});
 		/******************************/
+		function to_page(id) {
+			 // Integer reviewStatus;
+			 //   * Integer reviewProstarnum;
+			 //   * String reviewStarttime;
+			 //   * String reviewEndtime;
+		      $.ajax({
+		        url: "${APP_PATH}/MlfrontReview/selectMlfrontReviewListBySearch",
+		        data: {
+		          "pn": pn,
+				  "reviewStatus": reviewStatus,
+				  "reviewProstarnum":reviewProstarnum,
+				  "reviewStarttime":reviewStarttime,
+				  "reviewEndtime":reviewEndtime,
+		        },
+		        type: "POST",
+		        success: function (result) {
+		          if (result.code == 100) {
+		            
+		          } else {
+		            alert("联系管理员");
+		          }
+		        }
+		      });
+		    }
+
+		
+		
 		getCategoryDown()
 		function getCategoryDown() {
 			$.ajax({
