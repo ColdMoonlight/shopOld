@@ -133,7 +133,7 @@
 						'<div class="sku">' + (item.orderitemPskuNamestr.split(',').join(' ')) + '</div>' +
 						'</div>' +
 						'<div class="order-num">' +
-						'<span class="price">$' + (item.orderitemPskuReamoney / item.orderitemPskuNumber) + '</span>' +
+						'<span class="price">$' + (item.orderitemPskuReamoney / item.orderitemPskuNumber).toFixed(2) + '</span>' +
 						'<span class="num">X' + item.orderitemPskuNumber + '</span>' +
 						'</div>' +
 						'</div>';
