@@ -130,12 +130,14 @@
 		});
 		// $(function () {
 			//去首页
+			var  reviewStarttime2;
+			var  reviewEndtime2;
 			$(".btn_search input").click(function(){
-				var reviewStarttime =minDatestar;
-				var reviewEndtime =maxDateend;
+			reviewStarttime=reviewStarttime2;
+			reviewEndtime=reviewEndtime2;
 				console.log(reviewStarttime)
-				console.log(reviewStarttime)
-				to_page(1,234,5,5,reviewStarttime,reviewEndtime);
+				console.log(reviewEndtime)
+				to_page(1,235,5,2,reviewStarttime,reviewEndtime);
 			})
 		/******************************/
 		var reviewStatus =$(".pinglun .selectpl").val();
@@ -260,8 +262,10 @@
 		 							hide: function (type) {
 										var reviewStarttime = this.$input.eq(0).val();
 										var reviewEndtime = this.$input.eq(1).val();
-										console.log(reviewStarttime)
-										console.log(reviewStarttime)
+										reviewStarttime2=reviewStarttime;
+										reviewEndtime2=reviewEndtime;
+										console.log(reviewStarttime2)
+										console.log(reviewEndtime2)
 		 								// $(".btn_search input").click(function(){
 		 									// to_page(1,234,5,5,reviewStarttime,reviewEndtime);
 		 								// })
