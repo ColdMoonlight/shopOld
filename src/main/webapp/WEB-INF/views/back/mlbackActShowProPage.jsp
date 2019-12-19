@@ -47,14 +47,12 @@
 										<th>id</th>
 										<th>活动品name</th>
 										<th>活动品归属组</th>
+										<th>产品or类or专题</th>
 										<th>产品id/类/专题</th>
-										<th>产品SEO名称</th>
-										<th>类id</th>
-										<th>类SEO名称</th>
+										<th>SEO</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
-										<th>产品or类or专题</th>
 										<th>同级别编号</th>
 										<th>更改时间</th>
 										<th>操作</th>
@@ -151,11 +149,10 @@
 				var actshowproId = $("<td></td>").append(item.actshowproId);
 				var actshowproName = $("<td></td>").append(item.actshowproName);
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);
-				var actshowproProid = $("<td></td>").append(item.actshowproProid);
-				var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
-				var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
-				var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
-				
+				//var actshowproProid = $("<td></td>").append(item.actshowproProid);
+				//var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
+				//var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
+				//var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
 				
 				var imgurl = item.actshowproImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
@@ -165,16 +162,18 @@
 				var actshowproImgpcurl = $("<td></td>").append(imagepc);
 				
 				var actshowproStatus = $("<td></td>").append((item.actshowproStatus === 1 ? '已上架' : '未上架'));
-				// var actshowproIfproORcate = $("<td></td>").append((item.actshowproIfproORcate === 1 ? '类' : '产品'));
 				var actshowproIfproORcate="单品";
 				if(item.actshowproIfproORcate==1){
-					actshowproIfproORcate = $("<td></td>").append("类"+item.actshowproProid);
+					var actshowproIfproORcate=$("<td></td>").append("类");
+					var showid = $("<td></td>").append("类"+item.actshowproCateid);
 					var actshowproSeoname = $("<td></td>").append(item.actshowproCatename);
 				}else if(item.actshowproIfproORcate==2){
-					actshowproIfproORcate = $("<td></td>").append("专题页"+item.actshowproProid);
+					var actshowproIfproORcate=$("<td></td>").append("专题页")
+					var showid  = $("<td></td>").append("专题页"+item.actshowproPageSeoname);
 					var actshowproSeoname = $("<td></td>").append(item.actshowproPageSeoname);
 				}else{
-					actshowproIfproORcate = $("<td></td>").append("单品"+item.actshowproProid)
+					var actshowproIfproORcate=$("<td></td>").append("单品")
+					var showid = $("<td></td>").append("单品"+item.actshowproProid)
 					var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
 				}
 				
@@ -195,15 +194,14 @@
 				$("<tr></tr>").append(actshowproId)
 					.append(actshowproName)
 					.append(actshowproActnum)
-					.append(actshowproProid)
-					// .append(actshowproProname)
+					.append(actshowproIfproORcate)
+					.append(showid)
 					.append(actshowproSeoname)
-					.append(actshowproCateid)
-					.append(actshowproCatename)
+//					.append(actshowproCateid)
+//					.append(actshowproCatename)
 					.append(actshowproImgwapurl)
 					.append(actshowproImgpcurl)
 					.append(actshowproStatus)
-					.append(actshowproIfproORcate)
 					.append(actshowproOrderth)
 					.append(actshowproMotifytime)
 					.append(btnTd)
