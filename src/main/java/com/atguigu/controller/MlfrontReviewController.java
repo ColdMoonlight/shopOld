@@ -492,7 +492,7 @@ public class MlfrontReviewController {
 			HttpSession session) {
 
 		MlfrontReview mlfrontReviewReq = new MlfrontReview();
-		mlfrontReviewReq.setReviewId(reviewPid);
+		mlfrontReviewReq.setReviewPid(reviewPid);
 		mlfrontReviewReq.setReviewStatus(reviewStatus);
 		mlfrontReviewReq.setReviewProstarnum(reviewProstarnum);
 		mlfrontReviewReq.setReviewStarttime(reviewStarttime);
