@@ -128,31 +128,131 @@
 					enablekeyboard: false,
 			}).resize()
 		});
-		// $(function () {
-			//去首页
-			var  reviewStarttime2;
-			var  reviewEndtime2;
-			$(".btn_search input").click(function(){
-			reviewStarttime=reviewStarttime2;
-			reviewEndtime=reviewEndtime2;
-				console.log(reviewStarttime)
-				console.log(reviewEndtime)
-				to_page(1,235,5,2,reviewStarttime,reviewEndtime);
-			})
-		/******************************/
+		
 		var reviewStatus =$(".pinglun .selectpl").val();
 		var reviewProstarnum =$(".staricon .xing").val();
-		var reviewPid=$("#actshowproProid").val();
-		var reviewStarttime =minDatestar;
-		var reviewEndtime =maxDateend;
+		var reviewPid;
+		var reviewStarttime;
+		var reviewEndtime;
+		var reviewStarttime2;
+		var reviewEndtime2;
 		
+		/**时间插件***/
+		var targetInput = $('.date-timepicker');
+		var date = new Date();
+			var minDatestar = moment()
+				.set({
+					'date': date.getDate(),
+					'hour': 0,
+					'minute': 0,
+					'second': 0
+				}).format('YYYY-MM-DD HH:mm:ss');
+			 reviewStarttime =minDatestar;
+			var maxDateend = moment()
+				.set({
+					'date': date.getDate(),
+					'hour': date.getHours(),
+					'minute': date.getMinutes(),
+					'second': date.getSeconds()
+				}).format('YYYY-MM-DD HH:mm:ss');
+			reviewEndtime =maxDateend;	
+			/***********************************************/
+			 				function initJs() {
+			 					targetInput.each(function (i, item) {
+			 						$(item).datePicker({
+			 							hasShortcut: true,
+			 							min: '2018-01-01 06:00:00',
+			 							max: maxDateend,
+			 							isRange: true,
+			 							shortcutOptions: [{
+			 							 name: '昨天',
+			 							 day: '-1,-1',
+			 							 time: '00:00:00,23:59:59'
+			 							},{
+			 							 name: '最近一周',
+			 							 day: '-7,0',
+			 							 time:'00:00:00,'
+			 							}, {
+			 							 name: '最近一个月',
+			 							 day: '-30,0',
+			 							 time: '00:00:00,'
+			 							}, {
+			 							 name: '最近三个月',
+			 							 day: '-90, 0',
+			 							 time: '00:00:00,'
+			 							}],
+			 							hide: function (type) {
+											var changestar = this.$input.eq(0).val();
+											var changeEnd = this.$input.eq(1).val();
+											reviewStarttime2=changestar;
+											reviewEndtime2=changeEnd;
+			 							}
+			 						})
+			 					})
+			 				}
+			function initHtml() {
+				var $input = targetInput.find('input');
+				$input.eq(0).val(minDatestar);
+				$input.eq(1).val(maxDateend);
+			}
+			$(function () {
+				initHtml();
+				initJs();
+			});
+			
+
+		/**时间插件***/
+		/**产品id****/
+		getCategoryDown()
+		function getCategoryDown() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						function setCategoryDescSelect(el, data) {
+							var html = '';
+							for (var i = 0; i < data.length; i += 1) {
+								 // var productId = data[i].productId;
+								 // console.log(productId)
+								html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
+							}
+							el.html(html);
+						}
+						objparentList = result.extend.mlbackProductResList;
+						var categoryIdSelect = $('#actshowproProid');
+						setCategoryDescSelect(categoryIdSelect, objparentList);
+						categoryIdSelect.change(function(){
+							var productSelectid=$(this).val();
+							reviewPid=productSelectid;
+							// console.log(reviewPid)
+						})
+						
+						
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+		/********************************/
+		// console.log(reviewStarttime)
+		// console.log(reviewEndtime)
+		console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		$(".btn_search").click(function(){
+			var reviewProstarnum =$(".staricon .xing").val();
+			console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime2"+reviewStarttime2+"reviewEndtime2"+reviewEndtime2);
+			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime2,reviewStarttime2)
+			
+		})
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
 			 //   * Integer reviewProstarnum;
 			 //   * String reviewStarttime;
 			 //   * String reviewEndtime;
 		      $.ajax({
-		        url: "${APP_PATH}/MlfrontReview/selectMlfrontReviewListBySearch",
+		        url: "${APP_PATH}/MlfrontReview/selectMlblackReviewListBySearch",
 				data:{
 					"pn": pn,
 					"reviewPid": reviewPid,
@@ -172,114 +272,7 @@
 		        }
 		      });
 		    }
-
 		
-		
-		getCategoryDown()
-		function getCategoryDown() {
-			$.ajax({
-				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
-				type: "GET",
-				async: false,
-				success: function (result) {
-					if (result.code == 100) {
-						function setCategoryDescSelect(el, data) {
-							var html = '<option value="-1">---无绑定产品---</option>';
-							for (var i = 0; i < data.length; i += 1) {
-								html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
-							}
-							el.html(html);
-						}
-						objparentList = result.extend.mlbackProductResList;
-						// console.log("objparentList");
-						 // console.log(objparentList);
-						var categoryIdSelect = $('#actshowproProid');
-						setCategoryDescSelect(categoryIdSelect, objparentList);
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
-		}
-         /*****/
-		 
-		 				var targetInput = $('.date-timepicker');
-		 				var date = new Date();
-
-		 					/**1111**************************/
-		 					var minDatestar = moment()
-		 						.set({
-		 							'date': date.getDate(),
-		 							'hour': 0,
-		 							'minute': 0,
-		 							'second': 0
-		 						})
-		 						.format('YYYY-MM-DD HH:mm:ss');
-						 /***11111111*************************/	
-						/***222222*************************/	
-							var maxDateend = moment()
-								.set({
-									'date': date.getDate(),
-									'hour': date.getHours(),
-									'minute': date.getMinutes(),
-									'second': date.getSeconds()
-								})
-						/***2222222*************************/	
-		 					.format('YYYY-MM-DD HH:mm:ss');
-		 				function initHtml() {
-		 					var $input = targetInput.find('input');
-		 					$input.eq(0).val(minDatestar);
-		 					$input.eq(1).val(maxDateend);
-		 				}
-		 				
-		 /*******初始化显示*************/
-		              
-		 		/***********************************************/
-		 				function initJs() {
-		 					targetInput.each(function (i, item) {
-		 						$(item).datePicker({
-		 							hasShortcut: true,
-		 							min: '2018-01-01 06:00:00',
-		 							max: maxDateend,
-		 							isRange: true,
-		 							shortcutOptions: [{
-		 							 name: '昨天',
-		 							 day: '-1,-1',
-		 							 time: '00:00:00,23:59:59'
-		 							},{
-		 							 name: '最近一周',
-		 							 day: '-7,0',
-		 							 time:'00:00:00,'
-		 							}, {
-		 							 name: '最近一个月',
-		 							 day: '-30,0',
-		 							 time: '00:00:00,'
-		 							}, {
-		 							 name: '最近三个月',
-		 							 day: '-90, 0',
-		 							 time: '00:00:00,'
-		 							}],
-		 							hide: function (type) {
-										var reviewStarttime = this.$input.eq(0).val();
-										var reviewEndtime = this.$input.eq(1).val();
-										reviewStarttime2=reviewStarttime;
-										reviewEndtime2=reviewEndtime;
-										console.log(reviewStarttime2)
-										console.log(reviewEndtime2)
-		 								// $(".btn_search input").click(function(){
-		 									// to_page(1,234,5,5,reviewStarttime,reviewEndtime);
-		 								// })
-										
-		 							}
-		 						})
-		 					})
-		 				}
-		 
-		/*****/
-		$(function () {
-			initHtml();
-			initJs();
-		});
 	</script>
 </body>
 
