@@ -492,9 +492,21 @@ public class MlfrontReviewController {
 			HttpSession session) {
 
 		MlfrontReview mlfrontReviewReq = new MlfrontReview();
-		mlfrontReviewReq.setReviewPid(reviewPid);
-		mlfrontReviewReq.setReviewStatus(reviewStatus);
-		mlfrontReviewReq.setReviewProstarnum(reviewProstarnum);
+		if(reviewPid==999){
+			System.out.println("eviewPid==999");
+		}else{
+			mlfrontReviewReq.setReviewPid(reviewPid);
+		}
+		if(reviewProstarnum==0){
+			System.out.println("reviewProstarnum==0");
+		}else{
+			mlfrontReviewReq.setReviewProstarnum(reviewProstarnum);
+		}
+		if(reviewStatus==999){
+			System.out.println("reviewStatus==999");
+		}else{
+			mlfrontReviewReq.setReviewStatus(reviewStatus);
+		}
 		mlfrontReviewReq.setReviewStarttime(reviewStarttime);
 		mlfrontReviewReq.setReviewEndtime(reviewEndtime);
 			int PagNum = 20;
