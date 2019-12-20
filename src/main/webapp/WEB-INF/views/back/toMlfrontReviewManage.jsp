@@ -38,7 +38,7 @@
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
-					<div class="table-box">
+					<div class="table-box_list">
 						<!-- operator -->
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 评论列表列表</a>
@@ -59,7 +59,8 @@
 								    <label class="control-label" style="float: left;">评论状态</label>
 								    <div class="" style="float: left;">
 								        <select class="form-control selectpl">
-										  <option value ="0" selected="selected">不生效</option>
+										  <option value ="999" selected="selected">全部</option>
+										  <option value ="0">不生效</option>
 										  <option value ="1">生效</option>
 										</select>
 								    </div>
@@ -68,7 +69,8 @@
 								    <label class="control-label" style="float: left;">星级:</label>
 								    <div class="" style="float: left;">
 								        <select class="form-control xing">
-										  <option value ="1" selected="selected">1颗星</option>
+										  <option value ="0" selected="selected">全部</option>
+										  <option value ="1">1颗星</option>
 										  <option value ="2">2颗星</option>
 										  <option value ="3">3颗星</option>
 										  <option value ="4">4颗星</option>
@@ -121,11 +123,14 @@
 								</div>
 							</div>
 					</div>
+					<div class="table-box box_new_review">
+						
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+     <div class="maskbg"></div>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
@@ -154,9 +159,44 @@
 					enablekeyboard: false,
 			}).resize()
 		});
-		var reviewPid;
-		var reviewStatus=0;
-		var reviewProstarnum;
+		/**产品id****/
+		var reviewPid=999;
+		getCategoryDown()
+		function getCategoryDown() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						function setCategoryDescSelect(el, data) {
+						var html = '<option value="999">---全部---</option>';
+							for (var i = 0; i < data.length; i += 1) {
+								 // var productId = data[i].productId;
+								 // console.log(productId)
+								html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
+							}
+							el.html(html);
+						}
+						objparentList = result.extend.mlbackProductResList;
+						var categoryIdSelect = $('#actshowproProid');
+						setCategoryDescSelect(categoryIdSelect, objparentList);
+						categoryIdSelect.change(function(){
+							var productSelectid=$(this).val();
+							reviewPid=productSelectid;
+							// console.log(reviewPid)
+						})
+						
+						
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+		/********************************/
+		var reviewStatus=999;
+		var reviewProstarnum=0;
 		var reviewStarttime;
 		var reviewEndtime;
 		var totalRecord, currentPage, editid;
@@ -233,51 +273,21 @@
 				initHtml();
 				initJs();
 			});
-			
-
-		/**时间插件***/
-		/**产品id****/
-		getCategoryDown()
-		function getCategoryDown() {
-			$.ajax({
-				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
-				type: "GET",
-				async: false,
-				success: function (result) {
-					if (result.code == 100) {
-						function setCategoryDescSelect(el, data) {
-							var html = '';
-							for (var i = 0; i < data.length; i += 1) {
-								 // var productId = data[i].productId;
-								 // console.log(productId)
-								html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
-							}
-							el.html(html);
-						}
-						objparentList = result.extend.mlbackProductResList;
-						var categoryIdSelect = $('#actshowproProid');
-						setCategoryDescSelect(categoryIdSelect, objparentList);
-						categoryIdSelect.change(function(){
-							var productSelectid=$(this).val();
-							reviewPid=productSelectid;
-							// console.log(reviewPid)
-						})
-						
-						
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
-		}
-		/********************************/
-		// console.log(reviewStarttime)
-		// console.log(reviewEndtime)
 		console.log( "初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
 		$(".btn_search").click(function(){
-			var reviewProstarnum =$(".staricon .xing").val();
+		console.log(reviewPid)
 			console.log("点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
-			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+			if(reviewStatus=="999"){
+				alert("请选择状态")
+			}else if(reviewProstarnum=="0"){
+				alert("请选择产品")
+			}else if(reviewPid=="999"){
+				alert("请选择产品")
+			}else{
+				to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+			}
+			
+			
 		})
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
@@ -427,6 +437,275 @@
 			var navEle = $("<nav></nav>").append(ul);
 			navEle.appendTo("#page_nav_area");
 		}
+		//新建任務
+		$('#task_add_modal_btn').click(function () {
+			$(".maskbg").show();
+			$(".box_new_review").show();
+			$('.table-box').load('${APP_PATH}/static/tpl/addReview.html',function () {
+					// 设置归属类
+					// getProductDown();
+					getCategoryDown();
+					// $(":input[name='reviewCreatetime']").val(minDate);
+					// $(":input[name='reviewConfirmtime']").val(maxDate);
+					$('.date-timepicker2').each(function(i, item) {
+						$(item).datePicker({
+							isRange: true,
+							format: reviewStarttime
+						});
+					});
+					$(".closeaddreview").click(function(){
+						$(".box_new_review").hide();
+						$(".maskbg").hide();
+					})
+				}
+			);
+		});
+		// 删除该条（id）评论信息
+		$("#task_table").on("click", ".btn-danger", function () {
+			var data = {
+				reviewId: $(this).attr('del-id')
+			};
+			console.log(data)
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/delete",
+				data: JSON.stringify(data),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "post",
+				success: function (result) {
+					if (result.code == 100) {
+						alert('删除成功！');
+						to_page(1);
+					}
+				}
+			});
+		});
+		// // fetch all product infos
+		// var productData;
+		// function getProductDown() {
+		// 	$.ajax({
+		// 		url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+		// 		type: "GET",
+		// 		async: false,
+		// 		success: function (result) {
+		// 			if (result.code == 100) {
+		// 				function setCategoryDescSelect(el, data) {
+		// 					var html = '';
+		// 					for (var i = 0; i < data.length; i += 1) {
+		// 						html += '<option value="' + data[i].productId + '">' + data[i].productId +" "+ data[i].productName + '</option>';
+		// 					}
+		// 					el.html(html);
+		// 				}
+		// 				productData = result.extend.mlbackProductResList;
+		// 				var categoryIdSelect = $('#reviewPid');
+		// 				setCategoryDescSelect(categoryIdSelect, productData);
+		// 			} else {
+		// 				alert("联系管理员");
+		// 			}
+		// 		}
+		// 	});
+		// }
+		
+		// 跳转到编辑页面/并做编辑页面的相关处理
+		$("#task_table").on("click", ".edit_btn", function () {
+			$(".maskbg").show();
+			$(".box_new_review").show();
+			var reviewId = parseInt($(this).attr('edit-id'))
+			// tab tpl
+			$('.table-box').load('${APP_PATH}/static/tpl/addReview.html', function () {
+				// 获取产品列表
+				// getProductDown();
+				getProductDown();
+				// init
+				initOtherInfo(reviewId)
+				initImgList(reviewId);//附图文件
+		
+				// boot upload img
+				/* $('#upload-img-main').on("change", upload); */ //头像图不再上传，从名字的第一个字母生成
+				$('.upload-img-fu').each(function (i, item) {
+					$(item).on("change", function () {
+						uploadfu($(this), i + 1);
+					})
+				});
+				$('#upload-img-fu1').on("change", uploadfu);
+					$(".clear_img").on("click",function(id){
+						var selfimg =this;
+							var data = {
+								reviewimgId:$(this).parents(".upload-img-btn").attr("id")
+							};
+							// console.log(data);
+							$.ajax({
+								url: "${APP_PATH}/MlbackReviewImg/delete",
+								data: JSON.stringify(data),
+								dataType: "json",
+								contentType: 'application/json',
+								type: "post",
+								success: function (result) {
+									console.log(result)
+									if (result.code == 100) {
+										alert('删除成功！');
+										$(selfimg).parents(".upload-img-btn").css({"background":"url(/ShopTemplate/static/img/plus.png) no-repeat","background-size":"200px"})
+									}
+								}
+							});
+						});
+				
+			$(".closeaddreview").click(function(){
+				$(".box_new_review").hide();
+				$(".maskbg").hide();
+			})	
+				
+			});
+		});
+		// fetch data about review imgs
+		function initImgList(id) {
+			$.ajax({
+				url: "${APP_PATH}/MlbackReviewImg/getMlbackReviewImgListByReviewId",
+				data: {
+					"reviewId": id
+				},
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						// render data
+						tianchongImg(result.extend.mlbackReviewImgResList);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+		
+		// fetch data about reivew
+		function initOtherInfo(id) {
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/getOneMlfrontReviewDetailById",
+				data: {
+					"reviewId": id
+				},
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						var obj = result.extend.mlfrontReviewOne;
+						// console.log(obj)
+						// render data
+						tianchong(obj);
+		
+						$('.date-timepicker2').each(function(i, item) {
+							$(item).datePicker({
+								isRange: true,
+								format: reviewStarttime
+							});
+						});
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+		// 编辑-回显-数据（不带图片）
+		function tianchong(data) {
+			$(":input[name='reviewId']").val(data.reviewId);
+			$(":input[name='reviewUid']").val(data.reviewUid);
+			$(":input[name='reviewUname']").val(data.reviewUname);
+			$(":input[name='reviewPid']").val(data.reviewPid);
+			$(":input[name='reviewPname']").val(data.reviewPname);
+			
+			$(":input[name='reviewCreatetime']").val(data.reviewCreatetime);
+			$(":input[name='reviewConfirmtime']").val(data.reviewConfirmtime);
+		
+			$(":input[name='reviewStatus']").val(data.reviewStatus);
+			
+			if (data.reviewUimgurl && data.reviewUimgurl.length) {
+				$("#upload-img-main").parent().css("background-image", "url(" + data.reviewUimgurl + ")");
+			}
+			$(":input[name='reviewDetailstr']").val(data.reviewDetailstr);
+			$(":input[name='reviewImgidstr']").val(data.reviewImgidstr);
+			$(":input[name='reviewProstarnum']").val(data.reviewProstarnum);
+		}
+		
+		
+		// 编辑-回显-数据（仅图片）
+		function tianchongImg(data) {
+			console.log(data);
+			var elImgs = $('.sub-img').find('.upload-img-btn');
+			for (var i = 0; i < data.length; i += 1) {
+				$(elImgs[data[i].reviewimgSortOrder - 1]).css("background-image", "url(" + data[i].reviewimgUrl + ")");
+				var imgid =data[i].reviewimgId;
+				$(elImgs[data[i].reviewimgSortOrder - 1]).attr("id",imgid)
+			}
+		}
+		
+		// upload img 
+		function upload() {
+			var self = this;
+			//实例化一个FormData
+			var obj = new FormData();
+			obj.append('file', $(this)[0].files[0]);
+			// console.log($(this)[0].files[0])
+			var reviewIdUP = $(":input[name='reviewId']").val();
+			if (reviewIdUP == null) {
+				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
+				// console.log("productIdUP:"+productIdUP);
+				alert("请先输入产品名，保存后从编辑进入");
+			} else {
+				obj.append('reviewId', reviewIdUP);
+				$.ajax({
+					url: "${APP_PATH}/UpImg/uploadReviewUImg",
+					type: "post",
+					dataType: "json",
+					cache: false,
+					data: obj,
+					processData: false, // 不处理数据
+					contentType: false, // 不设置内容类型
+					success: function (data) {
+						//设置背景为我们选择的图片
+						// console.log(data);
+						var returl = data.extend.uploadUrl;
+						$(self).parent().css({
+							"background-image": "url(" + '${APP_PATH }/static/img/ReviewUImg/' + returl + ")"
+						});
+					}
+				});
+			}
+		}
+		
+		// upload img 1-2
+		function uploadfu(item, index) {
+			var self = this;
+			// console.log(self)
+			//实例化一个FormData
+			var obj = new FormData();
+			obj.append('file', item[0].files[0]);
+			// console.log($(this)[0].files[0])
+			var reviewIdUP = $(":input[name='reviewId']").val();
+			if (reviewIdUP == null) {
+				alert("请先输入产品名，保存后从编辑进入");
+			} else {
+				obj.append('reviewId', reviewIdUP);
+				obj.append('sort', index);
+				$.ajax({
+					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
+					type: "post",
+					dataType: "json",
+					cache: false,
+					data: obj,
+					processData: false, // 不处理数据
+					contentType: false, // 不设置内容类型
+					success: function (data) {
+						//设置背景为我们选择的图片
+						// console.log(data);
+						var returl = data.extend.uploadUrl;
+						item.parent().css({
+							"background-image": "url(" + '${APP_PATH }/static/img/reviewAllImg/' + returl + ")"
+						});
+					}
+				});
+			}
+		}
+		
+		
+		
 	</script>
 </body>
 
