@@ -475,28 +475,30 @@ public class MlfrontReviewController {
 	
 	
 	/**11.0	useOn	0505
-	 * 分类MlbackCoupon列表分页list数据
+	 * 分类MlfrontReview列表分页list数据
 	 * @param pn,
+	 * Integer reviewPid;
 	 * Integer reviewStatus;
 	 * Integer reviewProstarnum;
 	 * String reviewStarttime;
 	 * String reviewEndtime;
 	 * @return
 	 */
-	@RequestMapping(value="/selectMlfrontReviewListBySearch",method=RequestMethod.POST)
+	@RequestMapping(value="/selectMlblackReviewListBySearch",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg selectMlfrontReviewListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "reviewPid") Integer reviewPid,
 			@RequestParam(value = "reviewStatus") Integer reviewStatus,@RequestParam(value = "reviewProstarnum") Integer reviewProstarnum,
 			@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
 			HttpSession session) {
-		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
-//		if(mlbackAdmin==null){
-//			//SysUsers对象为空
-//			return Msg.fail().add("resMsg", "session中adminuser对象为空");
-//		}else{
-			int PagNum = 50;
+
+		MlfrontReview mlfrontReviewReq = new MlfrontReview();
+		mlfrontReviewReq.setReviewId(reviewPid);
+		mlfrontReviewReq.setReviewStatus(reviewStatus);
+		mlfrontReviewReq.setReviewProstarnum(reviewProstarnum);
+		mlfrontReviewReq.setReviewStarttime(reviewStarttime);
+		mlfrontReviewReq.setReviewEndtime(reviewEndtime);
+			int PagNum = 20;
 			PageHelper.startPage(pn, PagNum);
-			MlfrontReview mlfrontReviewReq = new MlfrontReview();
 			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
 			
 			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
