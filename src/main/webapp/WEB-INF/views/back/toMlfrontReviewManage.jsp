@@ -128,14 +128,18 @@
 					enablekeyboard: false,
 			}).resize()
 		});
+		var reviewStatusselect =$(".pinglun .selectpl")
+		$(reviewStatusselect).change(function(){
+			var reviewStatusselect=$(this).val();
+			reviewStatus=reviewStatusselect;
+			console.log(reviewStatus)
+		})
 		
-		var reviewStatus =$(".pinglun .selectpl").val();
 		var reviewProstarnum =$(".staricon .xing").val();
 		var reviewPid;
+		var reviewStatus=0;
 		var reviewStarttime;
 		var reviewEndtime;
-		var reviewStarttime2;
-		var reviewEndtime2;
 		
 		/**时间插件***/
 		var targetInput = $('.date-timepicker');
@@ -184,8 +188,8 @@
 			 							hide: function (type) {
 											var changestar = this.$input.eq(0).val();
 											var changeEnd = this.$input.eq(1).val();
-											reviewStarttime2=changestar;
-											reviewEndtime2=changeEnd;
+											reviewStarttime=changestar;
+											reviewEndtime=changeEnd;
 			 							}
 			 						})
 			 					})
@@ -239,11 +243,11 @@
 		/********************************/
 		// console.log(reviewStarttime)
 		// console.log(reviewEndtime)
-		// console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		console.log( "初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
 		$(".btn_search").click(function(){
 			var reviewProstarnum =$(".staricon .xing").val();
-			console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime2"+reviewStarttime2+"reviewEndtime2"+reviewEndtime2);
-			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime2,reviewStarttime2)
+			console.log("点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
 		})
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
