@@ -280,7 +280,7 @@
 			if(reviewStatus=="999"){
 				alert("请选择状态")
 			}else if(reviewProstarnum=="0"){
-				alert("请选择产品")
+				alert("请选择星级")
 			}else if(reviewPid=="999"){
 				alert("请选择产品")
 			}else{
