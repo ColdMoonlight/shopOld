@@ -88,7 +88,33 @@
 							</div>
 							<div id="productTabContent" class="tabreview tab-content">
 								<div class="tab-pane in active" id="allreview">
-									111111111111111111111111111111111111
+								    <!-- table-content -->
+								    <div class="table-content">
+								    	<table class="table table-striped table-hover" id="task_table">
+								    		<thead>
+								    			<tr>
+								    				<th>reviewId</th>
+								    				<th>评论客户</th>
+								    				<th>客户头像</th>
+								    				<th>产品id</th>
+								    				<!-- <th>产品名称</th> -->
+								    				<th>评论时间</th>
+								    				<th>评论状态</th>
+								    				<!-- <th>评论图片数</th> -->
+								    				<th>评分星级</th>
+								    				<th>操作</th>
+								    			</tr>
+								    		</thead>
+								    		<tbody> </tbody>
+								    	</table>
+								    </div>
+								    <!-- 显示分页信息 -->
+								    <div class="row">
+								    	<!--分页文字信息  -->
+								    	<div class="col-md-6 col-sm-6" id="page_info_area"></div>
+								    	<!-- 分页条信息 -->
+								    	<div class="col-md-6 col-sm-6" id="page_nav_area"></div>
+								    </div>
 								</div>
 								<div class="tab-pane in" id="myreview">
 									222222222222222222222222222222222222
@@ -128,18 +154,22 @@
 					enablekeyboard: false,
 			}).resize()
 		});
-		var reviewStatusselect =$(".pinglun .selectpl")
-		$(reviewStatusselect).change(function(){
+		var reviewPid;
+		var reviewStatus=0;
+		var reviewProstarnum;
+		var reviewStarttime;
+		var reviewEndtime;
+		var totalRecord, currentPage, editid;
+		$(".pinglun .selectpl").change(function(){
 			var reviewStatusselect=$(this).val();
 			reviewStatus=reviewStatusselect;
 			console.log(reviewStatus)
+		});
+		$(".staricon .xing").change(function(){
+			var xingselect=$(this).val();
+			reviewProstarnum=xingselect;
+			console.log(reviewProstarnum)
 		})
-		
-		var reviewProstarnum =$(".staricon .xing").val();
-		var reviewPid;
-		var reviewStatus=0;
-		var reviewStarttime;
-		var reviewEndtime;
 		
 		/**时间插件***/
 		var targetInput = $('.date-timepicker');
@@ -268,14 +298,135 @@
 		        success: function (result) {
 		          if (result.code == 100) {
 		            console.log(result)
-					
+					//1、解析并显示员工数据
+					build_task_table(result);
+					//2、解析并显示分页信息
+					build_page_info(result);
+					//3、解析显示分页条数据
+					build_page_nav(result);
 		          } else {
 		            alert("联系管理员");
 		          }
 		        }
 		      });
 		    }
+		/**************/
+		function build_task_table(result) {
+			//清空table表格
+			$("#task_table tbody").empty();
+			var task = result.extend.pageInfo.list;
+			$.each(task, function (index, item) {
+				var reviewId = $("<td></td>").append(item.reviewId);
+				var reviewUname = $("<td></td>").append(item.reviewUname);
+				var imgurl = item.reviewUimgurl;
+				var image = '<img src=' + imgurl + ' ' + 'width=40 height=40>';
+				var reviewUimgurl = $("<td></td>").append(image);
+				var reviewPid = $("<td></td>").append(item.reviewPid);
+				var reviewPname = $("<td></td>").append(item.reviewPname);
+				var reviewCreatetime = $("<td></td>").append(item.reviewCreatetime);
+				var reviewStatus = $("<td></td>").append((item.reviewStatus ? '已生效' : '未生效'));
+				var reviewImgidstr = $("<td></td>").append(item.reviewImgidstr);
+				var reviewProstarnum = $("<td></td>").append(item.reviewProstarnum);
 		
+				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
+					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
+				//为编辑按钮添加一个自定义的属性，来表示当前productId
+				editBtn.attr("edit-id", item.reviewId);
+				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
+					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+				//为删除按钮添加一个自定义的属性来表示当前删除的productId
+				delBtn.attr("del-id", item.reviewId);
+				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
+				//append方法执行完成以后还是返回原来的元素
+				$("<tr></tr>").append(reviewId)
+					.append(reviewUname)
+					.append(reviewUimgurl)
+					.append(reviewPid)
+					.append(reviewCreatetime)
+					.append(reviewStatus)
+					.append(reviewProstarnum)
+					.append(btnTd)
+					.appendTo("#task_table tbody");
+			});
+		}
+		//解析显示分页信息
+		function build_page_info(result) {
+			$("#page_info_area").empty();
+			$("#page_info_area").append(
+					"当前" + result.extend.pageInfo.pageNum + "页,总" +
+					result.extend.pageInfo.pages + "页,总" +
+					result.extend.pageInfo.total + "条记录"
+			);
+			totalRecord = result.extend.pageInfo.total;
+			currentPage = result.extend.pageInfo.pageNum;
+		}
+		//解析显示分页条，点击分页要能去下一页....
+		function build_page_nav(result) {
+			//page_nav_area
+			$("#page_nav_area").empty();
+			var ul = $("<ul></ul>").addClass("pagination");
+		
+			//构建元素
+			var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+			if (result.extend.pageInfo.hasPreviousPage == false) {
+				firstPageLi.addClass("disabled");
+				prePageLi.addClass("disabled");
+			} else {
+				//为元素添加点击翻页的事件
+				firstPageLi.click(function () {
+					// to_page(1);
+					to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+				});
+				prePageLi.click(function () {
+					// to_page(result.extend.pageInfo.pageNum - 1);
+					to_page(currentPage-1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+					
+				});
+			}
+		
+			var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+			var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+			if (result.extend.pageInfo.hasNextPage == false) {
+				nextPageLi.addClass("disabled");
+				lastPageLi.addClass("disabled");
+			} else {
+				nextPageLi.click(function () {
+					// to_page(result.extend.pageInfo.pageNum + 1);
+					to_page(currentPage+1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+				});
+				lastPageLi.click(function () {
+					// to_page(result.extend.pageInfo.pages);
+					to_page(result.extend.pageInfo.pages,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+					
+				});
+			}
+		
+			//添加首页和前一页 的提示
+			ul.append(firstPageLi).append(prePageLi);
+			//1,2，3遍历给ul中添加页码提示
+			$.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
+		
+				var numLi = $("<li></li>").append($("<a></a>").append(item));
+				if (result.extend.pageInfo.pageNum == item) {
+					numLi.addClass("active");
+				}
+				numLi.click(function () {
+					// to_page(item);
+					// console.log("点击数字"+"pn:"+ item + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+					// console.log(reviewProstarnum)
+					// console.log(reviewStatus)
+					to_page(item,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+				});
+				ul.append(numLi);
+			});
+			//添加下一页和末页 的提示
+			ul.append(nextPageLi).append(lastPageLi);
+		
+			//把ul加入到nav
+			var navEle = $("<nav></nav>").append(ul);
+			navEle.appendTo("#page_nav_area");
+		}
 	</script>
 </body>
 
