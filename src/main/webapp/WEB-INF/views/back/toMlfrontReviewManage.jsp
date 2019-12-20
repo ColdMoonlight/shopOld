@@ -239,12 +239,11 @@
 		/********************************/
 		// console.log(reviewStarttime)
 		// console.log(reviewEndtime)
-		console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		// console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
 		$(".btn_search").click(function(){
 			var reviewProstarnum =$(".staricon .xing").val();
 			console.log("pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime2"+reviewStarttime2+"reviewEndtime2"+reviewEndtime2);
 			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime2,reviewStarttime2)
-			
 		})
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
