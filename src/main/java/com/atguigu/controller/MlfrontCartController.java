@@ -91,7 +91,6 @@ public class MlfrontCartController {
 	@RequestMapping(value="/toAddToCart",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg toAddToCart(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
-		String nowViewTime = DateUtil.strTime14s();
 		
 		insertAddCartView(mlfrontCartItem,session);
 		
@@ -174,7 +173,7 @@ public class MlfrontCartController {
 						}else{
 							//没有该sku的Cartitem	新增该条Cartitem sku
 							//将该id写入cart对象的cartItemStr中
-							System.out.println("不包含"); 
+							System.out.println("操作说明：当前客户添加购物车,此前购物车中不包含本次添加的产品"); 
 							//将本id加入原来的idstr中
 							//更新一下该user的购物车中的cartitemIdstr字段
 							mlfrontCartItem.setCartitemStatus(0);
@@ -300,7 +299,7 @@ public class MlfrontCartController {
 							//没有该sku的Cartitem
 							//新增该条Cartitem sku
 							//将该id写入cart对象的cartItemStr中
-							System.out.println("不包含"); 
+							System.out.println("操作说明：当前客户添加购物车,此前购物车中不包含本次添加的产品"); 
 							//将本id加入原来的idstr中
 							//更新一下该user的购物车中的cartitemIdstr字段
 							mlfrontCartItem.setCartitemStatus(0);
@@ -958,7 +957,7 @@ public class MlfrontCartController {
 						}else{
 							//没有该sku的Cartitem	新增该条Cartitem sku
 							//将该id写入cart对象的cartItemStr中
-							System.out.println("不包含"); 
+							System.out.println("操作说明：当前客户添加购物车,此前购物车中不包含本次添加的产品");  
 							//将本id加入原来的idstr中
 							//更新一下该user的购物车中的cartitemIdstr字段
 							mlfrontCartItem.setCartitemStatus(0);
@@ -1092,7 +1091,7 @@ public class MlfrontCartController {
 							//没有该sku的Cartitem
 							//新增该条Cartitem sku
 							//将该id写入cart对象的cartItemStr中
-							System.out.println("不包含"); 
+							System.out.println("操作说明：当前客户添加购物车,此前购物车中不包含本次添加的产品"); 
 							//将本id加入原来的idstr中
 							//更新一下该user的购物车中的cartitemIdstr字段
 							mlfrontCartItem.setCartitemStatus(0);
