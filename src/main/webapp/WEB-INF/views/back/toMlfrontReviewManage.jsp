@@ -488,7 +488,7 @@
 			
 			$('.table-box').load('${APP_PATH}/static/tpl/addReviewnew.html',function () {
 					// 设置归属类
-					// getProductDown();
+					getProductDown();
 					getCategoryDown();
 					// $(":input[name='reviewCreatetime']").val(minDatestar);
 					// $(":input[name='reviewConfirmtime']").val(reviewEndtime);
@@ -546,30 +546,30 @@
 			});
 		});
 		// // fetch all product infos
-		// var productData;
-		// function getProductDown() {
-		// 	$.ajax({
-		// 		url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
-		// 		type: "GET",
-		// 		async: false,
-		// 		success: function (result) {
-		// 			if (result.code == 100) {
-		// 				function setCategoryDescSelect(el, data) {
-		// 					var html = '';
-		// 					for (var i = 0; i < data.length; i += 1) {
-		// 						html += '<option value="' + data[i].productId + '">' + data[i].productId +" "+ data[i].productName + '</option>';
-		// 					}
-		// 					el.html(html);
-		// 				}
-		// 				productData = result.extend.mlbackProductResList;
-		// 				var categoryIdSelect = $('#reviewPid');
-		// 				setCategoryDescSelect(categoryIdSelect, productData);
-		// 			} else {
-		// 				alert("联系管理员");
-		// 			}
-		// 		}
-		// 	});
-		// }
+		var productData;
+		function getProductDown() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						function setCategoryDescSelect(el, data) {
+							var html = '';
+							for (var i = 0; i < data.length; i += 1) {
+								html += '<option value="' + data[i].productId + '">' + data[i].productId +" "+ data[i].productName + '</option>';
+							}
+							el.html(html);
+						}
+						productData = result.extend.mlbackProductResList;
+						var categoryIdSelect = $('#reviewPid');
+						setCategoryDescSelect(categoryIdSelect, productData);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
 		
 		// 跳转到编辑页面/并做编辑页面的相关处理
 		$("#task_table").on("click", ".edit_btn", function () {
@@ -580,7 +580,7 @@
 			$('.table-box').load('${APP_PATH}/static/tpl/addReviewnew.html', function () {
 				// 获取产品列表
 				// getProductDown();
-				// getProductDown();
+				getProductDown();
 				getCategoryDown()
 				// init
 				initOtherInfo(reviewId)
