@@ -55,6 +55,22 @@
 									<span class="c-datepicker-range-separator">-</span>
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
+<!-- 								<div class="date-timepicker2">
+									<div class="form-group row">
+										<label for="reviewCreatetime" class="col-sm-2 control-label">编造评论时间:</label>
+										<div class="col-sm-6 J-datepicker">
+											<input type="text" autocomplete="off" class="form-control countdown-start" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="reviewCreatetime">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label for="reviewConfirmtime" class="col-sm-2 control-label">审核评论时间:</label>
+										<div class="col-sm-6 J-datepicker">
+											<input type="text" autocomplete="off" class="form-control countdown-end" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="reviewConfirmtime">
+										</div>
+									</div>
+								</div> -->
+								
+								
 								<div class="form-group pinglun" style="float: left;">
 								    <label class="control-label" style="float: left;">评论状态</label>
 								    <div class="" style="float: left;">
@@ -159,6 +175,8 @@
 					enablekeyboard: false,
 			}).resize()
 		});
+		
+		
 		/**产品id****/
 		var reviewPid=999;
 		getCategoryDown()
@@ -269,9 +287,32 @@
 				$input.eq(0).val(minDatestar);
 				$input.eq(1).val(maxDateend);
 			}
+			function  datePickerint(){
+				$('.J-datepicker').datePicker({
+				  hasShortcut:true,
+				  min:'2018-01-01 04:00:00',
+				  max:'2050-09-09 20:59:59',
+				  shortcutOptions:[{
+					name: '今天',
+					day: '0'
+				  }, {
+					name: '昨天',
+					day: '-1',
+					time: '00:00:00'
+				  }, {
+					name: '一周前',
+					day: '-7'
+				  }],
+				  hide:function(){
+					console.info(this)
+				  }
+				}); 
+			}
 			$(function () {
 				initHtml();
 				initJs();
+				 datePickerint()
+				
 			});
 		console.log( "初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
 		$(".btn_search").click(function(){
@@ -440,34 +481,19 @@
 		//新建任務
 		$('#task_add_modal_btn').click(function () {
 			$(".maskbg").show();
-			$(".box_new_review").show();
+			$(".box_new_review").addClass("active")
+			// $(".box_new_review").css("height","600px");
+			
 			$('.table-box').load('${APP_PATH}/static/tpl/addReviewnew.html',function () {
 					// 设置归属类
 					// getProductDown();
 					getCategoryDown();
 					// $(":input[name='reviewCreatetime']").val(minDatestar);
 					// $(":input[name='reviewConfirmtime']").val(reviewEndtime);
-					$('.J-datepicker').datePicker({
-					  hasShortcut:true,
-					  min:'2018-01-01 04:00:00',
-					  max:'2050-09-09 20:59:59',
-					  shortcutOptions:[{
-					    name: '今天',
-					    day: '0'
-					  }, {
-					    name: '昨天',
-					    day: '-1',
-					    time: '00:00:00'
-					  }, {
-					    name: '一周前',
-					    day: '-7'
-					  }],
-					  hide:function(){
-					    console.info(this)
-					  }
-					});
+					datePickerint()
+					
 					$(".closeaddreview").click(function(){
-						$(".box_new_review").hide();
+						$(".box_new_review").removeClass("active")
 						$(".maskbg").hide();
 					})
 				}
@@ -490,7 +516,9 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('操作成功！');
-						window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewPage";
+						// window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewPage";
+						$(".box_new_review").removeClass("active")
+						$(".maskbg").hide();
 					}
 				}
 			});
@@ -544,7 +572,7 @@
 		// 跳转到编辑页面/并做编辑页面的相关处理
 		$("#task_table").on("click", ".edit_btn", function () {
 			$(".maskbg").show();
-			$(".box_new_review").show();
+			$(".box_new_review").addClass("active")
 			var reviewId = parseInt($(this).attr('edit-id'))
 			// tab tpl
 			$('.table-box').load('${APP_PATH}/static/tpl/addReviewnew.html', function () {
@@ -587,7 +615,7 @@
 						});
 				
 			$(".closeaddreview").click(function(){
-				$(".box_new_review").hide();
+				$(".box_new_review").removeClass("active")
 				$(".maskbg").hide();
 			})	
 				
@@ -628,25 +656,8 @@
 						tianchong(obj);
 						// $(":input[name='reviewCreatetime']").val(minDatestar);
 						// $(":input[name='reviewConfirmtime']").val(reviewEndtime);
-						$('.J-datepicker').datePicker({
-						  hasShortcut:true,
-							min:'2018-01-01 04:00:00',
-							max:'2050-09-09 20:59:59',
-						  shortcutOptions:[{
-						    name: '今天',
-						    day: '0'
-						  }, {
-						    name: '昨天',
-						    day: '-1',
-						    time: '00:00:00'
-						  }, {
-						    name: '一周前',
-						    day: '-7'
-						  }],
-						  hide:function(){
-						    console.info(this)
-						  }
-						});
+						 datePickerint()
+						
 					} else {
 						alert("联系管理员");
 					}
