@@ -441,17 +441,30 @@
 		$('#task_add_modal_btn').click(function () {
 			$(".maskbg").show();
 			$(".box_new_review").show();
-			$('.table-box').load('${APP_PATH}/static/tpl/addReview.html',function () {
+			$('.table-box').load('${APP_PATH}/static/tpl/addReviewnew.html',function () {
 					// 设置归属类
 					// getProductDown();
 					getCategoryDown();
-					// $(":input[name='reviewCreatetime']").val(minDate);
-					// $(":input[name='reviewConfirmtime']").val(maxDate);
-					$('.date-timepicker2').each(function(i, item) {
-						$(item).datePicker({
-							isRange: true,
-							format: reviewStarttime
-						});
+					// $(":input[name='reviewCreatetime']").val(minDatestar);
+					// $(":input[name='reviewConfirmtime']").val(reviewEndtime);
+					$('.J-datepicker').datePicker({
+					  hasShortcut:true,
+					  min:'2018-01-01 04:00:00',
+					  max:'2050-09-09 20:59:59',
+					  shortcutOptions:[{
+					    name: '今天',
+					    day: '0'
+					  }, {
+					    name: '昨天',
+					    day: '-1',
+					    time: '00:00:00'
+					  }, {
+					    name: '一周前',
+					    day: '-7'
+					  }],
+					  hide:function(){
+					    console.info(this)
+					  }
 					});
 					$(".closeaddreview").click(function(){
 						$(".box_new_review").hide();
@@ -459,6 +472,28 @@
 					})
 				}
 			);
+		});
+		//保存
+		$(document).on('click', '#tasksubmit', function () {
+			var data = $('form').serializeArray();
+			reqData = data.reduce(function (obj, item) {
+				obj[item.name] = item.value;
+				return obj
+			}, {});
+			console.log(reqData)
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/save",
+				data: JSON.stringify(reqData),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						alert('操作成功！');
+						window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewPage";
+					}
+				}
+			});
 		});
 		// 删除该条（id）评论信息
 		$("#task_table").on("click", ".btn-danger", function () {
@@ -512,10 +547,11 @@
 			$(".box_new_review").show();
 			var reviewId = parseInt($(this).attr('edit-id'))
 			// tab tpl
-			$('.table-box').load('${APP_PATH}/static/tpl/addReview.html', function () {
+			$('.table-box').load('${APP_PATH}/static/tpl/addReviewnew.html', function () {
 				// 获取产品列表
 				// getProductDown();
-				getProductDown();
+				// getProductDown();
+				getCategoryDown()
 				// init
 				initOtherInfo(reviewId)
 				initImgList(reviewId);//附图文件
@@ -590,12 +626,26 @@
 						// console.log(obj)
 						// render data
 						tianchong(obj);
-		
-						$('.date-timepicker2').each(function(i, item) {
-							$(item).datePicker({
-								isRange: true,
-								format: reviewStarttime
-							});
+						// $(":input[name='reviewCreatetime']").val(minDatestar);
+						// $(":input[name='reviewConfirmtime']").val(reviewEndtime);
+						$('.J-datepicker').datePicker({
+						  hasShortcut:true,
+							min:'2018-01-01 04:00:00',
+							max:'2050-09-09 20:59:59',
+						  shortcutOptions:[{
+						    name: '今天',
+						    day: '0'
+						  }, {
+						    name: '昨天',
+						    day: '-1',
+						    time: '00:00:00'
+						  }, {
+						    name: '一周前',
+						    day: '-7'
+						  }],
+						  hide:function(){
+						    console.info(this)
+						  }
 						});
 					} else {
 						alert("联系管理员");
