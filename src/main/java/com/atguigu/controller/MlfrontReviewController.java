@@ -87,9 +87,6 @@ public class MlfrontReviewController {
 			return Msg.success().add("pageInfo", page);
 //		}
 	}
-	
-	
-
 
 	/**3.0	useOn	0505
 	 * MlfrontReview	insert
@@ -126,6 +123,8 @@ public class MlfrontReviewController {
 		if(ReviewConfirmtime==""){
 			mlfrontReview.setReviewConfirmtime(nowTime);
 		}
+		mlfrontReview.setReviewStarttime(nowTime);
+		mlfrontReview.setReviewEndtime(nowTime);
 		if(reviewId==null){
 			//无id，insert
 			int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
@@ -139,8 +138,6 @@ public class MlfrontReviewController {
 			
 		}		
 	}
-	
-
 
 	/**3.1	useOn	0505
 	 * MlfrontReview	GetUImgUrlByUname
@@ -428,8 +425,6 @@ public class MlfrontReviewController {
 		return startNumList;
 	}
 	
-	
-	
 	/**9.0	useOn	0505
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
@@ -480,4 +475,48 @@ public class MlfrontReviewController {
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
+	
+	/**11.0	useOn	0505
+	 * 分类MlfrontReview列表分页list数据
+	 * @param pn,
+	 * Integer reviewPid;
+	 * Integer reviewStatus;
+	 * Integer reviewProstarnum;
+	 * String reviewStarttime;
+	 * String reviewEndtime;
+	 * @return
+	 */
+	@RequestMapping(value="/selectMlblackReviewListBySearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg selectMlfrontReviewListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "reviewPid") Integer reviewPid,
+			@RequestParam(value = "reviewStatus") Integer reviewStatus,@RequestParam(value = "reviewProstarnum") Integer reviewProstarnum,
+			@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
+			HttpSession session) {
+
+		MlfrontReview mlfrontReviewReq = new MlfrontReview();
+		if(reviewPid==999){
+			System.out.println("eviewPid==999");
+		}else{
+			mlfrontReviewReq.setReviewPid(reviewPid);
+		}
+		if(reviewProstarnum==0){
+			System.out.println("reviewProstarnum==0");
+		}else{
+			mlfrontReviewReq.setReviewProstarnum(reviewProstarnum);
+		}
+		if(reviewStatus==999){
+			System.out.println("reviewStatus==999");
+		}else{
+			mlfrontReviewReq.setReviewStatus(reviewStatus);
+		}
+		mlfrontReviewReq.setReviewStarttime(reviewStarttime);
+		mlfrontReviewReq.setReviewEndtime(reviewEndtime);
+			int PagNum = 20;
+			PageHelper.startPage(pn, PagNum);
+			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
+			
+			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
+			return Msg.success().add("pageInfo", page);
+//		}
+	}
 }

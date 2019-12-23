@@ -1,6 +1,7 @@
 package com.atguigu.bean;
 
 public class MlfrontReview {
+	
     private Integer reviewId;
 
     private Integer reviewUid;
@@ -18,6 +19,10 @@ public class MlfrontReview {
     private String reviewMotifytime;
 
     private String reviewConfirmtime;
+    
+    private String reviewStarttime;
+
+    private String reviewEndtime;
 
     private Integer reviewStatus;
 
@@ -98,6 +103,22 @@ public class MlfrontReview {
     public void setReviewConfirmtime(String reviewConfirmtime) {
         this.reviewConfirmtime = reviewConfirmtime == null ? null : reviewConfirmtime.trim();
     }
+    
+    public String getReviewStarttime() {
+		return reviewStarttime;
+	}
+
+	public void setReviewStarttime(String reviewStarttime) {
+		this.reviewStarttime = reviewStarttime == null ? null : reviewStarttime.trim();
+	}
+
+	public String getReviewEndtime() {
+		return reviewEndtime;
+	}
+
+	public void setReviewEndtime(String reviewEndtime) {
+		this.reviewEndtime = reviewEndtime == null ? null : reviewEndtime.trim();
+	}
 
     public Integer getReviewStatus() {
         return reviewStatus;

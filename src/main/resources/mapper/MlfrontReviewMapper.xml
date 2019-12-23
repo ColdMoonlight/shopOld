@@ -11,6 +11,8 @@
     <result column="review_createTime" jdbcType="VARCHAR" property="reviewCreatetime" />
     <result column="review_motifyTime" jdbcType="VARCHAR" property="reviewMotifytime" />
     <result column="review_confirmTime" jdbcType="VARCHAR" property="reviewConfirmtime" />
+    <result column="review_startTime" jdbcType="VARCHAR" property="reviewStarttime" />
+    <result column="review_endTime" jdbcType="VARCHAR" property="reviewEndtime" />
     <result column="review_status" jdbcType="INTEGER" property="reviewStatus" />
     <result column="review_detailStr" jdbcType="VARCHAR" property="reviewDetailstr" />
     <result column="review_imgIdStr" jdbcType="VARCHAR" property="reviewImgidstr" />
@@ -76,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     review_id, review_uid, review_uname, review_uimgUrl, review_pid, review_pname, review_createTime, 
-    review_motifyTime, review_confirmTime, review_status, review_detailStr, review_imgIdStr, 
+    review_motifyTime, review_confirmTime, review_startTime, review_endTime, review_status, review_detailStr, review_imgIdStr, 
     review_proStarNum
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlfrontReviewExample" resultMap="BaseResultMap">
@@ -108,12 +110,12 @@
   <insert id="insert" parameterType="com.atguigu.bean.MlfrontReview">
     insert into tb_mlfront_review (review_id, review_uid, review_uname, 
       review_uimgUrl, review_pid, review_pname, 
-      review_createTime, review_motifyTime, review_confirmTime, 
+      review_createTime, review_motifyTime, review_confirmTime, review_startTime, review_endTime, 
       review_status, review_detailStr, review_imgIdStr, 
       review_proStarNum)
     values (#{reviewId,jdbcType=INTEGER}, #{reviewUid,jdbcType=INTEGER}, #{reviewUname,jdbcType=VARCHAR}, 
       #{reviewUimgurl,jdbcType=VARCHAR}, #{reviewPid,jdbcType=INTEGER}, #{reviewPname,jdbcType=VARCHAR}, 
-      #{reviewCreatetime,jdbcType=VARCHAR}, #{reviewMotifytime,jdbcType=VARCHAR}, #{reviewConfirmtime,jdbcType=VARCHAR}, 
+      #{reviewCreatetime,jdbcType=VARCHAR}, #{reviewMotifytime,jdbcType=VARCHAR}, #{reviewConfirmtime,jdbcType=VARCHAR}, #{reviewStarttime,jdbcType=VARCHAR}, #{reviewEndtime,jdbcType=VARCHAR}, 
       #{reviewStatus,jdbcType=INTEGER}, #{reviewDetailstr,jdbcType=VARCHAR}, #{reviewImgidstr,jdbcType=VARCHAR}, 
       #{reviewProstarnum,jdbcType=INTEGER})
   </insert>
@@ -154,6 +156,12 @@
       <if test="record.reviewConfirmtime != null">
         review_confirmTime = #{record.reviewConfirmtime,jdbcType=VARCHAR},
       </if>
+      <if test="record.reviewStarttime != null">
+        review_startTime = #{record.reviewStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reviewEndtime != null">
+        review_endTime = #{record.reviewEndtime,jdbcType=VARCHAR},
+      </if>
       <if test="record.reviewStatus != null">
         review_status = #{record.reviewStatus,jdbcType=INTEGER},
       </if>
@@ -182,6 +190,8 @@
       review_createTime = #{record.reviewCreatetime,jdbcType=VARCHAR},
       review_motifyTime = #{record.reviewMotifytime,jdbcType=VARCHAR},
       review_confirmTime = #{record.reviewConfirmtime,jdbcType=VARCHAR},
+      review_startTime = #{record.reviewStarttime,jdbcType=VARCHAR},
+      review_endTime = #{record.reviewEndtime,jdbcType=VARCHAR},
       review_status = #{record.reviewStatus,jdbcType=INTEGER},
       review_detailStr = #{record.reviewDetailstr,jdbcType=VARCHAR},
       review_imgIdStr = #{record.reviewImgidstr,jdbcType=VARCHAR},
@@ -200,6 +210,8 @@
       review_createTime = #{reviewCreatetime,jdbcType=VARCHAR},
       review_motifyTime = #{reviewMotifytime,jdbcType=VARCHAR},
       review_confirmTime = #{reviewConfirmtime,jdbcType=VARCHAR},
+      review_startTime = #{reviewStarttime,jdbcType=VARCHAR},
+      review_endTime = #{reviewEndtime,jdbcType=VARCHAR},
       review_status = #{reviewStatus,jdbcType=INTEGER},
       review_detailStr = #{reviewDetailstr,jdbcType=VARCHAR},
       review_imgIdStr = #{reviewImgidstr,jdbcType=VARCHAR},
@@ -237,6 +249,12 @@
       </if>
       <if test="reviewConfirmtime != null">
         review_confirmTime,
+      </if>
+      <if test="reviewStarttime != null">
+        review_startTime,
+      </if>
+      <if test="reviewEndtime != null">
+        review_endTime,
       </if>
       <if test="reviewStatus != null">
         review_status,
@@ -279,6 +297,12 @@
       <if test="reviewConfirmtime != null">
         #{reviewConfirmtime,jdbcType=VARCHAR},
       </if>
+      <if test="reviewStarttime != null">
+        #{reviewStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewEndtime != null">
+        #{reviewEndtime,jdbcType=VARCHAR},
+      </if> 
       <if test="reviewStatus != null">
         #{reviewStatus,jdbcType=INTEGER},
       </if>
@@ -326,6 +350,12 @@
       <if test="reviewConfirmtime != null">
         review_confirmTime = #{reviewConfirmtime,jdbcType=VARCHAR},
       </if>
+      <if test="reviewStarttime != null">
+        review_startTime = #{reviewStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewEndtime != null">
+        review_endTime = #{reviewEndtime,jdbcType=VARCHAR},
+      </if> 
       <if test="reviewStatus != null">
         review_status = #{reviewStatus,jdbcType=INTEGER},
       </if>
@@ -356,5 +386,21 @@
   <select id="selectMlfrontReviewListByPId" parameterType="com.atguigu.bean.MlfrontReview" resultMap="BaseResultMap">
     select *
     from tb_mlfront_review where review_pid = #{reviewPid,jdbcType=INTEGER} and review_status = #{reviewStatus,jdbcType=INTEGER} order by review_createTime desc
+  </select>
+  
+  <!-- selectMlfrontReviewListBySearch使用中 -->
+  <select id="selectMlfrontReviewListBySearch" parameterType="com.atguigu.bean.MlfrontReview" resultMap="BaseResultMap">
+  	select * from tb_mlfront_review where
+   	review_createTime between #{reviewStarttime,jdbcType=VARCHAR} and #{reviewEndtime,jdbcType=VARCHAR} 
+   	<if test="reviewPid != null">
+      and review_pid = #{reviewPid,jdbcType=INTEGER}
+    </if>
+    <if test="reviewStatus != null">
+      and review_status = #{reviewStatus,jdbcType=INTEGER}
+    </if>
+    <if test="reviewProstarnum != null">
+      and review_proStarNum = #{reviewProstarnum,jdbcType=INTEGER}
+    </if>
+    order by review_id desc
   </select>
 </mapper>

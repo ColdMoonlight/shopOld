@@ -109,9 +109,7 @@
 	    }).resize()
 		});
 		var totalRecord, currentPage, editid;
-
-		var timeFormat = 'YYYY-MM-DD HH:mm:ss';
-
+/*****************************************************************/		
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
 		to_page(1);
 
@@ -199,7 +197,7 @@
 					to_page(1);
 				});
 				prePageLi.click(function () {
-					to_page(result.extend.pageInfo.pageNum - 1);
+					to_page(currentPage - 1);
 				});
 			}
 
@@ -210,7 +208,7 @@
 				lastPageLi.addClass("disabled");
 			} else {
 				nextPageLi.click(function () {
-					to_page(result.extend.pageInfo.pageNum + 1);
+					to_page(currentPage + 1);
 				});
 				lastPageLi.click(function () {
 					to_page(result.extend.pageInfo.pages);
@@ -247,14 +245,29 @@
 					// 设置归属类
 					getProductDown();
 
-					$(":input[name='reviewCreatetime']").val(minDate);
-					$(":input[name='reviewConfirmtime']").val(maxDate);
-					$('.date-timepicker').each(function(i, item) {
-						$(item).datePicker({
-							isRange: true,
-							format: timeFormat
-						});
-					});
+					// $(":input[name='reviewCreatetime']").val(minDate);
+					// $(":input[name='reviewConfirmtime']").val(maxDate);
+					          $('.J-datepicker').datePicker({
+					            hasShortcut:true,
+					            min:'2018-01-01 04:00:00',
+					            max:'2050-09-09 20:59:59',
+					            shortcutOptions:[{
+					              name: '今天',
+					              day: '0'
+					            }, {
+					              name: '昨天',
+					              day: '-1',
+					              time: '00:00:00'
+					            }, {
+					              name: '一周前',
+					              day: '-7'
+					            }],
+					            hide:function(){
+					              console.info(this)
+					            }
+					          });
+							 
+							 
 				}
 			);
 		});
@@ -427,13 +440,25 @@
 						// console.log(obj)
 						// render data
 						tianchong(obj);
-
-						$('.date-timepicker').each(function(i, item) {
-							$(item).datePicker({
-								isRange: true,
-								format: timeFormat
-							});
-						});
+								  $('.J-datepicker').datePicker({
+								    hasShortcut:true,
+									  min:'2018-01-01 04:00:00',
+									  max:'2050-09-09 20:59:59',
+								    shortcutOptions:[{
+								      name: '今天',
+								      day: '0'
+								    }, {
+								      name: '昨天',
+								      day: '-1',
+								      time: '00:00:00'
+								    }, {
+								      name: '一周前',
+								      day: '-7'
+								    }],
+								    hide:function(){
+								      console.info(this)
+								    }
+								  });
 					} else {
 						alert("联系管理员");
 					}

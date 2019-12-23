@@ -52,8 +52,8 @@
 										<th>wap状态</th>
 										<th>PC图</th>
 										<th>pc状态</th>
-										<th>产品id</th>
-										<th>产品名字</th>
+										<th>产品/类/专题页</th>
+										<th>产品id/类id/</th>
 										<th>产品Seo</th>
 										<th>if可点进</th>
 										<th>修改时间</th>
@@ -158,9 +158,23 @@
 				var slidePcimgurl = $("<td></td>").append(imagepc);
 				var slidePcstatus = $("<td></td>").append((item.slidePcstatus === 1 ? '展示' : '不展示'));
 				
-				var slideProid = $("<td></td>").append(item.slideProid);
-				var slideProname = $("<td width=400></td>").append(item.slideProname);
-				var slideSeoname = $("<td></td>").append(item.slideSeoname);
+				//var slideProname = $("<td width=400></td>").append(item.slideProname);
+				var slideIfproORcateORpage="单品";
+				if(item.slideIfproORcateORpage==1){
+					slideIfproORcateORpage = $("<td></td>").append("类");
+					var slideProid = $("<td></td>").append('类'+item.slideCateid);
+					var slideSeoname = $("<td></td>").append(item.slideCateSeoname);
+				}else if(item.slideIfproORcateORpage==2){
+					slideIfproORcateORpage = $("<td></td>").append("专题页");
+					var slideProid = $("<td></td>").append('专题页'+item.slidePageSeoname);
+					var slideSeoname = $("<td></td>").append(item.slidePageSeoname);
+				}else{
+					slideIfproORcateORpage = $("<td></td>").append("单品")
+					var slideProid = $("<td></td>").append('单品'+item.slideProid);
+					var slideSeoname = $("<td></td>").append(item.slideSeoname);
+				}
+				
+				
 				var slideIfinto = $("<td></td>").append((item.slideIfinto === 1 ? '可点进' : '不可点进'));
 				var slideMotifytime = $("<td></td>").append(item.slideMotifytime);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
@@ -181,8 +195,9 @@
 					.append(slideWapstatus)
 					.append(slidePcimgurl)
 					.append(slidePcstatus)
+					.append(slideIfproORcateORpage)
 					.append(slideProid)
-					.append(slideProname)
+					//.append(slideProname)
 					.append(slideSeoname)
 					.append(slideIfinto)
 					.append(slideMotifytime)
@@ -257,7 +272,31 @@
 			navEle.appendTo("#page_nav_area");
 		}
 		//新建任務
-
+				function getLeiDown() {
+					$.ajax({
+						url: "${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail",
+						type: "GET",
+						async: false,
+						success: function (result) {
+							console.log(result);/********result***********/
+							if (result.code == 100) {
+								function setCategoryDescSelect(el, data) {
+									var html = '<option value="-1">---none---</option>';
+									for (var i = 0; i < data.length; i += 1) {
+										html += '<option value="' + data[i].categoryId + '">'+ data[i].categoryId+"   "+ data[i].categoryDesc + '</option>';
+									}
+									el.html(html);
+								}
+								objparentList = result.extend.mlbackCategorydownList;
+								console.log(objparentList);
+								var categoryIdSelect = $('#slideCateid');
+								setCategoryDescSelect(categoryIdSelect, objparentList);
+							} else {
+								alert("联系管理员");
+							}
+						}
+					});
+				}
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
 			loadTpl()
@@ -333,6 +372,25 @@
 			$('.table-box').load('${APP_PATH}/static/tpl/addSlide.html', function () {
 				// 设置归属类
 				getCategoryDown();
+				getLeiDown()
+				$(".lei_select").hide();
+				$(".zt_select").hide();
+				$(".cp_orlei select").change(function() {
+					if($(this).val() == 0 ) {
+						$(".cp_select").show();
+						$(".lei_select").hide();
+						$(".zt_select").hide();
+					} else if($(this).val() == 1) {
+					    $(".lei_select").show();
+						$(".cp_select").hide();
+						$(".zt_select").hide();
+					}else if($(this).val() == 2){
+						$(".lei_select").hide();
+						$(".cp_select").hide();
+						$(".zt_select").show();
+					}
+				})
+				
 			});
 		}
 
@@ -342,6 +400,7 @@
 			loadTpl()
 			// 设置归属类
 			getCategoryDown();
+			getLeiDown()
 			// fetch data
 			data = {
 				"slideId": $(this).attr('edit-id')
@@ -379,12 +438,30 @@
 				}
 				$(":input[name='slidePcstatus']").val(data.slidePcstatus);
 				$(":input[name='slideProid']").val(data.slideProid);
+				$(":input[name='slideCateid']").val(data.slideCateid);
+				$(":input[name='slidePageSeoname']").val(data.slidePageSeoname);
 				$(":input[name='slideIfinto']").val(data.slideIfinto);
 				$(":input[name='slideMotifytime']").val(data.slideMotifytime);
 				
 				var slideProid = $("<td></td>").append(data.slideProid);
+				$(":input[name='slideIfproORcateORpage']").val(data.slideIfproORcateORpage);
 				var slideIfinto = $("<td></td>").append((data.slideIfinto === 1 ? '可点进' : '不可点进'));
 				var slideMotifytime = $("<td></td>").append(data.slideMotifytime);
+				$(":input[name='slideIfproORcateORpage']").val(data.slideIfproORcateORpage);
+				if(data.slideIfproORcateORpage==0){
+					$(".zt_select").hide();
+					$(".lei_select").hide();
+					$(".cp_select").show();
+				}else if(data.slideIfproORcateORpage==1){
+					$(".cp_select").hide();
+					$(".zt_select").hide();
+					$(".lei_select").show();
+				}else if(data.slideIfproORcateORpage==2){
+					$(".cp_select").hide();
+					$(".lei_select").hide();
+					$(".zt_select").show();
+				}
+				
 			}
 
 		});

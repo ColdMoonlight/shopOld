@@ -486,9 +486,8 @@ html,body {
 .choose_screen .form-group{margin: 0 20px 0 0;}
 .choose_screen .form-group{float: left;}
 .btn_search input {border:none; width: 100px; height: 34px; background:#337ab7; color: #fff; border-radius:3px;}
-
-
-
+/********************/
+.tabreview_box{width: 100%; height:auto; min-height: 600px; float: left;}
 
 
 

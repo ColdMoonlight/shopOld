@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackSlide;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
+import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackSlideService;
 import com.atguigu.utils.DateUtil;
@@ -39,6 +41,9 @@ public class MlbackSlideController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
+	
+	@Autowired
+	MlbackCategoryService mlbackCategoryService;
 	
 	/**
 	 * 1.0	UseNow	0505
@@ -85,21 +90,47 @@ public class MlbackSlideController {
 		//接受参数信息
 		//获取类名
 		Integer slideId = mlbackSlide.getSlideId();
-		Integer proId = mlbackSlide.getSlideProid();
 		
-		MlbackProduct mlbackProductReq = new MlbackProduct();
-		MlbackProduct mlbackProductRes = new MlbackProduct();
-		mlbackProductReq.setProductId(proId);
-		List<MlbackProduct> mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
-		mlbackProductRes = mlbackProductResList.get(0);
-		String Pname = mlbackProductRes.getProductName();
-		String Pseoname = mlbackProductRes.getProductSeo();
+		//取出slideIfproORcateORpage;	//0pro	1cate	2page
+		Integer ifproORcateORpage = mlbackSlide.getSlideIfproORcateORpage();
+		if(ifproORcateORpage==0){
+			//0pro
+			Integer proId = mlbackSlide.getSlideProid();
+			
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			MlbackProduct mlbackProductRes = new MlbackProduct();
+			mlbackProductReq.setProductId(proId);
+			List<MlbackProduct> mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
+			mlbackProductRes = mlbackProductResList.get(0);
+			String Pname = mlbackProductRes.getProductName();
+			String Pseoname = mlbackProductRes.getProductSeo();
+			mlbackSlide.setSlideProname(Pname);//Pseoname
+			mlbackSlide.setSlideSeoname(Pseoname);
+		}else if(ifproORcateORpage==1){
+			//1cate
+			Integer cateid = mlbackSlide.getSlideCateid();
+			
+			MlbackCategory mlbackCategoryReq = new MlbackCategory();
+			MlbackCategory mlbackCategoryRes = new MlbackCategory();
+			mlbackCategoryReq.setCategoryId(cateid);
+			List<MlbackCategory> mlbackCategoryResList = mlbackCategoryService.selectMlbackCategory(mlbackCategoryReq);
+			mlbackCategoryRes = mlbackCategoryResList.get(0);
+			String cName = mlbackCategoryRes.getCategoryName();
+			String cateSeo = mlbackCategoryRes.getCategorySeo();
+			mlbackSlide.setSlideCatename(cName);//Pseoname
+			mlbackSlide.setSlideCateSeoname(cateSeo);
+		}else{
+			//2page
+			String pageSeoname = mlbackSlide.getSlidePageSeoname();
+			
+			mlbackSlide.setSlidePageSeoname(pageSeoname);
+		}
+		
 		
 		//mlbackProductService;
 		String nowtime = DateUtil.strTime14s();
 		mlbackSlide.setSlideMotifytime(nowtime);
-		mlbackSlide.setSlideProname(Pname);//Pseoname
-		mlbackSlide.setSlideSeoname(Pseoname);
+		
 		if(slideId==null){
 			mlbackSlide.setSlideCreatetime(nowtime);
 			//无id，insert

@@ -13,6 +13,12 @@
     <result column="slide_proid" jdbcType="INTEGER" property="slideProid" />
     <result column="slide_proname" jdbcType="VARCHAR" property="slideProname" />
     <result column="slide_seoname" jdbcType="VARCHAR" property="slideSeoname" />
+    <result column="slide_cateid" jdbcType="INTEGER" property="slideCateid" />
+    <result column="slide_catename" jdbcType="VARCHAR" property="slideCatename" />
+    <result column="slide_cateSeoname" jdbcType="VARCHAR" property="slideCateSeoname" />
+    <result column="slide_ifproORcateORpage" jdbcType="INTEGER" property="slideIfproORcateORpage" />
+    <result column="slide_pagename" jdbcType="VARCHAR" property="slidePagename" />
+    <result column="slide_pageSeoname" jdbcType="VARCHAR" property="slidePageSeoname" />
     <result column="slide_ifinto" jdbcType="INTEGER" property="slideIfinto" />
     <result column="slide_createTime" jdbcType="VARCHAR" property="slideCreatetime" />
     <result column="slide_motifyTime" jdbcType="VARCHAR" property="slideMotifytime" />
@@ -77,8 +83,9 @@
   </sql>
   <sql id="Base_Column_List">
     slide_id, slide_name, slide_area, slide_firth_num, slide_wapstatus, slide_pcstatus, 
-    slide_wapimgurl, slide_pcimgurl, slide_proid, slide_proname, slide_seoname, slide_ifinto, 
-    slide_createTime, slide_motifyTime
+    slide_wapimgurl, slide_pcimgurl, slide_proid, slide_proname, slide_seoname, 
+    slide_cateid, slide_catename, slide_cateSeoname, slide_ifproORcateORpage, slide_pagename, slide_pageSeoname, 
+    slide_ifinto, slide_createTime, slide_motifyTime
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackSlideExample" resultMap="BaseResultMap">
     select
@@ -111,13 +118,16 @@
     insert into tb_mlback_slide (slide_id, slide_name, slide_area, 
       slide_firth_num, slide_wapstatus, slide_pcstatus, 
       slide_wapimgurl, slide_pcimgurl, slide_proid, 
-      slide_proname, slide_seoname, slide_ifinto, 
-      slide_createTime, slide_motifyTime)
+      slide_proname, slide_seoname, 
+      slide_cateid, slide_catename, slide_cateSeoname, slide_ifproORcateORpage, slide_pagename, slide_pageSeoname, 
+      slide_ifinto, slide_createTime, slide_motifyTime)
     values (#{slideId,jdbcType=INTEGER}, #{slideName,jdbcType=VARCHAR}, #{slideArea,jdbcType=INTEGER}, 
       #{slideFirthNum,jdbcType=INTEGER}, #{slideWapstatus,jdbcType=INTEGER}, #{slidePcstatus,jdbcType=INTEGER}, 
       #{slideWapimgurl,jdbcType=VARCHAR}, #{slidePcimgurl,jdbcType=VARCHAR}, #{slideProid,jdbcType=INTEGER}, 
-      #{slideProname,jdbcType=VARCHAR}, #{slideSeoname,jdbcType=VARCHAR}, #{slideIfinto,jdbcType=INTEGER}, 
-      #{slideCreatetime,jdbcType=VARCHAR}, #{slideMotifytime,jdbcType=VARCHAR})
+      #{slideProname,jdbcType=VARCHAR}, #{slideSeoname,jdbcType=VARCHAR}, 
+      #{slideCateid,jdbcType=INTEGER}, #{slideCatename,jdbcType=VARCHAR}, #{slideCateSeoname,jdbcType=VARCHAR}, 
+      #{slideIfproORcateORpage,jdbcType=INTEGER}, #{slidePagename,jdbcType=VARCHAR}, #{slidePageSeoname,jdbcType=VARCHAR}, 
+      #{slideIfinto,jdbcType=INTEGER}, #{slideCreatetime,jdbcType=VARCHAR}, #{slideMotifytime,jdbcType=VARCHAR})
   </insert>
   
   <select id="countByExample" parameterType="com.atguigu.bean.MlbackSlideExample" resultType="java.lang.Long">
@@ -162,6 +172,24 @@
       <if test="record.slideSeoname != null">
         slide_seoname = #{record.slideSeoname,jdbcType=VARCHAR},
       </if>
+      <if test="record.slideCateid != null">
+        slide_cateid = #{record.slideCateid,jdbcType=INTEGER},
+      </if>
+      <if test="record.slideCatename != null">
+        slide_catename = #{record.slideCatename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slideCateSeoname != null">
+        slide_cateSeoname = #{record.slideCateSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slideIfproORcateORpage != null">
+        slide_ifproORcateORpage = #{record.slideIfproORcateORpage,jdbcType=INTEGER},
+      </if>
+      <if test="record.slidePagename != null">
+        slide_pagename = #{record.slidePagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slidePageSeoname != null">
+        slide_pageSeoname = #{record.slidePageSeoname,jdbcType=VARCHAR},
+      </if>
       <if test="record.slideIfinto != null">
         slide_ifinto = #{record.slideIfinto,jdbcType=INTEGER},
       </if>
@@ -189,6 +217,12 @@
       slide_proid = #{record.slideProid,jdbcType=INTEGER},
       slide_proname = #{record.slideProname,jdbcType=VARCHAR},
       slide_seoname = #{record.slideSeoname,jdbcType=VARCHAR},
+      slide_cateid = #{record.slideCateid,jdbcType=INTEGER},
+      slide_catename = #{record.slideCatename,jdbcType=VARCHAR},
+      slide_cateSeoname = #{record.slideCateSeoname,jdbcType=VARCHAR},
+      slide_ifproORcateORpage = #{record.slideIfproORcateORpage,jdbcType=INTEGER},
+      slide_pagename = #{record.slidePagename,jdbcType=VARCHAR},
+      slide_pageSeoname = #{record.slidePageSeoname,jdbcType=VARCHAR},
       slide_ifinto = #{record.slideIfinto,jdbcType=INTEGER},
       slide_createTime = #{record.slideCreatetime,jdbcType=VARCHAR},
       slide_motifyTime = #{record.slideMotifytime,jdbcType=VARCHAR}
@@ -209,6 +243,12 @@
       slide_proid = #{slideProid,jdbcType=INTEGER},
       slide_proname = #{slideProname,jdbcType=VARCHAR},
       slide_seoname = #{slideSeoname,jdbcType=VARCHAR},
+      slide_cateid = #{slideCateid,jdbcType=INTEGER},
+      slide_catename = #{slideCatename,jdbcType=VARCHAR},
+      slide_cateSeoname = #{slideCateSeoname,jdbcType=VARCHAR},
+      slide_ifproORcateORpage = #{slideIfproORcateORpage,jdbcType=INTEGER},
+      slide_pagename = #{slidePagename,jdbcType=VARCHAR},
+      slide_pageSeoname = #{slidePageSeoname,jdbcType=VARCHAR},
       slide_ifinto = #{slideIfinto,jdbcType=INTEGER},
       slide_createTime = #{slideCreatetime,jdbcType=VARCHAR},
       slide_motifyTime = #{slideMotifytime,jdbcType=VARCHAR}
@@ -251,6 +291,24 @@
       </if>
       <if test="slideSeoname != null">
         slide_seoname,
+      </if>
+      <if test="slideCateid != null">
+        slide_cateid,
+      </if>
+      <if test="slideCatename != null">
+        slide_catename,
+      </if>
+      <if test="slideCateSeoname != null">
+        slide_cateSeoname,
+      </if>
+      <if test="slideIfproORcateORpage != null">
+        slide_ifproORcateORpage,
+      </if>
+      <if test="slidePagename != null">
+        slide_pagename,
+      </if>
+      <if test="slidePageSeoname != null">
+        slide_pageSeoname,
       </if>
       <if test="slideIfinto != null">
         slide_ifinto,
@@ -295,6 +353,24 @@
       </if>
       <if test="slideSeoname != null">
         #{slideSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="slideCateid != null">
+        #{slideCateid,jdbcType=INTEGER},
+      </if>
+      <if test="slideCatename != null">
+        #{slideCatename,jdbcType=VARCHAR},
+      </if>
+      <if test="slideCateSeoname != null">
+        #{slideCateSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="slideIfproORcateORpage != null">
+        #{slideIfproORcateORpage,jdbcType=INTEGER},
+      </if>
+      <if test="slidePagename != null">
+        #{slidePagename,jdbcType=VARCHAR},
+      </if>
+      <if test="slidePageSeoname != null">
+        #{slidePageSeoname,jdbcType=VARCHAR},
       </if>
       <if test="slideIfinto != null">
         #{slideIfinto,jdbcType=INTEGER},
@@ -347,6 +423,24 @@
       </if>
       <if test="slideSeoname != null">
         slide_seoname = #{slideSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="slideCateid != null">
+        slide_cateid = #{slideCateid,jdbcType=INTEGER},
+      </if>
+      <if test="slideCatename != null">
+        slide_catename = #{slideCatename,jdbcType=VARCHAR},
+      </if>
+      <if test="slideCateSeoname != null">
+        slide_cateSeoname = #{slideCateSeoname,jdbcType=VARCHAR},
+      </if>
+      <if test="slideIfproORcateORpage != null">
+        slide_ifproORcateORpage = #{slideIfproORcateORpage,jdbcType=INTEGER},
+      </if>
+      <if test="slidePagename != null">
+        slide_pagename = #{slidePagename,jdbcType=VARCHAR},
+      </if>
+      <if test="slidePageSeoname != null">
+        slide_pageSeoname = #{slidePageSeoname,jdbcType=VARCHAR},
       </if>
       <if test="slideIfinto != null">
         slide_ifinto = #{slideIfinto,jdbcType=INTEGER},

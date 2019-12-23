@@ -27,7 +27,7 @@ public class MlfrontOrder {
 
     private Integer addressinfoId;//1
 
-    private Integer orderStatus;
+    private Integer orderStatus;//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
 
     private String orderCreatetime;
 

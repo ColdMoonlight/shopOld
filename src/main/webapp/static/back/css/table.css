@@ -3,11 +3,20 @@
     height: 100%;
     padding: 20px;
 }
+.table-box_list{
+	height: 100%;
+	padding: 20px;
+}
 
 .table-box .op {
     width: 100%;
     padding: 20px;
     background-color: #fff;
+}
+.box_new_review .op {
+    width: 100%;
+    background-color: #fff;
+	padding: 0;
 }
 
 .op .right-box {
@@ -51,18 +60,39 @@
     background: #fff;
     border: 1px solid #cdcdcd;
 }
+.table-box_list .table {
+ margin-top: 10px;
+    background: #fff;
+    border: 1px solid #cdcdcd;	
+}
 
 .table-box .table thead>tr>th:first-child, .table-box .table tbody>tr>th {
+    border-right: 1px solid #cdcdcd;
+}
+.table-box_list .table thead>tr>th:first-child, .table-box_list .table tbody>tr>th {
     border-right: 1px solid #cdcdcd;
 }
 
 .table-box .table tbody>tr>th, .table-box .table tbody>tr>td {
     vertical-align: middle;
 }
-
+.table-box_list .table tbody>tr>th, .table-box_list .table tbody>tr>td {
+    vertical-align: middle;
+}
 .table-box .date-timepicker {
 	margin-left: 0;
 }
+.table-box_list .date-timepicker {
+	margin-left: 0;
+}
+.box_new_review{ transition: .5s; background: #fff; width:1000px;height:100%; z-index: 999; position: absolute; top:-1000px;left: 50%; margin: 0 0 0 -500px;}
+.box_new_review.active{top:10%;bottom:0; margin: 0 0 0 -500px;}
+.maskbg{display: none; position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 998;background: rgba(0,0,0,.3);}
+.box_new_review .upload-img-btn{min-width:100px; min-height: 100px;background-size: 100px;} 
+.closeaddreview{width: 30px;height: 30px; line-height: 30px; display: none; text-align: center; position: absolute; top:-15px;right: -15px; background: #000;color: #fff;border-radius:50%;font-size: 16px;}
+.box_new_review .closeaddreview{display: block;}
+
+
 
 /* pagination */
 #page_info_area{
@@ -77,6 +107,7 @@
 .table-box form {
 	margin-top: 40px;
 }
+.box_new_review  form{margin:10px 0 0;}
 
 .table-box .tab-content {
 	padding: 0 20px;
@@ -85,6 +116,10 @@
 .table-box .tab-pane {
     padding: 30px 0;
 }
+.box_new_review .tab-pane{
+	 padding:10px 0
+}
+
 
 @media (max-width: 1000px) {
 	td>.btn {
@@ -127,7 +162,7 @@
 .yzf_bg b{background:#daab27; color: #FFF;padding: 5px;}/*黄*/
 .ysh_bg b{background:#2ce41f; color: #fff;padding: 5px;}/*绿*/
 .yfh_bg b{background:#4832ef; color: #fff;padding: 5px;}/*蓝*/
-
+.ytk_bg b{background:#a24af3; color: #fff;padding: 5px;}/*退*/
 
 
 
@@ -158,7 +193,7 @@
 .user_rating{color: #FF0000;}
 .userstart b{color: #0062CC;}
 .wordly{color: #F23030;}
-
+#page_nav_area .pagination{width: 100%;}
 
 
 

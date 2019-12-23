@@ -47,14 +47,12 @@
 										<th>id</th>
 										<th>活动品name</th>
 										<th>活动品归属组</th>
-										<th>产品id</th>
-										<th>产品SEO名称</th>
-										<th>类id</th>
-										<th>类SEO名称</th>
+										<th>产品or类or专题</th>
+										<th>产品id/类/专题</th>
+										<th>SEO</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>启用状态</th>
-										<th>产品or类</th>
 										<th>同级别编号</th>
 										<th>更改时间</th>
 										<th>操作</th>
@@ -151,11 +149,10 @@
 				var actshowproId = $("<td></td>").append(item.actshowproId);
 				var actshowproName = $("<td></td>").append(item.actshowproName);
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);
-				var actshowproProid = $("<td></td>").append(item.actshowproProid);
-				var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
-				var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
-				var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
-				
+				//var actshowproProid = $("<td></td>").append(item.actshowproProid);
+				//var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
+				//var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
+				//var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
 				
 				var imgurl = item.actshowproImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
@@ -165,7 +162,22 @@
 				var actshowproImgpcurl = $("<td></td>").append(imagepc);
 				
 				var actshowproStatus = $("<td></td>").append((item.actshowproStatus === 1 ? '已上架' : '未上架'));
-				var actshowproIfproORcate = $("<td></td>").append((item.actshowproIfproORcate === 1 ? '类' : '产品'));
+				var actshowproIfproORcate="单品";
+				if(item.actshowproIfproORcate==1){
+					var actshowproIfproORcate=$("<td></td>").append("类");
+					var showid = $("<td></td>").append("类"+item.actshowproCateid);
+					var actshowproSeoname = $("<td></td>").append(item.actshowproCatename);
+				}else if(item.actshowproIfproORcate==2){
+					var actshowproIfproORcate=$("<td></td>").append("专题页")
+					var showid  = $("<td></td>").append("专题页"+item.actshowproPageSeoname);
+					var actshowproSeoname = $("<td></td>").append(item.actshowproPageSeoname);
+				}else{
+					var actshowproIfproORcate=$("<td></td>").append("单品")
+					var showid = $("<td></td>").append("单品"+item.actshowproProid)
+					var actshowproSeoname = $("<td></td>").append(item.actshowproSeoname);
+				}
+				
+				
 				var actshowproOrderth = $("<td></td>").append(item.actshowproOrderth);
 				var actshowproCreatetime = $("<td></td>").append(item.actshowproCreatetime);
 				var actshowproMotifytime = $("<td></td>").append(item.actshowproMotifytime);
@@ -182,15 +194,14 @@
 				$("<tr></tr>").append(actshowproId)
 					.append(actshowproName)
 					.append(actshowproActnum)
-					.append(actshowproProid)
-					// .append(actshowproProname)
+					.append(actshowproIfproORcate)
+					.append(showid)
 					.append(actshowproSeoname)
-					.append(actshowproCateid)
-					.append(actshowproCatename)
+//					.append(actshowproCateid)
+//					.append(actshowproCatename)
 					.append(actshowproImgwapurl)
 					.append(actshowproImgpcurl)
 					.append(actshowproStatus)
-					.append(actshowproIfproORcate)
 					.append(actshowproOrderth)
 					.append(actshowproMotifytime)
 					.append(btnTd)
@@ -372,15 +383,21 @@
 				// 设置归属类
 				getCategoryDown();
 				getLeiDown()
-				$(".lei_select").hide()
-				 $(".cp_orlei select").change(function() {
+				$(".lei_select").hide();
+				$(".zt_select").hide();
+				$(".cp_orlei select").change(function() {
 					if($(this).val() == 0 ) {
-						$(".cp_select").show()
-						$(".lei_select").hide()
+						$(".cp_select").show();
+						$(".lei_select").hide();
+						$(".zt_select").hide();
 					} else if($(this).val() == 1) {
-					    $(".lei_select").show()
-						$(".cp_select").hide()
-						
+					    $(".lei_select").show();
+						$(".cp_select").hide();
+						$(".zt_select").hide();
+					}else if($(this).val() == 2){
+						$(".lei_select").hide();
+						$(".cp_select").hide();
+						$(".zt_select").show();
 					}
 				})
 				
@@ -420,6 +437,7 @@
 				$(":input[name='actshowproProid']").val(data.actshowproProid);
 				$(":input[name='actshowproCateid']").val(data.actshowproCateid);/*****************/
 				$(":input[name='actshowproProname']").val(data.actshowproProname);
+				$(":input[name='actshowproPageSeoname']").val(data.actshowproPageSeoname);
 				if (data.actshowproImgwapurl && data.actshowproImgwapurl.length) {
 					var el = $(".upload-img-btn.img");
 					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
@@ -432,11 +450,27 @@
 				}
 				$(":input[name='actshowproStatus']").val(data.actshowproStatus);
 				$(":input[name='actshowproOrderth']").val(data.actshowproOrderth);
+				// $(":input[name='actshowproIfproORcate']").val(data.actshowproIfproORcate);
+				// if(data.actshowproIfproORcate==1){
+				// 	$(".cp_select").hide();
+				// 	$(".lei_select").show();
+				// }
 				$(":input[name='actshowproIfproORcate']").val(data.actshowproIfproORcate);
-				if(data.actshowproIfproORcate==1){
+				if(data.actshowproIfproORcate==0){
+					$(".zt_select").hide();
+					$(".lei_select").hide();
+					$(".cp_select").show();
+				}else if(data.actshowproIfproORcate==1){
 					$(".cp_select").hide();
+					$(".zt_select").hide();
 					$(".lei_select").show();
+				}else if(data.actshowproIfproORcate==2){
+					$(".cp_select").hide();
+					$(".lei_select").hide();
+					$(".zt_select").show();
 				}
+				
+				
 			}
 
 		});
