@@ -1,6 +1,7 @@
 package com.atguigu.bean;
 
 public class MlfrontReview {
+	
     private Integer reviewId;
 
     private Integer reviewUid;
