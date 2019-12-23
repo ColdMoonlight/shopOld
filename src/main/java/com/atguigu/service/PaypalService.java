@@ -38,7 +38,7 @@ public class PaypalService {
 //	String clientSecret = "EANTizGHYqb_0rWbPKlDD-otKQwi0k7RN6xvDiWtZNZY1gSyO71VrCpzvy6xTzGPVC5VxB6U66wjndYM";
 //	String mode="sandbox";
 	
-//	//mogalook环境
+//	//mogalook-live环境
 	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
 	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
     String mode="live";
