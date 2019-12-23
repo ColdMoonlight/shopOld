@@ -318,16 +318,14 @@
 		$(".btn_search").click(function(){
 		console.log(reviewPid)
 			console.log("点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
-			if(reviewStatus=="999"){
-				alert("请选择状态")
-			}else if(reviewProstarnum=="0"){
-				alert("请选择星级")
-			}else if(reviewPid=="999"){
-				alert("请选择产品")
-			}else{
-				to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
-			}
-			
+   //         if(reviewProstarnum=="0"){
+			// 	alert("请选择星级")
+			// }else if(reviewPid=="999"){
+			// 	alert("请选择产品")
+			// }else{
+				
+			// }
+			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
 			
 		})
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
@@ -348,6 +346,10 @@
 		        type: "POST",
 		        success: function (result) {
 		          if (result.code == 100) {
+					  var task = result.extend.pageInfo.list;
+					  if(task.length==0){
+						  alert("没有查到")
+					  }
 		            console.log(result)
 					//1、解析并显示员工数据
 					build_task_table(result);
