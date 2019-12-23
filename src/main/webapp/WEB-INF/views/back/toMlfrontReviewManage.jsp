@@ -508,7 +508,9 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			console.log(reqData)
+			// console.log(reqData)
+			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
+			
 			$.ajax({
 				url: "${APP_PATH}/MlfrontReview/save",
 				data: JSON.stringify(reqData),
@@ -518,9 +520,13 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('操作成功！');
-						// window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewPage";
+						console.log(result);
+						// window.location.href = "${APP_PATH}/MlfrontReview/toMlfrontReviewManage";
 						$(".box_new_review").removeClass("active")
 						$(".maskbg").hide();
+						
+						
+						
 					}
 				}
 			});
@@ -581,7 +587,7 @@
 				// 获取产品列表
 				// getProductDown();
 				getProductDown();
-				getCategoryDown()
+				// getCategoryDown()
 				// init
 				initOtherInfo(reviewId)
 				initImgList(reviewId);//附图文件
@@ -653,7 +659,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						var obj = result.extend.mlfrontReviewOne;
-						// console.log(obj)
+						console.log(obj)
 						// render data
 						tianchong(obj);
 						// $(":input[name='reviewCreatetime']").val(minDatestar);
