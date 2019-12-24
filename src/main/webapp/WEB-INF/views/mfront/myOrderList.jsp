@@ -58,22 +58,25 @@
 		3: 'Shipped',
 	}
 	//去首页
-	to_page(1);
-
+	to_page(1,0);
+    // console.log(pn)
+	// console.log(type)
 	function to_page(pn, type) {
+		console.log("pn"+pn);
+		console.log("type"+type);
 		$.ajax({
 			url: "${APP_PATH}/MlfrontOrderList/selectOrderlistBySearch",
 			// data: "pn=" + pn,
 			data:{
 				"pn": pn,
-				"orderStatus": 1,
+				"orderStatus":0,
 			},
 			type: "POST",
 			success: function (result) {
 				console.log(result);
 				var pageInfo = result.extend.pageInfo;
 				var orderList = result.extend.pageInfo.list;
-				var orderItemList = result.extend.mlfrontOrderItemReturn;
+				var orderItemList = result.extend.mlfrontOrderItemReturnList;
 				if (!isNaN(parseInt(type))) {
 					orderList = orderList.filter(function (item) {
 						return item.orderStatus === parseInt(type);
@@ -94,6 +97,7 @@
 				$(this).addClass('active');
 				activeItem = $(this);
 				to_page(1, String($(this).data('id')));
+				console.log("点击当前元素的id："+String($(this).data('id')))
 			}
 		})
 	})
@@ -166,7 +170,7 @@
 		//page_nav_area
 		pageArea.empty();
 		var ul = $("<ul></ul>").addClass("pagination");
-        console.log(pageInfo.pages);
+        // console.log(pageInfo.pages);
 		//构建元素
 		var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
 		var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
