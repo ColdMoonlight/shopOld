@@ -123,6 +123,8 @@ public class MlfrontReviewController {
 		if(ReviewConfirmtime==""){
 			mlfrontReview.setReviewConfirmtime(nowTime);
 		}
+		mlfrontReview.setReviewStarttime(nowTime);
+		mlfrontReview.setReviewEndtime(nowTime);
 		if(reviewId==null){
 			//无id，insert
 			int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
