@@ -98,5 +98,10 @@ public class MlfrontOrderService {
 		List<MlfrontOrder>  mlfrontOrderList = mlfrontOrderMapper.selectMlfrontOrderByUidOnly(mlfrontOrder);
 		return mlfrontOrderList;
 	}
+
+	public List<MlfrontOrder> selectOrderListByUidAndStatus(MlfrontOrder mlfrontOrder) {
+		List<MlfrontOrder>  mlfrontOrderList = mlfrontOrderMapper.selectOrderListByUidAndStatus(mlfrontOrder);
+		return mlfrontOrderList;
+	}
 	
 }
