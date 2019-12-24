@@ -1892,7 +1892,10 @@ a:focus {
   box-sizing: border-box;
   /* border-bottom: 2px solid #f23030; */
 }
-
+.tab-item.active{
+	color: #ff1671;
+	border-bottom: 2px solid #ff1671;
+}
 .login-register {
   background-color: #fff;
   padding: 0 0 20px;
