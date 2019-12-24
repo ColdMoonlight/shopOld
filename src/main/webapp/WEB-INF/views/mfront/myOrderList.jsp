@@ -62,11 +62,15 @@
 
 	function to_page(pn, type) {
 		$.ajax({
-			url: "${APP_PATH}/MlfrontOrder/getmOrderByUidPage",
-			data: "pn=" + pn,
+			url: "${APP_PATH}/MlfrontOrderList/selectOrderlistBySearch",
+			// data: "pn=" + pn,
+			data:{
+				"pn": pn,
+				"orderStatus": 1,
+			},
 			type: "POST",
 			success: function (result) {
-				// console.log(result);
+				console.log(result);
 				var pageInfo = result.extend.pageInfo;
 				var orderList = result.extend.pageInfo.list;
 				var orderItemList = result.extend.mlfrontOrderItemReturn;
@@ -89,7 +93,7 @@
 				activeItem.removeClass('active');
 				$(this).addClass('active');
 				activeItem = $(this);
-				to_page(i, String($(this).data('id')));
+				to_page(1, String($(this).data('id')));
 			}
 		})
 	})
@@ -162,7 +166,7 @@
 		//page_nav_area
 		pageArea.empty();
 		var ul = $("<ul></ul>").addClass("pagination");
-
+        console.log(pageInfo.pages);
 		//构建元素
 		var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
 		var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
@@ -172,10 +176,10 @@
 		} else {
 			//为元素添加点击翻页的事件
 			firstPageLi.click(function () {
-				to_page(1);
+				to_page(1,0);
 			});
 			prePageLi.click(function () {
-				to_page(pageInfo.pageNum - 1);
+				to_page(pageInfo.pageNum - 1,0);
 			});
 		}
 
@@ -186,10 +190,10 @@
 			lastPageLi.addClass("disabled");
 		} else {
 			nextPageLi.click(function () {
-				to_page(pageInfo.pageNum + 1);
+				to_page(pageInfo.pageNum + 1,0);
 			});
 			lastPageLi.click(function () {
-				to_page(pageInfo.pages);
+				to_page(pageInfo.pages,0);
 			});
 		}
 
@@ -203,7 +207,7 @@
 				numLi.addClass("active");
 			}
 			numLi.click(function () {
-				to_page(item);
+				to_page(item,0);
 			});
 			ul.append(numLi);
 		});
