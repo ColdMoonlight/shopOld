@@ -63,7 +63,7 @@
 	to_page(1,999);
     // console.log(pn)
 	// console.log(type)
-	var orderStatusid;
+	var orderStatusid=999;
 	var activeItem = $('.tab-item.active');
 	$('.order-info .tab-item').each(function (i, item) {
 		$(item).on('click', function () {
