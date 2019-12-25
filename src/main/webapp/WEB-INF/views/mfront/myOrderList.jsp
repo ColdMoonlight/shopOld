@@ -31,11 +31,12 @@
 	<!-- main -->
 	<div class="main order-info">
 		<div class="tab">
-			<div class="tab-item active" data-id="all">All orders</div>
+			<div class="tab-item active" data-id="999">All orders</div>
 			<div class="tab-item" data-id="0">Unpaid</div>
 			<div class="tab-item" data-id="1">Paid</div>
-			<div class="tab-item" data-id="2">TobeShipped</div>
-			<div class="tab-item" data-id="3">Shipped</div>
+			<div class="tab-item" data-id="3">TobeShipped</div>
+			<div class="tab-item" data-id="4">Shipped</div>
+			<div class="tab-item" data-id="5">Refund</div>
 		</div>
 		<div class="tab-content">
 			<div class="order-list"></div>
@@ -52,43 +53,17 @@
 	var containerBox = mainBox.find(".order-list");
 	var pageArea = mainBox.find(".page-info-area");
 	var orderStatus = {
-		0: 'Unpaid',
-		1: 'Paid',
-		2: 'TobeShipped',
-		3: 'Shipped',
+		0: '0Unpaid',
+		1: '1Paid',
+		3: '3TobeShipped',
+		4: '4Shipped',
+		5:'5refund'
 	}
 	//去首页
-	to_page(1,0);
+	to_page(1,999);
     // console.log(pn)
 	// console.log(type)
-	function to_page(pn, type) {
-		console.log("pn"+pn);
-		console.log("type"+type);
-		$.ajax({
-			url: "${APP_PATH}/MlfrontOrderList/selectOrderlistBySearch",
-			// data: "pn=" + pn,
-			data:{
-				"pn": pn,
-				"orderStatus":0,
-			},
-			type: "POST",
-			success: function (result) {
-				console.log(result);
-				var pageInfo = result.extend.pageInfo;
-				var orderList = result.extend.pageInfo.list;
-				var orderItemList = result.extend.mlfrontOrderItemReturnList;
-				if (!isNaN(parseInt(type))) {
-					orderList = orderList.filter(function (item) {
-						return item.orderStatus === parseInt(type);
-					});
-				}
-				// 列表数据
-				renderContainer(containerBox, orderList, orderItemList);
-				// 解析显示分页条数据
-				render_page_nav(pageInfo);
-			}
-		});
-	}
+	var orderStatusid;
 	var activeItem = $('.tab-item.active');
 	$('.order-info .tab-item').each(function (i, item) {
 		$(item).on('click', function () {
@@ -97,10 +72,44 @@
 				$(this).addClass('active');
 				activeItem = $(this);
 				to_page(1, String($(this).data('id')));
-				console.log("点击当前元素的id："+String($(this).data('id')))
+				var myid =String($(this).data('id'));
+				orderStatusid=myid;
 			}
 		})
 	})
+	
+	function to_page(pn, orderStatus) {
+		console.log("pn："+pn);
+		console.log("type："+orderStatus);
+		$.ajax({
+			url: "${APP_PATH}/MlfrontOrderList/selectOrderlistBySearch",
+			// data: "pn=" + pn,
+			data:{
+				"pn": pn,
+				"orderStatus":orderStatus,
+			},
+			type: "POST",
+			success: function (result) {
+				// console.log(result);
+				var pageInfo = result.extend.pageInfo;
+				var orderList = result.extend.pageInfo.list;
+				console.log(orderList)
+				var orderItemList = result.extend.mlfrontOrderItemReturnList;
+				// if (!isNaN(parseInt(type))) {
+				// 	orderList = orderList.filter(function (item) {
+				// 		return item.orderStatus === parseInt(type);
+				// 	});
+				// }
+				// 列表数据
+				renderContainer(containerBox, orderList, orderItemList);
+				// 解析显示分页条数据
+				render_page_nav(pageInfo);
+			}
+		});
+	}
+	
+	
+
 
 	function orderMap(data) {
 		var orderMap = {};
@@ -180,10 +189,12 @@
 		} else {
 			//为元素添加点击翻页的事件
 			firstPageLi.click(function () {
-				to_page(1,0);
+				to_page(1,orderStatusid);
+				console.log("orderStatusid："+orderStatusid)
 			});
 			prePageLi.click(function () {
-				to_page(pageInfo.pageNum - 1,0);
+				to_page(pageInfo.pageNum - 1,orderStatusid);
+			console.log("orderStatusid："+orderStatusid)
 			});
 		}
 
@@ -194,10 +205,12 @@
 			lastPageLi.addClass("disabled");
 		} else {
 			nextPageLi.click(function () {
-				to_page(pageInfo.pageNum + 1,0);
+				to_page(pageInfo.pageNum + 1,orderStatusid);
+				console.log("orderStatusid："+orderStatusid)
 			});
 			lastPageLi.click(function () {
-				to_page(pageInfo.pages,0);
+				to_page(pageInfo.pages,orderStatusid);
+			console.log("orderStatusid："+orderStatusid)
 			});
 		}
 
@@ -211,7 +224,8 @@
 				numLi.addClass("active");
 			}
 			numLi.click(function () {
-				to_page(item,0);
+				to_page(item,orderStatusid);
+				console.log("orderStatusid"+orderStatusid)
 			});
 			ul.append(numLi);
 		});
