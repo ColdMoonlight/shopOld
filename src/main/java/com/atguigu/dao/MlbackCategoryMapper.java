@@ -42,4 +42,6 @@ public interface MlbackCategoryMapper {
 	List<MlbackCategory> selectMenuMlbackCategoryGetAll();
 	//通过CategoryBySeo查找该类的详情
 	List<MlbackCategory> selectMlbackCategoryBySeo(MlbackCategory mlbackCategory);
+	//selectCategorylistByParentId	onuse	20191226	检查
+	List<MlbackCategory> selectCategorylistByParam(MlbackCategory mlbackCategory);
 }

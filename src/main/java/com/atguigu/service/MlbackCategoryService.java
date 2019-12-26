@@ -110,5 +110,15 @@ public class MlbackCategoryService {
 		List<MlbackCategory>  mlbackCategoryList = mlbackCategoryMapper.selectMlbackCategoryBySeo(mlbackCategory);
 		return mlbackCategoryList;
 	}
+	/**
+	 * @autho	onuse	20191226	检查
+	 * @param MlbackCategory
+	 * @exception	
+	 * 获取getCategoryMenuSenond
+	 * */
+	public List<MlbackCategory> selectCategorylistByParam(MlbackCategory mlbackCategory) {
+		List<MlbackCategory>  mlbackCategoryList = mlbackCategoryMapper.selectCategorylistByParam(mlbackCategory);
+		return mlbackCategoryList;
+	}
 
 }
