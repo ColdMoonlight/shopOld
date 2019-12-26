@@ -94,17 +94,12 @@ public class MlbackCategoryController {
 	@RequestMapping(value="/getMlbackCategoryByPage")
 	@ResponseBody
 	public Msg getGroupDisplayWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
-		if(mlbackAdmin==null){
-			//SysUsers对象为空
-			return Msg.fail().add("resMsg", "session中adminuser对象为空");
-		}else{
+
 			int PagNum = 30;
 			PageHelper.startPage(pn, PagNum);
 			List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryGetAll();
 			PageInfo page = new PageInfo(mlbackCategoryList, PagNum);
 			return Msg.success().add("pageInfo", page);
-		}
 	}
 	
 	
@@ -459,6 +454,60 @@ public class MlbackCategoryController {
 //		}
 		
 		return Msg.success().add("resMsg", "getCategoryMenu完毕").add("mlbackCategorydownFirst", mlbackCategorydownFirst);
+	}
+	
+	/**
+	 * 12.0	onuse	20191225	检查
+	 * 获取getCategoryMenuSenond
+	 * @param rep res
+	 * @return 
+	 */
+	@RequestMapping(value="/getCategoryMenuSenond",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getCategoryMenuSenond(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackCategory mlbackCategory){
+		
+		//查询全部的category信息
+		List<MlbackCategory> categorySecondList = mlbackCategoryService.selectCategorylistByParam(mlbackCategory);
+		System.out.println("操作说明:前端客户查询-getMenuMlbackCategory-菜单");
+		
+		List<MlbackCategory> mlbackCategorydownFirst =new ArrayList<MlbackCategory>();
+//		List<List<MlbackCategory>> mlbackCategoryfirstdownList = null;
+//		for(MlbackCategory categoryOne :categorySecondList){
+//			Integer categoryId = categoryOne.getCategoryId();
+//			List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
+//			if(categoryParentId>0){
+//				mlbackCategorydownEr.add(mlbackCategoryOne);
+//			}else{
+//				//筛选出一级菜单(patentId=-1)的类，
+//				//存到list中，存一下这些ids,这些是一级类
+//				mlbackCategorydownFirst.add(mlbackCategoryOne);//一级类list;
+//			}
+//			
+//		}
+//		//便利mlbackCategorydownEr,	first取出id,当剩下的mlbackCategorydownEr中的便利fuid ==first的id时候,存起来，这是二级类目,不是得话,是三级类目
+//		
+//		List<MlbackCategory> categorySecondList =new ArrayList<MlbackCategory>();
+//		
+//		List<MlbackCategory> categoryThirdList =new ArrayList<MlbackCategory>();
+//		
+//		for(MlbackCategory FirstmlbackCategory :mlbackCategorydownFirst){
+//			
+//			Integer FirstcategoryId = FirstmlbackCategory.getCategoryId();
+//			
+//			//查询类==-1的东西
+//			
+//			for(MlbackCategory categoryErOne :mlbackCategorydownEr){
+//				Integer SecondcategoryId = categoryErOne.getCategoryParentId();
+//				if(SecondcategoryId == FirstcategoryId){
+//					categorySecondList.add(categoryErOne);
+//				}
+//			}
+//		}
+		
+		
+		
+		return Msg.success().add("resMsg", "getCategoryMenu完毕").add("mlbackCategorydownFirst", mlbackCategorydownFirst)
+				.add("categorySecondList", categorySecondList);
 	}
 	 
 }
