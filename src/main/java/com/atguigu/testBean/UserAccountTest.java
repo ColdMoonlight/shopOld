@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.atguigu.bean.AppuserInfo;
 import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.UserAccount;
-import com.atguigu.dao.AppuserInfoMapper;
 import com.atguigu.dao.GroupDisplayMapper;
 import com.atguigu.dao.UserAccountMapper;
 import com.atguigu.utils.DateUtil;
@@ -33,8 +31,6 @@ import com.atguigu.utils.UUIDUtils;
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class UserAccountTest {
 	
-	@Autowired
-	AppuserInfoMapper appuserInfoMapper;
 	
 	@Autowired
 	UserAccountMapper userAccountMapper;
@@ -58,23 +54,6 @@ public class UserAccountTest {
 		System.out.println("条件查询完成");
 	}
 	
-	/**
-	 * groupDisplayMapper查询全部
-	 */
-	@Test
-	public void testSearchAll(){
-		
-		AppuserInfo appuserInfo = new AppuserInfo();
-		appuserInfo.setAppuserId(1);
-		
-		//查询全部信息
-		List<AppuserInfo> appuserInfoListALl = appuserInfoMapper.getAppuserInfoAll();
-		System.out.println(appuserInfoListALl);
-		System.out.println("appuserInfoListALl:"+appuserInfoListALl.size());
-		
-		System.out.println("查询全部完成");
-		
-	}
 	
 	
 	/**
@@ -117,39 +96,7 @@ public class UserAccountTest {
 		userAccount.setUserAccSparefour("0");		//备用字段4appuser_sparefour			VARCHAR(128)
 		userAccountMapper.insertSelective(userAccount);
 	}
-	
-	
-	
-	/**
-	 * appuserInfoMapper更新
-	 */
-	@Test
-	public void testUpdate(){
-		
-		AppuserInfo appuserInfo = new AppuserInfo();
-		//设置UserID
-		appuserInfo.setAppuserId(1);
-		//更新时间
-		String nowTime = DateUtil.strTime14s();
-		appuserInfo.setAppuserLasttime(nowTime);;
-		
-		//2、更新任务信息
-		appuserInfoMapper.updateByPrimaryKeySelective(appuserInfo);
 
-		System.out.println("更新完成");
-	}
-	
-	/**
-	 * groupDisplayMapper删除
-	 */
-	@Test
-	public void testDelete(){
-		
-		//2、生成员工数据，测试员工删除
-		appuserInfoMapper.deleteByPrimaryKey(2);
-
-		System.out.println("删除完成");
-	}
 
 
 }
