@@ -489,7 +489,8 @@
   </select>
   <!-- 使用中selectCategorylistByParam -->
   <select id="selectCategorylistByParam" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
-  	select * from tb_mlback_category where category_status = 1
+  	select category_id, category_name, category_parent_id, category_parent_name, category_status, category_lable, category_seo, category_sort_order
+  	from tb_mlback_category where category_status = 1
     <if test="categoryId != null">
       and category_id = #{categoryId,jdbcType=INTEGER}
     </if>
