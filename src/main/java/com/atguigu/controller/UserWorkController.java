@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.Msg;
 import com.atguigu.bean.UserWork;
-import com.atguigu.service.AppuserInfoService;
 import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.UserAccountService;
 import com.atguigu.service.UserWorkService;
@@ -33,8 +32,6 @@ import com.github.pagehelper.PageInfo;
 @RequestMapping("/userWork")
 public class UserWorkController {
 	
-	@Autowired
-	AppuserInfoService appuserInfoService;
 	
 	@Autowired
 	UserAccountService userAccountService;

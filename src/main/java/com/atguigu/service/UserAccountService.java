@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.AppuserInfo;
 import com.atguigu.bean.Department;
 import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.UserAccount;
-import com.atguigu.dao.AppuserInfoMapper;
 import com.atguigu.dao.DepartmentMapper;
 import com.atguigu.dao.UserAccountMapper;
 
@@ -22,7 +20,7 @@ public class UserAccountService {
 	/**1.0	useOn
 	 * @author Shinelon
 	 * @param userAccount
-	 * @exception ¸ø±¾ÓÃ»§ÐÂ½¨Ò»¸ö×Ê½ðÕË»§
+	 * @exception ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Â½ï¿½Ò»ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ë»ï¿½
 	 * */
 	public int insertSelective(UserAccount userAccount) {
 		int  intReslut = userAccountMapper.insertSelective(userAccount);
@@ -32,7 +30,7 @@ public class UserAccountService {
 	/**2.0	useOn
 	 * @author Shinelon
 	 * @param udid
-	 * @exception ²éÑ¯¸ÃÓÃ»§µÄ×Ê½ðÕË»§
+	 * @exception ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ë»ï¿½
 	 * */
 	public List<UserAccount> getUserAccountByConditions(UserAccount userAccount) {
 		List<UserAccount>  userAccountListALl = userAccountMapper.getUserAccountByConditions(userAccount);
@@ -42,7 +40,7 @@ public class UserAccountService {
 	/**
 	 * @author Shinelon
 	 * @param 
-	 * @exception ²éÑ¯ÕËºÅÊÇ·ñ´æÔÚ
+	 * @exception ï¿½ï¿½Ñ¯ï¿½Ëºï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * */
 	
@@ -58,7 +56,7 @@ public class UserAccountService {
 	/**
 	 * @author Shinelon
 	 * @param 
-	 * @exception ²éÑ¯ÕËºÅÊÇ·ñ´æÔÚ
+	 * @exception ï¿½ï¿½Ñ¯ï¿½Ëºï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * */
 //	public int deleteByPrimaryKey(int taskId) {
