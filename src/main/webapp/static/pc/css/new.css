@@ -12,7 +12,7 @@
 .img_show.active{top: -100px;}
 .img_show a {display: block;width: 100%; height: 100%;}
 .discount, .banner img{transform: scale(.99);}
-
+.logo_search{width: 100%;border-bottom: 1px solid #f1f1f1;}
 .fixed_link{width:100px;height: 150px; z-index: 9999; position: fixed; top: 50%; margin: -75px 0 0; left: 20px;}
 .fixed_link a{display: block;width: 100%; height: 100%; background: url(../../../../../ShopTemplate/static/pc/huodong/pcxuanfu.png) no-repeat;background-size:100px 150px ;}
 
@@ -102,7 +102,7 @@
 .form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e ;}
 .shipping>span{color: #ff6f5e;}
 
-.tt-desctop-menu nav > ul > li.dropdown > a{padding: 25px 12px 10px;}
+.tt-desctop-menu nav > ul > li.dropdown > a{padding:15px 12px}
 .u-flyer{width: 100px; height: 100px;z-index: 99999;}
 .product-item{ position: relative;}
 .hui_icon{width:50px; height: 50px; position: absolute; top: 0;right: 0; }
