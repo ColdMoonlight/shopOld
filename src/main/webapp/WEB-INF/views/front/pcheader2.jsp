@@ -116,9 +116,8 @@
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<script>
+	<script>		
        $(function(){
-		   MenuSenondnav()
 		    //定义一个变量用来记录li宽度的累加值
 		       var sumWidth=0;
 		       //假设$("li")返回的就是这3个li
@@ -128,8 +127,6 @@
 			   if(sumWidth>1300){
 				   $(".head_box").addClass("active")
 			   }
-		   
-		   
 		   $(".img_show_cont a").click(function(){
 			 $(".img_show").animate({ 
 			    height: "0", 
@@ -186,7 +183,7 @@
 			  var n = parseFloat(val);
 			  return isNaN(n) ? 0 : n
 			}
-
+			
 		function renderMainCategory(parent, data) {
 			var html = '';
 			for (var i in data) {
@@ -222,140 +219,112 @@
 		var mainCategory = $('.tt-desctop-menu ul');
 		var categoryData = {};
 		// 获取全部的category信息,文件信息
+		/************************************************************************************/
+		
+		
+		/**********************************************************************************/
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getCategoryMenu',
-			method: 'GET',
-			success: function (data) {
-				console.log(data)
-				var resData = data.extend.mlbackCategorydownFirst;
-				// console.log(resData);/**********resData*********/
-				if (data.code === 100) {
-					categoryData = resData.reduce(function (obj, item) {
-						if (item.categoryParentId === -1) {
-							item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
-								obj[item.categoryId].list : [];
-							obj[item.categoryId] = item;
-							return obj;
-						} else {
-							if (!obj[item.categoryParentId]) {
-								obj[item.categoryParentId] = {}
-							}
-							if (!obj[item.categoryParentId].list) {
-								obj[item.categoryParentId].list = []
-							}
-							obj[item.categoryParentId].list.push(item);
-							return obj;
-						}
-					}, {});
+		        url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
+		        method: 'POST',
+		        success: function (data) {
+		          var resData = data.extend.mlbackCategorySuperList;
+				  console.log(resData)
+		          // console.log("**********resData*********");/**********resData*********/
+		          // console.log(resData);/**********resData*********/
+		         // console.log("**********resData*********");/**********resData*********/
+		          //console.log("**********categoryFirstList*********");/**********resData*********/
+		          //console.log(data.extend.categoryFirstList);/**********resData*********/
+		          //console.log("**********categoryFirstList*********");/**********resData*********/
+				   var navfirstonelist=data.extend.categoryFirstList;
+				   console.log(navfirstonelist)
+				   categoryData = navfirstonelist.reduce(function (obj, item) {
+				   	if (item.categoryParentId === -1) {
+				   		item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
+				   			obj[item.categoryId].list : [];
+				   		obj[item.categoryId] = item;
+				   		return obj;
+				   	} else {
+				   		if (!obj[item.categoryParentId]) {
+				   			obj[item.categoryParentId] = {}
+				   		}
+				   		if (!obj[item.categoryParentId].list) {
+				   			obj[item.categoryParentId].list = []
+				   		}
+				   		obj[item.categoryParentId].list.push(item);
+				   		return obj;
+				   	}
+				   }, {});
+				   renderMainCategory(mainCategory, categoryData);
+		          for(var i=0;i<resData.length;i++){
+		            var resOne = resData[i];
+		           console.log(resOne);/**********resData*********/
+		            // console.log("**********resOne***i******"+i);/**********resData*********/
 					//console.log(categoryData)
-					renderMainCategory(mainCategory, categoryData);
-				} else {
-					renderErrorMsg(prodcutBox, '未获取到目录相关的数据');
-				}
-			}
-		})
-		/**********************************************************/
-		function MenuSenondnav(){
-			function renderMainCategorythreenav(parent, data) {
-				var html = '';
-				for (var i in data) {
-					html +='<ul class="">sdfsdfsdfsdf</ul>';
-				}
-			}
-			$(".megamenuid").on("mouseover",function(){
-				var mainCategorythree =$(".sendnav")
-				
-				var dropdown_categoryid= $(this).attr('categoryid-id');
-				console.log(dropdown_categoryid)
-				/* category condition */
-				 $.ajax({
-				   url: '${APP_PATH}/MlbackCategory/getCategoryMenuSenond',
-				   data: JSON.stringify({
-				     "categoryParentId":dropdown_categoryid
-				   }),
-				   type: 'post',
-				   dataType: 'JSON',
-				   contentType: 'application/json',
-				   success: function (data) {
-				       console.log("***********data = JSON.parse(data);*************")
-				       console.log(data.extend.mlbackCategoryfirstdownList);
-				       console.log("***********data = JSON.parse(data);*************")
-					   
-					   
-					   
-					   var datathreenav =data.extend.mlbackCategoryfirstdownList;
-					   renderMainCategorythreenav(mainCategorythree,datathreenav)
-					   
-					   
-					   
-				   }
-				 });
-				
-			});
-			
-			
-		}
+					
+		            if(resOne.length>0){
+		              for(var j=0;j<resOne.length;j++){
+		                var resSecond = resOne[j];
+		                // console.log(resSecond);/**********resData*********/
+		                //console.log("**********resSecond***j******"+j);/**********resData*********/
+		              
+		              
+		              if(resSecond.length>0){
+		                for(var k=0;k<resSecond.length;k++){
+		                  var resThree = resSecond[j];
+		                    // console.log(resThree);/**********resData*********/
+		                  // console.log("**********resThree***k******"+k);/**********resData*********/
+		                  // console.log(resThree.categoryId+":"+resThree.categoryName);/**********resData*********/
+		                }
+		              }
+		              }
+		            }
+		          }
+		        }
+		      })
 		
 		
+		// $.ajax({
+		// 	url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
+		// 	 method: 'POST',
+		// 	success: function (data) {
+		// 		console.log(data)
+		// 		 var resData = data.extend.mlbackCategorySuperList;
+		// 		 var oneresData = data.extend.categoryFirstList;
+		// 		console.log("**********resData*********");/**********resData*********/
+		// 		console.log(resData);/**********resData*********/
+		// 		console.log("**********resData*********");/**********resData*********/
+		// 		console.log("**********categoryFirstList*********");/**********resData*********/
+		// 		console.log(data.extend.categoryFirstList);/**********resData*********/
+		// 		console.log("**********categoryFirstList*********");/**********resData*********/
+		// 		if (data.code === 100) {
+		// 			categoryData = oneresData.reduce(function (obj, item) {
+		// 				if (item.categoryParentId === -1) {
+		// 					item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
+		// 						obj[item.categoryId].list : [];
+		// 					obj[item.categoryId] = item;
+		// 					return obj;
+		// 				} else {
+		// 					if (!obj[item.categoryParentId]) {
+		// 						obj[item.categoryParentId] = {}
+		// 					}
+		// 					if (!obj[item.categoryParentId].list) {
+		// 						obj[item.categoryParentId].list = []
+		// 					}
+		// 					obj[item.categoryParentId].list.push(item);
+		// 					return obj;
+		// 				}
+		// 			}, {});
+		// 			//console.log(categoryData)
+		// 			renderMainCategory(mainCategory, categoryData);
+		// 		} else {
+		// 			renderErrorMsg(prodcutBox, '未获取到目录相关的数据');
+		// 		}
+		// 	}
+		// })
+
 		
-		 
-		
-		
-		
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	 // function mainCategoryTrigger() {
-		//   var activeItem = mainCategory.find('.active');
-		//   var items = mainCategory.find('.category-item');
-		
-		//   items.each(function (i, item) {
-		//     $(item).on('click', function () {
-		//       activeItem.removeClass('active');
-		//       $(this).addClass('active');
-		//       activeItem = $(this);
-		//       var data = categoryData[$(this).data('id')];
-		//       renderSubCategory(subCategory, data);
-		// 	 	//  var iddata =data.categoryId;
-		// 		 // if(iddata==7){
-		// 			// window.location.href = "${APP_PATH }/Category/49.html";
-		// 		 // }
-		//     })
-		//   })
-		// }
-		 //    function renderSubCategory(parent, data) {
-			//   parent.find('.title .name').text(data.categoryName);
-			//   var html = '';
-			//   if (data.list && data.list.length) {
-			
-			// 	for (var i = 0; i < data.list.length; i += 1) {
-			// 	  html += '<div class="sub-category-product">' +
-			// 		'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
-			// 		'<div class="product-img">' +
-			// 		'<img src="' + data.list[i].categoryImgurl + '" alt="">' +
-			// 		'</div>' +
-			// 		'<span class="product-name">' + data.list[i].categoryName + '</span>' +
-			// 		/* '<span class="product-name">' + data.list[i].categoryDesc + '</span>'+ */
-			
-			// 		'</a>' +
-			// 		'</div>';
-			// 	}
-			// 	parent.find('.body').html(html);
-			//   } else {
-			// 	renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
-			//   }
-			
-			//   parent.parent().addClass('active');
-			// }
-		
-		// cart icon default number
+
+
 		var cartText = iCart.find('.cart_num');
 		var num = window.localStorage.getItem('productNum') || 0;
 		
