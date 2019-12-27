@@ -35,7 +35,7 @@
 </head>
 
 <body>
-	<div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a></div>
+	<!-- <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a></div> -->
 	<header>
 		<!-- tt-desktop-header -->
 		<div class="tt-desktop-header">
@@ -49,8 +49,9 @@
 <!-- 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a> -->
-			<div class="alinktop"><a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
-			<div class="container head_box">
+			<!-- <div class="alinktop"><a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div> -->
+		   <div class="logo_search">
+			   	<div class="container head_box">
 				<!-- search logo cart -->
 				<div class="header_holder">
 					<div class="logo">
@@ -59,19 +60,19 @@
 						</a>
 					</div>
 					 <div class="serch_cont">
-					 	<div class="serch_box">
-					 		<div class="tt-col">
-					 			<input type="text" class="tt-search-input" placeholder="Search Products..." />
-					 			<button class="tt-btn-search" type="submit"></button>
-					 		</div>
-					 		<ul class="show_ul">
-					 			<li>bob</li>
-					 			<li>wigs</li>
-					 			<li>bundle</li>
-					 			<li>wig 613</li>
-					 			<li>Water Wave</li>
-					 		</ul>
-					 	</div>
+						<div class="serch_box">
+							<div class="tt-col">
+								<input type="text" class="tt-search-input" placeholder="Search Products..." />
+								<button class="tt-btn-search" type="submit"></button>
+							</div>
+							<ul class="show_ul">
+								<li>bob</li>
+								<li>wigs</li>
+								<li>bundle</li>
+								<li>wig 613</li>
+								<li>Water Wave</li>
+							</ul>
+						</div>
 					 </div>
 					 <div class="loginbox">
 						<div class="tt-desctop-parent-account tt-parent-box person">
@@ -83,6 +84,10 @@
 						</div>
 					 </div>
 				</div>
+				</div>
+		   </div>
+			<div class="container head_box">
+				
 				
 				<!-- tt-menu -->
 				<div class="tt-desctop-parent-menu tt-parent-box">
@@ -91,6 +96,7 @@
 							<ul>
 							</ul>
 						</nav>
+						<div class="sendnav"></div>
 					</div>
 					<a class="logosmall" href="${APP_PATH}/index.html"><img src="${APP_PATH }/static/m/img/index/logo.png" alt=""></a>
 				</div>
@@ -112,6 +118,18 @@
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>
        $(function(){
+		   MenuSenondnav()
+		    //定义一个变量用来记录li宽度的累加值
+		       var sumWidth=0;
+		       //假设$("li")返回的就是这3个li
+		       $(".dropdown").each(function(){
+		           sumWidth += $(this).outerWidth();
+		       });
+			   if(sumWidth>1300){
+				   $(".head_box").addClass("active")
+			   }
+		   
+		   
 		   $(".img_show_cont a").click(function(){
 			 $(".img_show").animate({ 
 			    height: "0", 
@@ -122,12 +140,12 @@
 					   return false;
 				   });
 			   $(window).scroll(function(){
-				   var scrollhead=$(window).scrollTop();
-				   if(scrollhead>5){
-					   $(".tt-desktop-header").addClass("headActive")
-				   }else{
-					   $(".tt-desktop-header").removeClass("headActive")
-				   }
+				   // var scrollhead=$(window).scrollTop();
+				   // if(scrollhead>5){
+					  //  $(".tt-desktop-header").addClass("headActive")
+				   // }else{
+					  //  $(".tt-desktop-header").removeClass("headActive")
+				   // }
 				/**************************/
 				var winS=$(this).scrollTop();
 				if(winS>0){
@@ -170,8 +188,6 @@
 			}
 
 		function renderMainCategory(parent, data) {
-			
-			
 			var html = '';
 			for (var i in data) {
 				var categoryLableInt = data[i].categoryLable;
@@ -191,33 +207,13 @@
 				var no_show=""
 				if(iddata==7){
 						no_show="hide";
-						html += '<li class="dropdown megamenu '+classimg+'">'+
+						html += '<li class="dropdown megamenuid megamenu '+classimg+'" categoryId-id="'+data[i].categoryId+'">'+
 						'<a href="${APP_PATH}/Category/49.html">' + data[i].categoryName + '</a>';
 				}else{
-					html += '<li class="dropdown megamenu '+classimg+'">'+
+					html += '<li class="dropdown megamenuid megamenu '+classimg+'" categoryId-id="'+data[i].categoryId+'">'+
 					'<a href="${APP_PATH}/search/' + data[i].categorySeo + '.html">' + data[i].categoryName + '</a>';
 				}
 				html +='<div class="dropdown-menu '+no_show+'">' +
-					'<div class="row">' +
-					'<div class="left col-sm-9">';
-				if (data[i].list && data[i].list.length) {
-					html += '<ul class="tt-megamenu-submenu">';
-					for (var j = 0; j < data[i].list.length; j += 1) {
-						html += '<li class="col-sm-6 listfl6">' +
-						'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId='+ data[i].list[j].categoryId +'">' +
-								'<img src="'+ data[i].list[j].categoryImgurl +'" />' +
-								'<span>'+ data[i].list[j].categoryName +'</span>' + 
-						'</a></li>';
-					}
-					html += '</ul>';
-				} else {
-					html += '<div>相关分类产品未上架</div>';
-				}
-
-				html += '</div>' +
-					'<div class="left col-sm-3">' +
-					'<img src="' + data[i].categoryImgurl + '" alt="">' +
-					'</div>' +
 					'</div>';
 			}
 			parent.html(html);
@@ -227,10 +223,11 @@
 		var categoryData = {};
 		// 获取全部的category信息,文件信息
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
+			url: '${APP_PATH}/MlbackCategory/getCategoryMenu',
 			method: 'GET',
 			success: function (data) {
-				var resData = data.extend.mlbackCategorydownList;
+				console.log(data)
+				var resData = data.extend.mlbackCategorydownFirst;
 				// console.log(resData);/**********resData*********/
 				if (data.code === 100) {
 					categoryData = resData.reduce(function (obj, item) {
@@ -257,48 +254,106 @@
 				}
 			}
 		})
-	 function mainCategoryTrigger() {
-		  var activeItem = mainCategory.find('.active');
-		  var items = mainCategory.find('.category-item');
-		
-		  items.each(function (i, item) {
-		    $(item).on('click', function () {
-		      activeItem.removeClass('active');
-		      $(this).addClass('active');
-		      activeItem = $(this);
-		      var data = categoryData[$(this).data('id')];
-		      renderSubCategory(subCategory, data);
-			 	//  var iddata =data.categoryId;
-				 // if(iddata==7){
-					// window.location.href = "${APP_PATH }/Category/49.html";
-				 // }
-		    })
-		  })
-		}
-		    function renderSubCategory(parent, data) {
-			  parent.find('.title .name').text(data.categoryName);
-			  var html = '';
-			  if (data.list && data.list.length) {
-			
-				for (var i = 0; i < data.list.length; i += 1) {
-				  html += '<div class="sub-category-product">' +
-					'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
-					'<div class="product-img">' +
-					'<img src="' + data.list[i].categoryImgurl + '" alt="">' +
-					'</div>' +
-					'<span class="product-name">' + data.list[i].categoryName + '</span>' +
-					/* '<span class="product-name">' + data.list[i].categoryDesc + '</span>'+ */
-			
-					'</a>' +
-					'</div>';
+		/**********************************************************/
+		function MenuSenondnav(){
+			function renderMainCategorythreenav(parent, data) {
+				var html = '';
+				for (var i in data) {
+					html +='<ul class="">sdfsdfsdfsdf</ul>';
 				}
-				parent.find('.body').html(html);
-			  } else {
-				renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
-			  }
-			
-			  parent.parent().addClass('active');
 			}
+			$(".megamenuid").on("mouseover",function(){
+				var mainCategorythree =$(".sendnav")
+				
+				var dropdown_categoryid= $(this).attr('categoryid-id');
+				console.log(dropdown_categoryid)
+				/* category condition */
+				 $.ajax({
+				   url: '${APP_PATH}/MlbackCategory/getCategoryMenuSenond',
+				   data: JSON.stringify({
+				     "categoryParentId":dropdown_categoryid
+				   }),
+				   type: 'post',
+				   dataType: 'JSON',
+				   contentType: 'application/json',
+				   success: function (data) {
+				       console.log("***********data = JSON.parse(data);*************")
+				       console.log(data.extend.mlbackCategoryfirstdownList);
+				       console.log("***********data = JSON.parse(data);*************")
+					   
+					   
+					   
+					   var datathreenav =data.extend.mlbackCategoryfirstdownList;
+					   renderMainCategorythreenav(mainCategorythree,datathreenav)
+					   
+					   
+					   
+				   }
+				 });
+				
+			});
+			
+			
+		}
+		
+		
+		
+		 
+		
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	 // function mainCategoryTrigger() {
+		//   var activeItem = mainCategory.find('.active');
+		//   var items = mainCategory.find('.category-item');
+		
+		//   items.each(function (i, item) {
+		//     $(item).on('click', function () {
+		//       activeItem.removeClass('active');
+		//       $(this).addClass('active');
+		//       activeItem = $(this);
+		//       var data = categoryData[$(this).data('id')];
+		//       renderSubCategory(subCategory, data);
+		// 	 	//  var iddata =data.categoryId;
+		// 		 // if(iddata==7){
+		// 			// window.location.href = "${APP_PATH }/Category/49.html";
+		// 		 // }
+		//     })
+		//   })
+		// }
+		 //    function renderSubCategory(parent, data) {
+			//   parent.find('.title .name').text(data.categoryName);
+			//   var html = '';
+			//   if (data.list && data.list.length) {
+			
+			// 	for (var i = 0; i < data.list.length; i += 1) {
+			// 	  html += '<div class="sub-category-product">' +
+			// 		'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
+			// 		'<div class="product-img">' +
+			// 		'<img src="' + data.list[i].categoryImgurl + '" alt="">' +
+			// 		'</div>' +
+			// 		'<span class="product-name">' + data.list[i].categoryName + '</span>' +
+			// 		/* '<span class="product-name">' + data.list[i].categoryDesc + '</span>'+ */
+			
+			// 		'</a>' +
+			// 		'</div>';
+			// 	}
+			// 	parent.find('.body').html(html);
+			//   } else {
+			// 	renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
+			//   }
+			
+			//   parent.parent().addClass('active');
+			// }
 		
 		// cart icon default number
 		var cartText = iCart.find('.cart_num');
