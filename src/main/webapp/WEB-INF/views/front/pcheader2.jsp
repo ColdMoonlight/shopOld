@@ -94,6 +94,7 @@
 			  </div>
 			</div>
 		</div>
+		 <div class="navbar_itemContent-background"></div>
 	</header>
 	<div class="fix_iconnav">
 		<ul class="icon_nav">
@@ -112,12 +113,13 @@
 		    var menuTimer;
 		   $('.home-menu_list').hover(function () {
 			   var _this = this;
-			   // var menuContentHright = $(_this).find('.home-menu_list_wrap .home-menu_list_wrap_inner').outerHeight();
+			    var menuContentHright = $(this).find('.menu_list-wap').outerHeight();
+			    console.log(menuContentHright)
 			   if(menuTimer){
 				   clearTimeout(menuTimer);
 			   }
 			  menuTimer = setTimeout(function () {
-				  // $('.navbar_itemContent-background').height(menuContentHright);
+				   $('.navbar_itemContent-background').height(menuContentHright);
 				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
 				   if($(_this).hasClass('wrap_active')){
 					   $(_this).removeClass('wrap_active');
@@ -233,14 +235,14 @@
 			function renderMainCategory(parent,data1,data2) {
 				var html="";
 				for(var i=0;i<data1.length;i++){
-					html += '<li class="home-menu_list"><a href="javascript:void(0)">'+ data1[i].categoryName +'</a>'
+					html += '<li class="home-menu_list"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';
 					for(var j=0;j<data2[i].length;j++){
 						  if(data2[i][j] && data2[i][j].length > 0){
 							  html += '<dl>'; 
 							   for(var k=0;k<data2[i][j].length;k++){
-								  html += '<dd><a href="javascript:void(0)">'+ data2[i][j][k].categoryName +'</a></dd>';  
+								  html += '<dd><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';  
 							   }
 							     html +=  '</dl>';
 						  }
@@ -259,6 +261,8 @@
 				  if(data.code === 100){
 					  FirstList = data.extend.categoryFirstList,
 					  SuperList = data.extend.mlbackCategorySuperList;
+					  console.log(FirstList)
+					   console.log(SuperList)
 					  renderMainCategory(nav_boxfirst,FirstList,SuperList)
 				  }else{
 					 renderErrorMsg(prodcutBox, '未获取到目录相关的数据'); 
