@@ -6,25 +6,29 @@
 .fl{float:left;}
 .fr{float:right;}
 .nav_boxfirst{width: 100%;position: relative;}
-.navul li{float: left; line-height: 50px; margin: 0 20px 0 0;font-weight: bold;}
+.navul{ text-align: center;width: 100%;}
+.navul li{line-height: 60px;margin: 0 15px; font-weight: bold; display:inline-block;}
 .menu_list-wap{opacity: 0;
- -ms-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -webkit-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
+ -ms-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -webkit-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
         z-index: 3;
+		display: none;
 }
 /*.home-menu_list:nth-of-type(2) .menu_list-wap{display: block;}*/
-.menu_list-wap{width: 1300px; height:auto;padding: 20px 0; position: absolute; top: 49px; left: 0;}
+.menu_list-wap{width: 1300px; height:auto; padding: 20px 0; position: absolute;  top: 49px; left: 0; z-index: -99;}
 .menu_list-wap dl{width:200px; float: left; margin: 0 20px;}
 .menu_list-wap dl dd{ line-height: 30px;}
-.menu_list-wap dl dd:nth-of-type(1) a{color: #0000CC;}
-.menu_list-wap.wrap_active{opacity: 1;}
+.menu_list-wap dl dd a{font-weight: normal; color: #444;}
+.menu_list-wap dl dd:nth-of-type(1) a{color: #222;font-weight: bold;font-size: 12px;}
+.menu_list-wap dl dd a:hover{color: #444;}
+.menu_list-wap.wrap_active{opacity: 1; z-index: 2; top: 49px; display: block;}
 .navbar_itemContent-background{
 	 overflow: hidden;
     background: #fff;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     width: 100%;
     height: 0;
@@ -71,7 +75,7 @@
 -webkit-transition: background-color .3s ease, height .3s ease;
 	transition: background-color .3s ease, height .3s ease;
 }
-.main{margin: 159px 0 0;}
+.main{margin: 120px 0 0;}
 .mainindex{margin:0 auto;}
 .alinktop{width: 100%;height: 60px; position: relative; position: relative;
 -webkit-transition: background-color .3s ease, height .3s ease;
@@ -133,6 +137,14 @@
 /*new*/.classimg2{background:url(../../../../../ShopTemplate/static/pc/img/new.gif) no-repeat center top; background-size:35px 25px;}
 /*Sale*/.classimg3{background:url(../../../../../ShopTemplate/static/pc/img/4zoff.gif) no-repeat center top; background-size:64px 25px;}
 /*Double Drawn*/.classimg4{background:url(../../../../../ShopTemplate/static/pc/img/doubledrawn.gif) no-repeat center top; background-size:100px 25px;}
+
+/*hot*/.menu_list-wap dl dd.classimg1{background:url(../../../../../ShopTemplate/static/pc/img/hot.gif) no-repeat right top; background-size:35px 25px;}
+/*new*/.menu_list-wap dl dd.classimg2{background:url(../../../../../ShopTemplate/static/pc/img/new.gif) no-repeat right top; background-size:35px 25px;}
+/*Sale*/.menu_list-wap dl dd.classimg3{background:url(../../../../../ShopTemplate/static/pc/img/4zoff.gif) no-repeat right top; background-size:64px 25px;}
+/*Double Drawn*/.menu_list-wap dl dd.classimg4{background:url(../../../../../ShopTemplate/static/pc/img/doubledrawn.gif) no-repeat right top; background-size:100px 25px;}
+
+
+
 .red{color: #ff1671;}
 .form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e ;}
 .shipping>span{color: #ff6f5e;}

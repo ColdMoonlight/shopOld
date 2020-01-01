@@ -49,7 +49,7 @@
 <!-- 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a> -->
-			<!-- <div class="alinktop"><a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div> -->
+			<div class="alinktop"><a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
 		   <div class="logo_search">
 			   	<div class="container head_box">
 				<!-- search logo cart -->
@@ -86,9 +86,9 @@
 				</div>
 				</div>
 		   </div>
-			<div class="container head_box">
-			  <div class="nav_boxfirst">
-				  <ul class="navul">
+			<div class="container head_box clearfix">
+			  <div class="nav_boxfirst clearfix">
+				  <ul class="navul clearfix">
 				  	
 				  </ul>
 			  </div>
@@ -108,12 +108,24 @@
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<script>		
+	<script>	
        $(function(){
+		   //定义一个变量用来记录li宽度的累加值
+		      var sumWidth=0;
+		      //假设$("li")返回的就是这3个li
+		      $(".navul li").each(function(){
+		          sumWidth += $(this).outerWidth();
+				  
+		      });
+		      if(sumWidth>1300){
+		   	   $(".nav_boxfirst").addClass("active")
+		      }
+		   
+		   
 		    var menuTimer;
 		   $('.home-menu_list').hover(function () {
-			   var _this = this;
-			    var menuContentHright = $(this).find('.menu_list-wap').outerHeight();
+			  var _this = this;
+			    var menuContentHright = $(_this).find('.menu_list-wap').outerHeight();
 			    // console.log(menuContentHright)
 			   if(menuTimer){
 				   clearTimeout(menuTimer);
@@ -232,7 +244,20 @@
 						  if(data2[i][j] && data2[i][j].length > 0){
 							  html += '<dl>'; 
 							   for(var k=0;k<data2[i][j].length;k++){
-								  html += '<dd><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';  
+								   var categoryLableInt2 = data2[i][j][k].categoryLable;
+								   var	classimg = "";
+								   if(categoryLableInt2 == 0){
+								   	classimg = "classimg0";
+								   }else if(categoryLableInt2 == 1){
+								   	classimg = "classimg1";
+								   }else if(categoryLableInt2 == 2){
+								   	classimg = "classimg2";
+								   }else if(categoryLableInt2 == 3){
+								   	classimg = "classimg3";
+								   }else if(categoryLableInt2 == 4){
+								   	classimg = "classimg4";
+								   }
+								     html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';   
 							   }
 							     html +=  '</dl>';
 						  }
