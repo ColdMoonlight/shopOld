@@ -114,7 +114,7 @@
 		   $('.home-menu_list').hover(function () {
 			   var _this = this;
 			    var menuContentHright = $(this).find('.menu_list-wap').outerHeight();
-			    console.log(menuContentHright)
+			    // console.log(menuContentHright)
 			   if(menuTimer){
 				   clearTimeout(menuTimer);
 			   }
@@ -209,33 +209,23 @@
 			}
 			/**********************************/
 			var nav_boxfirst =$(".navul")
-			
-			// for(var i=0;i<FirstList.length;i++){
-			//     htm += '<li>'
-			//     htm += '<a href="javascript:void(0)">'+ FirstList[i].categoryName +'</a>'
-			    
-			//     if(SuperList && SuperList.length > 0 && SuperList[i] && SuperList[i].length > 0){
-			//         htm += '<div>'
-			//         for(var j=0;j<SuperList[i].length;j++){
-			//             if(SuperList[i][j] && SuperList[i][j].length > 0){
-			//                 htm += '<ol>'
-			//                 for(var k=0;k<SuperList[i][j].length;k++){
-			//                     //SuperList[i][j][k]
-			//                     htm += '<li><a href="javascript:void(0)">'+ SuperList[i][j][k].categoryName +'</a></li>'
-			//                 }
-			//                 htm +=  '</ol>'
-			//             }
-			//         }
-			//         htm += '</div>'
-			//     }
-			    
-			//     htm += '</li>'
-			// }
-			
 			function renderMainCategory(parent,data1,data2) {
 				var html="";
 				for(var i=0;i<data1.length;i++){
-					html += '<li class="home-menu_list"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
+					var categoryLableInt = data1[i].categoryLable;
+					var	classimg = "";
+					if(categoryLableInt == 0){
+						classimg = "classimg0";
+					}else if(categoryLableInt == 1){
+						classimg = "classimg1";
+					}else if(categoryLableInt == 2){
+						classimg = "classimg2";
+					}else if(categoryLableInt == 3){
+						classimg = "classimg3";
+					}else if(categoryLableInt == 4){
+						classimg = "classimg4";
+					}
+					html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';
 					for(var j=0;j<data2[i].length;j++){
@@ -261,8 +251,12 @@
 				  if(data.code === 100){
 					  FirstList = data.extend.categoryFirstList,
 					  SuperList = data.extend.mlbackCategorySuperList;
+					  console.log("-------------FirstList------------------")
 					  console.log(FirstList)
+					  console.log("-------------FirstList------------------")
+					  console.log("-------------SuperList------------------")
 					   console.log(SuperList)
+					   console.log("-------------SuperList------------------")
 					  renderMainCategory(nav_boxfirst,FirstList,SuperList)
 				  }else{
 					 renderErrorMsg(prodcutBox, '未获取到目录相关的数据'); 

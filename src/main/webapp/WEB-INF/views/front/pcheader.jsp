@@ -50,7 +50,8 @@
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a> -->
 			<!-- <div class="alinktop"><a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div> -->
-			<div class="container head_box">
+		   <div class="logo_search">
+			   	<div class="container head_box">
 				<!-- search logo cart -->
 				<div class="header_holder">
 					<div class="logo">
@@ -59,19 +60,19 @@
 						</a>
 					</div>
 					 <div class="serch_cont">
-					 	<div class="serch_box">
-					 		<div class="tt-col">
-					 			<input type="text" class="tt-search-input" placeholder="Search Products..." />
-					 			<button class="tt-btn-search" type="submit"></button>
-					 		</div>
-					 		<ul class="show_ul">
-					 			<li>bob</li>
-					 			<li>wigs</li>
-					 			<li>bundle</li>
-					 			<li>wig 613</li>
-					 			<li>Water Wave</li>
-					 		</ul>
-					 	</div>
+						<div class="serch_box">
+							<div class="tt-col">
+								<input type="text" class="tt-search-input" placeholder="Search Products..." />
+								<button class="tt-btn-search" type="submit"></button>
+							</div>
+							<ul class="show_ul">
+								<li>bob</li>
+								<li>wigs</li>
+								<li>bundle</li>
+								<li>wig 613</li>
+								<li>Water Wave</li>
+							</ul>
+						</div>
 					 </div>
 					 <div class="loginbox">
 						<div class="tt-desctop-parent-account tt-parent-box person">
@@ -83,20 +84,17 @@
 						</div>
 					 </div>
 				</div>
-				
-				<!-- tt-menu -->
-				<div class="tt-desctop-parent-menu tt-parent-box">
-					<div class="tt-desctop-menu">
-						<nav>
-							<ul>
-							</ul>
-						</nav>
-					</div>
-					<a class="logosmall" href="${APP_PATH}/index.html"><img src="${APP_PATH }/static/m/img/index/logo.png" alt=""></a>
 				</div>
-				<!-- /tt-menu -->
+		   </div>
+			<div class="container head_box">
+			  <div class="nav_boxfirst">
+				  <ul class="navul">
+				  	
+				  </ul>
+			  </div>
 			</div>
 		</div>
+		 <div class="navbar_itemContent-background"></div>
 	</header>
 	<div class="fix_iconnav">
 		<ul class="icon_nav">
@@ -110,8 +108,49 @@
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<script>
+	<script>		
        $(function(){
+		    var menuTimer;
+		   $('.home-menu_list').hover(function () {
+			   var _this = this;
+			    var menuContentHright = $(this).find('.menu_list-wap').outerHeight();
+			    // console.log(menuContentHright)
+			   if(menuTimer){
+				   clearTimeout(menuTimer);
+			   }
+			  menuTimer = setTimeout(function () {
+				   $('.navbar_itemContent-background').height(menuContentHright);
+				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
+				   if($(_this).hasClass('wrap_active')){
+					   $(_this).removeClass('wrap_active');
+				   }
+			   });
+			   $(_this).find('.menu_list-wap').addClass('wrap_active');
+
+			   return false;
+			   },100)
+		   },function () {
+			   var _this = this;
+			   if(menuTimer){
+				   clearTimeout(menuTimer);
+			   }
+			   $(_this).find('.menu_list-wap').removeClass('wrap_active');
+			   setTimeout(function () {
+				   $('.navbar_itemContent-background').height(0);
+				   return false;
+			   },100);
+
+		   });
+		   
+		    //定义一个变量用来记录li宽度的累加值
+		       var sumWidth=0;
+		       //假设$("li")返回的就是这3个li
+		       $(".dropdown").each(function(){
+		           sumWidth += $(this).outerWidth();
+		       });
+			   if(sumWidth>1300){
+				   $(".head_box").addClass("active")
+			   }
 		   $(".img_show_cont a").click(function(){
 			 $(".img_show").animate({ 
 			    height: "0", 
@@ -122,12 +161,12 @@
 					   return false;
 				   });
 			   $(window).scroll(function(){
-				   var scrollhead=$(window).scrollTop();
-				   if(scrollhead>5){
-					   $(".tt-desktop-header").addClass("headActive")
-				   }else{
-					   $(".tt-desktop-header").removeClass("headActive")
-				   }
+				   // var scrollhead=$(window).scrollTop();
+				   // if(scrollhead>5){
+					  //  $(".tt-desktop-header").addClass("headActive")
+				   // }else{
+					  //  $(".tt-desktop-header").removeClass("headActive")
+				   // }
 				/**************************/
 				var winS=$(this).scrollTop();
 				if(winS>0){
@@ -168,139 +207,65 @@
 			  var n = parseFloat(val);
 			  return isNaN(n) ? 0 : n
 			}
-
-		function renderMainCategory(parent, data) {
-			
-			
-			var html = '';
-			for (var i in data) {
-				var categoryLableInt = data[i].categoryLable;
-				var	classimg = "";
-				if(categoryLableInt == 0){
-					classimg = "classimg0";
-				}else if(categoryLableInt == 1){
-					classimg = "classimg1";
-				}else if(categoryLableInt == 2){
-					classimg = "classimg2";
-				}else if(categoryLableInt == 3){
-					classimg = "classimg3";
-				}else if(categoryLableInt == 4){
-					classimg = "classimg4";
-				}
-				var iddata =data[i].categoryId;
-				var no_show=""
-				if(iddata==7){
-						no_show="hide";
-						html += '<li class="dropdown megamenu '+classimg+'">'+
-						'<a href="${APP_PATH}/Category/49.html">' + data[i].categoryName + '</a>';
-				}else{
-					html += '<li class="dropdown megamenu '+classimg+'">'+
-					'<a href="${APP_PATH}/search/' + data[i].categorySeo + '.html">' + data[i].categoryName + '</a>';
-				}
-				html +='<div class="dropdown-menu '+no_show+'">' +
-					'<div class="row">' +
-					'<div class="left col-sm-9">';
-				if (data[i].list && data[i].list.length) {
-					html += '<ul class="tt-megamenu-submenu">';
-					for (var j = 0; j < data[i].list.length; j += 1) {
-						html += '<li class="col-sm-6 listfl6">' +
-						'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId='+ data[i].list[j].categoryId +'">' +
-								'<img src="'+ data[i].list[j].categoryImgurl +'" />' +
-								'<span>'+ data[i].list[j].categoryName +'</span>' + 
-						'</a></li>';
+			/**********************************/
+			var nav_boxfirst =$(".navul")
+			function renderMainCategory(parent,data1,data2) {
+				var html="";
+				for(var i=0;i<data1.length;i++){
+					var categoryLableInt = data1[i].categoryLable;
+					var	classimg = "";
+					if(categoryLableInt == 0){
+						classimg = "classimg0";
+					}else if(categoryLableInt == 1){
+						classimg = "classimg1";
+					}else if(categoryLableInt == 2){
+						classimg = "classimg2";
+					}else if(categoryLableInt == 3){
+						classimg = "classimg3";
+					}else if(categoryLableInt == 4){
+						classimg = "classimg4";
 					}
-					html += '</ul>';
-				} else {
-					html += '<div>相关分类产品未上架</div>';
-				}
+					html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
+					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
+				    html += '<div class="menu_list-wap">';
+					for(var j=0;j<data2[i].length;j++){
+						  if(data2[i][j] && data2[i][j].length > 0){
+							  html += '<dl>'; 
+							   for(var k=0;k<data2[i][j].length;k++){
+								  html += '<dd><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';  
+							   }
+							     html +=  '</dl>';
+						  }
+					 }	
+					 html += '</div>';	
+					}
+					 html += '	</li>';	
+			    }
+			 parent.html(html);
+			}
 
-				html += '</div>' +
-					'<div class="left col-sm-3">' +
-					'<img src="' + data[i].categoryImgurl + '" alt="">' +
-					'</div>' +
-					'</div>';
-			}
-			parent.html(html);
-			
-		}
-		var mainCategory = $('.tt-desctop-menu ul');
-		var categoryData = {};
-		// 获取全部的category信息,文件信息
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			method: 'GET',
-			success: function (data) {
-				var resData = data.extend.mlbackCategorydownList;
-				// console.log(resData);/**********resData*********/
-				if (data.code === 100) {
-					categoryData = resData.reduce(function (obj, item) {
-						if (item.categoryParentId === -1) {
-							item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
-								obj[item.categoryId].list : [];
-							obj[item.categoryId] = item;
-							return obj;
-						} else {
-							if (!obj[item.categoryParentId]) {
-								obj[item.categoryParentId] = {}
-							}
-							if (!obj[item.categoryParentId].list) {
-								obj[item.categoryParentId].list = []
-							}
-							obj[item.categoryParentId].list.push(item);
-							return obj;
-						}
-					}, {});
-					//console.log(categoryData)
-					renderMainCategory(mainCategory, categoryData);
-				} else {
-					renderErrorMsg(prodcutBox, '未获取到目录相关的数据');
-				}
-			}
-		})
-	 function mainCategoryTrigger() {
-		  var activeItem = mainCategory.find('.active');
-		  var items = mainCategory.find('.category-item');
+		        url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
+		        method: 'POST',
+		        success: function (data) {
+				  if(data.code === 100){
+					  FirstList = data.extend.categoryFirstList,
+					  SuperList = data.extend.mlbackCategorySuperList;
+					  console.log("-------------FirstList------------------")
+					  console.log(FirstList)
+					  console.log("-------------FirstList------------------")
+					  console.log("-------------SuperList------------------")
+					   console.log(SuperList)
+					   console.log("-------------SuperList------------------")
+					  renderMainCategory(nav_boxfirst,FirstList,SuperList)
+				  }else{
+					 renderErrorMsg(prodcutBox, '未获取到目录相关的数据'); 
+				  }
+				  
+		        }
+		      })
 		
-		  items.each(function (i, item) {
-		    $(item).on('click', function () {
-		      activeItem.removeClass('active');
-		      $(this).addClass('active');
-		      activeItem = $(this);
-		      var data = categoryData[$(this).data('id')];
-		      renderSubCategory(subCategory, data);
-			 	//  var iddata =data.categoryId;
-				 // if(iddata==7){
-					// window.location.href = "${APP_PATH }/Category/49.html";
-				 // }
-		    })
-		  })
-		}
-		    function renderSubCategory(parent, data) {
-			  parent.find('.title .name').text(data.categoryName);
-			  var html = '';
-			  if (data.list && data.list.length) {
-			
-				for (var i = 0; i < data.list.length; i += 1) {
-				  html += '<div class="sub-category-product">' +
-					'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
-					'<div class="product-img">' +
-					'<img src="' + data.list[i].categoryImgurl + '" alt="">' +
-					'</div>' +
-					'<span class="product-name">' + data.list[i].categoryName + '</span>' +
-					/* '<span class="product-name">' + data.list[i].categoryDesc + '</span>'+ */
-			
-					'</a>' +
-					'</div>';
-				}
-				parent.find('.body').html(html);
-			  } else {
-				renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
-			  }
-			
-			  parent.parent().addClass('active');
-			}
-		
-		// cart icon default number
+
 		var cartText = iCart.find('.cart_num');
 		var num = window.localStorage.getItem('productNum') || 0;
 		
