@@ -7,10 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.atguigu.bean.Department;
-import com.atguigu.bean.Employee;
-import com.atguigu.dao.DepartmentMapper;
-import com.atguigu.dao.EmployeeMapper;
 
 /**
  * 测试dao层的工作
@@ -25,11 +21,11 @@ import com.atguigu.dao.EmployeeMapper;
 @ContextConfiguration(locations={"classpath:applicationContext.xml"})
 public class MapperTest {
 	
-	@Autowired
-	DepartmentMapper departmentMapper;
-	
-	@Autowired
-	EmployeeMapper employeeMapper;
+//	@Autowired
+//	DepartmentMapper departmentMapper;
+//	
+//	@Autowired
+//	EmployeeMapper employeeMapper;
 	
 	@Autowired
 	SqlSession sqlSession;
@@ -49,7 +45,7 @@ public class MapperTest {
 //		departmentMapper.insertSelective(new Department(null, "UI部"));
 		
 		//2、生成员工数据，测试员工插入
-		employeeMapper.insertSelective(new Employee(null, "Jerry12", "M", "Jerry3@atguigu.com", 1));
+//		employeeMapper.insertSelective(new Employee(null, "Jerry12", "M", "Jerry3@atguigu.com", 1));
 		
 		
 		//sysUserMapper.insertSelective(new SysUser(null,"admin2","admin123456"));
