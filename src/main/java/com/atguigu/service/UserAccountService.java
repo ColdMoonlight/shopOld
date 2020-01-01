@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.Department;
 import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.UserAccount;
-import com.atguigu.dao.DepartmentMapper;
 import com.atguigu.dao.UserAccountMapper;
 
 @Service

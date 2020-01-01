@@ -11,13 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.atguigu.bean.Department;
-import com.atguigu.bean.Employee;
 import com.atguigu.bean.MoneyOut;
 import com.atguigu.bean.TaskFrom;
 import com.atguigu.bean.TaskFromExample;
-import com.atguigu.dao.DepartmentMapper;
-import com.atguigu.dao.EmployeeMapper;
 import com.atguigu.dao.MoneyOutMapper;
 import com.atguigu.dao.TaskFromMapper;
 import com.atguigu.utils.DateUtil;
