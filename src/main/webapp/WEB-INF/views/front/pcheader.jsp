@@ -121,7 +121,7 @@
 		   	   $(".nav_boxfirst").addClass("active")
 		      }
 		   
-		   
+		    var headtop = $(".tt-desktop-header").outerHeight(); 
 		    var menuTimer;
 		   $('.home-menu_list').hover(function () {
 			  var _this = this;
@@ -132,6 +132,7 @@
 			   }
 			  menuTimer = setTimeout(function () {
 				   $('.navbar_itemContent-background').height(menuContentHright);
+				    $('.navbar_itemContent-background').css("top",headtop);
 				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
 				   if($(_this).hasClass('wrap_active')){
 					   $(_this).removeClass('wrap_active');
@@ -237,7 +238,13 @@
 					}else if(categoryLableInt == 4){
 						classimg = "classimg4";
 					}
-					html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
+					var twonav = data1[i].categorySeo;
+					if(twonav==""){
+						html += '<li class="home-menu_list '+classimg+'"><a href="javascript:;">'+ data1[i].categoryName +'</a>';
+					}else{
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>';
+					}
+					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';
 					for(var j=0;j<data2[i].length;j++){
@@ -257,7 +264,13 @@
 								   }else if(categoryLableInt2 == 4){
 								   	classimg = "classimg4";
 								   }
-								     html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';   
+								   var threenav =data2[i][j][k].categorySeo;
+								   if(threenav==""){
+								   		html += '<dd class="'+classimg+'"><a href="javacsript:;">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   }else{
+								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   }
+								     // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';   
 							   }
 							     html +=  '</dl>';
 						  }
