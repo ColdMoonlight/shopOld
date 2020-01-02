@@ -7,7 +7,7 @@
 
 
 
-.box_con1{width: 100%; height: auto; position: relative; background: url(../../../../../ShopTemplate/static/pc/huodong/hbg_02.jpg) repeat-y center top;}
+.box_con1{width: 100%; height: auto; position: relative; background: url(../../pc/huodong/hbg_02.jpg) repeat-y center top;}
 .word1{width: 100%; height: auto;}
 .word1 img{display: block; margin: 0 auto; max-width: 100%;}
 .zs_link{width: 100%; height: auto;}
@@ -22,7 +22,7 @@
 .word2{width: 100%; height: auto;}   
 .word2 img{display: block; margin: 0 auto; max-width: 100%;}
 .five_5cont{z-index: 2; width:100%;height: auto; margin: 0 auto;}
-.hongbg{position: relative; width: 100%; height: auto; margin: 0 auto; background: url(../../../../../ShopTemplate/static/pc/huodong/hbgt_02.jpg) no-repeat center top;}
+.hongbg{position: relative; width: 100%; height: auto; margin: 0 auto; background: url(../../pc/huodong/hbgt_02.jpg) no-repeat center top;}
 .topbg{width: 100%; margin: 0 auto; }
 .topbg img{margin: 0 auto;max-width: 100%; }
 .botbg{width: 100%; margin: 0 auto; }
@@ -30,7 +30,7 @@
 
 
 .dwbox{ z-index: 3; width: 100%; height: auto; }
-.product_box_cont{width: 100%; height: auto; margin: 0 auto; background: url(../../../../../ShopTemplate/static/m/img/huodong/tg_02.png) repeat-y center; background-size:100% auto;}
+.product_box_cont{width: 100%; height: auto; margin: 0 auto; background: url(../../m/img/huodong/tg_02.png) repeat-y center; background-size:100% auto;}
 .kong{width: 100%;min-height: 160px; margin: 0 auto;}
 .word3{width: 100%; height: auto; margin:0 auto;padding: 0 0 10px;}
 .word3 img{display: block; margin: 0 auto; max-width: 100%;}
