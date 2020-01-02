@@ -94,16 +94,9 @@
   </div>
   <div class="category">
     <i class="icon close close2"></i>
-    <ul class="main-category bd-b"></ul>
-    <div class="product-box bd-l bd-b">
-      <div class="sub-category">
-        <div class="title bd-b">
-          <span class="name">二级分类</span>
-          <a class="close" href="#"><i class="icon close"></i></a>
-        </div>
-        <div class="body"></div>
-      </div>
-    </div>
+    <ul class="main-category category_ul bd-b">
+		
+	</ul>
   </div>
   
    <div class="serch_cont">
@@ -126,8 +119,6 @@
 
   <script>
 	  $(function(){
-		  
-		  
 		  $(window).scroll(function(){
 			   var scrollhead=$(window).scrollTop();
 			   if(scrollhead>5){
@@ -182,124 +173,115 @@
       var n = parseFloat(val);
       return isNaN(n) ? 0 : n
     }
-
-    function renderMainCategory(parent, data) {
-      var html = '';
-      for (var i in data) {
-		  var categoryLableInt = data[i].categoryLable;
-		  var	classimg = "";
-		  if(categoryLableInt == 0){
-		  	classimg = "classimg0";
-		  }else if(categoryLableInt == 1){
-		  	classimg = "classimg1";
-		  }else if(categoryLableInt == 2){
-		  	classimg = "classimg2";
-		  }else if(categoryLableInt == 3){
-		  	classimg = "classimg3";
-		  }else if(categoryLableInt == 4){
-		  	classimg = "classimg4";
-		  }
-        if (categoryActiveNum === i) {
-          html += '<li class="category-item '+classimg+' active" data-id="' + data[i].categoryId + '"><a href="#">' + data[i]
-            .categoryName + '</a></li>';
-        } else {
-          html += '<li class="category-item '+classimg+'" data-id="' + data[i].categoryId + '"><a href="#">' + data[i].categoryName +
-            '</a></li>';
-        }
-      }
-      parent.html(html);
-	  
-    }
-	
-	
-    function renderSubCategory(parent, data) {
-      parent.find('.title .name').text(data.categoryName);
-      var html = '';
-      if (data.list && data.list.length) {
-        for (var i = 0; i < data.list.length; i += 1) {
-			var iddata =data.categoryId
-			var no_show=""
-			if(iddata==7){
-					no_show="hide"	
+/************************/
+              var mainCategory =$(".main-category");
+			  var categoryBox = $('.category');
+			function renderMainCategory(parent,data1,data2) {
+				var html="";
+				for(var i=0;i<data1.length;i++){
+					var categoryLableInt = data1[i].categoryLable;
+					var	classimg = "";
+					if(categoryLableInt == 0){
+						classimg = "classimg0";
+					}else if(categoryLableInt == 1){
+						classimg = "classimg1";
+					}else if(categoryLableInt == 2){
+						classimg = "classimg2";
+					}else if(categoryLableInt == 3){
+						classimg = "classimg3";
+					}else if(categoryLableInt == 4){
+						classimg = "classimg4";
+					}
+					html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
+				    html += '<div class="menu_list-wap">';
+					for(var j=0;j<data2[i].length;j++){
+						  if(data2[i][j] && data2[i][j].length > 0){
+							  html += '<dl>'; 
+							   for(var k=0;k<data2[i][j].length;k++){
+								   var categoryLableInt2 = data2[i][j][k].categoryLable;
+								   var	classimg = "";
+								   if(categoryLableInt2 == 0){
+								   	classimg = "classimg0";
+								   }else if(categoryLableInt2 == 1){
+								   	classimg = "classimg1";
+								   }else if(categoryLableInt2 == 2){
+								   	classimg = "classimg2";
+								   }else if(categoryLableInt2 == 3){
+								   	classimg = "classimg3";
+								   }else if(categoryLableInt2 == 4){
+								   	classimg = "classimg4";
+								   }
+								     html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';   
+							   }
+							     html +=  '</dl>';
+						  }
+					 }	
+					 html += '</div>';	
+					}
+					 html += '	</li>';	
+			    }
+			 parent.html(html);
+			 
+			 $(".category_ul li i.gw-i").click(function(){
+			   // $(this).toggleClass('active').next('.menu_list-wap').show(200);
+			   var str = $(this).next('.menu_list-wap').css('display');
+			   if(str == 'none'){
+			   	$(this).next('.menu_list-wap').show(200);
+				$(this).addClass("active");
+			   }else{
+			   	$(this).next('.menu_list-wap').hide(200);
+				$(this).removeClass("active");
+			   }
+			   $(this).parent('.home-menu_list').siblings('.home-menu_list').find('.gw-i').removeClass('active').next('.menu_list-wap').hide(200);
+			 })
+			 
+			 $(".menu_list-wap dl dd:first-child .gw-i2").click(function(){
+				 $(this).toggleClass('active');
+				 if($(this).hasClass('active')){
+					   $(this).parents("dl").addClass("submenu");
+					   $(this).parents("dl").siblings("dl").removeClass("submenu"); 
+					   $(this).parents("dl").siblings("dl").children("dd:first-child").find(".gw-i2").removeClass("active"); 
+				 }else{
+					  $(this).parents("dl").removeClass("submenu");
+					  $(this).removeClass("active")
+				 }
+			   // $(this).toggleClass('active').parents("dl").toggleClass("submenu");
+			   // $(this).parents("dl").siblings("dl").removeClass("submenu");
+			   
+			 })
+			 
+			 
 			}
-          html += '<div class="sub-category-product '+no_show+'">' +
-            '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
-            '<div class="product-img">' +
-            '<img src="' + data.list[i].categoryImgurl + '" alt="">' +
-            '</div>' +
-            '<span class="product-name">' + data.list[i].categoryName + '</span>' +
 
-            '</a>' +
-            '</div>';
-        }
-        parent.find('.body').html(html);
-      } else {
-        renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
-      }
-      parent.parent().removeClass("hide");
-      parent.parent().addClass('active');
-    }
 
-    var categoryBox = $('.category');
-    var mainCategory = $('.main-category');
-    var subCategory = $('.sub-category');
-    var prodcutBox = $('.product-box');
-    var categoryData = {};
-    // 获取全部的category信息,文件信息
-    $.ajax({
-      //url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-      url: '${APP_PATH}/MlbackCategory/getMenuMlbackCategory',
-      method: 'GET',
-      success: function (data) {
-		  var resData = data.extend.mlbackCategorydownList;
-		  // console.log(resData)/**************resData********/
-        if (data.code === 100) {
-          categoryData = data.extend.mlbackCategorydownList.reduce(function (obj, item) {
-            if (item.categoryParentId === -1) {
-              item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
-                obj[item.categoryId].list : [];
-              obj[item.categoryId] = item;
-              return obj;
-            } else {
-              if (!obj[item.categoryParentId]) {
-                obj[item.categoryParentId] = {}
-              }
-              if (!obj[item.categoryParentId].list) {
-                obj[item.categoryParentId].list = []
-              }
-              obj[item.categoryParentId].list.push(item);
-              return obj;
-            }
-          }, {});
+		$.ajax({
+			url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
+		    type: 'POST',
+			dataType: 'JSON',
+			contentType: 'application/json',
+			success: function (data) {
+				console.log("***JsonDate******222******");
+				var JsonDate = JSON.parse(data);
+				console.log(JsonDate);
+				console.log("***JsonDate******222******");
+			  if(JsonDate.code === 100){
+				  FirstList = JsonDate.extend.categoryFirstList;
+				  SuperList = JsonDate.extend.mlbackCategorySuperList;
+				  console.log("-------------FirstList------------------")
+				  console.log(FirstList)
+				  console.log("-------------FirstList------------------")
+				  console.log("-------------SuperList------------------")
+				   console.log(SuperList)
+				   console.log("-------------SuperList------------------")
+				  renderMainCategory(mainCategory,FirstList,SuperList)
+			  }else{
+				 // renderErrorMsg(prodcutBox, '未获取到目录相关的数据'); 
+			  }
+			  
+			}
+		  })
 
-          renderMainCategory(mainCategory, categoryData);
-          mainCategoryTrigger();
-        } else {
-          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
-        }
-      }
-    })
-
-    function mainCategoryTrigger() {
-      var activeItem = mainCategory.find('.active');
-      var items = mainCategory.find('.category-item');
-      items.each(function (i, item) {
-        $(item).on('click', function () {
-          activeItem.removeClass('active');
-          $(this).addClass('active');
-          activeItem = $(this);
-          var data = categoryData[$(this).data('id')];
-          renderSubCategory(subCategory, data);
-		  var hideno=$(".sub-category-product.hide")
-		 var hidtop=hideno.parents(".product-box")
-		     hidtop.addClass("hide")
-			 var iddata =data.categoryId
-		 if(iddata==7){
-			  window.location.href = "${APP_PATH }/Category/49.html";
-		 }
-        })
-      })
-    }
 
     $('#menu').on('click', function () {
       categoryBox.show();
@@ -307,9 +289,7 @@
     categoryBox.find('.close2').on('click', function () {
       categoryBox.hide();
     });
-    prodcutBox.find('.title .close').on('click', function () {
-      prodcutBox.removeClass('active');
-    });
+
 
     // cart icon default number
     var cartText = iCart.find('.num');
