@@ -39,8 +39,8 @@ public class EmailUtilshtmlCustomer {
 		sendEmilRegisterCustomer(getToEmail, Message, mlfrontUserafterIn);
 	}
 	
-	public static void readyEmailVerifyCustomer(String getToEmail, String message, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
-		sendEmilVerifyCustomer(getToEmail, message, toCustomerVerifyInfoStr,payinfoPlateNum);
+	public static void readyEmailVerifyCustomer(String getToEmail, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
+		sendEmilVerifyCustomer(getToEmail, toCustomerVerifyInfoStr,payinfoPlateNum);
 	}
 	
 	public static void readyEmailPaySuccessCustomer(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
@@ -234,7 +234,7 @@ public class EmailUtilshtmlCustomer {
 	 * megalookweb@outlook.com
 	 * mingyueqingl@163.com
 	 * */
-	private static void sendEmilVerifyCustomer(String to, String message, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
+	private static void sendEmilVerifyCustomer(String to, String toCustomerVerifyInfoStr,String payinfoPlateNum) {
 		try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
