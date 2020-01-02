@@ -4,7 +4,7 @@
 .hd_ban img{display: block; margin: 0 auto; max-width: 100%;}
 .con_ban{width: 100%; height: auto; text-align: center; overflow: hidden;}
 .con_ban img{display: block; margin: 0 auto; max-width: 100%;}
-.box_con1{width: 100%; height: auto; min-height: 2970px; position: relative; background: url(../../../../../ShopTemplate/static/pc/huodong/hbg_02.jpg) repeat-y center top;}
+.box_con1{width: 100%; height: auto; min-height: 2970px; position: relative; background: url(../../pc/huodong/hbg_02.jpg) repeat-y center top;}
 .word1{width: 100%; height: auto;}
 .word1 img{display: block; margin: 0 auto; max-width: 100%;}
 .zs_link{width: 100%; height: auto;}
@@ -19,13 +19,13 @@
 .word2{width: 100%; height: auto;}   
 .word2 img{display: block; margin: 0 auto; max-width: 100%;}
 .five_5cont{border-radius:5px; z-index: 2; width: 1400px; height: 450px; margin: 0 auto; background: #fff; position: absolute; left: 50%; margin: 0 0 0 -700px; bottom:-100px;}
-.hongbg{position: relative; width: 100%; height: auto;min-height: 1561px; margin: 0 auto; background: url(../../../../../ShopTemplate/static/pc/huodong/hbgt_02.jpg) no-repeat center top;}
+.hongbg{position: relative; width: 100%; height: auto;min-height: 1561px; margin: 0 auto; background: url(../../pc/huodong/hbgt_02.jpg) no-repeat center top;}
 .dwbox{ z-index: 3; position: absolute;  top:160px; left: 50%; margin: 0 0 0 -702px; width: 1405px; height: auto; min-height:1550px; }
-.product_box_cont{width: 1405px; height: auto; margin: 0 auto; min-height:1360px; background: url(../../../../../ShopTemplate/static/pc/huodong/cpk_03_01.png) no-repeat center top; background-size:100% auto;}
+.product_box_cont{width: 1405px; height: auto; margin: 0 auto; min-height:1360px; background: url(../../pc/huodong/cpk_03_01.png) no-repeat center top; background-size:100% auto;}
 .kong{width: 100%;min-height: 160px; margin: 0 auto;}
 .word3{width: 100%; height: auto; margin:0 auto}
 .word3 img{display: block; margin: 0 auto; max-width: 100%;}
-.lei_cont{width: 100%;height: auto; padding: 100px 0; background: url(../../../../../ShopTemplate/static/pc/huodong/cont_22.png) no-repeat center top; background-size:100% auto;}  
+.lei_cont{width: 100%;height: auto; padding: 100px 0; background: url(../../pc/huodong/cont_22.png) no-repeat center top; background-size:100% auto;}  
 .lei_cont ul{width: 1736px;height: auto; margin: 0 auto;display: flex; flex-wrap:wrap;}
 .lei_cont ul li {width: 25%;height: auto;} 
 .lei_cont ul li a{display: block;}
