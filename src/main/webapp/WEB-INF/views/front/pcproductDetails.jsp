@@ -595,9 +595,9 @@
 				deleteReview();
 			});
 			// select star reank
-			$('.review-star .icon').each(function(item){
-				var parent = $(item).parent();
-				$(item).on('click', function() {
+			$('.review-star .icon').each(function(){
+				var parent = $(".icon").parent(".review-star");
+				$(".review-star .icon").on('click', function() {
 					parent.find('.icon').removeClass('star2').addClass('star');
 					$(this).removeClass('star').addClass('star2').prevAll('.icon').removeClass('star').addClass('star2');
 					parent.attr('data-star', $(this).data('id'));

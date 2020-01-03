@@ -31,9 +31,7 @@
 	
 	  gtag('config', 'UA-148326913-1');
 	</script>
-	
 </head>
-
 <body>
 	<!-- <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a></div> -->
 	<header>
@@ -89,7 +87,6 @@
 			<div class="container head_box clearfix">
 			  <div class="nav_boxfirst clearfix">
 				  <ul class="navul clearfix">
-				  	
 				  </ul>
 			  </div>
 			</div>
@@ -103,25 +100,11 @@
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
 	</div>
-
-	
-	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>	
        $(function(){
-		   //定义一个变量用来记录li宽度的累加值
-		      var sumWidth=0;
-		      //假设$("li")返回的就是这3个li
-		      $(".navul li").each(function(){
-		          sumWidth += $(this).outerWidth();
-				  
-		      });
-		      if(sumWidth>1300){
-		   	   $(".nav_boxfirst").addClass("active")
-		      }
-		   
 		    var headtop = $(".tt-desktop-header").outerHeight(); 
 		    var menuTimer;
 		   $('.home-menu_list').hover(function () {
@@ -155,16 +138,6 @@
 			   },100);
 
 		   });
-		   
-		    //定义一个变量用来记录li宽度的累加值
-		       var sumWidth=0;
-		       //假设$("li")返回的就是这3个li
-		       $(".dropdown").each(function(){
-		           sumWidth += $(this).outerWidth();
-		       });
-			   if(sumWidth>1300){
-				   $(".head_box").addClass("active")
-			   }
 		   $(".img_show_cont a").click(function(){
 			 $(".img_show").animate({ 
 			    height: "0", 
@@ -174,7 +147,6 @@
 					$("body,html").animate({scrollTop:0},500);  
 					   return false;
 				   });
-		   
 			   $(window).scroll(function(){
 				   var scrollhead=$(window).scrollTop();
 				   if(scrollhead>5){
@@ -293,21 +265,12 @@
 				  if(data.code === 100){
 					  FirstList = data.extend.categoryFirstList,
 					  SuperList = data.extend.mlbackCategorySuperList;
-					  console.log("-------------FirstList------------------")
-					  console.log(FirstList)
-					  console.log("-------------FirstList------------------")
-					  console.log("-------------SuperList------------------")
-					   console.log(SuperList)
-					   console.log("-------------SuperList------------------")
 					  renderMainCategory(nav_boxfirst,FirstList,SuperList)
 				  }else{
 					 renderErrorMsg(nav_boxfirst, '未获取到目录相关的数据'); 
 				  }
-				  
 		        }
 		      })
-		
-
 		var cartText = iCart.find('.cart_num');
 		var num = window.localStorage.getItem('productNum') || 0;
 		
@@ -386,12 +349,6 @@
 				     if(target.closest(".tt-search-input").length != 0) return;
 				    $('ul.show_ul').slideUp(200)
 				})
-				
-		
-		
 	</script>
 </body>
-
-
-
 </html>
