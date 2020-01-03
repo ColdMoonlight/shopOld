@@ -366,21 +366,11 @@ public class MlbackCategoryController {
 	 @RequestMapping(value="/searchBycategorySeo",method=RequestMethod.POST)
 	 @ResponseBody
 	 public Msg searchBycategorySeo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlbackCategory mlbackCategory){
-		 //接受信息
-		 String categorySeoReq = mlbackCategory.getCategorySeo();
-		 MlbackCategory mlbackCategoryReq = new MlbackCategory();
-		 mlbackCategoryReq.setCategorySeo(categorySeoReq);
-		 List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
 		 
-		 MlbackCategory mlbackCategoryres = mlbackCategoryList.get(0);
-		 System.out.println("操作说明:前端客户点击菜单类-searchBycategorySeo");
-	 
-		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
-		 
-		 
+		 //初始化返回下拉所需
 		 //查询全部的category信息，便于下拉选择
 		 List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
-			
+		 
 		 List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
 		 for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
 			 Integer categoryParentId = mlbackCategoryOne.getCategoryParentId();
@@ -388,6 +378,21 @@ public class MlbackCategoryController {
 				 mlbackCategorydownEr.add(mlbackCategoryOne);
 			 }
 		 }
+		 
+		 //接受信息
+		 String categorySeoReq = mlbackCategory.getCategorySeo();
+		 MlbackCategory mlbackCategoryReq = new MlbackCategory();
+		 mlbackCategoryReq.setCategorySeo(categorySeoReq);
+		 List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
+		 
+		 if(!(mlbackCategoryList.size()>0)){
+			 return Msg.fail().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
+		 }
+		 
+		 MlbackCategory mlbackCategoryres = mlbackCategoryList.get(0);
+		 System.out.println("操作说明:前端客户点击菜单类-searchBycategorySeo");
+	 
+		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
 		 
 		 if("".equals(CategoryProductIdsStr)){
 			 return Msg.fail().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
