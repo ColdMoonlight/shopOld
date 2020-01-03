@@ -1,27 +1,11 @@
 package com.atguigu.controller;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//import org.dom4j.Document;
-//import org.dom4j.DocumentException;
-//import org.dom4j.Element;
-//import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlfrontUser;
-import com.atguigu.bean.Msg;
 
 /**
  * HomePage

@@ -71,7 +71,7 @@ public class MlbackActShowProController {
 	@RequestMapping(value="/getMlbackActShowProByPage")
 	@ResponseBody
 	public Msg getMlbackActShowProByPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
+//		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
