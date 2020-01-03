@@ -241,6 +241,8 @@
 					var twonav = data1[i].categorySeo;
 					if(twonav==""){
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a>';
+					}else if(twonav == "home"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a>';
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>';
 					}
@@ -281,7 +283,6 @@
 			    }
 			 parent.html(html);
 			}
-
 		$.ajax({
 		        url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
 		        method: 'POST',
@@ -297,7 +298,7 @@
 					   console.log("-------------SuperList------------------")
 					  renderMainCategory(nav_boxfirst,FirstList,SuperList)
 				  }else{
-					 renderErrorMsg(prodcutBox, '未获取到目录相关的数据'); 
+					 renderErrorMsg(nav_boxfirst, '未获取到目录相关的数据'); 
 				  }
 				  
 		        }
