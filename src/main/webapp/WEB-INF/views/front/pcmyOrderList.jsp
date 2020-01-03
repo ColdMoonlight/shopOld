@@ -51,11 +51,11 @@
 	var containerBox = mainBox.find(".order-list");
 	var pageArea = mainBox.find(".page-info-area");
 	var orderStatus = {
-		0: '0Unpaid',
-		1: '1Paid',
-		3: '3TobeShipped',
-		4: '4Shipped',
-		5:'5refund'
+		0: 'Unpaid',
+		1: 'Paid',
+		3: 'TobeShipped',
+		4: 'Shipped',
+		5:'refund'
 	}
 	//去首页
 	to_page(1,999);

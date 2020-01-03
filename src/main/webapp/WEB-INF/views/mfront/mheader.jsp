@@ -95,10 +95,8 @@
   <div class="category">
     <i class="icon close close2"></i>
     <ul class="main-category category_ul bd-b">
-		
 	</ul>
   </div>
-  
    <div class="serch_cont">
       <div class="serch_box">
         <span class="close_serch">X</span>
@@ -137,10 +135,7 @@
 	  		$(".fixed_link").removeClass("active");
 	  		$(this).removeClass("active");
 	  	})
-	  	
-	  	
 	  })
-	  
     var categoryActiveNum = 1;
     var iCart = $('.icon.cart');
     var iPerson = $('.icon.person');
@@ -227,8 +222,6 @@
 									   html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
 								   }
 								   // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
-								   
-								     
 							   }
 							     html +=  '</dl>';
 						  }
@@ -238,9 +231,7 @@
 					 html += '	</li>';	
 			    }
 			 parent.html(html);
-			 
 			 $(".category_ul li i.gw-i").click(function(){
-			   // $(this).toggleClass('active').next('.menu_list-wap').show(200);
 			   var str = $(this).next('.menu_list-wap').css('display');
 			   if(str == 'none'){
 			   	$(this).next('.menu_list-wap').show(200);
@@ -251,7 +242,6 @@
 			   }
 			   $(this).parent('.home-menu_list').siblings('.home-menu_list').find('.gw-i').removeClass('active').next('.menu_list-wap').hide(200);
 			 })
-			 
 			 $(".menu_list-wap dl dd:first-child .gw-i2").click(function(){
 				 $(this).toggleClass('active');
 				 if($(this).hasClass('active')){
@@ -262,14 +252,8 @@
 					  $(this).parents("dl").removeClass("submenu");
 					  $(this).removeClass("active")
 				 }
-			   // $(this).toggleClass('active').parents("dl").toggleClass("submenu");
-			   // $(this).parents("dl").siblings("dl").removeClass("submenu");
-			   
 			 })
-			 
-			 
 			}
-
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
 		    type: 'POST',
@@ -283,29 +267,18 @@
 			  if(JsonDate.code === 100){
 				  FirstList = JsonDate.extend.categoryFirstList;
 				  SuperList = JsonDate.extend.mlbackCategorySuperList;
-				  console.log("-------------FirstList------------------")
-				  console.log(FirstList)
-				  console.log("-------------FirstList------------------")
-				  console.log("-------------SuperList------------------")
-				   console.log(SuperList)
-				   console.log("-------------SuperList------------------")
 				  renderMainCategory(mainCategory,FirstList,SuperList)
 			  }else{
 				 renderErrorMsg(mainCategory, '未获取到目录相关的数据'); 
 			  }
-			  
 			}
 		  })
-
-
     $('#menu').on('click', function () {
       categoryBox.show();
     });
     categoryBox.find('.close2').on('click', function () {
       categoryBox.hide();
     });
-
-
     // cart icon default number
     var cartText = iCart.find('.num');
     var num = window.localStorage.getItem('productNum') || 0;
@@ -317,13 +290,9 @@
         cartText.text(parseInt(data.extend.number) || 0);
       }
     })
-
-
     iCart.on('click', function () {
       window.location.href = "${APP_PATH }/myCart.html";
     })
-
-
     iPerson.on('click', function () {
       if ($(this).hasClass('active')) {
         window.location.href = "${APP_PATH }/MlfrontUser/toUserCenter";
@@ -331,7 +300,6 @@
         window.location.href = "${APP_PATH }/MlfrontUser/toLoginRegisterPage";
       }
     })
-
     /* check user is login or not  */
     $.ajax({
       url: "${APP_PATH }/MlfrontUser/ifLogin",
@@ -349,11 +317,9 @@
         }
       }
     })
-
     function toProductItem(id) {
       if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/tomProductDetailPage?productId=" + id;
     }
-	
 	/************advlistpic**********************************/
 	var banneradv=$("#adv_silder .swiper-wrapper")
 	   function rednertop(parent, data) {
@@ -425,11 +391,6 @@
 	        $("body").on('click', '.close_serch',function() {
 	            $('.serch_cont').hide()
 	        })
-	
-	
-	
-
-	
   </script>
 </body>
 

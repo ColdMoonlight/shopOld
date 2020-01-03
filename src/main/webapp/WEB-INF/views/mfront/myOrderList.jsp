@@ -53,11 +53,11 @@
 	var containerBox = mainBox.find(".order-list");
 	var pageArea = mainBox.find(".page-info-area");
 	var orderStatus = {
-		0: '0Unpaid',
-		1: '1Paid',
-		3: '3TobeShipped',
-		4: '4Shipped',
-		5:'5refund'
+		0: 'Unpaid',
+		1: 'Paid',
+		3: 'TobeShipped',
+		4: 'Shipped',
+		5:'refund'
 	}
 	//去首页
 	to_page(1,999);
@@ -93,16 +93,9 @@
 				// console.log(result);
 				var pageInfo = result.extend.pageInfo;
 				var orderList = result.extend.pageInfo.list;
-				console.log(orderList)
+				// console.log(orderList)
 				var orderItemList = result.extend.mlfrontOrderItemReturnList;
-				// if (!isNaN(parseInt(type))) {
-				// 	orderList = orderList.filter(function (item) {
-				// 		return item.orderStatus === parseInt(type);
-				// 	});
-				// }
-				// 列表数据
 				renderContainer(containerBox, orderList, orderItemList);
-				// 解析显示分页条数据
 				render_page_nav(pageInfo);
 			}
 		});
@@ -173,7 +166,6 @@
 		window.location.href = '${APP_PATH }/MlfrontOrder/getMlfrontOrderDetailPage?orderId=' + $(e.target).parents(
 			'.order-item').data('orderid');
 	}
-
 	//解析显示分页条，点击分页要能去下一页....
 	function render_page_nav(pageInfo) {
 		//page_nav_area
@@ -197,7 +189,6 @@
 			console.log("orderStatusid："+orderStatusid)
 			});
 		}
-
 		var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
 		var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
 		if (pageInfo.hasNextPage == false) {
@@ -213,7 +204,6 @@
 			console.log("orderStatusid："+orderStatusid)
 			});
 		}
-
 		//添加首页和前一页 的提示
 		ul.append(firstPageLi).append(prePageLi);
 		//1,2，3遍历给ul中添加页码提示
