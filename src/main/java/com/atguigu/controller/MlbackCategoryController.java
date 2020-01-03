@@ -376,6 +376,22 @@ public class MlbackCategoryController {
 		 System.out.println("操作说明:前端客户点击菜单类-searchBycategorySeo");
 	 
 		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
+		 
+		 
+		 //查询全部的category信息，便于下拉选择
+		 List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
+			
+		 List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
+		 for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
+			 Integer categoryParentId = mlbackCategoryOne.getCategoryParentId();
+			 if(categoryParentId>0){
+				 mlbackCategorydownEr.add(mlbackCategoryOne);
+			 }
+		 }
+		 
+		 if("".equals(CategoryProductIdsStr)){
+			 return Msg.success().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
+		 }
 		
 		 String productidsStrArr [] =CategoryProductIdsStr.split(",");
 		 String productidStr ="";
@@ -396,16 +412,7 @@ public class MlbackCategoryController {
 			 }
 		 }
 		 
-		//查询全部的category信息，便于下拉选择
-		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
-			
-		List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
-		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
-			Integer categoryParentId = mlbackCategoryOne.getCategoryParentId();
-			if(categoryParentId>0){
-				mlbackCategorydownEr.add(mlbackCategoryOne);
-			}
-		}
+		
 	   return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 	     .add("mlbackProductResList", mlbackProductResList).add("mlbackCategorydownEr", mlbackCategorydownEr);
 	 }
