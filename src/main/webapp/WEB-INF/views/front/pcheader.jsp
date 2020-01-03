@@ -96,6 +96,7 @@
 		</div>
 		 <div class="navbar_itemContent-background"></div>
 	</header>
+	<div class="kongbai"></div>
 	<div class="fix_iconnav">
 		<ul class="icon_nav">
 			<li id="cart_icon" class="cart_icon"><a href="###"></a><span class="cart_num">0</span></li>
@@ -174,12 +175,12 @@
 					   return false;
 				   });
 			   $(window).scroll(function(){
-				   // var scrollhead=$(window).scrollTop();
-				   // if(scrollhead>5){
-					  //  $(".tt-desktop-header").addClass("headActive")
-				   // }else{
-					  //  $(".tt-desktop-header").removeClass("headActive")
-				   // }
+				   var scrollhead=$(window).scrollTop();
+				   if(scrollhead>5){
+					   $(".tt-desktop-header").addClass("headActive")
+				   }else{
+					   $(".tt-desktop-header").removeClass("headActive")
+				   }
 				/**************************/
 				var winS=$(this).scrollTop();
 				if(winS>0){
@@ -222,6 +223,7 @@
 			}
 			/**********************************/
 			var nav_boxfirst =$(".navul")
+			var prodcutBox=$(".kongbai")
 			function renderMainCategory(parent,data1,data2) {
 				var html="";
 				for(var i=0;i<data1.length;i++){

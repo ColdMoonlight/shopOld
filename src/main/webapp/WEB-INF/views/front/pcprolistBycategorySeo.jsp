@@ -67,6 +67,11 @@
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
+		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
+		if(sessionScopecategorySeo=="nowig"){
+			$(".list_homeselect").hide();
+		}
+		console.log(sessionScopecategorySeo)
 		var categorySeo = sessionScopecategorySeo;
 		getProductList({
 			"categorySeo": categorySeo

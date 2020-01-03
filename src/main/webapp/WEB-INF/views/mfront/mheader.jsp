@@ -116,7 +116,7 @@
         </ul>
       </div>
     </div>
-
+<div class="kongbai"></div>
   <script>
 	  $(function(){
 		  $(window).scroll(function(){
@@ -196,7 +196,7 @@
 					if(twonav==""){
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}else if(twonav=="home"){
-						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}
@@ -395,7 +395,7 @@
 					}
 				  }
 		});
-	
+	  var prodcutBox=$(".kongbai")
 	  /************************/
 	        $(".tt-btn-search").click(function(){
 	           var seaProductName = $(this).parents(".tt-col").find("input.tt-search-input").val();
