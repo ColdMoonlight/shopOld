@@ -174,6 +174,7 @@
 					$("body,html").animate({scrollTop:0},500);  
 					   return false;
 				   });
+		   
 			   $(window).scroll(function(){
 				   var scrollhead=$(window).scrollTop();
 				   if(scrollhead>5){
