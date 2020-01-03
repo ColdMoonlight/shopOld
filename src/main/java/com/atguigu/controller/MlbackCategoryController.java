@@ -390,7 +390,7 @@ public class MlbackCategoryController {
 		 }
 		 
 		 if("".equals(CategoryProductIdsStr)){
-			 return Msg.success().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
+			 return Msg.fail().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
 		 }
 		
 		 String productidsStrArr [] =CategoryProductIdsStr.split(",");
