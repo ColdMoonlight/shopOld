@@ -32,8 +32,8 @@ public class MlbackAreafreightController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	useOn	0505
-	 * to分类MlbackCategory列表页面
+	 * 1.0	onuse	20191225	检查
+	 * to分类MlbackAreafreight列表页面
 	 * @param jsp
 	 * @return 
 	 * */
@@ -49,22 +49,21 @@ public class MlbackAreafreightController {
 		}
 	}
 	
-	/**2.0	useOn	0505
-	 * 分类MlbackCategory列表分页list数据
+	/**2.0	onuse	20191225	检查
+	 * 分类MlbackAreafreight列表分页list数据
 	 * @param pn
 	 * @return
 	 */
 	@RequestMapping(value="/getMlbackAreafreightByPage")
 	@ResponseBody
 	public Msg getMlbackAreafreightWithJson(
-			@RequestParam(value = "pn", defaultValue = "1") Integer pn
-			,HttpSession session) {
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
 //		}else{
-		int PagNum = 20;
+			int PagNum = 20;
 			PageHelper.startPage(pn, PagNum);
 			List<MlbackAreafreight> mlbackAreafreightList = mlbackAreafreightService.selectMlbackAreafreightAll();
 			PageInfo page = new PageInfo(mlbackAreafreightList, PagNum);
@@ -72,8 +71,8 @@ public class MlbackAreafreightController {
 //		}
 	}
 	
-	/**3.0	useOn	0505
-	 * MlbackAreafreight	insert
+	/**3.0	onuse	20191225	检查
+	 * MlbackAreafreight	save
 	 * @param MlbackAreafreight
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
@@ -82,7 +81,6 @@ public class MlbackAreafreightController {
 		//接受参数信息
 		System.out.println("mlbackAreafreight:"+mlbackAreafreight);
 		//取出id
-		System.out.println(1);
 		Integer areafreightId = mlbackAreafreight.getAreafreightId();
 		String nowTime = DateUtil.strTime14s();
 		mlbackAreafreight.setAreafreightMotifytime(nowTime);
@@ -90,18 +88,18 @@ public class MlbackAreafreightController {
 			//无id，insert
 			mlbackAreafreight.setAreafreightCreatetime(nowTime);
 			int intResult = mlbackAreafreightService.insertSelective(mlbackAreafreight);
-			System.out.println(intResult);
+			System.out.println("后台操作:insert,mlbackAreafreight,success+intResult："+intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
 			int intResult = mlbackAreafreightService.updateByPrimaryKeySelective(mlbackAreafreight);
-			System.out.println(intResult);
+			System.out.println("后台操作:update,mlbackAreafreight,success+intResult："+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 			
 		}		
 	}
 	
-	/**4.0	useOn	0505
+	/**4.0	onuse	20191225	check
 	 * MlbackAreafreight	delete
 	 * @param id
 	 */
@@ -110,14 +108,14 @@ public class MlbackAreafreightController {
 	public Msg delete(@RequestBody MlbackAreafreight mlbackAreafreight){
 		//接收id信息
 		int areafreightIdInt = mlbackAreafreight.getAreafreightId();
-		int intResult = mlbackAreafreightService.deleteByPrimaryKey(areafreightIdInt);
+		mlbackAreafreightService.deleteByPrimaryKey(areafreightIdInt);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
 	
 	/**
-	 * 5.0	useOn	0505
-	 * 查看单条类目的详情细节
+	 * 5.0	onuse	20191225	check
+	 * 查看单条MlbackAreafreight详情
 	 * @param MlbackAreafreight
 	 * @return 
 	 */
@@ -141,8 +139,8 @@ public class MlbackAreafreightController {
 	}
 	
 	/**
-	 * 6.0	useOn	0505
-	 * 查看单条类目的详情细节
+	 * 6.0	onuse	20191225	check
+	 * 通过英文简写,查看单条MlbackAreafreight的详情
 	 * @param MlbackAreafreight
 	 * @return 
 	 */
