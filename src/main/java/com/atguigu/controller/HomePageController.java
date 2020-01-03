@@ -32,6 +32,9 @@ import com.atguigu.bean.Msg;
 @RequestMapping("/HomePage")
 public class HomePageController {
 	
+	/**
+	 * 	onuse	20200103	检查
+	 * */
 	@RequestMapping("/toHomePage")
 	public String tologin(HttpSession session) throws Exception{
 		

@@ -46,7 +46,7 @@ public class MlbackActShowProController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	UseNow	0505
+	 * 1.0	onuse	20200103	检查
 	 * toMlbackActShowPro列表页面
 	 * @param jsp
 	 * @return 
@@ -63,7 +63,7 @@ public class MlbackActShowProController {
 		}
 	}
 	
-	/**2.0	UseNow	0505
+	/**2.0	onuse	20200103	检查
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
 	 * @return
@@ -85,7 +85,7 @@ public class MlbackActShowProController {
 	}
 	
 	
-	/**3.0	UseNow	0505
+	/**3.0	onuse	20200103	检查
 	 * MlbackActShowPro	insert
 	 * @param MlbackActShowPro
 	 */
@@ -150,7 +150,7 @@ public class MlbackActShowProController {
 		}		
 	}
 	
-	/**4.0	UseNow	0505
+	/**4.0	onuse	20200103	检查
 	 * MlbackActShowPro	delete
 	 * @param id
 	 */
@@ -165,7 +165,7 @@ public class MlbackActShowProController {
 	}
 	
 	/**
-	 * 5.0	UseNow	0505
+	 * 5.0	onuse	20200103	检查
 	 * 查看单条类目的详情细节
 	 * @param MlbackActShowPro
 	 * @return 
@@ -183,7 +183,7 @@ public class MlbackActShowProController {
 	}
 	
 	/**
-	 * 5.0	UseNow	0505
+	 * 6.0	onuse	20200103	检查
 	 * 查看首页活动品区域的顺序
 	 * @param MlbackActShowPro
 	 * @return 
