@@ -194,11 +194,11 @@
 					}
 					var twonav = data1[i].categorySeo;
 					if(twonav==""){
-						html += '<li class="home-menu_list '+classimg+'"><a href="javascript:;">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}
-					
+					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';
 					for(var j=0;j<data2[i].length;j++){
@@ -220,10 +220,11 @@
 								   }
 								   var threenav =data2[i][j][k].categorySeo;
 								   if(threenav==""){
-									 html += '<dd class="'+classimg+'"><a href="javacsript:;">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
+									 html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
 								   }else{
 									   html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
 								   }
+								   // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
 								   
 								     
 							   }
