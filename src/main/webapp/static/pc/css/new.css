@@ -9,11 +9,11 @@
 .navul{ text-align: center;width: 100%;}
 .navul li{line-height: 60px;margin: 0 15px; font-weight: bold; display:inline-block;}
 .menu_list-wap{opacity: 0;
- -ms-transition: all 0.2s ease;
-        -moz-transition: all 0.2s ease;
-        -webkit-transition: all 0.2s ease;
-        -o-transition: all 0.2s ease;
-        transition: all 0.2s ease;
+ -ms-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
         z-index: 3;
 		display: none;
 }
@@ -37,11 +37,11 @@
 	left: 0;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    -ms-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    -ms-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 
