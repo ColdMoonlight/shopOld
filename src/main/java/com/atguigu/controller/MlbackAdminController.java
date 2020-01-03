@@ -30,9 +30,7 @@ public class MlbackAdminController {
 	 * */
 	@RequestMapping("/toindex")
 	public String toindex() throws Exception{
-		System.out.println("进入toindex");
-		System.out.println("toindex");
-	
+		System.out.println("后台登陆:进入toindex");
 		return "back/mlbackAdminLogin";
 	}
 	
@@ -44,7 +42,7 @@ public class MlbackAdminController {
 	public String exitindex(HttpSession session) throws Exception{
 		session.removeAttribute("AdminUser");
 		session.invalidate();
-		return "sysLogin";
+		return "back/mlbackAdminLogin";
 	}
 	
 	/**
