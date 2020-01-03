@@ -195,6 +195,8 @@
 					var twonav = data1[i].categorySeo;
 					if(twonav==""){
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					}else if(twonav=="home"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}
@@ -268,7 +270,6 @@
 			 
 			}
 
-
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
 		    type: 'POST',
@@ -290,7 +291,7 @@
 				   console.log("-------------SuperList------------------")
 				  renderMainCategory(mainCategory,FirstList,SuperList)
 			  }else{
-				 // renderErrorMsg(prodcutBox, '未获取到目录相关的数据'); 
+				 renderErrorMsg(mainCategory, '未获取到目录相关的数据'); 
 			  }
 			  
 			}
@@ -390,7 +391,7 @@
 					  // console.log(resData);
 					 // rednertop(bannerfirst,resData)
 					} else {
-					  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+					  renderErrorMsg(banneradv, 'No product-related data was obtained.');
 					}
 				  }
 		});
