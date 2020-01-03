@@ -177,7 +177,7 @@
       <if test="record.footnavIfIncome != null">
         footnav_ifIncome = #{record.footnavIfIncome,jdbcType=INTEGER},
       </if>
-      <if test="record.footnaviIfShow != null">
+      <if test="record.footnavIfShow != null">
         footnav_ifShow = #{record.footnavIfShow,jdbcType=INTEGER},
       </if>
     </set>
@@ -282,7 +282,7 @@
       <if test="footnavIfIncome != null">
 		footnav_ifIncome,
 	  </if>
-	  <if test="footnaviIfShow != null">
+	  <if test="footnavIfShow != null">
 		footnav_ifShow,
 	  </if>
     </trim>
