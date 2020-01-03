@@ -424,6 +424,6 @@ public class MlbackCategoryController {
 			mlbackCategorySuperList.add(mlbackCategoryfirstdownList);
 		}
 		
-		return Msg.success().add("resMsg", "getCategoryMenuSenond完毕").add("mlbackCategorySuperList", mlbackCategorySuperList).add("categoryFirstList", mlbackCategorydownFirst);
+		return Msg.success().add("resMsg", "getCategoryMenuSenond-end").add("mlbackCategorySuperList", mlbackCategorySuperList).add("categoryFirstList", mlbackCategorydownFirst);
 	}
 }
