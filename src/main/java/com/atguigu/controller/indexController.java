@@ -13,6 +13,7 @@ import com.atguigu.utils.DateUtil;
 public class indexController {
 	
 	/**
+	 *	onuse	20200103	检查
 	 * 返回信息
 	 * */
 	@RequestMapping("/isMobileOrPc")
@@ -29,6 +30,7 @@ public class indexController {
 	}
 	
 	/**
+	 * 	onuse	20200103	检查
 	 * 判断设备型号
 	 * */
 	public static boolean  isMobileDevice(String requestHeader){
