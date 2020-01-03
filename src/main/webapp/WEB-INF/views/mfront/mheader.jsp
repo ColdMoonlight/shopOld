@@ -260,10 +260,8 @@
 			dataType: 'JSON',
 			contentType: 'application/json',
 			success: function (data) {
-				console.log("***JsonDate******222******");
 				var JsonDate = JSON.parse(data);
-				console.log(JsonDate);
-				console.log("***JsonDate******222******");
+				// console.log(JsonDate);
 			  if(JsonDate.code === 100){
 				  FirstList = JsonDate.extend.categoryFirstList;
 				  SuperList = JsonDate.extend.mlbackCategorySuperList;
