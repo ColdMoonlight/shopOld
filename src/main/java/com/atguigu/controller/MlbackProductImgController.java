@@ -26,7 +26,7 @@ public class MlbackProductImgController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	useOn	0505
+	 * 1.0	onuse	200104
 	 * 查看单条id下的细节详情图
 	 * @param MlbackProductImg
 	 * @return 
@@ -36,15 +36,12 @@ public class MlbackProductImgController {
 	public Msg getMlbackProductImgListByProductId(@RequestParam(value = "productId") Integer productId){
 		
 		//接受信息
-		MlbackProductImg mMbackProductImgReq = new MlbackProductImg();
-		//传入参数设置
-		mMbackProductImgReq.setProductId(productId);
 		List<MlbackProductImg> mbackProductImgResList =mlbackProductImgService.selectMlbackProductImgById(productId);
 		return Msg.success().add("resMsg", "查看本productId下的所有小图,完毕")
 					.add("mbackProductImgResList", mbackProductImgResList);
 	}
 	
-	/**2.0	UseNow	0505
+	/**2.0	onuse	200104
 	 * MlbackProductImg	delete
 	 * @param id
 	 */
@@ -57,8 +54,7 @@ public class MlbackProductImgController {
 		List<MlbackProductImg> mbackProductImgResList =mlbackProductImgService.selectMlbackProductImgByProductImgId(productimgId);
 		if(mbackProductImgResList.size()>0){
 			//本条存在,执行删除
-			int intResult = mlbackProductImgService.deleteByPrimaryKey(productimgId);
-			
+			mlbackProductImgService.deleteByPrimaryKey(productimgId);
 			return Msg.success().add("resMsg", "delete success");
 		}else{
 			//本条不存在,仅此而已

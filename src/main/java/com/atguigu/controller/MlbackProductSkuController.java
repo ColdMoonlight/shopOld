@@ -28,42 +28,36 @@ public class MlbackProductSkuController {
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
-		
 	
-	/**1.0	UseNow	0505
-	 * MlbackProductSku	insert
+	/**1.0	onuse	200104
+	 * MlbackProductSku	add/update
 	 * @param MlbackProductSku
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackProductSku mlbackProductSku){
-		//接受json大串
-		//json分解进map中
-		System.out.println("mlbackProductSku:"+mlbackProductSku);
-		//取出id
-		System.out.println(1);
+		//接受参数
 		Integer productskuId = mlbackProductSku.getProductskuId();
 		String nowTime = DateUtil.strTime14s();
 		mlbackProductSku.setProductskuMotifytime(nowTime);
 		if(productskuId==null){
 			//无id，insert
 			mlbackProductSku.setProductskuCreatetime(nowTime);
-			int intResult = mlbackProductSkuService.insertSelective(mlbackProductSku);
-			System.out.println(intResult);
+			mlbackProductSkuService.insertSelective(mlbackProductSku);
+			System.out.println("productSku,insert,success");
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackProductSkuService.updateByPrimaryKeySelective(mlbackProductSku);
-			System.out.println(intResult);
+			mlbackProductSkuService.updateByPrimaryKeySelective(mlbackProductSku);
+			System.out.println("productSku,update,success");
 			return Msg.success().add("resMsg", "更新成功");
-			
 		}		
 	}
 	
 	/**
-	 * 2.0	UseNow	0505
-	 * 查看单条类目的详情细节
-	 * @param MlbackProduct
+	 * 2.0	onuse	200104
+	 * 查看单产品的全部sku
+	 * @param productId
 	 * @return 
 	 */
 	@RequestMapping(value="/getOneProductAllSku",method=RequestMethod.POST)
