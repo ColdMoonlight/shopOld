@@ -98,7 +98,6 @@ $.ajax({
               "name": fData[key2].footnavName,
               "icon": "",
 			  "link": "${APP_PATH}/MlbackFootNav/toFootNavPage?footnavId=" + fData[key2].footnavId
-//			  "link": "${APP_PATH}/MlbackFootNav/topcMlfrontFootNavPage?footnavId=" + fData[key2].footnavId
             })
           } else {
             footerData[key].children.push({
