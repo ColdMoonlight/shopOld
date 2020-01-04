@@ -20,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackFootNavService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -212,13 +213,13 @@ public class MlbackFootNavController {
 //	}
 	
 	/**
-	 * 8.01	UseNow	0505
+	 * 8.0	UseNow	0505
 	 * toMlbackFootNav展示页面(wap)
 	 * @param jsp
 	 * @return 
 	 * */
-	@RequestMapping(value="/toMlfrontFootNavPage",method=RequestMethod.GET)
-	public String toMlfrontFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
+	@RequestMapping(value="/toFootNavPage",method=RequestMethod.GET)
+	public String toFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
 	
 		//接收传递进来的参数
 		Integer footnavIdReq = footnavId;
@@ -227,26 +228,17 @@ public class MlbackFootNavController {
 		
 		session.setAttribute("footnavId", footnavIdReq);
 		
-		return "mfront/footNavPage";
-	}
-	
-	/**
-	 * 8.02	UseNow	0505
-	 * toMlbackFootNav展示页面(PC)
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/topcMlfrontFootNavPage",method=RequestMethod.GET)
-	public String topcMlfrontFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
-	
-		//接收传递进来的参数
-		Integer footnavIdReq = footnavId;
-		//放回响应域中
-		res.setAttribute("footnavId", footnavIdReq);
+		//判断请求设备
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		
-		session.setAttribute("footnavId", footnavIdReq);
+		if(ifMobile.equals("1")){
+			//1wap
+			return "mfront/footNavPage";
+		}else{
+			//0PC
+			return "front/pcfootNavPage";
+		}
 		
-		return "front/pcfootNavPage";
 	}
 	
 	/**
