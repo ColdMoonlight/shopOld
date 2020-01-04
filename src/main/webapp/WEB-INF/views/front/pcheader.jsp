@@ -245,7 +245,7 @@
 								   if(threenav==""){
 								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
 								   }else{
-								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
 								   }
 								     // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';   
 							   }
