@@ -88,7 +88,7 @@ public class MlbackProductAdminController {
 			mlbackProductSkuService.insertSelective(mlbackProductSkuInReq);
 		}
 		
-		return Msg.success().add("resMsg", "快速copy产品详情")
+		return Msg.success().add("resMsg", "快速copy某产品全部内容")
 				.add("insertResult", insertResult).add("productId", productIdIn);
 		  
 	}

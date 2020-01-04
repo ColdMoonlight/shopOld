@@ -322,12 +322,12 @@
 		     if(seaProductName==""){
 		          alert("Please enter keywords;")
 		     }else{
-		         window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+		         window.location.href = "${APP_PATH}/MlbackProduct/toSearchPage?seaProductName=" +seaProductName;
 		     }
 		   });
 				$(".show_ul li").click(function(){
 				  var seaProductName =$(this).html();
-								window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+								window.location.href = "${APP_PATH}/MlbackProduct/toSearchPage?seaProductName=" +seaProductName;
 				 });
 				
 				
