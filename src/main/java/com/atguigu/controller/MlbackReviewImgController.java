@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.Msg;
 import com.atguigu.service.MlbackAdminService;
@@ -27,9 +26,9 @@ public class MlbackReviewImgController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	useOn	0505
+	 * 1.0	onuse	200104
 	 * 查看单条id下的细节详情图
-	 * @param MlbackReviewImg
+	 * @param reviewId
 	 * @return 
 	 */
 	@RequestMapping(value="/getMlbackReviewImgListByReviewId",method=RequestMethod.POST)
@@ -45,7 +44,7 @@ public class MlbackReviewImgController {
 					.add("mlbackReviewImgResList", mlbackReviewImgResList);
 	}
 	
-	/**2.0	UseNow	0505
+	/**2.0	onuse	200104
 	 * MlbackReviewImg	delete
 	 * @param id
 	 */
@@ -54,8 +53,7 @@ public class MlbackReviewImgController {
 	public Msg delete(@RequestBody MlbackReviewImg mlbackReviewImg){
 		//接收id信息
 		Integer reviewimgId = mlbackReviewImg.getReviewimgId();
-		int intResult = mlbackReviewImgService.deleteByPrimaryKey(reviewimgId);
-		System.out.println(intResult);
+		mlbackReviewImgService.deleteByPrimaryKey(reviewimgId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
