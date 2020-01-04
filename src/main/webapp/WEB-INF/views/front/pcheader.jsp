@@ -90,8 +90,9 @@
 				  </ul>
 			  </div>
 			</div>
+			 <div class="navbar_itemContent-background"></div>
 		</div>
-		 <div class="navbar_itemContent-background"></div>
+		
 	</header>
 	<div class="kongbai"></div>
 	<div class="fix_iconnav">
@@ -116,7 +117,7 @@
 			   }
 			  menuTimer = setTimeout(function () {
 				   $('.navbar_itemContent-background').height(menuContentHright);
-				    $('.navbar_itemContent-background').css("top",headtop);
+				    // $('.navbar_itemContent-background').css("top",headtop);
 				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
 				   if($(_this).hasClass('wrap_active')){
 					   $(_this).removeClass('wrap_active');
@@ -151,6 +152,8 @@
 				   var scrollhead=$(window).scrollTop();
 				   if(scrollhead>5){
 					   $(".tt-desktop-header").addClass("headActive")
+					    // var headtop = $(".tt-desktop-header").outerHeight(); 
+						 // $('.navbar_itemContent-background').css("top",headtop);
 				   }else{
 					   $(".tt-desktop-header").removeClass("headActive")
 				   }

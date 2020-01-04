@@ -545,6 +545,10 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .headActive .header_holder{overflow: hidden;display: none;}
 .loginbox{position: absolute; right: 0; top:10px; line-height: 60px;}
 .headActive .tt-desctop-menu ul li{padding: 0 30px 0 0;}
+.head_box{z-index: 3;}
+.navbar_itemContent-background{top: 182px;}
+.headActive .navbar_itemContent-background{top:60px}
+
 
 
 .big_img {
