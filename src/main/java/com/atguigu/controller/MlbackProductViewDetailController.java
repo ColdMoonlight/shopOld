@@ -3,8 +3,6 @@ package com.atguigu.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCoupon;
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.atguigu.service.MlbackActShowProService;
-import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackCategoryService;
-import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackProductViewDetailService;
-import com.atguigu.utils.DateUtil;
-
 
 @Controller
 @RequestMapping("/MlbackProductViewDetail")
@@ -39,7 +28,7 @@ public class MlbackProductViewDetailController {
 	MlbackProductViewDetailService mlbackProductViewDetailService;
 		
 	/**
-	 * 1.0	UseNow	0505
+	 * 1.0	onuse	200104
 	 * toMlbackActShowPro列表页面
 	 * @param jsp
 	 * @return 
@@ -56,7 +45,7 @@ public class MlbackProductViewDetailController {
 		}
 	}
 	
-	/**2.0	UseNow	0505
+	/**2.0	onuse	200104
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
 	 * @return
@@ -81,7 +70,7 @@ public class MlbackProductViewDetailController {
 	}
 	
 	
-	/**3.0	UseNow	0505
+	/**3.0	onuse	200104
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
 	 * @return
@@ -101,7 +90,7 @@ public class MlbackProductViewDetailController {
 	}
 	
 	
-	/**4.0	UseNow	0505
+	/**4.0	onuse	200104
 	 * 分类MlbackProductViewDetail列表list数据
 	 * @param
 	 * @return
