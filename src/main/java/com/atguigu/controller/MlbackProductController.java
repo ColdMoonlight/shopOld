@@ -1,21 +1,12 @@
 package com.atguigu.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,8 +19,6 @@ import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.Msg;
-import com.atguigu.bean.SysUser;
-import com.atguigu.bean.UserWork;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
@@ -37,8 +26,6 @@ import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackProductViewDetailService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.ExcelUtils;
-import com.atguigu.utils.HttpUtil;
 import com.atguigu.utils.IfMobileUtils;
 
 
@@ -59,8 +46,8 @@ public class MlbackProductController {
 	MlbackProductViewDetailService mlbackProductViewDetailService;
 	
 	/**
-	 * 1.0	UseNow	0505
-	 * to分类MlbackProduct列表页面
+	 * 1.0	onuse	200103	check
+	 * to-Product-list页
 	 * @param jsp
 	 * @return 
 	 * */
@@ -69,7 +56,6 @@ public class MlbackProductController {
 	
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("AdminUser");
 		if(mlbackAdmin==null){
-			//SysUsers对象为空
 			return "back/mlbackAdminLogin";
 		}else{
 			return "back/mlbackProductPage";
@@ -88,44 +74,44 @@ public class MlbackProductController {
 		return "back/mlbackProductSearchPage";
 	}
 	
-	/**
-	 * 3.1.1	UseNow	0505
-	 * 前台移动端获取详情页面mfront/productDetails
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/tomProductDetailPage",method=RequestMethod.GET)
-	public String tomProductDetailPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productId") Integer productId) throws Exception{
-		//接收传递进来的参数
-		Integer productIdReq = productId;
-		//放回响应域中
-		res.setAttribute("productId", productIdReq);
-		//放回session域中
-		session.setAttribute("productDetailId", productIdReq);
-		//返回视图
-		return "mfront/productDetails";
-	}
+//	/**
+//	 * 3.1.1	UseNow	0505
+//	 * 前台移动端获取详情页面mfront/productDetails
+//	 * @param jsp
+//	 * @return 
+//	 * */
+//	@RequestMapping(value="/tomProductDetailPage",method=RequestMethod.GET)
+//	public String tomProductDetailPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productId") Integer productId) throws Exception{
+//		//接收传递进来的参数
+//		Integer productIdReq = productId;
+//		//放回响应域中
+//		res.setAttribute("productId", productIdReq);
+//		//放回session域中
+//		session.setAttribute("productDetailId", productIdReq);
+//		//返回视图
+//		return "mfront/productDetails";
+//	}
 	
 	
-	/**
-	 * 3.2.1	UseNow	0505
-	 * 前台PC端获取详情页面front/pcproductDetails
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/topcProductDetailPage",method=RequestMethod.GET)
-	public String topcProductDetailPage(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId) throws Exception{
-		//接收传递进来的参数
-		Integer productIdReq = productId;
-		//放回响应域中
-		res.setAttribute("productId", productIdReq);
-		//返回视图
-		return "front/pcproductDetails";
-	}
+//	/**
+//	 * 3.2.1	UseNow	0505
+//	 * 前台PC端获取详情页面front/pcproductDetails
+//	 * @param jsp
+//	 * @return 
+//	 * */
+//	@RequestMapping(value="/topcProductDetailPage",method=RequestMethod.GET)
+//	public String topcProductDetailPage(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId) throws Exception{
+//		//接收传递进来的参数
+//		Integer productIdReq = productId;
+//		//放回响应域中
+//		res.setAttribute("productId", productIdReq);
+//		//返回视图
+//		return "front/pcproductDetails";
+//	}
 	
 	/**
-	 * 3.3.2	UseNow	0505
-	 * 前台移动端获取详情页面mfront/productDetails
+	 * 3.0	onuse	200103
+	 * 前台详情页面wap/pc的productDetails
 	 * @param jsp
 	 * @return 
 	 * */
@@ -133,12 +119,12 @@ public class MlbackProductController {
 	 public String tomfbProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
 	  
 	  String nowTime = DateUtil.strTime14s();
-	  System.out.println("有访客通过productSeo进入落地页-productSeo:"+productSeo+" ,nowTime:"+nowTime);
+	  System.out.println("访客通过productSeo进入落地页-productSeo:"+productSeo+" ,nowTime:"+nowTime);
 	  
 	  //准备封装参数
 	  MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
 	  mlbackProductrepBySeo.setProductSeo(productSeo);
-	  //记录落地页信息insertProView
+	  //3.0.1记录落地页信息insertProView
 	  insertProView(productSeo,session);
 
 	  MlbackProduct mlbackProductRes = mlbackProductService.selectMlbackProductBySeo(mlbackProductrepBySeo);
@@ -165,13 +151,12 @@ public class MlbackProductController {
 		  }
 	  	}
 	 }
-	/**3内部方法.0	UseNow	0505
+	/**3.0.1	onuse	200103
 	 * 记录落地页信息insertProView
-	 * @param pn
+	 * @param productSeo,session
 	 * @return
 	 */
 	private void insertProView(String productSeo,HttpSession session) {
-		  
 		//准备参数信息
 		MlbackProductViewDetail mlbackProductViewDetailreq = new MlbackProductViewDetail();
 		//浏览对象
@@ -186,8 +171,8 @@ public class MlbackProductController {
 		mlbackProductViewDetailService.insertSelective(mlbackProductViewDetailreq);
 	}
 
-	/**4.0	UseNow	0505
-	 * 分类MlbackProduct列表分页list数据
+	/**4.0	onuse	200104
+	 * 后台-Product-list分页数据
 	 * @param pn
 	 * @return
 	 */
@@ -207,15 +192,14 @@ public class MlbackProductController {
 //		}
 	}
 	
-	/**5.0	UseNow	0505
-	 * MlbackProduct	insert
+	/**5.0	onuse	200104
+	 * Product	add/update
 	 * @param MlbackProduct
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackProduct mlbackProduct){
-		//接受参数信息
-		//取出id
+		//取出参数信息
 		Integer productId = mlbackProduct.getProductId();
 		String productName = mlbackProduct.getProductName();
 		Integer  CategoryId = mlbackProduct.getProductCategoryid();
@@ -236,33 +220,31 @@ public class MlbackProductController {
 		Integer Actoffoff= Actoffid*10;
 		//获取折扣力度
 		mlbackProduct.setProductActoffoff(Actoffoff);
-		System.out.println("操作分析:管理员add/update产品信息mlbackProduct");
 		if(productId==null){
 			//无id，insert
-			int intResult = mlbackProductService.insertSelective(mlbackProduct);
-			System.out.println("操作分析:管理员add产品信息mlbackProduct");
+			mlbackProductService.insertSelective(mlbackProduct);
+			System.out.println("操作说明:管理员add产品信息mlbackProduct");
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//先对这个产品选择的一些类，进行productIdStr的清理,
 			//有id，update
 			String categoryIdsStr = mlbackProduct.getProductCategoryIdsStr();
-			//5.1从中读取categoryIdsStr,切割得到每一个categoryId,遍历，把productId,填充再每个查回来的categort中的proidStr拼上
+			//5.0.1从中读取categoryIdsStr,切割得到每一个categoryId,遍历，把productId,填充再每个查回来的categort中的proidStr拼上
 			UpdateCategoryProductIdStr(categoryIdsStr,productId,productName);
-			//更新本条product的新数据
-			int intResult = mlbackProductService.updateByPrimaryKeySelective(mlbackProduct);
-			System.out.println("操作分析:管理员update产品信息mlbackProduct");
+			//更新本条product数据
+			mlbackProductService.updateByPrimaryKeySelective(mlbackProduct);
+			System.out.println("操作说明:管理员update产品信息mlbackProduct");
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
 	
 	/**
-	 * 5.1
+	 * 5.0.1
 	 * //从中读取categoryIdsStr,切割得到每一个categoryId,
 	 * 遍历categoryId查询，把productId,填充再每个查回来的category中的proidStr拼上
 	 * */
 	private void UpdateCategoryProductIdStr(String categoryIdsStr, Integer productId,String productName) {
 		
-		String nowtime = DateUtil.strTime14s();
 		String inproductIdStr=productId+"";
 		
 		if(categoryIdsStr==""){
@@ -310,7 +292,6 @@ public class MlbackProductController {
 					int ifHave = cheakifHave(categoryProductIdsStr,inproductIdStr);
 					
 					//先判断是否包含本次
-					//int ifHave = categoryProductIdsStr.indexOf(inproductIdStr);
 					if(ifHave>0){
 						//只要test.indexOf('This')返回的值不是-1说明test字符串中包含字符串'This',相反如果包含返回的值必定是-1"
 						//如果包含，跳过
@@ -430,7 +411,7 @@ public class MlbackProductController {
 	public Msg delete(@RequestBody MlbackProduct mlbackProduct){
 		//接收id信息
 		Integer productIdInt = mlbackProduct.getProductId();
-		int intResult = mlbackProductService.deleteByPrimaryKey(productIdInt);
+		mlbackProductService.deleteByPrimaryKey(productIdInt);
 		System.out.println("操作说明：管理员delete success-productIdInt:"+productIdInt);
 		return Msg.success().add("resMsg", "delete success");
 	}
@@ -456,8 +437,8 @@ public class MlbackProductController {
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：查询单个产品-mlbackProductOne:"+mlbackProductOne.toString());
-		return Msg.success().add("resMsg", "查看单个类目的详情细节完毕").add("mlbackProductOne", mlbackProductOne);
+		System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne.toString());
+		return Msg.success().add("resMsg", "查看单个产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
 	/**
@@ -478,7 +459,7 @@ public class MlbackProductController {
 			mlbackProductOne =mlbackProductResList.get(0);
 		}
 		System.out.println("操作说明：通过产品名查询单个产品-mlbackProductOne:"+mlbackProductOne.toString());
-		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕").add("mlbackProductOne", mlbackProductOne);
+		return Msg.success().add("resMsg", "查-单条产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
 	/**
@@ -503,7 +484,7 @@ public class MlbackProductController {
 		}else{
 			mlbackProductResList = mlbackProductResLimitList;
 		}
-		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
+		return Msg.success().add("resMsg", "查-该标签下的产品List完毕")
 					.add("mlbackProductResList", mlbackProductResList);
 	}
 	
@@ -555,7 +536,7 @@ public class MlbackProductController {
 	 	List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
 	 	
 	 	if(categoryProductIds==null||categoryProductIds.length()==0){
-	 		System.out.println("mlbackProductResList的长度："+mlbackProductResList.size());
+	 		System.out.println("ProductResList的长度："+mlbackProductResList.size());
 	 	}else{
 	 		String categoryProductIdsArr [] = categoryProductIds.split(",");
 	 		//遍历查询product产品
@@ -604,7 +585,7 @@ public class MlbackProductController {
 		
 		mlbackCategoryOne = mlbackCategoryService.selectMlbackCategoryById(mlbackCategoryReq);
 		
-		List<MlbackCategory> mlbackCategoryList = new ArrayList<MlbackCategory>();
+		//List<MlbackCategory> mlbackCategoryList = new ArrayList<MlbackCategory>();
 	 	
 	 	String categoryProductIds = null;
 	 	if(mlbackCategoryOne==null){
@@ -620,7 +601,7 @@ public class MlbackProductController {
 	 	PageInfo page = new PageInfo();
 	 	
 	 	if(categoryProductIds==null||categoryProductIds.length()==0){
-	 		System.out.println("mlbackProductResList的长度："+mlbackProductResList.size());
+	 		System.out.println("ProductResList的长度："+mlbackProductResList.size());
 	 	}else{
 	 		
 	 		String categoryProductIdsArr [] = categoryProductIds.split(",");
@@ -848,39 +829,49 @@ public class MlbackProductController {
 	 * @param jsp
 	 * @return 
 	 * */
-	@RequestMapping(value="/tomSearchPage",method=RequestMethod.GET)
-	public String tomSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
+	@RequestMapping(value="/toSearchPage",method=RequestMethod.GET)
+	public String toSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
 		//接收传递进来的参数
 		String seaProductNameReq = seaProductName;
 		//放回响应域中
 		res.setAttribute("productName", seaProductNameReq);
 		//放回session域中
 		session.setAttribute("productName", seaProductNameReq);
-		//返回视图
-		return "mfront/searchproductlist";
+		//判断请求设备
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		
+		if(ifMobile.equals("1")){
+			//1wap
+			return "mfront/searchproductlist";
+//			return "mfront/footNavPage";
+		}else{
+			//0PC
+			return "front/searchproductlist";
+//			return "front/pcfootNavPage";
+		}
 	}
 	
-	/**
-	 * 14	UseNow	0505
-	 * 前台移动端获取详情页面mfront/productDetails
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/topSearchPage",method=RequestMethod.GET)
-	public String topSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
-		//接收传递进来的参数
-		String seaProductNameReq = seaProductName;
-		//放回响应域中
-		res.setAttribute("productName", seaProductNameReq);
-		//放回session域中
-		session.setAttribute("productName", seaProductNameReq);
-		//返回视图
-		return "front/searchproductlist";
-	}
+//	/**
+//	 * 14	UseNow	0505
+//	 * 前台移动端获取详情页面mfront/productDetails
+//	 * @param jsp
+//	 * @return 
+//	 * */
+//	@RequestMapping(value="/topSearchPage",method=RequestMethod.GET)
+//	public String topSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
+//		//接收传递进来的参数
+//		String seaProductNameReq = seaProductName;
+//		//放回响应域中
+//		res.setAttribute("productName", seaProductNameReq);
+//		//放回session域中
+//		session.setAttribute("productName", seaProductNameReq);
+//		//返回视图
+//		return "front/searchproductlist";
+//	}
 	
 	/**
 	  * 15.0 UseNow 0505
-	  * 通过产品名查看单条产品的详情
+	  * 通过产品名模糊搜索
 	  * @param productId
 	  * @return 
 	  */
@@ -890,12 +881,12 @@ public class MlbackProductController {
 	  //接受信息
 	  MlbackProduct mlbackProductReq = new MlbackProduct();
 	  mlbackProductReq.setProductName(productName);
-	  System.out.println("操作说明:有客户搜索的产品名字productName:"+productName);
+	  System.out.println("操作说明:客户搜索的产品名字productName:"+productName);
 	  List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProductLike(mlbackProductReq);
 	  List<MlbackProduct> mlbackProductResListnum =mlbackProductService.selectMlbackProductLikeNum(mlbackProductReq);
 	  Integer num = mlbackProductResListnum.size();
-	  System.out.println("操作说明:有客户搜索的产品名字,查询结果mlbackProductResListnum.size():"+num);
-	  return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
+	  System.out.println("操作说明:客户搜索的产品名,查询结果mlbackProductResListnum:"+num);
+	  return Msg.success().add("resMsg", "产品名模糊搜索完毕")
 	     .add("mlbackProductResList", mlbackProductResList).add("mlbackProductResListnum", num).add("productName", productName);
 	  
 	 }
