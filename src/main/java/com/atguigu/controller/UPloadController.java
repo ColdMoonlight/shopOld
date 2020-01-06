@@ -1,35 +1,14 @@
 package com.atguigu.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.annotations.Param;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MlbackActShowPro;
-import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProduct;
@@ -37,13 +16,7 @@ import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.MlbackShowArea;
 import com.atguigu.bean.MlbackSlide;
-import com.atguigu.bean.MlfrontReview;
 import com.atguigu.bean.Msg;
-import com.atguigu.bean.SysUser;
-import com.atguigu.bean.UserWork;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.MlbackActShowProService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
@@ -54,11 +27,8 @@ import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlbackShowAreaService;
 import com.atguigu.service.MlbackSlideService;
 import com.atguigu.service.MlfrontReviewService;
-import com.atguigu.service.SysUserService;
-import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.ExcelUtils;
-import com.atguigu.utils.HttpUtil;
+import com.atguigu.utils.URLLocationUtils;
 import com.atguigu.utils.UpImgUtils;
 
 
@@ -106,17 +76,13 @@ public class UPloadController {
 	@ResponseBody
 	public Msg toUploadCategoryImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
 		
-		
-		String contextPathStr = res.getContextPath();    
-        System.out.println("contextPathStr:"+contextPathStr);
-        String realPathStr = res.getSession().
-                        getServletContext().getRealPath("/");    
-        System.out.println("realPathStr:"+realPathStr);
-        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
-        		res.getServerPort()+contextPathStr+"/";
+		String contextPathStr = URLLocationUtils.getcontextPathStr(rep,res);	//出来是真实的
+		System.out.println("contextPathStr:"+contextPathStr);
+		String realPathStr = URLLocationUtils.getrealPathStr(rep,res);	//出来是真实的
+		System.out.println("realPathStr:"+realPathStr);
+		String basePathStr = URLLocationUtils.getbasePathStr(rep,res);	//出来是真实的
         
         System.out.println("basePathStr:"+basePathStr);
-		
 		
 		String pathBig = basePathStr;
 		
