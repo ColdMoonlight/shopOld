@@ -197,7 +197,7 @@
 			}
 
 			function renderCondition(parent, data) {
-				console.log(data)
+				// console.log(data)
 				var productskuNameDetails = data.productskuNameDetails.split(',');
 				var lengthsku=productskuNameDetails.length;
 				var conditionEl = $('<div class="container product-d-length" data-name="' + data.productskuName +
