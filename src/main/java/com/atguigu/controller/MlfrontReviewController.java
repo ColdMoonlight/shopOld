@@ -92,14 +92,12 @@ public class MlfrontReviewController {
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
 	 */
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlfrontReview mlfrontReview){
 		//接受参数信息
 		System.out.println("mlfrontReview:"+mlfrontReview);
 		//取出id
-		System.out.println(1);
 		Integer reviewId = mlfrontReview.getReviewId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontReview.setReviewMotifytime(nowTime);
@@ -127,13 +125,11 @@ public class MlfrontReviewController {
 		mlfrontReview.setReviewEndtime(nowTime);
 		if(reviewId==null){
 			//无id，insert
-			int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
-			System.out.println(intResult);
+			mlfrontReviewService.insertSelective(mlfrontReview);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlfrontReviewService.updateByPrimaryKeySelective(mlfrontReview);
-			System.out.println(intResult);
+			mlfrontReviewService.updateByPrimaryKeySelective(mlfrontReview);
 			return Msg.success().add("resMsg", "更新成功");
 			
 		}		
@@ -229,8 +225,7 @@ public class MlfrontReviewController {
 	public Msg delete(@RequestBody MlfrontReview mlfrontReview){
 		//接收id信息
 		Integer reviewId = mlfrontReview.getReviewId();
-		int intResult = mlfrontReviewService.deleteByPrimaryKey(reviewId);
-		System.out.println(intResult);
+		mlfrontReviewService.deleteByPrimaryKey(reviewId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -436,16 +431,13 @@ public class MlfrontReviewController {
 		Integer Pid = mlfrontReview.getReviewPid();
 		//接受参数信息
 		System.out.println("mlfrontReview:"+mlfrontReview);
-		//取出id
-		System.out.println(1);
-		Integer reviewId = mlfrontReview.getReviewId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontReview.setReviewMotifytime(nowTime);
 		mlfrontReview.setReviewCreatetime(nowTime);
 		mlfrontReview.setReviewConfirmtime(nowTime);
 		mlfrontReview.setReviewStatus(0);//0待审核状态1审核完毕
 		//插入本条null的reviewid
-		int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
+		mlfrontReviewService.insertSelective(mlfrontReview);
 		//查回来插入的这一条
 		MlfrontReview MlfrontReviewReq = new MlfrontReview();
 		MlfrontReviewReq.setReviewPid(Pid);
@@ -467,8 +459,7 @@ public class MlfrontReviewController {
 	public Msg deleteNew(@RequestBody MlfrontReview mlfrontReview){
 		//接收id信息,删除本条主评论
 		Integer reviewId = mlfrontReview.getReviewId();
-		int intResult = mlfrontReviewService.deleteByPrimaryKey(reviewId);
-		System.out.println(intResult);
+		mlfrontReviewService.deleteByPrimaryKey(reviewId);
 		
 		mlbackReviewImgService.deleteByreviewId(reviewId);
 		
