@@ -120,7 +120,7 @@
         if (data.code === 100) {
 			// console.log(data)
         	var resData = data.extend.mlbackActShowProList;
-            console.log(resData);/*banban*/
+            // console.log(resData);/*banban*/
           rednerHotProduct($('#hot-product .swiper-wrapper'), resData)
 		  new Swiper('#hot-product', {
 				freeMode: true,
