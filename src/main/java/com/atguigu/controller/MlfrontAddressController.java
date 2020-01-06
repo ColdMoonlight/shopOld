@@ -1,13 +1,10 @@
 package com.atguigu.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,21 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.atguigu.bean.MlPaypalStateprovince;
-import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
-import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlPaypalStateprovinceService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
-import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.utils.DateUtil;
 
@@ -74,10 +64,10 @@ public class MlfrontAddressController {
 			areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
 			addressCountryAll = mlbackAreafreightResList.get(0).getAreafreightCountry();//拿到国家全称
 		}
-		//拿到国家的code
+		//拿到省份的code
 		String addressProvinceAll = mlfrontAddress.getAddressProvince();
 		
-		//封装国家code
+		//封装省份code
 		MlPaypalStateprovince mlPaypalStateprovinceReq = new MlPaypalStateprovince();
 		mlPaypalStateprovinceReq.setStateprovinceCountryCode(areafreightCountryEnglish);
 		mlPaypalStateprovinceReq.setStateprovinceName(addressProvinceAll);
@@ -85,7 +75,7 @@ public class MlfrontAddressController {
 		List<MlPaypalStateprovince> mlPaypalStateprovinceList =  mlPaypalStateprovinceService.selectMlPaypalStateprovinceByCountryCodeAndProvince(mlPaypalStateprovinceReq);
 		String stateprovinceNameCode ="";
 		if(mlPaypalStateprovinceList.size()>0){
-			stateprovinceNameCode =mlPaypalStateprovinceList.get(0).getStateprovinceNameCode();//拿到国家全称
+			stateprovinceNameCode =mlPaypalStateprovinceList.get(0).getStateprovinceNameCode();//拿到省份Code
 		}
 		//将省份code放入地址对象中
 		mlfrontAddress.setAddressProvinceCode(stateprovinceNameCode);
@@ -124,7 +114,7 @@ public class MlfrontAddressController {
 				//无id，insert
 				mlfrontAddress.setAddressIp(Userip);
 				mlfrontAddress.setAddressCreatetime(nowTime);
-				int intResult = mlfrontAddressService.insertSelective(mlfrontAddress);
+				mlfrontAddressService.insertSelective(mlfrontAddress);
 				
 				MlfrontAddress mlfrontAddressLast = mlfrontAddressService.selectMlfrontAddressAll().get(0);
 				
@@ -138,11 +128,10 @@ public class MlfrontAddressController {
 			}else{
 				//有id，update
 				mlfrontAddress.setAddressMotifytime(nowTime);
-				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
+				mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
 				
 				session.setAttribute("realAddressId", addressId);
 				System.out.println("游客非第一次存的mlfrontAddress:"+mlfrontAddress);
-				//MlfrontAddress mlfrontAddressres = mlfrontAddressService.selectMlfrontAddressByIp(Userip);
 				return Msg.success().add("resMsg", "游客地址信息更新成功").add("mlfrontAddress", mlfrontAddress).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
 			}		
 		}else{
@@ -151,7 +140,7 @@ public class MlfrontAddressController {
 			if(addressId==null){
 				//无id，insert
 				mlfrontAddress.setAddressCreatetime(nowTime);
-				int intResult = mlfrontAddressService.insertSelective(mlfrontAddress);
+				mlfrontAddressService.insertSelective(mlfrontAddress);
 				
 				MlfrontAddress mlfrontAddressLast = mlfrontAddressService.selectMlfrontAddressAll().get(0);
 				
@@ -165,7 +154,7 @@ public class MlfrontAddressController {
 			}else{
 				//有id，update
 				mlfrontAddress.setAddressMotifytime(nowTime);
-				int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
+				mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
 				
 				session.setAttribute("realAddressId", addressId);
 				System.out.println("注册用户非第一次存的mlfrontAddress:"+mlfrontAddress);
@@ -261,9 +250,6 @@ public class MlfrontAddressController {
 		//查询本条
 		List<MlfrontAddress> mlfrontAddressResList =mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
 		MlfrontAddress mlfrontAddressOne =mlfrontAddressResList.get(0);
-		//查询全部的category信息，便于下拉选择
-//		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
-//		System.out.println(mlbackCategorydownList);
 		return Msg.success().add("resMsg", "查看单条mlfrontAddressOne的详情细节完毕")
 					.add("mlfrontAddressOne", mlfrontAddressOne);
 	}
@@ -335,80 +321,5 @@ public class MlfrontAddressController {
 		return Msg.success().add("resMsg", "查看单条mlfrontAddressOne的详情细节完毕")
 					.add("mlfrontAddressOne", mlfrontAddressOne).add("areafreightMoney", areafreightMoney).add("usertype", usertype);
 	}
-	
-	/**7.0
-	 * @author Shinelon
-	 * @exception 导出单一发布任务执行明细
-	 * @param MlbackAreafreight
-	 * @return 
-	 * */
-//	@ResponseBody
-//	@RequestMapping("/exportFile")
-//	public String exportFile(HttpServletRequest request,HttpServletResponse response) throws IOException {
-//		response.reset(); 
-//		// 接收请求相应
-//	    //准备请求头参数
-//		String authstatus =request.getParameter("authStatus");
-//		String userworkGroupdisplayId =request.getParameter("userworkGroupdisplayId");
-//		int authStatus =Integer.parseInt(authstatus);
-//		int userworkGroupdisplayIdId =Integer.parseInt(userworkGroupdisplayId);
-//		Date date =new Date();
-//		SimpleDateFormat sdf =new SimpleDateFormat("yyyyMMddHHmmss");
-//		String time =sdf.format(date);
-//		response.setHeader("Content-Disposition", "attachment;filename=File" + time +".xlsx");
-//		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-//		response.setHeader("Pragma", "no-cache");
-//		response.setHeader("Cache-Control", "no-cache");
-//		response.setDateHeader("Expires", 0);
-//	    XSSFWorkbook workbook = null;
-//	    try {
-//	    	UserWork userWork= new UserWork();
-//	    	userWork.setUserworkGroupdisplayId(userworkGroupdisplayIdId);
-//	    	if(authStatus==1) {	    		
-//	    		List<UserWork> UserWorkList = userWorkService.getUserWorkByConditions(userWork);
-//	            workbook = ExcelUtils.exportContactsGroupDisplay(UserWorkList);
-//	        }
-//	        OutputStream output;
-//	        try {
-//	        	output = response.getOutputStream();
-//	            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
-//	            bufferedOutPut.flush();
-//	            workbook.write(bufferedOutPut);
-//	            bufferedOutPut.close();
-//	            } catch (Exception e) {
-//	                e.printStackTrace();
-//	            }
-//	        } catch (Exception e1) {
-//	            e1.printStackTrace();
-//	        }
-//	        return null;
-//	}
-	
-	/**1.1	useOn
-	 * 远程调用url,name,pimageUrl
-	 * @return Map
-	 */
-//	private Map<String, String> HttpGetPImgUrl(String id) {
-//		HttpUtil httpUtil = new HttpUtil();
-//		String urls="https://itunes.apple.com/cn/lookup";
-//		String idParm = "id="+id;
-//		String result = null;
-//		Map<String, String> iosNeedMap= new HashMap<String, String>();
-//		try {
-//			result = httpUtil.sendPostUrl(urls,idParm,"utf-8");
-//			JSONObject JSONObject = new JSONObject(result);
-//			String resStr = JSONObject.get("results").toString();
-//			String resStr2 =resStr.substring(1, resStr.length()-1);
-//			System.out.println(resStr2);
-//			JSONObject JSONObjectStr2 = new JSONObject(resStr2);
-//			iosNeedMap.put("artworkUrl100", (String) JSONObjectStr2.get("artworkUrl100"));
-////			iosNeedMap.put("trackName", (String) JSONObjectStr2.get("trackName"));
-//			iosNeedMap.put("bundleId", (String) JSONObjectStr2.get("bundleId"));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return iosNeedMap;
-//	}
 	
 }
