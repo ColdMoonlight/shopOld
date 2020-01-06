@@ -5,18 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MoneyOut;
 import com.atguigu.bean.Msg;
-import com.atguigu.bean.SysUser;
 import com.atguigu.bean.UserAccount;
 import com.atguigu.service.MoneyOutService;
 import com.atguigu.service.UserAccountService;
@@ -25,8 +21,6 @@ import com.atguigu.utils.DateUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-
-//@Controller
 @RestController
 @RequestMapping("/moneyOut")
 public class MoneyOutController {
@@ -108,7 +102,7 @@ public class MoneyOutController {
 			moneyOut.setMoneyoutSparetwo(accOutTimes);
 			moneyOut.setMoneyoutAlipayname(userAlipayname);
 			moneyOut.setMoneyoutAlipaypeople(userAlipaypeople);
-			int insertRes = moneyOutService.insertSelectiveTrans(moneyOut);
+			moneyOutService.insertSelectiveTrans(moneyOut);
 			return Msg.success().add("resMsg", "提现申请成功");
 		}else{
 			return Msg.fail().add("resMsg", "提现申请失败");
@@ -161,7 +155,7 @@ public class MoneyOutController {
 			userAccountReq.setUserAlipaypeople(alipayAccUseName);
 			userAccountReq.setUserAccIfalipay("1");
 			//绑定用户信息
-			int updateRes = userAccountService.updateByPrimaryKeySelective(userAccountReq);
+			userAccountService.updateByPrimaryKeySelective(userAccountReq);
 			return Msg.success().add("resMsg", "绑定提现账户成功");
 		}
 	}
@@ -262,7 +256,7 @@ public class MoneyOutController {
 		UserAccountReq.setUserAccAllout(alloutAfter);
 		UserAccountReq.setUserAccOuting(alloutIngAfter);
 		//
-		int resAccOut = userAccountService.updateByPrimaryKeySelective(UserAccountReq);
+		userAccountService.updateByPrimaryKeySelective(UserAccountReq);
 		return Msg.success().add("resMsg", "提现完毕");
 	}
 }
