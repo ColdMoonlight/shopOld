@@ -327,7 +327,7 @@ public class MlbackCategoryController {
 		 List<MlbackCategory> mlbackCategoryList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
 		 
 		 if(!(mlbackCategoryList.size()>0)){
-			 return Msg.fail().add("resMsg", "通过categorySeo未查到该category").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
+			 return Msg.success().add("resMsg", "通过categorySeo未查到该category").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
 		 }
 		 
 		 MlbackCategory mlbackCategoryres = mlbackCategoryList.get(0);
@@ -335,8 +335,12 @@ public class MlbackCategoryController {
 	 
 		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
 		 
+		 
+		 if(CategoryProductIdsStr==null){
+			 return Msg.success().add("resMsg", "该类下无prolist").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
+		 }
 		 if("".equals(CategoryProductIdsStr)){
-			 return Msg.fail().add("resMsg", "该类下无prolist").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
+			 return Msg.success().add("resMsg", "该类下无prolist").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
 		 }
 		
 		 String productidsStrArr [] =CategoryProductIdsStr.split(",");
