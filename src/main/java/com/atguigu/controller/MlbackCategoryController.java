@@ -384,7 +384,7 @@ public class MlbackCategoryController {
 		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
 			Integer categoryParentId = mlbackCategoryOne.getCategoryParentId();
 			if(categoryParentId>0){
-				System.out.println("categoryParentId:"+categoryParentId);
+				//System.out.println("categoryParentId:"+categoryParentId);
 			}else{
 				//筛选出一级菜单(patentId=-1)的类，//第一级别的导航
 				//存到list中，存一下这些ids,这些是一级类
