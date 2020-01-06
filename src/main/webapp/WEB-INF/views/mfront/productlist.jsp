@@ -76,7 +76,7 @@
 			success: function (data) {
 				if (data.code === 100) {
 					var resData = data.extend.mlbackCategorydownEr;
-					console.log(resData);
+					// console.log(resData);
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
@@ -113,9 +113,9 @@
 			              content_ids: [shopidlist],
 			              content_type: 'product'
 			            });
-					console.log("shopidlist");
-					console.log(shopidlist);
-					console.log("shopidlist");
+					// console.log("shopidlist");
+					// console.log(shopidlist);
+					// console.log("shopidlist");
 					var data = JSON.parse(data);
 					if (data.code === 100) {
 						rednerProduct(productList, data.extend.mlbackProductResList);
