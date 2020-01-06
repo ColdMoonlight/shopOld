@@ -62,9 +62,6 @@
 		var productList = $('.product-list');
 		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
 		console.log(sessionScopecategorySeo)
-		if(sessionScopecategorySeo=="nowig"){
-			$(".condition.select").hide();
-		}
 		var categorySeo = sessionScopecategorySeo;
 		getProductList({
 			"categorySeo": categorySeo
@@ -135,7 +132,7 @@
 
 		function rednerProduct(parent, data) {
 			var html = '';
-			if (data.length > 0) {
+			if(data!==null){
 				for (var i = 0; i < data.length; i += 1) {
 					var productactoffif = data[i].productActoffIf;
 					// console.log(productactoffif)
@@ -185,11 +182,15 @@
 						'</div>' +
 						'</div>';
 				}
-
+				
 				parent.html(html);
-			} else {
+			}else {
 				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
 			}
+			// if (data.length > 0) {
+			// } else {
+			// 	renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
+			// }
 		}
 
 		function renderCondition(parent, data, defaultHtml) {

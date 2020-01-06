@@ -121,6 +121,7 @@
 			   var scrollhead=$(window).scrollTop();
 			   if(scrollhead>5){
 				   $(".header").addClass("headActive")
+				   $(".show_ul").hide();
 			   }else{
 				   $(".header").removeClass("headActive")
 			   }
