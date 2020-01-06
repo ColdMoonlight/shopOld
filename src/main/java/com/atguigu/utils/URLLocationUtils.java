@@ -21,7 +21,7 @@ public class URLLocationUtils {
 		String contextPathStr = res.getContextPath();    
         String basePathStrAll = res.getScheme()+"://"+res.getServerName()+":"+res.getServerPort()+contextPathStr+"/";
         
-//        basePathStrAll = "http://megalook.com:80/";		//测试初始值
+//      basePathStrAll = "http://megalook.com:80/";		//测试初始值
         
         String basePathStr =basePathStrAll;
         System.out.println("工具类中初始的basePathStr:"+basePathStr);
