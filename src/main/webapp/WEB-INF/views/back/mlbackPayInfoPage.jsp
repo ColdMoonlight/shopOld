@@ -518,7 +518,8 @@
 			var headerHtml = '';
 			// console.log(data)
 			headerHtml += '<span class="order-id">订单id ：' + data.orderId + '</span>' +
-			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
+//			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
+			    '<span class="payyufei_num" num-id="'+ data.payinfoPlateNum + '">支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
 			if(data.orderStatus == 1){
 				headerHtml += '<span class="btn btn-success check_order" onclick="check_order()">审核</span><span class="btn btn-danger return_order" onclick="return_order()" >退款</span>';
@@ -695,8 +696,11 @@
 			var parent = $(e.target).parents('.ship-box');
 			var shipId = parent.find('.ship-id').val();
 			shipName = parent.find('.ship-name').val();
+			var payinfoPlateNum = $('.payyufei_num').attr('num-id');
+			//console.log(payinfoPlateNum)
 			var reqData = {
 				orderCouponId:payinfoIdcd,
+				orderCouponCode:payinfoPlateNum,
 				orderId: parseInt(orderId),
 				orderLogisticsname: shipName,
 				orderLogisticsnumber: shipId
