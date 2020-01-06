@@ -458,7 +458,7 @@ public class MlfrontCartController {
 	 * getCartitemIdDetails	get
 	 * @param
 	 */
-	@SuppressWarnings("unused")
+//	@SuppressWarnings("unused")
 	@RequestMapping(value="/getCartitemIdDetails",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg getCartitemIdDetails(HttpServletResponse rep,HttpServletRequest res,HttpSession session){
@@ -484,7 +484,7 @@ public class MlfrontCartController {
 			Integer CartItemIdInt =Integer.parseInt(CartItemId);
 			MlfrontCartItem mlfrontCartItemFor = new MlfrontCartItem();
 			mlfrontCartItemFor.setCartitemId(CartItemIdInt);
-			//查看该id+该pid时候已经有了。
+			//查看该id+该pid时候已经有了
 			List<MlfrontCartItem> mlfrontCartItemListFor= mlfrontCartItemService.selectMlfrontCartItemById(mlfrontCartItemFor);
 			if(mlfrontCartItemListFor.size()>0){
 				mlfrontCartItemListRes.add(mlfrontCartItemListFor.get(0));

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlPaypalShipAddress;
-import com.atguigu.bean.MlfrontReview;
 import com.atguigu.bean.Msg;
 import com.atguigu.service.MlPaypalShipAddressService;
 import com.atguigu.service.MlbackAdminService;
@@ -26,10 +25,10 @@ public class MlPaypalShipAddressController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	useOn	0505
-	 * 查看单条MlfrontReview的详情细节
-	 * @param MlfrontReview
-	 * @return 
+	 * 1.0	onuse	200104
+	 * 查-单条PaypalShipAddress的详情
+	 * @param shippingaddressPayinfoid
+	 * @return
 	 */
 	@RequestMapping(value="/getOneMlfrontReviewDetailById",method=RequestMethod.POST)
 	@ResponseBody
@@ -39,7 +38,7 @@ public class MlPaypalShipAddressController {
 		//封装参数
 		mlPaypalShipAddressReq.setShippingaddressPayinfoid(shippingaddressPayinfoid);
 		List<MlPaypalShipAddress> mlPaypalShipAddressRes =mlPaypalShipAddressService.selectMlPaypalShipAddressByPayinfoid(mlPaypalShipAddressReq);
-		return Msg.success().add("resMsg", "查看单条优惠券的详情细节完毕")
+		return Msg.success().add("resMsg", "查-单条paypal返回的地址完毕")
 					.add("mlPaypalShipAddressOne", mlPaypalShipAddressRes);
 	}
 	
