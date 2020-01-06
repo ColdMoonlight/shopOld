@@ -294,106 +294,6 @@ public class UserWorkController {
 		}
 	}
 	
-//	/**1.1	useOn
-//	 * 开始下载
-//	 * @param udid  groupDisplayId	userName
-//	 * @return
-//	 */
-//	@RequestMapping(value="/appUserGetWork2",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getAppUserGetWork2(@RequestBody UserWork UserWorkRIn){
-//		String userworkUdid = UserWorkRIn.getUserworkUdid();
-//		String userworkIdfa = UserWorkRIn.getUserworkIdfa();
-//		Integer userworkGroupdisplayId = UserWorkRIn.getUserworkGroupdisplayId();
-//		
-//		//4,用udid,idfa下查看是否有开始下载0，试玩中1
-//		UserWork userWorkReq = new UserWork();
-//		userWorkReq.setUserworkUdid(userworkUdid);
-//		userWorkReq.setUserworkIdfa(userworkIdfa);
-//		userWorkReq.setUserworkState("0");		//0仅下载	1试玩中	2完成		3超时
-//		List<UserWork> userWorkRes0 = userWorkService.getUserWorkByConditions(userWorkReq);
-//		
-//		//如果正在进行中的本次传入的任务,直接
-////		if(userWorkRes0.size()>0){
-////			UserWork userWorkPD = userWorkRes0.get(0);
-////			Integer kId = userWorkPD.getUserworkId();
-////			if(kId == ){
-////				
-////			}
-////		}
-//		
-//		userWorkReq.setUserworkState("1");		//0仅下载	1试玩中	2完成		3超时
-//		List<UserWork> userWorkRes1 = userWorkService.getUserWorkByConditions(userWorkReq);
-//		
-//		int ifHav = 0;
-//		if(userWorkRes0.size()>0){
-//			ifHav = 1;
-//		}else if(userWorkRes1.size()>0){
-//			ifHav = 1;
-//		}
-//		//查看本人时候有正在进行的任务
-//		if(ifHav>0){
-//			//有正在进行中的任务
-//			return Msg.fail().add("resMsg", "请先完成正在进行中的任务");//请先完成正在进行中的任务
-//		}else{
-//			//没正在进行任务
-//			UserWork userWorkTree = new UserWork();
-////			groupDisplay.setGroupId(null);						//任务IDuserwork_id
-//			//1封装查询参数
-//			userWorkTree.setUserworkGroupdisplayId(userworkGroupdisplayId);	//任务IDuserwork_groupdisplay_id
-//			userWorkTree.setUserworkUdid(userworkUdid);						//用户IDuserwork_udid
-//			userWorkTree.setUserworkIdfa(userworkIdfa);						//设备IDuserwork_idfa
-//			
-//			List<UserWork> userWorkResList = userWorkService.getUserWorkByConditions(userWorkTree);
-//			
-//			//查询本条任务多少钱
-//			GroupDisplay groupDisplay = new GroupDisplay();
-//			groupDisplay.setGroupId(userworkGroupdisplayId);
-//			
-//			List<GroupDisplay> groupDisplayList = groupDisplayService.getGroupDisplayByConditions(groupDisplay);
-//			GroupDisplay groupDisplayOne = groupDisplayList.get(0);
-//			String outMoney = groupDisplayOne.getGroupOutprice();
-//			int insertRes = 0;
-//			if(userWorkResList.size()>0){
-//				UserWork UserWorkOne = userWorkResList.get(0) ;
-//				UserWork UserWorkReq = new UserWork();
-//				int userWorkId = UserWorkOne.getUserworkId();
-//				UserWorkReq.setUserworkId(userWorkId);
-//				UserWorkReq.setUserworkState("0");	//̬userwork_state	//0仅下载	1试玩中	2完成		3超时
-//				long nowTimeBegin = System.currentTimeMillis();
-//				String nowTime = nowTimeBegin+"";						//系统时间转化stringֵ
-//				UserWorkReq.setUserworkCreatetime(nowTime);				//设置userwork_createtime
-//				int FreeTimes = DateUtil.getFreeTimes(nowTimeBegin);
-//				String freeTimeStr = FreeTimes+"";
-//				UserWorkReq.setUserworkUploadtime(freeTimeStr);			//任务剩余时间userwork_uploadtime
-//				UserWorkReq.setUserworkGroupdisplayId(userworkGroupdisplayId);
-//				//更新信息文件̬
-//				insertRes = userWorkService.updateByPrimaryKeySelectiveNext(UserWorkReq);		//这是再次进来,得更新超时的那条信息
-//			}else{
-//				//1之前没这条任务，第一次接insert
-//				UserWork userWork = new UserWork();
-////				groupDisplay.setGroupId(null);								//任务IDuserwork_id
-//				userWork.setUserworkGroupdisplayId(userworkGroupdisplayId);	//本条任务IDuserwork_groupdisplay_id
-//				userWork.setUserworkUdid(userworkUdid);						//用户的IDuserwork_udid
-//				userWork.setUserworkIdfa(userworkIdfa);						//用户的本次设备idfauserwork_idfa
-//				long nowTimeBegin = System.currentTimeMillis();
-//				String nowTime = nowTimeBegin+"";							//时间戳Stringֵ
-//				userWork.setUserworkCreatetime(nowTime);					//放入userwork_createtime
-//				int FreeTimes = DateUtil.getFreeTimes(nowTimeBegin);
-//				String freeTimeStr = FreeTimes+"";
-//				userWork.setUserworkUploadtime(freeTimeStr);				//任务剩余时间userwork_uploadtime
-//				userWork.setUserworkState("0");								////̬userwork_state	//0仅下载	1试玩中	2完成		3超时
-//				userWork.setUserworkPrice(outMoney);							//价格信息userwork_price
-//				insertRes = userWorkService.insertSelectiveTrans(userWork);
-//			}
-//			if(insertRes==1){
-//				return Msg.success().add("resMsg", "任务领取成功/开始下载");
-//			}else{
-//				return Msg.fail().add("resMsg", "任务领取失败/开始下载");
-//			}
-//		}
-//	}
-	
 	
 	/**2.0	useOn
 	 * 开始试玩
@@ -419,11 +319,6 @@ public class UserWorkController {
 		}
 		UserWork userWorkOne= userWorkResList.get(0);
 		String uWordSate = userWorkOne.getUserworkState();
-//		if("3".equals(uWordSate)){
-//			return Msg.fail().add("resMsg", "任务超时,请重新领取任务/应该不会出现这种情况");
-//		}else if("0".equals(uWordSate)){
-//			return Msg.fail().add("resMsg", "不要作弊,请先试玩");
-//		}
 		int userWorkId = userWorkOne.getUserworkId();
 		//2查看任务是否过期
 		//2.1查看本任务当时的领取时间
@@ -439,7 +334,7 @@ public class UserWorkController {
 			userWorkBegin.setUserworkId(userWorkId);
 			userWorkBegin.setUserworkGroupdisplayId(userworkGroupdisplayId);
 			userWorkBegin.setUserworkState("3");	//̬userwork_state	//0仅下载	1试玩中	2完成		3超时
-			int beginRes = userWorkService.updateByPrimaryKeySelectiveTransGiveUp(userWorkBegin);
+			userWorkService.updateByPrimaryKeySelectiveTransGiveUp(userWorkBegin);
 			return Msg.fail().add("resMsg", "任务已经超时请重新领取");
 		}else{
 			//4未超时
@@ -452,7 +347,7 @@ public class UserWorkController {
 				String freeTimeStr = FreeTimes+"";
 				userWork.setUserworkUploadtime(freeTimeStr);				//倒计时放入userwork_uploadtime
 				userWorkBegin.setUserworkState("1");	//̬userwork_state	//0仅下载	1试玩中	2完成		3超时
-				int beginRes = userWorkService.updateByPrimaryKeySelective(userWorkBegin);
+				userWorkService.updateByPrimaryKeySelective(userWorkBegin);
 				return Msg.success().add("resMsg", "开始试玩成功");
 			}else{
 				//4.2不是第一次试玩
@@ -506,7 +401,6 @@ public class UserWorkController {
 			//2.3.1超时了
 			userWorkBegin.setUserworkId(userWorkId);
 			userWorkBegin.setUserworkState("3");	//̬userwork_state	//0仅下载	1试玩中	2完成		3超时
-			//int beginRes = userWorkService.updateByPrimaryKeySelective(userWorkBegin);
 			userWorkService.updateByPrimaryKeySelectiveTransGiveUp(userWorkBegin);
 			return Msg.fail().add("resMsg", "任务超时请重新领取");
 		}else{
@@ -526,7 +420,7 @@ public class UserWorkController {
 				String Price = userWorkOne.getUserworkPrice();
 				userWorkToFinallyReq.setUserworkPrice(Price);
 				userWorkToFinallyReq.setUserworkReceivetime(StartPlayTime);
-				int UpdateRes = userWorkService.updateByPrimaryKeySelectiveTrans(userWorkToFinallyReq);
+				userWorkService.updateByPrimaryKeySelectiveTrans(userWorkToFinallyReq);
 				return Msg.success().add("resMsg", "奖励领取成功");
 			}else{
 				//试玩超过2分钟
@@ -559,43 +453,10 @@ public class UserWorkController {
 		UserWorkReq.setUserworkGroupdisplayId(userworkGroupdisplayId);
 		UserWorkReq.setUserworkState("3");	//̬userwork_state	//0仅下载	1试玩中	2完成		3超时
 		//放弃本条任务
-		int updateRes = userWorkService.updateByPrimaryKeySelectiveTransGiveUp(UserWorkReq);
+		userWorkService.updateByPrimaryKeySelectiveTransGiveUp(UserWorkReq);
 		//�޸�groupDisplay
 		return Msg.success().add("resMsg", "任务放弃成功");
 	}
-	
-//	/**5.0	useOn
-//	 * 放弃当前任务
-//	 * @param idfa
-//	 * @return
-//	 */
-//	@RequestMapping(value="/allOutTimeToGiveUp",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg allOutTimeToGiveUp(@RequestBody UserWork UserWorkRIn
-////			@RequestParam(value = "userworkUdid") String userworkUdid,
-////			@RequestParam(value = "userworkIdfa") String userworkIdfa,
-////			@RequestParam(value = "userworkGroupdisplayId") Integer userworkGroupdisplayId
-//			){
-//		String userworkUdid = UserWorkRIn.getUserworkUdid();
-//		String userworkIdfa = UserWorkRIn.getUserworkIdfa();
-//		Integer userworkGroupdisplayId = UserWorkRIn.getUserworkGroupdisplayId();
-//		//��ѯUserwork�б�������,�޸ı��������״̬
-//		UserWork UserWork = new UserWork();
-//		UserWork.setUserworkUdid(userworkUdid);
-//		UserWork.setUserworkGroupdisplayId(userworkGroupdisplayId);
-//		UserWork.setUserworkIdfa(userworkIdfa);
-//		List<UserWork> userWorkResList = userWorkService.getUserWorkByConditions(UserWork);
-//		UserWork userWorkOne = userWorkResList.get(0);
-//		int userWorkId = userWorkOne.getUserworkId();
-//		UserWork UserWorkReq = new UserWork();
-//		UserWorkReq.setUserworkId(userWorkId);
-//		UserWorkReq.setUserworkGroupdisplayId(userworkGroupdisplayId);
-//		UserWorkReq.setUserworkState("3");	//���״̬userwork_state	0��ȡ	1����	2���	3��ʱ/����
-//		//�޸Ĵ�idfa�µı�����״̬
-//		int updateRes = userWorkService.updateByPrimaryKeySelectiveTransGiveUp(UserWorkReq);
-//		//�޸�groupDisplay���еı���������
-//		return Msg.success().add("resMsg", "ȡ��ɹ�");
-//	}
 	
 	/**5.0	useOn
 	 * 查看完成的任务
@@ -617,7 +478,6 @@ public class UserWorkController {
 			//分页返回
 			int PagNum = 10;
 			PageHelper.startPage(pn, PagNum);
-//			List<GroupDisplay> groupDisplay = groupDisplayService.getGroupDisplayAll();
 			PageInfo page = new PageInfo(userWorkResList, PagNum);
 			return Msg.success().add("pageInfo", page);
 		}
@@ -670,7 +530,6 @@ public class UserWorkController {
 		if(!(userWorkResList.size()>0)){
 			modelAndView.setViewName("alludidEndTaskdetail");
 		}else{
-			//return Msg.success().add("pageInfo", page);
 			modelAndView.setViewName("alludidEndTaskdetail");
 			modelAndView.addObject("userworkUdid", userworkUdid);
 		}
