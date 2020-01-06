@@ -30,6 +30,9 @@
 
 	<!-- main -->
 	<div class="main order-info">
+		<div class="state_num">
+			
+		</div>
         <!-- <div class="goback"><a href="javascript:history.go(-1)">返回列表</a> </div> -->
 		<div class="address bd-t"></div>
 
@@ -60,7 +63,7 @@ param:　orderId
 		type: "POST",
 		data: reqData,
 		success: function (data) {
-			// console.log(data)
+			console.log(data)
 			var resDataAddress = data.extend.addressInfo;
 			var resDataOrder = data.extend.mlfrontOrderOne;
 			var resDataOrderItem = data.extend.mlfrontOrderItemList;
