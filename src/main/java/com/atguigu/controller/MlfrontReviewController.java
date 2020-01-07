@@ -534,9 +534,9 @@ public class MlfrontReviewController {
 	/**13.0	onuse	200104
 	 * search review From Ins
 	 */
-	@RequestMapping(value="/selectReviewListFromInsh",method=RequestMethod.POST)
+	@RequestMapping(value="/selectReviewListFrom",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg selectReviewListFromInsh(HttpSession session,MlfrontReview mlfrontReview) {
+	public Msg selectReviewListFrom(HttpSession session,MlfrontReview mlfrontReview) {
 		
 		mlfrontReview.setReviewStatus(1);
 		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReview);
