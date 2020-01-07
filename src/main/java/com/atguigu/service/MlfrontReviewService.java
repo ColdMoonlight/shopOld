@@ -92,5 +92,10 @@ public class MlfrontReviewService {
 		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectMlfrontReviewListBySearch(mlfrontReview);
 		return MlfrontReviewList;
 	}
+
+	public List<MlfrontReview> selectReviewListFrom(MlfrontReview mlfrontReview) {
+		List<MlfrontReview>  MlfrontReviewList = mlfrontReviewMapper.selectReviewListFrom(mlfrontReview);
+		return MlfrontReviewList;
+	}
 	
 }

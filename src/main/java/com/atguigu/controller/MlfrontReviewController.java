@@ -516,12 +516,11 @@ public class MlfrontReviewController {
 	 * 12.0	onuse	200104
 	 * Ins Review page
 	 * @param jsp
-	 * @return 
+	 * @return
 	 * */
 	@RequestMapping("/toReviewInsPage")
 	public String toReviewInsPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
 	
-		
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		  
 		if(ifMobile.equals("1")){
@@ -537,15 +536,11 @@ public class MlfrontReviewController {
 	 */
 	@RequestMapping(value="/selectReviewListFromInsh",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg selectReviewListFromInsh(HttpSession session) {
-
-		List<MlfrontReview> mlfrontReviewListAll = mlfrontReviewService.selectMlfrontReviewAll();
-		MlfrontReview mlfrontReviewOne = new MlfrontReview();
-		List<MlfrontReview> mlfrontReviewList = new ArrayList<MlfrontReview>();
-		for(int i=0;i<50;i++){
-			mlfrontReviewOne=mlfrontReviewListAll.get(i);
-			mlfrontReviewList.add(mlfrontReviewOne);
-		}
+	public Msg selectReviewListFromInsh(HttpSession session,MlfrontReview mlfrontReview) {
+		
+		mlfrontReview.setReviewStatus(1);
+		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReview);
 		return Msg.success().add("mlfrontReviewList", mlfrontReviewList);
+		
 	}
 }

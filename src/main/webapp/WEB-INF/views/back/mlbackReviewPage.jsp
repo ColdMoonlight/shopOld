@@ -59,6 +59,7 @@
 										<th>评论状态</th>
 										<!-- <th>评论图片数</th> -->
 										<th>评分星级</th>
+										<th>评分来源</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -146,6 +147,15 @@
 				var reviewStatus = $("<td></td>").append((item.reviewStatus ? '已生效' : '未生效'));
 				var reviewImgidstr = $("<td></td>").append(item.reviewImgidstr);
 				var reviewProstarnum = $("<td></td>").append(item.reviewProstarnum);
+				var reviewFromStr = '';
+				if(item.reviewFrom==0){
+					reviewFromStr = '0-self';
+				}else if(item.reviewFrom==1){
+					reviewFromStr = '1-Customer';
+				}else if(item.reviewFrom==2){
+					reviewFromStr = '2-Ins';
+				}
+				var reviewFrom = $("<td></td>").append(reviewFromStr);
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
@@ -164,6 +174,7 @@
 					.append(reviewCreatetime)
 					.append(reviewStatus)
 					.append(reviewProstarnum)
+					.append(reviewFrom)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -487,6 +498,7 @@
 			$(":input[name='reviewDetailstr']").val(data.reviewDetailstr);
 			$(":input[name='reviewImgidstr']").val(data.reviewImgidstr);
 			$(":input[name='reviewProstarnum']").val(data.reviewProstarnum);
+			$(":input[name='reviewFrom']").val(data.reviewFrom);
 		}
 
 
