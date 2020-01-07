@@ -96,7 +96,7 @@
 								</div>
 								<div class="form-group cp_select">
 								     <label for="actshowproProid" style="float: left;" class="control-label">产品名字:</label>
-								     <div class="" style="float: left;">
+								     <div class="" style="float: left;width: 300px;">
 								         <select id="actshowproProid" name="actshowproProid" class="form-control"></select>
 								     </div>
 								 </div>

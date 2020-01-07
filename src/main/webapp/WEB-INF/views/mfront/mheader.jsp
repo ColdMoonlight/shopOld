@@ -193,9 +193,12 @@
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}else if(twonav=="home"){
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					}else if(twonav == "Activty"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/Activty.html">'+ data1[i].categoryName +'</a>';
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					}
+
 					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';

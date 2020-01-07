@@ -64,7 +64,7 @@
 			</div>
 			<div class="review-box-item">
 				<div class="name">RANTING</div>
-				<div class="stars-list review-star" data-star="0">
+				<div class="stars-list review-star" data-star="5">
 					<i class="icon star2" data-id="1"></i>
 					<i class="icon star2" data-id="2"></i>
 					<i class="icon star2" data-id="3"></i>
@@ -588,7 +588,7 @@
 								if (sysFlag) {
 									window.location.href = window.location.href;
 								}
-							}, 1000);
+							}, 500);
 						} else {
 							renderSysMsg('Operation Failed！');
 						}
@@ -1056,7 +1056,7 @@
 		}
 		
 		$(window).on('beforeunload', function() {
-			if (reviewId) {
+			if (!reviewId) {
 				deleteReview();
 			}
 		});
