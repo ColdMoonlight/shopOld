@@ -10,9 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.SysUser;
 import com.atguigu.dao.MlbackAdminMapper;
-import com.atguigu.dao.SysUserMapper;
 
 /**
  * 测试dao层的工作
