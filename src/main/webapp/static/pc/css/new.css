@@ -638,6 +638,16 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .review-cancel{width: 30px; height: 30px;border-radius:50%;color: #fff;font-size: 20px; text-align: center; line-height: 27px; display: block; position: absolute; top: -10px; right: -10px;;background: #000;}
 .maskdd{display: none; width: 68px; height: 68px; position: absolute; top: 0; left: 0; z-index: 3;}
 .reviews-img-list{position: relative;}
+/****************瀑布流页面************************************/
+.list_pro_cont{width: 1300px; height: auto; margin: 0 auto;min-height: 600px;}
+.list_pro_cont ul{width: 100%;}
+.list_pro_cont ul li{float:left;width:260px;background:#fff;position:relative;overflow:hidden;box-shadow:0 0 10px #bcbcbc}
+.list_pro_cont ul li img{width: 260px;}
+
+
+
+
+
 /***********/
  @media (max-width: 1330px) {
 	 .product-details{max-width:98%; margin: 0 1%;}
