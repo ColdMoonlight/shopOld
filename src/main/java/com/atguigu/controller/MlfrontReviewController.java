@@ -26,6 +26,7 @@ import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -509,5 +510,42 @@ public class MlfrontReviewController {
 			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
 			return Msg.success().add("pageInfo", page);
 //		}
+	}
+	
+	/**
+	 * 12.0	onuse	200104
+	 * Ins Review page
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/toReviewInsPage")
+	public String toReviewInsPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+	
+		
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		  
+		if(ifMobile.equals("1")){
+			return "mfront/navActive/mreviewInsListPage";
+		}else{
+			return "front/navActive/pcreviewInsList";
+		}
+	}
+	
+	
+	/**13.0	onuse	200104
+	 * search review From Ins
+	 */
+	@RequestMapping(value="/selectMlblackReviewListBySearch",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg selectReviewListFromInsh(HttpSession session) {
+
+		List<MlfrontReview> mlfrontReviewListAll = mlfrontReviewService.selectMlfrontReviewAll();
+		MlfrontReview mlfrontReviewOne = new MlfrontReview();
+		List<MlfrontReview> mlfrontReviewList = new ArrayList<MlfrontReview>();
+		for(int i=0;i<50;i++){
+			mlfrontReviewOne=mlfrontReviewListAll.get(i);
+			mlfrontReviewList.add(mlfrontReviewOne);
+		}
+		return Msg.success().add("mlfrontReviewList", mlfrontReviewList);
 	}
 }
