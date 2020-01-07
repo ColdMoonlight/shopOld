@@ -31,6 +31,8 @@ public class MlfrontReview {
     private String reviewImgidstr;
 
     private Integer reviewProstarnum;
+    
+    private Integer reviewFrom;
 
     public Integer getReviewId() {
         return reviewId;
@@ -151,4 +153,13 @@ public class MlfrontReview {
     public void setReviewProstarnum(Integer reviewProstarnum) {
         this.reviewProstarnum = reviewProstarnum;
     }
+
+	public Integer getReviewFrom() {
+		return reviewFrom;
+	}
+
+	public void setReviewFrom(Integer reviewFrom) {
+		this.reviewFrom = reviewFrom;
+	}
+    
 }
