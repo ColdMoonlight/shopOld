@@ -217,9 +217,13 @@
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a>';
 					}else if(twonav == "home"){
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a>';
+					}else if(twonav == "Activty"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/Activty.html">'+ data1[i].categoryName +'</a>';
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>';
 					}
+					
+
 					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';
