@@ -45,7 +45,7 @@
 
 <body>
 
-	<jsp:include page="mheader.jsp"></jsp:include>
+	<jsp:include page="../mheader.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
@@ -55,7 +55,7 @@
 		<div class="product-list"></div>
 	</div>
 
-	<jsp:include page="mfooter.jsp"></jsp:include>
+	<jsp:include page="../mfooter.jsp"></jsp:include>
 
 	<script>
 		var condition = $('.select');
