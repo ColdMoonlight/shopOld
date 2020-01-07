@@ -5,11 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackChannel;
-import com.atguigu.bean.UserWork;
-import com.atguigu.dao.MlbackAdminMapper;
 import com.atguigu.dao.MlbackChannelMapper;
 
 
