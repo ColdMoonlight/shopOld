@@ -535,7 +535,7 @@ public class MlfrontReviewController {
 	/**13.0	onuse	200104
 	 * search review From Ins
 	 */
-	@RequestMapping(value="/selectMlblackReviewListBySearch",method=RequestMethod.POST)
+	@RequestMapping(value="/selectReviewListFromInsh",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg selectReviewListFromInsh(HttpSession session) {
 
