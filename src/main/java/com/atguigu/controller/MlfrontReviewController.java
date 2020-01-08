@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -542,7 +543,21 @@ public class MlfrontReviewController {
 		mlfrontReviewReq.setReviewStatus(1);
 		mlfrontReviewReq.setReviewFrom(reviewFrom);
 		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReviewReq);
-		return Msg.success().add("mlfrontReviewList", mlfrontReviewList);
+		
+		MlfrontReview mlfrontReviewOne = new MlfrontReview();
+		
+		MlbackReviewImg mlbackReviewImgOneReq = new MlbackReviewImg();
+		List<List<MlbackReviewImg>> mlfrontReviewImgList = new ArrayList<List<MlbackReviewImg>>();
+		
+		List<MlbackReviewImg> mlfrontReviewImgFirstList = new ArrayList<MlbackReviewImg>();
+		for(int i=0;i<mlfrontReviewList.size();i++){
+			Integer reviewId = mlfrontReviewOne.getReviewId();
+			mlbackReviewImgOneReq.setReviewId(reviewId);
+			mlbackReviewImgOneReq.setReviewimgSortOrder(1);
+			mlfrontReviewImgFirstList = mlbackReviewImgService.selectMlbackReviewImgByRIdAndImgSort(mlbackReviewImgOneReq);
+			mlfrontReviewImgList.add(mlfrontReviewImgFirstList);
+		}
+		return Msg.success().add("mlfrontReviewList", mlfrontReviewList).add("mlfrontReviewImgList", mlfrontReviewImgList);
 		
 	}
 }
