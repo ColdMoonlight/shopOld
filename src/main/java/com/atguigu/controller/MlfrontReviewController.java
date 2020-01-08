@@ -544,14 +544,12 @@ public class MlfrontReviewController {
 		mlfrontReviewReq.setReviewFrom(reviewFrom);
 		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReviewReq);
 		
-		MlfrontReview mlfrontReviewOne = new MlfrontReview();
-		
 		MlbackReviewImg mlbackReviewImgOneReq = new MlbackReviewImg();
 		List<List<MlbackReviewImg>> mlfrontReviewImgList = new ArrayList<List<MlbackReviewImg>>();
 		
 		List<MlbackReviewImg> mlfrontReviewImgFirstList = new ArrayList<MlbackReviewImg>();
 		for(int i=0;i<mlfrontReviewList.size();i++){
-			Integer reviewId = mlfrontReviewOne.getReviewId();
+			Integer reviewId = mlfrontReviewList.get(i).getReviewId();
 			mlbackReviewImgOneReq.setReviewId(reviewId);
 			mlbackReviewImgOneReq.setReviewimgSortOrder(1);
 			mlfrontReviewImgFirstList = mlbackReviewImgService.selectMlbackReviewImgByRIdAndImgSort(mlbackReviewImgOneReq);
