@@ -351,6 +351,9 @@ public class MlbackProductController {
 				Integer categoryIdsInt = Integer.parseInt(categoryIdsStr);
 				mlbackCategoryReq.setCategoryId(categoryIdsInt);
 				MlbackCategoryList = mlbackCategoryService.selectMlbackCategory(mlbackCategoryReq);
+				if(!(MlbackCategoryList.size()>0)){
+					continue;
+				}
 				mlbackCategoryRes = MlbackCategoryList.get(0);
 				
 				//从该中取的老的产品串串
