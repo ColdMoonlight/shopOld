@@ -536,10 +536,12 @@ public class MlfrontReviewController {
 	 */
 	@RequestMapping(value="/selectReviewListFrom",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg selectReviewListFrom(HttpSession session,MlfrontReview mlfrontReview) {
+	public Msg selectReviewListFrom(HttpSession session,@RequestParam(value = "reviewFrom") Integer reviewFrom) {
 		
-		mlfrontReview.setReviewStatus(1);
-		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReview);
+		MlfrontReview mlfrontReviewReq = new MlfrontReview();
+		mlfrontReviewReq.setReviewStatus(1);
+		mlfrontReviewReq.setReviewFrom(reviewFrom);
+		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReviewReq);
 		return Msg.success().add("mlfrontReviewList", mlfrontReviewList);
 		
 	}
