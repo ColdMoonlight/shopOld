@@ -2687,11 +2687,11 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .menu_list-wap dl dd:first-child i.gw-i2.active{background:url(../../m/img/index/cut.png) no-repeat center;background-size:18px;}
 .menu_list-wap dl:last-child dd:first-child{border:none;}
 /****************瀑布流页面************************************/
-.list_pro_cont{width: 100%; height: auto; margin:30px auto;min-height: 600px;float: left;}
+.list_pro_cont{width: 100%; height: auto; margin:20px auto;min-height: 600px;float: left;}
 .list_pro_cont ul{width: 100%;}
 .list_pro_cont ul li{float:left; width:48%;background:#fff;position:relative;overflow:hidden;box-shadow:0 0 10px #bcbcbc}
-.list_pro_cont ul li:nth-of-type(odd){margin:0 0 20px 1.5%;}
-.list_pro_cont ul li:nth-of-type(even){margin:0 0 20px 1.5%;}
+.list_pro_cont ul li:nth-of-type(odd){margin:0 0 1.5% 1.5%;}
+.list_pro_cont ul li:nth-of-type(even){margin:0 0 1.5% 1.5%;}
 .list_pro_cont ul li img{width: 100%;}
 .time_namep2{ padding: 0; margin: 0;}
 .time_namep2 span{display: inline-block; text-align: center;width: 100%;margin: 0 0 10px;}
@@ -2700,13 +2700,14 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .btn_shop{display: inline-block;margin: 0 0 10px; background: #000; width: 150px;height: 30px; color: #fff;border-radius:3px; line-height: 30px; text-align: center;}
 .btn_shop:hover{color: #fff;}
 .btnlink{ text-align: center;}
-.statrnum{width: 100%; height: 30px;}
-.statrnum span{display: inline-block;width: 100%; height: 30px;}
-.statrnum1 span{background: #000; /* background: url(../../pc/img/wx.png) no-repeat */}
-.statrnum2 span{background: #f00;}
-.statrnum3 span{background: #f0f;}
-.statrnum4 span{background: #ff0;}
-.statrnum5 span{background: #00f;}
+.statrnum{width: 100%; height: 30px;text-align: center;margin: 10px 0 0;}
+.statrnum span{display: inline-block;width: 150px; height: 30px;}
+.statrnum1 span{background: url(../../m/img/index/wx.png) no-repeat 0 0}
+.statrnum2 span{background: url(../../m/img/index/wx.png) no-repeat 0 -30px}
+.statrnum3 span{background: url(../../m/img/index/wx.png) no-repeat 0 -60px}
+.statrnum4 span{background: url(../../m/img/index/wx.png) no-repeat 0 -90px}
+.statrnum5 span{background: url(../../m/img/index/wx.png) no-repeat 0 -120px}
+
 
 
 
