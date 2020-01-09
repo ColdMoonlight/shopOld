@@ -651,6 +651,13 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .btn_shop:hover{color: #fff;}
 .product-list_home{min-height: 600px;}
 .btnlink{text-align: center;padding:0;margin:0}
+.statrnum{width: 100%; height: 30px;}
+.statrnum span{display: inline-block;width: 100%; height: 30px;}
+.statrnum1 span{background: #000; /* background: url(../../pc/img/wx.png) no-repeat */}
+.statrnum2 span{background: #f00;}
+.statrnum3 span{background: #f0f;}
+.statrnum4 span{background: #ff0;}
+.statrnum5 span{background: #00f;}
 
 
 /***********/
