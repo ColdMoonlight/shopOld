@@ -49,263 +49,17 @@
 
 	<!-- main -->
 	<div class="main">
-		<div class="container">
+		<div class="container clearfix">
             <div class="list_pro_cont" id="waterfull">
             	<ul>
-            		<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-            		</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey BrowLuvme Honey Browm Hombre, 18 inch full lace wig!!! No blem Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey BrowLuvme Honey Browm Hombre, 18 inch full lace wig!!! No blem Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm HoLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No blembre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey BrowLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No blem Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey BrowmLuvme Honey Browm Hombre, 18 inch full lace wig!!! No ble Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme Honey BrLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleowm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme HoLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleney Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
-					<li>
-						<img src="${APP_PATH }/static/pc/huodong/mu_08.png">
-						<p class="p1">Luvme HoneLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bleLuvme Honey Browm Hombre, 18 inch full lace wig!!! No bley Browm Hombre, 18 inch full lace wig!!! No bleaching knots or coloring to do. Just Curl and Go! I love it!!</p>
-						<p>
-							<span class="time">by<i class="sp1">Cherie A McFadden</i></span>
-							 <span class="time">12/26/19</span>
-						</p>
-						<a class="a_btn" href="###">Shop This Look</a>
-					</li>
+            		
             	</ul>
+				<div id="imloading" style="width:150px;height:30px;line-height:30px;font-size:16px;text-align:center;border-radius:3px;opacity:0.7;background:#000;margin:10px auto 30px;color:#fff;display:none">
+				loading.....
+				</div>
             </div>
+			
+			
 		</div>
 	</div>
 
@@ -313,33 +67,109 @@
 	<script src="${APP_PATH }/static/js/masonry.min.js"></script>
 	<script type="text/javascript">
         $(function(){
+			// rec()
+			// function rec(){
+			// 	var mymessage=confirm("你喜欢javascript吗？");
+			// 	if(mymessage==true){
+			// 		document.write("很好，加油！");
+			// 	}else if(mymessage==false){
+			// 		document.write("要学javascript，而且必须学");
+			// 	}
+			// }
+			var masonrycont =$("#waterfull ul")
+			var loading=$('#imloading');
+			// 初始化loading状态
+			loading.data("on",true);
+			$.ajax({
+				url: "${APP_PATH}/MlfrontReview/selectReviewListFrom",
+					data:{
+					  "reviewFrom": 1
+					},
+					type: "POST",
+					success: function (result) {
+					  if (result.code == 100) {
+							console.log(result);
+							  resData = result.extend.mlfrontReviewList;
+							  resDataimg = result.extend.mlfrontReviewImgList;
+							  masonryHtml(masonrycont,resData,resDataimg)
+						  }
+					}
+			  });
+			function masonryHtml(parent, data1, data2){
+				var html = '';
+				for(var i=0;i<data1.length;i++){
+					var reviewProstarnum=data1[i].reviewProstarnum;
+					var statrnum = "";
+					  if(reviewProstarnum==1){
+						   statrnum ="statrnum1"
+					  }else if(reviewProstarnum==2){
+						   statrnum ="statrnum2"
+					  }else if(reviewProstarnum==3){
+						   statrnum ="statrnum3"
+					  }else if(reviewProstarnum==4){
+						   statrnum ="statrnum4"
+					  }else if(reviewProstarnum==5){
+						   statrnum ="statrnum5"
+					  }
+					// console.log(reviewProstarnum)
+					html += '<li class="item">';
+					// var data11 =data2[i];
+					 // console.log(data11);
+					for(var j=0;j<data2[i].length;j++){
+						// var data11 =data2[i][j].reviewimgUrl;
+						 // console.log(data11);
+					    html +=	'<img src="'+data2[i][j].reviewimgUrl+'" />';
+					 }	
+					 html += '<p class="statrnum '+statrnum+'"><span></span</p>'+
+					         '<p class="p_contpl">'+ data1[i].reviewDetailstr +'</p>'+
+							  '<p class="time_namep2">'+
+							  '<span class="time">by <i class="sp1"> '+ data1[i].reviewUname +'</i></span>'+
+							  '<span class="time">'+ data1[i].reviewCreatetime +'</span>'+
+							  '<p class="btnlink">'+
+							  '<a href="${APP_PATH }/MlbackProduct/topcProductDetailPage?productId='+data1[i].reviewPid+'" class="btn_shop">Shop This Look</a>'+
+							  '</p>';
+							  '</p>';
+					
+					 html += '</li>';
+				}
+				  parent.html(html);
 				/*瀑布流开始*/
-				var container = $('.list_pro_cont ul');
+				var $container = $('.list_pro_cont ul');
 				/*判断瀑布流最大布局宽度，最大为1280*/
 				function tores(){
 					var tmpWid=$(window).width();
 					if(tmpWid>1300){
 						tmpWid=1300;
 					}else{
-						var column=Math.floor(tmpWid/260);
-						tmpWid=column*260;
+						var column=Math.floor(tmpWid/325);
+						tmpWid=column*325;
 					}
-					$('.list_pro_cont').width(tmpWid);
+					$('.list_pro_cont ul').width(tmpWid);
 				}
 				tores();
 				$(window).resize(function(){
 					tores();
 				});
-				container.imagesLoaded(function(){
-				  container.masonry({
-					columnWidth: 260,
-					itemSelector : '.item',
-					isFitWidth: true,//是否根据浏览器窗口大小自动适应默认false
-					isAnimated: true,//是否采用jquery动画进行重拍版
-					isRTL:false,//设置布局的排列方式，即：定位砖块时，是从左向右排列还是从右向左排列。默认值为false，即从左向右
-					isResizable: true,//是否自动布局默认true
-				  });
+				$container.imagesLoaded( function(){
+					$container.masonry({
+							columnWidth: 325,
+							itemSelector : '.item',
+							isFitWidth: true,//是否根据浏览器窗口大小自动适应默认false
+							isRTL:false,//设置布局的排列方式，即：定位砖块时，是从左向右排列还是从右向左排列。默认值为false，即从左向右
+							isResizable: true,//是否自动布局默认true
+					});
 				});
+				/******************/
+				
+			}
+
+
+			
+			
+			
+			
+				
+				
 		})
 		
 		

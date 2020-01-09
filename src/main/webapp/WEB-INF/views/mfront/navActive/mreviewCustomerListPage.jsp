@@ -48,181 +48,95 @@
 	<jsp:include page="../mheader.jsp"></jsp:include>
 
 	<!-- main -->
+	<!-- main -->
 	<div class="main">
-		<div class="condition select">
-			<select class="select-item select-category" data-type="category"></select>
+		<div class="container clearfix" style="margin: 0;">
+            <div class="list_pro_cont" id="waterfull">
+            	<ul>
+            		
+            	</ul>
+            </div>
+			
+			
 		</div>
-		<div class="product-list"></div>
 	</div>
 
 	<jsp:include page="../mfooter.jsp"></jsp:include>
-
-	<script>
-		var condition = $('.select');
-		var productList = $('.product-list');
-		var sessionScopecategoryId = '${sessionScope.categoryId}';
-		//var cidA = window.location.href.split('?')[1].split('=');
-		var cidA = sessionScopecategoryId;
-
-		//default codition
-		getProductList({
-			"productCategoryid": cidA
-		});
-
-		/* category condition */
-		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			type: "GET",
-			success: function (data) {
-				if (data.code === 100) {
-					var resData = data.extend.mlbackCategorydownEr;
-					// console.log(resData);
-					renderCondition($('.select-item.select-category'), resData)
-					$('.select-item').each(function (i, item) {
-						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
-							$(item).on('change', function () {
-								//console.log($('.select-category').val(), $('.select-color').val());
-								getProductList({
-									"productCategoryid": $('.select-category').val() || cidA[1]
-								});
-							})
-
-						}
-					})
-
-				} else {
-					renderErrorMsg(prodcutBox, 'No product-related data was obtained');
-				}
-			}
-		});
-		/* product list for category */
-		function getProductList(data) {
+	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
+    <script src="${APP_PATH }/static/js/masonry.min.js"></script>
+	<script type="text/javascript">
+        $(function(){
+			
+			var masonrycont =$("#waterfull ul")
 			$.ajax({
-				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
-				data: JSON.stringify(data),
-				dataType: "JSON",
-				contentType: 'application/json',
-				type: "POST",
-				success: function (data) {
-//					console.log("data.extend.mlbackProductResList");
-//					console.log(JSON.parse(data));
-//					console.log("data.extend.mlbackProductResList");
-					//从类别中获取fb所需要的当前页面的类下产品
-					var shopidlist = toFbidsPurchase((JSON.parse(data)).extend.mlbackProductResList);
-					fbq('track', 'ViewCategory', {
-			              content_ids: [shopidlist],
-			              content_type: 'product'
-			            });
-					// console.log("shopidlist");
-					// console.log(shopidlist);
-					// console.log("shopidlist");
-					var data = JSON.parse(data);
-					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
-					} else {
-						renderErrorMsg(productList, 'No product-related data was obtained');
+				url: "${APP_PATH}/MlfrontReview/selectReviewListFrom",
+					data:{
+					  "reviewFrom": 1
+					},
+					type: "POST",
+					success: function (result) {
+					  if (result.code == 100) {
+							console.log(result);
+							  resData = result.extend.mlfrontReviewList;
+							  resDataimg = result.extend.mlfrontReviewImgList;
+							  masonryHtml(masonrycont,resData,resDataimg)
+						  }
 					}
-				},
-				error: function (error) {
-					if (error.status === 400) {
-						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
-						setTimeout(function () {
-							window.location.href = "${APP_PATH}/index/isMobileOrPc";
-						}, 3000);
-					}
+			  });
+			function masonryHtml(parent, data1, data2){
+				var html = '';
+				for(var i=0;i<data1.length;i++){
+					var reviewProstarnum=data1[i].reviewProstarnum;
+					var statrnum = "";
+					  if(reviewProstarnum==1){
+						   statrnum ="statrnum1"
+					  }else if(reviewProstarnum==2){
+						   statrnum ="statrnum2"
+					  }else if(reviewProstarnum==3){
+						   statrnum ="statrnum3"
+					  }else if(reviewProstarnum==4){
+						   statrnum ="statrnum4"
+					  }else if(reviewProstarnum==5){
+						   statrnum ="statrnum5"
+					  }
+					
+					html += '<li class="item">';
+					// var data11 =data2[i];
+					 // console.log(data11);
+					for(var j=0;j<data2[i].length;j++){
+						// var data11 =data2[i][j].reviewimgUrl;
+						 // console.log(data11);
+					    html +=	'<img src="'+data2[i][j].reviewimgUrl+'" />';
+					 }	
+					 html +=  '<p class="statrnum '+statrnum+'"><span></span</p>'+
+					          '<p class="p_contpl">'+ data1[i].reviewDetailstr +'</p>'+
+							  '<p class="time_namep2">'+
+							  '<span class="time">by <i class="sp1"> '+ data1[i].reviewUname +'</i></span>'+
+							  '<span class="time">'+ data1[i].reviewCreatetime +'</span>'+
+							  '</p>'+
+							  '<p class="btnlink">'+
+							  '<a href="${APP_PATH }/MlbackProduct/tomProductDetailPage?productId='+data1[i].reviewPid+'" class="btn_shop">Shop This Look</a>'+
+							  '</p>';
+					 html += '</li>';
 				}
-			});
-		}
-		//计算fb所需要的当前页面的类下产品
-		function toFbidsPurchase(resData){
-	       	var infoStrlids = '';
-	       	var infoRelids = '';
-	       	for(var i=0;i<resData.length;i++){
-	       		infoStrlids=infoStrlids+resData[i].productId+',';
-	       	}
-	       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
-	       	return infoRelids;
-	       }
-
-
-		function renderErrorMsg(parent, msg) {
-			parent.html('<p>' + msg + '</p>');
-		}
-
-		function rednerProduct(parent, data) {
-			var html = '';
-			if (data.length > 0) {
-				for (var i = 0; i < data.length; i += 1) {
-					var productactoffif = data[i].productActoffIf;
-					// console.log(productactoffif)
-					var productactoffid  =  data[i].productActoffid;
-					 // console.log(productactoffid)  
-					var cp_icon = "";
-					var showspan = "";
-					if(productactoffif == 1){
-								  if(productactoffid==1){
-									   showspan ="showactive1"
-								  }else if(productactoffid==2){
-									   showspan ="showactive2"
-								  }else if(productactoffid==3){
-									   showspan ="showactive3"
-								  }else if(productactoffid==4){
-									   showspan ="showactive4"
-								  }
-								  
-					}else{
-								   showspan ="hideactive"
-					}
-					html += '<div class="product-item">' +
-					 '<span class="hui_icon '+showspan+'"></span>'+
-						'<div class="product-img">' +
-						/* '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' + */
-						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-						'<img src="' + data[i].productMainimgurl + '" alt="">' +
-						'</a>' +
-						'</div>' +
-						'<div class="product-desc">' +
-						'<div class="product-title">' +
-						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
-						'</div>' +
-						'<div class="product-type"></div>' +
-						'<div class="product-data">' +
-						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
-						'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
-						' Review(s)</span>' +
-						'</div>' +
-						'<div class="product-price">' +
-						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
-							.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
-						'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
-						'</span>' +
-						'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
-						'</div>' +
-						'</div>' +
-						'</div>';
-				}
-
-				parent.html(html);
-			} else {
-				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
-			}
-		}
-
-		function renderCondition(parent, data, defaultHtml) {
-			var html = defaultHtml || '';
-			html += ''
-
-			for (var i = 0, len = data.length; i < len; i += 1) {
-				if (data[i].categoryId === parseInt(cidA[1])) {
-					// console.log("*********")
-					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
-				} else {
-					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
-				}
+				  parent.html(html);
+				/*瀑布流开始*/
+				var $container = $('.list_pro_cont ul');
+				/*判断瀑布流最大布局宽度，最大为1280*/
+				$container.imagesLoaded( function(){
+					$container.masonry({
+							itemSelector : '.item',
+							isFitWidth: true,//是否根据浏览器窗口大小自动适应默认false
+							isRTL:false,//设置布局的排列方式，即：定位砖块时，是从左向右排列还是从右向左排列。默认值为false，即从左向右
+							isResizable: true,//是否自动布局默认true
+					});
+				});
 			}
 
-			parent.html(html);
-		}
+		})
+		
+		
+		
 	</script>
 	<!-- megalook-->
   	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
