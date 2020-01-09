@@ -639,13 +639,18 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .maskdd{display: none; width: 68px; height: 68px; position: absolute; top: 0; left: 0; z-index: 3;}
 .reviews-img-list{position: relative;}
 /****************瀑布流页面************************************/
-.list_pro_cont{width: 1300px; height: auto; margin: 0 auto;min-height: 600px;}
+.list_pro_cont{width: 1300px; height: auto; margin:30px auto;min-height: 600px;float: left;}
 .list_pro_cont ul{width: 100%;}
-.list_pro_cont ul li{float:left;width:260px;background:#fff;position:relative;overflow:hidden;box-shadow:0 0 10px #bcbcbc}
-.list_pro_cont ul li img{width: 260px;}
-
-
-
+.list_pro_cont ul li{float:left;margin: 0 10px 20px; width:305px;background:#fff;position:relative;overflow:hidden;box-shadow:0 0 10px #bcbcbc}
+.list_pro_cont ul li img{width: 305px;}
+.time_namep2{ padding: 0; margin: 0;}
+.time_namep2 span{display: inline-block; text-align: center;width: 100%;margin: 0 0 10px;}
+.time_namep2 span i{font-style: normal;font-weight: bold; color: #333;}
+.p_contpl{text-align: left;padding: 10px;word-wrap:break-word;margin: 0;}
+.btn_shop{display: inline-block;margin: 0 45px 10px; background: #000; width: 150px;height: 30px; color: #fff;border-radius:3px; line-height: 30px; text-align: center;}
+.btn_shop:hover{color: #fff;}
+.product-list_home{min-height: 600px;}
+.btnlink{text-align: center;padding:0;margin:0}
 
 
 /***********/
