@@ -89,6 +89,29 @@
     <div class="item">
       <a href="javascript:;">
         <i class="glyphicon glyphicon-chevron-right"></i>
+        <span class="text">video管理</span></a>
+    </div>
+    <ul class="children">
+      <li>
+        <div class="item">
+          <a href="${APP_PATH }/MlbackVideoShowArea/toMlbackVideoShowAreaPage">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">video展区列表</span></a>
+        </div>
+      </li>
+      <li>
+        <div class="item">
+          <a href="${APP_PATH }/MlbackSlide/toMlbackSlidePage">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">video管理</span></a>
+        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <div class="item">
+      <a href="javascript:;">
+        <i class="glyphicon glyphicon-chevron-right"></i>
         <span class="text">地域运费定价管理</span></a>
     </div>
     <ul class="children">
