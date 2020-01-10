@@ -873,4 +873,108 @@ public class UPloadController {
 		//把文件存储的url存到数据库中
 		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
 	}
+	
+	/**
+	 * 7.1	useOn	0505
+	 * uploadCouponWapImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadVideoShowAreaWapImg")
+	@ResponseBody
+	public Msg uploadVideoShowAreaWapImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/VideoShowArea/";
+		//存储图片
+		String returnUrl = UpImgUtils.keepVideoShowAreaWapFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String SlideIdstr = aa[1];
+		
+		int SlideIdstrInt = Integer.parseInt(SlideIdstr);
+		
+		System.out.println("SlideIdstr:"+SlideIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlbackSlide mlbackSlide = new MlbackSlide();
+		
+		mlbackSlide.setSlideId(SlideIdstrInt);
+		//win环境下
+		mlbackSlide.setSlideWapimgurl(returnReaUrlAll);
+
+		mlbackSlideService.updateByPrimaryKeySelective(mlbackSlide);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	/**
+	 * 5.2	useOn	0505
+	 * uploadCouponPcImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadVideoShowAreaPcImg")
+	@ResponseBody
+	public Msg uploadVideoShowAreaPcImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/VideoShowArea/";
+		//存储图片
+		String returnUrl = UpImgUtils.keepVideoShowAreaPcFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String SlideIdstr = aa[1];
+		
+		int SlideIdInt = Integer.parseInt(SlideIdstr);
+		
+		System.out.println("SlideIdstr:"+SlideIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		MlbackSlide mlbackSlide = new MlbackSlide();
+		
+		mlbackSlide.setSlideId(SlideIdInt);
+		//环境下
+		mlbackSlide.setSlidePcimgurl(returnReaUrlAll);
+		
+		mlbackSlideService.updateByPrimaryKeySelective(mlbackSlide);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
 }
