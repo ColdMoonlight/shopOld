@@ -478,15 +478,15 @@
 				$(":input[name='videoPcstatus']").val(data.videoPcstatus);
 
 				$(":input[name='videoIfproorcateorpage']").val(data.videoIfproorcateorpage);
-				if(data.actshowproIfproORcate==0){
+				if(data.videoIfproorcateorpage==0){
 					$(".zt_select").hide();
 					$(".lei_select").hide();
 					$(".cp_select").show();
-				}else if(data.actshowproIfproORcate==1){
+				}else if(data.videoIfproorcateorpage==1){
 					$(".cp_select").hide();
 					$(".zt_select").hide();
 					$(".lei_select").show();
-				}else if(data.actshowproIfproORcate==2){
+				}else if(data.videoIfproorcateorpage==2){
 					$(".cp_select").hide();
 					$(".lei_select").hide();
 					$(".zt_select").show();
