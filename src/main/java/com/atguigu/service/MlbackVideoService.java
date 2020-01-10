@@ -77,9 +77,23 @@ public class MlbackVideoService {
 	 * @exception 查看全部用户信息
 	 * 
 	 * */
+	public List<MlbackVideo> selectMlbackvideoByVideoAreaCount(MlbackVideo mlbackVideoReq) {
+		List<MlbackVideo>  MlbackVideoList = mlbackVideoMapper.selectMlbackvideoByVideoAreaCount(mlbackVideoReq);
+		return MlbackVideoList;
+		
+	}
+	
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 查看全部用户信息
+	 * 
+	 * */
 	public List<MlbackVideo> selectMlbackvideoByVideoArea(MlbackVideo mlbackVideoReq) {
 		List<MlbackVideo>  MlbackVideoList = mlbackVideoMapper.selectMlbackvideoByVideoArea(mlbackVideoReq);
 		return MlbackVideoList;
+		
+		
 	}
 
 }

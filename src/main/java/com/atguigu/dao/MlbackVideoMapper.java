@@ -35,6 +35,8 @@ public interface MlbackVideoMapper {
     MlbackVideo selectMlbackVideoById(MlbackVideo example);
     //查询全部登陆用户
 	List<MlbackVideo> selectMlbackVideoGetAll();
+	
+	List<MlbackVideo> selectMlbackvideoByVideoAreaCount(MlbackVideo mlbackVideo);
 
 	List<MlbackVideo> selectMlbackvideoByVideoArea(MlbackVideo mlbackVideo);
     
