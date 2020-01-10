@@ -8,6 +8,7 @@
 .nav_boxfirst{width: 100%;position: relative;}
 .navul{ text-align: center;width: 100%;}
 .navul li{line-height: 60px;margin: 0 15px; font-weight: bold; display:inline-block;}
+.navul li a{font-size: 14px;}
 .menu_list-wap{opacity: 0;
  -ms-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
@@ -21,9 +22,11 @@
 .menu_list-wap{width: 1300px; height:auto; padding: 20px 0; position: absolute;  top: 49px; left: 0; z-index: -99;}
 .menu_list-wap dl{width:200px; float: left; margin: 0 20px;}
 .menu_list-wap dl dd{ line-height: 30px;}
-.menu_list-wap dl dd a{font-weight: normal; color: #444;}
-.menu_list-wap dl dd:nth-of-type(1) a{color: #222;font-weight: bold;font-size: 12px;}
+.menu_list-wap dl dd a{font-weight: normal; color: #444;font-size:12px;}
+.menu_list-wap dl dd:nth-of-type(1) a{color: #222;font-weight: bold;font-size:12px;}
 .menu_list-wap dl dd a:hover{color: #444;}
+.menu_list-wap dl dd.dljc a{font-weight: bold;font-size: 12px;color: #222;}
+
 .menu_list-wap.wrap_active{opacity: 1; z-index: 2; top: 49px; display: block;}
 .navbar_itemContent-background{
 	 overflow: hidden;
@@ -658,6 +661,9 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .statrnum3 span{background: url(../../m/img/index/wx.png) no-repeat 0 -60px}
 .statrnum4 span{background: url(../../m/img/index/wx.png) no-repeat 0 -90px}
 .statrnum5 span{background: url(../../m/img/index/wx.png) no-repeat 0 -120px}
+/**************************************/
+.videocont{width: 100%;min-height: 600px;}
+
 
 
 /***********/

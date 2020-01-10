@@ -54,9 +54,6 @@
             	<ul>
             		
             	</ul>
-				<div id="imloading" style="width:150px;height:30px;line-height:30px;font-size:16px;text-align:center;border-radius:3px;opacity:0.7;background:#000;margin:10px auto 30px;color:#fff;display:none">
-				loading.....
-				</div>
             </div>
 			
 			

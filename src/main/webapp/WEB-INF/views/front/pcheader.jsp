@@ -219,10 +219,11 @@
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a>';
 					}else if(twonav == "Activty"){
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/Activty.html">'+ data1[i].categoryName +'</a>';
+					}else if(twonav == "CUSTOMER-VOICE"){
+					    html += '<li class="home-menu_list '+classimg+'"><a href="javascript:void(0)">'+ data1[i].categoryName +'</a>';		   
 					}else{
 						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>';
 					}
-					
 
 					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
@@ -247,9 +248,20 @@
 								   var threenav =data2[i][j][k].categorySeo;
 								   if(threenav==""){
 								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   }else if(threenav=="Customer-Videos"){
+									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   }else if(threenav=="Shop-By-Look"){
+									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   }else if(threenav=="Photo-Gallery"){
+									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dd>';     
 								   }else{
 								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
 								   }
+								   
+
+								   
+								   
+								   
 								     // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';   
 							   }
 							     html +=  '</dl>';
