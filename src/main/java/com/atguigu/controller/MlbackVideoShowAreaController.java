@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackProduct;
+import com.atguigu.bean.MlbackVideo;
 import com.atguigu.bean.MlbackVideoShowArea;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
@@ -24,6 +25,7 @@ import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
+import com.atguigu.service.MlbackVideoService;
 import com.atguigu.service.MlbackVideoShowAreaService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.IfMobileUtils;
@@ -44,6 +46,9 @@ public class MlbackVideoShowAreaController {
 	
 	@Autowired
 	MlbackCategoryService mlbackCategoryService;
+	
+	@Autowired
+	MlbackVideoService mlbackVideoService;
 	
 	/**
 	 * 1.0	onuse	200104
@@ -214,7 +219,21 @@ public class MlbackVideoShowAreaController {
 		//接受信息
 		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreaGetAll();
 		
-		return Msg.success().add("resMsg", "查看上架状态的下的全部产品").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList);
+		MlbackVideo mlbackVideoReq = new MlbackVideo();
+		List<MlbackVideo> mlbackVideoList = new ArrayList<MlbackVideo>();
+		List<Integer> videoNumByAreaListList = new ArrayList<Integer>();
+		for(MlbackVideoShowArea mlbackVideoShowAreaOne:mlbackVideoShowAreaList){
+			Integer videoshowareaId = mlbackVideoShowAreaOne.getVideoshowareaId();
+			mlbackVideoReq.setVideoArea(videoshowareaId);
+			mlbackVideoList = mlbackVideoService.selectMlbackvideoByVideoAreaCount(mlbackVideoReq);
+			if(mlbackVideoList.size()>0){
+				videoNumByAreaListList.add(mlbackVideoList.size());
+			}else{
+				videoNumByAreaListList.add(0);
+			}
+		}
+		
+		return Msg.success().add("resMsg", "查看上架状态的下的全部产品").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList).add("videoNumByAreaListList", videoNumByAreaListList);
 		
 	}
 

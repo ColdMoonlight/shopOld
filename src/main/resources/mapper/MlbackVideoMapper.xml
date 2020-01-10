@@ -533,6 +533,13 @@
     from tb_mlback_video order by video_id desc
   </select>
   
+  <!-- selectMlbackvideoByVideoAreaCount -->
+  <select id="selectMlbackvideoByVideoAreaCount" parameterType="com.atguigu.bean.MlbackVideo" resultMap="BaseResultMap">
+    select video_id
+    from tb_mlback_video 
+    where video_area = #{videoArea,jdbcType=INTEGER}
+  </select>
+  
    <!-- selectMlbackvideoByVideoArea -->
   <select id="selectMlbackvideoByVideoArea" parameterType="com.atguigu.bean.MlbackVideo" resultMap="BaseResultMap">
     select *

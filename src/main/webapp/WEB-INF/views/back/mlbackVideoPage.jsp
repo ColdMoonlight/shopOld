@@ -458,6 +458,7 @@
 				$(":input[name='videoCateid']").val(data.videoCateid);/*****************/
 				$(":input[name='videoSeoname']").val(data.videoSeoname);
 				$(":input[name='videoPageseoname']").val(data.videoPageseoname);
+//				$(":input[name='videoVideoSeoname']").val(data.videoVideoSeoname);
 				/* if (data.actshowproImgwapurl && data.actshowproImgwapurl.length) {
 					var el = $(".upload-img-btn.img");
 					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
