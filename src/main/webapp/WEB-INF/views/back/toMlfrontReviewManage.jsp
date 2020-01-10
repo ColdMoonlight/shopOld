@@ -105,6 +105,9 @@
 							       </div>
 							</div>
 							<div id="productTabContent" class="tabreview tab-content">
+								<div id="wei_num" style="display: none; text-align:center;min-height: 600px;">
+								  <h3>当前未查到数据</h3>	
+								</div>
 								<div class="tab-pane in active" id="allreview">
 								    <!-- table-content -->
 								    <div class="table-content">
@@ -350,7 +353,9 @@
 		          if (result.code == 100) {
 					  var task = result.extend.pageInfo.list;
 					  if(task.length==0){
-						  alert("没有查到")
+						  // alert("没有查到")
+						  $("#allreview").hide();
+						  $("#wei_num").show();
 					  }
 		            console.log(result)
 					//1、解析并显示员工数据
