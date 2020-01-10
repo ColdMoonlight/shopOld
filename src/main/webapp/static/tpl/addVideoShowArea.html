@@ -1,0 +1,82 @@
+<div class="op">
+    <a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 新增/编辑</a>
+    <button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
+</div>
+<form class="form-horizontal">
+	<ul id="categoryTab" class="nav nav-tabs">
+		<li class="active"><a data-href="#general" data-toggle="tab">基本</a></li>
+		<li><a data-href="#pic" data-toggle="tab">图片</a></li>
+	</ul>
+	<div id="categoryTabContent" class="tab-content">
+		<input type="text" style="display: none;" placeholder="videoshowareaId" name="videoshowareaId">
+		<div class="tab-pane in active" id="general">
+		 	<div class="form-group">
+	            <label for="videoshowareaName" class="col-sm-2 control-label">Video展区name:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="videoshowareaName" name="videoshowareaName">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="videoshowareaAreanum" class="col-sm-2 control-label">Video展区位置:</label>
+	             <div class="col-sm-10">
+			  	    <select name="videoshowareaAreanum" class="form-control">
+			  	      <option value ="0" selected="selected">未选择位置</option>
+					  <option value ="1">1-首页活动</option>
+					  <option value ="2">2-Video页面</option>
+					</select>
+	             </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="videoshowareaOrderthNum" class="col-sm-2 control-label">同级次序:</label>
+	             <div class="col-sm-10">
+			  	    <select name="videoshowareaOrderthNum" class="form-control">
+					  <option value ="1" selected="selected">1</option>
+					  <option value ="2">2</option>
+					  <option value ="3">3</option>
+					  <option value ="4">4</option>
+					  <option value ="5">5</option>
+					  <option value ="6">6</option>
+					  <option value ="7">7</option>
+				      <option value ="8">8</option>
+				      <option value ="9">9</option>
+				      <option value ="10">10</option>
+				      <option value ="11">11</option>
+				      <option value ="12">12</option>
+					</select>
+	             </div>
+	        </div>
+	        <div class="form-group">
+	             <label for="videoshowareaWapstatus" class="col-sm-2 control-label">手机图状态:</label>
+	             <div class="col-sm-10">
+	                 <select name="videoshowareaWapstatus" class="form-control">
+					  <option value ="0" selected="selected">不展示</option>
+					  <option value ="1">展示</option>
+					</select>
+	             </div>
+	         </div>
+	         <div class="form-group">
+	             <label for="videoshowareaPcstatus" class="col-sm-2 control-label">pc图状态:</label>
+	             <div class="col-sm-10">
+	                 <select name="videoshowareaPcstatus" class="form-control">
+					  <option value ="0" selected="selected">不展示</option>
+					  <option value ="1">展示</option>
+					</select>
+	             </div>
+	         </div>
+	       </div>     
+		</div>
+		<div class="tab-pane" id="pic">
+			<h3>Video的展区主图：</h3>
+		    <div>
+		    	 <div class="upload-img-btn img">
+		    	 <span>手机图</span>
+		            <input class="uploadImg" type="file" name="file" id="file1">
+		        </div>
+		        <span>Pc图</span>
+		        <div class="upload-img-btn img2">
+		            <input class="uploadImg" type="file" name="file" id="file2">
+		        </div>
+		    </div>
+		</div>
+	</div>             
+</form>
