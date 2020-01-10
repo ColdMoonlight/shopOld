@@ -16,6 +16,7 @@ import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.MlbackShowArea;
 import com.atguigu.bean.MlbackSlide;
+import com.atguigu.bean.MlbackVideoShowArea;
 import com.atguigu.bean.Msg;
 import com.atguigu.service.MlbackActShowProService;
 import com.atguigu.service.MlbackAdminService;
@@ -26,10 +27,12 @@ import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlbackShowAreaService;
 import com.atguigu.service.MlbackSlideService;
+import com.atguigu.service.MlbackVideoShowAreaService;
 import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.URLLocationUtils;
 import com.atguigu.utils.UpImgUtils;
+import com.atguigu.utils.UpVideoImgUtils;
 
 
 @Controller
@@ -65,6 +68,9 @@ public class UPloadController {
 	
 	@Autowired
 	MlbackSlideService mlbackSlideService;
+	
+	@Autowired
+	MlbackVideoShowAreaService mlbackVideoShowAreaService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -875,15 +881,14 @@ public class UPloadController {
 	}
 	
 	/**
-	 * 7.1	useOn	0505
-	 * uploadCouponWapImg
+	 * 8.1	useOn	200110
+	 * uploadVideoShowAreaWapImg
 	 * @param jsp
 	 * @return 
 	 * */
 	@RequestMapping("/uploadVideoShowAreaWapImg")
 	@ResponseBody
 	public Msg uploadVideoShowAreaWapImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
-		
 		
 		String contextPathStr = res.getContextPath();    
         System.out.println("contextPathStr:"+contextPathStr);
@@ -900,25 +905,23 @@ public class UPloadController {
 		
 		String path="static/img/VideoShowArea/";
 		//存储图片
-		String returnUrl = UpImgUtils.keepVideoShowAreaWapFile(res);
+		String returnUrl = UpVideoImgUtils.keepVideoShowAreaWapFile(res);
 		
 		String[] aa = returnUrl.split("%");
 		String returnReaUrl =aa[0];
-		String SlideIdstr = aa[1];
+		String VideoshowareaIdstr = aa[1];
 		
-		int SlideIdstrInt = Integer.parseInt(SlideIdstr);
+		int VideoshowareaIdInt = Integer.parseInt(VideoshowareaIdstr);
 		
-		System.out.println("SlideIdstr:"+SlideIdstr);
+		System.out.println("VideoshowareaIdstr:"+VideoshowareaIdstr);
 		
 		String returnReaUrlAll = pathBig+path+returnReaUrl;
 		
-		MlbackSlide mlbackSlide = new MlbackSlide();
-		
-		mlbackSlide.setSlideId(SlideIdstrInt);
-		//win环境下
-		mlbackSlide.setSlideWapimgurl(returnReaUrlAll);
-
-		mlbackSlideService.updateByPrimaryKeySelective(mlbackSlide);
+		//通过id更新本条的w图片
+		MlbackVideoShowArea mlbackVideoShowAreaReq = new MlbackVideoShowArea();
+		mlbackVideoShowAreaReq.setVideoshowareaId(VideoshowareaIdInt);
+		mlbackVideoShowAreaReq.setVideoshowareaWapimgurl(returnReaUrlAll);
+		mlbackVideoShowAreaService.updateByPrimaryKeySelective(mlbackVideoShowAreaReq);
 		
 		System.out.println("returnReaUrl:"+returnReaUrl);
 		
@@ -927,8 +930,8 @@ public class UPloadController {
 	}
 	
 	/**
-	 * 5.2	useOn	0505
-	 * uploadCouponPcImg
+	 * 8.2	useOn	200110
+	 * uploadVideoShowAreaPcImg
 	 * @param jsp
 	 * @return 
 	 * */
@@ -946,30 +949,27 @@ public class UPloadController {
         
         System.out.println("basePathStr:"+basePathStr);
 		
-		
 		String pathBig = basePathStr;
 		
 		String path="static/img/VideoShowArea/";
 		//存储图片
-		String returnUrl = UpImgUtils.keepVideoShowAreaPcFile(res);
+		String returnUrl = UpVideoImgUtils.keepVideoShowAreaPcFile(res);
 		
 		String[] aa = returnUrl.split("%");
 		String returnReaUrl =aa[0];
-		String SlideIdstr = aa[1];
+		String VideoshowareaIdstr = aa[1];
 		
-		int SlideIdInt = Integer.parseInt(SlideIdstr);
+		int VideoshowareaIdInt = Integer.parseInt(VideoshowareaIdstr);
 		
-		System.out.println("SlideIdstr:"+SlideIdstr);
+		System.out.println("VideoshowareaIdstr:"+VideoshowareaIdstr);
 		
 		String returnReaUrlAll = pathBig+path+returnReaUrl;
-		
-		MlbackSlide mlbackSlide = new MlbackSlide();
-		
-		mlbackSlide.setSlideId(SlideIdInt);
-		//环境下
-		mlbackSlide.setSlidePcimgurl(returnReaUrlAll);
-		
-		mlbackSlideService.updateByPrimaryKeySelective(mlbackSlide);
+
+		//通过id更新本条的PC图片
+		MlbackVideoShowArea mlbackVideoShowAreaReq = new MlbackVideoShowArea();
+		mlbackVideoShowAreaReq.setVideoshowareaId(VideoshowareaIdInt);
+		mlbackVideoShowAreaReq.setVideoshowareaPcimgurl(returnReaUrlAll);
+		mlbackVideoShowAreaService.updateByPrimaryKeySelective(mlbackVideoShowAreaReq);
 		
 		System.out.println("returnReaUrl:"+returnReaUrl);
 		
