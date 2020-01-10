@@ -183,7 +183,21 @@ public class MlbackVideoShowAreaController {
 		//查询pc本位置下有多少Video展区
 		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreapcListByArea(mlbackVideoShowAreaReq);
 		
-		return Msg.success().add("resMsg", "查看该位置的轮播完毕").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList);
+		
+		MlbackVideo mlbackVideoReq = new MlbackVideo();
+		List<MlbackVideo> mlbackVideoList = new ArrayList<MlbackVideo>();
+		List<Integer> videoNumByAreaListList = new ArrayList<Integer>();
+		for(MlbackVideoShowArea mlbackVideoShowAreaOne:mlbackVideoShowAreaList){
+			Integer videoshowareaId = mlbackVideoShowAreaOne.getVideoshowareaId();
+			mlbackVideoReq.setVideoArea(videoshowareaId);
+			mlbackVideoList = mlbackVideoService.selectMlbackvideoByVideoAreaCount(mlbackVideoReq);
+			if(mlbackVideoList.size()>0){
+				videoNumByAreaListList.add(mlbackVideoList.size());
+			}else{
+				videoNumByAreaListList.add(0);
+			}
+		}
+		return Msg.success().add("resMsg", "查看该位置的轮播完毕").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList).add("videoNumByAreaListList", videoNumByAreaListList);
 	}
 	
 	
@@ -219,21 +233,7 @@ public class MlbackVideoShowAreaController {
 		//接受信息
 		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreaGetAll();
 		
-		MlbackVideo mlbackVideoReq = new MlbackVideo();
-		List<MlbackVideo> mlbackVideoList = new ArrayList<MlbackVideo>();
-		List<Integer> videoNumByAreaListList = new ArrayList<Integer>();
-		for(MlbackVideoShowArea mlbackVideoShowAreaOne:mlbackVideoShowAreaList){
-			Integer videoshowareaId = mlbackVideoShowAreaOne.getVideoshowareaId();
-			mlbackVideoReq.setVideoArea(videoshowareaId);
-			mlbackVideoList = mlbackVideoService.selectMlbackvideoByVideoAreaCount(mlbackVideoReq);
-			if(mlbackVideoList.size()>0){
-				videoNumByAreaListList.add(mlbackVideoList.size());
-			}else{
-				videoNumByAreaListList.add(0);
-			}
-		}
-		
-		return Msg.success().add("resMsg", "查看上架状态的下的全部产品").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList).add("videoNumByAreaListList", videoNumByAreaListList);
+		return Msg.success().add("resMsg", "查看上架状态的下的全部产品").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList);
 		
 	}
 
