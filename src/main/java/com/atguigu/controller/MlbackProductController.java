@@ -100,11 +100,13 @@ public class MlbackProductController {
 	 * @return 
 	 * */
 	@RequestMapping(value="/topcProductDetailPage",method=RequestMethod.GET)
-	public String topcProductDetailPage(HttpServletResponse rep,HttpServletRequest res,@RequestParam(value = "productId") Integer productId) throws Exception{
+	public String topcProductDetailPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productId") Integer productId) throws Exception{
 		//接收传递进来的参数
 		Integer productIdReq = productId;
 		//放回响应域中
 		res.setAttribute("productId", productIdReq);
+		//放回session域中
+		session.setAttribute("productDetailId", productIdReq);
 		//返回视图
 		return "front/pcproductDetails";
 	}
