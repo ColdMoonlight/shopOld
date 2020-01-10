@@ -1635,7 +1635,7 @@ a:focus {
 .address-details {
   display: flex;
   align-content: center;
-  padding: .5em 0;
+  padding: .5em .5em .5em 0;
 }
 
 .address-details .address {
@@ -1654,6 +1654,9 @@ a:focus {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	background:url(../../m/img/other/dw.png) no-repeat center left;
+	background-size:30px;
+	padding: 0 0 0 30px;
 }
 
 .address-details .address-i-name,
@@ -1664,11 +1667,13 @@ a:focus {
 .address-details .address-i-phone {
   margin-left: 1em;
 }
+.address-i-name{float: left;}
+.address-i-phone{float: right;}
 
 .address-details .address-i-address {
-  font-size: 12px;
+  font-size: 14px;
 }
-
+.address-i-item{margin: 5px 0 0; font-size: 14px;line-height: 18px;}
 /* address box */
 .form-group {
   /* display: flex; */
@@ -2707,8 +2712,8 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .statrnum3 span{background: url(../../m/img/index/wx.png) no-repeat 0 -60px}
 .statrnum4 span{background: url(../../m/img/index/wx.png) no-repeat 0 -90px}
 .statrnum5 span{background: url(../../m/img/index/wx.png) no-repeat 0 -120px}
-
-
-
+/************/
+.state_num{width: 100%; text-align: center; height: 100px;background:#ff1671;}
+.state_num span{line-height: 100px; text-align: center; display: inline-block; color: #fff;font-size: 14px;}
 
 

@@ -250,9 +250,6 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {}));
-			console.log("**********");
-			console.log(data);
-			console.log("**********");
 			$.ajax({
 				url: "${APP_PATH}/MlbackVideoShowArea/save",
 				data: data,
@@ -270,7 +267,7 @@
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
-					videoshowareaId: $(this).attr('del-id')
+					slideId: $(this).attr('del-id')
 			};
 			$.ajax({
 				url: "${APP_PATH}/MlbackVideoShowArea/delete",
@@ -286,57 +283,60 @@
 				}
 			});
 		});
+/*****************/
+		//编辑任务
+		$("#task_table").on("click", ".edit_btn", function () {
+			// tab tpl
+			loadTpl($(this).attr('edit-id'));
 
-		function loadTpl() {
+		});
+		function tianchong(data) {
+			$(":input[name='videoshowareaId']").val(data.videoshowareaId);
+			$(":input[name='videoshowareaName']").val(data.videoshowareaName);
+			$(":input[name='videoshowareaAreanum']").val(data.videoshowareaAreanum);
+			$(":input[name='videoshowareaOrderthNum']").val(data.videoshowareaOrderthNum);
+			if (data.videoshowareaWapimgurl && data.videoshowareaWapimgurl.length) {
+				var el = $(".upload-img-btn.img");
+				el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
+				setImage(el, data.videoshowareaWapimgurl);
+			}
+			$(":input[name='videoshowareaWapstatus']").val(data.videoshowareaWapstatus);
+			if (data.videoshowareaPcimgurl && data.videoshowareaPcimgurl.length) {
+				var el2 = $(".upload-img-btn.img2");
+				el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
+				setImage(el2, data.videoshowareaPcimgurl);
+			}
+			$(":input[name='videoshowareaPcstatus']").val(data.videoshowareaPcstatus);
+			$(":input[name='slideMotifytime']").val(data.slideMotifytime);
+			
+		}
+		
+/*************/
+
+		function loadTpl(videoshowareaId) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addVideoShowArea.html', function () {
-
+                  data = {
+                  	"videoshowareaId": videoshowareaId
+                  };
+                  $.ajax({
+                  	url: "${APP_PATH}/MlbackVideoShowArea/getOneMlbackVideoShowAreaDetail",
+                  	data: data,
+                  	type: "POST",
+                  	success: function (result) {
+                  		if (result.code == 100) {
+                  			obj = result.extend.mlbackVideoShowAreaOne;
+                  			// console.log(obj);
+                  			tianchong(obj);
+                  		} else {
+                  			alert("联系管理员");
+                  		}
+                  	}
+                  }); 
 			});
 		}
 
 		//编辑任务
-		$("#task_table").on("click", ".edit_btn", function () {
-			// tab tpl
-			loadTpl()
-			data = {
-				"videoshowareaId": $(this).attr('edit-id')
-			};
-			$.ajax({
-				url: "${APP_PATH}/MlbackVideoShowArea/getOneMlbackVideoShowAreaDetail",
-				data: data,
-				type: "POST",
-				success: function (result) {
-					if (result.code == 100) {
-						obj = result.extend.mlbackVideoShowAreaOne;
-						// console.log(obj);
-						tianchong(obj);
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
 
-			function tianchong(data) {
-				$(":input[name='videoshowareaId']").val(data.videoshowareaId);
-				$(":input[name='videoshowareaName']").val(data.videoshowareaName);
-				$(":input[name='videoshowareaAreanum']").val(data.videoshowareaAreanum);
-				$(":input[name='videoshowareaOrderthNum']").val(data.videoshowareaOrderthNum);
-				if (data.videoshowareaWapimgurl && data.videoshowareaWapimgurl.length) {
-					var el = $(".upload-img-btn.img");
-					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el, data.videoshowareaWapimgurl);
-				}
-				$(":input[name='videoshowareaWapstatus']").val(data.videoshowareaWapstatus);
-				if (data.videoshowareaPcimgurl && data.videoshowareaPcimgurl.length) {
-					var el2 = $(".upload-img-btn.img2");
-					el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el2, data.videoshowareaPcimgurl);
-				}
-				$(":input[name='videoshowareaPcstatus']").val(data.videoshowareaPcstatus);
-				$(":input[name='slideMotifytime']").val(data.slideMotifytime);
-				
-			}
-
-		});
 
 		$(document.body).on("change", "#file1", upload);
 		$(document.body).on("change", "#file2", uploadMainFu);
