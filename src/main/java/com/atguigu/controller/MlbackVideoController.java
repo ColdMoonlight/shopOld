@@ -112,8 +112,8 @@ public class MlbackVideoController {
 			mlbackProductRes = mlbackProductResList.get(0);
 			String Pname = mlbackProductRes.getProductName();
 			String Pseoname = mlbackProductRes.getProductSeo();
-			mlbackVideo.setVideoPagename(Pname);
-			mlbackVideo.setVideoPageseoname(Pseoname);//Pseoname
+			mlbackVideo.setVideoProname(Pname);
+			mlbackVideo.setVideoSeoname(Pseoname);//Pseoname
 		}else if(videoIfproorcateorpage==1){
 			//类
 			Integer cId = mlbackVideo.getVideoCateid();
@@ -126,8 +126,10 @@ public class MlbackVideoController {
 			mlbackCategoryRes = mlbackCategoryResList.get(0);
 			
 			String Cname = mlbackCategoryRes.getCategoryName();
-			String CategoryDesc = mlbackCategoryRes.getCategoryDesc();
-			mlbackVideo.setVideoCatename(CategoryDesc);//Cname
+//			String CategoryDesc = mlbackCategoryRes.getCategoryDesc();
+			String CategorySeo = mlbackCategoryRes.getCategorySeo();
+			mlbackVideo.setVideoCatename(Cname);//Cname
+			mlbackVideo.setVideoCateseoname(CategorySeo);
 		}else{
 			String pageSeoname = mlbackVideo.getVideoPageseoname();
 			mlbackVideo.setVideoPageseoname(pageSeoname);//pageSeoname
@@ -144,7 +146,8 @@ public class MlbackVideoController {
 			mlbackVideoService.insertSelective(mlbackVideo);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
-			//有id，updatemlbackVideoService.updateByPrimaryKeySelective(mlbackVideo);
+			//有id，update
+			mlbackVideoService.updateByPrimaryKeySelective(mlbackVideo);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}

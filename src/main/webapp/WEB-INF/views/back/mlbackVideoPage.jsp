@@ -45,7 +45,7 @@
 								<thead>
 									<tr>
 										<th>视频id</th>
-										<th>视频namename</th>
+										<th>视频name</th>
 										<th>父级别</th>
 										<th>本类的顺序</th>
 										<th>wap视频url</th>
@@ -174,11 +174,11 @@
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//为编辑按钮添加一个分类id
-				editBtn.attr("edit-id", item.videoProid);
+				editBtn.attr("edit-id", item.videoId);
 				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
 				//为删除按钮添加一个分类id
-				delBtn.attr("del-id", item.videoProid);
+				delBtn.attr("del-id", item.videoId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
 				//append方法执行完成以后还是返回原来的元素
 				
@@ -190,6 +190,7 @@
 					.append(videoWapstatus)
 					.append(videoPcvideurl)
 					.append(videoPcstatus)
+					.append(videoIfproorcateorpage)
 					.append(showid)
 					.append(videoSeoname)
 					.append(videoCreatetime)
