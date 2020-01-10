@@ -132,7 +132,6 @@
 			$.each(task, function (index, item) {
 				
 				var actshowproActnum 
-				
 				var videoAreaStr = "";
 				if (item.videoArea == 1) {
 					videoAreaStr = '1-首页活动';
