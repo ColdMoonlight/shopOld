@@ -24,6 +24,7 @@ import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackVideoShowAreaService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -136,76 +137,66 @@ public class MlbackVideoShowAreaController {
 					.add("mlbackVideoShowAreaOne", mlbackVideoShowAreaOne);
 	}
 	
-//	/**
-//	 * 6.0	UseNow	190905
-//	 * 查询wap不同位置的图片
-//	 * @param mlbackVideoShowArea
-//	 * @return 
-//	 */
-//	@RequestMapping(value="/getMlbackVideoShowAreawapListByArea",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getMlbackVideoShowAreawapListByArea(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackVideoShowArea mlbackVideoShowArea){
-//		//接受slideArea
-//		
-//		Integer videoshowareaAreanum = mlbackVideoShowArea.getVideoshowareaAreanum();
-//		
-//		MlbackVideoShowArea mlbackVideoShowAreaReq = new MlbackVideoShowArea();
-//		mlbackVideoShowAreaReq.setVideoshowareaAreanum(videoshowareaAreanum);
-//		mlbackVideoShowAreaReq.setVideoshowareaWapstatus(1);
-//		//查询本条
-//		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreawapListByArea(mlbackVideoShowAreaReq);
-//		MlbackVideoShowArea mlbackVideoShowAreaOne = new MlbackVideoShowArea();
-//		MlbackProduct mlbackProductOne = new MlbackProduct();
-//		List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
-//		//MlbackProductService
-//		if(mlbackVideoShowAreaList.size()>0){
-//			for(int i=0;i<mlbackVideoShowAreaList.size();i++){
-//				mlbackVideoShowAreaOne = mlbackVideoShowAreaList.get(i);
-//				Integer proId = mlbackVideoShowAreaOne.getSlideProid();
-//				mlbackProductOne.setProductId(proId);
-//				List<MlbackProduct> mlbackProductList  = mlbackProductService.selectMlbackProduct(mlbackProductOne);
-//				if(mlbackProductList.size()>0){
-//					mlbackProductResList.add(mlbackProductList.get(0));
-//				}
-//			}
-//		}
-//		return Msg.success().add("resMsg", "查看该位置的轮播完毕")
-//					.add("mlbackVideoShowAreaList", mlbackVideoShowAreaList).add("mlbackProductResList", mlbackProductResList);
-//	}
-//	
-//	/**
-//	 * 7.0	UseNow	190905
-//	 * 查询pc不同位置的图片
-//	 * @param MlbackVideoShowArea
-//	 * @return 
-//	 */
-//	@RequestMapping(value="/getMlbackVideoShowAreapcListByArea",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getMlbackVideoShowAreapcListByArea(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackVideoShowArea mlbackVideoShowArea){
-//		//接受slideArea
-//		Integer slideArea = mlbackVideoShowArea.getSlideArea();
-//		MlbackVideoShowArea mlbackVideoShowAreaReq = new MlbackVideoShowArea();
-//		mlbackVideoShowAreaReq.setSlideArea(slideArea);
-//		mlbackVideoShowAreaReq.setSlidePcstatus(1);
-//		//查询本条
-//		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreapcListByArea(mlbackVideoShowAreaReq);
-//		MlbackVideoShowArea mlbackVideoShowAreaOne = new MlbackVideoShowArea();
-//		MlbackProduct mlbackProductOne = new MlbackProduct();
-//		List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
-//		//MlbackProductService
-//		if(mlbackVideoShowAreaList.size()>0){
-//			for(int i=0;i<mlbackVideoShowAreaList.size();i++){
-//				mlbackVideoShowAreaOne = mlbackVideoShowAreaList.get(i);
-//				Integer proId = mlbackVideoShowAreaOne.getSlideProid();
-//				mlbackProductOne.setProductId(proId);
-//				List<MlbackProduct> mlbackProductList  = mlbackProductService.selectMlbackProduct(mlbackProductOne);
-//				if(mlbackProductList.size()>0){
-//					mlbackProductResList.add(mlbackProductList.get(0));
-//				}
-//			}
-//		}
-//		return Msg.success().add("resMsg", "查看该位置的轮播完毕")
-//					.add("mlbackVideoShowAreaList", mlbackVideoShowAreaList).add("mlbackProductResList", mlbackProductResList);
-//	}
+	/**
+	 * 6.0	onuse	20200110
+	 * 查询wap不同位置的图片
+	 * @param mlbackVideoShowArea
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackVideoShowAreawapListByArea",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackVideoShowAreawapListByArea(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackVideoShowArea mlbackVideoShowArea){
+		//接受VideoShowArea
+		Integer videoshowareaAreanum = mlbackVideoShowArea.getVideoshowareaAreanum();
+		
+		MlbackVideoShowArea mlbackVideoShowAreaReq = new MlbackVideoShowArea();
+		mlbackVideoShowAreaReq.setVideoshowareaAreanum(videoshowareaAreanum);	//0首页
+		mlbackVideoShowAreaReq.setVideoshowareaWapstatus(1);
+		//查询wap本位置下有多少Video展区
+		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreawapListByArea(mlbackVideoShowAreaReq);
+		
+		return Msg.success().add("resMsg", "查看该位置的轮播完毕").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList);
+	}
+	
+	/**
+	 * 7.0	onuse	20200110
+	 * 查询pc不同位置的图片
+	 * @param MlbackVideoShowArea
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackVideoShowAreapcListByArea",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackVideoShowAreapcListByArea(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackVideoShowArea mlbackVideoShowArea){
+		//接受VideoShowArea
+		Integer videoshowareaAreanum = mlbackVideoShowArea.getVideoshowareaAreanum();
+		
+		MlbackVideoShowArea mlbackVideoShowAreaReq = new MlbackVideoShowArea();
+		mlbackVideoShowAreaReq.setVideoshowareaAreanum(videoshowareaAreanum);	//0首页
+		mlbackVideoShowAreaReq.setVideoshowareaPcstatus(1);
+		//查询pc本位置下有多少Video展区
+		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreapcListByArea(mlbackVideoShowAreaReq);
+		
+		return Msg.success().add("resMsg", "查看该位置的轮播完毕").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList);
+	}
+	
+	
+	/**
+	 * 8.0	onuse	200103
+	 * 前台详情页面wap/pc的toVideoListPage
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/toVideoListPage",method=RequestMethod.GET)
+	 public String toVideoListPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+	  
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+	  
+		//返回视图
+		if(ifMobile.equals("1")){
+			return "mfront/video/videoList";
+		}else{
+			return "front/video/pcvideoList";
+		}
+	}
 
 }
