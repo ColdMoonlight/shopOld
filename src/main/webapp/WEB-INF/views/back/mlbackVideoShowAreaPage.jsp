@@ -250,6 +250,9 @@
 				obj[item.name] = item.value;
 				return obj
 			}, {}));
+			console.log("**********");
+			console.log(data);
+			console.log("**********");
 			$.ajax({
 				url: "${APP_PATH}/MlbackVideoShowArea/save",
 				data: data,
@@ -267,7 +270,7 @@
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
-					slideId: $(this).attr('del-id')
+					videoshowareaId: $(this).attr('del-id')
 			};
 			$.ajax({
 				url: "${APP_PATH}/MlbackVideoShowArea/delete",
