@@ -101,7 +101,7 @@
       </li>
       <li>
         <div class="item">
-          <a href="${APP_PATH }/MlbackSlide/toMlbackSlidePage">
+          <a href="${APP_PATH }/MlbackVideo/toMlbackVideoPage">
             <i class="glyphicon glyphicon-stats"></i>
             <span class="text">video管理</span></a>
         </div>

@@ -1,5 +1,6 @@
 package com.atguigu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAdmin;
+import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackVideoShowArea;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
@@ -197,6 +199,23 @@ public class MlbackVideoShowAreaController {
 		}else{
 			return "front/video/pcvideoList";
 		}
+	}
+	
+	/**
+	 * 12.0	UseNow	0527
+	 * 通过，类id,productColor,查询满足条件的全部产品
+	 * @param productCategoryid,productColor
+	 * @return MlbackVideoShowArea
+	 */
+	@RequestMapping(value="/getMlbackVideoShowAreaAllList",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getMlbackProductAllList(HttpServletResponse rep,HttpServletRequest res){
+		
+		//接受信息
+		List<MlbackVideoShowArea> mlbackVideoShowAreaList =mlbackVideoShowAreaService.selectMlbackVideoShowAreaGetAll();
+		
+		return Msg.success().add("resMsg", "查看上架状态的下的全部产品").add("mlbackVideoShowAreaList", mlbackVideoShowAreaList);
+		
 	}
 
 }

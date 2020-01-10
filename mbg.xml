@@ -13,6 +13,11 @@
 			connectionURL="jdbc:mysql://localhost:3306/ShopTemplate" userId="root"
 			password="root">
 		</jdbcConnection>
+		
+		<!-- <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ShopNew" userId="root"
+			password="root">
+		</jdbcConnection> -->
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -58,8 +63,9 @@
 		<table tableName="tb_mlback_addorderviewdetail" domainObjectName="MlbackAddOrderViewDetail"></table>
 		<table tableName="tb_mlback_addcheakoutviewdetail" domainObjectName="MlbackAddCheakoutViewDetail"></table>
 		<table tableName="tb_mlback_shipemail" domainObjectName="MlbackShipEmail"></table>
-		<table tableName="tb_mlback_addpayinfoviewdetail" domainObjectName="MlbackAddPayinfoViewDetail"></table>-->
-		
+		<table tableName="tb_mlback_addpayinfoviewdetail" domainObjectName="MlbackAddPayinfoViewDetail"></table>
+		<table tableName="tb_mlback_videoshowarea" domainObjectName="MlbackVideoShowArea"></table>
+		<table tableName="tb_mlback_video" domainObjectName="MlbackVideo"></table>-->
 		<!--
 		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>
 		<table tableName="tb_mlfront_userTemporary" domainObjectName="MlfrontUserTemporary"></table>
