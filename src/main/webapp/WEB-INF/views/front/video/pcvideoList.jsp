@@ -51,7 +51,9 @@
 	<div class="main">
 		<div class="container clearfix">
 			<div class="videocont clearfix">
-				
+				<ul class="clearfix">
+			
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -59,6 +61,20 @@
 	<jsp:include page="../pcfooter.jsp"></jsp:include>
 
 	<script>
+		var videocont= $(".videocont ul")
+		function videoCont(parent, data) {
+		  var html = '';
+		  for (var i=0, len=data.length; i < len; i += 1) {
+				html += '<li>' +
+						'<a href="###">' +
+						'<img src="'+data[i].videoshowareaPcimgurl+'">' +
+						'<p><em>'+data[i].videoshowareaName+'</em><span>(1)</span></p>'+
+						'</a>' +
+						'</li>';
+				}
+		  parent.html(html);
+		}
+		
 		$.ajax({
 				 url: '${APP_PATH}/MlbackVideoShowArea/getMlbackVideoShowAreapcListByArea',
 					data: JSON.stringify({
@@ -70,9 +86,9 @@
 				 success: function (data) {
 					console.log(data)/***data**/
 					   if (data.code === 100) {
-						 var resData = data.extend.mlbackVideoShowAreaList;;
+						 var resData = data.extend.mlbackVideoShowAreaList;
 						 console.log(resData)
-						 
+						 videoCont(videocont,resData)
 						 
 					   } 
 					 }
