@@ -48,6 +48,7 @@
 										<th>视频name</th>
 										<th>父级别</th>
 										<th>本类的顺序</th>
+										<th>视频截图</th>
 										<th>视频url</th>
 										<th>展示状态</th>
 										<th>产品or类or专题</th>
@@ -146,6 +147,9 @@
 				var videoStatus = $("<td></td>").append((item.videoStatus === 1 ? '已上架' : '未上架'));
 				
 				var videoUrl = $("<td></td>").append(item.videoUrl);
+				var imgurl = item.videoImgUrl;
+				var image = '<img src=' + imgurl + ' ' + 'width=40 height=40>';
+				var videoImgUrl = $("<td></td>").append(image);
 				//var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
 				//var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
 				
@@ -183,6 +187,7 @@
 					.append(videoArea)
 					.append(videoOrderthNum)
 					.append(videoUrl)
+					.append(videoImgUrl)
 					.append(videoStatus)
 					.append(videoIfproorcateorpage)
 					.append(showid)
@@ -453,12 +458,12 @@
 				$(":input[name='videoSeoname']").val(data.videoSeoname);
 				$(":input[name='videoPageseoname']").val(data.videoPageseoname);
 //				$(":input[name='videoVideoSeoname']").val(data.videoVideoSeoname);
-				/* if (data.actshowproImgwapurl && data.actshowproImgwapurl.length) {
+				if (data.videoImgUrl && data.videoImgUrl.length) {
 					var el = $(".upload-img-btn.img");
 					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el, data.actshowproImgwapurl);
+					setImage(el, data.videoImgUrl);
 				}
-				if (data.actshowproImgpcurl && data.actshowproImgpcurl.length) {
+				/* if (data.actshowproImgpcurl && data.actshowproImgpcurl.length) {
 					var el2 = $(".upload-img-btn.img2");
 					el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
 					setImage(el2, data.actshowproImgpcurl);
@@ -489,22 +494,21 @@
 		});
 
 		$(document.body).on("change", "#file1", upload);
-		$(document.body).on("change", "#file2", uploadMainFu);
 
 		function upload() {
 			var self = this;
 			var obj = new FormData();
 			obj.append('file', $(this)[0].files[0]);
-			var actshowproIdUP = $(":input[name='actshowproId']").val();
+			var videoIdUP = $(":input[name='videoId']").val();
 			//console.log("categoryIdUP:"+categoryIdUP);
-			if (actshowproIdUP == '') {
+			if (videoIdUP == '') {
 				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
 				// console.log("productIdUP:"+productIdUP);
 				alert("请先输入类名，保存后从编辑进入");
 			} else {
-				obj.append('actshowproId', actshowproIdUP);
+				obj.append('videoId', videoIdUP);
 				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadActShowProWapImg",
+					url: "${APP_PATH}/UpImg/uploadVideoImg",
 					type: "post",
 					dataType: "json",
 					cache: false,
@@ -524,7 +528,7 @@
 
 		function setImage(el, url) {
 			var img = new Image();
-			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/actShowPro/' + url;
+			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/Video/' + url;
 			img.src = url;
 			img.onload = function () {
 				var winW = $('#categoryTabContent').width();
@@ -549,7 +553,7 @@
 			}
 		}
 
-		function uploadMainFu() {
+		/* function uploadMainFu() {
 			var self = this;
 			//实例化一个FormData
 			var obj = new FormData();
@@ -579,7 +583,7 @@
 					}
 				});
 			}
-		}
+		} */
 	</script>
 </body>
 

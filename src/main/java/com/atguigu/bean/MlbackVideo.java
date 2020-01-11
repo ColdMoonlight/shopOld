@@ -12,6 +12,8 @@ public class MlbackVideo {
     private Integer videoStatus;
 
     private String videoUrl;
+    
+    private String videoImgUrl;
 
     private Integer videoProid;
 
@@ -89,6 +91,14 @@ public class MlbackVideo {
 
 	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl == null ? null : videoUrl.trim();
+	}
+	
+	public String getVideoImgUrl() {
+		return videoImgUrl;
+	}
+
+	public void setVideoImgUrl(String videoImgUrl) {
+		this.videoImgUrl = videoImgUrl == null ? null : videoImgUrl.trim();
 	}
 
 	public Integer getVideoProid() {

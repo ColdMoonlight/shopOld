@@ -16,6 +16,7 @@ import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackReviewImg;
 import com.atguigu.bean.MlbackShowArea;
 import com.atguigu.bean.MlbackSlide;
+import com.atguigu.bean.MlbackVideo;
 import com.atguigu.bean.MlbackVideoShowArea;
 import com.atguigu.bean.Msg;
 import com.atguigu.service.MlbackActShowProService;
@@ -27,6 +28,7 @@ import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlbackShowAreaService;
 import com.atguigu.service.MlbackSlideService;
+import com.atguigu.service.MlbackVideoService;
 import com.atguigu.service.MlbackVideoShowAreaService;
 import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.utils.DateUtil;
@@ -68,6 +70,9 @@ public class UPloadController {
 	
 	@Autowired
 	MlbackSlideService mlbackSlideService;
+	
+	@Autowired
+	MlbackVideoService mlbackVideoService;
 	
 	@Autowired
 	MlbackVideoShowAreaService mlbackVideoShowAreaService;
@@ -970,6 +975,54 @@ public class UPloadController {
 		mlbackVideoShowAreaReq.setVideoshowareaId(VideoshowareaIdInt);
 		mlbackVideoShowAreaReq.setVideoshowareaPcimgurl(returnReaUrlAll);
 		mlbackVideoShowAreaService.updateByPrimaryKeySelective(mlbackVideoShowAreaReq);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	/**
+	 * 8.2	useOn	200110
+	 * uploadVideoShowAreaPcImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadVideoImg")
+	@ResponseBody
+	public Msg uploadVideoImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/Video/";
+		//存储图片
+		String returnUrl = UpVideoImgUtils.keepVideoFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String VideoIdstr = aa[1];
+		
+		int VideoIdInt = Integer.parseInt(VideoIdstr);
+		
+		System.out.println("VideoIdstr:"+VideoIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+
+		//通过id更新本条的PC图片
+		MlbackVideo mlbackVideoReq = new MlbackVideo();
+		mlbackVideoReq.setVideoId(VideoIdInt);
+		mlbackVideoReq.setVideoImgUrl(returnReaUrlAll);
+		mlbackVideoService.updateByPrimaryKeySelective(mlbackVideoReq);
 		
 		System.out.println("returnReaUrl:"+returnReaUrl);
 		
