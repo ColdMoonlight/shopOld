@@ -9,13 +9,9 @@ public class MlbackVideo {
 
     private Integer videoOrderthNum;
 
-    private Integer videoWapstatus;
+    private Integer videoStatus;
 
-    private Integer videoPcstatus;
-
-    private String videoWapvideourl;
-
-    private String videoPcvideurl;
+    private String videoUrl;
 
     private Integer videoProid;
 
@@ -38,8 +34,6 @@ public class MlbackVideo {
     private String videoPagewapimgurl;
 
     private String videoPagepcimgurl;
-
-    private Integer videoIfinto;
 
     private String videoCreatetime;
 
@@ -81,39 +75,23 @@ public class MlbackVideo {
         this.videoOrderthNum = videoOrderthNum;
     }
 
-    public Integer getVideoWapstatus() {
-        return videoWapstatus;
-    }
+    public Integer getVideoStatus() {
+		return videoStatus;
+	}
 
-    public void setVideoWapstatus(Integer videoWapstatus) {
-        this.videoWapstatus = videoWapstatus;
-    }
+	public void setVideoStatus(Integer videoStatus) {
+		this.videoStatus = videoStatus;
+	}
 
-    public Integer getVideoPcstatus() {
-        return videoPcstatus;
-    }
+	public String getVideoUrl() {
+		return videoUrl;
+	}
 
-    public void setVideoPcstatus(Integer videoPcstatus) {
-        this.videoPcstatus = videoPcstatus;
-    }
+	public void setVideoUrl(String videoUrl) {
+		this.videoUrl = videoUrl == null ? null : videoUrl.trim();
+	}
 
-    public String getVideoWapvideourl() {
-        return videoWapvideourl;
-    }
-
-    public void setVideoWapvideourl(String videoWapvideourl) {
-        this.videoWapvideourl = videoWapvideourl == null ? null : videoWapvideourl.trim();
-    }
-
-    public String getVideoPcvideurl() {
-        return videoPcvideurl;
-    }
-
-    public void setVideoPcvideurl(String videoPcvideurl) {
-        this.videoPcvideurl = videoPcvideurl == null ? null : videoPcvideurl.trim();
-    }
-
-    public Integer getVideoProid() {
+	public Integer getVideoProid() {
         return videoProid;
     }
 
@@ -199,14 +177,6 @@ public class MlbackVideo {
 
     public void setVideoPagepcimgurl(String videoPagepcimgurl) {
         this.videoPagepcimgurl = videoPagepcimgurl == null ? null : videoPagepcimgurl.trim();
-    }
-
-    public Integer getVideoIfinto() {
-        return videoIfinto;
-    }
-
-    public void setVideoIfinto(Integer videoIfinto) {
-        this.videoIfinto = videoIfinto;
     }
 
     public String getVideoCreatetime() {

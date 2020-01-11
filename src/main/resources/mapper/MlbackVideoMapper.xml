@@ -6,10 +6,8 @@
     <result column="video_name" jdbcType="VARCHAR" property="videoName" />
     <result column="video_area" jdbcType="INTEGER" property="videoArea" />
     <result column="video_orderth_num" jdbcType="INTEGER" property="videoOrderthNum" />
-    <result column="video_wapstatus" jdbcType="INTEGER" property="videoWapstatus" />
-    <result column="video_pcstatus" jdbcType="INTEGER" property="videoPcstatus" />
-    <result column="video_wapVideourl" jdbcType="VARCHAR" property="videoWapvideourl" />
-    <result column="video_pcVideurl" jdbcType="VARCHAR" property="videoPcvideurl" />
+    <result column="video_status" jdbcType="INTEGER" property="videoStatus" />
+    <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
     <result column="video_proid" jdbcType="INTEGER" property="videoProid" />
     <result column="video_proname" jdbcType="VARCHAR" property="videoProname" />
     <result column="video_seoname" jdbcType="VARCHAR" property="videoSeoname" />
@@ -21,7 +19,6 @@
     <result column="video_pageSeoname" jdbcType="VARCHAR" property="videoPageseoname" />
     <result column="video_pagewapimgurl" jdbcType="VARCHAR" property="videoPagewapimgurl" />
     <result column="video_pagepcimgurl" jdbcType="VARCHAR" property="videoPagepcimgurl" />
-    <result column="video_ifinto" jdbcType="INTEGER" property="videoIfinto" />
     <result column="video_createTime" jdbcType="VARCHAR" property="videoCreatetime" />
     <result column="video_motifyTime" jdbcType="VARCHAR" property="videoMotifytime" />
     <result column="video_startTime" jdbcType="VARCHAR" property="videoStarttime" />
@@ -86,10 +83,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    video_id, video_name, video_area, video_orderth_num, video_wapstatus, video_pcstatus, 
-    video_wapVideourl, video_pcVideurl, video_proid, video_proname, video_seoname, video_cateid, 
+    video_id, video_name, video_area, video_orderth_num, video_status,
+    video_url, video_proid, video_proname, video_seoname, video_cateid, 
     video_catename, video_cateSeoname, video_ifproORcateORpage, video_pagename, video_pageSeoname, 
-    video_pagewapimgurl, video_pagepcimgurl, video_ifinto, video_createTime, video_motifyTime, 
+    video_pagewapimgurl, video_pagepcimgurl, video_createTime, video_motifyTime, 
     video_startTime, video_endTime
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackVideoExample" resultMap="BaseResultMap">
@@ -121,21 +118,21 @@
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackVideo">
     insert into tb_mlback_video (video_id, video_name, video_area, 
-      video_orderth_num, video_wapstatus, video_pcstatus, 
-      video_wapVideourl, video_pcVideurl, video_proid, 
+      video_orderth_num, video_status,
+      video_url, video_proid, 
       video_proname, video_seoname, video_cateid, 
       video_catename, video_cateSeoname, video_ifproORcateORpage, 
       video_pagename, video_pageSeoname, video_pagewapimgurl, 
-      video_pagepcimgurl, video_ifinto, video_createTime, 
+      video_pagepcimgurl, video_createTime, 
       video_motifyTime, video_startTime, video_endTime
       )
     values (#{videoId,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR}, #{videoArea,jdbcType=INTEGER}, 
-      #{videoOrderthNum,jdbcType=INTEGER}, #{videoWapstatus,jdbcType=INTEGER}, #{videoPcstatus,jdbcType=INTEGER}, 
-      #{videoWapvideourl,jdbcType=VARCHAR}, #{videoPcvideurl,jdbcType=VARCHAR}, #{videoProid,jdbcType=INTEGER}, 
+      #{videoOrderthNum,jdbcType=INTEGER}, #{videoStatus,jdbcType=INTEGER},
+      #{videoUrl,jdbcType=VARCHAR}, #{videoProid,jdbcType=INTEGER}, 
       #{videoProname,jdbcType=VARCHAR}, #{videoSeoname,jdbcType=VARCHAR}, #{videoCateid,jdbcType=INTEGER}, 
       #{videoCatename,jdbcType=VARCHAR}, #{videoCateseoname,jdbcType=VARCHAR}, #{videoIfproorcateorpage,jdbcType=INTEGER}, 
       #{videoPagename,jdbcType=VARCHAR}, #{videoPageseoname,jdbcType=VARCHAR}, #{videoPagewapimgurl,jdbcType=VARCHAR}, 
-      #{videoPagepcimgurl,jdbcType=VARCHAR}, #{videoIfinto,jdbcType=INTEGER}, #{videoCreatetime,jdbcType=VARCHAR}, 
+      #{videoPagepcimgurl,jdbcType=VARCHAR}, #{videoCreatetime,jdbcType=VARCHAR}, 
       #{videoMotifytime,jdbcType=VARCHAR}, #{videoStarttime,jdbcType=VARCHAR}, #{videoEndtime,jdbcType=VARCHAR}
       )
   </insert>
@@ -161,17 +158,11 @@
       <if test="record.videoOrderthNum != null">
         video_orderth_num = #{record.videoOrderthNum,jdbcType=INTEGER},
       </if>
-      <if test="record.videoWapstatus != null">
-        video_wapstatus = #{record.videoWapstatus,jdbcType=INTEGER},
+      <if test="record.videoStatus != null">
+        video_status = #{record.videoStatus,jdbcType=INTEGER},
       </if>
-      <if test="record.videoPcstatus != null">
-        video_pcstatus = #{record.videoPcstatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.videoWapvideourl != null">
-        video_wapVideourl = #{record.videoWapvideourl,jdbcType=VARCHAR},
-      </if>
-      <if test="record.videoPcvideurl != null">
-        video_pcVideurl = #{record.videoPcvideurl,jdbcType=VARCHAR},
+      <if test="record.videoUrl != null">
+        video_url = #{record.videoUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.videoProid != null">
         video_proid = #{record.videoProid,jdbcType=INTEGER},
@@ -206,9 +197,6 @@
       <if test="record.videoPagepcimgurl != null">
         video_pagepcimgurl = #{record.videoPagepcimgurl,jdbcType=VARCHAR},
       </if>
-      <if test="record.videoIfinto != null">
-        video_ifinto = #{record.videoIfinto,jdbcType=INTEGER},
-      </if>
       <if test="record.videoCreatetime != null">
         video_createTime = #{record.videoCreatetime,jdbcType=VARCHAR},
       </if>
@@ -232,10 +220,8 @@
       video_name = #{record.videoName,jdbcType=VARCHAR},
       video_area = #{record.videoArea,jdbcType=INTEGER},
       video_orderth_num = #{record.videoOrderthNum,jdbcType=INTEGER},
-      video_wapstatus = #{record.videoWapstatus,jdbcType=INTEGER},
-      video_pcstatus = #{record.videoPcstatus,jdbcType=INTEGER},
-      video_wapVideourl = #{record.videoWapvideourl,jdbcType=VARCHAR},
-      video_pcVideurl = #{record.videoPcvideurl,jdbcType=VARCHAR},
+      video_status = #{record.videoStatus,jdbcType=INTEGER},
+      video_url = #{record.videoUrl,jdbcType=VARCHAR},
       video_proid = #{record.videoProid,jdbcType=INTEGER},
       video_proname = #{record.videoProname,jdbcType=VARCHAR},
       video_seoname = #{record.videoSeoname,jdbcType=VARCHAR},
@@ -247,7 +233,6 @@
       video_pageSeoname = #{record.videoPageseoname,jdbcType=VARCHAR},
       video_pagewapimgurl = #{record.videoPagewapimgurl,jdbcType=VARCHAR},
       video_pagepcimgurl = #{record.videoPagepcimgurl,jdbcType=VARCHAR},
-      video_ifinto = #{record.videoIfinto,jdbcType=INTEGER},
       video_createTime = #{record.videoCreatetime,jdbcType=VARCHAR},
       video_motifyTime = #{record.videoMotifytime,jdbcType=VARCHAR},
       video_startTime = #{record.videoStarttime,jdbcType=VARCHAR},
@@ -262,10 +247,8 @@
     set video_name = #{videoName,jdbcType=VARCHAR},
       video_area = #{videoArea,jdbcType=INTEGER},
       video_orderth_num = #{videoOrderthNum,jdbcType=INTEGER},
-      video_wapstatus = #{videoWapstatus,jdbcType=INTEGER},
-      video_pcstatus = #{videoPcstatus,jdbcType=INTEGER},
-      video_wapVideourl = #{videoWapvideourl,jdbcType=VARCHAR},
-      video_pcVideurl = #{videoPcvideurl,jdbcType=VARCHAR},
+      video_status = #{videoStatus,jdbcType=INTEGER},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
       video_proid = #{videoProid,jdbcType=INTEGER},
       video_proname = #{videoProname,jdbcType=VARCHAR},
       video_seoname = #{videoSeoname,jdbcType=VARCHAR},
@@ -277,7 +260,6 @@
       video_pageSeoname = #{videoPageseoname,jdbcType=VARCHAR},
       video_pagewapimgurl = #{videoPagewapimgurl,jdbcType=VARCHAR},
       video_pagepcimgurl = #{videoPagepcimgurl,jdbcType=VARCHAR},
-      video_ifinto = #{videoIfinto,jdbcType=INTEGER},
       video_createTime = #{videoCreatetime,jdbcType=VARCHAR},
       video_motifyTime = #{videoMotifytime,jdbcType=VARCHAR},
       video_startTime = #{videoStarttime,jdbcType=VARCHAR},
@@ -301,17 +283,11 @@
       <if test="videoOrderthNum != null">
         video_orderth_num,
       </if>
-      <if test="videoWapstatus != null">
-        video_wapstatus,
+      <if test="videoStatus != null">
+        video_status,
       </if>
-      <if test="videoPcstatus != null">
-        video_pcstatus,
-      </if>
-      <if test="videoWapvideourl != null">
-        video_wapVideourl,
-      </if>
-      <if test="videoPcvideurl != null">
-        video_pcVideurl,
+      <if test="videoUrl != null">
+        video_url,
       </if>
       <if test="videoProid != null">
         video_proid,
@@ -346,9 +322,6 @@
       <if test="videoPagepcimgurl != null">
         video_pagepcimgurl,
       </if>
-      <if test="videoIfinto != null">
-        video_ifinto,
-      </if>
       <if test="videoCreatetime != null">
         video_createTime,
       </if>
@@ -375,17 +348,11 @@
       <if test="videoOrderthNum != null">
         #{videoOrderthNum,jdbcType=INTEGER},
       </if>
-      <if test="videoWapstatus != null">
-        #{videoWapstatus,jdbcType=INTEGER},
+      <if test="videoStatus != null">
+        #{videoStatus,jdbcType=INTEGER},
       </if>
-      <if test="videoPcstatus != null">
-        #{videoPcstatus,jdbcType=INTEGER},
-      </if>
-      <if test="videoWapvideourl != null">
-        #{videoWapvideourl,jdbcType=VARCHAR},
-      </if>
-      <if test="videoPcvideurl != null">
-        #{videoPcvideurl,jdbcType=VARCHAR},
+      <if test="videoUrl != null">
+        #{videoUrl,jdbcType=VARCHAR},
       </if>
       <if test="videoProid != null">
         #{videoProid,jdbcType=INTEGER},
@@ -420,9 +387,6 @@
       <if test="videoPagepcimgurl != null">
         #{videoPagepcimgurl,jdbcType=VARCHAR},
       </if>
-      <if test="videoIfinto != null">
-        #{videoIfinto,jdbcType=INTEGER},
-      </if>
       <if test="videoCreatetime != null">
         #{videoCreatetime,jdbcType=VARCHAR},
       </if>
@@ -456,17 +420,11 @@
       <if test="videoOrderthNum != null">
         video_orderth_num = #{videoOrderthNum,jdbcType=INTEGER},
       </if>
-      <if test="videoWapstatus != null">
-        video_wapstatus = #{videoWapstatus,jdbcType=INTEGER},
+      <if test="videoStatus != null">
+        video_status = #{videoStatus,jdbcType=INTEGER},
       </if>
-      <if test="videoPcstatus != null">
-        video_pcstatus = #{videoPcstatus,jdbcType=INTEGER},
-      </if>
-      <if test="videoWapvideourl != null">
-        video_wapVideourl = #{videoWapvideourl,jdbcType=VARCHAR},
-      </if>
-      <if test="videoPcvideurl != null">
-        video_pcVideurl = #{videoPcvideurl,jdbcType=VARCHAR},
+      <if test="videoUrl != null">
+        video_url = #{videoUrl,jdbcType=VARCHAR},
       </if>
       <if test="videoProid != null">
         video_proid = #{videoProid,jdbcType=INTEGER},
@@ -500,9 +458,6 @@
       </if>
       <if test="videoPagepcimgurl != null">
         video_pagepcimgurl = #{videoPagepcimgurl,jdbcType=VARCHAR},
-      </if>
-      <if test="videoIfinto != null">
-        video_ifinto = #{videoIfinto,jdbcType=INTEGER},
       </if>
       <if test="videoCreatetime != null">
         video_createTime = #{videoCreatetime,jdbcType=VARCHAR},
