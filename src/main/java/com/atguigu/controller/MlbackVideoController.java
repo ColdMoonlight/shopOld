@@ -28,6 +28,7 @@ import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackVideoService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -76,17 +77,11 @@ public class MlbackVideoController {
 	@RequestMapping(value="/getMlbackVideoByPage")
 	@ResponseBody
 	public Msg getMlbackVideoByPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-//		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
-//		if(mlbackAdmin==null){
-//			//SysUsers对象为空
-//			return Msg.fail().add("resMsg", "session中adminuser对象为空");
-//		}else{
-			int PagNum = 20;
-			PageHelper.startPage(pn, PagNum);
-			List<MlbackVideo> mlbackVideoList = mlbackVideoService.selectMlbackVideoGetAll();
-			PageInfo page = new PageInfo(mlbackVideoList, PagNum);
-			return Msg.success().add("pageInfo", page);
-//		}
+		int PagNum = 20;
+		PageHelper.startPage(pn, PagNum);
+		List<MlbackVideo> mlbackVideoList = mlbackVideoService.selectMlbackVideoGetAll();
+		PageInfo page = new PageInfo(mlbackVideoList, PagNum);
+		return Msg.success().add("pageInfo", page);
 	}
 	
 	
@@ -152,8 +147,8 @@ public class MlbackVideoController {
 		}		
 	}
 	
-	/**4.0	onuse	20200103	检查
-	 * MlbackActShowPro	delete
+	/**4.0	onuse	20200103
+	 * MlbackVideo	delete
 	 * @param id
 	 */
 	@RequestMapping(value="/delete",method=RequestMethod.POST)
@@ -167,8 +162,8 @@ public class MlbackVideoController {
 	
 	/**
 	 * 5.0	onuse	20200103	检查
-	 * 查看单条类目的详情细节
-	 * @param MlbackActShowPro
+	 * 查看单条by videoId
+	 * @param MlbackVideo
 	 * @return 
 	 */
 	@RequestMapping(value="/getOneMlbackVideoDetail",method=RequestMethod.POST)
@@ -184,21 +179,49 @@ public class MlbackVideoController {
 	}
 	
 	/**
-	 * 6.0	onuse	20200103	检查
-	 * 查看首页活动品区域的顺序
-	 * @param MlbackActShowPro
+	 * 6.0	onuse	200103
+	 * 前台详情页面wap/pc的toVideoAreaPage
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/toVideoAreaPage",method=RequestMethod.GET)
+	 public String toVideoAreaPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "videoArea") Integer videoArea) throws Exception{
+	  
+		//接收传递进来的参数
+		Integer videoAreaReq = videoArea;
+		//放回响应域中
+		res.setAttribute("videoArea", videoAreaReq);
+		//放回session域中
+		session.setAttribute("videoArea", videoArea);
+		
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+	  
+		//返回视图
+		if(ifMobile.equals("1")){
+			return "mfront/video/videoArea";
+		}else{
+			return "front/video/pcvideoArea";
+		}
+	}
+	
+	/**
+	 * 7.0	onuse	20200111
+	 * 查看-本展块内的产品List
+	 * * @param MlbackVideo
 	 * @return 
 	 */
-	@RequestMapping(value="/getMlbackVideoListByActnum",method=RequestMethod.POST)
+	@RequestMapping(value="/getMlbackVideoListByVideoArea",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getMlbackVideoListByActnum(@RequestParam(value = "actshowproActnum") Integer actshowproActnum){
-		//接受actshowproId
+	public Msg getMlbackVideoListByActnum(@RequestParam(value = "videoArea") Integer videoArea){
+		//接受videoArea
 		MlbackVideo mlbackVideoReq = new MlbackVideo();
-		mlbackVideoReq.setVideoArea(actshowproActnum);
+		mlbackVideoReq.setVideoArea(videoArea);
 		//查询本条
 		List<MlbackVideo> mlbackVideoList =mlbackVideoService.selectMlbackvideoByVideoArea(mlbackVideoReq);
 		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 					.add("mlbackVideoList", mlbackVideoList);
 	}
+	
+	
 
 }
