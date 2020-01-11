@@ -48,10 +48,8 @@
 										<th>视频name</th>
 										<th>父级别</th>
 										<th>本类的顺序</th>
-										<th>wap视频url</th>
-										<th>wap状态</th>
-										<th>pc视频url</th>
-										<th>pc状态</th>
+										<th>视频url</th>
+										<th>展示状态</th>
 										<th>产品or类or专题</th>
 										<th>产品id/类/专题</th>
 										<th>SEO</th>
@@ -145,11 +143,9 @@
 				var videoName = $("<td></td>").append(item.videoName);
 				var videoArea = $("<td></td>").append(item.videoArea);
 				var videoOrderthNum = $("<td></td>").append(item.videoOrderthNum);
-				var videoWapstatus = $("<td></td>").append((item.videoWapstatus === 1 ? '已上架' : '未上架'));
-				var videoPcstatus = $("<td></td>").append((item.videoPcstatus === 1 ? '已上架' : '未上架'));
+				var videoStatus = $("<td></td>").append((item.videoStatus === 1 ? '已上架' : '未上架'));
 				
-				var videoWapvideourl = $("<td></td>").append(item.videoWapvideourl);
-				var videoPcvideurl = $("<td></td>").append(item.videoPcvideurl);
+				var videoUrl = $("<td></td>").append(item.videoUrl);
 				//var actshowproCatename = $("<td></td>").append(item.actshowproCatename);
 				//var actshowproCateid = $("<td></td>").append(item.actshowproCateid);
 				
@@ -186,10 +182,8 @@
 					.append(videoName)
 					.append(videoArea)
 					.append(videoOrderthNum)
-					.append(videoWapvideourl)
-					.append(videoWapstatus)
-					.append(videoPcvideurl)
-					.append(videoPcstatus)
+					.append(videoUrl)
+					.append(videoStatus)
 					.append(videoIfproorcateorpage)
 					.append(showid)
 					.append(videoSeoname)
@@ -469,14 +463,10 @@
 					el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
 					setImage(el2, data.actshowproImgpcurl);
 				} */
-				if (data.videoWapvideourl && data.videoWapvideourl.length) {
-					$(":input[name='videoWapvideourl']").val(data.videoWapvideourl);
+				if (data.videoUrl && data.videoUrl.length) {
+					$(":input[name='videoUrl']").val(data.videoUrl);
 				}
-				if (data.videoPcvideurl && data.videoPcvideurl.length) {
-					$(":input[name='videoPcvideurl']").val(data.videoPcvideurl);
-				} 
-				$(":input[name='videoWapstatus']").val(data.videoWapstatus);
-				$(":input[name='videoPcstatus']").val(data.videoPcstatus);
+				$(":input[name='videoStatus']").val(data.videoStatus);
 
 				$(":input[name='videoIfproorcateorpage']").val(data.videoIfproorcateorpage);
 				if(data.videoIfproorcateorpage==0){
