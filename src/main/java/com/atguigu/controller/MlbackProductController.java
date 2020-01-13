@@ -92,7 +92,6 @@ public class MlbackProductController {
 		return "mfront/productDetails";
 	}
 	
-	
 	/**
 	 * 3.2.1	UseNow	0505
 	 * 前台PC端获取详情页面front/pcproductDetails
