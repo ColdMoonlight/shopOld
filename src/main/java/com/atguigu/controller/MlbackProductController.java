@@ -447,6 +447,30 @@ public class MlbackProductController {
 	}
 	
 	/**
+	 * 7.1	UseNow	0505
+	 * 查询单个产品信息(无富文本描述)
+	 * @param productId
+	 * @return 
+	 */
+	@RequestMapping(value="/getOneProductSimple",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getOneProductSimple(@RequestParam(value = "productId") Integer productId){
+		//接受信息
+		MlbackProduct mlbackProductReq = new MlbackProduct();
+		mlbackProductReq.setProductId(productId);
+		List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+		MlbackProduct mlbackProductOne = new MlbackProduct();
+		if(mlbackProductResList.size()>0){
+			mlbackProductOne = mlbackProductResList.get(0);
+		}else{
+			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
+			mlbackProductOne = mlbackProductResList.get(0);
+		}
+		System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne.toString());
+		return Msg.success().add("resMsg", "查看单个产品详情完毕").add("mlbackProductOne", mlbackProductOne);
+	}
+	
+	/**
 	 * 8.0	UseNow	0505
 	 * 通过产品名查看单条产品的详情
 	 * @param productId

@@ -144,6 +144,14 @@ public class MlbackProductService {
 	public List<MlbackProduct> selectMlbackProductbyCategorySeo(MlbackProduct mlbackProductReq) {
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductbyCategorySeo(mlbackProductReq);
 		return mlbackProductList;
+	}
+	
+	/**
+	 * 查询单个产品信息(无富文本描述)
+	 * */
+	public List<MlbackProduct> selectMlbackProductSimple(MlbackProduct mlbackProductReq) {
+		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductSimple(mlbackProductReq);
+		return mlbackProductList;
 	}	
 
 }
