@@ -61,21 +61,19 @@
 	<jsp:include page="../pcfooter.jsp"></jsp:include>
 
 	<script>
-		var videoArea = '${sessionScope.videoArea}';
-		
 		var videocont= $(".videocont ul")
 		function videoCont(parent, data) {
 		  var html = '';
 		  for (var i=0, len=data.length; i < len; i += 1) {
-			  var videoUrl =data[i].videoUrl;
-			  console.log(videoUrl);
-				html += '<li videonum-id="'+data[i].videoProid+'">' +
+			  var urlStr =data[i].videoUrl;
+				html += '<li onclick="clickVideo(event)" videonum-id="'+data[i].videoProid+'" dataiframe="'+urlStr+'">' +
 						'<img src="'+data[i].videoImgUrl+'">' +
 						'<p><em>'+data[i].videoName+'</em></p>'+
 						'</li>';
 				}
 		  parent.html(html);
 		}
+		var videoArea = '${sessionScope.videoArea}';
 		data = {
 			"videoArea":videoArea
 		};
@@ -84,76 +82,82 @@
                 data:data,
 				 type: 'post',
 				 success: function (data) {
-					console.log(data)/***data**/
+					// console.log(data)/***data**/
 					   if (data.code === 100) {
 						 var resData = data.extend.mlbackVideoList;
-						 console.log(resData)
+						 // console.log(resData)
 						 videoCont(videocont,resData)
 						 
 					   } 
 					 }
 		       });
 	/***********************************/
-	function videoProduct (data){
+	function videoProduct (data,videoLink){
 	 var elBox = $('<div class="video_enlarge_corver" style="display: block;"></div>');
-	 var html = '<div class="sys-title" style="background: #000; color: #fff;">' +
-	             '<div class="video_enlarge_wrap">'+
-	             '<div class="video_enlarge_content">'+
-	             '<img src="###"  width="460" height="356" />'+
-				'<div class="promotion_product_list">'+
-				'<a href="###" class="product-image"><img src="" alt=""></a>'+
-				'<h3 class="product-name"><a href="###">Beautyforever Brazilian Body Wave Hair 3 Bundles Black Color</a></h3>'+
-				'<div class="price-box_promotion">'+	
-				'<div class="price-box">'+
-	             '<p class="old-price">'+						
-	             '<span class="price-label">Regular Price:</span>'+							
-	             '<span class="price-label">Regular Price:</span>'+									
-	             '<span class="price">$64.50</span>'+									 
-	             '</p>'+								
-	             '<p class="special-price span12">'+								
-	             '<span class="price-label">SALE PRICE:</span>'+									
-	             '<span class="price">$56.12</span>'									
-	             '</p>'+								
-	             '</div>'+							
+	 var html = '<div class="video_enlarge_wrap">'+
+	                   '<div class="video_enlarge_content">'+
+							   '<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="460" height="370" src="'+videoLink+'"></iframe>'+
+					             '<div class="promotion_product_list">'+
+								   '<a href="###" class="product-image"><img src="'+data.productMainimgurl+'" alt=""></a>'+
+								   '<h3 class="product-name"><a href="###">Beautyforever Brazilian Body Wave Hair 3 Bundles Black Color</a></h3>'+
+								    '<div class="price-box_promotion">'+	
+									     '<div class="price-box">'+ 
+												'<p class="old-price">'+
+													'<span class="price-label">Regular Price:</span>'+
+													'<span class="price">$' + (data.productOriginalprice ? data.productOriginalprice : 0) +
+												'</p>'+
+												'<p class="special-price span12">'+
+													'<span class="price-label">SALE PRICE:</span>'+
+													'<span class="price">$' + (data.productOriginalprice && data.productActoffoff ? (data.productOriginalprice * data.productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+													
+												'</p>'+	
+								    	 '</div>'+	
+								    '</div>'+	
+									'<a class="video_link_buyBtn" href="${APP_PATH }/'+data.productSeo+'.html">Buy Now </a>'+
+								 '</div>'+		
+	                    '</div>'+	
+						'<button class="video_enlarge_close"></button>'		
 	             '</div>'+						
-	             '<a class="video_link_buyBtn" href="###">Buy Now </a>'+					
-	             '</div>'+	
-	             '</div>'+				
-	             '<button class="video_enlarge_close"></button>'+	
-	             '</div>'+
-				 
 	 $(document.body).append(elBox.html(html));
+	 $(".video_enlarge_close").on("click",function(){
+		 elBox.remove();
+		 
+	 })
+	 
+	 
+	 
+	}
+	function clickVideo(e) {
+		e.stopPropagation();
+		var item  = $(e.target);
+		var videoLink = item.parent().attr('dataiframe');
+		var productId = item.parent().attr('videonum-id');
+		data = {
+			"productId":productId
+		};
+		console.log(productId)
+		$.ajax({
+				 url: '${APP_PATH}/MlbackProduct/getOneProductSimple',
+		        data:data,
+				 type: 'post',
+				 success: function (data) {
+					// console.log(data)/***data**/
+					   if (data.code === 100) {
+										    var resData = data.extend. mlbackProductOne;
+											videoProduct(resData,videoLink)
+					   } 
+					 }
+		       });
+		
 	}
 	
 	
-	$(function(){
-		$(".videocont ul li").on("click",function(){
-				 var productId=$(this).attr('videonum-id')
-				 data = {
-				 	"productId":productId
-				 };
-				 // console.log(productId)
-				 $.ajax({
-				 		 url: '${APP_PATH}/MlbackProduct/getOneMlbackProductDetail',
-				         data:data,
-				 		 type: 'post',
-				 		 success: function (data) {
-				 			console.log(data)/***data**/
-				 			   if (data.code === 100) {
-								    var resData = data.extend. mlbackProductOne;
-									videoProduct(resData)
-				 			   } 
-				 			 }
-				        });
-				 
-				 
-		})
-	})
-	
-			   
-			   
-		
-		
+	// function clickVideo (item){
+	// 	$(".videocont ul li").on("click",function(){
+			     
+	// 	})
+	// }
+
 
 	</script>
   	<!-- megalook-->

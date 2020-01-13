@@ -683,12 +683,16 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .video_enlarge_corver  .video_enlarge_wrap{position: absolute;left: 50%;margin-left: -400px;top: 200px;width: 800px;background: #fff;padding: 20px;box-sizing: border-box;}
 .video_enlarge_corver .video_enlarge_close{background: #000;display: block;width: 40px;height: 40px;position: absolute;right: 0;top: 0;font-size: 0;border: none;}
 .video_enlarge_content .promotion_product_list {float: right;width: 260px;border: 1px solid #eee;padding: 12px;box-sizing: border-box;margin-right: 24px;}
+.product-image{display: block;}
 .video_enlarge_content .promotion_product_list .product-image img {width: 100%;height: auto;}
-.video_enlarge_content .promotion_product_list .product-name {color:#fe186e;line-height: 16px;font-size: 14px;text-align: center;height: 16px;font-weight: normal;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;}
-.product-name a{color:#fe186e;}
-.video_link_buyBtn {display: inline-block;width: 140px;background: #f92d96;color: #fff;text-align: center;padding: 6px 0;position: relative;left: 50%;margin-left: -70px;font-size: 16px;}
+.video_enlarge_content .promotion_product_list h3.product-name {padding: 0; margin:10px 0 0; color:#fe186e;line-height: 16px;font-size: 14px;text-align: center;height: 16px;font-weight: normal;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;}
+.product-name a{color:#fe186e; display: inline-block; padding: 0;height: 16px; line-height: 16px;}
+.video_link_buyBtn {display: inline-block;width: 140px;background: #f92d96;color: #fff;text-align: center;padding: 3px 0;position: relative;left: 50%;margin-left: -70px;font-size: 16px;}
 .video_link_buyBtn:hover {color: #fff !important;}
-.promotion_product_list .price-box_promotion {margin-bottom: 10px;text-align: center;}
+.promotion_product_list .price-box_promotion {margin-bottom: 12px;text-align: center;}
+.price-box p{padding: 0; margin: 0;}
+
+
 /***********/
  @media (max-width: 1330px) {
 	 .product-details{max-width:98%; margin: 0 1%;}
