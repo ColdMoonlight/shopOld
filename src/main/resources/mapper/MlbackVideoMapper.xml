@@ -8,6 +8,7 @@
     <result column="video_orderth_num" jdbcType="INTEGER" property="videoOrderthNum" />
     <result column="video_status" jdbcType="INTEGER" property="videoStatus" />
     <result column="video_url" jdbcType="VARCHAR" property="videoUrl" />
+    <result column="video_imgurl" jdbcType="VARCHAR" property="videoImgUrl" />
     <result column="video_proid" jdbcType="INTEGER" property="videoProid" />
     <result column="video_proname" jdbcType="VARCHAR" property="videoProname" />
     <result column="video_seoname" jdbcType="VARCHAR" property="videoSeoname" />
@@ -84,7 +85,7 @@
   </sql>
   <sql id="Base_Column_List">
     video_id, video_name, video_area, video_orderth_num, video_status,
-    video_url, video_proid, video_proname, video_seoname, video_cateid, 
+    video_url, video_imgurl, video_proid, video_proname, video_seoname, video_cateid, 
     video_catename, video_cateSeoname, video_ifproORcateORpage, video_pagename, video_pageSeoname, 
     video_pagewapimgurl, video_pagepcimgurl, video_createTime, video_motifyTime, 
     video_startTime, video_endTime
@@ -119,7 +120,7 @@
   <insert id="insert" parameterType="com.atguigu.bean.MlbackVideo">
     insert into tb_mlback_video (video_id, video_name, video_area, 
       video_orderth_num, video_status,
-      video_url, video_proid, 
+      video_url, video_imgurl, video_proid, 
       video_proname, video_seoname, video_cateid, 
       video_catename, video_cateSeoname, video_ifproORcateORpage, 
       video_pagename, video_pageSeoname, video_pagewapimgurl, 
@@ -128,7 +129,7 @@
       )
     values (#{videoId,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR}, #{videoArea,jdbcType=INTEGER}, 
       #{videoOrderthNum,jdbcType=INTEGER}, #{videoStatus,jdbcType=INTEGER},
-      #{videoUrl,jdbcType=VARCHAR}, #{videoProid,jdbcType=INTEGER}, 
+      #{videoUrl,jdbcType=VARCHAR}, #{videoImgUrl,jdbcType=VARCHAR}, #{videoProid,jdbcType=INTEGER}, 
       #{videoProname,jdbcType=VARCHAR}, #{videoSeoname,jdbcType=VARCHAR}, #{videoCateid,jdbcType=INTEGER}, 
       #{videoCatename,jdbcType=VARCHAR}, #{videoCateseoname,jdbcType=VARCHAR}, #{videoIfproorcateorpage,jdbcType=INTEGER}, 
       #{videoPagename,jdbcType=VARCHAR}, #{videoPageseoname,jdbcType=VARCHAR}, #{videoPagewapimgurl,jdbcType=VARCHAR}, 
@@ -163,6 +164,9 @@
       </if>
       <if test="record.videoUrl != null">
         video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoImgUrl != null">
+        video_imgurl = #{record.videoImgUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.videoProid != null">
         video_proid = #{record.videoProid,jdbcType=INTEGER},
@@ -222,6 +226,7 @@
       video_orderth_num = #{record.videoOrderthNum,jdbcType=INTEGER},
       video_status = #{record.videoStatus,jdbcType=INTEGER},
       video_url = #{record.videoUrl,jdbcType=VARCHAR},
+      video_imgurl = #{record.videoImgUrl,jdbcType=VARCHAR},
       video_proid = #{record.videoProid,jdbcType=INTEGER},
       video_proname = #{record.videoProname,jdbcType=VARCHAR},
       video_seoname = #{record.videoSeoname,jdbcType=VARCHAR},
@@ -249,6 +254,7 @@
       video_orderth_num = #{videoOrderthNum,jdbcType=INTEGER},
       video_status = #{videoStatus,jdbcType=INTEGER},
       video_url = #{videoUrl,jdbcType=VARCHAR},
+      video_imgurl = #{videoImgUrl,jdbcType=VARCHAR},
       video_proid = #{videoProid,jdbcType=INTEGER},
       video_proname = #{videoProname,jdbcType=VARCHAR},
       video_seoname = #{videoSeoname,jdbcType=VARCHAR},
@@ -288,6 +294,9 @@
       </if>
       <if test="videoUrl != null">
         video_url,
+      </if>
+      <if test="videoImgUrl != null">
+        video_imgurl,
       </if>
       <if test="videoProid != null">
         video_proid,
@@ -354,6 +363,9 @@
       <if test="videoUrl != null">
         #{videoUrl,jdbcType=VARCHAR},
       </if>
+      <if test="videoImgUrl != null">
+		#{videoImgUrl,jdbcType=VARCHAR},
+	  </if>
       <if test="videoProid != null">
         #{videoProid,jdbcType=INTEGER},
       </if>
@@ -426,6 +438,9 @@
       <if test="videoUrl != null">
         video_url = #{videoUrl,jdbcType=VARCHAR},
       </if>
+      <if test="videoImgUrl != null">
+		video_imgurl = #{videoImgUrl,jdbcType=VARCHAR},
+	  </if>
       <if test="videoProid != null">
         video_proid = #{videoProid,jdbcType=INTEGER},
       </if>

@@ -1,5 +1,6 @@
 package com.atguigu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -217,6 +218,18 @@ public class MlbackVideoController {
 		mlbackVideoReq.setVideoArea(videoArea);
 		//查询本条
 		List<MlbackVideo> mlbackVideoList =mlbackVideoService.selectMlbackvideoByVideoArea(mlbackVideoReq);
+//		Integer proId = 0;
+//		MlbackProduct mlbackProductReq = new MlbackProduct();
+//		List<MlbackProduct> mlbackProductList = new ArrayList<MlbackProduct>();
+//		List<MlbackProduct> mlbackVideoProductList = new ArrayList<MlbackProduct>();
+//		MlbackProduct mlbackProductRes = new MlbackProduct();
+//		for(MlbackVideo mlbackVideo:mlbackVideoList){
+//			proId = mlbackVideo.getVideoProid();
+//			mlbackProductReq.setProductId(proId);
+//			mlbackProductList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
+//			mlbackProductRes = mlbackProductList.get(0);
+//			mlbackVideoProductList.add(mlbackProductRes);
+//		}
 		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 					.add("mlbackVideoList", mlbackVideoList);
 	}
