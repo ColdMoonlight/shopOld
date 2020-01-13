@@ -64,5 +64,8 @@ public interface MlbackProductMapper {
 	List<MlbackProduct> selectMlbackProductlast();
 
 	List<MlbackProduct> selectMlbackProductbyCategorySeo(MlbackProduct mlbackProductReq);
+
+	//查询单个产品信息(无富文本描述)
+	List<MlbackProduct> selectMlbackProductSimple(MlbackProduct mlbackProductReq);
     
 }
