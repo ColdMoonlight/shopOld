@@ -62,13 +62,17 @@
 
 	<script>
 		var videocont= $(".videocont ul")
-		function videoCont(parent, data) {
+		function videoCont(parent,data,videoNum) {
 		  var html = '';
 		  for (var i=0, len=data.length; i < len; i += 1) {
-				html += '<li>' +
-						'<a href="###">' +
-						'<img src="'+data[i].videoshowareaPcimgurl+'">' +
-						'<p><em>'+data[i].videoshowareaName+'</em><span>(1)</span></p>'+
+			   var v_num =videoNum[i];
+				html += '<li>';
+				html +='<a href="${APP_PATH }/MlbackVideo/toVideoAreaPage?videoArea='+data[i].videoshowareaId+'">';
+				html +='<img src="'+data[i].videoshowareaPcimgurl+'">';
+				html +='<p>';
+				html +='<em>'+data[i].videoshowareaName+'</em>';
+				html +='<span>'+v_num+'</span>';
+				html +='</p>'+
 						'</a>' +
 						'</li>';
 				}
@@ -87,8 +91,8 @@
 					console.log(data)/***data**/
 					   if (data.code === 100) {
 						 var resData = data.extend.mlbackVideoShowAreaList;
-						 console.log(resData)
-						 videoCont(videocont,resData)
+						 var videoNum = data.extend.videoNumByAreaListList;
+						 videoCont(videocont,resData,videoNum)
 						 
 					   } 
 					 }

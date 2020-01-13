@@ -61,38 +61,97 @@
 	<jsp:include page="../pcfooter.jsp"></jsp:include>
 
 	<script>
+		var videoArea = '${sessionScope.videoArea}';
+		
 		var videocont= $(".videocont ul")
 		function videoCont(parent, data) {
 		  var html = '';
 		  for (var i=0, len=data.length; i < len; i += 1) {
-				html += '<li>' +
-						'<a href="###">' +
-						'<img src="'+data[i].videoshowareaPcimgurl+'">' +
-						'<p><em>'+data[i].videoshowareaName+'</em><span>(1)</span></p>'+
-						'</a>' +
+			  var videoUrl =data[i].videoUrl;
+			  console.log(videoUrl);
+				html += '<li videonum-id="'+data[i].videoProid+'">' +
+						'<img src="'+data[i].videoImgUrl+'">' +
+						'<p><em>'+data[i].videoName+'</em></p>'+
 						'</li>';
 				}
 		  parent.html(html);
 		}
-		
+		data = {
+			"videoArea":videoArea
+		};
 		$.ajax({
-				 url: '${APP_PATH}/MlbackVideoShowArea/getMlbackVideoShowAreapcListByArea',
-					data: JSON.stringify({
-				   "videoshowareaAreanum": 2
-				 }),
+				 url: '${APP_PATH}/MlbackVideo/getMlbackVideoListByVideoArea',
+                data:data,
 				 type: 'post',
-				 dataType: 'JSON',
-				 contentType: 'application/json',
 				 success: function (data) {
 					console.log(data)/***data**/
 					   if (data.code === 100) {
-						 var resData = data.extend.mlbackVideoShowAreaList;
+						 var resData = data.extend.mlbackVideoList;
 						 console.log(resData)
 						 videoCont(videocont,resData)
 						 
 					   } 
 					 }
 		       });
+	/***********************************/
+	function videoProduct (data){
+	 var elBox = $('<div class="video_enlarge_corver" style="display: block;"></div>');
+	 var html = '<div class="sys-title" style="background: #000; color: #fff;">' +
+	             '<div class="video_enlarge_wrap">'+
+	             '<div class="video_enlarge_content">'+
+	             '<img src="###"  width="460" height="356" />'+
+				'<div class="promotion_product_list">'+
+				'<a href="###" class="product-image"><img src="" alt=""></a>'+
+				'<h3 class="product-name"><a href="###">Beautyforever Brazilian Body Wave Hair 3 Bundles Black Color</a></h3>'+
+				'<div class="price-box_promotion">'+	
+				'<div class="price-box">'+
+	             '<p class="old-price">'+						
+	             '<span class="price-label">Regular Price:</span>'+							
+	             '<span class="price-label">Regular Price:</span>'+									
+	             '<span class="price">$64.50</span>'+									 
+	             '</p>'+								
+	             '<p class="special-price span12">'+								
+	             '<span class="price-label">SALE PRICE:</span>'+									
+	             '<span class="price">$56.12</span>'									
+	             '</p>'+								
+	             '</div>'+							
+	             '</div>'+						
+	             '<a class="video_link_buyBtn" href="###">Buy Now </a>'+					
+	             '</div>'+	
+	             '</div>'+				
+	             '<button class="video_enlarge_close"></button>'+	
+	             '</div>'+
+				 
+	 $(document.body).append(elBox.html(html));
+	}
+	
+	
+	$(function(){
+		$(".videocont ul li").on("click",function(){
+				 var productId=$(this).attr('videonum-id')
+				 data = {
+				 	"productId":productId
+				 };
+				 // console.log(productId)
+				 $.ajax({
+				 		 url: '${APP_PATH}/MlbackProduct/getOneMlbackProductDetail',
+				         data:data,
+				 		 type: 'post',
+				 		 success: function (data) {
+				 			console.log(data)/***data**/
+				 			   if (data.code === 100) {
+								    var resData = data.extend. mlbackProductOne;
+									videoProduct(resData)
+				 			   } 
+				 			 }
+				        });
+				 
+				 
+		})
+	})
+	
+			   
+			   
 		
 		
 
