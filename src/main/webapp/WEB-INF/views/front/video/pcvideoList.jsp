@@ -71,7 +71,7 @@
 				html +='<img src="'+data[i].videoshowareaPcimgurl+'">';
 				html +='<p>';
 				html +='<em>'+data[i].videoshowareaName+'</em>';
-				html +='<span>'+v_num+'</span>';
+				html +='<span>('+v_num+')</span>';
 				html +='</p>'+
 						'</a>' +
 						'</li>';

@@ -1184,11 +1184,11 @@
 			});
 		}
 		
-		$(window).on('beforeunload', function() {
-			if (!reviewId) {
-				deleteReview();
-			}
-		});
+		// $(window).on('beforeunload', function() {
+		// 	if (!reviewId) {
+		// 		deleteReview();
+		// 	}
+		// });
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData
