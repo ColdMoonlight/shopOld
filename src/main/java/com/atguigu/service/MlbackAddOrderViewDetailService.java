@@ -1,19 +1,10 @@
 package com.atguigu.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.atguigu.bean.MlbackActShowPro;
-import com.atguigu.bean.MlbackAddCartViewDetail;
 import com.atguigu.bean.MlbackAddOrderViewDetail;
-import com.atguigu.bean.MlbackProductViewDetail;
-import com.atguigu.dao.MlbackActShowProMapper;
-import com.atguigu.dao.MlbackAddCartViewDetailMapper;
 import com.atguigu.dao.MlbackAddOrderViewDetailMapper;
-import com.atguigu.dao.MlbackProductViewDetailMapper;
-
 
 @Service
 public class MlbackAddOrderViewDetailService {
