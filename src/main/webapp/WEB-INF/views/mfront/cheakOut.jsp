@@ -1036,7 +1036,7 @@
 					// $("#country").attr("data-country",datacountry);
 					var dataname =$("#country").data("name");
 					datalocation (dataname)
-					// console.log("***dataprov****");
+					// console.log("***dataprov***");
 					// console.log(dataprov);
 					// console.log("***dataprov****");
 					if(dataprov==null||dataprov==""){
