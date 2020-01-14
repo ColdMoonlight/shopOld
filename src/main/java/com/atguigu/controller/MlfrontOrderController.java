@@ -152,7 +152,7 @@ public class MlfrontOrderController {
 	
 	
 	/**
-	 * 7.0	zsh 0615
+	 * 4.0	zsh 0615
 	 * 删除购物车中的项delCartItem
 	 * @param Msg
 	 * @return 
@@ -220,7 +220,7 @@ public class MlfrontOrderController {
 	
 	
 	
-	/**3.0	useOn	0505
+	/**5.0	useOn	0505
 	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
 	 * @param MlfrontOrder
 	 */
@@ -354,6 +354,10 @@ public class MlfrontOrderController {
 		session.setAttribute("payinfoId", payinfoId);
 		
 		session.setAttribute("sendAddressinfoId", payAddressinfoId);
+		
+		//取出sessionid，再次放入
+		Integer orderIdFinally = (Integer) session.getAttribute("orderId");
+		session.setAttribute("orderId", orderIdFinally);
 		//4.0传入orderid,查询其中的orderItemID，、找到cartID 找到cartid,移除购物车中的
 		Integer IsUpdate = updateCart(mlfrontOrder);
 		//5.0发起支付
