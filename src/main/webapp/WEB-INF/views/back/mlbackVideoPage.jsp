@@ -186,8 +186,8 @@
 					.append(videoName)
 					.append(videoArea)
 					.append(videoOrderthNum)
-					.append(videoUrl)
 					.append(videoImgUrl)
+					.append(videoUrl)
 					.append(videoStatus)
 					.append(videoIfproorcateorpage)
 					.append(showid)
@@ -487,10 +487,7 @@
 					$(".lei_select").hide();
 					$(".zt_select").show();
 				}
-				
-				
 			}
-
 		});
 
 		$(document.body).on("change", "#file1", upload);
@@ -553,37 +550,6 @@
 			}
 		}
 
-		/* function uploadMainFu() {
-			var self = this;
-			//实例化一个FormData
-			var obj = new FormData();
-			obj.append('file', $(this)[0].files[0]);
-			// console.log($(this)[0].files[0])
-			var actshowproIdUP = $(":input[name='actshowproId']").val();
-			if (actshowproIdUP == "") {
-				// 如果没有pid,弹出"请先输入产品名，保存后再次进入"
-				// console.log("productIdUP:"+productIdUP);
-				alert("请先输入产品名，保存后从编辑进入");
-			} else {
-				obj.append('actshowproId', actshowproIdUP);
-				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadActShowProPcImg",
-					type: "post",
-					dataType: "json",
-					cache: false,
-					data: obj,
-					processData: false, // 不处理数据
-					contentType: false, // 不设置内容类型
-					success: function (data) {
-						//设置背景为我们选择的图片
-						// console.log(data);
-						var returl = data.extend.uploadUrl;
-						// $(self).parent().css({ "background-image": "url("+'${APP_PATH }/static/img/category/'+returl+")" });
-						setImage($(self).parent(), returl);
-					}
-				});
-			}
-		} */
 	</script>
 </body>
 
