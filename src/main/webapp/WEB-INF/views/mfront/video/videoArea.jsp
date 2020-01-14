@@ -66,7 +66,15 @@
 		  var html = '';
 		  for (var i=0, len=data.length; i < len; i += 1) {
 			  var urlStr =data[i].videoUrl;
-				html += '<li onclick="clickVideo(event)" videonum-id="'+data[i].videoProid+'" dataiframe="'+urlStr+'">' +
+			   function matchYoutubeUrl(url){
+			   var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+			    return (url.match(p)) ? RegExp.$1 : false ;
+			   }
+			  var urlNum =  matchYoutubeUrl(urlStr)
+			  var urlytb =   "https://www.youtube.com/embed/"
+			  var urlall = urlytb+urlNum;
+			  // console.log(urlall)
+				html += '<li onclick="clickVideo(event)" videonum-id="'+data[i].videoProid+'" dataiframe="'+urlall+'">' +
 						'<img src="'+data[i].videoImgUrl+'">' +
 						'<p><em>'+data[i].videoName+'</em></p>'+
 						'</li>';
