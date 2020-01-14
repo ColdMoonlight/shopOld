@@ -559,8 +559,7 @@ public class MlbackProductController {
 	 	mlbackCategoryOne = mlbackCategoryList.get(0);
 	 	
 	 	String categoryProductIds = mlbackCategoryOne.getCategoryProductIds();
-	 	
-	 	
+
 	 	List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
 	 	
 	 	if(categoryProductIds==null||categoryProductIds.length()==0){
@@ -612,8 +611,6 @@ public class MlbackProductController {
 		mlbackCategoryReq.setCategoryId(categoryIdInt);
 		
 		mlbackCategoryOne = mlbackCategoryService.selectMlbackCategoryById(mlbackCategoryReq);
-		
-		//List<MlbackCategory> mlbackCategoryList = new ArrayList<MlbackCategory>();
 	 	
 	 	String categoryProductIds = null;
 	 	if(mlbackCategoryOne==null){
@@ -850,7 +847,6 @@ public class MlbackProductController {
 		
 	}
 	
-	
 	/**
 	 * 13	UseNow	0505
 	 * 前台移动端获取详情页面mfront/productDetails
@@ -871,34 +867,14 @@ public class MlbackProductController {
 		if(ifMobile.equals("1")){
 			//1wap
 			return "mfront/searchproductlist";
-//			return "mfront/footNavPage";
 		}else{
 			//0PC
 			return "front/searchproductlist";
-//			return "front/pcfootNavPage";
 		}
 	}
 	
-//	/**
-//	 * 14	UseNow	0505
-//	 * 前台移动端获取详情页面mfront/productDetails
-//	 * @param jsp
-//	 * @return 
-//	 * */
-//	@RequestMapping(value="/topSearchPage",method=RequestMethod.GET)
-//	public String topSearchPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "seaProductName") String seaProductName) throws Exception{
-//		//接收传递进来的参数
-//		String seaProductNameReq = seaProductName;
-//		//放回响应域中
-//		res.setAttribute("productName", seaProductNameReq);
-//		//放回session域中
-//		session.setAttribute("productName", seaProductNameReq);
-//		//返回视图
-//		return "front/searchproductlist";
-//	}
-	
 	/**
-	  * 15.0 UseNow 0505
+	  * 14.0 UseNow 0505
 	  * 通过产品名模糊搜索
 	  * @param productId
 	  * @return 
@@ -916,7 +892,6 @@ public class MlbackProductController {
 	  System.out.println("操作说明:客户搜索的产品名,查询结果mlbackProductResListnum:"+num);
 	  return Msg.success().add("resMsg", "产品名模糊搜索完毕")
 	     .add("mlbackProductResList", mlbackProductResList).add("mlbackProductResListnum", num).add("productName", productName);
-	  
 	 }
 	
 }
