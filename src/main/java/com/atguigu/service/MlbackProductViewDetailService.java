@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackProductViewDetail;
-import com.atguigu.dao.MlbackActShowProMapper;
 import com.atguigu.dao.MlbackProductViewDetailMapper;
 
 

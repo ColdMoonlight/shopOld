@@ -62,7 +62,6 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int productId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductMapper.deleteByPrimaryKey(productId);
 		return intReslut;
 	}
@@ -74,7 +73,6 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public int updateByPrimaryKeySelective(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductMapper.updateByPrimaryKeySelective(mlbackProduct);
 		return intReslut;
 	}
@@ -86,7 +84,6 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public int updateMainFuImgById(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductMapper.updateMainFuImgById(mlbackProduct);
 		return intReslut;
 	}
@@ -99,29 +96,24 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public List<MlbackProduct> selectMlbackProductByLable(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByLable(mlbackProduct);
 		return mlbackProductList;
 	}
 	
 	public List<MlbackProduct> selectMlbackProductByProductCategoryid(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByProductCategoryid(mlbackProduct);
 		return mlbackProductList;
 	}
 	
 	public List<MlbackProduct> selectMlbackProductByStatus(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByStatus(mlbackProduct);
 		return mlbackProductList;
 	}
 	public MlbackProduct selectMlbackProductBySeo(MlbackProduct mlbackProductrepBySeo) {
-		// TODO Auto-generated method stub
 		MlbackProduct  mlbackProduct = mlbackProductMapper.selectMlbackProductBySeo(mlbackProductrepBySeo);
 		return mlbackProduct;
 	}
 	public List<MlbackProduct> selectMlbackProductLike(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductLike(mlbackProduct);
 		return mlbackProductList;
 	}
