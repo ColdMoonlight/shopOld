@@ -1,6 +1,5 @@
 package com.atguigu.dao;
 
-import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlPaypalStateprovince;
 import com.atguigu.bean.MlPaypalStateprovinceExample;
 import java.util.List;
