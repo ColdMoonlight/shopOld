@@ -918,6 +918,10 @@
 		      interval: 1000,
 		      state: false,
 		    });
+			if (countdown && countdown.state === 'after') {
+			    	  $('#countdown-area').addClass('hide');
+			}
+			
 	    }
 	    var countDownArea = $('#countdown-area');
 	    $.ajax({
