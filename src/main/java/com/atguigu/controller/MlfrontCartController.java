@@ -654,7 +654,6 @@ public class MlfrontCartController {
 		return Msg.success().add("resMsg", "订单提交成功");
 	}
 	
-	
 	/**
 	 * 7.0	zsh 0615
 	 * 删除购物车中的项delCartItem
@@ -1374,8 +1373,6 @@ public class MlfrontCartController {
 		String addcartviewdetailSeoname = mlbackProductres.getProductSeo();
 		String addcartviewdetailProname = mlbackProductres.getProductName();
 		
-		
-		
 		//准备参数信息
 		MlbackAddCartViewDetail mlbackAddCartViewDetailreq = new MlbackAddCartViewDetail();
 		//浏览对象
@@ -1427,7 +1424,5 @@ public class MlfrontCartController {
 			mlbackAddCheakoutViewDetailreq.setAddcheakoutviewdetailActnum(0); //计数用户行为，0(从CartList--Cheakout)的结算数	，1(从buyNow--Cheakout)的结算数
 			mlbackAddCheakoutViewDetailService.insertSelective(mlbackAddCheakoutViewDetailreq);
 		}
-	
 	}
-
 }
