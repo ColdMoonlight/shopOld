@@ -267,7 +267,7 @@
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
-					slideId: $(this).attr('del-id')
+					videoshowareaId: $(this).attr('del-id')
 			};
 			$.ajax({
 				url: "${APP_PATH}/MlbackVideoShowArea/delete",
