@@ -116,7 +116,7 @@
 									'<a class="video_link_buyBtn" href="${APP_PATH }/'+data.productSeo+'.html">Buy Now </a>'+
 								 '</div>'+		
 	                    '</div>'+	
-						'<button class="video_enlarge_close"></button>'		
+						'<button class="video_enlarge_close">X</button>'		
 	             '</div>'+						
 	 $(document.body).append(elBox.html(html));
 	 $(".video_enlarge_close").on("click",function(){
