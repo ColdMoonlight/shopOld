@@ -34,7 +34,6 @@ public class MlbackProductSkuService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int productskuId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductSkuMapper.deleteByPrimaryKey(productskuId);
 		return intReslut;
 	}
@@ -46,7 +45,6 @@ public class MlbackProductSkuService {
 	 * 
 	 * */
 	public int updateByPrimaryKeySelective(MlbackProductSku mlbackProductSku) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductSkuMapper.updateByPrimaryKeySelective(mlbackProductSku);
 		return intReslut;
 	}
@@ -83,8 +81,5 @@ public class MlbackProductSkuService {
 		List<MlbackProductSku>  mlbackProductSkuList = mlbackProductSkuMapper.selectMlbackProductGetAll();
 		return mlbackProductSkuList;
 	}
-	
-
-	
 
 }

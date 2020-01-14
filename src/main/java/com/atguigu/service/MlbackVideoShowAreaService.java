@@ -4,16 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.atguigu.bean.MlbackSlide;
 import com.atguigu.bean.MlbackVideoShowArea;
-import com.atguigu.dao.MlbackSlideMapper;
 import com.atguigu.dao.MlbackVideoShowAreaMapper;
-
 
 @Service
 public class MlbackVideoShowAreaService {
-	
 	
 	@Autowired
 	MlbackVideoShowAreaMapper mlbackSlideMapper;
@@ -36,11 +31,9 @@ public class MlbackVideoShowAreaService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int slideId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackSlideMapper.deleteByPrimaryKey(slideId);
 		return intReslut;
 	}
-	
 	
 	/**
 	 * @author Shinelon
@@ -84,16 +77,5 @@ public class MlbackVideoShowAreaService {
 		List<MlbackVideoShowArea>  MlbackVideoShowAreaList = mlbackSlideMapper.selectMlbackVideoShowAreapcListByArea(mlbackSlide);
 		return MlbackVideoShowAreaList;
 	}
-	
-	/**
-	 * @author Shinelon
-	 * @param 
-	 * @exception 查看全部用户信息
-	 * 
-	 * */
-/*	public List<MlbackSlide> selectMlbackSlideByActnum(MlbackSlide mlbackSlide) {
-		List<MlbackSlide>  MlbackSlideList = mlbackSlideMapper.selectMlbackSlideByActnum(mlbackSlide);
-		return MlbackSlideList;
-	}*/
 
 }
