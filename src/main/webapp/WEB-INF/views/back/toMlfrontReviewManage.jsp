@@ -562,6 +562,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('删除成功！');
+						window.location.href = window.location.href;
 						to_page(1);
 					}
 				}
