@@ -516,6 +516,7 @@
 			// close review box
 			$('.review-cancel').on('click', function() {
 				$('.review-box').addClass('hide');
+				$(".maskreview").hide();
 				deleteReview();
 			});
 			// select star reank
@@ -1055,11 +1056,11 @@
 			});
 		}
 		
-		$(window).on('beforeunload', function() {
-			if (!reviewId) {
-				deleteReview();
-			}
-		});
+		// $(window).on('beforeunload', function() {
+		// 	if (reviewId) {
+		// 		deleteReview();
+		// 	}
+		// });
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData

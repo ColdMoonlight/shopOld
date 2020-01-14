@@ -70,7 +70,7 @@
           		html += '<li>' +
           				'<a href="${APP_PATH }/MlbackVideo/toVideoAreaPage?videoArea='+data[i].videoshowareaId+'">' +
           				'<img src="'+data[i].videoshowareaWapimgurl+'">' +
-          				'<p><em>'+data[i].videoshowareaName+'</em><span>'+v_num+'</span></p>'+
+          				'<p><em>'+data[i].videoshowareaName+'</em><span>('+v_num+')</span></p>'+
           				'</a>' +
           				'</li>';
           		}
