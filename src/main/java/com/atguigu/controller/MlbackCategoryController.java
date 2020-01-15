@@ -334,7 +334,6 @@ public class MlbackCategoryController {
 	 
 		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
 		 
-		 
 		 if(CategoryProductIdsStr==null){
 			 return Msg.success().add("resMsg", "该类下无prolist").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
 		 }
