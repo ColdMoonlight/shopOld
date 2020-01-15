@@ -27,11 +27,10 @@ import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.utils.IfMobileUtils;
 
-
 @Controller
 @RequestMapping("/MlbackCategory")
 public class MlbackCategoryController {
-		
+	
 	@Autowired
 	MlbackCategoryService mlbackCategoryService;
 	
@@ -335,7 +334,6 @@ public class MlbackCategoryController {
 	 
 		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
 		 
-		 
 		 if(CategoryProductIdsStr==null){
 			 return Msg.success().add("resMsg", "该类下无prolist").add("mlbackProductResList", null).add("mlbackCategorydownEr", mlbackCategorydownEr);
 		 }
@@ -361,7 +359,6 @@ public class MlbackCategoryController {
 				 mlbackProductResList.add(mlbackProductResOne);
 			 }
 		 }
-		
 		 return Msg.success().add("resMsg", "searchBycategorySeo完毕")
 				 .add("mlbackProductResList", mlbackProductResList).add("mlbackCategorydownEr", mlbackCategorydownEr);
 	 }
@@ -422,6 +419,7 @@ public class MlbackCategoryController {
 					
 					mlbackCategoryfirstdownList.add(mlbackCategorydownEr);
 				}else{
+					mlbackCategoryfirstdownList.add(mlbackCategorydownEr);
 					System.out.println("该二级下没有三级分类");
 				}
 			}
