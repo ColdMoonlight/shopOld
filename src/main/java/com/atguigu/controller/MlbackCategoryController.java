@@ -27,11 +27,10 @@ import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.utils.IfMobileUtils;
 
-
 @Controller
 @RequestMapping("/MlbackCategory")
 public class MlbackCategoryController {
-		
+	
 	@Autowired
 	MlbackCategoryService mlbackCategoryService;
 	
@@ -361,7 +360,6 @@ public class MlbackCategoryController {
 				 mlbackProductResList.add(mlbackProductResOne);
 			 }
 		 }
-		
 		 return Msg.success().add("resMsg", "searchBycategorySeo完毕")
 				 .add("mlbackProductResList", mlbackProductResList).add("mlbackCategorydownEr", mlbackCategorydownEr);
 	 }
