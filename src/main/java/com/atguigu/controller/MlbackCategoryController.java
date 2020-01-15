@@ -419,6 +419,7 @@ public class MlbackCategoryController {
 					
 					mlbackCategoryfirstdownList.add(mlbackCategorydownEr);
 				}else{
+					mlbackCategoryfirstdownList.add(mlbackCategorydownEr);
 					System.out.println("该二级下没有三级分类");
 				}
 			}
