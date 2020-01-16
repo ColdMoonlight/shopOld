@@ -119,8 +119,12 @@
 					var data = JSON.parse(data);
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductResList;
-						var DataproListBySaleNum =orderProListBySaleNum(productData);
-						rednerProduct(productList,DataproListBySaleNum);
+						if(productData==null){
+							renderErrorMsg(productList, 'No product-related data was obtained');
+						}else{
+							var DataproListBySaleNum =orderProListBySaleNum(productData);
+							rednerProduct(productList,DataproListBySaleNum);
+						}
 						// rednerProduct(productList, productData);
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');

@@ -110,8 +110,12 @@
 					if (data.code === 100) {
 						var resData2 = data.extend.mlbackProductResList;
 						// rednerProduct(productList,resData2);
-						var DataproListBySaleNum =orderProListBySaleNum(resData2);
-						rednerProduct(productList,DataproListBySaleNum);
+						if(resData2==null){
+							renderErrorMsg(productList, 'No product-related data was obtained');
+						}else{
+							var DataproListBySaleNum =orderProListBySaleNum(resData2);
+							rednerProduct(productList,DataproListBySaleNum);
+						}
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
