@@ -308,7 +308,7 @@
   <!-- 使用中 -->
   <select id="selectMenuMlbackCategoryGetAll" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
     select category_id,category_name,category_lable,category_imgurl,category_parent_id,category_seo,category_desc,category_imgpcurl,category_sort_order
-    from tb_mlback_category order by category_parent_id,category_sort_order
+    from tb_mlback_category where category_status = 1 order by category_parent_id,category_sort_order
   </select>
   
   <!-- 使用中 -->
