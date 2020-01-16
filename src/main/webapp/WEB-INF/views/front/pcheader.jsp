@@ -245,26 +245,24 @@
 								   }else if(categoryLableInt2 == 4){
 								   	classimg = "classimg4";
 								   }
-								   var threenav =data2[i][j][k].categorySeo;
-								   if(threenav==""){
-								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
-								   }else if(threenav=="Customer-Videos"){
-									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dd>';     
-								   }else if(threenav=="Shop-By-Look"){
-									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dd>';     
-								   }else if(threenav=="Photo-Gallery"){
-									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   if(k==0){
+									    var threenav =data2[i][j][k].categorySeo;
+										if(threenav==""){
+												html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+										}else if(threenav=="Customer-Videos"){
+												html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}else if(threenav=="Shop-By-Look"){
+												html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}else if(threenav=="Photo-Gallery"){
+											     html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}else{
+												html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										} 
 								   }else{
-								   		html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+									  html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';    
 								   }
-								   
-
-								   
-								   
-								   
-								     // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';   
 							   }
-							     html +=  '</dl>';
+							  html += '</dl>';	  
 						  }
 					 }	
 					 html += '</div>';	
