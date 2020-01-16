@@ -97,8 +97,12 @@
 					Search = name;
 					// console.log(resultlist);
 					// rednerProductmm(productList,resultlist);
-					var DataproListBySaleNum =orderProListBySaleNum(resultlist);
-					rednerProductmm(productList,DataproListBySaleNum);
+					if(resultlist==null){
+						renderErrorMsg(productList, 'No product-related data was obtained');
+					}else{
+						var DataproListBySaleNum =orderProListBySaleNum(resultlist);
+						rednerProductmm(productList,DataproListBySaleNum);
+					}
 					if(resultlistlength==0){
 						$(".hot_box_product").show();
 					}else{

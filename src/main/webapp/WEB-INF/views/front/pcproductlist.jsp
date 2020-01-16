@@ -128,13 +128,17 @@
 				              content_type: 'product'
 				            });
 						// console.log(reviewTextData)
-						var DataproListBySaleNum =orderProListBySaleNum(reviewTextData);
-						rednerProduct(productList,DataproListBySaleNum);
+						if(reviewTextData==null){
+							renderErrorMsg(productList, 'No product-related data was obtained');
+						}else{
+							var DataproListBySaleNum =orderProListBySaleNum(reviewTextData);
+							rednerProduct(productList,DataproListBySaleNum);
+						}
 						// rednerProduct(productList,reviewTextData);
 						var pageInfo = data.extend.pageInfo;
-						console.log("************pageInfo*************");
-						console.log(pageInfo);
-						console.log("************pageInfo*************");
+						// console.log("************pageInfo*************");
+						// console.log(pageInfo);
+						// console.log("************pageInfo*************");
 						render_page_nav($('.page-info-area'), pageInfo)
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
