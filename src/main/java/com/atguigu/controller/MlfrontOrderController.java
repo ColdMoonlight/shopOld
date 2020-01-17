@@ -358,13 +358,11 @@ public class MlfrontOrderController {
 		//取出sessionid，再次放入
 		Integer orderIdFinally = (Integer) session.getAttribute("orderId");
 		session.setAttribute("orderId", orderIdFinally);
-		//4.0传入orderid,查询其中的orderItemID，、找到cartID 找到cartid,移除购物车中的
+		//4.0传入orderid,查询其中的orderItemID,找到cartID 找到cartid,移除购物车中的
 		Integer IsUpdate = updateCart(mlfrontOrder);
 		//5.0发起支付
-		Integer isSuccess = 0;//返回0，跳支付成功页面
-		//Integer isSuccess = 1;//返回1，跳支付失败页面
+		Integer isSuccess = 0;//返回0，跳支付成功页面;返回1，跳支付失败页面
 		return Msg.success().add("resMsg", "更新成功").add("isSuccess", isSuccess);
-		//return "redirect:/paypal/pay";
 	}
 
 	/**
@@ -912,21 +910,38 @@ public class MlfrontOrderController {
 
 
 	//11.1
+//	private String getToCustomerVerifyEmail(String payinfoPlateNum) {
+//		String Message ="";
+//		Message =Message+"Hi gorgeous girl ,"+"<br><br>";
+//		Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
+//		Message=Message+"The hair you ordered is in stock and is expected to be shipped within 24-48 hours .<br><br>";
+//		Message=Message+"We will send the parcel tracking number to you through email & SMS after delivery, and you can also view it on the PayPal bill.<br><br><br>";
+//		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
+//		Message=Message+"Best Regards,<br><br>";
+//		Message=Message+"-----------------------------------<br><br>";
+//		Message=Message+"Megalook hair <br>";
+//		Message=Message+"Email:service@megalook.com <br>";
+//		Message=Message+"Whatsapp:+86 18903740682 <br>";
+//		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+//		return Message;
+//	}
+	
+	//节假日版本
 	private String getToCustomerVerifyEmail(String payinfoPlateNum) {
-		String Message ="";
-		Message =Message+"Hi gorgeous girl ,"+"<br><br>";
-		Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
-		Message=Message+"The hair you ordered is in stock and is expected to be shipped within 24-48 hours .<br><br>";
-		Message=Message+"We will send the parcel tracking number to you through email & SMS after delivery, and you can also view it on the PayPal bill.<br><br><br>";
-		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
-		Message=Message+"Best Regards,<br><br>";
-		Message=Message+"-----------------------------------<br><br>";
-		Message=Message+"Megalook hair <br>";
-		Message=Message+"Email:service@megalook.com <br>";
-		Message=Message+"Whatsapp:+86 18903740682 <br>";
-		Message=Message+"Telephone/SMS:+1 5017226336<br>";
-		return Message;
-	}
+	String Message ="";
+	Message=Message+"Dear valued clients ,"+"<br><br>";
+	Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
+	Message=Message+"We would like to inform u that accordance with the law of China ,Megalook hair team will have a holiday of The Spring Festival from January 23rd to January 30th.";
+	Message=Message+"We are sorry can't reply u timely and can't ship out the package for u before January 30th, the package will ship out ASAP when we back.<br><br>";
+	Message=Message+"Hope to understand and best wish for u!<br><br>";
+	Message=Message+"Best Regards,<br><br>";
+	Message=Message+"-----------------------------------<br><br>";
+	Message=Message+"Megalook hair <br>";
+	Message=Message+"Email:service@megalook.com <br>";
+	Message=Message+"Whatsapp:+86 18903740682 <br>";
+	Message=Message+"Telephone/SMS:+1 5017226336<br>";
+	return Message;
+}
 	
 	//11.2	更改payinfo为审核状态
 	private void updatePayInfoVerifyedstatus(Integer payInfoId) {
