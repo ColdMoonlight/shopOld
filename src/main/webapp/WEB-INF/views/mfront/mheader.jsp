@@ -187,6 +187,8 @@
 						classimg = "classimg3";
 					}else if(categoryLableInt == 4){
 						classimg = "classimg4";
+					}else if(categoryLableInt == 5){
+						classimg = "classimg5";
 					}
 					var twonav = data1[i].categorySeo;
 					if(twonav==""){
@@ -221,6 +223,8 @@
 								   	classimg = "classimg3";
 								   }else if(categoryLableInt2 == 4){
 								   	classimg = "classimg4";
+								   }else if(categoryLableInt2 == 5){
+								   	classimg = "classimg5";
 								   }
 								   var threenav =data2[i][j][k].categorySeo;
 								   if(threenav==""){

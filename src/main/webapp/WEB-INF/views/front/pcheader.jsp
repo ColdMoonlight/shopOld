@@ -211,6 +211,8 @@
 						classimg = "classimg3";
 					}else if(categoryLableInt == 4){
 						classimg = "classimg4";
+					}else if(categoryLableInt == 5){
+						classimg = "classimg5";
 					}
 					var twonav = data1[i].categorySeo;
 					if(twonav==""){
@@ -228,6 +230,9 @@
 					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
 					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
 				    html += '<div class="menu_list-wap">';
+					html += '<div class="home-menu_list_wrap_inner">';
+					html += '<div class="home-menu_list--left_left"></div>';
+					html += '<div class="home_left_middle">';
 					for(var j=0;j<data2[i].length;j++){
 						  if(data2[i][j] && data2[i][j].length > 0){
 							  html += '<dl>'; 
@@ -244,6 +249,8 @@
 								   	classimg = "classimg3";
 								   }else if(categoryLableInt2 == 4){
 								   	classimg = "classimg4";
+								   }else if(categoryLableInt2 == 5){
+								   	classimg = "classimg5";
 								   }
 								   if(k==0){
 									    var threenav =data2[i][j][k].categorySeo;
@@ -265,6 +272,9 @@
 							  html += '</dl>';	  
 						  }
 					 }	
+					 html += '</div>';	
+					  html += '<div class="home-menu_list--left_right"></div>';
+					  html += '</div>';	
 					 html += '</div>';	
 					}
 					 html += '	</li>';	
