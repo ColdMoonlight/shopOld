@@ -268,8 +268,8 @@ public class MlfrontOrderController {
 			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));
 			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));
 			String str = df1.format(oneAllprice);
-			System.out.println(oneAllprice);
-			System.out.println(str); //13.15
+			System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
+			System.out.println("存进去的OrderitemPskuReamoney:"+str); //13.15
 			MlfrontOrderItem mlfrontOrderItemMoneyBlack = new MlfrontOrderItem();
 			mlfrontOrderItemMoneyBlack.setOrderitemId(orderItemId);
 			mlfrontOrderItemMoneyBlack.setOrderitemPskuReamoney(str);

@@ -195,7 +195,9 @@ public class PaypalService {
 	}
 
 	private String getOnemoney(Integer skuNum, String money) {
+		System.out.println("paypalService中的:getOnemoney"+money+",skuNum:"+skuNum);
 		Double moneyAll = new Double(money);
+		System.out.println("paypalService中的Double moneyAll = new Double(money)+moneyAll:"+moneyAll);
 		Double oneM = moneyAll/skuNum;
 		String Onemoney = String.format("%.2f", oneM);
 		return Onemoney;
@@ -213,6 +215,7 @@ public class PaypalService {
 	private ItemList getItemList(List<MlfrontOrderItem> mlfrontOrderItemList) {
 		ItemList itemList = new ItemList();
 		List<Item> items = new ArrayList<Item>();
+		System.out.println("paypalService中的结算单子的详情"+mlfrontOrderItemList.toString());
 		for(MlfrontOrderItem mlfrontOrderItem:mlfrontOrderItemList){
 			Item item = new Item();
 			String name=mlfrontOrderItem.getOrderitemPname();
