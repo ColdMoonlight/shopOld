@@ -124,7 +124,7 @@ public class PaypalService {
   		Details details = new Details();
   		details.setShipping("0");
   		details.setSubtotal(subMoney);
-  		details.setTax("0");//shipping_discount
+  		details.setTax("0");//税
   		String shopdiscountMoney = "-"+Shopdiscount;
   		details.setShippingDiscount(shopdiscountMoney);
   		details.setShipping((addressMoney));
