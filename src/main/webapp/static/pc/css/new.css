@@ -27,7 +27,7 @@
 	 display: inline-block;
 	        vertical-align: top;
 	        width: auto;
-	        margin-right: 40px;
+	        margin: 0 40px;
 	        text-align: left;
  }
 
@@ -118,7 +118,9 @@
  .navul li:nth-of-type(6) .home-menu_list--left_left{background:url(../../pc/img/n1.jpg) no-repeat; width: 900px; height: 200px; float: left;}
  
  .navul li:nth-of-type(2) .menu_list-wap{text-align: left;}
+  .navul li:nth-of-type(2) .menu_list-wap .home_left_middle{padding: 0 0 0 140px;}
  .navul li:nth-of-type(3) .menu_list-wap{text-align: left;}
+   .navul li:nth-of-type(3) .menu_list-wap .home_left_middle{padding: 0 0 0 290px;}
  .navul li:nth-of-type(4) .menu_list-wap{text-align: center;}
  .navul li:nth-of-type(7) .menu_list-wap{text-align: center;}
 
