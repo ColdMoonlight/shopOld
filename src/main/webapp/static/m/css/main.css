@@ -2616,6 +2616,8 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .clearfix:after{clear: both;}
 .clearfix{*zoom:1;}
 .order-info{width: 100%}
+.order-info .tab-item{font-size: 14px;}
+
 .cp_img{width:75%; float: left;padding:0 1%;}
 .lefttp{float: left;width: 25%; text-align: center; margin: 0 0 10px;}
 .lefttp img{display: inline-block;width: 80px; height:80px;border: 1px solid #ccc;}
@@ -2694,13 +2696,23 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .menu_list-wap dl dd{display: none;margin: 0 5%;}
 .menu_list-wap dl dd a{color: #888;}
 .menu_list-wap dl dd:first-child{position: relative; display:block; border-bottom: 1px solid #eee; padding: 0;}
+.menu_list-wap dl dt{position: relative;}
 .menu_list-wap dl dd:first-child a{color: #444;}
 .menu_list-wap dl.submenu  dd{display: block;}
 .menu_list-wap dl dd:first-child i.gw-i2{cursor: pointer; z-index: 2;background:url(../../m/img/index/add.png) no-repeat center;background-size:18px;width: 40px; height: 40px; position: absolute; right: 0; top: 0;}
 .menu_list-wap dl dd:first-child i.gw-i2.active{background:url(../../m/img/index/cut.png) no-repeat center;background-size:18px;}
+.menu_list-wap dl dt i.gw-i2{cursor: pointer; z-index: 2;background:url(../../m/img/index/add.png) no-repeat center;background-size:18px;width: 40px; height: 40px; position: absolute; right: 0; top: 0;}
+.menu_list-wap dl dt i.gw-i2.active{background:url(../../m/img/index/cut.png) no-repeat center;background-size:18px;}
+
+
+
+
 .menu_list-wap dl:last-child dd:first-child{border:none;}
 .menu_list-wap dl dd.dljc{display: block !important}
 .menu_list-wap dl dd.dljc a{font-weight: bold;font-size: 12px;color: #222;}
+.category_ul li:nth-of-type(8) .menu_list-wap dl dt .gw-i2{display: none;}
+.category_ul li:nth-of-type(6) .menu_list-wap dl dt .gw-i2{display: none;}
+
 
 
 /****************瀑布流页面************************************/
