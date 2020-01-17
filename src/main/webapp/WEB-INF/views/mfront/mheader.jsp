@@ -226,19 +226,24 @@
 								   }else if(categoryLableInt2 == 5){
 								   	classimg = "classimg5";
 								   }
-								   var threenav =data2[i][j][k].categorySeo;
-								   if(threenav==""){
-									 html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
-								   }else if(threenav=="Customer-Videos"){
-									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dd>';     
-								   }else if(threenav=="Shop-By-Look"){
-									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dd>';     
-								   }else if(threenav=="Photo-Gallery"){
-									   html += '<dd class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dd>';     
+								   if(k==0){
+									   var threenav =data2[i][j][k].categorySeo;
+									   if(threenav==""){
+									   			 html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else if(threenav=="Customer-Videos"){
+									   			html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else if(threenav=="Shop-By-Look"){
+									   			 html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else if(threenav=="Photo-Gallery"){
+									   			html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else{
+									   		    html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }
 								   }else{
-									   html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
+									   html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';      
 								   }
-								   // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
+								    // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
+								  
 							   }
 							     html +=  '</dl>';
 						  }
@@ -259,7 +264,7 @@
 			   }
 			   $(this).parent('.home-menu_list').siblings('.home-menu_list').find('.gw-i').removeClass('active').next('.menu_list-wap').hide(200);
 			 })
-			 $(".menu_list-wap dl dd:first-child .gw-i2").click(function(){
+			 $(".menu_list-wap dl dt .gw-i2").click(function(){
 				 $(this).toggleClass('active');
 				 if($(this).hasClass('active')){
 					   $(this).parents("dl").addClass("submenu");
