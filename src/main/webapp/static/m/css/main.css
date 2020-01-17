@@ -394,15 +394,18 @@ a:focus {
 /*new*/.category .category-item.classimg2:before{content: "";  width:35px; height:25px;position: absolute; top: 10px; left:50%;background:url(../../m/img/firstpage/new.png) no-repeat center top; background-size:35px 25px;}
 /*Sale*/.category .category-item.classimg3:before{content: ""; width:64px; height:25px; position: absolute; top:10px; left:50%;background:url(../../m/img/firstpage/4off.png) no-repeat center top; background-size:64px 25px;}
 /*Double Drawn*/.category .category-item.classimg4:before{content: ""; width:100px; height:25px; position: absolute; top: 0; left:50%;background:url(../../m/img/firstpage/double.png) no-repeat center top; background-size:100px 25px;}
-/*hot*/.category_ul li.classimg1:before{content: ""; width:35px; height:25px; position: absolute; top: 10px; left:50%;background:url(../../m/img/firstpage/hot.png) no-repeat center top; background-size:35px 25px;}
-/*new*/.category_ul li.classimg2:before{content: "";  width:35px; height:25px;position: absolute; top: 10px; left:50%;background:url(../../m/img/firstpage/new.png) no-repeat center top; background-size:35px 25px;}
-/*Sale*/.category_ul li.classimg3:before{content: ""; width:64px; height:25px; position: absolute; top:10px; left:50%;background:url(../../m/img/firstpage/4off.png) no-repeat center top; background-size:64px 25px;}
+/*hot*/.category_ul li.classimg1:before{content: ""; width:35px; height:25px; position: absolute; top: 0; left:50%;background:url(../../m/img/firstpage/hot.png) no-repeat center top; background-size:35px 25px;}
+/*new*/.category_ul li.classimg2:before{content: "";  width:35px; height:25px;position: absolute; top: 0; left:60%;background:url(../../m/img/firstpage/new.png) no-repeat center top; background-size:35px 25px;}
+/*Sale*/.category_ul li.classimg3:before{content: ""; width:64px; height:25px; position: absolute; top:0; left:50%;background:url(../../m/img/firstpage/4off.png) no-repeat center top; background-size:64px 25px;}
 /*Double Drawn*/.category_ul li.classimg4:before{content: ""; width:100px; height:25px; position: absolute; top: 0; left:50%;background:url(../../m/img/firstpage/double.png) no-repeat center top; background-size:100px 25px;}
-/*************/
+/*Double Drawn*/.category_ul li.classimg5:before{content: ""; width:35px; height:25px; position: absolute; top: 0; left:50%;background:url(../../pc/img/15A.gif) no-repeat center top; background-size:35px 25px;}
+
+
 /*hot*/.menu_list-wap dl dd.classimg1:before{content: ""; width:35px; height:25px; position: absolute; top: 10px; left:50%;background:url(../../m/img/firstpage/hot.png) no-repeat center top; background-size:35px 25px;}
 /*new*/.menu_list-wap dl dd.classimg2:before{content: "";  width:35px; height:25px;position: absolute; top: 10px; left:50%;background:url(../../m/img/firstpage/new.png) no-repeat center top; background-size:35px 25px;}
 /*Sale*/.menu_list-wap dl dd.classimg3:before{content: ""; width:64px; height:25px; position: absolute; top:10px; left:50%;background:url(../../m/img/firstpage/4off.png) no-repeat center top; background-size:64px 25px;}
 /*Double Drawn*/.menu_list-wap dl dd.classimg4:before{content: ""; width:100px; height:25px; position: absolute; top: 0; left:50%;background:url(../../m/img/firstpage/double.png) no-repeat center top; background-size:100px 25px;}
+/*Double Drawn*/.menu_list-wap dl dd.classimg5:before{content: ""; width:35px; height:25px; position: absolute; top: 0; left:50%;background:url(../../pc/img/15A.gif) no-repeat center top; background-size:35px 25px;}
 
 .box_nogoods{padding: 20px 0 0;}
 
@@ -2680,7 +2683,7 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .category_ul li{position:relative; width: 100%; border-bottom: 1px solid #F1F1F1;min-height: 40px; line-height: 40px;}
 .category_ul li:nth-of-type(1) .gw-i{background: none;}
 .category_ul li:nth-of-type(5) .gw-i{background: none;}
-.category_ul li:nth-of-type(6) .gw-i{background: none;}
+/* .category_ul li:nth-of-type(6) .gw-i{background: none;} */
 /* .category_ul li:nth-of-type(7) .gw-i{background: none;} */
 
 
