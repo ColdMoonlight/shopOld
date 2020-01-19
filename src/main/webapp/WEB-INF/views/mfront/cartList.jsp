@@ -108,8 +108,7 @@
 			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				cartitemMap[data[i].cartitemId] = data[i];
-				html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i]
-				.cartitemId +'" data-productid="' + data[i].cartitemProductId + '" data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' +
+				html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'" data-cartitemid="' + data[i].cartitemId +'" data-productid="' + data[i].cartitemProductId + '" data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' +
 					/* '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
 					.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' + */
 					'<img class="img" style="margin-left: 0;" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
@@ -122,7 +121,7 @@
 				var skuNameArr = data[i].cartitemProductskuNamestr.split(',');
 				var skuPriceArr = data[i].cartitemProductskuMoneystr.split(',');
 				for (var j = 0, len2 = skuIdArr.length; j < len2; j += 1) {
-					html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
+					html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="'+ skuPriceArr[j] +'">' + skuIdNameArr[j] +
 						': ' + skuNameArr[j] + '</div>';
 				}
 				html += '<span class="sku-edit" style="position: absolute; top:-20px; right: 0; color: #ff6f5e;" onclick="skuEdit(event);"> EDIT </span>';
