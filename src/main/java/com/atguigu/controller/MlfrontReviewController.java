@@ -475,6 +475,7 @@ public class MlfrontReviewController {
 	 * Integer reviewPid;
 	 * Integer reviewStatus;
 	 * Integer reviewProstarnum;
+	 * Integer reviewFrom;
 	 * String reviewStarttime;
 	 * String reviewEndtime;
 	 * @return
@@ -483,6 +484,7 @@ public class MlfrontReviewController {
 	@ResponseBody
 	public Msg selectMlfrontReviewListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "reviewPid") Integer reviewPid,
 			@RequestParam(value = "reviewStatus") Integer reviewStatus,@RequestParam(value = "reviewProstarnum") Integer reviewProstarnum,
+			@RequestParam(value = "reviewFrom") Integer reviewFrom,
 			@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
 			HttpSession session) {
 
@@ -502,15 +504,19 @@ public class MlfrontReviewController {
 		}else{
 			mlfrontReviewReq.setReviewStatus(reviewStatus);
 		}
+		if(reviewFrom==999){
+			System.out.println("reviewFrom==999");
+		}else{
+			mlfrontReviewReq.setReviewFrom(reviewFrom);
+		}
 		mlfrontReviewReq.setReviewStarttime(reviewStarttime);
 		mlfrontReviewReq.setReviewEndtime(reviewEndtime);
-			int PagNum = 20;
-			PageHelper.startPage(pn, PagNum);
-			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
-			
-			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
-			return Msg.success().add("pageInfo", page);
-//		}
+		int PagNum = 20;
+		PageHelper.startPage(pn, PagNum);
+		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
+		
+		PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
+		return Msg.success().add("pageInfo", page);
 	}
 	
 	/**

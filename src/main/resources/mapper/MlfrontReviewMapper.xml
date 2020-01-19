@@ -415,6 +415,9 @@
     <if test="reviewProstarnum != null">
       and review_proStarNum = #{reviewProstarnum,jdbcType=INTEGER}
     </if>
+    <if test="reviewFrom != null">
+      and review_from = #{reviewFrom,jdbcType=INTEGER}
+    </if>
     order by review_id desc
   </select>
   
