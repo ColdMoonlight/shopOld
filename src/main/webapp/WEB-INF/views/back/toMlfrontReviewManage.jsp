@@ -60,9 +60,9 @@
 								    <div class="" style="float: left;">
 								        <select class="form-control selectpl">
 										  <option value ="999" selected="selected">全部</option>
-										  <option value ="0">我添加的</option>
-										  <option value ="1">1customer</option>
-										   <option value ="2">2ins</option>
+										  <option value ="0">0-self</option>
+										  <option value ="1">1-Customer</option>
+										   <option value ="2">2-Ins</option>
 										</select>
 								    </div>
 								</div>
