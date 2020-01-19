@@ -926,16 +926,16 @@ public class MlfrontOrderController {
 //		return Message;
 //	}
 	
-	//节假日版本
+	//11.1节假日版本
 	private String getToCustomerVerifyEmail(String payinfoPlateNum) {
 	String Message ="";
 	Message=Message+"Dear valued clients ,"+"<br><br>";
-	Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
+	Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br>";
 	Message=Message+"We would like to inform u that accordance with the law of China ,Megalook hair team will have a holiday of The Spring Festival from January 23rd to January 30th.";
 	Message=Message+"We are sorry can't reply u timely and can't ship out the package for u before January 30th, the package will ship out ASAP when we back.<br><br>";
 	Message=Message+"Hope to understand and best wish for u!<br><br>";
-	Message=Message+"Best Regards,<br><br>";
-	Message=Message+"-----------------------------------<br><br>";
+	Message=Message+"Best Regards,<br><br><br>";
+	Message=Message+"-----------------------------------<br>";
 	Message=Message+"Megalook hair <br>";
 	Message=Message+"Email:service@megalook.com <br>";
 	Message=Message+"Whatsapp:+86 18903740682 <br>";
