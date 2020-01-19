@@ -106,37 +106,6 @@
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>	
        $(function(){
-		    var headtop = $(".tt-desktop-header").outerHeight(); 
-		    var menuTimer;
-		   $('.home-menu_list').hover(function () {
-			  var _this = this;
-			    var menuContentHright = $(_this).find('.menu_list-wap').outerHeight();
-			   if(menuTimer){
-				   clearTimeout(menuTimer);
-			   }
-			  menuTimer = setTimeout(function () {
-				   $('.navbar_itemContent-background').height(menuContentHright);
-				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
-				   if($(_this).hasClass('wrap_active')){
-					   $(_this).removeClass('wrap_active');
-				   }
-			   });
-			   $(_this).find('.menu_list-wap').addClass('wrap_active');
-
-			   return false;
-			   },100)
-		   },function () {
-			   var _this = this;
-			   if(menuTimer){
-				   clearTimeout(menuTimer);
-			   }
-			   $(_this).find('.menu_list-wap').removeClass('wrap_active');
-			   setTimeout(function () {
-				   $('.navbar_itemContent-background').height(0);
-				   return false;
-			   },100);
-
-		   });
 		   $(".img_show_cont a").click(function(){
 			 $(".img_show").animate({ 
 			    height: "0", 
@@ -280,6 +249,39 @@
 					 html += '	</li>';	
 			    }
 			 parent.html(html);
+			 
+			 var headtop = $(".tt-desktop-header").outerHeight();
+			  var menuTimer;
+			 $('.home-menu_list').hover(function () {
+			 			  var _this = this;
+			 			    var menuContentHright = $(_this).find('.menu_list-wap').outerHeight();
+			 			   if(menuTimer){
+			 				   clearTimeout(menuTimer);
+			 			   }
+			 			  menuTimer = setTimeout(function () {
+			 				   $('.navbar_itemContent-background').height(menuContentHright);
+			 				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
+			 				   if($(_this).hasClass('wrap_active')){
+			 					   $(_this).removeClass('wrap_active');
+			 				   }
+			 			   });
+			 			   $(_this).find('.menu_list-wap').addClass('wrap_active');
+			 
+			 			   return false;
+			 			   },100)
+			 },function () {
+			 			   var _this = this;
+			 			   if(menuTimer){
+			 				   clearTimeout(menuTimer);
+			 			   }
+			 			   $(_this).find('.menu_list-wap').removeClass('wrap_active');
+			 			   setTimeout(function () {
+			 				   $('.navbar_itemContent-background').height(0);
+			 				   return false;
+			 			   },100);
+			 
+			 });
+			 
 			}
 		$.ajax({
 		        url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
