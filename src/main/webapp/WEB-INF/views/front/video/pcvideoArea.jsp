@@ -109,7 +109,7 @@
 							   '<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="460" height="370" src="'+videoLink+'"></iframe>'+
 					             '<div class="promotion_product_list">'+
 								   '<a href="###" class="product-image"><img src="'+data.productMainimgurl+'" alt=""></a>'+
-								   '<h3 class="product-name"><a href="###">Beautyforever Brazilian Body Wave Hair 3 Bundles Black Color</a></h3>'+
+								  '<h3 class="product-name"><a href="javascript:;">'+data.productName+'</a></h3>'+
 								    '<div class="price-box_promotion">'+	
 									     '<div class="price-box">'+ 
 												'<p class="old-price">'+
@@ -151,7 +151,7 @@
 		        data:data,
 				 type: 'post',
 				 success: function (data) {
-					// console.log(data)/***data**/
+					console.log(data)/***data**/
 					   if (data.code === 100) {
 										    var resData = data.extend. mlbackProductOne;
 											videoProduct(resData,videoLink)
