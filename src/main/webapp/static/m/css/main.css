@@ -693,7 +693,7 @@ a:focus {
   font: 12px/12px '';
   color: #bfbfbf;
 }
-
+.content h4{font-weight: normal;}
 @media screen and (max-width: 321px) {
   .product-data>span {
     font-size: 6px;
