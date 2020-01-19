@@ -118,9 +118,7 @@
 				var html = '';
 				for (var i = 0, len = data.length; i < len; i += 1) {
 					var hasStorageItem = cartObj[data[i].cartitemId];
-					html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'">' +
-						'<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i]
-						.cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
+					html += '<div class="cart-item bd-b" data-actoff="'+ data[i].cartitemProductActoff +'" " data-originalprice="'+ data[i].cartitemProductOriginalprice + '">' + '<input onclick="selectCartItem(event)" '+ (hasStorageItem ? 'checked' : '') +' class="checkbox" type="checkbox" data-cartitemid="' + data[i].cartitemId + '" data-productid="' + data[i].cartitemProductId + '">' +
 						'<img class="img" src="' + data[i].cartitemProductMainimgurl + '" alt="">' +
 						'<div class="content">' +
 						' <div class="text">' +
@@ -131,7 +129,7 @@
 					var skuNameArr = data[i].cartitemProductskuNamestr.split(',');
 					var skuPriceArr = data[i].cartitemProductskuMoneystr.split(',');
 					for (var j = 0, len2 = skuIdArr.length; j < len2; j += 1) {
-						html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="+ skuPriceArr[j] +">' + skuIdNameArr[j] +
+						html += '<div class="c-item" data-id="' + skuIdArr[j] + '" data-price="'+ skuPriceArr[j] +'">' + skuIdNameArr[j] +
 							': ' + skuNameArr[j] + '</div>';
 					}
 					html += '<span class="sku-edit" style="position: absolute; top: 0; right: 0; color: #ff6f5e;" onclick="skuEdit(event);"> EDIT </span>';
@@ -209,7 +207,7 @@
 		    		    			var reqData = {};
 		    							reqData.cartitemProductId = parseInt(productId);
 		    							reqData.cartitemProductName = cartItem.find('.title').text();
-		    							reqData.cartitemProductOriginalprice = parseFloat(cartItem.find('.original').text().slice(1)).toFixed(2);
+										reqData.cartitemProductOriginalprice = parseFloat(cartItem.data('originalprice')).toFixed(2);
 		    							reqData.cartitemProductMainimgurl = cartItem.find('img').attr('src');
 		    							reqData.cartitemProductActoff = cartitemProductActoffid/10;
 		    							reqData.cartitemProductskuIdstr = skuIdstr.join(',');
