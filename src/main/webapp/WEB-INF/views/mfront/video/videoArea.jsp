@@ -108,7 +108,7 @@
 					             '<div class="promotion_product_list clearfix">'+
 								   '<a href="###" class="product-image"><img src="'+data.productMainimgurl+'" alt=""></a>'+
 								   '<div class="rightcont">'+
-								   '<h3 class="product-name"><a href="###">Beautyforever Brazilian Body Wave Hair 3 Bundles Black Color</a></h3>'+
+								   '<h3 class="product-name"><a href="javascript:;">'+data.productName+'</a></h3>'+
 								    '<div class="price-box_promotion">'+	
 									     '<div class="price-box">'+ 
 												'<p class="old-price">'+

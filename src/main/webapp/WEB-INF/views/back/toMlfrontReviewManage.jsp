@@ -55,21 +55,17 @@
 									<span class="c-datepicker-range-separator">-</span>
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
-<!-- 								<div class="date-timepicker2">
-									<div class="form-group row">
-										<label for="reviewCreatetime" class="col-sm-2 control-label">编造评论时间:</label>
-										<div class="col-sm-6 J-datepicker">
-											<input type="text" autocomplete="off" class="form-control countdown-start" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="reviewCreatetime">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label for="reviewConfirmtime" class="col-sm-2 control-label">审核评论时间:</label>
-										<div class="col-sm-6 J-datepicker">
-											<input type="text" autocomplete="off" class="form-control countdown-end" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="reviewConfirmtime">
-										</div>
-									</div>
-								</div> -->
-								
+								<div class="form-group pinglun_from" style="float: left;">
+								    <label class="control-label" style="float: left;">评论来源</label>
+								    <div class="" style="float: left;">
+								        <select class="form-control selectpl">
+										  <option value ="999" selected="selected">全部</option>
+										  <option value ="0">我添加的</option>
+										  <option value ="1">1customer</option>
+										   <option value ="2">2ins</option>
+										</select>
+								    </div>
+								</div>
 								
 								<div class="form-group pinglun" style="float: left;">
 								    <label class="control-label" style="float: left;">评论状态</label>
@@ -221,16 +217,22 @@
 		var reviewProstarnum=0;
 		var reviewStarttime;
 		var reviewEndtime;
+		var reviewFrom=999;
 		var totalRecord, currentPage, editid;
+		$(".pinglun_form .selectpl").change(function(){
+			var reviewFromselect =$(this).val();
+			reviewFrom=reviewFromselect;
+			console.log(reviewFrom)
+		});
 		$(".pinglun .selectpl").change(function(){
 			var reviewStatusselect=$(this).val();
 			reviewStatus=reviewStatusselect;
-			console.log(reviewStatus)
+			// console.log(reviewStatus)
 		});
 		$(".staricon .xing").change(function(){
 			var xingselect=$(this).val();
 			reviewProstarnum=xingselect;
-			console.log(reviewProstarnum)
+			// console.log(reviewProstarnum)
 		})
 		
 		/**时间插件***/
@@ -318,10 +320,10 @@
 				 datePickerint()
 				
 			});
-		console.log( "初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		console.log("reviewFrom:"+reviewFrom+"初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
 		$(".btn_search").click(function(){
-		console.log(reviewPid)
-			console.log("点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		// console.log(reviewPid)
+			console.log("reviewFrom:"+reviewFrom+"点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
    //         if(reviewProstarnum=="0"){
 			// 	alert("请选择星级")
 			// }else if(reviewPid=="999"){
@@ -352,10 +354,14 @@
 		        success: function (result) {
 		          if (result.code == 100) {
 					  var task = result.extend.pageInfo.list;
+					  console.log(task.length)
 					  if(task.length==0){
 						  // alert("没有查到")
 						  $("#allreview").hide();
 						  $("#wei_num").show();
+					  }else{
+						   $("#wei_num").hide();
+						    $("#allreview").show();
 					  }
 		            console.log(result)
 					//1、解析并显示员工数据
