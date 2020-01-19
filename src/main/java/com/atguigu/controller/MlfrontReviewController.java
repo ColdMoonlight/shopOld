@@ -484,8 +484,7 @@ public class MlfrontReviewController {
 	@ResponseBody
 	public Msg selectMlfrontReviewListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "reviewPid") Integer reviewPid,
 			@RequestParam(value = "reviewStatus") Integer reviewStatus,@RequestParam(value = "reviewProstarnum") Integer reviewProstarnum,
-			@RequestParam(value = "reviewFrom") Integer reviewFrom,
-			@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
+			@RequestParam(value = "reviewFrom") Integer reviewFrom,@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
 			HttpSession session) {
 
 		MlfrontReview mlfrontReviewReq = new MlfrontReview();
