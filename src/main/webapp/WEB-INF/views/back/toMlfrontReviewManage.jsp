@@ -219,7 +219,7 @@
 		var reviewEndtime;
 		var reviewFrom=999;
 		var totalRecord, currentPage, editid;
-		$(".pinglun_form .selectpl").change(function(){
+		$(".pinglun_from .selectpl").change(function(){
 			var reviewFromselect =$(this).val();
 			reviewFrom=reviewFromselect;
 			console.log(reviewFrom)
