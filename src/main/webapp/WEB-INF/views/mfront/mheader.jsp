@@ -67,7 +67,7 @@
     <!-- <div class="fixed_small"><a href="javascript:;"></a></div> -->
   <div class="header bd-b">
 	  <div class="img_show">
-	  <a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
+	  <a href="javascript:;"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
 	  	<div class="img_show_cont">
 	  		<a href="javascript:;"></a>
 	  	</div>
