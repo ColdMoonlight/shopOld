@@ -83,7 +83,7 @@
 								'</div>';
 				   }else if(actshowprolei==1){
 					  html += '<div class="swiper-slide">' +
-					   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+					     '<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
 							'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 					  '</a>' +
 					  '</div>';
