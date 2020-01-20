@@ -587,6 +587,7 @@ public class MlfrontOrderController {
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
 		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
 		List<MlfrontAddress> mlfrontAddressList = new ArrayList<MlfrontAddress>();
+		Integer areafreightMoney = 0;
 		if(mlfrontOrderResList.size()>0){
 			mlfrontOrderOne =mlfrontOrderResList.get(0);
 
@@ -595,6 +596,16 @@ public class MlfrontOrderController {
 			mlfrontAddressList =mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
 			if(mlfrontAddressList.size()>0){
 				mlfrontAddressRes = mlfrontAddressList.get(0);
+				//从中取出国家字段
+				String areafreightCountryEnglish = mlfrontAddressRes.getAddressCountry();
+				//接受categoryId
+				MlbackAreafreight mlbackAreafreightReq = new MlbackAreafreight();
+				mlbackAreafreightReq.setAreafreightCountryEnglish(areafreightCountryEnglish);
+				//查询本条
+				List<MlbackAreafreight> mlbackAreafreightResList =mlbackAreafreightService.selectMlbackAreafreightByEng(mlbackAreafreightReq);
+				if(mlbackAreafreightResList.size()>0){
+					areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();
+				}
 			}
 			//2.3从详情中拿到orderItemIDStr;
 			String orderItemIdsStr = mlfrontOrderOne.getOrderOrderitemidstr();
@@ -618,7 +629,7 @@ public class MlfrontOrderController {
 		}
 		return Msg.success().add("resMsg", "查看单条mlfrontOrderOne的详情细节完毕")
 					.add("mlfrontOrderOne", mlfrontOrderOne).add("mlfrontOrderItemList", mlfrontOrderItemList)
-					.add("addressInfo", mlfrontAddressRes);
+					.add("addressInfo", mlfrontAddressRes).add("areafreightMoney", areafreightMoney);
 	}
 	
 	
