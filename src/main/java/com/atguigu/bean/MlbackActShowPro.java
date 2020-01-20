@@ -13,9 +13,11 @@ public class MlbackActShowPro {
     
     private String actshowproSeoname;	//产品Seo名字
     
-    private Integer actshowproCateid;	//产品id
+    private Integer actshowproCateid;	//类id
 
-    private String actshowproCatename;	//产品名字
+    private String actshowproCatename;	//类名字
+    
+    private String actshowproCateSeoname;	//类Seo名
     
     private String actshowproPageSeoname;	//活动seo路径名字
     
@@ -96,6 +98,14 @@ public class MlbackActShowPro {
 	public void setActshowproCatename(String actshowproCatename) {
 		this.actshowproCatename = actshowproCatename == null ? null : actshowproCatename.trim();
 	}
+	
+	public String getActshowproCateSeoname() {
+		return actshowproCateSeoname;
+	}
+
+	public void setActshowproCateSeoname(String actshowproCateSeoname) {
+		this.actshowproCateSeoname = actshowproCateSeoname == null ? null : actshowproCateSeoname.trim();
+	}
 
 	public String getActshowproPageSeoname() {
 		return actshowproPageSeoname;
@@ -167,9 +177,10 @@ public class MlbackActShowPro {
 
 	public MlbackActShowPro(Integer actshowproId, String actshowproName, Integer actshowproActnum,
 			Integer actshowproProid, String actshowproProname, String actshowproSeoname, Integer actshowproCateid,
-			String actshowproCatename, String actshowproPageSeoname, Integer actshowproIfproORcate,
-			String actshowproImgwapurl, String actshowproImgpcurl, Integer actshowproStatus, Integer actshowproOrderth,
-			String actshowproCreatetime, String actshowproMotifytime) {
+			String actshowproCatename, String actshowproCateSeoname, String actshowproPageSeoname,
+			Integer actshowproIfproORcate, String actshowproImgwapurl, String actshowproImgpcurl,
+			Integer actshowproStatus, Integer actshowproOrderth, String actshowproCreatetime,
+			String actshowproMotifytime) {
 		super();
 		this.actshowproId = actshowproId;
 		this.actshowproName = actshowproName;
@@ -179,6 +190,7 @@ public class MlbackActShowPro {
 		this.actshowproSeoname = actshowproSeoname;
 		this.actshowproCateid = actshowproCateid;
 		this.actshowproCatename = actshowproCatename;
+		this.actshowproCateSeoname = actshowproCateSeoname;
 		this.actshowproPageSeoname = actshowproPageSeoname;
 		this.actshowproIfproORcate = actshowproIfproORcate;
 		this.actshowproImgwapurl = actshowproImgwapurl;
@@ -195,11 +207,11 @@ public class MlbackActShowPro {
 				+ ", actshowproActnum=" + actshowproActnum + ", actshowproProid=" + actshowproProid
 				+ ", actshowproProname=" + actshowproProname + ", actshowproSeoname=" + actshowproSeoname
 				+ ", actshowproCateid=" + actshowproCateid + ", actshowproCatename=" + actshowproCatename
-				+ ", actshowproPageSeoname=" + actshowproPageSeoname + ", actshowproIfproORcate="
-				+ actshowproIfproORcate + ", actshowproImgwapurl=" + actshowproImgwapurl + ", actshowproImgpcurl="
-				+ actshowproImgpcurl + ", actshowproStatus=" + actshowproStatus + ", actshowproOrderth="
-				+ actshowproOrderth + ", actshowproCreatetime=" + actshowproCreatetime + ", actshowproMotifytime="
-				+ actshowproMotifytime + "]";
+				+ ", actshowproCateSeoname=" + actshowproCateSeoname + ", actshowproPageSeoname=" + actshowproPageSeoname
+				+ ", actshowproIfproORcate=" + actshowproIfproORcate + ", actshowproImgwapurl=" + actshowproImgwapurl
+				+ ", actshowproImgpcurl=" + actshowproImgpcurl + ", actshowproStatus=" + actshowproStatus
+				+ ", actshowproOrderth=" + actshowproOrderth + ", actshowproCreatetime=" + actshowproCreatetime
+				+ ", actshowproMotifytime=" + actshowproMotifytime + "]";
 	}
 
 }
