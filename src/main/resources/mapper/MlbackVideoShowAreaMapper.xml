@@ -357,7 +357,7 @@
   <!-- selectMlbackVideoShowAreapcListByArea -->
   <select id="selectMlbackVideoShowAreapcListByArea" parameterType="com.atguigu.bean.MlbackVideoShowArea" resultMap="BaseResultMap">
     select *
-    from tb_mlback_videoshowarea where videoShowArea_pcstatus = #{videoshowareaPcstatus,jdbcType=INTEGER} and videoShowArea_areanum = #{videoshowareaAreanum,jdbcType=INTEGER}
+    from tb_mlback_videoshowarea where videoShowArea_pcstatus = #{videoshowareaPcstatus,jdbcType=INTEGER} and videoShowArea_areanum = #{videoshowareaAreanum,jdbcType=INTEGER} order by videoShowArea_orderth_num 
   </select>
   
 </mapper>
