@@ -31,9 +31,7 @@
 	
 	  gtag('config', 'UA-148326913-1');
 	</script>
-	
 </head>
-
 <body>
 	<!-- <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a></div> -->
 	<header>
@@ -49,8 +47,9 @@
 <!-- 			<a class="logosmall" href="${APP_PATH}/index.html">
 				<img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 			</a> -->
-			<div class="alinktop"><a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
-			<div class="container head_box">
+			<div class="alinktop"><a href="javascript:;"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
+		   <div class="logo_search">
+			   	<div class="container head_box">
 				<!-- search logo cart -->
 				<div class="header_holder">
 					<div class="logo">
@@ -59,19 +58,19 @@
 						</a>
 					</div>
 					 <div class="serch_cont">
-					 	<div class="serch_box">
-					 		<div class="tt-col">
-					 			<input type="text" class="tt-search-input" placeholder="Search Products..." />
-					 			<button class="tt-btn-search" type="submit"></button>
-					 		</div>
-					 		<ul class="show_ul">
-					 			<li>bob</li>
-					 			<li>wigs</li>
-					 			<li>bundle</li>
-					 			<li>wig 613</li>
-					 			<li>Water Wave</li>
-					 		</ul>
-					 	</div>
+						<div class="serch_box">
+							<div class="tt-col">
+								<input type="text" class="tt-search-input" placeholder="Search Products..." />
+								<button class="tt-btn-search" type="submit"></button>
+							</div>
+							<ul class="show_ul">
+								<li>bob</li>
+								<li>wigs</li>
+								<li>bundle</li>
+								<li>wig 613</li>
+								<li>Water Wave</li>
+							</ul>
+						</div>
 					 </div>
 					 <div class="loginbox">
 						<div class="tt-desctop-parent-account tt-parent-box person">
@@ -83,34 +82,29 @@
 						</div>
 					 </div>
 				</div>
-				
-				<!-- tt-menu -->
-				<div class="tt-desctop-parent-menu tt-parent-box">
-					<div class="tt-desctop-menu">
-						<nav>
-							<ul>
-							</ul>
-						</nav>
-					</div>
-					<a class="logosmall" href="${APP_PATH}/index.html"><img src="${APP_PATH }/static/m/img/index/logo.png" alt=""></a>
 				</div>
-				<!-- /tt-menu -->
+		   </div>
+			<div class="container head_box clearfix">
+			  <div class="nav_boxfirst clearfix">
+				  <ul class="navul clearfix">
+				  </ul>
+			  </div>
 			</div>
+			 <div class="navbar_itemContent-background"></div>
 		</div>
+		
 	</header>
+	<div class="kongbai"></div>
 	<div class="fix_iconnav">
 		<ul class="icon_nav">
 			<li id="cart_icon" class="cart_icon"><a href="###"></a><span class="cart_num">0</span></li>
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
 	</div>
-
-	
-	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<script>
+	<script>	
        $(function(){
 		   $(".img_show_cont a").click(function(){
 			 $(".img_show").animate({ 
@@ -125,6 +119,7 @@
 				   var scrollhead=$(window).scrollTop();
 				   if(scrollhead>5){
 					   $(".tt-desktop-header").addClass("headActive")
+					   $(".show_ul").hide();
 				   }else{
 					   $(".tt-desktop-header").removeClass("headActive")
 				   }
@@ -132,7 +127,6 @@
 				var winS=$(this).scrollTop();
 				if(winS>0){
 					$(".go_top").show();
-					// $('.serch_cont').slideUp(200);
 				}else{
 					$(".go_top").hide();
 				}
@@ -168,139 +162,140 @@
 			  var n = parseFloat(val);
 			  return isNaN(n) ? 0 : n
 			}
-
-		function renderMainCategory(parent, data) {
-			
-			
-			var html = '';
-			for (var i in data) {
-				var categoryLableInt = data[i].categoryLable;
-				var	classimg = "";
-				if(categoryLableInt == 0){
-					classimg = "classimg0";
-				}else if(categoryLableInt == 1){
-					classimg = "classimg1";
-				}else if(categoryLableInt == 2){
-					classimg = "classimg2";
-				}else if(categoryLableInt == 3){
-					classimg = "classimg3";
-				}else if(categoryLableInt == 4){
-					classimg = "classimg4";
-				}
-				var iddata =data[i].categoryId;
-				var no_show=""
-				if(iddata==7){
-						no_show="hide";
-						html += '<li class="dropdown megamenu '+classimg+'">'+
-						'<a href="${APP_PATH}/Category/49.html">' + data[i].categoryName + '</a>';
-				}else{
-					html += '<li class="dropdown megamenu '+classimg+'">'+
-					'<a href="${APP_PATH}/search/' + data[i].categorySeo + '.html">' + data[i].categoryName + '</a>';
-				}
-				html +='<div class="dropdown-menu '+no_show+'">' +
-					'<div class="row">' +
-					'<div class="left col-sm-9">';
-				if (data[i].list && data[i].list.length) {
-					html += '<ul class="tt-megamenu-submenu">';
-					for (var j = 0; j < data[i].list.length; j += 1) {
-						html += '<li class="col-sm-6 listfl6">' +
-						'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId='+ data[i].list[j].categoryId +'">' +
-								'<img src="'+ data[i].list[j].categoryImgurl +'" />' +
-								'<span>'+ data[i].list[j].categoryName +'</span>' + 
-						'</a></li>';
+			/**********************************/
+			var nav_boxfirst =$(".navul")
+			var prodcutBox=$(".kongbai")
+			function renderMainCategory(parent,data1,data2) {
+				var html="";
+				for(var i=0;i<data1.length;i++){
+					var categoryLableInt = data1[i].categoryLable;
+					var	classimg = "";
+					if(categoryLableInt == 0){
+						classimg = "classimg0";
+					}else if(categoryLableInt == 1){
+						classimg = "classimg1";
+					}else if(categoryLableInt == 2){
+						classimg = "classimg2";
+					}else if(categoryLableInt == 3){
+						classimg = "classimg3";
+					}else if(categoryLableInt == 4){
+						classimg = "classimg4";
+					}else if(categoryLableInt == 5){
+						classimg = "classimg5";
 					}
-					html += '</ul>';
-				} else {
-					html += '<div>相关分类产品未上架</div>';
-				}
+					var twonav = data1[i].categorySeo;
+					if(twonav==""){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a>';
+					}else if(twonav == "home"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a>';
+					}else if(twonav == "Activty"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/Activty.html">'+ data1[i].categoryName +'</a>';
+					}else if(twonav == "CUSTOMER-VOICE"){
+					    html += '<li class="home-menu_list '+classimg+'"><a href="javascript:void(0)">'+ data1[i].categoryName +'</a>';		   
+					}else{
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>';
+					}
 
-				html += '</div>' +
-					'<div class="left col-sm-3">' +
-					'<img src="' + data[i].categoryImgurl + '" alt="">' +
-					'</div>' +
-					'</div>';
+					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a>'
+					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
+				    html += '<div class="menu_list-wap">';
+					html += '<div class="home-menu_list_wrap_inner">';
+					html += '<div class="home-menu_list--left_left"></div>';
+					html += '<div class="home_left_middle">';
+					for(var j=0;j<data2[i].length;j++){
+						  if(data2[i][j] && data2[i][j].length > 0){
+							  html += '<dl>'; 
+							   for(var k=0;k<data2[i][j].length;k++){
+								   var categoryLableInt2 = data2[i][j][k].categoryLable;
+								   var	classimg = "";
+								   if(categoryLableInt2 == 0){
+								   	classimg = "classimg0";
+								   }else if(categoryLableInt2 == 1){
+								   	classimg = "classimg1";
+								   }else if(categoryLableInt2 == 2){
+								   	classimg = "classimg2";
+								   }else if(categoryLableInt2 == 3){
+								   	classimg = "classimg3";
+								   }else if(categoryLableInt2 == 4){
+								   	classimg = "classimg4";
+								   }else if(categoryLableInt2 == 5){
+								   	classimg = "classimg5";
+								   }
+								   if(k==0){
+									    var threenav =data2[i][j][k].categorySeo;
+										if(threenav==""){
+												html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+										}else if(threenav=="Customer-Videos"){
+												html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}else if(threenav=="Shop-By-Look"){
+												html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}else if(threenav=="Photo-Gallery"){
+											     html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}else{
+												html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										} 
+								   }else{
+									  html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';    
+								   }
+							   }
+							  html += '</dl>';	  
+						  }
+					 }	
+					 html += '</div>';	
+					  html += '<div class="home-menu_list--left_right"></div>';
+					  html += '</div>';	
+					 html += '</div>';	
+					}
+					 html += '	</li>';	
+			    }
+			 parent.html(html);
+			 
+			 var headtop = $(".tt-desktop-header").outerHeight();
+			  var menuTimer;
+			 $('.home-menu_list').hover(function () {
+			 			  var _this = this;
+			 			    var menuContentHright = $(_this).find('.menu_list-wap').outerHeight();
+			 			   if(menuTimer){
+			 				   clearTimeout(menuTimer);
+			 			   }
+			 			  menuTimer = setTimeout(function () {
+			 				   $('.navbar_itemContent-background').height(menuContentHright);
+			 				  $(_this).siblings('.home-menu_list').find('.menu_list-wap').each(function () {
+			 				   if($(_this).hasClass('wrap_active')){
+			 					   $(_this).removeClass('wrap_active');
+			 				   }
+			 			   });
+			 			   $(_this).find('.menu_list-wap').addClass('wrap_active');
+			 
+			 			   return false;
+			 			   },100)
+			 },function () {
+			 			   var _this = this;
+			 			   if(menuTimer){
+			 				   clearTimeout(menuTimer);
+			 			   }
+			 			   $(_this).find('.menu_list-wap').removeClass('wrap_active');
+			 			   setTimeout(function () {
+			 				   $('.navbar_itemContent-background').height(0);
+			 				   return false;
+			 			   },100);
+			 
+			 });
+			 
 			}
-			parent.html(html);
-			
-		}
-		var mainCategory = $('.tt-desctop-menu ul');
-		var categoryData = {};
-		// 获取全部的category信息,文件信息
 		$.ajax({
-			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			method: 'GET',
-			success: function (data) {
-				var resData = data.extend.mlbackCategorydownList;
-				// console.log(resData);/**********resData*********/
-				if (data.code === 100) {
-					categoryData = resData.reduce(function (obj, item) {
-						if (item.categoryParentId === -1) {
-							item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
-								obj[item.categoryId].list : [];
-							obj[item.categoryId] = item;
-							return obj;
-						} else {
-							if (!obj[item.categoryParentId]) {
-								obj[item.categoryParentId] = {}
-							}
-							if (!obj[item.categoryParentId].list) {
-								obj[item.categoryParentId].list = []
-							}
-							obj[item.categoryParentId].list.push(item);
-							return obj;
-						}
-					}, {});
-					//console.log(categoryData)
-					renderMainCategory(mainCategory, categoryData);
-				} else {
-					renderErrorMsg(prodcutBox, '未获取到目录相关的数据');
-				}
-			}
-		})
-	 function mainCategoryTrigger() {
-		  var activeItem = mainCategory.find('.active');
-		  var items = mainCategory.find('.category-item');
-		
-		  items.each(function (i, item) {
-		    $(item).on('click', function () {
-		      activeItem.removeClass('active');
-		      $(this).addClass('active');
-		      activeItem = $(this);
-		      var data = categoryData[$(this).data('id')];
-		      renderSubCategory(subCategory, data);
-			 	//  var iddata =data.categoryId;
-				 // if(iddata==7){
-					// window.location.href = "${APP_PATH }/Category/49.html";
-				 // }
-		    })
-		  })
-		}
-		    function renderSubCategory(parent, data) {
-			  parent.find('.title .name').text(data.categoryName);
-			  var html = '';
-			  if (data.list && data.list.length) {
-			
-				for (var i = 0; i < data.list.length; i += 1) {
-				  html += '<div class="sub-category-product">' +
-					'<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
-					'<div class="product-img">' +
-					'<img src="' + data.list[i].categoryImgurl + '" alt="">' +
-					'</div>' +
-					'<span class="product-name">' + data.list[i].categoryName + '</span>' +
-					/* '<span class="product-name">' + data.list[i].categoryDesc + '</span>'+ */
-			
-					'</a>' +
-					'</div>';
-				}
-				parent.find('.body').html(html);
-			  } else {
-				renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
-			  }
-			
-			  parent.parent().addClass('active');
-			}
-		
-		// cart icon default number
+		        url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
+		        method: 'POST',
+		        success: function (data) {
+				  if(data.code === 100){
+					  FirstList = data.extend.categoryFirstList,
+					  SuperList = data.extend.mlbackCategorySuperList;
+					  renderMainCategory(nav_boxfirst,FirstList,SuperList)
+				  }else{
+					 renderErrorMsg(nav_boxfirst, '未获取到目录相关的数据'); 
+				  }
+		        }
+		      })
 		var cartText = iCart.find('.cart_num');
 		var num = window.localStorage.getItem('productNum') || 0;
 		
@@ -349,12 +344,12 @@
 		     if(seaProductName==""){
 		          alert("Please enter keywords;")
 		     }else{
-		         window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+		         window.location.href = "${APP_PATH}/MlbackProduct/toSearchPage?seaProductName=" +seaProductName;
 		     }
 		   });
 				$(".show_ul li").click(function(){
 				  var seaProductName =$(this).html();
-								window.location.href = "${APP_PATH}/MlbackProduct/topSearchPage?seaProductName=" +seaProductName;
+								window.location.href = "${APP_PATH}/MlbackProduct/toSearchPage?seaProductName=" +seaProductName;
 				 });
 				
 				
@@ -379,12 +374,6 @@
 				     if(target.closest(".tt-search-input").length != 0) return;
 				    $('ul.show_ul').slideUp(200)
 				})
-				
-		
-		
 	</script>
 </body>
-
-
-
 </html>

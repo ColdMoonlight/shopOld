@@ -55,21 +55,17 @@
 									<span class="c-datepicker-range-separator">-</span>
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
-<!-- 								<div class="date-timepicker2">
-									<div class="form-group row">
-										<label for="reviewCreatetime" class="col-sm-2 control-label">编造评论时间:</label>
-										<div class="col-sm-6 J-datepicker">
-											<input type="text" autocomplete="off" class="form-control countdown-start" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="reviewCreatetime">
-										</div>
-									</div>
-									<div class="form-group row">
-										<label for="reviewConfirmtime" class="col-sm-2 control-label">审核评论时间:</label>
-										<div class="col-sm-6 J-datepicker">
-											<input type="text" autocomplete="off" class="form-control countdown-end" placeholder="格式:年-月-日-时-分-秒，如：2020-08-01 12:30:00" name="reviewConfirmtime">
-										</div>
-									</div>
-								</div> -->
-								
+								<div class="form-group pinglun_from" style="float: left;">
+								    <label class="control-label" style="float: left;">评论来源</label>
+								    <div class="" style="float: left;">
+								        <select class="form-control selectpl">
+										  <option value ="999" selected="selected">全部</option>
+										  <option value ="0">0-self</option>
+										  <option value ="1">1-Customer</option>
+										   <option value ="2">2-Ins</option>
+										</select>
+								    </div>
+								</div>
 								
 								<div class="form-group pinglun" style="float: left;">
 								    <label class="control-label" style="float: left;">评论状态</label>
@@ -96,7 +92,7 @@
 								</div>
 								<div class="form-group cp_select">
 								     <label for="actshowproProid" style="float: left;" class="control-label">产品名字:</label>
-								     <div class="" style="float: left;">
+								     <div class="" style="float: left;width: 300px;">
 								         <select id="actshowproProid" name="actshowproProid" class="form-control"></select>
 								     </div>
 								 </div>
@@ -105,6 +101,9 @@
 							       </div>
 							</div>
 							<div id="productTabContent" class="tabreview tab-content">
+								<div id="wei_num" style="display: none; text-align:center;min-height: 600px;">
+								  <h3>当前未查到数据</h3>	
+								</div>
 								<div class="tab-pane in active" id="allreview">
 								    <!-- table-content -->
 								    <div class="table-content">
@@ -120,6 +119,7 @@
 								    				<th>评论状态</th>
 								    				<!-- <th>评论图片数</th> -->
 								    				<th>评分星级</th>
+													<th>评分来源</th>
 								    				<th>操作</th>
 								    			</tr>
 								    		</thead>
@@ -217,16 +217,22 @@
 		var reviewProstarnum=0;
 		var reviewStarttime;
 		var reviewEndtime;
+		var reviewFrom=999;
 		var totalRecord, currentPage, editid;
+		$(".pinglun_from .selectpl").change(function(){
+			var reviewFromselect =$(this).val();
+			reviewFrom=reviewFromselect;
+			console.log(reviewFrom)
+		});
 		$(".pinglun .selectpl").change(function(){
 			var reviewStatusselect=$(this).val();
 			reviewStatus=reviewStatusselect;
-			console.log(reviewStatus)
+			// console.log(reviewStatus)
 		});
 		$(".staricon .xing").change(function(){
 			var xingselect=$(this).val();
 			reviewProstarnum=xingselect;
-			console.log(reviewProstarnum)
+			// console.log(reviewProstarnum)
 		})
 		
 		/**时间插件***/
@@ -314,10 +320,10 @@
 				 datePickerint()
 				
 			});
-		console.log( "初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		console.log("reviewFrom:"+reviewFrom+"初始化"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
 		$(".btn_search").click(function(){
-		console.log(reviewPid)
-			console.log("点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
+		// console.log(reviewPid)
+			console.log("reviewFrom:"+reviewFrom+"点击"+"pn:"+ 1 + "reviewPid:"+reviewPid+"reviewStatus:"+reviewStatus+"reviewProstarnum:"+reviewProstarnum+"reviewStarttime"+reviewStarttime+"reviewEndtime"+reviewEndtime);
    //         if(reviewProstarnum=="0"){
 			// 	alert("请选择星级")
 			// }else if(reviewPid=="999"){
@@ -328,6 +334,7 @@
 			to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
 			
 		})
+		to_page(1,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime)
 		function to_page(pn,reviewPid,reviewStatus,reviewProstarnum,reviewStarttime,reviewEndtime) {
 			 // Integer reviewStatus;
 			 //   * Integer reviewProstarnum;
@@ -341,14 +348,21 @@
 					"reviewStatus":reviewStatus,
 					"reviewProstarnum":reviewProstarnum,
 					"reviewStarttime":reviewStarttime,
-					"reviewEndtime":reviewEndtime
+					"reviewEndtime":reviewEndtime,
+					"reviewFrom":reviewFrom,
 				},
 		        type: "POST",
 		        success: function (result) {
 		          if (result.code == 100) {
 					  var task = result.extend.pageInfo.list;
+					  console.log(task.length)
 					  if(task.length==0){
-						  alert("没有查到")
+						  // alert("没有查到")
+						  $("#allreview").hide();
+						  $("#wei_num").show();
+					  }else{
+						   $("#wei_num").hide();
+						    $("#allreview").show();
 					  }
 		            console.log(result)
 					//1、解析并显示员工数据
@@ -380,7 +394,15 @@
 				var reviewStatus = $("<td></td>").append((item.reviewStatus ? '已生效' : '未生效'));
 				var reviewImgidstr = $("<td></td>").append(item.reviewImgidstr);
 				var reviewProstarnum = $("<td></td>").append(item.reviewProstarnum);
-		
+				var reviewFromStr = '';
+				if(item.reviewFrom==0){
+					reviewFromStr = '0-self';
+				}else if(item.reviewFrom==1){
+					reviewFromStr = '1-Customer';
+				}else if(item.reviewFrom==2){
+					reviewFromStr = '2-Ins';
+				}
+				var reviewFrom = $("<td></td>").append(reviewFromStr);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//为编辑按钮添加一个自定义的属性，来表示当前productId
@@ -398,6 +420,7 @@
 					.append(reviewCreatetime)
 					.append(reviewStatus)
 					.append(reviewProstarnum)
+					.append(reviewFrom)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -546,6 +569,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('删除成功！');
+						window.location.href = window.location.href;
 						to_page(1);
 					}
 				}
@@ -691,6 +715,7 @@
 			$(":input[name='reviewDetailstr']").val(data.reviewDetailstr);
 			$(":input[name='reviewImgidstr']").val(data.reviewImgidstr);
 			$(":input[name='reviewProstarnum']").val(data.reviewProstarnum);
+			$(":input[name='reviewFrom']").val(data.reviewFrom);
 		}
 		
 		

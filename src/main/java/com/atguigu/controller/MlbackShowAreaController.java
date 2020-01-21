@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackShowArea;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackShowAreaService;
 import com.atguigu.utils.DateUtil;
 
@@ -34,7 +32,7 @@ public class MlbackShowAreaController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	useOn	0505
+	 * 1.0	onuse	200104
 	 * to_MlbackShowArea列表页面
 	 * @param jsp
 	 * @return 
@@ -45,7 +43,7 @@ public class MlbackShowAreaController {
 		return "back/mlbackShowAreaPage";
 	}
 	
-	/**2.0	useOn	0505
+	/**2.0	onuse	200104
 	 * 分类MlbackShowArea列表分页list数据
 	 * @param pn
 	 * @return
@@ -66,8 +64,8 @@ public class MlbackShowAreaController {
 //		}
 	}
 	
-	/**3.0	useOn	0505
-	 * MlbackShowArea	insert
+	/**3.0	onuse	200104
+	 * MlbackShowArea	insert/update
 	 * @param MlbackShowArea
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
@@ -76,25 +74,22 @@ public class MlbackShowAreaController {
 		//接受参数信息
 		System.out.println("mlbackShowArea:"+mlbackShowArea);
 		//取出id
-		System.out.println(1);
 		Integer showareaIdId = mlbackShowArea.getShowareaId();
 		String nowTime = DateUtil.strTime14s();
 		mlbackShowArea.setShowareaMotifytime(nowTime);
 		if(showareaIdId==null){
 			//无id，insert
 			mlbackShowArea.setShowareaCreatetime(nowTime);
-			int intResult = mlbackShowAreaService.insertSelective(mlbackShowArea);
-			System.out.println(intResult);
+			mlbackShowAreaService.insertSelective(mlbackShowArea);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackShowAreaService.updateByPrimaryKeySelective(mlbackShowArea);
-			System.out.println(intResult);
+			mlbackShowAreaService.updateByPrimaryKeySelective(mlbackShowArea);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
 	
-	/**4.0	useOn	0505
+	/**4.0	onuse	200104
 	 * MlbackShowArea	delete
 	 * @param id
 	 */
@@ -103,12 +98,12 @@ public class MlbackShowAreaController {
 	public Msg delete(@RequestBody MlbackShowArea mlbackShowArea){
 		//接收id信息
 		int showareaIdId = mlbackShowArea.getShowareaId();
-		int intResult = mlbackShowAreaService.deleteByPrimaryKey(showareaIdId);
+		mlbackShowAreaService.deleteByPrimaryKey(showareaIdId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
 	/**
-	 * 5.0	useOn	0505
+	 * 5.0	onuse	200104
 	 * 查看单条详情
 	 * @param getOneMlbackShowAreaDetail
 	 * @return 
@@ -133,7 +128,7 @@ public class MlbackShowAreaController {
 	}
 	
 	/**
-	 * 6.0	useOn	0505
+	 * 6.0	onuse	200104
 	 * 查看单条详情
 	 * @param getOneMlbackShowAreaDetail
 	 * @return 

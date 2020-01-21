@@ -38,7 +38,7 @@ public class PaypalService {
 //	String clientSecret = "EANTizGHYqb_0rWbPKlDD-otKQwi0k7RN6xvDiWtZNZY1gSyO71VrCpzvy6xTzGPVC5VxB6U66wjndYM";
 //	String mode="sandbox";
 	
-//	//mogalook-live环境
+	//mogalook-live环境
 	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
 	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
     String mode="live";
@@ -124,7 +124,7 @@ public class PaypalService {
   		Details details = new Details();
   		details.setShipping("0");
   		details.setSubtotal(subMoney);
-  		details.setTax("0");//shipping_discount
+  		details.setTax("0");//税
   		String shopdiscountMoney = "-"+Shopdiscount;
   		details.setShippingDiscount(shopdiscountMoney);
   		details.setShipping((addressMoney));
@@ -195,7 +195,9 @@ public class PaypalService {
 	}
 
 	private String getOnemoney(Integer skuNum, String money) {
+		System.out.println("paypalService中的:getOnemoney"+money+",skuNum:"+skuNum);
 		Double moneyAll = new Double(money);
+		System.out.println("paypalService中的Double moneyAll = new Double(money)+moneyAll:"+moneyAll);
 		Double oneM = moneyAll/skuNum;
 		String Onemoney = String.format("%.2f", oneM);
 		return Onemoney;
@@ -213,6 +215,7 @@ public class PaypalService {
 	private ItemList getItemList(List<MlfrontOrderItem> mlfrontOrderItemList) {
 		ItemList itemList = new ItemList();
 		List<Item> items = new ArrayList<Item>();
+		System.out.println("paypalService中的结算单子的详情"+mlfrontOrderItemList.toString());
 		for(MlfrontOrderItem mlfrontOrderItem:mlfrontOrderItemList){
 			Item item = new Item();
 			String name=mlfrontOrderItem.getOrderitemPname();

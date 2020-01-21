@@ -15,13 +15,11 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.atguigu.bean.Employee;
 import com.github.pagehelper.PageInfo;
 
 /**
- * Ê¹ÓÃSpring²âÊÔÄ£¿éÌá¹©µÄ²âÊÔÇëÇó¹¦ÄÜ£¬²âÊÔcurdÇëÇóµÄÕıÈ·ĞÔ
- * Spring4²âÊÔµÄÊ±ºò£¬ĞèÒªservlet3.0µÄÖ§³Ö
+ * Ê¹ï¿½ï¿½Springï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½á¹©ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½curdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½
+ * Spring4ï¿½ï¿½ï¿½Ôµï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªservlet3.0ï¿½ï¿½Ö§ï¿½ï¿½
  * @author lfy
  * 
  */
@@ -30,10 +28,10 @@ import com.github.pagehelper.PageInfo;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml",
 		"file:src/main/webapp/WEB-INF/dispatcherServlet-servlet.xml" })
 public class MvcTest {
-	// ´«ÈëSpringmvcµÄioc
+	// ï¿½ï¿½ï¿½ï¿½Springmvcï¿½ï¿½ioc
 	@Autowired
 	WebApplicationContext context;
-	// ĞéÄâmvcÇëÇó£¬»ñÈ¡µ½´¦Àí½á¹û¡£
+	// ï¿½ï¿½ï¿½ï¿½mvcï¿½ï¿½ï¿½ó£¬»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	MockMvc mockMvc;
 
 	@Before
@@ -43,27 +41,22 @@ public class MvcTest {
 
 	@Test
 	public void testPage() throws Exception {
-		//Ä£ÄâÇëÇóÄÃµ½·µ»ØÖµ
+		//Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/emps").param("pn", "5"))
 				.andReturn();
 		
-		//ÇëÇó³É¹¦ÒÔºó£¬ÇëÇóÓòÖĞ»áÓĞpageInfo£»ÎÒÃÇ¿ÉÒÔÈ¡³öpageInfo½øĞĞÑéÖ¤
+		//ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½pageInfoï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½È¡ï¿½ï¿½pageInfoï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤
 		MockHttpServletRequest request = result.getRequest();
 		PageInfo pi = (PageInfo) request.getAttribute("pageInfo");
-		System.out.println("µ±Ç°Ò³Âë£º"+pi.getPageNum());
-		System.out.println("×ÜÒ³Âë£º"+pi.getPages());
-		System.out.println("×Ü¼ÇÂ¼Êı£º"+pi.getTotal());
-		System.out.println("ÔÚÒ³ÃæĞèÒªÁ¬ĞøÏÔÊ¾µÄÒ³Âë");
+		System.out.println("ï¿½ï¿½Ç°Ò³ï¿½ë£º"+pi.getPageNum());
+		System.out.println("ï¿½ï¿½Ò³ï¿½ë£º"+pi.getPages());
+		System.out.println("ï¿½Ü¼ï¿½Â¼ï¿½ï¿½ï¿½ï¿½"+pi.getTotal());
+		System.out.println("ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ò³ï¿½ï¿½");
 		int[] nums = pi.getNavigatepageNums();
 		for (int i : nums) {
 			System.out.print(" "+i);
 		}
-		
-		//»ñÈ¡Ô±¹¤Êı¾İ
-		List<Employee> list = pi.getList();
-		for (Employee employee : list) {
-			System.out.println("ID£º"+employee.getEmpId()+"==>Name:"+employee.getEmpName());
-		}
+
 		
 	}
 

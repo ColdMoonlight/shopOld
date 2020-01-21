@@ -1,8 +1,6 @@
 package com.atguigu.testBean.front;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,20 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.atguigu.bean.AppuserInfo;
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlfrontCart;
 import com.atguigu.bean.MlfrontCartItem;
-import com.atguigu.bean.MlfrontUser;
-import com.atguigu.bean.MlfrontUserTemporary;
-import com.atguigu.dao.AppuserInfoMapper;
-import com.atguigu.dao.GroupDisplayMapper;
 import com.atguigu.dao.MlfrontCartItemMapper;
-import com.atguigu.dao.MlfrontCartMapper;
-import com.atguigu.dao.MlfrontUserMapper;
-import com.atguigu.dao.MlfrontUserTemporaryMapper;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.UUIDUtils;
 
 /**
  * 测试dao层的工作

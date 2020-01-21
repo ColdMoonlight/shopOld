@@ -307,8 +307,8 @@
   </select>
   <!-- 使用中 -->
   <select id="selectMenuMlbackCategoryGetAll" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
-    select category_id,category_name,category_lable,category_imgurl,category_parent_id,category_desc,category_imgpcurl,category_sort_order
-    from tb_mlback_category order by category_parent_id,category_sort_order
+    select category_id,category_name,category_lable,category_imgurl,category_parent_id,category_seo,category_desc,category_imgpcurl,category_sort_order
+    from tb_mlback_category where category_status = 1 order by category_parent_id,category_sort_order
   </select>
   
   <!-- 使用中 -->
@@ -487,4 +487,47 @@
     from tb_mlback_category
     where category_seo = #{categorySeo,jdbcType=VARCHAR}
   </select>
+  <!-- 使用中selectCategorylistByParam -->
+  <select id="selectCategorylistByParam" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
+  	select category_id, category_name, category_parent_id, category_parent_name, category_status, category_lable, category_seo, category_sort_order
+  	from tb_mlback_category where category_status = 1
+    <if test="categoryId != null">
+      and category_id = #{categoryId,jdbcType=INTEGER}
+    </if>
+    <if test="categoryName != null">
+      and category_name = #{categoryName,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryImgurl != null">
+      and category_imgurl = #{categoryImgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryParentId != null">
+      and category_parent_id = #{categoryParentId,jdbcType=INTEGER}
+    </if>
+    <if test="categoryParentName != null">
+      and category_parent_name = #{categoryParentName,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryLable != null">
+      and category_lable = #{categoryLable,jdbcType=INTEGER}
+    </if>
+    <if test="categorySeo != null">
+      and category_seo = #{categorySeo,jdbcType=VARCHAR}
+    </if>
+    <if test="categorySortOrder != null">
+      and category_sort_order = #{categorySortOrder,jdbcType=INTEGER}
+    </if>
+    <if test="categoryDesc != null">
+      and category_desc = #{categoryDesc,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryProductIds != null">
+      and category_product_ids = #{categoryProductIds,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryProductNames != null">
+      and category_product_names = #{categoryProductNames,jdbcType=VARCHAR}
+    </if>
+    <if test="categoryImgPcurl != null">
+      and category_imgpcurl = #{categoryImgPcurl,jdbcType=VARCHAR}
+    </if>
+    order by category_parent_id
+  </select>
+  
 </mapper>

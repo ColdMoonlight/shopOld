@@ -904,11 +904,11 @@
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
 						<div class="sale_copen">
-							<p> Merry Christmas! New Year, New Look! Crazy SALE is waiting you!</p> 
-						 	<ul>
-						 		<li>Extra <span>12% </span>off No Limit with code: <b>MH12</b></li>
-						 		<li>Extra<span>15%</span> off upon order $150 with code: <b>MH15</b></li>
-						 	</ul>
+							<p> Happy Chinese New Year! 2020 To Be Better Woman! </p>
+							<ul>
+							  <li>Extra<span>10%</span> off No Limit with code: <b>SF10</b></li>
+							  <li>Extra<span>13%</span> off upon order $180 with code: <b>SF13</b></li>
+							</ul>
 						</div>
 						<div class="group-details coupons active"></div>
 					</li>
@@ -1036,7 +1036,7 @@
 					// $("#country").attr("data-country",datacountry);
 					var dataname =$("#country").data("name");
 					datalocation (dataname)
-					// console.log("***dataprov****");
+					// console.log("***dataprov***");
 					// console.log(dataprov);
 					// console.log("***dataprov****");
 					if(dataprov==null||dataprov==""){

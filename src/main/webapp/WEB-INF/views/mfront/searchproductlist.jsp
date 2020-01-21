@@ -91,7 +91,16 @@
 					var name =data.extend.productName;
 					Search = name;
 					// console.log(resultlist);
-					rednerProductmm(productList,resultlist)
+					// rednerProductmm(productList,resultlist)
+					if(resultlist==null){
+					     renderErrorMsg(productList, 'No product-related data was obtained');
+					}else{
+						var DataproListBySaleNum =orderProListBySaleNum(resultlist);
+						rednerProductmm(productList,DataproListBySaleNum);
+					}
+					
+					
+					
 					if(resultlistlength==0){
 						$(".hot_box_product").show();
 					}else{
@@ -101,6 +110,22 @@
 				}
 			}
 		});
+		   function orderProListBySaleNum(reqData) {
+			if(reqData.length>0){
+			   var n = reqData.length;
+			   for(var i=0;i<n;i++){
+				 for(var j=0;j<n-1-i;j++){
+					// console.log(reqData[j].productHavesalenum);
+				   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
+					 var  DateOne = reqData[j];
+					 reqData[j] = reqData[j+1];
+					 reqData[j+1] = DateOne;
+				   }
+				 }
+			   }
+			 }
+			return reqData;
+		   }
 
 		function renderErrorMsg(parent, msg) {
 			parent.html('<p class="notfind">' + msg + '</p>');

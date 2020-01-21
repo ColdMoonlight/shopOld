@@ -45,7 +45,7 @@
 
 <body>
 
-  <jsp:include page="mheader2.jsp"></jsp:include>
+  <jsp:include page="mheader.jsp"></jsp:include>
   <!-- main -->
   <div class="main">
     <!-- sale -->
@@ -95,7 +95,7 @@
 		  			  '</div>';
 		  }else if(actshowprolei==1){
 		  			  html += '<div class="swiper-slide">' +
-		  			   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+		  			   '<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
 		  			  	    '<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
 		  			  '</a>' +
 		  			  '</div>';
@@ -120,7 +120,7 @@
         if (data.code === 100) {
 			// console.log(data)
         	var resData = data.extend.mlbackActShowProList;
-            console.log(resData);/*banban*/
+            // console.log(resData);/*banban*/
           rednerHotProduct($('#hot-product .swiper-wrapper'), resData)
 		  new Swiper('#hot-product', {
 				freeMode: true,
@@ -295,36 +295,6 @@
 	         }
 	       });
     }
-    /*************优惠券***************/
-	 // 	var couponCont = $(".coupon_cont");
-	 //   function renderCoupon (parent, data){
-		// 	var htmlcoup = '';
-		// 	for(var i=0, len=data.length; i < len; i += 1){
-		// 		htmlcoup += '<div class="coup_img">' +
-		// 		'<img src="' + data[i].couponImgwapurl + '">' +
-		// 		'</div>';
-		// 	}
-		// couponCont.html(htmlcoup);
-		// }
-  //   $.ajax({
-		// url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByAreaNum',
-		// data: JSON.stringify({
-		// 	"couponAreaNum": 2
-		// }),
-		// type: 'post',
-		// dataType: 'JSON',
-		// contentType: 'application/json',
-		// success: function (data) {
-		// 	 console.log(data)/***data**/
-  //          if (JSON.parse(data).code === 100) {
-  //            var resData = JSON.parse(data).extend.mlbackCouponResList;;
-		// 	 console.log(resData);
-		// 	  renderCoupon(couponCont,resData)
-  //          } else {
-  //            renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
-  //          }
-  //        }
-  //      });
 /********弹层注册********************************/
 	   // setTimeout(function() {
 		  //  renderSysMsg('');

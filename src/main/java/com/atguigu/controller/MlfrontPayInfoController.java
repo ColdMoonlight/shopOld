@@ -18,16 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlPaypalShipAddress;
-import com.atguigu.bean.MlbackAddCheakoutViewDetail;
 import com.atguigu.bean.MlbackAddOrderViewDetail;
 import com.atguigu.bean.MlbackAddPayinfoViewDetail;
-import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackAreafreight;
-import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.MlbackCoupon;
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlfrontAddress;
-import com.atguigu.bean.MlfrontCartItem;
 import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontPayInfo;
@@ -41,7 +34,6 @@ import com.atguigu.service.MlbackAddOrderViewDetailService;
 import com.atguigu.service.MlbackAddPayinfoViewDetailService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
-import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
@@ -138,7 +130,7 @@ public class MlfrontPayInfoController {
 		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
 		mlfrontPayInfoReq.setPayinfoCreatetime(beginTime);
 		mlfrontPayInfoReq.setPayinfoMotifytime(endTime);
-		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
+//		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
@@ -159,7 +151,7 @@ public class MlfrontPayInfoController {
 	@RequestMapping(value="/getMlfrontPayInfoByPage")
 	@ResponseBody
 	public Msg getMlfrontPayInfoWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
+//		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
 //			return Msg.fail().add("resMsg", "session中adminuser对象为空");
@@ -182,20 +174,17 @@ public class MlfrontPayInfoController {
 		//接受参数信息
 		System.out.println("mlfrontPayInfo:"+mlfrontPayInfo);
 		//取出id
-		System.out.println(1);
 		Integer payinfoIdId = mlfrontPayInfo.getPayinfoId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
 		if(payinfoIdId==null){
 			//无id，insert
 			mlfrontPayInfo.setPayinfoCreatetime(nowTime);;
-			int intResult = mlfrontPayInfoService.insertSelective(mlfrontPayInfo);
-			System.out.println(intResult);
+			mlfrontPayInfoService.insertSelective(mlfrontPayInfo);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
-			System.out.println(intResult);
+			mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
 			return Msg.success().add("resMsg", "更新成功");
 			
 		}		
@@ -210,7 +199,7 @@ public class MlfrontPayInfoController {
 	public Msg delete(@RequestBody MlfrontPayInfo mlfrontPayInfo){
 		//接收id信息
 		Integer payinfoIdId = mlfrontPayInfo.getPayinfoId();
-		int intResult = mlfrontPayInfoService.deleteByPrimaryKey(payinfoIdId);
+		mlfrontPayInfoService.deleteByPrimaryKey(payinfoIdId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -299,7 +288,6 @@ public class MlfrontPayInfoController {
 	}
 	
 	
-	
 	/**9.0	useOn	0505
 	 * MlfrontPayInfo	get
 	 * successPayinfoId
@@ -337,20 +325,16 @@ public class MlfrontPayInfoController {
 		System.out.println("mlfrontPayInfo:"+mlfrontPayInfo);
 		//取出id
 		Integer payinfoIdIn = mlfrontPayInfo.getPayinfoId();
-//		String nowTime = DateUtil.strTime14s();
-//		mlfrontPayInfo.setPayinfoMotifytime(nowTime);
 		mlfrontPayInfo.setPayinfoStatus(3);//0未支付		1已支付	2已审核	3已发货
 		//有id，update
-		int intResult = mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfo);
 		
 		MlfrontPayInfo mlfrontPayInfoOne = new MlfrontPayInfo();
 		mlfrontPayInfoOne.setPayinfoId(payinfoIdIn);
 		List<MlfrontPayInfo> mlfrontPayInfoList = mlfrontPayInfoService.selectMlfrontPayInfoById(mlfrontPayInfoOne);
 		MlfrontPayInfo mlfrontPayInfoResOne = mlfrontPayInfoList.get(0);
-		System.out.println(intResult);
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontPayInfoOne", mlfrontPayInfoResOne);
 	}
-	
 	
 	/**11.0	useOn	0505
 	 * MlfrontPayInfo	getFailTimes

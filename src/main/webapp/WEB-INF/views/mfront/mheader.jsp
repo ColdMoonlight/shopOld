@@ -67,7 +67,7 @@
     <!-- <div class="fixed_small"><a href="javascript:;"></a></div> -->
   <div class="header bd-b">
 	  <div class="img_show">
-	  <a href="${APP_PATH}/Activty.html"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
+	  <a href="javascript:;"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
 	  	<div class="img_show_cont">
 	  		<a href="javascript:;"></a>
 	  	</div>
@@ -94,18 +94,9 @@
   </div>
   <div class="category">
     <i class="icon close close2"></i>
-    <ul class="main-category bd-b"></ul>
-    <div class="product-box bd-l bd-b">
-      <div class="sub-category">
-        <div class="title bd-b">
-          <span class="name">二级分类</span>
-          <a class="close" href="#"><i class="icon close"></i></a>
-        </div>
-        <div class="body"></div>
-      </div>
-    </div>
+    <ul class="main-category category_ul bd-b">
+	</ul>
   </div>
-  
    <div class="serch_cont">
       <div class="serch_box">
         <span class="close_serch">X</span>
@@ -123,15 +114,14 @@
         </ul>
       </div>
     </div>
-
+<div class="kongbai"></div>
   <script>
 	  $(function(){
-		  
-		  
 		  $(window).scroll(function(){
 			   var scrollhead=$(window).scrollTop();
 			   if(scrollhead>5){
 				   $(".header").addClass("headActive")
+				   $(".show_ul").hide();
 			   }else{
 				   $(".header").removeClass("headActive")
 			   }
@@ -146,10 +136,7 @@
 	  		$(".fixed_link").removeClass("active");
 	  		$(this).removeClass("active");
 	  	})
-	  	
-	  	
 	  })
-	  
     var categoryActiveNum = 1;
     var iCart = $('.icon.cart');
     var iPerson = $('.icon.person');
@@ -182,135 +169,136 @@
       var n = parseFloat(val);
       return isNaN(n) ? 0 : n
     }
+/************************/
+              var mainCategory =$(".main-category");
+			  var categoryBox = $('.category');
+			function renderMainCategory(parent,data1,data2) {
+				var html="";
+				for(var i=0;i<data1.length;i++){
+					var categoryLableInt = data1[i].categoryLable;
+					var	classimg = "";
+					if(categoryLableInt == 0){
+						classimg = "classimg0";
+					}else if(categoryLableInt == 1){
+						classimg = "classimg1";
+					}else if(categoryLableInt == 2){
+						classimg = "classimg2";
+					}else if(categoryLableInt == 3){
+						classimg = "classimg3";
+					}else if(categoryLableInt == 4){
+						classimg = "classimg4";
+					}else if(categoryLableInt == 5){
+						classimg = "classimg5";
+					}
+					var twonav = data1[i].categorySeo;
+					if(twonav==""){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					}else if(twonav=="home"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/index.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					}else if(twonav == "Activty"){
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/Activty.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>';
+					}else if(twonav == "CUSTOMER-VOICE"){
+					    html += '<li class="home-menu_list '+classimg+'"><a href="javascript:void(0)">'+ data1[i].categoryName +'</a><i class="gw-i"></i>';		   
+					}else{
+						html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					}
 
-    function renderMainCategory(parent, data) {
-      var html = '';
-      for (var i in data) {
-		  var categoryLableInt = data[i].categoryLable;
-		  var	classimg = "";
-		  if(categoryLableInt == 0){
-		  	classimg = "classimg0";
-		  }else if(categoryLableInt == 1){
-		  	classimg = "classimg1";
-		  }else if(categoryLableInt == 2){
-		  	classimg = "classimg2";
-		  }else if(categoryLableInt == 3){
-		  	classimg = "classimg3";
-		  }else if(categoryLableInt == 4){
-		  	classimg = "classimg4";
-		  }
-        if (categoryActiveNum === i) {
-          html += '<li class="category-item '+classimg+' active" data-id="' + data[i].categoryId + '"><a href="#">' + data[i]
-            .categoryName + '</a></li>';
-        } else {
-          html += '<li class="category-item '+classimg+'" data-id="' + data[i].categoryId + '"><a href="#">' + data[i].categoryName +
-            '</a></li>';
-        }
-      }
-      parent.html(html);
-	  
-    }
-	
-	
-    function renderSubCategory(parent, data) {
-      parent.find('.title .name').text(data.categoryName);
-      var html = '';
-      if (data.list && data.list.length) {
-        for (var i = 0; i < data.list.length; i += 1) {
-			var iddata =data.categoryId
-			var no_show=""
-			if(iddata==7){
-					no_show="hide"	
+
+					// html += '<li class="home-menu_list '+classimg+'"><a href="${APP_PATH}/search/' + data1[i].categorySeo + '.html">'+ data1[i].categoryName +'</a><i class="gw-i"></i>'
+					if(data2 && data2.length > 0 && data2[i] && data2[i].length > 0){
+				    html += '<div class="menu_list-wap">';
+					for(var j=0;j<data2[i].length;j++){
+						  if(data2[i][j] && data2[i][j].length > 0){
+							  html += '<dl>'; 
+							   for(var k=0;k<data2[i][j].length;k++){
+								   var categoryLableInt2 = data2[i][j][k].categoryLable;
+								   var	classimg = "";
+								   if(categoryLableInt2 == 0){
+								   	classimg = "classimg0";
+								   }else if(categoryLableInt2 == 1){
+								   	classimg = "classimg1";
+								   }else if(categoryLableInt2 == 2){
+								   	classimg = "classimg2";
+								   }else if(categoryLableInt2 == 3){
+								   	classimg = "classimg3";
+								   }else if(categoryLableInt2 == 4){
+								   	classimg = "classimg4";
+								   }else if(categoryLableInt2 == 5){
+								   	classimg = "classimg5";
+								   }
+								   if(k==0){
+									   var threenav =data2[i][j][k].categorySeo;
+									   if(threenav==""){
+									   			 html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else if(threenav=="Customer-Videos"){
+									   			html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else if(threenav=="Shop-By-Look"){
+									   			 html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else if(threenav=="Photo-Gallery"){
+									   			html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }else{
+									   		    html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dt>';     
+									   }
+								   }else{
+									   html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';      
+								   }
+								    // html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a><i class="gw-i2"></i></dd>';     
+								  
+							   }
+							     html +=  '</dl>';
+						  }
+					 }	
+					 html += '</div>';	
+					}
+					 html += '	</li>';	
+			    }
+			 parent.html(html);
+			 $(".category_ul li i.gw-i").click(function(){
+			   var str = $(this).next('.menu_list-wap').css('display');
+			   if(str == 'none'){
+			   	$(this).next('.menu_list-wap').show(200);
+				$(this).addClass("active");
+			   }else{
+			   	$(this).next('.menu_list-wap').hide(200);
+				$(this).removeClass("active");
+			   }
+			   $(this).parent('.home-menu_list').siblings('.home-menu_list').find('.gw-i').removeClass('active').next('.menu_list-wap').hide(200);
+			 })
+			 $(".menu_list-wap dl dt .gw-i2").click(function(){
+				 $(this).toggleClass('active');
+				 if($(this).hasClass('active')){
+					   $(this).parents("dl").addClass("submenu");
+					   $(this).parents("dl").siblings("dl").removeClass("submenu"); 
+					   $(this).parents("dl").siblings("dl").children("dd:first-child").find(".gw-i2").removeClass("active"); 
+				 }else{
+					  $(this).parents("dl").removeClass("submenu");
+					  $(this).removeClass("active")
+				 }
+			 })
 			}
-          html += '<div class="sub-category-product '+no_show+'">' +
-            '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data.list[i].categoryId + '">' +
-            '<div class="product-img">' +
-            '<img src="' + data.list[i].categoryImgurl + '" alt="">' +
-            '</div>' +
-            '<span class="product-name">' + data.list[i].categoryName + '</span>' +
-
-            '</a>' +
-            '</div>';
-        }
-        parent.find('.body').html(html);
-      } else {
-        renderErrorMsg(parent.find('.body'), 'Related products have been removed！')
-      }
-      parent.parent().removeClass("hide");
-      parent.parent().addClass('active');
-    }
-
-    var categoryBox = $('.category');
-    var mainCategory = $('.main-category');
-    var subCategory = $('.sub-category');
-    var prodcutBox = $('.product-box');
-    var categoryData = {};
-    // 获取全部的category信息,文件信息
-    $.ajax({
-      //url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-      url: '${APP_PATH}/MlbackCategory/getMenuMlbackCategory',
-      method: 'GET',
-      success: function (data) {
-		  var resData = data.extend.mlbackCategorydownList;
-		  // console.log(resData)/**************resData********/
-        if (data.code === 100) {
-          categoryData = data.extend.mlbackCategorydownList.reduce(function (obj, item) {
-            if (item.categoryParentId === -1) {
-              item.list = obj.hasOwnProperty(item.categoryId) && obj[item.categoryId].hasOwnProperty('list') ?
-                obj[item.categoryId].list : [];
-              obj[item.categoryId] = item;
-              return obj;
-            } else {
-              if (!obj[item.categoryParentId]) {
-                obj[item.categoryParentId] = {}
-              }
-              if (!obj[item.categoryParentId].list) {
-                obj[item.categoryParentId].list = []
-              }
-              obj[item.categoryParentId].list.push(item);
-              return obj;
-            }
-          }, {});
-
-          renderMainCategory(mainCategory, categoryData);
-          mainCategoryTrigger();
-        } else {
-          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
-        }
-      }
-    })
-
-    function mainCategoryTrigger() {
-      var activeItem = mainCategory.find('.active');
-      var items = mainCategory.find('.category-item');
-      items.each(function (i, item) {
-        $(item).on('click', function () {
-          activeItem.removeClass('active');
-          $(this).addClass('active');
-          activeItem = $(this);
-          var data = categoryData[$(this).data('id')];
-          renderSubCategory(subCategory, data);
-		  var hideno=$(".sub-category-product.hide")
-		 var hidtop=hideno.parents(".product-box")
-		     hidtop.addClass("hide")
-			 var iddata =data.categoryId
-		 if(iddata==7){
-			  window.location.href = "${APP_PATH }/Category/49.html";
-		 }
-        })
-      })
-    }
-
+		$.ajax({
+			url: '${APP_PATH}/MlbackCategory/getCategorySuperMenu',
+		    type: 'POST',
+			dataType: 'JSON',
+			contentType: 'application/json',
+			success: function (data) {
+				var JsonDate = JSON.parse(data);
+				// console.log(JsonDate);
+			  if(JsonDate.code === 100){
+				  FirstList = JsonDate.extend.categoryFirstList;
+				  SuperList = JsonDate.extend.mlbackCategorySuperList;
+				  renderMainCategory(mainCategory,FirstList,SuperList)
+			  }else{
+				 renderErrorMsg(mainCategory, '未获取到目录相关的数据'); 
+			  }
+			}
+		  })
     $('#menu').on('click', function () {
       categoryBox.show();
     });
     categoryBox.find('.close2').on('click', function () {
       categoryBox.hide();
     });
-    prodcutBox.find('.title .close').on('click', function () {
-      prodcutBox.removeClass('active');
-    });
-
     // cart icon default number
     var cartText = iCart.find('.num');
     var num = window.localStorage.getItem('productNum') || 0;
@@ -322,13 +310,9 @@
         cartText.text(parseInt(data.extend.number) || 0);
       }
     })
-
-
     iCart.on('click', function () {
       window.location.href = "${APP_PATH }/myCart.html";
     })
-
-
     iPerson.on('click', function () {
       if ($(this).hasClass('active')) {
         window.location.href = "${APP_PATH }/MlfrontUser/toUserCenter";
@@ -336,7 +320,6 @@
         window.location.href = "${APP_PATH }/MlfrontUser/toLoginRegisterPage";
       }
     })
-
     /* check user is login or not  */
     $.ajax({
       url: "${APP_PATH }/MlfrontUser/ifLogin",
@@ -354,11 +337,9 @@
         }
       }
     })
-
     function toProductItem(id) {
       if (parseInt(id)) window.location.href = "${APP_PATH }/MlbackProduct/tomProductDetailPage?productId=" + id;
     }
-	
 	/************advlistpic**********************************/
 	var banneradv=$("#adv_silder .swiper-wrapper")
 	   function rednertop(parent, data) {
@@ -396,23 +377,23 @@
 					  // console.log(resData);
 					 // rednertop(bannerfirst,resData)
 					} else {
-					  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+					  renderErrorMsg(banneradv, 'No product-related data was obtained.');
 					}
 				  }
 		});
-	
+	  var prodcutBox=$(".kongbai")
 	  /************************/
 	        $(".tt-btn-search").click(function(){
 	           var seaProductName = $(this).parents(".tt-col").find("input.tt-search-input").val();
 			   if(seaProductName==""){
 				   alert("Please enter keywords;")
 			   }else{
-				    window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+				    window.location.href = "${APP_PATH}/MlbackProduct/toSearchPage?seaProductName=" +seaProductName;
 			   }
 	        });
 			  $(".show_ul li").click(function(){
 			    var seaProductName =$(this).html();
-				window.location.href = "${APP_PATH}/MlbackProduct/tomSearchPage?seaProductName=" +seaProductName;
+				window.location.href = "${APP_PATH}/MlbackProduct/toSearchPage?seaProductName=" +seaProductName;
 	           });
 	    /**************搜索*************************/
 	        $(".tt-search-input").focus(function(){
@@ -430,11 +411,6 @@
 	        $("body").on('click', '.close_serch',function() {
 	            $('.serch_cont').hide()
 	        })
-	
-	
-	
-
-	
   </script>
 </body>
 

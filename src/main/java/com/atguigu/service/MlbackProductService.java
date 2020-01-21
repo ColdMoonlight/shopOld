@@ -4,16 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
-import com.atguigu.bean.UserWork;
-import com.atguigu.dao.MlbackAdminMapper;
-import com.atguigu.dao.MlbackCategoryMapper;
 import com.atguigu.dao.MlbackProductMapper;
-
 
 @Service
 public class MlbackProductService {
@@ -70,7 +62,6 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int productId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductMapper.deleteByPrimaryKey(productId);
 		return intReslut;
 	}
@@ -82,7 +73,6 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public int updateByPrimaryKeySelective(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductMapper.updateByPrimaryKeySelective(mlbackProduct);
 		return intReslut;
 	}
@@ -94,7 +84,6 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public int updateMainFuImgById(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductMapper.updateMainFuImgById(mlbackProduct);
 		return intReslut;
 	}
@@ -107,29 +96,24 @@ public class MlbackProductService {
 	 * 
 	 * */
 	public List<MlbackProduct> selectMlbackProductByLable(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByLable(mlbackProduct);
 		return mlbackProductList;
 	}
 	
 	public List<MlbackProduct> selectMlbackProductByProductCategoryid(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByProductCategoryid(mlbackProduct);
 		return mlbackProductList;
 	}
 	
 	public List<MlbackProduct> selectMlbackProductByStatus(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductByStatus(mlbackProduct);
 		return mlbackProductList;
 	}
 	public MlbackProduct selectMlbackProductBySeo(MlbackProduct mlbackProductrepBySeo) {
-		// TODO Auto-generated method stub
 		MlbackProduct  mlbackProduct = mlbackProductMapper.selectMlbackProductBySeo(mlbackProductrepBySeo);
 		return mlbackProduct;
 	}
 	public List<MlbackProduct> selectMlbackProductLike(MlbackProduct mlbackProduct) {
-		// TODO Auto-generated method stub
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductLike(mlbackProduct);
 		return mlbackProductList;
 	}
@@ -151,6 +135,14 @@ public class MlbackProductService {
 	
 	public List<MlbackProduct> selectMlbackProductbyCategorySeo(MlbackProduct mlbackProductReq) {
 		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductbyCategorySeo(mlbackProductReq);
+		return mlbackProductList;
+	}
+	
+	/**
+	 * 查询单个产品信息(无富文本描述)
+	 * */
+	public List<MlbackProduct> selectMlbackProductSimple(MlbackProduct mlbackProductReq) {
+		List<MlbackProduct>  mlbackProductList = mlbackProductMapper.selectMlbackProductSimple(mlbackProductReq);
 		return mlbackProductList;
 	}	
 

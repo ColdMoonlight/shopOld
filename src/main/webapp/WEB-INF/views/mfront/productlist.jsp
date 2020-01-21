@@ -45,7 +45,7 @@
 
 <body>
 
-	<jsp:include page="mheader2.jsp"></jsp:include>
+	<jsp:include page="mheader.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
@@ -76,7 +76,7 @@
 			success: function (data) {
 				if (data.code === 100) {
 					var resData = data.extend.mlbackCategorydownEr;
-					console.log(resData);
+					// console.log(resData);
 					renderCondition($('.select-item.select-category'), resData)
 					$('.select-item').each(function (i, item) {
 						if ($('.select-category').val() && $('.select-category').val().trim().length > 0) {
@@ -104,7 +104,7 @@
 				contentType: 'application/json',
 				type: "POST",
 				success: function (data) {
-//					console.log("data.extend.mlbackProductResList");
+					// console.log(data.extend.mlbackProductResList);
 //					console.log(JSON.parse(data));
 //					console.log("data.extend.mlbackProductResList");
 					//从类别中获取fb所需要的当前页面的类下产品
@@ -113,12 +113,19 @@
 			              content_ids: [shopidlist],
 			              content_type: 'product'
 			            });
-					console.log("shopidlist");
-					console.log(shopidlist);
-					console.log("shopidlist");
+					// console.log("shopidlist");
+					// console.log(shopidlist);
+					// console.log("shopidlist");
 					var data = JSON.parse(data);
 					if (data.code === 100) {
-						rednerProduct(productList, data.extend.mlbackProductResList);
+						var productData = data.extend.mlbackProductResList;
+						if(productData==null){
+							renderErrorMsg(productList, 'No product-related data was obtained');
+						}else{
+							var DataproListBySaleNum =orderProListBySaleNum(productData);
+							rednerProduct(productList,DataproListBySaleNum);
+						}
+						// rednerProduct(productList, productData);
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
@@ -133,6 +140,23 @@
 				}
 			});
 		}
+		function orderProListBySaleNum(reqData) {
+				if(reqData.length>0){
+				   var n = reqData.length;
+				   for(var i=0;i<n;i++){
+					 for(var j=0;j<n-1-i;j++){
+						// console.log(reqData[j].productHavesalenum);
+					   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
+						 var  DateOne = reqData[j];
+						 reqData[j] = reqData[j+1];
+						 reqData[j+1] = DateOne;
+					   }
+					 }
+				   }
+				 }
+				return reqData;
+			}
+		
 		//计算fb所需要的当前页面的类下产品
 		function toFbidsPurchase(resData){
 	       	var infoStrlids = '';

@@ -1,53 +1,27 @@
 package com.atguigu.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductSku;
-import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.Msg;
-import com.atguigu.bean.SysUser;
-import com.atguigu.bean.UserWork;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackProductSkuService;
 import com.atguigu.service.MlbackProductViewDetailService;
-import com.atguigu.service.SysUserService;
-import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.ExcelUtils;
-import com.atguigu.utils.HttpUtil;
-import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -71,8 +45,8 @@ public class MlbackProductAdminController {
 	
 	 
 	 /**
-	  * 1.0 UseNow 0505
-	  * 通过管理模式下快速新增chanpi产品名查看单条产品的详情
+	  * 1.0	onuse	20200103	check
+	  * 通过管理模式下快速add产品名查看单条产品的详情
 	  * @param productId
 	  * @return 
 	  */
@@ -103,7 +77,6 @@ public class MlbackProductAdminController {
 		mlbackProductSkuReq.setProductId(productId);
 		List<MlbackProductSku> mlbackProductSkuResList = mlbackProductSkuService.selectMlbackProductSku(mlbackProductSkuReq);
 		//
-		//
 		MlbackProductSku mlbackProductSkuInReq = new MlbackProductSku();
 		String nowTime = DateUtil.strTime14s();
 		for(MlbackProductSku mlbackProductSku:mlbackProductSkuResList){
@@ -112,12 +85,10 @@ public class MlbackProductAdminController {
 			mlbackProductSkuInReq.setProductId(productIdIn);
 			mlbackProductSkuInReq.setProductskuCreatetime(nowTime);
 			mlbackProductSkuInReq.setProductskuMotifytime(nowTime);
-			
 			mlbackProductSkuService.insertSelective(mlbackProductSkuInReq);
 		}
 		
-		
-		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
+		return Msg.success().add("resMsg", "快速copy某产品全部内容")
 				.add("insertResult", insertResult).add("productId", productIdIn);
 		  
 	}

@@ -30,6 +30,9 @@
 
 	<!-- main -->
 	<div class="main order-info">
+<!-- 		<div class="state_num">
+			<span>状态：1111</span>
+		</div> -->
         <!-- <div class="goback"><a href="javascript:history.go(-1)">返回列表</a> </div> -->
 		<div class="address bd-t"></div>
 
@@ -60,7 +63,7 @@ param:　orderId
 		type: "POST",
 		data: reqData,
 		success: function (data) {
-			// console.log(data)
+			console.log(data)
 			var resDataAddress = data.extend.addressInfo;
 			var resDataOrder = data.extend.mlfrontOrderOne;
 			var resDataOrderItem = data.extend.mlfrontOrderItemList;
@@ -73,11 +76,11 @@ param:　orderId
 	function renderAddressDetail(parent, data) {
 		var html = '';
 		html += '<div class="address-details address-trigger">' +
-			'<i class="icon address"></i>' +
+			// '<i class="icon address"></i>' +
 			'<div class="address-info">' +
 			'<div class="address-i-item">' +
-			'<span class="address-i-name">' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
-			'<span class="address-i-phone">' + data.addressTelephone + '</span>' +
+			'<span class="address-i-name">Consignee：' + (data.addressUserlastname + ' ' + data.addressUserfirstname) + '</span>' +
+			'<span class="address-i-phone">Phone：' + data.addressTelephone + '</span>' +
 			'</div>' +
 			'<div class="address-i-item">' +
 			'<span class="address-i-address">' + data.addressDetail + ' ' + data.addressCity + ' ' + data.addressProvince +
@@ -111,7 +114,7 @@ param:　orderId
 		var html = '';
 		if (data.length) {
 			for (var key in data) {
-				html += '<div class="order-item" data-orderid="' + data[key].orderId + '" onclick="toDetailPage(event)">' +
+				html += '<div class="order-item" data-orderid="' + data[key].orderId + '">' +
 					'<div class="order-item-title">' +
 					'<span class="order-id">order Id: ' + data[key].orderId + '</span>' +
 					//'<span class="order-status">'+ (orderStatus[data[key].orderStatus]) +'</span>' +

@@ -61,6 +61,7 @@
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
+		console.log(sessionScopecategorySeo)
 		var categorySeo = sessionScopecategorySeo;
 		getProductList({
 			"categorySeo": categorySeo
@@ -108,7 +109,13 @@
 					// console.log(data)
 					if (data.code === 100) {
 						var resData2 = data.extend.mlbackProductResList;
-						rednerProduct(productList,resData2);
+						// rednerProduct(productList,resData2);
+						if(resData2==null){
+							renderErrorMsg(productList, 'No product-related data was obtained');
+						}else{
+							var DataproListBySaleNum =orderProListBySaleNum(resData2);
+							rednerProduct(productList,DataproListBySaleNum);
+						}
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					}
@@ -123,7 +130,23 @@
 				}
 			});
 		}
-
+		/****************************/
+			function orderProListBySaleNum(reqData) {
+					if(reqData.length>0){
+					   var n = reqData.length;
+					   for(var i=0;i<n;i++){
+						 for(var j=0;j<n-1-i;j++){
+							// console.log(reqData[j].productHavesalenum);
+						   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
+							 var  DateOne = reqData[j];
+							 reqData[j] = reqData[j+1];
+							 reqData[j+1] = DateOne;
+						   }
+						 }
+					   }
+					 }
+					return reqData;
+				}
 
 		function renderErrorMsg(parent, msg) {
 			parent.html('<p>' + msg + '</p>');
@@ -131,7 +154,7 @@
 
 		function rednerProduct(parent, data) {
 			var html = '';
-			if (data.length > 0) {
+			if(data!==null){
 				for (var i = 0; i < data.length; i += 1) {
 					var productactoffif = data[i].productActoffIf;
 					// console.log(productactoffif)
@@ -181,11 +204,15 @@
 						'</div>' +
 						'</div>';
 				}
-
+				
 				parent.html(html);
-			} else {
+			}else {
 				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
 			}
+			// if (data.length > 0) {
+			// } else {
+			// 	renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
+			// }
 		}
 
 		function renderCondition(parent, data, defaultHtml) {

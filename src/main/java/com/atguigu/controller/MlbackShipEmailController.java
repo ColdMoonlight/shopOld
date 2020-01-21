@@ -32,7 +32,7 @@ public class MlbackShipEmailController {
 	MlbackAdminService mlbackAdminService;
 	
 	/**
-	 * 1.0	useOn	0505
+	 * 1.0	onuse	200104
 	 * to_MlbackShipEmail列表页面
 	 * @param jsp
 	 * @return 
@@ -43,7 +43,7 @@ public class MlbackShipEmailController {
 		return "back/mlbackShipEmailPage";
 	}
 	
-	/**2.0	useOn	0505
+	/**2.0	onuse	200104
 	 * 分类MlbackShipEmail列表分页list数据
 	 * @param pn
 	 * @return
@@ -64,17 +64,14 @@ public class MlbackShipEmailController {
 //		}
 	}
 	
-	/**3.0	useOn	0505
-	 * MlbackShipEmail	insert
+	/**3.0	onuse	200104
+	 * MlbackShipEmail	insert/update
 	 * @param MlbackShipEmail
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackShipEmail mlbackShipEmail){
 		//接受参数信息
-		System.out.println("mlbackShipEmail:"+mlbackShipEmail);
-		//取出id
-		System.out.println(1);
 		Integer showareaIdId = mlbackShipEmail.getShipemailId();
 		Integer shipemailNameth = mlbackShipEmail.getShipemailNameth();
 		String shipemailName ="";
@@ -103,18 +100,16 @@ public class MlbackShipEmailController {
 		if(showareaIdId==null){
 			//无id，insert
 			mlbackShipEmail.setShipemailCreatetime(nowTime);
-			int intResult = mlbackShipEmailService.insertSelective(mlbackShipEmail);
-			System.out.println(intResult);
+			mlbackShipEmailService.insertSelective(mlbackShipEmail);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackShipEmailService.updateByPrimaryKeySelective(mlbackShipEmail);
-			System.out.println(intResult);
+			mlbackShipEmailService.updateByPrimaryKeySelective(mlbackShipEmail);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
 	
-	/**4.0	useOn	0505
+	/**4.0	onuse	200104
 	 * MlbackShipEmail	delete
 	 * @param id
 	 */
@@ -123,12 +118,12 @@ public class MlbackShipEmailController {
 	public Msg delete(@RequestBody MlbackShipEmail mlbackShipEmail){
 		//接收id信息
 		int showareaIdId = mlbackShipEmail.getShipemailId();
-		int intResult = mlbackShipEmailService.deleteByPrimaryKey(showareaIdId);
+		mlbackShipEmailService.deleteByPrimaryKey(showareaIdId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
 	/**
-	 * 5.0	useOn	0505
+	 * 5.0	onuse	200104
 	 * 查看单条详情
 	 * @param getOneMlbackShipEmailDetail
 	 * @return 
@@ -151,31 +146,5 @@ public class MlbackShipEmailController {
 		return Msg.success().add("resMsg", "查看单条mlbackShipEmailOne的详情细节完毕")
 					.add("mlbackShipEmailOne", mlbackShipEmailOne);
 	}
-	
-	/**
-	 * 6.0	useOn	0505
-	 * 查看单条详情
-	 * @param getOnemlbackShipEmailDetail
-	 * @return 
-	 */
-//	@RequestMapping(value="/getmlbackShipEmailOne",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getmlbackShipEmailOne(@RequestParam(value = "showareaNumth") Integer showareaNumth){
-//		
-//		//接受showareaId
-//		mlbackShipEmail mlbackShipEmailReq = new mlbackShipEmail();
-//		mlbackShipEmailReq.setShowareaNumth(showareaNumth);
-//		mlbackShipEmailReq.setShowareaStatus(1);//使用中
-//		//查询本条
-//		List<mlbackShipEmail> mlbackShipEmailResList =mlbackShipEmailService.selectmlbackShipEmailByNumthAndStatus(mlbackShipEmailReq);
-//		mlbackShipEmail mlbackShipEmailOne = new mlbackShipEmail();
-//		if(mlbackShipEmailResList.size()>0){
-//			mlbackShipEmailOne =mlbackShipEmailResList.get(0);
-//		}else{
-//			mlbackShipEmailOne = null;
-//		}
-//		return Msg.success().add("resMsg", "查看单条mlbackShipEmailOne的详情细节完毕")
-//					.add("mlbackShipEmailOne", mlbackShipEmailOne);
-//	}
 	
 }

@@ -166,7 +166,7 @@
 				if(item.actshowproIfproORcate==1){
 					var actshowproIfproORcate=$("<td></td>").append("类");
 					var showid = $("<td></td>").append("类"+item.actshowproCateid);
-					var actshowproSeoname = $("<td></td>").append(item.actshowproCatename);
+					var actshowproSeoname = $("<td></td>").append(item.actshowproCateSeoname);
 				}else if(item.actshowproIfproORcate==2){
 					var actshowproIfproORcate=$("<td></td>").append("专题页")
 					var showid  = $("<td></td>").append("专题页"+item.actshowproPageSeoname);

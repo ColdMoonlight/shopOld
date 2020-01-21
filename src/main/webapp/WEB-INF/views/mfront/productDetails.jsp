@@ -64,7 +64,7 @@
 			</div>
 			<div class="review-box-item">
 				<div class="name">RANTING</div>
-				<div class="stars-list review-star" data-star="0">
+				<div class="stars-list review-star" data-star="5">
 					<i class="icon star2" data-id="1"></i>
 					<i class="icon star2" data-id="2"></i>
 					<i class="icon star2" data-id="3"></i>
@@ -197,7 +197,7 @@
 			}
 
 			function renderCondition(parent, data) {
-				console.log(data)
+				// console.log(data)
 				var productskuNameDetails = data.productskuNameDetails.split(',');
 				var lengthsku=productskuNameDetails.length;
 				var conditionEl = $('<div class="container product-d-length" data-name="' + data.productskuName +
@@ -516,6 +516,7 @@
 			// close review box
 			$('.review-cancel').on('click', function() {
 				$('.review-box').addClass('hide');
+				$(".maskreview").hide();
 				deleteReview();
 			});
 			// select star reank
@@ -588,7 +589,7 @@
 								if (sysFlag) {
 									window.location.href = window.location.href;
 								}
-							}, 1000);
+							}, 500);
 						} else {
 							renderSysMsg('Operation Failed！');
 						}
@@ -917,6 +918,10 @@
 		      interval: 1000,
 		      state: false,
 		    });
+			if (countdown && countdown.state === 'after') {
+			    	  $('#countdown-area').addClass('hide');
+			}
+			
 	    }
 	    var countDownArea = $('#countdown-area');
 	    $.ajax({
@@ -1055,11 +1060,11 @@
 			});
 		}
 		
-		$(window).on('beforeunload', function() {
-			if (reviewId) {
-				deleteReview();
-			}
-		});
+		// $(window).on('beforeunload', function() {
+		// 	if (reviewId) {
+		// 		deleteReview();
+		// 	}
+		// });
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData

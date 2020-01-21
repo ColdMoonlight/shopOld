@@ -33,7 +33,7 @@ public class MlbackCountDownController {
 	
 	/**
 	 * 1.0	useOn	0505
-	 * to分类MlbackCountDown列表页面
+	 * to-MlbackCountDown列表页面
 	 * @param jsp
 	 * @return 
 	 * */
@@ -45,7 +45,7 @@ public class MlbackCountDownController {
 	
 	
 	/**2.0	useOn	0505
-	 * 分类MlbackCountDown列表分页list数据
+	 * MlbackCountDown列表分页list数据
 	 * @param pn
 	 * @return
 	 */
@@ -83,14 +83,11 @@ public class MlbackCountDownController {
 			//无id,insert
 			mlbackCountDown.setCountdownCreatetime(nowTime);
 			int intResult = mlbackCountDownService.insertSelective(mlbackCountDown);
-			System.out.println(intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id,update
 			int intResult = mlbackCountDownService.updateByPrimaryKeySelective(mlbackCountDown);
-			System.out.println(intResult);
 			return Msg.success().add("resMsg", "更新成功");
-			
 		}		
 	}
 	
@@ -107,10 +104,9 @@ public class MlbackCountDownController {
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
-	
 	/**
 	 * 5.0	useOn	0505
-	 * 查看单条类目的详情细节
+	 * 查看单条MlbackCountDown-详情细节
 	 * @param MlbackCountDown
 	 * @return 
 	 */
@@ -122,7 +118,7 @@ public class MlbackCountDownController {
 		mlbackCountDownReq.setCountdownId(countdownId);
 		//查询本条
 		MlbackCountDown mlbackCountDownOne =mlbackCountDownService.selectMlbackCountDownById(mlbackCountDownReq);
-		return Msg.success().add("resMsg", "查看单条mlbackCountDownOne的详情细节完毕")
+		return Msg.success().add("resMsg", "查-单条mlbackCountDownOne详情完毕")
 					.add("mlbackCountDownOne", mlbackCountDownOne);
 	}
 	

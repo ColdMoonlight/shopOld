@@ -46,7 +46,7 @@ public class MlbackSlideController {
 	MlbackCategoryService mlbackCategoryService;
 	
 	/**
-	 * 1.0	UseNow	0505
+	 * 1.0	onuse	200104
 	 * toMlbackActShowPro列表页面
 	 * @param jsp
 	 * @return 
@@ -57,7 +57,7 @@ public class MlbackSlideController {
 		return "back/mlbackSlidePage";
 	}
 	
-	/**2.0	UseNow	0505
+	/**2.0	onuse	200104
 	 * 分类MlbackActShowPro列表分页list数据
 	 * @param pn
 	 * @return
@@ -80,8 +80,8 @@ public class MlbackSlideController {
 	}
 	
 	
-	/**3.0	UseNow	0505
-	 * MlbackActShowPro	insert
+	/**3.0	onuse	200104
+	 * MlbackActShowPro	save
 	 * @param MlbackActShowPro
 	 */
 	@RequestMapping(value="/save",method=RequestMethod.POST)
@@ -134,20 +134,16 @@ public class MlbackSlideController {
 		if(slideId==null){
 			mlbackSlide.setSlideCreatetime(nowtime);
 			//无id，insert
-			System.out.println(3);
-			int intResult = mlbackSlideService.insertSelective(mlbackSlide);
-			System.out.println(intResult);
+			mlbackSlideService.insertSelective(mlbackSlide);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			System.out.println(4);
-			int intResult = mlbackSlideService.updateByPrimaryKeySelective(mlbackSlide);
-			System.out.println(intResult);
+			mlbackSlideService.updateByPrimaryKeySelective(mlbackSlide);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
 	
-	/**4.0	UseNow	0906
+	/**4.0	UseNow	190905
 	 * MlbackSlide	delete
 	 * @param id
 	 */
@@ -156,8 +152,7 @@ public class MlbackSlideController {
 	public Msg delete(@RequestBody MlbackSlide mlbackSlide){
 		//接收id信息
 		Integer slideId = mlbackSlide.getSlideId();
-		int intResult = mlbackSlideService.deleteByPrimaryKey(slideId);
-		System.out.println(intResult);
+		mlbackSlideService.deleteByPrimaryKey(slideId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -180,7 +175,7 @@ public class MlbackSlideController {
 	}
 	
 	/**
-	 * 6.0	UseNow	0505
+	 * 6.0	UseNow	190905
 	 * 查询wap不同位置的图片
 	 * @param MlbackSlide
 	 * @return 
@@ -217,7 +212,7 @@ public class MlbackSlideController {
 	}
 	
 	/**
-	 * 7.0	UseNow	0505
+	 * 7.0	UseNow	190905
 	 * 查询pc不同位置的图片
 	 * @param MlbackSlide
 	 * @return 

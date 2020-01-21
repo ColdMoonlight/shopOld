@@ -13,16 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackFootNav;
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackFootNavService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -79,9 +77,7 @@ public class MlbackFootNavController {
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackFootNav mlbackFootNav){
 		//接受参数信息
-		System.out.println("mlbackFootNav:"+mlbackFootNav);
 		//取出id
-		System.out.println(1);
 		Integer footnavId = mlbackFootNav.getFootnavId();
 		String nowTime = DateUtil.strTime14s();
 		mlbackFootNav.setFootnavMotifytime(nowTime);
@@ -89,12 +85,12 @@ public class MlbackFootNavController {
 			//无id，insert
 			mlbackFootNav.setFootnavCreatetime(nowTime);
 			int intResult = mlbackFootNavService.insertSelective(mlbackFootNav);
-			System.out.println(intResult);
+			System.out.println("后台操作:footnavId为null,走add+intResult:"+intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
 			int intResult = mlbackFootNavService.updateByPrimaryKeySelective(mlbackFootNav);
-			System.out.println(intResult);
+			System.out.println("后台操作:footnavId不为null,走update+intResult:"+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 			
 		}		
@@ -110,9 +106,9 @@ public class MlbackFootNavController {
 		//接收id信息
 		Integer footnavId = mlbackFootNav.getFootnavId();
 		int intResult = mlbackFootNavService.deleteByPrimaryKey(footnavId);
+		System.out.println("后台操作:MlbackFootNav delete success:"+intResult);
 		return Msg.success().add("resMsg", "delete success");
 	}
-	
 	
 	/**
 	 * 5.0	UseNow	0505
@@ -120,24 +116,24 @@ public class MlbackFootNavController {
 	 * @param MlbackAreafreight
 	 * @return 
 	 */
-	@RequestMapping(value="/getOneMlbackFootNavDetail",method=RequestMethod.POST)
-	@ResponseBody
-	public Msg getOneMlbackFootNavDetail(@RequestParam(value = "footnavId") Integer footnavId){
-		
-		//接受categoryId
-		MlbackFootNav mlbackFootNavReq = new MlbackFootNav();
-		mlbackFootNavReq.setFootnavId(footnavId);
-		//查询本条
-		List<MlbackFootNav> mlbackFootNavResList =mlbackFootNavService.selectMlbackFootNavById(mlbackFootNavReq);
-		MlbackFootNav MlbackFootNavOne = new MlbackFootNav();
-		if(mlbackFootNavResList.size()>0){
-			MlbackFootNavOne =mlbackFootNavResList.get(0);
-		}else{
-			MlbackFootNavOne = null;
-		}
-		return Msg.success().add("resMsg", "查看单条MlbackFootNavOne的详情细节完毕")
-					.add("MlbackFootNavOne", MlbackFootNavOne);
-	}
+//	@RequestMapping(value="/getOneMlbackFootNavDetail",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Msg getOneMlbackFootNavDetail(@RequestParam(value = "footnavId") Integer footnavId){
+//		
+//		//接受categoryId
+//		MlbackFootNav mlbackFootNavReq = new MlbackFootNav();
+//		mlbackFootNavReq.setFootnavId(footnavId);
+//		//查询本条
+//		List<MlbackFootNav> mlbackFootNavResList =mlbackFootNavService.selectMlbackFootNavById(mlbackFootNavReq);
+//		MlbackFootNav MlbackFootNavOne = new MlbackFootNav();
+//		if(mlbackFootNavResList.size()>0){
+//			MlbackFootNavOne =mlbackFootNavResList.get(0);
+//		}else{
+//			MlbackFootNavOne = null;
+//		}
+//		return Msg.success().add("resMsg", "查看单条MlbackFootNavOne的详情细节完毕")
+//					.add("MlbackFootNavOne", MlbackFootNavOne);
+//	}
 	
 	/**
 	 * 6.0	UseNow	0505
@@ -171,50 +167,50 @@ public class MlbackFootNavController {
 	 * @param MlbackAreafreight
 	 * @return 
 	 */
-	@RequestMapping(value="/getMlfrontFootNavAll",method=RequestMethod.POST)
-	@ResponseBody
-	public Msg selectMlbackFootNavAllIfShow(HttpServletResponse rep,HttpServletRequest res){
-		
-		
-		MlbackFootNav mlbackFootNavReq = new MlbackFootNav();
-		mlbackFootNavReq.setFootnavIfShow(1);//0不生效	1生效中 
-		//查询本条
-		List<MlbackFootNav> mlbackFootNavList = mlbackFootNavService.selectMlbackFootNavAllIfShow(mlbackFootNavReq);
-		List<MlbackFootNav> mlbackFootNavOneList = new ArrayList<MlbackFootNav>();
-		List<MlbackFootNav> mlbackFootNavTwoList = new ArrayList<MlbackFootNav>();
-		List<MlbackFootNav> mlbackFootNavThreeList = new ArrayList<MlbackFootNav>();
-		List<MlbackFootNav> mlbackFootNavFourList = new ArrayList<MlbackFootNav>();
-		MlbackFootNav MlbackFootNavOne = new MlbackFootNav();
-		
-		Integer isNav = 1;
-		if(mlbackFootNavList.size()>0){
-			isNav = 1;
-			MlbackFootNavOne =mlbackFootNavList.get(0);
-			for(int i=0;i<mlbackFootNavList.size();i++){
-				//获取当前
-				MlbackFootNavOne = mlbackFootNavList.get(i);
-				if(mlbackFootNavList.get(i).getFootnavLie()==1){
-					//第1列
-					mlbackFootNavOneList.add(MlbackFootNavOne);
-				}else if(mlbackFootNavList.get(i).getFootnavLie()==2){
-					//第2列
-					mlbackFootNavTwoList.add(MlbackFootNavOne);
-				}else if(mlbackFootNavList.get(i).getFootnavLie()==3){
-					//第3列
-					mlbackFootNavThreeList.add(MlbackFootNavOne);
-				}else{
-					//第4列
-					mlbackFootNavFourList.add(MlbackFootNavOne);
-				}
-			}
-		}else{
-			isNav = 0;
-		}
-		//4footer里请求这个接口,回去的4列
-		return Msg.success().add("resMsg", "查看底部导航完毕详情细节完毕").add("isNav", isNav)
-				.add("mlbackFootNavOneList", mlbackFootNavOneList).add("mlbackFootNavTwoList", mlbackFootNavTwoList)
-				.add("mlbackFootNavThreeList", mlbackFootNavThreeList).add("mlbackFootNavFourList", mlbackFootNavFourList);
-	}
+//	@RequestMapping(value="/getMlfrontFootNavAll",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Msg selectMlbackFootNavAllIfShow(HttpServletResponse rep,HttpServletRequest res){
+//		
+//		
+//		MlbackFootNav mlbackFootNavReq = new MlbackFootNav();
+//		mlbackFootNavReq.setFootnavIfShow(1);//0不生效	1生效中 
+//		//查询本条
+//		List<MlbackFootNav> mlbackFootNavList = mlbackFootNavService.selectMlbackFootNavAllIfShow(mlbackFootNavReq);
+//		List<MlbackFootNav> mlbackFootNavOneList = new ArrayList<MlbackFootNav>();
+//		List<MlbackFootNav> mlbackFootNavTwoList = new ArrayList<MlbackFootNav>();
+//		List<MlbackFootNav> mlbackFootNavThreeList = new ArrayList<MlbackFootNav>();
+//		List<MlbackFootNav> mlbackFootNavFourList = new ArrayList<MlbackFootNav>();
+//		MlbackFootNav MlbackFootNavOne = new MlbackFootNav();
+//		
+//		Integer isNav = 1;
+//		if(mlbackFootNavList.size()>0){
+//			isNav = 1;
+//			MlbackFootNavOne =mlbackFootNavList.get(0);
+//			for(int i=0;i<mlbackFootNavList.size();i++){
+//				//获取当前
+//				MlbackFootNavOne = mlbackFootNavList.get(i);
+//				if(mlbackFootNavList.get(i).getFootnavLie()==1){
+//					//第1列
+//					mlbackFootNavOneList.add(MlbackFootNavOne);
+//				}else if(mlbackFootNavList.get(i).getFootnavLie()==2){
+//					//第2列
+//					mlbackFootNavTwoList.add(MlbackFootNavOne);
+//				}else if(mlbackFootNavList.get(i).getFootnavLie()==3){
+//					//第3列
+//					mlbackFootNavThreeList.add(MlbackFootNavOne);
+//				}else{
+//					//第4列
+//					mlbackFootNavFourList.add(MlbackFootNavOne);
+//				}
+//			}
+//		}else{
+//			isNav = 0;
+//		}
+//		//4footer里请求这个接口,回去的4列
+//		return Msg.success().add("resMsg", "查看底部导航完毕详情细节完毕").add("isNav", isNav)
+//				.add("mlbackFootNavOneList", mlbackFootNavOneList).add("mlbackFootNavTwoList", mlbackFootNavTwoList)
+//				.add("mlbackFootNavThreeList", mlbackFootNavThreeList).add("mlbackFootNavFourList", mlbackFootNavFourList);
+//	}
 	
 	/**
 	 * 8.0	UseNow	0505
@@ -222,8 +218,8 @@ public class MlbackFootNavController {
 	 * @param jsp
 	 * @return 
 	 * */
-	@RequestMapping(value="/toMlfrontFootNavPage",method=RequestMethod.GET)
-	public String toMlfrontFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
+	@RequestMapping(value="/toFootNavPage",method=RequestMethod.GET)
+	public String toFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
 	
 		//接收传递进来的参数
 		Integer footnavIdReq = footnavId;
@@ -232,26 +228,17 @@ public class MlbackFootNavController {
 		
 		session.setAttribute("footnavId", footnavIdReq);
 		
-		return "mfront/footNavPage";
-	}
-	
-	/**
-	 * 8.02	UseNow	0505
-	 * toMlbackFootNav展示页面(PC)
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/topcMlfrontFootNavPage",method=RequestMethod.GET)
-	public String topcMlfrontFootNavPage(HttpSession session,@RequestParam(value = "footnavId") Integer footnavId,HttpServletResponse rep,HttpServletRequest res) throws Exception{
-	
-		//接收传递进来的参数
-		Integer footnavIdReq = footnavId;
-		//放回响应域中
-		res.setAttribute("footnavId", footnavIdReq);
+		//判断请求设备
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		
-		session.setAttribute("footnavId", footnavIdReq);
+		if(ifMobile.equals("1")){
+			//1wap
+			return "mfront/footNavPage";
+		}else{
+			//0PC
+			return "front/pcfootNavPage";
+		}
 		
-		return "front/pcfootNavPage";
 	}
 	
 	/**

@@ -67,7 +67,7 @@
 			</div>
 			<div class="review-box-item">
 				<div class="name">RANTING</div>
-				<div class="stars-list review-star" data-star="0">
+				<div class="stars-list review-star" data-star="5">
 					<i class="icon star2" data-id="1"></i>
 					<i class="icon star2" data-id="2"></i>
 					<i class="icon star2" data-id="3"></i>
@@ -595,9 +595,9 @@
 				deleteReview();
 			});
 			// select star reank
-			$('.review-star .icon').each(function(item){
-				var parent = $(item).parent();
-				$(item).on('click', function() {
+			$('.review-star .icon').each(function(){
+				var parent = $(".icon").parent(".review-star");
+				$(".review-star .icon").on('click', function() {
 					parent.find('.icon').removeClass('star2').addClass('star');
 					$(this).removeClass('star').addClass('star2').prevAll('.icon').removeClass('star').addClass('star2');
 					parent.attr('data-star', $(this).data('id'));
@@ -670,7 +670,7 @@
 								if (sysFlag) {
 									window.location.href = window.location.href;
 								}
-							}, 1000);
+							}, 500);
 						} else {
 							renderSysMsg('Operation Failed！');
 						}
@@ -1023,6 +1023,11 @@
 		      interval: 1000,
 		      state: false,
 		    });
+			
+			if (countdown && countdown.state === 'after') {
+			    	  $('#countdown-area').addClass('hide');
+			}
+			
 	    }
 	    var countDownArea = $('#countdown-area');
 	    $.ajax({
@@ -1184,11 +1189,11 @@
 			});
 		}
 		
-		$(window).on('beforeunload', function() {
-			if (reviewId) {
-				deleteReview();
-			}
-		});
+		// $(window).on('beforeunload', function() {
+		// 	if (!reviewId) {
+		// 		deleteReview();
+		// 	}
+		// });
 		
 		function uploadfu(parent, file) {
 			//实例化一个FormData

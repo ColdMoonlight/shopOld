@@ -5,17 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackAreafreight;
-import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlfrontOrder;
-import com.atguigu.bean.UserWork;
-import com.atguigu.dao.MlbackAdminMapper;
-import com.atguigu.dao.MlbackAreafreightMapper;
-import com.atguigu.dao.MlbackCategoryMapper;
-import com.atguigu.dao.MlbackProductMapper;
 import com.atguigu.dao.MlfrontOrderMapper;
 
 
@@ -44,7 +34,6 @@ public class MlfrontOrderService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int orderId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlfrontOrderMapper.deleteByPrimaryKey(orderId);
 		return intReslut;
 	}
@@ -56,7 +45,6 @@ public class MlfrontOrderService {
 	 * 
 	 * */
 	public int updateByPrimaryKeySelective(MlfrontOrder mlfrontOrder) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlfrontOrderMapper.updateByPrimaryKeySelective(mlfrontOrder);
 		return intReslut;
 	}
@@ -84,7 +72,6 @@ public class MlfrontOrderService {
 	}
 
 	public List<MlfrontOrder> selectMlfrontOrderByDate(MlfrontOrder mlfrontOrder) {
-		// TODO Auto-generated method stub
 		List<MlfrontOrder>  mlfrontOrderList = mlfrontOrderMapper.selectMlfrontOrderByDate(mlfrontOrder);
 		return mlfrontOrderList;
 	}
@@ -96,6 +83,11 @@ public class MlfrontOrderService {
 	
 	public List<MlfrontOrder> selectMlfrontOrderByUidOnly(MlfrontOrder mlfrontOrder) {
 		List<MlfrontOrder>  mlfrontOrderList = mlfrontOrderMapper.selectMlfrontOrderByUidOnly(mlfrontOrder);
+		return mlfrontOrderList;
+	}
+
+	public List<MlfrontOrder> selectOrderListByUidAndStatus(MlfrontOrder mlfrontOrder) {
+		List<MlfrontOrder>  mlfrontOrderList = mlfrontOrderMapper.selectOrderListByUidAndStatus(mlfrontOrder);
 		return mlfrontOrderList;
 	}
 	

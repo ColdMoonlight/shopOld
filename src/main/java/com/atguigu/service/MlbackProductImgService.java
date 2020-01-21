@@ -4,21 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.MlbackCoupon;
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductImg;
-import com.atguigu.bean.MlfrontUser;
-import com.atguigu.bean.UserWork;
-import com.atguigu.dao.MlbackAdminMapper;
-import com.atguigu.dao.MlbackCategoryMapper;
-import com.atguigu.dao.MlbackCouponMapper;
 import com.atguigu.dao.MlbackProductImgMapper;
-import com.atguigu.dao.MlbackProductMapper;
-import com.atguigu.dao.MlfrontUserMapper;
 
 
 @Service
@@ -45,7 +32,6 @@ public class MlbackProductImgService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int productimgId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductImgMapper.deleteByPrimaryKey(productimgId);
 		return intReslut;
 	}

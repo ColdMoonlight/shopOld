@@ -416,7 +416,7 @@
 			if (categoryIdUP == "") {
 				// 如果没有pid,弹出"请先输入产品名，保存后再次进入"
 				// console.log("productIdUP:"+productIdUP);
-				alert("请先输入产品名，保存后从编辑进入");
+				alert("请先输入类名，保存后从编辑进入");
 			} else {
 				obj.append('categoryId', categoryIdUP);
 				$.ajax({

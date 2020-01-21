@@ -39,8 +39,8 @@ public class EmailUtilshtml {
 		sendEmilRegister(getToEmail, Message, mlfrontUserafterIn);
 	}
 	
-	public static void readyEmailVerifySuccess(String getToEmail, String message, String toCustomerVerifyInfoStr, String payinfoPlateNum) {
-		sendEmilVerify(getToEmail, message, toCustomerVerifyInfoStr,payinfoPlateNum);
+	public static void readyEmailVerifySuccess(String getToEmail, String toCustomerVerifyInfoStr, String payinfoPlateNum) {
+		sendEmilVerify(getToEmail, toCustomerVerifyInfoStr,payinfoPlateNum);
 	}
 	
 	public static void readyEmailPaySuccess(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
@@ -123,7 +123,7 @@ public class EmailUtilshtml {
 	 * megalookweb@outlook.com
 	 * mingyueqingl@163.com
 	 * */
-	private static void sendEmilVerify(String to, String message, String toCustomerVerifyInfoStr, String payinfoPlateNum) {
+	private static void sendEmilVerify(String to, String toCustomerVerifyInfoStr, String payinfoPlateNum) {
 		try {
             Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
             final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -172,7 +172,7 @@ public class EmailUtilshtml {
             msg.setSentDate(new Date());
             //调用Transport的send方法去发送邮件
             Transport.send(msg);
-            System.out.println("给"+to+"客户,发送邮件完毕,"+"邮件内容为"+message);
+            System.out.println("给"+to+"客户,发送邮件完毕,"+"邮件内容为"+content);
         } catch (Exception e) {
             e.printStackTrace();
         }

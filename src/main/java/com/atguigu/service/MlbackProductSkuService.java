@@ -5,15 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atguigu.bean.GroupDisplay;
-import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductSku;
-import com.atguigu.bean.UserWork;
-import com.atguigu.dao.MlbackAdminMapper;
-import com.atguigu.dao.MlbackCategoryMapper;
-import com.atguigu.dao.MlbackProductMapper;
 import com.atguigu.dao.MlbackProductSkuMapper;
 
 
@@ -42,7 +34,6 @@ public class MlbackProductSkuService {
 	 * 
 	 * */
 	public int deleteByPrimaryKey(int productskuId) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductSkuMapper.deleteByPrimaryKey(productskuId);
 		return intReslut;
 	}
@@ -54,7 +45,6 @@ public class MlbackProductSkuService {
 	 * 
 	 * */
 	public int updateByPrimaryKeySelective(MlbackProductSku mlbackProductSku) {
-		// TODO Auto-generated method stub
 		int  intReslut = mlbackProductSkuMapper.updateByPrimaryKeySelective(mlbackProductSku);
 		return intReslut;
 	}
@@ -91,8 +81,5 @@ public class MlbackProductSkuService {
 		List<MlbackProductSku>  mlbackProductSkuList = mlbackProductSkuMapper.selectMlbackProductGetAll();
 		return mlbackProductSkuList;
 	}
-	
-
-	
 
 }

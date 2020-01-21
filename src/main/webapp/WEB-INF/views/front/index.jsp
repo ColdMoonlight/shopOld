@@ -32,15 +32,8 @@
 	</script>
 	<!-- Facebook Pixel Code end -->
 </head>
-
 <body>
-
-  <jsp:include page="pcheader2.jsp"></jsp:include>
-
-
-
-
-
+  <jsp:include page="pcheader.jsp"></jsp:include>
 	<!-- main -->
 	<!-- banner -->
 	<div id="banner" class="swiper-container">
@@ -53,7 +46,6 @@
   	<div class="container">
 	    <!-- discount -->
 		<div class="coupon_cont2">
-			
 		</div>
 	    <!-- <img class="discount" src="${APP_PATH }/static/pc/discount.jpg" /> -->
 	    <!-- countDownArea date -->
@@ -74,13 +66,11 @@
 	    </div>
   	</div>
   </div>
-  
   <jsp:include page="pcfooter.jsp"></jsp:include>
  	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
   <script>
   	/* banner */
-  	
     function renderHotProduct(parent, data) {
       var html = '';
       for (var i=0, len=data.length; i < len; i += 1) {
@@ -93,7 +83,7 @@
 								'</div>';
 				   }else if(actshowprolei==1){
 					  html += '<div class="swiper-slide">' +
-					   '<a href="${APP_PATH}/MlbackCategory/toproductlist?categoryId=' + data[i].actshowproCateid + '">' +
+					     '<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
 							'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 					  '</a>' +
 					  '</div>';

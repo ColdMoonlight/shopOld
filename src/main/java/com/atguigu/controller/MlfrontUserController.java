@@ -1,21 +1,11 @@
 package com.atguigu.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,32 +14,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.atguigu.bean.GroupDisplay;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCategory;
-import com.atguigu.bean.MlbackProduct;
-import com.atguigu.bean.MlfrontCart;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
-import com.atguigu.bean.SysUser;
-import com.atguigu.bean.UserWork;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.atguigu.service.GroupDisplayService;
 import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackCategoryService;
-import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlfrontUserService;
-import com.atguigu.service.SysUserService;
-import com.atguigu.service.UserWorkService;
 import com.atguigu.utils.DateUtil;
-import com.atguigu.utils.EmailUtils;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
-import com.atguigu.utils.ExcelUtils;
-import com.atguigu.utils.HttpUtil;
-
 
 @Controller
 @RequestMapping("/MlfrontUser")
@@ -181,8 +156,7 @@ public class MlfrontUserController {
 		mlfrontUser.setUserId(userId);
 		mlfrontUser.setUserMotifytime(nowtime);
 		mlfrontUser.setUserLastonlinetime(nowtime);
-		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
-		System.out.println(intResult);
+		mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
 		System.out.println(mlfrontUser);
 	}
 
@@ -214,8 +188,7 @@ public class MlfrontUserController {
 			mlfrontUserreq.setUserLastonlinetime(nowtime);
 			mlfrontUserreq.setUserVipLevel(0);
 			mlfrontUserreq.setUserTimes(0);
-			int intResult = mlfrontUserService.insertSelective(mlfrontUserreq);
-			System.out.println(intResult);
+			mlfrontUserService.insertSelective(mlfrontUserreq);
 			//用账号把它查回来
 			MlfrontUser mlfrontUserInAfterreq = new MlfrontUser();
 			mlfrontUserInAfterreq.setUserEmail(userEmail);
@@ -230,7 +203,6 @@ public class MlfrontUserController {
 				EmailUtilshtml.readyEmailRegister(getToEmail, Message,mlfrontUserafterIn);
 				EmailUtilshtmlCustomer.readyEmailRegisterCustomer(getToEmail, Message,mlfrontUserafterIn);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return Msg.success().add("resMsg", "Registration Success").add("registerYes", registerYes);//1的话,成功
@@ -374,8 +346,7 @@ public class MlfrontUserController {
 		mlfrontUser.setUserMotifytime(nowtime);
 		mlfrontUser.setUserLastonlinetime(nowtime);
 		//更新本条状态
-		int intResult = mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
-		System.out.println(intResult);
+		mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
 		System.out.println(mlfrontUser);
 		return Msg.success().add("resMsg", "Update Successful").add("mlfrontUser", mlfrontUser);
 	}

@@ -31,11 +31,12 @@
 	<!-- main -->
 	<div class="main order-info">
 		<div class="tab">
-			<div class="tab-item active" data-id="all">All orders</div>
+			<div class="tab-item active" data-id="999">All orders</div>
 			<div class="tab-item" data-id="0">Unpaid</div>
 			<div class="tab-item" data-id="1">Paid</div>
-			<div class="tab-item" data-id="2">TobeShipped</div>
-			<div class="tab-item" data-id="3">Shipped</div>
+			<div class="tab-item" data-id="3">TobeShipped</div>
+			<div class="tab-item" data-id="4">Shipped</div>
+			<div class="tab-item" data-id="5">Refund</div>
 		</div>
 		<div class="tab-content">
 			<div class="order-list"></div>
@@ -54,34 +55,15 @@
 	var orderStatus = {
 		0: 'Unpaid',
 		1: 'Paid',
-		2: 'TobeShipped',
-		3: 'Shipped',
+		3: 'TobeShipped',
+		4: 'Shipped',
+		5:'refund'
 	}
 	//去首页
-	to_page(1);
-
-	function to_page(pn, type) {
-		$.ajax({
-			url: "${APP_PATH}/MlfrontOrder/getmOrderByUidPage",
-			data: "pn=" + pn,
-			type: "POST",
-			success: function (result) {
-				// console.log(result);
-				var pageInfo = result.extend.pageInfo;
-				var orderList = result.extend.pageInfo.list;
-				var orderItemList = result.extend.mlfrontOrderItemReturn;
-				if (!isNaN(parseInt(type))) {
-					orderList = orderList.filter(function (item) {
-						return item.orderStatus === parseInt(type);
-					});
-				}
-				// 列表数据
-				renderContainer(containerBox, orderList, orderItemList);
-				// 解析显示分页条数据
-				render_page_nav(pageInfo);
-			}
-		});
-	}
+	to_page(1,999);
+    // console.log(pn)
+	// console.log(type)
+	var orderStatusid=999;
 	var activeItem = $('.tab-item.active');
 	$('.order-info .tab-item').each(function (i, item) {
 		$(item).on('click', function () {
@@ -89,10 +71,38 @@
 				activeItem.removeClass('active');
 				$(this).addClass('active');
 				activeItem = $(this);
-				to_page(i, String($(this).data('id')));
+				to_page(1, String($(this).data('id')));
+				var myid =String($(this).data('id'));
+				orderStatusid=myid;
 			}
 		})
 	})
+	
+	function to_page(pn, orderStatus) {
+		console.log("pn："+pn);
+		console.log("type："+orderStatus);
+		$.ajax({
+			url: "${APP_PATH}/MlfrontOrderList/selectOrderlistBySearch",
+			// data: "pn=" + pn,
+			data:{
+				"pn": pn,
+				"orderStatus":orderStatus,
+			},
+			type: "POST",
+			success: function (result) {
+				// console.log(result);
+				var pageInfo = result.extend.pageInfo;
+				var orderList = result.extend.pageInfo.list;
+				// console.log(orderList)
+				var orderItemList = result.extend.mlfrontOrderItemReturnList;
+				renderContainer(containerBox, orderList, orderItemList);
+				render_page_nav(pageInfo);
+			}
+		});
+	}
+	
+	
+
 
 	function orderMap(data) {
 		var orderMap = {};
@@ -156,13 +166,12 @@
 		window.location.href = '${APP_PATH }/MlfrontOrder/getMlfrontOrderDetailPage?orderId=' + $(e.target).parents(
 			'.order-item').data('orderid');
 	}
-
 	//解析显示分页条，点击分页要能去下一页....
 	function render_page_nav(pageInfo) {
 		//page_nav_area
 		pageArea.empty();
 		var ul = $("<ul></ul>").addClass("pagination");
-
+        // console.log(pageInfo.pages);
 		//构建元素
 		var firstPageLi = $("<li></li>").append($("<a></a>").append("first").attr("href", "javascript:;"));
 		var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
@@ -172,13 +181,14 @@
 		} else {
 			//为元素添加点击翻页的事件
 			firstPageLi.click(function () {
-				to_page(1);
+				to_page(1,orderStatusid);
+				console.log("orderStatusid："+orderStatusid)
 			});
 			prePageLi.click(function () {
-				to_page(pageInfo.pageNum - 1);
+				to_page(pageInfo.pageNum - 1,orderStatusid);
+			console.log("orderStatusid："+orderStatusid)
 			});
 		}
-
 		var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
 		var lastPageLi = $("<li></li>").append($("<a></a>").append("last").attr("href", "javascript:;"));
 		if (pageInfo.hasNextPage == false) {
@@ -186,13 +196,14 @@
 			lastPageLi.addClass("disabled");
 		} else {
 			nextPageLi.click(function () {
-				to_page(pageInfo.pageNum + 1);
+				to_page(pageInfo.pageNum + 1,orderStatusid);
+				console.log("orderStatusid："+orderStatusid)
 			});
 			lastPageLi.click(function () {
-				to_page(pageInfo.pages);
+				to_page(pageInfo.pages,orderStatusid);
+			console.log("orderStatusid："+orderStatusid)
 			});
 		}
-
 		//添加首页和前一页 的提示
 		ul.append(firstPageLi).append(prePageLi);
 		//1,2，3遍历给ul中添加页码提示
@@ -203,7 +214,8 @@
 				numLi.addClass("active");
 			}
 			numLi.click(function () {
-				to_page(item);
+				to_page(item,orderStatusid);
+				console.log("orderStatusid"+orderStatusid)
 			});
 			ul.append(numLi);
 		});

@@ -1,6 +1,5 @@
 package com.atguigu.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,18 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackEmail;
-import com.atguigu.bean.MlbackFootNav;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackEmailService;
-import com.atguigu.service.MlbackFootNavService;
 import com.atguigu.utils.DateUtil;
-
 
 @Controller
 @RequestMapping("/MlbackEmail")
@@ -56,9 +50,7 @@ public class MlbackEmailController {
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackEmail mlbackEmail){
 		//接受参数信息
-		System.out.println("mlbackEmail:"+mlbackEmail);
 		//取出id
-		System.out.println(1);
 		Integer emailId = mlbackEmail.getEmailId();
 		String nowTime = DateUtil.strTime14s();
 		mlbackEmail.setEmailMotifytime(nowTime);
@@ -66,12 +58,12 @@ public class MlbackEmailController {
 			//无id，insert
 			mlbackEmail.setEmailCreatetime(nowTime);
 			int intResult = mlbackEmailService.insertSelective(mlbackEmail);
-			System.out.println(intResult);
+			System.out.println("后台操作:emailId为null,走add+intResult:"+intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
 			int intResult = mlbackEmailService.updateByPrimaryKeySelective(mlbackEmail);
-			System.out.println(intResult);
+			System.out.println("后台操作:emailId不为null,走update+intResult:"+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
@@ -86,6 +78,7 @@ public class MlbackEmailController {
 		//接收id信息
 		Integer emailId = mlbackEmail.getEmailId();
 		int intResult = mlbackEmailService.deleteByPrimaryKey(emailId);
+		System.out.println("后台操作:delete success:"+intResult);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	

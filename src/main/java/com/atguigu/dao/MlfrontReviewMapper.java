@@ -37,4 +37,7 @@ public interface MlfrontReviewMapper {
 	List<MlfrontReview> selectMlfrontReviewListByPId(MlfrontReview mlfrontReview);
 	//条件搜索selectMlfrontReviewListBySearch
 	List<MlfrontReview> selectMlfrontReviewListBySearch(MlfrontReview mlfrontReview);
+	//查询从不同来源的地方selectReviewListFrom
+	List<MlfrontReview> selectReviewListFrom(MlfrontReview mlfrontReview);
+	
 }

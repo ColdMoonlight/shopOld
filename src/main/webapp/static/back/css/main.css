@@ -170,7 +170,7 @@ html,body {
 	margin-bottom: 20px;
     cursor: pointer;
      position: relative;
-     background: url("/ShopTemplate/static/img/plus.png") no-repeat;
+     background: url("../../img/plus.png") no-repeat;
      background-position: center;
      background-size: 200px 200px;
      border: 1px solid #ccc;

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackReviewImgService;
 import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.IfMobileUtils;
 
 
 @Controller
@@ -92,14 +94,12 @@ public class MlfrontReviewController {
 	 * MlfrontReview	insert
 	 * @param MlfrontReview
 	 */
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlfrontReview mlfrontReview){
 		//接受参数信息
 		System.out.println("mlfrontReview:"+mlfrontReview);
 		//取出id
-		System.out.println(1);
 		Integer reviewId = mlfrontReview.getReviewId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontReview.setReviewMotifytime(nowTime);
@@ -127,13 +127,11 @@ public class MlfrontReviewController {
 		mlfrontReview.setReviewEndtime(nowTime);
 		if(reviewId==null){
 			//无id，insert
-			int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
-			System.out.println(intResult);
+			mlfrontReviewService.insertSelective(mlfrontReview);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlfrontReviewService.updateByPrimaryKeySelective(mlfrontReview);
-			System.out.println(intResult);
+			mlfrontReviewService.updateByPrimaryKeySelective(mlfrontReview);
 			return Msg.success().add("resMsg", "更新成功");
 			
 		}		
@@ -229,8 +227,7 @@ public class MlfrontReviewController {
 	public Msg delete(@RequestBody MlfrontReview mlfrontReview){
 		//接收id信息
 		Integer reviewId = mlfrontReview.getReviewId();
-		int intResult = mlfrontReviewService.deleteByPrimaryKey(reviewId);
-		System.out.println(intResult);
+		mlfrontReviewService.deleteByPrimaryKey(reviewId);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -436,16 +433,13 @@ public class MlfrontReviewController {
 		Integer Pid = mlfrontReview.getReviewPid();
 		//接受参数信息
 		System.out.println("mlfrontReview:"+mlfrontReview);
-		//取出id
-		System.out.println(1);
-		Integer reviewId = mlfrontReview.getReviewId();
 		String nowTime = DateUtil.strTime14s();
 		mlfrontReview.setReviewMotifytime(nowTime);
 		mlfrontReview.setReviewCreatetime(nowTime);
 		mlfrontReview.setReviewConfirmtime(nowTime);
 		mlfrontReview.setReviewStatus(0);//0待审核状态1审核完毕
 		//插入本条null的reviewid
-		int intResult = mlfrontReviewService.insertSelective(mlfrontReview);
+		mlfrontReviewService.insertSelective(mlfrontReview);
 		//查回来插入的这一条
 		MlfrontReview MlfrontReviewReq = new MlfrontReview();
 		MlfrontReviewReq.setReviewPid(Pid);
@@ -467,8 +461,7 @@ public class MlfrontReviewController {
 	public Msg deleteNew(@RequestBody MlfrontReview mlfrontReview){
 		//接收id信息,删除本条主评论
 		Integer reviewId = mlfrontReview.getReviewId();
-		int intResult = mlfrontReviewService.deleteByPrimaryKey(reviewId);
-		System.out.println(intResult);
+		mlfrontReviewService.deleteByPrimaryKey(reviewId);
 		
 		mlbackReviewImgService.deleteByreviewId(reviewId);
 		
@@ -482,6 +475,7 @@ public class MlfrontReviewController {
 	 * Integer reviewPid;
 	 * Integer reviewStatus;
 	 * Integer reviewProstarnum;
+	 * Integer reviewFrom;
 	 * String reviewStarttime;
 	 * String reviewEndtime;
 	 * @return
@@ -490,7 +484,7 @@ public class MlfrontReviewController {
 	@ResponseBody
 	public Msg selectMlfrontReviewListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,@RequestParam(value = "reviewPid") Integer reviewPid,
 			@RequestParam(value = "reviewStatus") Integer reviewStatus,@RequestParam(value = "reviewProstarnum") Integer reviewProstarnum,
-			@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
+			@RequestParam(value = "reviewFrom") Integer reviewFrom,@RequestParam(value = "reviewStarttime") String reviewStarttime,@RequestParam(value = "reviewEndtime") String reviewEndtime,
 			HttpSession session) {
 
 		MlfrontReview mlfrontReviewReq = new MlfrontReview();
@@ -509,14 +503,82 @@ public class MlfrontReviewController {
 		}else{
 			mlfrontReviewReq.setReviewStatus(reviewStatus);
 		}
+		if(reviewFrom==999){
+			System.out.println("reviewFrom==999");
+		}else{
+			mlfrontReviewReq.setReviewFrom(reviewFrom);
+		}
 		mlfrontReviewReq.setReviewStarttime(reviewStarttime);
 		mlfrontReviewReq.setReviewEndtime(reviewEndtime);
-			int PagNum = 20;
-			PageHelper.startPage(pn, PagNum);
-			List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
-			
-			PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
-			return Msg.success().add("pageInfo", page);
-//		}
+		int PagNum = 20;
+		PageHelper.startPage(pn, PagNum);
+		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectMlfrontReviewListBySearch(mlfrontReviewReq);
+		
+		PageInfo page = new PageInfo(mlfrontReviewList, PagNum);
+		return Msg.success().add("pageInfo", page);
+	}
+	
+	/**
+	 * 12.0	onuse	200104
+	 * Ins Review page
+	 * @param jsp
+	 * @return
+	 * */
+	@RequestMapping("/toReviewInsPage")
+	public String toReviewInsPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+	
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		  
+		if(ifMobile.equals("1")){
+			return "mfront/navActive/mreviewInsListPage";
+		}else{
+			return "front/navActive/pcreviewInsList";
+		}
+	}
+	
+	
+	/**13.0	onuse	200104
+	 * search review From Ins
+	 */
+	@RequestMapping(value="/selectReviewListFrom",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg selectReviewListFrom(HttpSession session,@RequestParam(value = "reviewFrom") Integer reviewFrom) {
+		
+		MlfrontReview mlfrontReviewReq = new MlfrontReview();
+		mlfrontReviewReq.setReviewStatus(1);
+		mlfrontReviewReq.setReviewFrom(reviewFrom);
+		List<MlfrontReview> mlfrontReviewList = mlfrontReviewService.selectReviewListFrom(mlfrontReviewReq);
+		
+		MlbackReviewImg mlbackReviewImgOneReq = new MlbackReviewImg();
+		List<List<MlbackReviewImg>> mlfrontReviewImgList = new ArrayList<List<MlbackReviewImg>>();
+		
+		List<MlbackReviewImg> mlfrontReviewImgFirstList = new ArrayList<MlbackReviewImg>();
+		for(int i=0;i<mlfrontReviewList.size();i++){
+			Integer reviewId = mlfrontReviewList.get(i).getReviewId();
+			mlbackReviewImgOneReq.setReviewId(reviewId);
+			mlbackReviewImgOneReq.setReviewimgSortOrder(1);
+			mlfrontReviewImgFirstList = mlbackReviewImgService.selectMlbackReviewImgByRIdAndImgSort(mlbackReviewImgOneReq);
+			mlfrontReviewImgList.add(mlfrontReviewImgFirstList);
+		}
+		return Msg.success().add("mlfrontReviewList", mlfrontReviewList).add("mlfrontReviewImgList", mlfrontReviewImgList);
+		
+	}
+	
+	/**
+	 * 14.0	onuse	200108
+	 * Ins Review page
+	 * @param jsp
+	 * @return
+	 * */
+	@RequestMapping("/toReviewCustomer")
+	public String toReviewCustomer(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+	
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		  
+		if(ifMobile.equals("1")){
+			return "mfront/navActive/mreviewCustomerListPage";
+		}else{
+			return "front/navActive/pcreviewCustomerList";
+		}
 	}
 }

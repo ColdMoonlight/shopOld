@@ -45,7 +45,7 @@
 
 <body>
 
-	<jsp:include page="pcheader2.jsp"></jsp:include>
+	<jsp:include page="pcheader.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
@@ -127,12 +127,18 @@
 				              content_ids: [shopidlist],
 				              content_type: 'product'
 				            });
-						console.log(reviewTextData)
-						rednerProduct(productList,reviewTextData);
+						// console.log(reviewTextData)
+						if(reviewTextData==null){
+							renderErrorMsg(productList, 'No product-related data was obtained');
+						}else{
+							var DataproListBySaleNum =orderProListBySaleNum(reviewTextData);
+							rednerProduct(productList,DataproListBySaleNum);
+						}
+						// rednerProduct(productList,reviewTextData);
 						var pageInfo = data.extend.pageInfo;
-						console.log("************pageInfo*************");
-						console.log(pageInfo);
-						console.log("************pageInfo*************");
+						// console.log("************pageInfo*************");
+						// console.log(pageInfo);
+						// console.log("************pageInfo*************");
 						render_page_nav($('.page-info-area'), pageInfo)
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
@@ -147,6 +153,23 @@
 					}
 				}
 			});
+		}
+		/*********/
+		function orderProListBySaleNum(reqData) {
+			if(reqData.length>0){
+			   var n = reqData.length;
+			   for(var i=0;i<n;i++){
+				 for(var j=0;j<n-1-i;j++){
+					// console.log(reqData[j].productHavesalenum);
+				   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
+					 var  DateOne = reqData[j];
+					 reqData[j] = reqData[j+1];
+					 reqData[j+1] = DateOne;
+				   }
+				 }
+			   }
+			 }
+			return reqData;
 		}
 		//计算fb所需要的当前页面的类下产品
 		function toFbidsPurchase(resData){

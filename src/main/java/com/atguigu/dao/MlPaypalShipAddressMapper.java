@@ -2,7 +2,6 @@ package com.atguigu.dao;
 
 import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlPaypalShipAddressExample;
-import com.atguigu.bean.MlfrontReview;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
