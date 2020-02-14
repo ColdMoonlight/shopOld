@@ -762,17 +762,17 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .hot_box_product_cont .swiper-slide .product-item{width: 100%;}
 .new_box_product_cont .swiper-slide .product-item{width: 100%;}
 
-.grid{width:96%; height: auto;margin: 0 3% 20px;}
+.grid{width:96%; height: auto;margin: 0 2% 20px;}
 .grid_cont{width: 100%; height: auto; text-align: center;}
 .grid_cont a{width:48%;margin: 0 1%; display: inline-block;float: left; text-align: center;}
 .grid_cont a img{max-width:100%; margin: 0 auto;display: inline-block;}
 .banner_fl_1,.banner_fl_2,.banner_fl_3{width: 96%;margin: 0 3%;}
 .bannerpic{width: 100%;}
 .bannerpic img{display: block; margin: 0 auto;}
-.comment_cont{width: 96%; height: auto;margin: 0 3%;}
+.comment_cont{width: 96%; height: auto;margin: 0 2%;}
 .comment_cont ul{width: 100%; margin: 20px 0 0;}
-.list_ins{width: 25%;float: left;padding: 0 1%; margin: 0 0 2%;}
-.list_ins img{max-width: 100%;height: 200px;}
+.list_ins{width: 20%;float: left;padding: 0 1%; margin: 0 0 2%;}
+.list_ins img{max-width: 100%;}
 
 .index_tcbox .product-image{width: 100%;}
 .index_tcbox .rightcont{width: 100%;}

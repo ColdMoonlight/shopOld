@@ -609,12 +609,11 @@
 											console.log("/**result************/");
 											  resData = result.extend.mlfrontReviewList;
 											  resDataimg = result.extend.mlfrontReviewImgList;
-//											   var dataimgLength =resDataimg.length;
-//		                     var lens=parseInt(dataimgLength-(dataimgLength%8));
-//		                     masonryHtml(masonrycont,resData,resDataimg.slice(0,lens));
-											  masonryHtml(masonrycont,resData,resDataimg)
-		//									   productBlock.append(rednerProduct(number5Times(productData.length,productData)));
-											  
+											   var dataimgLength =resDataimg.length;
+											   var resDatalength =resData.length;
+		                     var lensimg=parseInt(dataimgLength-(dataimgLength%8));
+		                     var lenslist=parseInt(resDatalength-(resDatalength%8));
+		                     masonryHtml(masonrycont,resData.slice(0,lenslist),resDataimg.slice(0,lensimg));
 										  }
 									}
 							  });
