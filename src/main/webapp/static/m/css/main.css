@@ -666,8 +666,9 @@ a:focus {
 }
 
 .product-desc {
-  width: 100%;
-  padding: .5em;
+  width:90%;
+  margin:5%
+  
 }
 
 .product-title {
@@ -2485,7 +2486,7 @@ a:focus {
 .bannerfirst{margin:100px 0 0;}
 #ban_silder{position:relative;width:100%;overflow: hidden;}
 #ban_silder img{width: 100%;}
-#hot-product{position:relative;width:100%; overflow: hidden;}
+#hot-product{position:relative;width:100%; overflow: hidden;margin: 1% 0 0;}
 #hot-product img{width: 100%;}
 
 

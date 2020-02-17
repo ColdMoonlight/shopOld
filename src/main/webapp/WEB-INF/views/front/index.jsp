@@ -43,8 +43,9 @@
 	<div class="narrow clearfix" id="hot-two"></div>
 	<div class="coupon_cont2"></div>
 	<div id="countdown-area"> </div>
-	<div class="banner_fl_1"></div>
 	<div class="actionhot clearfix" id="hot-product"></div>
+	<div class="grid" id="hot-adv"></div>
+	<div class="banner_fl_1"></div>
   <div class="hot_index_product clearfix">
 	   <div class="hot_box_product_cont">
 	    	<div class="swiper-wrapper"></div>
@@ -52,7 +53,6 @@
         <div class="swiper-button-next hotbtn_next"></div>
 	   </div>
    </div>
-	<div class="grid" id="hot-adv"></div>
 	    <!--*********新品推荐******************-->
   <div class="banner_fl_2"></div>
 	<div class="new_index_product clearfix">
@@ -62,13 +62,14 @@
 	       <div class="swiper-button-next newbtn_next"></div>
 		   </div>
 	   </div>
+	   
 	    <!-- product show -->
 	     <div class="banner_fl_3"></div>
 	      <div class="comment_cont clearfix"> </div>
 	    <!-- buyer show -->
-	    <div id="buyer-show">
+	    <!--<div id="buyer-show">
 	    	<img src="${APP_PATH }/static/pc/show.jpg">
-	    </div>
+	    </div>-->
   	<!--</div>-->
   <!--</div>-->
   <jsp:include page="pcfooter.jsp"></jsp:include>
@@ -148,16 +149,34 @@
   
   	/****热播推荐四个图片******************************/
     function renderHotProduct(parent, data) {
-          var html = '';
+       var html = '';
        html += '<div class="actionhot_cont clearfix">';
        html += '<ul class="clearfix">';
       for (var i = 0; i < data.length; i += 1) {
 		  var actshowprolei = data[i].actshowproIfproORcate;
-		    html += '<li>' +
+//		  console.log(actshowprolei)
+		  	if(actshowprolei==0){
+		  		 html += '<li>' +
 		  			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
 		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
 		  			  '</a>' +
 		  			  '</li>';
+		  	}else if(actshowprolei==1){
+		  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}else if(actshowprolei==2){
+		  				  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/' + data[i].actshowproPageSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}
+		  
+		  
+		   
       }
        html +=  '</ul>';
        html +=  '</div>';
@@ -185,9 +204,25 @@
 	       html += '<div class="narrow_cont clearfix">';
 	      for (var i = 0; i < data.length; i += 1) {
 			  var actshowprolei = data[i].actshowproIfproORcate;
-			  		  html += '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-			  			  	'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
-			  			  '</a>';
+			  				  	if(actshowprolei==0){
+		  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}else if(actshowprolei==1){
+		  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}else if(actshowprolei==2){
+		  				  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/' + data[i].actshowproPageSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}
 	      }
 	       html +=  '</div>';
 	      parent.html(html);
@@ -264,9 +299,40 @@
 						'</div>'+
 						'</div>';
 				}
-        html += '<div class="swiper-slide" style="width:100%;height:100%"><a href="${APP_PATH}/search/Pop-Trending.html" style="width:100%;height:100%;dispaly:block" class="morelink">moremoremoremore</a></div>'
+        html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/Pop-Trending.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
 				parent.html(html);
 		}
+   /******M-Series-Hair**********************************/
+     		$.ajax({
+         url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
+					data: JSON.stringify({
+						"categorySeo": "M-Series-Hair"
+					}),
+			 type: 'post',
+			 dataType: 'text',
+			 contentType: 'application/json',
+			 success: function (data) {
+					if (JSON.parse(data).code === 100) {
+					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					    var dataLength =resDataProduct.length;
+             var lens=parseInt(dataLength-(dataLength%8));
+             rednerProduct(hot_pic,resDataProduct.slice(0,lens));
+//           rednerProduct(new_pic,resDataProduct.slice(0,lens));
+					 new Swiper('.hot_box_product_cont', {
+					     slidesPerView: 5,
+					    spaceBetween:5,
+					    freeMode: true,
+					    navigation: {
+					      nextEl: '.hotbtn_next',
+					      prevEl: '.hotbtn_prev',
+					    }
+					 });
+					 
+					} else {
+					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					}
+				  }
+		});	
    
    		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
@@ -281,17 +347,7 @@
 					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
 					    var dataLength =resDataProduct.length;
              var lens=parseInt(dataLength-(dataLength%8));
-             rednerProduct(hot_pic,resDataProduct.slice(0,lens));
              rednerProduct(new_pic,resDataProduct.slice(0,lens));
-					 new Swiper('.hot_box_product_cont', {
-					     slidesPerView: 5,
-					    spaceBetween:5,
-					    freeMode: true,
-					    navigation: {
-					      nextEl: '.hotbtn_next',
-					      prevEl: '.hotbtn_prev',
-					    }
-					 });
 	 					 new Swiper('.new_box_product_cont', {
 					    slidesPerView: 5,
 					    spaceBetween:5,
@@ -321,9 +377,25 @@
 	       html += '<div class="grid_cont clearfix">';
 	      for (var i = 0; i < data.length; i += 1) {
 			  var actshowprolei = data[i].actshowproIfproORcate;
-			  		  html += '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
-			  			  	'<img src="' + data[i].actshowproImgwapurl + '" alt="">' +
-			  			  '</a>';
+			  		 		  	if(actshowprolei==0){
+		  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}else if(actshowprolei==1){
+		  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}else if(actshowprolei==2){
+		  				  		 html += '<li>' +
+		  			  '<a href="${APP_PATH}/' + data[i].actshowproPageSeoname + '.html">' +
+		  			  					'<img src="' + data[i].actshowproImgpcurl + '" alt="">' +
+		  			  '</a>' +
+		  			  '</li>';
+		  	}
 	      }
 	       html +=  '</div>';
 	      parent.html(html);
