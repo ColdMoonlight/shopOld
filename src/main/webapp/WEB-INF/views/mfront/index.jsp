@@ -143,7 +143,7 @@
     }
     $.ajax({
       url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-      data: "actshowproActnum=" + 1,
+      data: "actshowproActnum=" + 7,
       type: "POST",
       success: function (data) {
         if (data.code === 100) {
@@ -188,7 +188,7 @@
 /*******************/
         $.ajax({
 		      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-		      data: "actshowproActnum=" + 10,
+		      data: "actshowproActnum=" + 8,
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
@@ -240,7 +240,7 @@
 /*******************/
         $.ajax({
 		      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-		      data: "actshowproActnum=" + 9,
+		      data: "actshowproActnum=" + 6,
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
@@ -421,7 +421,7 @@
 		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
-						"categorySeo": "M-Series-Hair"
+						"categorySeo": "Hot-Selling"
 					}),
 			 type: 'post',
 			 dataType: 'JSON',
@@ -450,7 +450,7 @@
 		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
-						"categorySeo": "Pop-Trending"
+						"categorySeo": "New-Arrival"
 					}),
 			 type: 'post',
 			 dataType: 'JSON',
