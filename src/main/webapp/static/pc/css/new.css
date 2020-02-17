@@ -452,10 +452,15 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .login-register .btn.go_home{display: block;width: 100%;height:40px;background-color:#fe186e;border-color:#fe186e ; color: #fff;padding: 0; line-height:40px;text-align:center;}
 .home_box{margin:0 20px;}
 /*****************************/
-.coupon_cont2{width: 100%; height: auto;}
+.coupon_cont2{width: 100%; height: auto;margin: 0 0 1%;}
 .coupon_cont2 .coupon_ban{width: 100%;}
 .coupon_cont2 .coupon_ban img{width: 100%;}
 .coupon_cont2 .coupon_ban a{display: block; margin: 0 10%;}
+.morelink{display: block;height: 360px;font-size:30px; transform: scale(.96); background:#000; color: #fff;font-weight: 600;}
+.morelink span{width: 100%; display: block; text-align: center;margin: 100px 0 50px; float: left;}
+.morelink em{width: 100%; display: block; text-align: center;font-style: normal;float: left;}
+.morelink b{width: 100%; display: block; text-align: center;font-style: normal; margin: 0 0 50px; float: left;}
+.morelink:hover{color: #fff;}
 
 /***********************/
 .hot_box_product .swiper-slide .product-item{width: 100%;}
