@@ -230,7 +230,7 @@
 /*******************/
         $.ajax({
 		      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-		      data: "actshowproActnum=" + 6,
+		      data: "actshowproActnum=" + 8,
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
@@ -306,7 +306,7 @@
      		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
-						"categorySeo": "M-Series-Hair"
+						"categorySeo": "Hot-Selling"
 					}),
 			 type: 'post',
 			 dataType: 'text',
@@ -337,7 +337,7 @@
    		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
-						"categorySeo": "Pop-Trending"
+						"categorySeo": "New-Arrival"
 					}),
 			 type: 'post',
 			 dataType: 'text',
@@ -403,7 +403,7 @@
 /*******************/
         $.ajax({
 		      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-		      data: "actshowproActnum=" + 8,
+		      data: "actshowproActnum=" + 6,
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
@@ -413,7 +413,7 @@
 		        	var resData = data.extend.mlbackActShowProList;
 		          rednerHotAdv($('#hot-adv'), resData)
 		        } else {
-		          renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+		          rendesrErrorMsg(prodcutBox, 'No product-related data was obtained.');
 		        }
 		      }
 		    });	
