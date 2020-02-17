@@ -185,7 +185,7 @@
 		/* xxxx */
     $.ajax({
       url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-      data: "actshowproActnum=" + 1,
+      data: "actshowproActnum=" + 7,
       type: "POST",
       success: function (data) {
         // console.log("mlbackActShowProList");
@@ -230,7 +230,7 @@
 /*******************/
         $.ajax({
 		      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-		      data: "actshowproActnum=" + 10,
+		      data: "actshowproActnum=" + 6,
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
@@ -403,7 +403,7 @@
 /*******************/
         $.ajax({
 		      url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-		      data: "actshowproActnum=" + 9,
+		      data: "actshowproActnum=" + 8,
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {

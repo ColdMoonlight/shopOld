@@ -112,6 +112,19 @@ public class MlfrontPayInfoController {
 	}
 	
 	/**
+	   * 3.0  UseNow  0505
+	   * toMlfrontPayInfoList列表页面
+	   * @param jsp
+	   * @return 
+	   * */
+	  @RequestMapping("/toMlbackPayInfohighList")
+	  public String toMlbackPayInfohighList() throws Exception{
+	  
+	    return "back/high/mlbackPayInfohighPage";
+	  }
+	
+	
+	/**
 	 * 4.0	UseNow	0505
 	 * to	MlfrontOrder列表页面
 	 * @param jsp
