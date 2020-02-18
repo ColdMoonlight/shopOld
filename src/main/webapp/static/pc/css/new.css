@@ -455,7 +455,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .coupon_cont2{width: 100%; height: auto;margin: 0 0 1%;}
 .coupon_cont2 .coupon_ban{width: 100%;}
 .coupon_cont2 .coupon_ban img{width: 100%;}
-.coupon_cont2 .coupon_ban a{display: block; margin: 0 10%;}
+.coupon_cont2 .coupon_ban a{display: block; margin: 0 5%;}
 .morelink{display: block;height: 360px;font-size:30px; transform: scale(.96); background:#000; color: #fff;font-weight: 600;}
 .morelink span{width: 100%; display: block; text-align: center;margin: 100px 0 50px; float: left;}
 .morelink em{width: 100%; display: block; text-align: center;font-style: normal;float: left;}
@@ -753,8 +753,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 /*************/
 .actionhot{width: 100%; height: auto; margin: 0 auto;}
 .actionhot_cont{width: 100%; height: auto;}
-.actionhot_cont ul{width: 100%;padding: 0 5%;}
-.actionhot_cont ul li{width:25%;float: left;margin: 0 0 2%; padding: 0 0 0 2%;}
+.actionhot_cont ul{width: 100%;padding:0 2%}
+.actionhot_cont ul li{width:25%;float: left;margin: 0 0 2%; padding: 0 1%;}
 /*.actionhot_cont ul li:nth-of-type(odd){padding: 0 1% 0 0;}*/
 /*.actionhot_cont ul li:nth-of-type(even){padding:0 0 0 1%}*/
 .actionhot_cont ul li a img{max-width: 100%;}
