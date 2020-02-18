@@ -192,9 +192,9 @@
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
-		        	 console.log("*****11111111************")
-					     console.log(data)
-					   console.log("*****11111111************")
+//		        	 console.log("*****11111111************")
+//					     console.log(data)
+//					   console.log("*****11111111************")
 		        	var resData = data.extend.mlbackActShowProList;
 		          rednerHotTwo($('#hot-two'), resData)
 		        } else {
@@ -210,7 +210,7 @@
 
     function rednerHotAdv(parent, data) {
 	      var html = '';
-	       html += '<div class="grid_cont clearfix">';
+	       html += '<ul class="grid_cont clearfix">';
 	      for (var i = 0; i < data.length; i += 1) {
 			  var actshowprolei = data[i].actshowproIfproORcate;
 			  		 		  if(actshowprolei==0){
@@ -234,7 +234,7 @@
 		  }
 		  
 	      }
-	       html +=  '</div>';
+	       html +=  '</ul>';
 	      parent.html(html);
 	    }
 /*******************/
@@ -244,9 +244,9 @@
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
-		        	 console.log("*****11111111************")
-					     console.log(data)
-					   console.log("*****11111111************")
+//		        	 console.log("*****11111111************")
+//					     console.log(data)
+//					   console.log("*****11111111************")
 		        	var resData = data.extend.mlbackActShowProList;
 		          rednerHotAdv($('#hot-adv'), resData)
 		        } else {
@@ -364,7 +364,7 @@
     /*------rednerProduct----------*/
 		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
 		 var new_pic = $('.new_box_product_cont .swiper-wrapper');
-		 function rednerProduct(parent, data) {
+		 function rednerProduct(parent, data,num) {
 		 	var html = '';
 		 		for (var i = 0; i < data.length; i += 1) {
 		 			 var productactoffif = data[i].productActoffIf;
@@ -414,10 +414,28 @@
 		 				'</div>'+
 		 				'</div>';
 		 		}
-		 		 html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/Pop-Trending.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
+        html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/Hot-Selling.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
+				html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/New-Arrival.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
 		 		parent.html(html);
 		 }
-		 /************************/
+		 /*******排序*****************/
+		  		function orderProListBySaleNum(reqData) {
+				if(reqData.length>0){
+				   var n = reqData.length;
+				   for(var i=0;i<n;i++){
+					 for(var j=0;j<n-1-i;j++){
+						// console.log(reqData[j].productHavesalenum);
+					   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
+						 var  DateOne = reqData[j];
+						 reqData[j] = reqData[j+1];
+						 reqData[j+1] = DateOne;
+					   }
+					 }
+				   }
+				 }
+				return reqData;
+			}
+		/**********************/
 		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
@@ -428,10 +446,17 @@
 			 contentType: 'application/json',
 			 success: function (data) {
 					if (JSON.parse(data).code === 100) {
-					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
-             var dataLength =resDataProduct.length;
+             var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					   var DataproListBySaleNum =orderProListBySaleNum(resDataProduct);
+					   var dataLength =DataproListBySaleNum.length;
              var lens=parseInt(dataLength-(dataLength%8));
-             rednerProduct(hot_pic,resDataProduct.slice(0,lens));
+             if(dataLength>=8){
+               rednerProduct(hot_pic,DataproListBySaleNum.slice(0,8));
+             }else{
+             	rednerProduct(hot_pic,DataproListBySaleNum);
+             }
+//           var lens=parseInt(dataLength-(dataLength%8));
+//           rednerProduct(hot_pic,resDataProduct.slice(0,lens));
 					 new Swiper('.hot_box_product_cont', {
 					          	  slidesPerView: 2,
 					    spaceBetween:5,
@@ -457,10 +482,15 @@
 			 contentType: 'application/json',
 			 success: function (data) {
 					if (JSON.parse(data).code === 100) {
-					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
-             var dataLength =resDataProduct.length;
+             var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					   var DataproListBySaleNum =orderProListBySaleNum(resDataProduct);
+					   var dataLength =DataproListBySaleNum.length;
              var lens=parseInt(dataLength-(dataLength%8));
-             rednerProduct(new_pic,resDataProduct.slice(0,lens));
+              if(dataLength>=8){
+		               rednerProduct(new_pic,DataproListBySaleNum.slice(0,8));
+		             }else{
+		             	rednerProduct(new_pic,DataproListBySaleNum);
+		             }
 	 					 new Swiper('.new_box_product_cont', {
 					    slidesPerView: 2,
 					    spaceBetween:5,
@@ -639,21 +669,21 @@
 						$.ajax({
 								url: "${APP_PATH}/MlfrontReview/selectReviewListFrom",
 									data:{
-									  "reviewFrom": 2
+									  "reviewFrom": 3
 									},
 									type: "POST",
 									success: function (result) {
 									  if (result.code == 100) {
-									  	console.log("/**result************/");
+//									  	console.log("/**result************/");
 		//									console.log(result);
-											console.log("/**result************/");
+//											console.log("/**result************/");
 											  resData = result.extend.mlfrontReviewList;
 											  resDataimg = result.extend.mlfrontReviewImgList;
 											   var dataimgLength =resDataimg.length;
 											   var resDatalength =resData.length;
-		                     var lensimg=parseInt(dataimgLength-(dataimgLength%8));
-		                     var lenslist=parseInt(resDatalength-(resDatalength%8));
-		                     masonryHtml(masonrycont,resData.slice(0,lenslist),resDataimg.slice(0,lensimg));
+//		                     var lensimg=parseInt(dataimgLength-(dataimgLength%8));
+//		                     var lenslist=parseInt(resDatalength-(resDatalength%8));
+		                     masonryHtml(masonrycont,resData.slice(0,8),resDataimg.slice(0,8));
 										  }
 									}
 							  });
