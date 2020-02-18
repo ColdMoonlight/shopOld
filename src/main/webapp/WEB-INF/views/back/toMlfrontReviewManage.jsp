@@ -62,7 +62,8 @@
 										  <option value ="999" selected="selected">全部</option>
 										  <option value ="0">0-self</option>
 										  <option value ="1">1-Customer</option>
-										   <option value ="2">2-Ins</option>
+										  <option value ="2">2-Ins瀑布流</option>
+                						  <option value ="3">3-Ins首页同尺寸</option>
 										</select>
 								    </div>
 								</div>
@@ -400,8 +401,10 @@
 				}else if(item.reviewFrom==1){
 					reviewFromStr = '1-Customer';
 				}else if(item.reviewFrom==2){
-					reviewFromStr = '2-Ins';
-				}
+					reviewFromStr = '2-Ins瀑布流';
+				}else if(item.reviewFrom==3){
+          			reviewFromStr = '3-Ins首页同尺寸';
+        		}
 				var reviewFrom = $("<td></td>").append(reviewFromStr);
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
