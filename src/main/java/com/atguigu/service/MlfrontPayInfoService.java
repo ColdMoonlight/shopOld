@@ -77,4 +77,9 @@ public class MlfrontPayInfoService {
 		return mlfrontPayInfoList;
 	}
 	
+	public List<MlfrontPayInfo> selectHighPayInfoListBySearch(MlfrontPayInfo mlfrontPayInfoReq) {
+	    List<MlfrontPayInfo>  mlfrontPayInfoList = mlfrontPayInfoMapper.selectHighPayInfoListBySearch(mlfrontPayInfoReq);
+	    return mlfrontPayInfoList;
+	}
+	
 }

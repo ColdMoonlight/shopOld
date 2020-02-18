@@ -47,7 +47,7 @@
 	<div class="grid" id="hot-adv"></div>
 	<div class="banner_fl_1"></div>
   <div class="hot_index_product clearfix">
-	   <div class="hot_box_product_cont">
+	    <div class="hot_box_product_cont">
 	    	<div class="swiper-wrapper"></div>
 	      <div class="swiper-button-prev hotbtn_prev"></div>
         <div class="swiper-button-next hotbtn_next"></div>
@@ -248,7 +248,6 @@
    /*****新品推荐开始****************************************/
     var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
 		var new_pic = $('.new_box_product_cont .swiper-wrapper');
-		
    function rednerProduct(parent, data) {
 			var html = '';
 				for (var i = 0; i < data.length; i += 1) {
@@ -299,14 +298,32 @@
 						'</div>'+
 						'</div>';
 				}
-        html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/Pop-Trending.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
-				parent.html(html);
-		}
+				html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/top-selling.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
+				html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/New-Arrival.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
+			parent.html(html);
+   }
+   /*****************/
+  		function orderProListBySaleNum(reqData) {
+				if(reqData.length>0){
+				   var n = reqData.length;
+				   for(var i=0;i<n;i++){
+					 for(var j=0;j<n-1-i;j++){
+						// console.log(reqData[j].productHavesalenum);
+					   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
+						 var  DateOne = reqData[j];
+						 reqData[j] = reqData[j+1];
+						 reqData[j+1] = DateOne;
+					   }
+					 }
+				   }
+				 }
+				return reqData;
+			}
    /******M-Series-Hair**********************************/
      		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
-						"categorySeo": "Hot-Selling"
+						"categorySeo": "top-selling"
 					}),
 			 type: 'post',
 			 dataType: 'text',
@@ -314,10 +331,14 @@
 			 success: function (data) {
 					if (JSON.parse(data).code === 100) {
 					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
-					    var dataLength =resDataProduct.length;
+					   var DataproListBySaleNum =orderProListBySaleNum(resDataProduct);
+					   var dataLength =DataproListBySaleNum.length;
              var lens=parseInt(dataLength-(dataLength%8));
-             rednerProduct(hot_pic,resDataProduct.slice(0,lens));
-//           rednerProduct(new_pic,resDataProduct.slice(0,lens));
+              if(dataLength>=8){
+		               rednerProduct(hot_pic,DataproListBySaleNum.slice(0,8));
+		             }else{
+		             	rednerProduct(hot_pic,DataproListBySaleNum);
+		             }
 					 new Swiper('.hot_box_product_cont', {
 					     slidesPerView: 5,
 					    spaceBetween:5,
@@ -344,10 +365,15 @@
 			 contentType: 'application/json',
 			 success: function (data) {
 					if (JSON.parse(data).code === 100) {
-					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
-					    var dataLength =resDataProduct.length;
+             var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					   var DataproListBySaleNum =orderProListBySaleNum(resDataProduct);
+					   var dataLength =DataproListBySaleNum.length;
              var lens=parseInt(dataLength-(dataLength%8));
-             rednerProduct(new_pic,resDataProduct.slice(0,lens));
+              if(dataLength>=8){
+		               rednerProduct(new_pic,DataproListBySaleNum.slice(0,8));
+		             }else{
+		             	rednerProduct(new_pic,DataproListBySaleNum);
+		             }
 	 					 new Swiper('.new_box_product_cont', {
 					    slidesPerView: 5,
 					    spaceBetween:5,
@@ -365,16 +391,16 @@
 		});	
    
    
-	function number5Times(len,resDataProduct) {
-        var lens=parseInt(len-(len%9));
-//      Console.log(lens)
-		return resDataProduct.slice(0,lens);
-       }	
+//	function number5Times(len,resDataProduct) {
+//      var lens=parseInt(len-(len%9));
+////      Console.log(lens)
+//		return resDataProduct.slice(0,lens);
+//     }	
    /*****新品推荐结束****************************************/ 
    /******advadvadvadvadv******************************/  
     function rednerHotAdv(parent, data) {
 	      var html = '';
-	       html += '<div class="grid_cont clearfix">';
+	       html += '<ul class="grid_cont clearfix">';
 	      for (var i = 0; i < data.length; i += 1) {
 			  var actshowprolei = data[i].actshowproIfproORcate;
 			  		 		  	if(actshowprolei==0){
@@ -397,7 +423,7 @@
 		  			  '</li>';
 		  	}
 	      }
-	       html +=  '</div>';
+	       html +=  '</ul>';
 	      parent.html(html);
 	    }
 /*******************/
@@ -407,9 +433,7 @@
 		      type: "POST",
 		      success: function (data) {
 		        if (data.code === 100) {
-		        	 console.log("*****11111111************")
-					     console.log(data)
-					   console.log("*****11111111************")
+//					     console.log(data)
 		        	var resData = data.extend.mlbackActShowProList;
 		          rednerHotAdv($('#hot-adv'), resData)
 		        } else {
@@ -474,7 +498,7 @@
 		   var productBlock2 =$(".banner_fl_2");
 		   var productBlock3 =$(".banner_fl_3");
 	    function renderBanner(data) {
-	    	return $('<div class="bannerpic"></div>').html('<img src="' + data.showareaImgurl + '" alt=" + data.showareaName + ">');
+	    	return $('<div class="bannerpic"></div>').html('<img src="' + data.showareaImgpcurl + '" alt=" + data.showareaName + ">');
 	    }
 	 	$.ajax({
 	 	      url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
@@ -523,29 +547,23 @@
 		 	      }
 		 	    });
 				/***ins品论*****************************/
-				var masonrycont=$(".comment_cont")
-					function number5Times(len,productData) {
-			        var lens=parseInt(len-(len%5));
-				    	return productData.slice(0,lens);
-			       }	
+				var masonrycont=$(".comment_cont")	
 					$.ajax({
 						url: "${APP_PATH}/MlfrontReview/selectReviewListFrom",
 							data:{
-							  "reviewFrom": 2
+							  "reviewFrom": 3
 							},
 							type: "POST",
 							success: function (result) {
 							  if (result.code == 100) {
-							  	console.log("/**result************/");
 //									console.log(result);
-									console.log("/**result************/");
 									  resData = result.extend.mlfrontReviewList;
 									  resDataimg = result.extend.mlfrontReviewImgList;
 									   var dataimgLength =resDataimg.length;
 									   var resDatalength =resData.length;
-                     var lensimg=parseInt(dataimgLength-(dataimgLength%10));
-                     var lenslist=parseInt(resDatalength-(resDatalength%10));
-                     masonryHtml(masonrycont,resData.slice(0,lenslist),resDataimg.slice(0,lensimg));
+//                   var lensimg=parseInt(dataimgLength-(dataimgLength%10));
+//                   var lenslist=parseInt(resDatalength-(resDatalength%10));
+                     masonryHtml(masonrycont,resData.slice(0,10),resDataimg.slice(0,10));
 								  }
 							}
 					  });

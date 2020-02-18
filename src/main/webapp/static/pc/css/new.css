@@ -773,7 +773,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .grid_cont a img{max-width:100%; margin: 0 auto;display: inline-block;}
 .banner_fl_1,.banner_fl_2,.banner_fl_3{width: 96%;margin: 0 3%;}
 .bannerpic{width: 100%;}
-.bannerpic img{display: block; margin: 0 auto;}
+.bannerpic img{display: block; margin: 0 auto; max-width: 100%;}
 .comment_cont{width: 96%; height: auto;margin: 0 2%;}
 .comment_cont ul{width: 100%; margin: 20px 0 0;}
 .list_ins{width: 20%;float: left;padding: 0 1%; margin: 0 0 2%;}
@@ -783,8 +783,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .index_tcbox .rightcont{width: 100%;}
 .new_index_product .product-title {height: 48px; line-height:24px; overflow: hidden;}
 .hot_index_product .product-title {height: 48px; line-height:24px; overflow: hidden;}
-
-
+.hot_index_product .hot_box_product_cont .swiper-slide:last-child{display: none !important;}
+.new_index_product .new_box_product_cont .swiper-slide:nth-last-child(2){display: none !important;}
 
 /***********/
  @media (max-width: 1330px) {
