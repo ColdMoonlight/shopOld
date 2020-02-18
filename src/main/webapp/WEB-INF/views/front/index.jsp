@@ -298,7 +298,7 @@
 						'</div>'+
 						'</div>';
 				}
-				html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/Hot-Selling.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
+				html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/top-selling.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
 				html += '<div class="swiper-slide" style="width:100%; height:100%"><a href="${APP_PATH}/search/New-Arrival.html" style="width:100%;;dispaly:block" class="morelink"> <span>VIEW</span><b>+</b><em>MORE</em> </a></div>'
 			parent.html(html);
    }
@@ -323,7 +323,7 @@
      		$.ajax({
          url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 					data: JSON.stringify({
-						"categorySeo": "Hot-Selling"
+						"categorySeo": "top-selling"
 					}),
 			 type: 'post',
 			 dataType: 'text',
