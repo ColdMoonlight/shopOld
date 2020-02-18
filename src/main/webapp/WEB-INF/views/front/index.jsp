@@ -641,6 +641,7 @@
 	   						  var html = '';
 	   						  for (var i = 0; i < data.length; i += 1) {
 	   							   var slideIfinto_click = data[i].slideIfinto;
+	   							   	var slideIfproORcateORpage =data[i].slideIfproORcateORpage;
 	   							  if(slideIfinto_click==0){
 	   								  html += '<div class="coupon_ban">' +
 	   								  '<a href="javascript:;">' +
@@ -648,11 +649,19 @@
 	   								  '</a>' +
 	   								  '</div>';
 	   							  }else{
-	   								  html += '<div class="coupon_ban">' +
-	   								  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-	   								  '<img src="' + data[i].slidePcimgurl + '" alt="">' +
-	   								  '</a>' +
-	   								  '</div>';
+		   								 if(slideIfproORcateORpage==0){
+														  	 html += '<div class="banner">' +
+																				  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +'<img src="' + data[i].slidePcimgurl + '" alt="">' +	'</a>' +
+																				  '</div>';
+													  }else if(slideIfproORcateORpage==1){
+														  html += '<div class="banner">' +
+														   '<a href="${APP_PATH}/search/' + data[i].slideCateSeoname + '.html">' +'<img src="' + data[i].slidePcimgurl + '" alt="">' +	'</a>' +
+														  	'</div>';
+													  }else if(slideIfproORcateORpage==2){
+														  html += '<div class="banner">' +
+														   '<a href="${APP_PATH}/' + data[i].slidePageSeoname + '.html">' +'<img src="' + data[i].slidePcimgurl + '" alt="">' +	'</a>' +
+														  	'</div>';
+													  }
 	   							  }
 	   							  
 	   							
