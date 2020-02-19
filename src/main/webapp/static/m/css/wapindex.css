@@ -69,7 +69,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .newbtn_prev{left: 5px;background: url(../../pc/img/left.png) no-repeat;}
 .newbtn_next{right: 5px;background: url(../../pc/img/right.png) no-repeat;}
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{opacity:0;background: none;}
-
+.old-price .price{text-decoration: line-through;}
 
 /************/
 .comment_cont{width: 100%; height: auto;}
@@ -78,14 +78,13 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .list_ins img{max-width: 100%;height: 200px;}
 .index_tcbox .product-image{width: 100%;}
 .index_tcbox .rightcont{width: 100%;}
-.morelink{display: block; position: relative; z-index: 2; height:290px;font-size:18px; transform: scale(.96); background:#000; color: #fff;font-weight: 600;}
-.morelink span{width: 100%; display: block; text-align: center;margin: 50px 0 25px; float: left;}
-.morelink em{width: 100%; display: block; text-align: center;font-style: normal;float: left;}
-.morelink b{width: 100%; display: block; text-align: center;font-style: normal; margin: 0 0 25px; float: left;}
-.morelink:hover{color: #fff;}
+.morelink{position:absolute;top: 0; left: 0;width: 100%; height: 100%; z-index: 2; display: block;font-size:30px; background:url(../../pc/img/more.jpg) no-repeat; background-size:100% 100%; color: #fff;font-weight: 600;}
+.last_top img{width: 100%; height: 100%; opacity: 0;}
+.last_new img{width: 100%; height: 100%; opacity: 0;}
+.word-desc{height:93px;}
 .new_box_product_cont .swiper-slide .product-item{transform:scale(1)}
 .hot_box_product_cont .swiper-slide .product-item{transform: scale(1);}
-
+.product-img{height: auto;}
 
 
 
