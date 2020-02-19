@@ -59,7 +59,10 @@
 							       </div>
 							</div>
 						<!-- table-content -->
-						<div class="table-content">
+						<div id="wei_num" style="display: none; width: 100%; float: left; background: #fff; text-align:center;min-height: 600px;">
+						  <h3>当前未查到数据</h3>	
+						</div>
+						<div class="table-content" id="allreview" style="padding: 0;">
 							<table class="table table-striped table-hover" id="task_table">
 								<thead>
 									<tr>
@@ -118,7 +121,7 @@
 		/***************************/
 		var payinfoCreatetime;/*开始时间*/
 		var payinfoMotifytime;/***结束时间*****/
-		var payinfoStatus=99;/**订单状态**/
+		var payinfoStatus=999;/**订单状态**/
 		var totalRecord, currentPage, editid;
 		var count = 1;
 		$(".pinglun_from .selectpl").change(function(){
@@ -234,7 +237,16 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		            console.log(result)
 		          if (result.code == 100) {
 					  var task = result.extend.pageInfo.list;
-					  console.log(task.length)
+					   console.log(task.length)
+					 if(task.length==0){
+						  // alert("没有查到")
+						  $("#allreview").hide();
+						  $("#wei_num").show();
+					  }else{
+						   $("#wei_num").hide();
+						    $("#allreview").show();
+					  }
+					 
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -323,10 +335,12 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 			} else {
 				//为元素添加点击翻页的事件
 				firstPageLi.click(function () {
-					to_page(1);
+//					to_page(1);
+					to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
 				});
 				prePageLi.click(function () {
-					to_page(result.extend.pageInfo.pageNum - 1);
+//					to_page(result.extend.pageInfo.pageNum - 1);
+                    to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
 				});
 			}
 
@@ -337,10 +351,10 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 				lastPageLi.addClass("disabled");
 			} else {
 				nextPageLi.click(function () {
-					to_page(result.extend.pageInfo.pageNum + 1);
+                     to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
 				});
 				lastPageLi.click(function () {
-					to_page(result.extend.pageInfo.pages);
+                    to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
 				});
 			}
 
@@ -354,7 +368,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 					numLi.addClass("active");
 				}
 				numLi.click(function () {
-					to_page(item);
+                    to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
 				});
 				ul.append(numLi);
 			});
