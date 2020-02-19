@@ -27,6 +27,9 @@
 			<div class="main-box nicescroll">
 				<div class="header">
 					<h2>付款页面列表</h2>
+					    <button type="button" id="downPayinfoDate">下载查账数据</button>
+          				<button type="button" id="downEcppDate">下载ecpp数据</button>
+          				<button type="button" id="downPayiFailDate">下载弃购数据</button>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
@@ -43,48 +46,23 @@
 								    <div class="" style="float: left;">
 								        <select class="form-control selectpl">
 										  <option value ="999" selected="selected">全部</option>
-										  <option value ="0">0-self</option>
-										  <option value ="1">1-Customer</option>
-										   <option value ="2">2-Ins</option>
+										  <option value ="0">未支付</option>
+										  <option value ="1">已支付</option>
+										  <option value ="2">已审核</option>
+										  <option value ="3">已发货</option>
+										  <option value ="4">已退款</option>
 										</select>
 								    </div>
 								</div>
-								
-								<div class="form-group pinglun" style="float: left;">
-								    <label class="control-label" style="float: left;">评论状态</label>
-								    <div class="" style="float: left;">
-								        <select class="form-control selectpl">
-										  <option value ="999" selected="selected">全部</option>
-										  <option value ="0">不生效</option>
-										  <option value ="1">生效</option>
-										</select>
-								    </div>
-								</div>
-								<div class="form-group staricon" style="float: left;">
-								    <label class="control-label" style="float: left;">星级:</label>
-								    <div class="" style="float: left;">
-								        <select class="form-control xing">
-										  <option value ="0" selected="selected">全部</option>
-										  <option value ="1">1颗星</option>
-										  <option value ="2">2颗星</option>
-										  <option value ="3">3颗星</option>
-										  <option value ="4">4颗星</option>
-										  <option value ="5">5颗星</option>
-										</select>
-								    </div>
-								</div>
-								<div class="form-group cp_select">
-								     <label for="actshowproProid" style="float: left;" class="control-label">产品名字:</label>
-								     <div class="" style="float: left;width: 300px;">
-								         <select id="actshowproProid" name="actshowproProid" class="form-control"></select>
-								     </div>
-								 </div>
 								   <div class="form-group btn_search">
 									   <input type="submit" id="" value="搜索" name="" />
 							       </div>
 							</div>
 						<!-- table-content -->
-						<div class="table-content">
+						<div id="wei_num" style="display: none; width: 100%; float: left; background: #fff; text-align:center;min-height: 600px;">
+						  <h3>当前未查到数据</h3>	
+						</div>
+						<div class="table-content" id="allreview" style="padding: 0;">
 							<table class="table table-striped table-hover" id="task_table">
 								<thead>
 									<tr>
@@ -118,7 +96,10 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
-
+	
+    <script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
+	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script>
+	
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		// console.log("adminAccname:"+adminAccname);
@@ -137,10 +118,296 @@
 				enablekeyboard: false,
 	    }).resize()
 		});
+		/***************************/
+		var payinfoCreatetime;/*开始时间*/
+		var payinfoMotifytime;/***结束时间*****/
+		var payinfoStatus=999;/**订单状态**/
 		var totalRecord, currentPage, editid;
 		var count = 1;
-		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
+		$(".pinglun_from .selectpl").change(function(){
+			var reviewFromselect =$(this).val();
+			payinfoStatus=reviewFromselect;
+			console.log(payinfoStatus)
+		});
+		/*****************************************************/
+          		/**时间插件***/
+		var targetInput = $('.date-timepicker');
+		var date = new Date();
+			var minDatestar = moment()
+				.set({
+					'date': date.getDate(),
+					'hour': 0,
+					'minute': 0,
+					'second': 0
+				}).format('YYYY-MM-DD HH:mm:ss');
+			 payinfoCreatetime =minDatestar;
+			var maxDateend = moment()
+				.set({
+					'date': date.getDate(),
+					'hour': date.getHours(),
+					'minute': date.getMinutes(),
+					'second': date.getSeconds()
+				}).format('YYYY-MM-DD HH:mm:ss');
+			payinfoMotifytime =maxDateend;	
+			/***********************************************/
+			 				function initJs() {
+			 					targetInput.each(function (i, item) {
+			 						$(item).datePicker({
+			 							hasShortcut: true,
+			 							min: '2018-01-01 06:00:00',
+			 							max: maxDateend,
+			 							isRange: true,
+			 							shortcutOptions: [{
+			 							 name: '昨天',
+			 							 day: '-1,-1',
+			 							 time: '00:00:00,23:59:59'
+			 							},{
+			 							 name: '最近一周',
+			 							 day: '-7,0',
+			 							 time:'00:00:00,'
+			 							}, {
+			 							 name: '最近一个月',
+			 							 day: '-30,0',
+			 							 time: '00:00:00,'
+			 							}, {
+			 							 name: '最近三个月',
+			 							 day: '-90, 0',
+			 							 time: '00:00:00,'
+			 							}],
+			 							hide: function (type) {
+											var changestar = this.$input.eq(0).val();
+											var changeEnd = this.$input.eq(1).val();
+											payinfoCreatetime=changestar;
+											payinfoMotifytime=changeEnd;
+			 							}
+			 						})
+			 					})
+			 				}
+			function initHtml() {
+				var $input = targetInput.find('input');
+				$input.eq(0).val(minDatestar);
+				$input.eq(1).val(maxDateend);
+			}
+			function  datePickerint(){
+				$('.J-datepicker').datePicker({
+				  hasShortcut:true,
+				  min:'2018-01-01 04:00:00',
+				  max:'2050-09-09 20:59:59',
+				  shortcutOptions:[{
+					name: '今天',
+					day: '0'
+				  }, {
+					name: '昨天',
+					day: '-1',
+					time: '00:00:00'
+				  }, {
+					name: '一周前',
+					day: '-7'
+				  }],
+				  hide:function(){
+					console.info(this)
+				  }
+				}); 
+			}
+			$(function () {
+				initHtml();
+				initJs();
+				 datePickerint()
+				
+			});
+/***************************************************************************************/
+console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+/****************************************************************************************/
+  		$(".btn_search").click(function(){
+  			console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+			to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+		})
+  		to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+  	function to_page(pn,payinfoStatus,payinfoCreatetime,payinfoMotifytime) {
+		      $.ajax({
+		        url: "${APP_PATH}/HighPayInfo/selectHighPayInfoListBySearch",
+				data:{
+					"pn": pn,
+					"payinfoStatus":payinfoStatus,
+					"payinfoCreatetime":payinfoCreatetime,
+					"payinfoMotifytime":payinfoMotifytime,
+				},
+		        type: "POST",
+		        success: function (result) {
+		            console.log(result)
+		          if (result.code == 100) {
+					  var task = result.extend.pageInfo.list;
+					   console.log(task.length)
+					 if(task.length==0){
+						  // alert("没有查到")
+						  $("#allreview").hide();
+						  $("#wei_num").show();
+					  }else{
+						   $("#wei_num").hide();
+						    $("#allreview").show();
+					  }
+					 
+					//1、解析并显示员工数据
+					build_task_table(result);
+					//2、解析并显示分页信息
+					build_page_info(result);
+					//3、解析显示分页条数据
+					build_page_nav(result);
+		          } else {
+		            alert("联系管理员");
+		          }
+		        }
+		      });
+		    }
+  	/***分页代码***********/
+       		function build_task_table(result) {
+			// console.log(result)
+			//清空table表格
+			$("#task_table tbody").empty();
+			var task = result.extend.pageInfo.list;
+			// console.log(task);
+			$.each(task, function (index, item) {
+				var payinfoId = $("<td></td>").append(item.payinfoId);
+				
+				// console.log(payinfoStatuscd);
+				var payinfoOid = $("<td></td>").append(item.payinfoOid);
+				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
+				var payinfoMoney = $("<td></td>").append(parseFloat(item.payinfoMoney));
+				if(item.payinfoStatus ===0){
+					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');//红
+				}else if(item.payinfoStatus ===1){
+					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');//黄
+				}else if(item.payinfoStatus ===2){
+					var payinfoStatus = $("<td class='ysh_bg'></td>").append('<b>已审核</b>');//绿
+				}else if(item.payinfoStatus ===3){
+					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
+				}else if(item.payinfoStatus ===4){
+					var payinfoStatus = $("<td class='ytk_bg'></td>").append('<b>已退款</b>');//灰
+				}
+				
+				// console.log(payinfoStatuscd)/**/
+				var payinfoPlateNum = $("<td></td>").append(item.payinfoPlateNum);
+				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);
+				var payinfoMotifytime = $("<td></td>").append(item.payinfoMotifytime);
+				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs view_btn")
+					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
+				//为编辑按钮添加一个分类id
+				editBtn.attr("view-id", item.payinfoId);
+				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
+					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
+				//为删除按钮添加一个分类id
+				delBtn.attr("del-id", item.payinfoId);
+				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
+				//append方法执行完成以后还是返回原来的元素
+				$("<tr></tr>").append(payinfoId)
+					.append(payinfoOid)
+					.append(payinfoPlatform)
+					.append(payinfoMoney)
+					.append(payinfoStatus)
+					.append(payinfoPlateNum)
+					.append(payinfoCreatetime)
+					.append(payinfoMotifytime)
+					.append(btnTd)
+					.appendTo("#task_table tbody");
+			});
+		}
+		//解析显示分页信息
+		function build_page_info(result) {
+			$("#page_info_area").empty();
+			$("#page_info_area").append("当前" + result.extend.pageInfo.pageNum + "页,总" +
+				result.extend.pageInfo.pages + "页,总" +
+				result.extend.pageInfo.total + "条记录");
+			totalRecord = result.extend.pageInfo.total;
+			currentPage = result.extend.pageInfo.pageNum;
+		}
+		//解析显示分页条，点击分页要能去下一页....
+		function build_page_nav(result) {
+			//page_nav_area
+			$("#page_nav_area").empty();
+			var ul = $("<ul></ul>").addClass("pagination");
 
+			//构建元素
+			var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+			var prePageLi = $("<li></li>").append($("<a></a>").append("&laquo;"));
+			if (result.extend.pageInfo.hasPreviousPage == false) {
+				firstPageLi.addClass("disabled");
+				prePageLi.addClass("disabled");
+			} else {
+				//为元素添加点击翻页的事件
+				firstPageLi.click(function () {
+//					to_page(1);
+					to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+				});
+				prePageLi.click(function () {
+//					to_page(result.extend.pageInfo.pageNum - 1);
+                    to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+				});
+			}
+
+			var nextPageLi = $("<li></li>").append($("<a></a>").append("&raquo;"));
+			var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+			if (result.extend.pageInfo.hasNextPage == false) {
+				nextPageLi.addClass("disabled");
+				lastPageLi.addClass("disabled");
+			} else {
+				nextPageLi.click(function () {
+                     to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+				});
+				lastPageLi.click(function () {
+                    to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+				});
+			}
+
+			//添加首页和前一页 的提示
+			ul.append(firstPageLi).append(prePageLi);
+			//1,2，3遍历给ul中添加页码提示
+			$.each(result.extend.pageInfo.navigatepageNums, function (index, item) {
+
+				var numLi = $("<li></li>").append($("<a></a>").append(item));
+				if (result.extend.pageInfo.pageNum == item) {
+					numLi.addClass("active");
+				}
+				numLi.click(function () {
+                    to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+				});
+				ul.append(numLi);
+			});
+			//添加下一页和末页 的提示
+			ul.append(nextPageLi).append(lastPageLi);
+
+			//把ul加入到nav
+			var navEle = $("<nav></nav>").append(ul);
+			navEle.appendTo("#page_nav_area");
+		}
+		//新建任務
+		$('#task_add_modal_btn').click(function () {
+			// 获取分类页面模板
+			loadTpl();
+		});
+		//新建/编辑任務提交按钮
+		$(document).on('click', '#tasksubmit', function () {
+			var data = $('form').serializeArray();
+			// console.log(data)
+			data = data.reduce(function (obj, item) {
+				obj[item.name] = item.value;
+				return obj
+			}, {});
+			data.payinfoStatus = $(":input[name='payinfoStatus']").val();
+			// console.log(data);
+			$.ajax({
+				url: "${APP_PATH}/MlfrontPayInfo/save",
+				data: JSON.stringify(data),
+				dataType: "json",
+				contentType: 'application/json',
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						alert('新建/编辑成功！');
+						window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+					}
+				}
+			});
+		});
 
 
 

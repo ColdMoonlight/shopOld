@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.bean.DownPayIFDate;
 import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlbackAddOrderViewDetail;
 import com.atguigu.bean.MlbackAddPayinfoViewDetail;
@@ -30,6 +31,7 @@ import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.atguigu.service.DownPayIFDateService;
 import com.atguigu.service.MlPaypalShipAddressService;
 import com.atguigu.service.MlbackAddOrderViewDetailService;
 import com.atguigu.service.MlbackAddPayinfoViewDetailService;
@@ -49,32 +51,9 @@ public class HighPayInfoController {
 	@Autowired
 	MlfrontPayInfoService mlfrontPayInfoService;
 	
-	@Autowired
-	MlfrontOrderService mlfrontOrderService;
 	
 	@Autowired
-	MlfrontOrderItemService mlfrontOrderItemService;
-	
-	@Autowired
-	MlfrontUserService mlfrontUserService;
-	
-	@Autowired
-	MlbackAreafreightService mlbackAreafreightService;
-	
-	@Autowired
-	MlfrontAddressService mlfrontAddressService;
-	
-	@Autowired
-	MlbackAdminService mlbackAdminService;
-	
-	@Autowired
-	MlPaypalShipAddressService mlPaypalShipAddressService;
-	
-	@Autowired
-	MlbackAddPayinfoViewDetailService mlbackAddPayinfoViewDetailService;
-	
-	@Autowired
-	MlbackAddOrderViewDetailService mlbackAddOrderViewDetailService;
+	DownPayIFDateService downPayIFDateService;
 	
 	/**
 	 * 1.0	UseNow	0505
@@ -133,6 +112,39 @@ public class HighPayInfoController {
 	 * String payinfoMotifytime;
 	 * @return
 	 */
+//	@RequestMapping(value="/selectHighPayInfoListBySearch",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Msg selectHighPayInfoListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+//			@RequestParam(value = "payinfoStatus") Integer payinfoStatus,
+//			@RequestParam(value = "payinfoCreatetime") String payinfoCreatetime,
+//			@RequestParam(value = "payinfoMotifytime") String payinfoMotifytime,
+//			HttpSession session) {
+//		
+//		//初始化请求参数
+//		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+//		//初始化请求参数
+//		if(payinfoStatus!=9999){
+//			mlfrontPayInfoReq.setPayinfoStatus(payinfoStatus);
+//		}
+//		mlfrontPayInfoReq.setPayinfoCreatetime(payinfoCreatetime);
+//		mlfrontPayInfoReq.setPayinfoMotifytime(payinfoMotifytime);
+//		int PagNum = 20;
+//		PageHelper.startPage(pn, PagNum);
+//		List<MlfrontPayInfo> mlfrontPayInfoList = mlfrontPayInfoService.selectHighPayInfoListBySearch(mlfrontPayInfoReq);
+//		
+//		PageInfo page = new PageInfo(mlfrontPayInfoList, PagNum);
+//		return Msg.success().add("pageInfo", page);
+//		
+//	}
+	
+	/**11.0	useOn	0505
+	 * 分类MlfrontReview列表分页list数据
+	 * @param pn,
+	 * Integer payinfoStatus;
+	 * String payinfoCreatetime;
+	 * String payinfoMotifytime;
+	 * @return
+	 */
 	@RequestMapping(value="/selectHighPayInfoListBySearch",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg selectHighPayInfoListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
@@ -153,8 +165,15 @@ public class HighPayInfoController {
 		PageHelper.startPage(pn, PagNum);
 		List<MlfrontPayInfo> mlfrontPayInfoList = mlfrontPayInfoService.selectHighPayInfoListBySearch(mlfrontPayInfoReq);
 		
+		DownPayIFDate downPayIFDateReq = new DownPayIFDate();
+		
+		downPayIFDateReq.setPayinfoCreatetime(payinfoCreatetime);
+		downPayIFDateReq.setPayinfoMotifytime(payinfoMotifytime);
+		
+		List<DownPayIFDate> highPayIFList= downPayIFDateService.selectHighPayIFList(downPayIFDateReq);
+		
 		PageInfo page = new PageInfo(mlfrontPayInfoList, PagNum);
-		return Msg.success().add("pageInfo", page);
+		return Msg.success().add("pageInfo", page).add("highPayIFList", highPayIFList);
 		
 	}
 	
