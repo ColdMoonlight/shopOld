@@ -68,11 +68,7 @@
 			</div>
 		</div>
 		<div class="narrow clearfix" id="hot-two"></div>
-    <div class="banner">
-		<div class="coupon_cont2">
-			
-		</div>
-    </div>
+		<div class="coupon_cont2"></div>
     <div id="countdown-area"> </div>
     <div class="actionhot clearfix" id="hot-product"></div>
     <div class="banner_fl_1"></div>
@@ -610,6 +606,7 @@
 						  var html = '';
 						  for (var i = 0; i < data.length; i += 1) {
 							   var slideIfinto_click = data[i].slideIfinto;
+							   	var slideIfproORcateORpage =data[i].slideIfproORcateORpage;
 							  if(slideIfinto_click==0){
 								  html += '<div class="banner">' +
 								  '<a href="javascript:;">' +
@@ -617,13 +614,20 @@
 								  '</a>' +
 								  '</div>';
 							  }else{
-								  html += '<div class="banner">' +
-								  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +
-								  '<img src="' + data[i].slideWapimgurl + '" alt="">' +
-								  '</a>' +
-								  '</div>';
-							  }
-							  
+						           if(slideIfproORcateORpage==0){
+													  	 html += '<div class="banner">' +
+																			  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html">' +'<img src="' + data[i].slideWapimgurl + '" alt="">' +	'</a>' +
+																			  '</div>';
+												  }else if(slideIfproORcateORpage==1){
+													  html += '<div class="banner">' +
+													   '<a href="${APP_PATH}/search/' + data[i].slideCateSeoname + '.html">' +'<img src="' + data[i].slideWapimgurl + '" alt="">' +	'</a>' +
+													  	'</div>';
+												  }else if(slideIfproORcateORpage==2){
+													  html += '<div class="banner">' +
+													   '<a href="${APP_PATH}/' + data[i].slidePageSeoname + '.html">' +'<img src="' + data[i].slideWapimgurl + '" alt="">' +	'</a>' +
+													  	'</div>';
+												  }
+								}
 							
 						  }
 						  parent.html(html);
