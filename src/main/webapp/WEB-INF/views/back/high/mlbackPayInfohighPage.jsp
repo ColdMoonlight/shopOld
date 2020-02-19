@@ -260,6 +260,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		      });
 		    }
   	/***分页代码***********/
+  	
        		function build_task_table(result) {
 			// console.log(result)
 			//清空table表格
