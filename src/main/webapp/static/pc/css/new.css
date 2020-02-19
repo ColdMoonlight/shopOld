@@ -456,8 +456,8 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 /*****************************/
 .coupon_cont2{width: 100%; height: auto;margin: 0 0 1%;}
 .coupon_cont2 .coupon_ban{width: 100%;}
-.coupon_cont2 .coupon_ban img{width: 100%;}
-.coupon_cont2 .coupon_ban a{display: block; margin: 0 5%;}
+.coupon_cont2 img{width: 100%;}
+.coupon_cont2 a{display: block; margin: 0 5%;}
 .morelink{display: block;height: 360px;font-size:30px; transform: scale(.96); background:#000; color: #fff;font-weight: 600;}
 .morelink span{width: 100%; display: block; text-align: center;margin: 100px 0 50px; float: left;}
 .morelink em{width: 100%; display: block; text-align: center;font-style: normal;float: left;}
@@ -751,7 +751,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .narrow{width: 100%; height: auto; margin: 0 auto;}
 .narrow_cont{width: auto; height: auto; margin: 0 auto;}
 .narrow_cont a{display: inline-block;width: 50%; padding:1%;float: left;}
-.narrow_cont a img{max-width: 100%;}
+.narrow_cont a img{width: 100%;}
 /*************/
 .actionhot{width: 100%; height: auto; margin: 0 auto;}
 .actionhot_cont{width: 100%; height: auto;}
@@ -759,8 +759,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .actionhot_cont ul li{width:25%;float: left;margin: 0 0 2%; padding: 0 1%;}
 /*.actionhot_cont ul li:nth-of-type(odd){padding: 0 1% 0 0;}*/
 /*.actionhot_cont ul li:nth-of-type(even){padding:0 0 0 1%}*/
-.actionhot_cont ul li a img{max-width: 100%;}
-
+.actionhot_cont ul li a img{width: 100%;}
 /********/
 .hot_index_product{ width: 98%; height:auto;padding: 10px 1%; margin:0 auto}
 .new_index_product{ width: 98%; height:auto;padding: 10px 1%; margin:0 auto}
@@ -776,13 +775,15 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .newbtn_prev{left: 30px;background: url(../../pc/img/left.png) no-repeat;}
 .newbtn_next{right: 30px;background: url(../../pc/img/right.png) no-repeat;}
 .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{opacity:0; background:none;}
+.product-img{height: auto;}
+
 
 
 
 .grid{width:96%; height: auto;margin: 0 2% 20px;}
 .grid_cont{width: 100%; height: auto; text-align: center;}
 .grid_cont a{width:48%;margin: 0 1%; display: inline-block;float: left; text-align: center;}
-.grid_cont a img{max-width:100%; margin: 0 auto;display: inline-block;}
+.grid_cont a img{width:100%; margin: 0 auto;display: inline-block;}
 .banner_fl_1,.banner_fl_2,.banner_fl_3{width: 96%;margin: 0 3%;}
 .bannerpic{width: 100%;}
 .bannerpic img{display: block; margin: 0 auto; max-width: 100%;}
