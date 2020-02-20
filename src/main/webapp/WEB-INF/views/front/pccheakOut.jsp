@@ -891,10 +891,10 @@
 						<li class="list-group-item">
 							<div class="group-title"><span>Choose Coupons</span> <!-- <span class="price-info"></span> --><!-- <iclass="icon right"></i> --></div>
 							<div class="sale_copen">
-								<p> Happy Chinese New Year! 2020 To Be Better Woman! </p>
+								<p> Happy Valentine's Day! Megalook Hair For Your Lover! </p>
 								<ul>
-								  <li>Extra<span>10%</span> off No Limit with code: <b>SF10</b></li>
-								  <li>Extra<span>13%</span> off upon order $180 with code: <b>SF13</b></li>
+								  <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li>
+								  <li>Extra<span>15%</span> off upon order $199 with code: <b>VA15</b></li>
 								</ul>
 							</div>
 							<div class="group-details coupons"></div>
