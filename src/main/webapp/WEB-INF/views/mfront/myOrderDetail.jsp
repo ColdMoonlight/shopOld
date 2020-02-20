@@ -66,9 +66,10 @@ param:　orderId
 			console.log(data)
 			var resDataAddress = data.extend.addressInfo;
 			var resDataOrder = data.extend.mlfrontOrderOne;
+			var resDataAfterMoney = data.extend.areafreightMoney;
 			var resDataOrderItem = data.extend.mlfrontOrderItemList;
 			renderAddressDetail($('.address'), resDataAddress);
-			renderContainer(containerBox, [resDataOrder], resDataOrderItem);
+			renderContainer(containerBox, [resDataOrder], resDataOrderItem,resDataAfterMoney);
 			renderOrderinfo($('.order-data .body'), resDataOrder);
 		}
 	});
@@ -108,7 +109,7 @@ param:　orderId
 		}
 	}
 
-	function renderContainer(parent, data, orderItemList) {
+	function renderContainer(parent, data, orderItemList,resDataAfterMoney) {
 		var map = orderMap(orderItemList);
 		//console.log(map);
 		var html = '';
@@ -137,9 +138,9 @@ param:　orderId
 				}
 				html += '</div>' +
 					'<div class="order-item-footer">' +
-					'<div class="order-i-i"><span>Total Amount</span><span>$ ' + (parseFloat(data[key].orderMoney) + parseFloat(data[key]
-						.orderCouponPrice)) + '<span></div>' +
+					'<div class="order-i-i"><span>Total Amount</span><span>$ ' + (parseFloat(data[key].orderMoney) + parseFloat(data[key].orderCouponPrice)-(parseFloat(resDataAfterMoney))) + '<span></div>' +
 					'<div class="order-i-i"><span>Coupon</span><span>-$ ' + data[key].orderCouponPrice + '<span></div>' +
+					'<div class="order-i-i"><span>shop</span><span>' + resDataAfterMoney + '<span></div>' +
 					'<div class="order-i-i"><span>Actual payment</span><span>$ ' + data[key].orderMoney + '<span></div>' +
 					'</div>' +
 					'</div>';
