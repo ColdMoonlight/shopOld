@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.DownPayEcppDateMapper">
+  <resultMap id="DownPayEcppResultMap" type="com.atguigu.bean.DownPayEcppDate">
+    <id column="payInfo_id" jdbcType="INTEGER" property="payinfoId" />
+    <result column="payInfo_createTime" jdbcType="VARCHAR" property="payinfoCreatetime" />
+    <result column="payInfo_plateNum" jdbcType="VARCHAR" property="payinfoPlateNum" />
+    <result column="payInfo_money" jdbcType="DECIMAL" property="payinfoMoney" />
+    <result column="payInfo_oid" jdbcType="INTEGER" property="payinfoOid" />
+    <result column="payInfo_status" jdbcType="INTEGER" property="payinfoStatus" />
+    <result column="payInfo_motifyTime" jdbcType="VARCHAR" property="payinfoMotifytime" />
+    <association property="mlfrontAddress" column="address_id" javaType="com.atguigu.bean.MlfrontAddress">
+    	<id column="address_id" jdbcType="INTEGER" property="addressId" />
+    	<result column="address_email" jdbcType="VARCHAR" property="addressEmail" />
+    	<result column="address_userFirstName" jdbcType="VARCHAR" property="addressUserfirstname" />
+    	<result column="address_userLastName" jdbcType="VARCHAR" property="addressUserlastname" />
+    	<result column="address_email" jdbcType="VARCHAR" property="addressEmail" />
+    	<result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    	<result column="address_province" jdbcType="VARCHAR" property="addressProvince" />
+    	<result column="address_city" jdbcType="VARCHAR" property="addressCity" />
+    	<result column="address_post" jdbcType="VARCHAR" property="addressPost" />
+    	<result column="address_countryAll" jdbcType="VARCHAR" property="addressCountryAll" />
+    	<result column="address_country" jdbcType="VARCHAR" property="addressCountry" />
+    	<result column="address_telephone" jdbcType="VARCHAR" property="addressTelephone" />
+    </association>
+    <association property="mlfrontOrderItem" column="orderItem_id" javaType="com.atguigu.bean.MlfrontOrderItem">
+    	<id column="orderItem_id" jdbcType="INTEGER" property="orderitemId" />
+    	<result column="order_id" jdbcType="INTEGER" property="orderId" />
+    	<result column="orderItem_pSku_nameStr" jdbcType="VARCHAR" property="orderitemPskuNamestr" />
+    	<result column="orderItem_pSku_number" jdbcType="INTEGER" property="orderitemPskuNumber" />
+    	<result column="orderItem_pid" jdbcType="INTEGER" property="orderitemPid" />
+    </association>
+    <association property="mlbackProduct" column="product_id" javaType="com.atguigu.bean.MlbackProduct">
+	    <id column="product_id" jdbcType="INTEGER" property="productId" />
+	    <result column="product_seo" jdbcType="VARCHAR" property="productSeo" />
+    </association>
+    <association property="mlfrontOrder" column="order_id" javaType="com.atguigu.bean.MlfrontOrder">
+    	<id column="order_id" jdbcType="INTEGER" property="orderId" />
+    	<result column="addressinfo_id" jdbcType="INTEGER" property="addressinfoId" />
+    	<result column="order_buy_mess" jdbcType="VARCHAR" property="orderBuyMess" />
+    </association>
+  </resultMap>
+  
+  <!-- selectAll使用中 -->
+  <select id="selectHighPayEcppList" parameterType="com.atguigu.bean.DownPayEcppDate" resultMap="DownPayEcppResultMap">
+   	SELECT tpay.payInfo_id, tpay.payInfo_createTime, tpay.payInfo_status,tpay.payInfo_plateNum,taddress.address_userFirstName,taddress.address_userLastName,
+	taddress.address_email,taddress.address_detail,taddress.address_province,taddress.address_city,taddress.address_post, taddress.address_countryAll,taddress.address_country,taddress.address_telephone,
+	torderitem.orderItem_pSku_nameStr,tpro.product_seo,torderitem.orderItem_pSku_number,tpay.payInfo_money,torder.order_buy_mess
+	from 
+	tb_mlfront_payinfo as tpay,tb_mlfront_order as torder, tb_mlfront_orderitem as torderitem, tb_mlfront_address as taddress ,tb_mlback_product as tpro
+	WHERE tpay.payInfo_createTime BETWEEN #{payinfoCreatetime,jdbcType=VARCHAR} and #{payinfoMotifytime,jdbcType=VARCHAR}
+    <if test="payinfoStatus != null">
+     AND tpay.payInfo_status = #{payinfoStatus,jdbcType=INTEGER}
+    </if>
+      AND taddress.address_id = torder.addressinfo_id AND torder.order_id = tpay.payInfo_oid AND torder.order_id = torderitem.order_id AND torderitem.orderItem_pid = tpro.product_id
+	ORDER BY tpay.payInfo_createTime
+  </select>
+  
+</mapper>

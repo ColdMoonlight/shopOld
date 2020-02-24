@@ -19,9 +19,7 @@
     </association>
   </resultMap>
   
-  
-  
-  <!-- selectAll使用中 -->
+  <!-- selectHighPayIFList使用中 -->
   <select id="selectHighPayIFList" parameterType="com.atguigu.bean.DownPayIFDate" resultMap="DownPayIFResultMap">
     SELECT 
 	tpay.payInfo_id,tpay.payInfo_oid,tpay.payInfo_money,tpay.payInfo_status,
@@ -31,17 +29,11 @@
 	tb_mlfront_payinfo as tpay,
 	tb_mlfront_order as torder,
 	tb_mlfront_address as taddress 
-	WHERE tpay.payInfo_createTime BETWEEN #{payinfoCreatetime,jdbcType=VARCHAR} and #{payinfoMotifytime,jdbcType=VARCHAR} AND taddress.address_id = torder.addressinfo_id AND torder.order_id = tpay.payInfo_oid
-  </select>
-  
-  <!-- selectHighPayInfoListBySearch使用中
-  <select id="selectHighPayInfoListBySearch" parameterType="com.atguigu.bean.MlfrontPayInfo" resultMap="BaseResultMap">
-  	select * from tb_mlfront_payinfo where
-   	payInfo_createTime between #{payinfoCreatetime,jdbcType=VARCHAR} and #{payinfoMotifytime,jdbcType=VARCHAR} 
-    <if test="payinfoStatus != null">
-      and payInfo_status = #{payinfoStatus,jdbcType=INTEGER}
+	WHERE tpay.payInfo_createTime BETWEEN #{payinfoCreatetime,jdbcType=VARCHAR} and #{payinfoMotifytime,jdbcType=VARCHAR}
+	<if test="payinfoStatus != null">
+     AND tpay.payInfo_status = #{payinfoStatus,jdbcType=INTEGER}
     </if>
-    order by payInfo_id desc
-  </select> -->
+	 AND taddress.address_id = torder.addressinfo_id AND torder.order_id = tpay.payInfo_oid
+  </select>
   
 </mapper>
