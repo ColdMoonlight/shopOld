@@ -286,8 +286,8 @@ public class HighPayInfoController {
 	        row.createCell(0).setCellValue(i+1);
 	        row.createCell(1).setCellValue(downPayEcppDateOne.getPayinfoId());
 	        row.createCell(2).setCellValue(downPayEcppDateOne.getPayinfoCreatetime());
-	        row.createCell(4).setCellValue(downPayEcppDateOne.getPayinfoPlateNum());
-	        row.createCell(3).setCellValue(downPayEcppDateOne.getPayinfoStatus()+"");
+	        row.createCell(3).setCellValue(downPayEcppDateOne.getPayinfoPlateNum());
+	        row.createCell(4).setCellValue(downPayEcppDateOne.getPayinfoStatus()+"");
 	        row.createCell(5).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressUserfirstname());
 	        row.createCell(6).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressUserlastname());
 	        row.createCell(7).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressEmail());
