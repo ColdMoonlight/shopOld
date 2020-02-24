@@ -88,11 +88,14 @@
 							<div class="col-md-6 col-sm-6" id="page_nav_area"></div>
 						</div>
 					</div>
+					<div class="table-box box_new_review nicescroll">
+						
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+    <div class="maskbg"></div>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
@@ -445,6 +448,8 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		// 查看订单详情
 		$("#task_table").on("click", ".view_btn", function () {
 			// load tpl
+			$(".maskbg").show();
+			$(".box_new_review").addClass("active")
 			loadTpl($(this).attr('view-id'));
 		});
 		var orderId;
@@ -453,7 +458,11 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		var payinfoStatus;
 		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
-			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
+			$('.box_new_review').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
+				$(".closeaddreview").click(function(){
+					$(".box_new_review").removeClass("active")
+					$(".maskbg").hide();
+				})
 				// fetch data
 				var reqData = {
 					"payinfoId": payid
@@ -576,7 +585,29 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 				
 			});
 		}
-
+/******/
+		// 删除该条（id）评论信息
+//		$("#task_table").on("click", ".btn-danger", function () {
+//			var data = {
+//				reviewId: $(this).attr('del-id')
+//			};
+//			console.log(data)
+//			$.ajax({
+//				url: "${APP_PATH}/MlfrontReview/delete",
+//				data: JSON.stringify(data),
+//				dataType: "json",
+//				contentType: 'application/json',
+//				type: "post",
+//				success: function (result) {
+//					if (result.code == 100) {
+//						alert('删除成功！');
+//						window.location.href = window.location.href;
+//						to_page(1);
+//					}
+//				}
+//			});
+//		});
+		/**************************/
 		function renderBuyerInfo(data) {
 			var strdetails = "";
 			var html = '';
