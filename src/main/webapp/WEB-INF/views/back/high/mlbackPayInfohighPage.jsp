@@ -29,7 +29,6 @@
 					<h2>付款页面列表</h2>
 					    <button type="button" id="downPayinfoDate">下载查账数据</button>
           				<button type="button" id="downEcppDate">下载ecpp数据</button>
-          				<button type="button" id="downPayiFailDate">下载弃购数据</button>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
@@ -221,6 +220,15 @@
 /***************************************************************************************/
 console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
 /****************************************************************************************/
+  		$("#downPayinfoDate").click(function(){
+  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoIF?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime;
+  		})
+  		
+  		$("#downEcppDate").click(function(){
+  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoEcpp?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime;
+  		})
   		$(".btn_search").click(function(){
   			console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
 			to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
