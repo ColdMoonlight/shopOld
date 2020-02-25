@@ -441,7 +441,7 @@
     from tb_mlback_product order by product_id desc
   </select>
   <!-- insert使用中 -->
-  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackProduct">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="productId"  parameterType="com.atguigu.bean.MlbackProduct">
     insert into tb_mlback_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="productId != null">

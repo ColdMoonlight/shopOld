@@ -312,7 +312,7 @@
   </select>
   
   <!-- 使用中 -->
-  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackCategory">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="categoryId" parameterType="com.atguigu.bean.MlbackCategory">
     insert into tb_mlback_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="categoryId != null">
