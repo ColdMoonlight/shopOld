@@ -142,10 +142,19 @@
 					actshowproActStr = '第4活动';
 				} else if (item.actshowproActnum == 5) {
 					actshowproActStr = '第5活动';
-				} else if (item.actshowproActnum == 99) {
-					actshowproActStr = '第99活动';
-				};
+				}else if (item.actshowproActnum == 6) {
+		          actshowproActStr = '第6-首页中间adv_two';
+		        } else if (item.actshowproActnum == 7) {
+		          actshowproActStr = '第7-首页adv_four';
+		        } else if (item.actshowproActnum == 8) {
+		          actshowproActStr = '第8-首banner下边_adv';
+		        }else if (item.actshowproActnum == 99) {
+		          actshowproActStr = '第99活动';
+		        };
 				
+				
+				
+
 				var actshowproId = $("<td></td>").append(item.actshowproId);
 				var actshowproName = $("<td></td>").append(item.actshowproName);
 				var actshowproActnum = $("<td></td>").append(actshowproActStr);

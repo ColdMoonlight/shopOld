@@ -171,6 +171,15 @@
         </div>
       </li>
     </ul>
+    <ul class="children">
+      <li>
+        <div class="item">
+          <a href="${APP_PATH }/MlfrontPayInfo/toMlbackPayInfohighList">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">Pay高级管理</span></a>
+        </div>
+      </li>
+    </ul>
   </li>
   <li>
     <div class="item">
