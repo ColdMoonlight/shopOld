@@ -267,6 +267,51 @@ a:focus {
 	
 } */
 
+/* follow-us */
+.follow-us {
+  width:100%;
+  background: #000;
+}
+.follow-us h3 {
+  padding-top: 18px;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 16px;
+  color: #fff;
+}
+.follow-us-list {
+  padding: 18px 0;
+  text-align: center;
+}
+.follow-us .follow-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 0 6px;
+}
+.follow-us .follow-icon>a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.follow-us .follow-icon.facebook {
+  background-image: url(../../common/img/facebook.png);
+}
+.follow-us .follow-icon.instagram {
+  background-image: url(../../common/img/instagram.png);
+}
+.follow-us .follow-icon.pinterest {
+  background-image: url(../../common/img/pinterest.png);
+}
+.follow-us .follow-icon.snapchat {
+  background-image: url(../../common/img/snapchat.png);
+}
+.follow-us .follow-icon.youtube {
+  background-image: url(../../common/img/youtube.png);
+}
+
 .footer .nav a {
 	color: #fff;
 }

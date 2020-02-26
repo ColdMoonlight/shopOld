@@ -10,6 +10,11 @@ https://www.klaiyihair.com/
 https://www.unice.com/
 ```
 
+## 网站测速工具
+
+* [` pc `](https://developers.google.com/speed/pagespeed/insights/)
+* [` mobile `](https://www.thinkwithgoogle.com/feature/testmysite)
+
 
 ## 工作进度
 
