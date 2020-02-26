@@ -435,7 +435,7 @@ public class MlfrontCartController {
 					String[] aa = cartitemIdStr.split(",");
 					number=aa.length;
 				}
-				System.out.println(number);
+				//System.out.println(number);
 			}else{
 				number = 0;
 			}
@@ -450,7 +450,7 @@ public class MlfrontCartController {
 					String[] aa = cartitemIdStr.split(",");
 					number=aa.length;
 				}
-				System.out.println(number);
+				//System.out.println(number);
 			}else{
 				number = 0;
 			}
@@ -530,7 +530,7 @@ public class MlfrontCartController {
 		//计算cart到boynow的加购次数
 		calcFormCartListToCheakoutPage(mlfrontCartItemList,session);
 		//接收传递进来的参数
-		System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
+		//System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
 		//从其中一个中获取cartId
 		Integer cartId = 0;
 		String sessionId = session.getId();
@@ -1167,7 +1167,7 @@ public class MlfrontCartController {
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
-				System.out.println(mlfrontCartItem);
+				//System.out.println(mlfrontCartItem);
 				mlfrontCartItemListBuyNow.add(mlfrontCartItem);
 			}
 			//loginUser加购已完毕,准备生成订单	

@@ -168,11 +168,8 @@
   </update>
   
   <!-- insert使用中 -->
-  <insert id="insertSelective" parameterType="com.atguigu.bean.MlfrontCart">
+  <insert id="insertSelective"  keyProperty="cartId" useGeneratedKeys="true" parameterType="com.atguigu.bean.MlfrontCart">
   
-  	  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="cartId">
-          SELECT LAST_INSERT_ID()
-      </selectKey>
     insert into tb_mlfront_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cartId != null">
