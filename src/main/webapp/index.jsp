@@ -15,12 +15,11 @@
 -->
 <script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 
-
-
 </head>
 <body>
 
 <script>
+	// test it
 	//接口初始hua
 	  $(function() {
 		window.location.href="${APP_PATH}/index.html";
