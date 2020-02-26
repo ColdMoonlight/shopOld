@@ -19,7 +19,6 @@
 <body>
 
 <script>
-	// test it
 	//接口初始hua
 	  $(function() {
 		window.location.href="${APP_PATH}/index.html";
