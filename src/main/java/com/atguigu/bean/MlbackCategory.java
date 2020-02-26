@@ -172,5 +172,46 @@ public class MlbackCategory {
 	public void setCategoryProductNames(String categoryProductNames) {
 		this.categoryProductNames = categoryProductNames == null ? null : categoryProductNames.trim();
 	}
-    
+
+	public MlbackCategory(Integer categoryId, String categoryName, String categoryImgurl, String categoryImgPcurl,
+			Integer categoryParentId, String categoryParentName, Integer categoryStatus, Integer categoryLable,
+			String categorySeo, Integer categorySortOrder, Integer categoryAdminId, String categoryAdminOperatername,
+			Date categoryCreatetime, Date categoryMotifytime, String categoryDesc, String categoryProductIds,
+			String categoryProductNames) {
+		super();
+		this.categoryId = categoryId;
+		this.categoryName = categoryName;
+		this.categoryImgurl = categoryImgurl;
+		this.categoryImgPcurl = categoryImgPcurl;
+		this.categoryParentId = categoryParentId;
+		this.categoryParentName = categoryParentName;
+		this.categoryStatus = categoryStatus;
+		this.categoryLable = categoryLable;
+		this.categorySeo = categorySeo;
+		this.categorySortOrder = categorySortOrder;
+		this.categoryAdminId = categoryAdminId;
+		this.categoryAdminOperatername = categoryAdminOperatername;
+		this.categoryCreatetime = categoryCreatetime;
+		this.categoryMotifytime = categoryMotifytime;
+		this.categoryDesc = categoryDesc;
+		this.categoryProductIds = categoryProductIds;
+		this.categoryProductNames = categoryProductNames;
+	}
+
+	public MlbackCategory() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "MlbackCategory [categoryId=" + categoryId + ", categoryName=" + categoryName + ", categoryImgurl="
+				+ categoryImgurl + ", categoryImgPcurl=" + categoryImgPcurl + ", categoryParentId=" + categoryParentId
+				+ ", categoryParentName=" + categoryParentName + ", categoryStatus=" + categoryStatus
+				+ ", categoryLable=" + categoryLable + ", categorySeo=" + categorySeo + ", categorySortOrder="
+				+ categorySortOrder + ", categoryAdminId=" + categoryAdminId + ", categoryAdminOperatername="
+				+ categoryAdminOperatername + ", categoryCreatetime=" + categoryCreatetime + ", categoryMotifytime="
+				+ categoryMotifytime + ", categoryDesc=" + categoryDesc + ", categoryProductIds=" + categoryProductIds
+				+ ", categoryProductNames=" + categoryProductNames + "]";
+	}
+	
 }

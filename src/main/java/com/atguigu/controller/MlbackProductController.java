@@ -46,7 +46,7 @@ public class MlbackProductController {
 	MlbackProductViewDetailService mlbackProductViewDetailService;
 	
 	/**
-	 * 1.0	onuse	200103	check
+	 * 1.0	onuse	200225	check
 	 * to-Product-list页
 	 * @param jsp
 	 * @return 
@@ -224,7 +224,7 @@ public class MlbackProductController {
 		if(productId==null){
 			//无id，insert
 			mlbackProductService.insertSelective(mlbackProduct);
-			System.out.println("操作说明:管理员add产品信息mlbackProduct");
+			//System.out.println("操作说明:管理员add产品信息mlbackProduct");
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//先对这个产品选择的一些类，进行productIdStr的清理,
@@ -234,7 +234,7 @@ public class MlbackProductController {
 			UpdateCategoryProductIdStr(categoryIdsStr,productId,productName);
 			//更新本条product数据
 			mlbackProductService.updateByPrimaryKeySelective(mlbackProduct);
-			System.out.println("操作说明:管理员update产品信息mlbackProduct");
+			//System.out.println("操作说明:管理员update产品信息mlbackProduct");
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
@@ -436,8 +436,10 @@ public class MlbackProductController {
 		List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProduct(mlbackProductReq);
 		MlbackProduct mlbackProductOne = new MlbackProduct();
 		if(mlbackProductResList.size()>0){
+			//如果用这个id查到,就拿出来.
 			mlbackProductOne = mlbackProductResList.get(0);
 		}else{
+			//如果用这个id没查到,就取出当前所有产品最新上的那款.
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
@@ -460,8 +462,10 @@ public class MlbackProductController {
 		List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
 		MlbackProduct mlbackProductOne = new MlbackProduct();
 		if(mlbackProductResList.size()>0){
+			//如果用这个id查到,就拿出来.
 			mlbackProductOne = mlbackProductResList.get(0);
 		}else{
+			//如果用这个id没查到,就取出当前所有产品最新上的那款.
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
@@ -759,7 +763,7 @@ public class MlbackProductController {
 		page.setSize(size);
 		page.setStartRow(startRow);
 		page.setTotal(mlbackProductResList.size());
-		System.out.println(page);
+		//System.out.println(page);
 		return page;
 	}
 

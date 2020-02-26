@@ -234,10 +234,7 @@
   
   
   <!-- insert -->
-  <insert id="insertSelective"  parameterType="com.atguigu.bean.MlfrontCartItem">
-  	  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="cartitemId">
-          SELECT LAST_INSERT_ID()
-      </selectKey>
+  <insert id="insertSelective" keyProperty="cartitemId" useGeneratedKeys="true" parameterType="com.atguigu.bean.MlfrontCartItem">
     insert into tb_mlfront_cartitem
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cartitemId != null">

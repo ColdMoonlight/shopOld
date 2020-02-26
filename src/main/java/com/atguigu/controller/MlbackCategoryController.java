@@ -137,13 +137,14 @@ public class MlbackCategoryController {
 		mlbackCategory.setCategoryParentName(categoryParentName);
 		if(categoryId==null){
 			//无id，insert
-			int intResult = mlbackCategoryService.insertSelective(mlbackCategory);
-			System.out.println("后台操作:categoryId为null,走add+intResult:"+intResult);
+			//System.out.println("插入前"+mlbackCategory.toString());
+			mlbackCategoryService.insertSelective(mlbackCategory);
+			//System.out.println("插入后"+mlbackCategory.toString());
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackCategoryService.updateByPrimaryKeySelective(mlbackCategory);
-			System.out.println("后台操作:categoryId不为null,走update+intResult:"+intResult);
+			mlbackCategoryService.updateByPrimaryKeySelective(mlbackCategory);
+			//System.out.println("后台操作:categoryId不为null,走update+intResult:"+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
@@ -375,7 +376,7 @@ public class MlbackCategoryController {
 		
 		//查询全部的category信息
 		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMenuMlbackCategoryGetAll();
-		System.out.println("操作说明:客户查询-getCategorySuperMenu");
+		//System.out.println("操作说明:客户查询-getCategorySuperMenu");
 		
 		List<MlbackCategory> mlbackCategorydownFirst =new ArrayList<MlbackCategory>();
 		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
@@ -398,7 +399,7 @@ public class MlbackCategoryController {
 			
 			//查询该父id下的全部category信息
 			List<MlbackCategory> categoryNowSecondList = mlbackCategoryService.selectCategorylistByParam(mlbackCategorySecReq);
-			System.out.println("操作说明:客户查询-本二级的菜单完毕Category-菜单");
+			//System.out.println("操作说明:客户查询-本二级的菜单完毕Category-菜单");
 			
 			List<List<MlbackCategory>> mlbackCategoryfirstdownList =new ArrayList<List<MlbackCategory>>();
 			for(MlbackCategory categoryOne :categoryNowSecondList){
@@ -420,7 +421,7 @@ public class MlbackCategoryController {
 					mlbackCategoryfirstdownList.add(mlbackCategorydownEr);
 				}else{
 					mlbackCategoryfirstdownList.add(mlbackCategorydownEr);
-					System.out.println("该二级下没有三级分类");
+					//System.out.println("该二级下没有三级分类");
 				}
 			}
 			mlbackCategorySuperList.add(mlbackCategoryfirstdownList);
