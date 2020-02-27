@@ -2833,7 +2833,134 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .special-price .price{font-size: 18px; color:#fe186e;}
 .rightcont{width: 60%;float: left;} 
 
-
-
+/* lottery */
+.lottery {
+    position: relative;
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+    box-shadow: 0 0 8px #000;
+    border-radius: 12px;
+}
+.lottery-email {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    background-color: #00b3ff;
+}
+.lottery-email>h4 {
+    font-size: 14px;
+    color: #fff;
+}
+.lottery-email>input {
+    display: inline-block;
+    width: 210px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-style: none;
+    border-radius: 6px;
+}
+.lottery-game-box {
+    padding: 20px;
+    background-color: #fff;
+}
+.lottery-game {
+    width: 250px;
+    /* padding-top: 70px; */
+    padding-top: 80px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    background-color: #e7e7e7;
+    border-radius: 6px;;
+}
+.lottery-game-list,
+.lottery-startgame,
+.lottery-game-item {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+}
+.lottery-startgame {
+    position: relative;
+    z-index: 9999;
+    margin: 0 auto;
+    background-color: #008fd3;
+}
+.lottery-game-list {
+    position: relative;
+    top: -70px;
+    margin: 0 auto;
+}
+.lottery-startgame > .lottery-game-item {
+    box-sizing: border-box;
+    width: 100%;
+    height: 62px;
+    margin: 8px 0;
+    background-color: #00b3ff;
+    -webkit-transition: all .6s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.lottery-startgame.active > .lottery-game-item {
+    height: 70px;
+    padding-top: 10px;
+}
+.lottery-startgame > .lottery-game-item span {
+    display: inline-block;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+.lottery-startgame > .lottery-game-item span:first-of-type {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.lottery-startgame > .lottery-game-item span:last-of-type {
+    font-size: 16px;
+    font-weight: bolder
+}
+.lottery-game-list > .lottery-game-item {
+    position: absolute;
+    background-color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid transparent;
+}
+.lottery-game-list > .lottery-game-item.active {
+    border-color: red;
+    box-shadow: 0 0 6px red;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(1) {
+    top: -80px;
+    left: -80px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(2) {
+    top: -80px;
+    left: 0;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(3) {
+    top: -80px;
+    left: 80px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(4) {
+    top: 0;
+    left: 80px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(5) {
+    top: 80px;
+    left: 80px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(6) {
+    top: 80px;
+    left: 0;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(7) {
+    top: 80px;
+    left: -80px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(8) {
+    top: 0;
+    left: -80px;
+}
 
 
