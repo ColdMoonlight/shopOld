@@ -100,7 +100,7 @@
 	   <span class="close">×</span> 
 	   <%-- <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a> --%>
 	   <div class="lottery">
-        <<!-- div class="lottery-close">x</div> -->
+        <!-- div class="lottery-close">x</div> -->
         <div class="lottery-email">
             <h4>Enter your email to join the game！</h4>
             <input type="text" placeholder="Email address">

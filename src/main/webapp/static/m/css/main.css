@@ -2856,7 +2856,9 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
     display: inline-block;
     width: 210px;
     padding: 8px 12px;
+    margin-top: 12px;
     font-size: 14px;
+    background-color: #fff;
     border-style: none;
     border-radius: 6px;
 }
