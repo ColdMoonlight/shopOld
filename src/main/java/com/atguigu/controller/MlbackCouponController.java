@@ -229,4 +229,22 @@ public class MlbackCouponController {
 		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList);
 	}
 	
+	/**
+	 * 9.0	useOn	0505
+	 * 查询生效中得抽奖优惠券
+	 * @param MlbackCoupon
+	 * @return 
+	 */
+	@RequestMapping(value="/getMlbackCouponShowByLuckDrawType",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getMlbackCouponShowByLuckDrawType(HttpServletResponse rep,HttpServletRequest res){
+		
+		//接受信息
+		MlbackCoupon mlbackCouponReq = new MlbackCoupon();
+		mlbackCouponReq.setCouponLuckDrawType(1);
+		List<MlbackCoupon> mlbackCouponResList =mlbackCouponService.selectMlbackCouponByLuckDrawType(mlbackCouponReq);
+		
+		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList);
+	}
+	
 }

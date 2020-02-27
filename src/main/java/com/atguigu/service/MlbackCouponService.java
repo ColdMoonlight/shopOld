@@ -85,5 +85,17 @@ public class MlbackCouponService {
 		List<MlbackCoupon>  mlbackCouponList = mlbackCouponMapper.selectMlbackCouponBYAreaNum(mlbackCoupon);
 		return mlbackCouponList;
 	}
+	
+	/**
+	 * @author Shinelon
+	 * @param 
+	 * @exception 查询生效中得抽奖优惠券
+	 * 
+	 * */
+	public List<MlbackCoupon> selectMlbackCouponByLuckDrawType(MlbackCoupon mlbackCoupon) {
+		List<MlbackCoupon>  mlbackCouponList = mlbackCouponMapper.selectMlbackCouponByLuckDrawType(mlbackCoupon);
+		return mlbackCouponList;
+	}
+	
 
 }
