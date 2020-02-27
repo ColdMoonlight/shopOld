@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.Vo.LuckDrawDate;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlfrontUser;
@@ -25,6 +26,7 @@ import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCouponService;
 import com.atguigu.service.MlfrontUserService;
 import com.atguigu.utils.DateUtil;
+import com.atguigu.utils.LuckDrawUtils;
 
 @Controller
 @RequestMapping("/MlbackCoupon")
@@ -244,7 +246,18 @@ public class MlbackCouponController {
 		mlbackCouponReq.setCouponLuckDrawType(1);
 		List<MlbackCoupon> mlbackCouponResList =mlbackCouponService.selectMlbackCouponByLuckDrawType(mlbackCouponReq);
 		
-		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList);
+		LuckDrawDate luckDrawDate =new LuckDrawDate();
+		
+		try {
+			luckDrawDate = LuckDrawUtils.getLuckDrawDate(mlbackCouponResList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		//调用信息
+		
+		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList).add("luckDrawDate", luckDrawDate);
 	}
 	
 }
