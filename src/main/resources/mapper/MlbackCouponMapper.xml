@@ -10,6 +10,8 @@
     <result column="coupon_status" jdbcType="INTEGER" property="couponStatus" />
     <result column="coupon_code" jdbcType="VARCHAR" property="couponCode" />
     <result column="coupon_type" jdbcType="VARCHAR" property="couponType" />
+    <result column="coupon_luckdraw_type" jdbcType="INTEGER" property="couponLuckDrawType" />
+    <result column="coupon_luckdraw_weight" jdbcType="INTEGER" property="couponLuckDrawWeight" />
     <result column="coupon_times" jdbcType="INTEGER" property="couponTimes" />
     <result column="coupon_alltimes" jdbcType="INTEGER" property="couponAllTimes" />
     
@@ -85,7 +87,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    coupon_id, coupon_name, coupon_price, coupon_priceoff, coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes,
+    coupon_id, coupon_name, coupon_price, coupon_priceoff, coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_luckdraw_type, coupon_luckdraw_weight, coupon_times, coupon_alltimes,
     coupon_admin_id, coupon_admin_operatorName, coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackCouponExample" resultMap="BaseResultMap">
@@ -117,11 +119,11 @@
   </delete>
   <insert id="insert" parameterType="com.atguigu.bean.MlbackCoupon">
     insert into tb_mlback_coupon (coupon_id, coupon_name, coupon_price, coupon_priceoff, 
-      coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_times, coupon_alltimes, 
+      coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_luckdraw_type, coupon_luckdraw_weight, coupon_times, coupon_alltimes, 
       coupon_admin_id, coupon_admin_operatorName, 
       coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum)
     values (#{couponId,jdbcType=INTEGER}, #{couponName,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, #{couponPriceOff,jdbcType=DECIMAL},  
-      #{couponPriceBaseline,jdbcType=DECIMAL}, #{couponStatus,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, #{couponTimes,jdbcType=INTEGER}, #{couponAllTimes,jdbcType=INTEGER}, 
+      #{couponPriceBaseline,jdbcType=DECIMAL}, #{couponStatus,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, #{couponLuckDrawType,jdbcType=INTEGER}, #{couponLuckDrawWeight,jdbcType=INTEGER}, #{couponTimes,jdbcType=INTEGER}, #{couponAllTimes,jdbcType=INTEGER}, 
       #{couponAdminId,jdbcType=INTEGER}, #{couponAdminOperatorname,jdbcType=VARCHAR}, 
       #{couponCreatetime,jdbcType=VARCHAR}, #{couponMotifytime,jdbcType=VARCHAR}, #{couponStarttime,jdbcType=VARCHAR}, #{couponEndtime,jdbcType=VARCHAR}, 
       #{couponImgwapurl,jdbcType=VARCHAR}, #{couponImgpcurl,jdbcType=VARCHAR}, #{couponAreaNum,jdbcType=INTEGER})
@@ -159,6 +161,12 @@
       </if>
       <if test="record.couponType != null">
         coupon_type = #{record.couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponLuckDrawType != null">
+        coupon_luckdraw_type = #{record.couponLuckDrawType,jdbcType=INTEGER},
+      </if>
+      <if test="record.couponLuckDrawWeight != null">
+        coupon_luckdraw_weight = #{record.couponLuckDrawWeight,jdbcType=INTEGER},
       </if>
       <if test="record.couponTimes != null">
         coupon_times = #{record.couponTimes,jdbcType=INTEGER},
@@ -208,6 +216,8 @@
       coupon_status = #{record.couponStatus,jdbcType=INTEGER},
       coupon_code = #{record.couponCode,jdbcType=VARCHAR},
       coupon_type = #{record.couponType,jdbcType=VARCHAR},
+      coupon_luckdraw_type = #{record.couponLuckDrawType,jdbcType=INTEGER},
+      coupon_luckdraw_weight = #{record.couponLuckDrawWeight,jdbcType=INTEGER},
       coupon_times = #{record.couponTimes,jdbcType=INTEGER},
       coupon_alltimes = #{record.couponAllTimes,jdbcType=INTEGER},
       coupon_admin_id = #{record.couponAdminId,jdbcType=INTEGER},
@@ -233,6 +243,8 @@
       coupon_status = #{couponStatus,jdbcType=INTEGER},
       coupon_code = #{couponCode,jdbcType=VARCHAR},
       coupon_type = #{couponType,jdbcType=VARCHAR},
+      coupon_luckdraw_type = #{couponLuckDrawType,jdbcType=INTEGER},
+      coupon_luckdraw_weight = #{couponLuckDrawWeight,jdbcType=INTEGER},
       coupon_times = #{couponTimes,jdbcType=INTEGER},
       coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
       coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
@@ -275,6 +287,12 @@
       <if test="couponType != null">
         coupon_type,
       </if>
+      <if test="couponLuckDrawType != null">
+		coupon_luckdraw_type,
+	  </if>
+	  <if test="couponLuckDrawWeight != null">
+	    coupon_luckdraw_weight,
+	  </if>
       <if test="couponTimes != null">
         coupon_times,
       </if>
@@ -334,6 +352,12 @@
       <if test="couponType != null">
         #{couponType,jdbcType=VARCHAR},
       </if>
+      <if test="couponLuckDrawType != null">
+	    #{couponLuckDrawType,jdbcType=INTEGER},
+	  </if>
+	  <if test="couponLuckDrawWeight != null">
+	    #{couponLuckDrawWeight,jdbcType=INTEGER},
+	  </if>
       <if test="couponTimes != null">
         #{couponTimes,jdbcType=INTEGER},
       </if>
@@ -399,6 +423,12 @@
       <if test="couponType != null">
         coupon_type = #{couponType,jdbcType=VARCHAR},
       </if>
+      <if test="couponLuckDrawType != null">
+	    coupon_luckdraw_type = #{couponLuckDrawType,jdbcType=INTEGER},
+	  </if>
+	  <if test="couponLuckDrawWeight != null">
+	    coupon_luckdraw_weight = #{couponLuckDrawWeight,jdbcType=INTEGER},
+	  </if>
       <if test="couponTimes != null">
         coupon_times = #{couponTimes,jdbcType=INTEGER},
       </if>
@@ -461,6 +491,12 @@
       <if test="couponType != null">
         coupon_type = #{couponType,jdbcType=VARCHAR},
       </if>
+      <if test="couponLuckDrawType != null">
+	    coupon_luckdraw_type = #{couponLuckDrawType,jdbcType=INTEGER},
+	  </if>
+	  <if test="couponLuckDrawWeight != null">
+	    coupon_luckdraw_weight = #{couponLuckDrawWeight,jdbcType=INTEGER},
+	  </if>
       <if test="couponTimes != null">
         coupon_times = #{couponTimes,jdbcType=INTEGER},
       </if>
@@ -512,5 +548,13 @@
   <select id="selectMlbackCouponGetAll" parameterType="com.atguigu.bean.MlbackCoupon" resultMap="BaseResultMap">
     select *
     from tb_mlback_coupon order by coupon_id desc
+  </select>
+  
+  <!-- selectMlbackCouponByLuckDrawType使用中 -->
+  <select id="selectMlbackCouponByLuckDrawType" parameterType="com.atguigu.bean.MlbackCoupon" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_coupon 
+    where coupon_luckdraw_type = #{couponLuckDrawType,jdbcType=INTEGER}
+    order by coupon_id
   </select>
 </mapper>
