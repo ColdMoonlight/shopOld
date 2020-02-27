@@ -45,6 +45,8 @@
 										<th>适用范围</th>
 										<th>优惠码</th>
 										<th>优惠类型</th>
+										<th>抽奖类型</th>
+										<th>抽奖权重比</th>
 										<th>已用次数</th>
 										<th>可用总次</th>
 										<th>展示位置</th>
@@ -133,6 +135,8 @@
 				var couponCode = $("<td></td>").append(item.couponCode);
 				
 				var couponType = $("<td></td>").append((item.couponType == 1 ? '折扣券' : '满减券'));
+				var couponLuckDrawType = $("<td></td>").append((item.couponLuckDrawType == 1 ? '支持抽奖' : '不支持抽奖'));
+				var couponLuckDrawWeight = $("<td></td>").append((item.couponLuckDrawWeight));
 				//var couponType = $("<td></td>").append((item.couponType));
 				console.log("item.couponType:"+item.couponType);
 				var couponTimes = $("<td></td>").append(item.couponTimes);
@@ -180,6 +184,8 @@
 					.append(couponPriceBaseline)
 					.append(couponCode)
 					.append(couponType)
+					.append(couponLuckDrawType)
+					.append(couponLuckDrawWeight)
 					.append(couponTimes)
 					.append(couponAllTimes)
 					.append(couponAreaNum)
@@ -335,6 +341,8 @@
 				$(".open_1").hide();
 				$(".open_0").show();
 			}
+			$(":input[name='couponLuckDrawType']").val(data.couponLuckDrawType);
+			$(":input[name='couponLuckDrawWeight']").val(data.couponLuckDrawWeight);
 			$(":input[name='couponTimes']").val(data.couponTimes);
 			$(":input[name='couponAllTimes']").val(data.couponAllTimes);
 			
