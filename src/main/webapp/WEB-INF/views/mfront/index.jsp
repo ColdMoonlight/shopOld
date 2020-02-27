@@ -115,14 +115,14 @@
                     </div>
                 </div>
                 <div class="lottery-game-list">
-                    <div class="lottery-game-item">1</div>
+                    <!-- <div class="lottery-game-item">1</div>
                     <div class="lottery-game-item">2</div>
                     <div class="lottery-game-item">3</div>
                     <div class="lottery-game-item">4</div>
                     <div class="lottery-game-item">5</div>
                     <div class="lottery-game-item">6</div>
                     <div class="lottery-game-item">7</div>
-                    <div class="lottery-game-item">8</div>
+                    <div class="lottery-game-item">8</div> -->
                 </div>
             </div>
         </div>
@@ -827,13 +827,19 @@
 			            success: function (data) {
 			            	var data = JSON.parse(data)
 			            	if (data.code === 100) {
-			            		console.log(data)
+			            		var couponList = data.extend.mlbackCouponResList;
+			            		var lotteryGameListEl = document.querySelector('.lottery-game-list');
+			            		var html = '';
+			            		for (var item in couponList) {
+			            			html += '<div class="lottery-game-item">' + couponList[item].couponId +'</div>'
+			            		}
+			            		
+			            		lotteryGameListEl.innerHTML = html;
 			            		go_re.show();
 								$(".mask").show();
 			            	}
 			            }
 			        })
-					
 				/* } */
 			},2000);
 			$(".close").click(function(){
@@ -863,7 +869,7 @@
 	                }, 300);
 	            }
 	            if (isValidEmail(emailEl.value)) {
-	
+					// $.ajax() // 提交邮箱地址
 	                startGame()
 	            } else {
 	                alert('请先输入合法的email')
