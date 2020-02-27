@@ -98,7 +98,34 @@
    <div class="mask maskindex" style="display: none;"></div>
    <div class="go_re" style="display: none;">
 	   <span class="close">×</span> 
-	   <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a>
+	   <%-- <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a> --%>
+	   <div class="lottery">
+        <<!-- div class="lottery-close">x</div> -->
+        <div class="lottery-email">
+            <h4>Enter your email to join the game！</h4>
+            <input type="text" placeholder="Email address">
+        </div>
+
+        <div class="lottery-game-box">
+            <div class="lottery-game">
+                <div class="lottery-startgame">
+                    <div class="lottery-game-item">
+                        <span>Start</span>
+                        <span>GAME</span>
+                    </div>
+                </div>
+                <div class="lottery-game-list">
+                    <div class="lottery-game-item">1</div>
+                    <div class="lottery-game-item">2</div>
+                    <div class="lottery-game-item">3</div>
+                    <div class="lottery-game-item">4</div>
+                    <div class="lottery-game-item">5</div>
+                    <div class="lottery-game-item">6</div>
+                    <div class="lottery-game-item">7</div>
+                    <div class="lottery-game-item">8</div>
+                </div>
+            </div>
+        </div>
    </div>
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
@@ -505,7 +532,7 @@
 
 /********弹层注册********************************/
    var go_re = $(".go_re")
-					function get_cookie(Name) {
+					/* function get_cookie(Name) {
 						var search = Name + "=";
 						var returnvalue = "";
 						if (document.cookie.length > 0) {
@@ -533,7 +560,7 @@
 					$(".close").click(function(){
 						go_re.hide();
 						$(".mask").hide();
-					}) 
+					}) */ 
 						
 /***************首页banner***********************************************/		
               var bannerfirst=$("#ban_silder .swiper-wrapper")
@@ -758,6 +785,93 @@
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
   	<!-- huashuohair -->
   	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
+  	<!-- lottery -->
+  	<script>
+	  	function isValidEmail(email) {
+	        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	        return reg.test(email)
+	    }
+	
+	    function startGame() {
+	        var timer = null,
+	            speed = 100,
+	            gameItemEls = document.querySelectorAll('.lottery-game-list .lottery-game-item'),
+	            currentItem = gameItemEls[count % 8];
+	
+	        if (count >= lotteryData + defaultTimes) {
+	            clearTimeout(timer)
+	            alert('恭喜你获得' + lotteryData + '奖品')
+	            prevItem.classList.remove('active');
+	            
+	        } else {
+	            speed = count <= defaultTimes ? speed - 5 : speed + 20;
+	
+	            prevItem && prevItem.classList.remove('active');
+	            currentItem.classList.add('active');
+	            prevItem = currentItem;
+	            count += 1;
+	
+	            timer = setTimeout(startGame, speed);
+	        }
+	    }
+	
+	    function getLotteryData() {
+	    	setTimeout(function(){
+				/* if (get_cookie("popped")==""){
+					document.cookie="popped=yes"; */
+					$.ajax({
+			            url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByLuckDrawType',
+			            type: 'post',
+			            dataType: 'JSON',
+			            contentType: 'application/json',
+			            success: function (data) {
+			            	var data = JSON.parse(data)
+			            	if (data.code === 100) {
+			            		console.log(data)
+			            		go_re.show();
+								$(".mask").show();
+			            	}
+			            }
+			        })
+					
+				/* } */
+			},2000);
+			$(".close").click(function(){
+				go_re.hide();
+				$(".mask").hide();
+			})
+	        return parseInt(Math.random() * 8) + 1
+	    }
+	
+	    var emailEl = document.querySelector('.lottery-email input'),
+	        gameStartEl = document.querySelector('.lottery-startgame'),
+	        isStart = false,
+	        defaultTimes = 16,
+	        count = 0,
+	        lotteryData = getLotteryData();
+	        prevItem = null;
+	    
+	    gameStartEl.addEventListener('click', function(e) {
+	        if (!isStart) {
+	            var timer = null
+	            isStart = true;
+	            if (!gameStartEl.classList.contains('active')) {
+	                gameStartEl.classList.add('active');
+	                timer = setTimeout(function() {
+	                    gameStartEl.classList.remove('active');
+	                    clearTimeout(timer)
+	                }, 300);
+	            }
+	            if (isValidEmail(emailEl.value)) {
+	
+	                startGame()
+	            } else {
+	                alert('请先输入合法的email')
+	            }
+	        }
+	    })
+	  	
+  	</script>
 </body>
 
 </html>
