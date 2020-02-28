@@ -268,7 +268,7 @@ public class MlbackCouponController {
 	 */
 	@RequestMapping(value="/getCouponLuckDrawResultAndUserEmail",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg getCouponLuckDrawResultAndUserEmail(@RequestParam(value = "couponId") Integer couponId,
+	public Msg getCouponLuckDrawResultAndUserEmail(@RequestParam(value = "couponId") String couponId,
 			@RequestParam(value = "userEmail") String userEmail,HttpSession session){
 		
 		//接受参数，客户email,抽奖优惠券结果
