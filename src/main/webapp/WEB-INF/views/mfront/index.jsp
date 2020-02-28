@@ -531,7 +531,7 @@
 		});	
 
 /********弹层注册********************************/
-   var go_re = $(".go_re")
+   /* var go_re = $(".go_re") */
 					/* function get_cookie(Name) {
 						var search = Name + "=";
 						var returnvalue = "";
@@ -798,11 +798,11 @@
 	            gameItemEls = document.querySelectorAll('.lottery-game-list .lottery-game-item'),
 	            currentItem = gameItemEls[count % 8];
 	
-	        if (count >= lotteryData + defaultTimes) {
-	            clearTimeout(timer)
-	            alert('恭喜你获得' + lotteryData + '奖品')
+	        if (count >= lotteryIndex + defaultTimes) {
+	            clearTimeout(timer);
+	            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
 	            prevItem.classList.remove('active');
-	            
+
 	        } else {
 	            speed = count <= defaultTimes ? speed - 5 : speed + 20;
 	
@@ -810,43 +810,52 @@
 	            currentItem.classList.add('active');
 	            prevItem = currentItem;
 	            count += 1;
-	
+
 	            timer = setTimeout(startGame, speed);
 	        }
 	    }
 	
-	    function getLotteryData() {
+	    function getLotteryIndex() {
+	    	var htmlStr = '',
+	    		couponArr = [],
+    			couponList,
+    			lotteryRequest = null,
+				lotteryGameListEl = document.querySelector('.lottery-game-list'),
+				go_re = $(".go_re");
+			
+	    	$.ajax({
+	            url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByLuckDrawType',
+	            type: 'post',
+	            dataType: 'JSON',
+	            contentType: 'application/json',
+	            async: false,
+	            success: function (data) {
+	            	var data = JSON.parse(data);
+	            	if (data.code === 100) {
+	            		lotteryRequest = data
+	            	}
+	            }
+	        });
+	        couponList = lotteryRequest.extend.mlbackCouponResList;
+			lotteryData = lotteryRequest.extend.luckDrawDate;
+
+			for (var item in couponList) {
+				var itemData = couponList[item];
+				couponArr.push(itemData.couponId);
+				htmlStr += '<div class="lottery-game-item">' + couponList[item].couponId +'</div>'
+			}
+
 	    	setTimeout(function(){
-				/* if (get_cookie("popped")==""){
-					document.cookie="popped=yes"; */
-					$.ajax({
-			            url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByLuckDrawType',
-			            type: 'post',
-			            dataType: 'JSON',
-			            contentType: 'application/json',
-			            success: function (data) {
-			            	var data = JSON.parse(data)
-			            	if (data.code === 100) {
-			            		var couponList = data.extend.mlbackCouponResList;
-			            		var lotteryGameListEl = document.querySelector('.lottery-game-list');
-			            		var html = '';
-			            		for (var item in couponList) {
-			            			html += '<div class="lottery-game-item">' + couponList[item].couponId +'</div>'
-			            		}
-			            		
-			            		lotteryGameListEl.innerHTML = html;
-			            		go_re.show();
-								$(".mask").show();
-			            	}
-			            }
-			        })
-				/* } */
-			},2000);
+				lotteryGameListEl.innerHTML = htmlStr;
+				go_re.show();
+				$(".mask").show();
+			}, 2000);
 			$(".close").click(function(){
 				go_re.hide();
 				$(".mask").hide();
-			})
-	        return parseInt(Math.random() * 8) + 1
+			});
+
+	        return couponArr.indexOf(lotteryData.luckDrawCouponId) + 1;
 	    }
 	
 	    var emailEl = document.querySelector('.lottery-email input'),
@@ -854,7 +863,8 @@
 	        isStart = false,
 	        defaultTimes = 16,
 	        count = 0,
-	        lotteryData = getLotteryData();
+	        lotteryData = null;
+	    	lotteryIndex = getLotteryIndex();
 	        prevItem = null;
 	    
 	    gameStartEl.addEventListener('click', function(e) {
@@ -875,8 +885,7 @@
 	                alert('请先输入合法的email')
 	            }
 	        }
-	    })
-	  	
+	    });
   	</script>
 </body>
 
