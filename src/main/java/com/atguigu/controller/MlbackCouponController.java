@@ -254,14 +254,67 @@ public class MlbackCouponController {
 			e.printStackTrace();
 		}
 		
+		return Msg.success().add("resMsg", "查询转盘优惠券及结果完毕").add("mlbackCouponResList", mlbackCouponResList).add("luckDrawDate", luckDrawDate);
+	}
+	
+
+	/**
+	 * 10.0	useOn	0505
+	 * 初始化请求，getMlbackCouponShowByLuckDrawType；拿回8个优惠券图片和结果，
+	 * 点击按钮，弹出输入邮箱的框框。
+	 * 输入完毕，checkCouponLuckDrawResultAndUserEmail
+	 * 点击开始抽奖。getCouponLuckDrawResultAndUserEmail
+	 * 该邮件邮箱已经抽到过次类优惠券，请登陆后可在个人中心查看。自动登陆中。
+	 * 恭喜你获得XXXXX，3s后自动登录。账号密码已发送至您的邮箱。--调接口把email+couponId传递进来。
+	 * 接口调用成功后，重定向到首页。
+	 * @param MlbackCoupon
+	 * @return 
+	 */
+	@RequestMapping(value="/checkCouponLuckDrawResultAndUserEmail",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg cheakCouponLuckDrawResultAndUserEmail(@RequestParam(value = "couponId") String couponId,
+			@RequestParam(value = "userEmail") String userEmail,HttpSession session){
 		
-		//调用信息
+		//接受参数，客户email,抽奖优惠券结果
+		MlfrontUser mlfrontUserreq = new MlfrontUser();
+		mlfrontUserreq.setUserEmail(userEmail);
+		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
+		Integer emailIsNew = 0;//默认有抽奖资格
+//		if(mlfrontUserList.size()>0){
+//			return Msg.success().add("resMsg", "该账号属于老用户账号emailIsNew为1时,无此券;emailIsNew为2,抽到此券的时候，不能再取了;");
+//		}else{
+//			return Msg.success().add("resMsg", "该账号属于新用户账号,没玩过;");
+//		}
 		
-		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList).add("luckDrawDate", luckDrawDate);
+		if(mlfrontUserList.size()>0){
+			//此账号邮箱存在，准备查是否已经包含此优惠券
+			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
+			String couponidstr= mlfrontUserres.getUserCouponidstr();
+			
+			String[] couponidArr = couponidstr.split(",");
+			
+			for(int i=0;i<couponidArr.length;i++){
+				String couponOne = couponidArr[i];
+				if(couponOne.equals(couponId)){
+					emailIsNew = 1;
+					break;
+				}
+			}
+			if(emailIsNew==1){
+				//老帐号名下有此券不能再抽了
+				return Msg.success().add("resMsg", "老帐号名下有此券不能再抽").add("emailIsNew", emailIsNew);
+			}else{
+				//老帐号名下无此券，可以抽
+				return Msg.success().add("resMsg", "老帐号名下无此券，可以抽").add("emailIsNew", emailIsNew);
+			}
+		}else{
+			//此账号新来的，可以抽奖
+			return Msg.success().add("resMsg", "该账号属于新用户账号").add("emailIsNew", emailIsNew);
+		}
 	}
 	
 	/**
-	 * 10.0	useOn	0505
+	 * 11.0	useOn	0505
 	 * 获取抽中优惠券,并注册账号,设置登陆状态
 	 * @param MlbackCoupon
 	 * @return 
@@ -274,6 +327,8 @@ public class MlbackCouponController {
 		//接受参数，客户email,抽奖优惠券结果
 		MlfrontUser mlfrontUserreq = new MlfrontUser();
 		
+		
+		//要么是新账号,要么账号里没有这个优惠券
 		if(userEmail!=null){
 			mlfrontUserreq.setUserEmail(userEmail);
 			mlfrontUserreq.setUserPassword(userEmail);
@@ -289,56 +344,5 @@ public class MlbackCouponController {
 		session.setAttribute("loginUser", mlfrontUserreq);
 		
 		return Msg.success().add("resMsg", "获取完毕抽奖客户邮箱完毕，强制注册完成");
-	}
-	
-	
-	/**
-	 * 11.0	useOn	0505
-	 * 初始化请求，getMlbackCouponShowByLuckDrawType；拿回8个优惠券图片和结果，
-	 * 点击按钮，弹出输入邮箱的框框。
-	 * 输入完毕，cheakCouponLuckDrawResultAndUserEmail
-	 * 点击开始抽奖。getCouponLuckDrawResultAndUserEmail
-	 * 该邮件邮箱已经抽到过次类优惠券，请登陆后可在个人中心查看。自动登陆中。
-	 * 恭喜你获得XXXXX，3s后自动登录。账号密码已发送至您的邮箱。--调接口把email+couponId传递进来。
-	 * 接口调用成功后，重定向到首页。
-	 * @param MlbackCoupon
-	 * @return 
-	 */
-	@RequestMapping(value="/cheakCouponLuckDrawResultAndUserEmail",method=RequestMethod.POST)
-	@ResponseBody
-	public Msg cheakCouponLuckDrawResultAndUserEmail(@RequestParam(value = "couponId") String couponId,
-			@RequestParam(value = "userEmail") String userEmail,HttpSession session){
-		
-		//接受参数，客户email,抽奖优惠券结果
-		MlfrontUser mlfrontUserreq = new MlfrontUser();
-		
-		mlfrontUserreq.setUserEmail(userEmail);
-		
-		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
-		
-		Integer emailIsNew = 0;
-		
-		if(mlfrontUserList.size()>0){
-			//此账号邮箱存在，准备查是否已经包含此优惠券
-			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
-			String couponidstr= mlfrontUserres.getUserCouponidstr();
-			
-			String[] couponidArr = couponidstr.split(",");
-			
-			emailIsNew = 1;
-			
-			for(int i=0;i<couponidArr.length;i++){
-				String couponOne = couponidArr[i];
-				if(couponOne.equals(couponId)){
-					emailIsNew = 2;
-					break;
-				}
-			}
-			return Msg.success().add("resMsg", "该账号属于老用户账号emailIsNew为1时,无此券;emailIsNew为2,可以继续抽;").add("emailIsNew", emailIsNew);
-		}else{
-			//此账号新来的，可以抽奖
-			return Msg.success().add("resMsg", "该账号属于新用户账号").add("emailIsNew", emailIsNew);
-		}
-		
 	}
 }
