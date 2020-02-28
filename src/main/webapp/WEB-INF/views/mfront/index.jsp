@@ -788,19 +788,18 @@
 	    function startGame() {
 	        var timer = null,
 	            speed = 100,
-	            gameItemEls = document.querySelectorAll('.lottery-game-list .lottery-game-item'),
+	            gameItemEls = $('.lottery-game-list .lottery-game-item'),
 	            currentItem = gameItemEls[count % 8];
-	
+
 	        if (count >= lotteryIndex + defaultTimes) {
 	            clearTimeout(timer);
 	            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
-	            prevItem.classList.remove('active');
-
+	            prevItem.removeClass('active');
 	        } else {
 	            speed = count <= defaultTimes ? speed - 5 : speed + 20;
 	
-	            prevItem && prevItem.classList.remove('active');
-	            currentItem.classList.add('active');
+	            prevItem && $(prevItem).removeClass('active');
+	            $(currentItem).addClass('active');
 	            prevItem = currentItem;
 	            count += 1;
 
@@ -851,8 +850,8 @@
 	        return couponArr.indexOf(lotteryData.luckDrawCouponId) + 1;
 	    }
 	
-	    var emailEl = document.querySelector('.lottery-email input'),
-	        gameStartEl = document.querySelector('.lottery-startgame'),
+	    var emailEl = $('.lottery-email input'),
+	        gameStartEl = $('.lottery-startgame'),
 	        isStart = false,
 	        defaultTimes = 16,
 	        count = 0,
@@ -860,18 +859,18 @@
 	    	lotteryIndex = getLotteryIndex();
 	        prevItem = null;
 	    
-	    gameStartEl.addEventListener('click', function(e) {
+	    gameStartEl.on('click', function(e) {
 	        if (!isStart) {
 	            var timer = null
 	            isStart = true;
-	            if (!gameStartEl.classList.contains('active')) {
-	                gameStartEl.classList.add('active');
+	            if (!gameStartEl.hasClass('active')) {
+	                gameStartEl.addClass('active');
 	                timer = setTimeout(function() {
-	                    gameStartEl.classList.remove('active');
+	                    gameStartEl.removeClass('active');
 	                    clearTimeout(timer)
 	                }, 300);
 	            }
-	            if (isValidEmail(emailEl.value)) {
+	            if (isValidEmail(emailEl.val())) {
 					// $.ajax() // 提交邮箱地址
 	                startGame()
 	            } else {
