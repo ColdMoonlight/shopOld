@@ -2832,6 +2832,9 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .price-box p{padding: 0; margin: 5px 0 0;font-size: 12px;}
 .special-price .price{font-size: 18px; color:#fe186e;}
 .rightcont{width: 60%;float: left;} 
+.index_tcbox .video_enlarge_wrap{width: 80%; left: 10%;}
+.index_tcbox .video_enlarge_content .promotion_product_list{padding: 20px;}
+.index_tcbox .video_enlarge_close{background: #000; color: #fff; right: -20px; top: -20px; border-color: #000;}
 
 /* lottery */
 .lottery {
