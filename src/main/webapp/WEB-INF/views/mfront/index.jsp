@@ -41,6 +41,7 @@
   		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
+	<style>.go_re {z-index: 9999999999 !important;}</style>
 </head>
 
 <body>
@@ -100,33 +101,25 @@
 	   <span class="close">×</span> 
 	   <%-- <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a> --%>
 	   <div class="lottery">
-        <!-- div class="lottery-close">x</div> -->
-        <div class="lottery-email">
-            <h4>Enter your email to join the game！</h4>
-            <input type="text" placeholder="Email address">
-        </div>
-
-        <div class="lottery-game-box">
-            <div class="lottery-game">
-                <div class="lottery-startgame">
-                    <div class="lottery-game-item">
-                        <span>Start</span>
-                        <span>GAME</span>
-                    </div>
-                </div>
-                <div class="lottery-game-list">
-                    <!-- <div class="lottery-game-item">1</div>
-                    <div class="lottery-game-item">2</div>
-                    <div class="lottery-game-item">3</div>
-                    <div class="lottery-game-item">4</div>
-                    <div class="lottery-game-item">5</div>
-                    <div class="lottery-game-item">6</div>
-                    <div class="lottery-game-item">7</div>
-                    <div class="lottery-game-item">8</div> -->
-                </div>
-            </div>
-        </div>
-   </div>
+	        <!-- div class="lottery-close">x</div> -->
+	        <div class="lottery-email">
+	            <h4>Enter your email to join the game！</h4>
+	            <input type="text" placeholder="Email address">
+	        </div>
+	
+	        <div class="lottery-game-box">
+	            <div class="lottery-game">
+	                <div class="lottery-startgame">
+	                    <div class="lottery-game-item">
+	                        <span>Start</span>
+	                        <span>GAME</span>
+	                    </div>
+	                </div>
+	                <div class="lottery-game-list"></div>
+	            </div>
+	        </div>
+       </div>
+  </div>
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
   <script>
