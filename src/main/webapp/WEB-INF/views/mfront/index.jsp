@@ -867,7 +867,7 @@
 					htmlStr += '<div class="lottery-game-item">' + couponList[item].couponId +'</div>'
 				}
 
-		    	setTimeout(function(){
+		    	setTimeout(function() {
 					lotteryGameListEl.innerHTML = htmlStr;
 					go_re.show();
 					$(".mask").show();
@@ -882,6 +882,30 @@
 	        return couponArr.indexOf(lotteryData.luckDrawCouponId) + 1;
 	    }
 
+	    function checkUserEmail(email) {
+	    	var isUsed = false;
+	    	$.ajax({
+	            url: '${APP_PATH}/MlbackCoupon/checkCouponLuckDrawResultAndUserEmail',
+	            type: 'post',
+	            dataType: 'json',
+	            data: {
+	            	userEmail: email,
+	            	couponId: String(lotteryData.luckDrawCouponId)
+	            },
+	            async: false,
+	            success: function (data) {
+	            	if (data.code === 100) {
+	            		isUsed = data.extend.emailIsNew ? false : true
+	            	}
+	            },
+	            fail: function() {
+	            	alert('邮箱验证失败，请重试')
+	            }
+	        });
+
+	    	return isUsed;
+	    }
+
 	    var emailEl = $('.lottery-email input'),
 	        gameStartEl = $('.lottery-startgame'),
 	        isPushEmail = true,
@@ -893,32 +917,34 @@
 	        isStartLottery = false,
 	    	lotteryIndex = getLotteryIndex(),
 	        prevItem = null;
-
+		
 	    gameStartEl.on('click', function(e) {
             var timer = null;
-            /* lotteryIndex = getLotteryIndex(); */
+ 
 			if (!isStartLottery) {
-				lotteryCount += 1;
-				if (lotteryCount <= 2) {
-		            if (!gameStartEl.hasClass('active')) {
-		                gameStartEl.addClass('active');
-		                timer = setTimeout(function() {
-		                    gameStartEl.removeClass('active');
-		                    clearTimeout(timer)
-		                }, 300);
-		            }
+				if (isValidEmail(emailEl.val())) {
+	            	isStartLottery = true;
+	            	// 判断是否使用过
+	            	console.log(checkUserEmail(emailEl.val()))
+	            	if (!checkUserEmail(emailEl.val())) {
+	            		startGame();
+	            	} else {
+	            		alert('该邮箱已使用过！');
+	            		isStartLottery = false;
+	            	}
+	            } else {
+	                alert('请先输入合法的email');
+	            }
 
-		            if (isValidEmail(emailEl.val())) {
-		            	isStartLottery = true;
-		                startGame();
-		            } else {
-		                alert('请先输入合法的email')
-		            }
-				} else {
-					alert('每天只有2次有效抽奖！')
-				}
+				if (!gameStartEl.hasClass('active')) {
+	                gameStartEl.addClass('active');
+	                timer = setTimeout(function() {
+	                    gameStartEl.removeClass('active');
+	                    clearTimeout(timer)
+	                }, 300);
+	            }
 			} else {
-				alert('本次抽奖结束，才可以进入下一轮抽奖！')
+				alert('本次抽奖结束，请稍后再来！')
 			}
 	    });
   	</script>
