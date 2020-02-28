@@ -37,7 +37,6 @@ public class LuckDrawUtils {
 			luckDrawDateOne.setLuckDrawCouponId(CouponId);
 			luckDrawDateOne.setLuckDrawCouponCode(CouponCode);
 			
-			
 			for(int i=0;i<CouponLuckDrawWeight;i++){
 				LuckDrawDateList.add(luckDrawDateOne);
 			}

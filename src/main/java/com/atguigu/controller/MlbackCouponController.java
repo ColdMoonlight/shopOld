@@ -260,4 +260,40 @@ public class MlbackCouponController {
 		return Msg.success().add("resMsg", "某页面展示的优惠券列表查询成功").add("mlbackCouponResList", mlbackCouponResList).add("luckDrawDate", luckDrawDate);
 	}
 	
+	/**
+	 * 10.0	useOn	0505
+	 * 获取抽中优惠券,并注册账号,设置登陆状态
+	 * @param MlbackCoupon
+	 * @return 
+	 */
+	@RequestMapping(value="/getCouponLuckDrawResultAndUserEmail",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getCouponLuckDrawResultAndUserEmail(@RequestParam(value = "couponId") Integer couponId,
+			@RequestParam(value = "userEmail") String userEmail,HttpSession session){
+		
+		//接受参数，客户email,抽奖优惠券结果
+		MlfrontUser mlfrontUserreq = new MlfrontUser();
+		
+		if(userEmail!=null){
+			mlfrontUserreq.setUserEmail(userEmail);
+			mlfrontUserreq.setUserPassword(userEmail);
+			String couponidstr = "1,2,3,"+couponId+"";
+			//把优惠券写入账号中
+			mlfrontUserreq.setUserCouponidstr(couponidstr);
+		}
+		//注册账号,
+		
+		mlfrontUserService.insertSelective(mlfrontUserreq);
+		
+		//将信息写入session中
+		session.setAttribute("loginUser", mlfrontUserreq);
+		Integer luckDrawLoginYes = 1;
+		
+		return Msg.success().add("resMsg", "获取完毕抽奖客户邮箱完毕，强制注册完成。").add("luckDrawLoginYes", luckDrawLoginYes).add("mlfrontUser", mlfrontUserreq);
+	}
+	
+	
+	
+	
+	
 }
