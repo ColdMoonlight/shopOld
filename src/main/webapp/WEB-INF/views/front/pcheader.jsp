@@ -266,7 +266,7 @@
 			 				   }
 			 			   });
 			 			   $(_this).find('.menu_list-wap').addClass('wrap_active');
-			 
+			               $(_this).find('a').eq(0).addClass('active');
 			 			   return false;
 			 			   },100)
 			 },function () {
@@ -275,6 +275,7 @@
 			 				   clearTimeout(menuTimer);
 			 			   }
 			 			   $(_this).find('.menu_list-wap').removeClass('wrap_active');
+						    $(_this).find('a').eq(0).removeClass('active');
 			 			   setTimeout(function () {
 			 				   $('.navbar_itemContent-background').height(0);
 			 				   return false;
