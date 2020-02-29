@@ -260,11 +260,11 @@ public class MlbackCouponController {
 
 	/**
 	 * 10.0	useOn	0505
-	 * 初始化请求，getMlbackCouponShowByLuckDrawType；拿回8个优惠券图片和结果，
-	 * 点击按钮，弹出输入邮箱的框框。
-	 * 输入完毕，checkCouponLuckDrawResultAndUserEmail
-	 * 点击开始抽奖。getCouponLuckDrawResultAndUserEmail
-	 * 该邮件邮箱已经抽到过次类优惠券，请登陆后可在个人中心查看。自动登陆中。
+	 * 初始化请求,getMlbackCouponShowByLuckDrawType,拿回8个优惠券图片和结果,
+	 * 点击按钮,弹出输入邮箱的框框.
+	 * 输入完毕,checkCouponLuckDrawResultAndUserEmail.
+	 * 点击开始抽奖。getCouponLuckDrawResultAndUserEmail.
+	 * 该邮件邮箱已经抽到过次类优惠券,请登陆后可在个人中心查看.自动登陆中.
 	 * 恭喜你获得XXXXX，3s后自动登录。账号密码已发送至您的邮箱。--调接口把email+couponId传递进来。
 	 * 接口调用成功后，重定向到首页。
 	 * @param MlbackCoupon
@@ -279,13 +279,8 @@ public class MlbackCouponController {
 		MlfrontUser mlfrontUserreq = new MlfrontUser();
 		mlfrontUserreq.setUserEmail(userEmail);
 		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
-		Integer emailIsNew = 0;//默认有抽奖资格
-//		if(mlfrontUserList.size()>0){
-//			return Msg.success().add("resMsg", "该账号属于老用户账号emailIsNew为1时,无此券;emailIsNew为2,抽到此券的时候，不能再取了;");
-//		}else{
-//			return Msg.success().add("resMsg", "该账号属于新用户账号,没玩过;");
-//		}
-		
+		Integer emailIsCan = 0;//名下没有账户内无券,默认有抽奖资格
+
 		if(mlfrontUserList.size()>0){
 			//此账号邮箱存在，准备查是否已经包含此优惠券
 			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
@@ -296,20 +291,20 @@ public class MlbackCouponController {
 			for(int i=0;i<couponidArr.length;i++){
 				String couponOne = couponidArr[i];
 				if(couponOne.equals(couponId)){
-					emailIsNew = 1;
+					emailIsCan = 0;
 					break;
 				}
 			}
-			if(emailIsNew==1){
+			if(emailIsCan==1){
 				//老帐号名下有此券不能再抽了
-				return Msg.success().add("resMsg", "老帐号名下有此券不能再抽").add("emailIsNew", emailIsNew);
+				return Msg.success().add("resMsg", "老帐号名下有此券不能再抽").add("emailIsCan", emailIsCan);
 			}else{
 				//老帐号名下无此券，可以抽
-				return Msg.success().add("resMsg", "老帐号名下无此券，可以抽").add("emailIsNew", emailIsNew);
+				return Msg.success().add("resMsg", "老帐号名下无此券，可以抽").add("emailIsCan", emailIsCan);
 			}
 		}else{
 			//此账号新来的，可以抽奖
-			return Msg.success().add("resMsg", "该账号属于新用户账号").add("emailIsNew", emailIsNew);
+			return Msg.success().add("resMsg", "该账号属于新用户账号").add("emailIsCan", emailIsCan);
 		}
 	}
 	
@@ -334,34 +329,18 @@ public class MlbackCouponController {
 		mlfrontUserreq.setUserEmail(userEmail);
 		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
 		
+		
+		//能进来说明是老账户，但是名下没有这个券，
 		if(mlfrontUserList.size()>0){
 			//2,存在的话，判断账户中是否有这个优惠券,有的话更新里面的接口信息，强制登陆
 			
 			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
 			String couponidstr= mlfrontUserres.getUserCouponidstr();
 			
-			String[] couponidArr = couponidstr.split(",");
+			couponidstr = couponidstr+","+couponId;
 			
-			Integer emailIsNew = 0;
-			
-			for(int i=0;i<couponidArr.length;i++){
-				String couponOne = couponidArr[i];
-				if(couponOne.equals(couponId)){
-					emailIsNew = 1;
-					break;
-				}
-			}
-			
-			if(emailIsNew==1){
-				//老帐号名下有此券,无需更该账户的优惠券Str信息，直接将用户信息放置进session,调整登陆状态即可
-				
-				
-				
-			}else{
-				//老帐号名下无此券，需要把这个优惠券补充进去
-				
-			}
-			
+			//把这个优惠券字段地算补充进去
+			mlfrontUserres.setUserCouponidstr(couponidstr);
 			
 		}else{
 			//1,不存在的话，补全默认信息，新增此条账号数据，强制登陆
@@ -373,22 +352,11 @@ public class MlbackCouponController {
 		}
 		
 		session.setAttribute("loginUser", mlfrontUserreq);
-		
-//		//要么是新账号,要么账号里没有这个优惠券
-//		if(userEmail!=null){
-//			mlfrontUserreq.setUserEmail(userEmail);
-//			mlfrontUserreq.setUserPassword(userEmail);
-//			String couponidstr = "1,2,3,"+couponId+"";
-//			//把优惠券写入账号中
-//			mlfrontUserreq.setUserCouponidstr(couponidstr);
-//		}
-//		//注册账号,
-//		
-//		mlfrontUserService.insertSelective(mlfrontUserreq);
-//		
-//		//将信息写入session中
 
 		
 		return Msg.success().add("resMsg", "获取完毕抽奖客户邮箱完毕，强制注册完成");
+		
 	}
+	
+	
 }
