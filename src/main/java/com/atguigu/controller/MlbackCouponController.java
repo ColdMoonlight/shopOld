@@ -325,23 +325,69 @@ public class MlbackCouponController {
 			@RequestParam(value = "userEmail") String userEmail,HttpSession session){
 		
 		//接受参数，客户email,抽奖优惠券结果
+		
+		//先查这个账号是否存在，
+		//1,不存在的话，补全默认信息，新增此条账号数据，强制登陆
+		//2,存在的话，更新里面的接口信息，强制登陆
+		
 		MlfrontUser mlfrontUserreq = new MlfrontUser();
+		mlfrontUserreq.setUserEmail(userEmail);
+		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
 		
-		
-		//要么是新账号,要么账号里没有这个优惠券
-		if(userEmail!=null){
+		if(mlfrontUserList.size()>0){
+			//2,存在的话，判断账户中是否有这个优惠券,有的话更新里面的接口信息，强制登陆
+			
+			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
+			String couponidstr= mlfrontUserres.getUserCouponidstr();
+			
+			String[] couponidArr = couponidstr.split(",");
+			
+			Integer emailIsNew = 0;
+			
+			for(int i=0;i<couponidArr.length;i++){
+				String couponOne = couponidArr[i];
+				if(couponOne.equals(couponId)){
+					emailIsNew = 1;
+					break;
+				}
+			}
+			
+			if(emailIsNew==1){
+				//老帐号名下有此券,无需更该账户的优惠券Str信息，直接将用户信息放置进session,调整登陆状态即可
+				
+				
+				
+			}else{
+				//老帐号名下无此券，需要把这个优惠券补充进去
+				
+			}
+			
+			
+		}else{
+			//1,不存在的话，补全默认信息，新增此条账号数据，强制登陆
 			mlfrontUserreq.setUserEmail(userEmail);
 			mlfrontUserreq.setUserPassword(userEmail);
 			String couponidstr = "1,2,3,"+couponId+"";
 			//把优惠券写入账号中
 			mlfrontUserreq.setUserCouponidstr(couponidstr);
 		}
-		//注册账号,
 		
-		mlfrontUserService.insertSelective(mlfrontUserreq);
-		
-		//将信息写入session中
 		session.setAttribute("loginUser", mlfrontUserreq);
+		
+//		//要么是新账号,要么账号里没有这个优惠券
+//		if(userEmail!=null){
+//			mlfrontUserreq.setUserEmail(userEmail);
+//			mlfrontUserreq.setUserPassword(userEmail);
+//			String couponidstr = "1,2,3,"+couponId+"";
+//			//把优惠券写入账号中
+//			mlfrontUserreq.setUserCouponidstr(couponidstr);
+//		}
+//		//注册账号,
+//		
+//		mlfrontUserService.insertSelective(mlfrontUserreq);
+//		
+//		//将信息写入session中
+
 		
 		return Msg.success().add("resMsg", "获取完毕抽奖客户邮箱完毕，强制注册完成");
 	}

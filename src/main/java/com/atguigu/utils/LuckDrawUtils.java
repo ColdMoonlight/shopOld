@@ -46,7 +46,7 @@ public class LuckDrawUtils {
 		
 		Integer num = getRandomNumber();
 		
-		LuckDrawDate luckDrawDateRes = LuckDrawDateList.get(num);
+		LuckDrawDate luckDrawDateRes = LuckDrawDateList.get(num-1);
 		System.out.println("luckDrawDateRes:"+luckDrawDateRes.toString());
 		
 		return luckDrawDateRes;
