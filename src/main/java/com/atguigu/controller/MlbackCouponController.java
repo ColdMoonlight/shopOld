@@ -350,10 +350,8 @@ public class MlbackCouponController {
 			//把优惠券写入账号中
 			mlfrontUserreq.setUserCouponidstr(couponidstr);
 		}
-		
+		//session中记录客户登录信息,即把客户信息放置在客户中
 		session.setAttribute("loginUser", mlfrontUserreq);
-
-		
 		return Msg.success().add("resMsg", "获取完毕抽奖客户邮箱完毕，强制注册完成");
 		
 	}
