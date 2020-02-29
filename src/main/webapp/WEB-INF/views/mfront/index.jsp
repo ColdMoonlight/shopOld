@@ -801,6 +801,7 @@
 		            /* contentType: 'application/json', */
 		            success: function (data) {
 		            	if (data.code === 100) {
+		            		console.log(data)
 		            		isPushEmail = true
 		            	}
 		            }
@@ -820,7 +821,16 @@
             	lotteryIndex = -1;
 
 	            if (isPushEmail) {
-		            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
+	            	$(".go_re").hide();
+	            	$(".mask").hide();
+		            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品', '三秒后将自动注册');
+		            lotteryData = null;
+		            setTimeout(function() {
+		            	// alert('注册中')
+		            	window.location.reload();
+		            }, 3000)
+	            } else {
+	            	alert('抽奖失败，请重新尝试！')
 	            }
 	        } else {
 	            speed = rollCount <= defaultTimes ? speed - 5 : speed + 20;
@@ -857,8 +867,7 @@
 
 			if (lotteryCount < 1) {
 				var htmlStr = '',
-					lotteryGameListEl = document.querySelector('.lottery-game-list'),
-					go_re = $(".go_re");
+					lotteryGameListEl = document.querySelector('.lottery-game-list');
 
 				for (var item in couponList) {
 					var itemData = couponList[item];
@@ -868,12 +877,12 @@
 
 		    	setTimeout(function() {
 					lotteryGameListEl.innerHTML = htmlStr;
-					go_re.show();
+					$(".go_re").show();
 					$(".mask").show();
 				}, 2000);
 
 				$(".close").click(function(){
-					go_re.hide();
+					$(".go_re").hide();
 					$(".mask").hide();
 				});
 			}
