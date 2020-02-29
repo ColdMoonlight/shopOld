@@ -2967,5 +2967,12 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
     top: 0;
     left: -80px;
 }
-
-
+.lottery-result {
+	position: absolute;
+	width: 100%;
+	height: auto;
+	padding: 20px;
+}
+.lottery-container {
+	text-align: center;
+}

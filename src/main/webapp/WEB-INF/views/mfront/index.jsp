@@ -821,10 +821,18 @@
             	lotteryIndex = -1;
 
 	            if (isPushEmail) {
-	            	$(".go_re").hide();
-	            	$(".mask").hide();
+	            	$(".lottery").hide();
+	            	/* $(".mask").hide(); */
 		            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品', '三秒后将自动注册');
+	            	var lotteryResultHtml = '';
+	            	lotteryResultHtml += '<div class="lottery-result">'
+	            		+ '<div class="lottery-container"> 恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品 </br>' + '三秒后将自动注册'
+	            		+ '</div></div>';
+	            	$('.go_re').append(lotteryResultHtml);
 		            lotteryData = null;
+		            /* 5s后， 转盘出现 */
+		            var date = new Date();
+		            document.cookie = "isHideLottery=true;expires=" + (date.setTime(date.getTime() + 30 * 60 * 1000), date.toGMTString());
 		            setTimeout(function() {
 		            	// alert('注册中')
 		            	window.location.reload();
@@ -903,9 +911,8 @@
 	            async: false,
 	            success: function (data) {
 	            	if (data.code === 100) {
-	            		isUsed = data.extend.emailIsNew ? true : false
+	            		isUsed = data.extend && data.extend.emailIsCan ? true : false
 	            	}
-	            	console.log(data, isUsed)
 	            },
 	            fail: function() {
 	            	alert('邮箱验证失败，请重试')
@@ -913,6 +920,16 @@
 	        });
 
 	    	return isUsed;
+	    }
+	    
+	    function getCookie(name) {
+	        var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+	     
+	        if(arr=document.cookie.match(reg))
+	     
+	            return (arr[2]);
+	        else
+	            return null;
 	    }
 
 	    var emailEl = $('.lottery-email input'),
@@ -923,7 +940,8 @@
 	        rollCount = 0,
 	        lotteryData = null,
 	        isStartLottery = false,
-	    	lotteryIndex = getLotteryIndex(),
+	        isHideLottery = getCookie('isHideLottery') || false;
+	    	lotteryIndex = isHideLottery ? undefined : getLotteryIndex(),
 	        prevItem = null;
 
 	    gameStartEl.on('click', function(e) {
