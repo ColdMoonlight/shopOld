@@ -41,6 +41,7 @@
   		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
+	<style>.go_re {z-index: 9999999999 !important;}</style>
 </head>
 
 <body>
@@ -100,33 +101,25 @@
 	   <span class="close">×</span> 
 	   <%-- <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a> --%>
 	   <div class="lottery">
-        <<!-- div class="lottery-close">x</div> -->
-        <div class="lottery-email">
-            <h4>Enter your email to join the game！</h4>
-            <input type="text" placeholder="Email address">
-        </div>
-
-        <div class="lottery-game-box">
-            <div class="lottery-game">
-                <div class="lottery-startgame">
-                    <div class="lottery-game-item">
-                        <span>Start</span>
-                        <span>GAME</span>
-                    </div>
-                </div>
-                <div class="lottery-game-list">
-                    <div class="lottery-game-item">1</div>
-                    <div class="lottery-game-item">2</div>
-                    <div class="lottery-game-item">3</div>
-                    <div class="lottery-game-item">4</div>
-                    <div class="lottery-game-item">5</div>
-                    <div class="lottery-game-item">6</div>
-                    <div class="lottery-game-item">7</div>
-                    <div class="lottery-game-item">8</div>
-                </div>
-            </div>
-        </div>
-   </div>
+	        <!-- div class="lottery-close">x</div> -->
+	        <div class="lottery-email">
+	            <h4>Enter your email to join the game！</h4>
+	            <input type="text" placeholder="Email address">
+	        </div>
+	
+	        <div class="lottery-game-box">
+	            <div class="lottery-game">
+	                <div class="lottery-startgame">
+	                    <div class="lottery-game-item">
+	                        <span>Start</span>
+	                        <span>GAME</span>
+	                    </div>
+	                </div>
+	                <div class="lottery-game-list"></div>
+	            </div>
+	        </div>
+       </div>
+  </div>
   <jsp:include page="mfooter.jsp"></jsp:include>
   <script src="${APP_PATH }/static/js/countdown.min.js"></script>
   <script>
@@ -534,7 +527,7 @@
 		});	
 
 /********弹层注册********************************/
-   var go_re = $(".go_re")
+   /* var go_re = $(".go_re") */
 					/* function get_cookie(Name) {
 						var search = Name + "=";
 						var returnvalue = "";
@@ -794,86 +787,173 @@
 	        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	        return reg.test(email)
 	    }
-	
+
 	    function startGame() {
+	    	if (!isPushEmail) {
+		    	$.ajax({
+		            url: '${APP_PATH}/MlbackCoupon/getCouponLuckDrawResultAndUserEmail',
+		            type: 'post',
+		            dataType: 'json',
+		            data: {
+		            	userEmail: emailEl.val(),
+		            	couponId: String(lotteryData.luckDrawCouponId)
+		            },
+		            /* contentType: 'application/json', */
+		            success: function (data) {
+		            	if (data.code === 100) {
+		            		console.log(data)
+		            		isPushEmail = true
+		            	}
+		            }
+		        });
+	    	}
 	        var timer = null,
 	            speed = 100,
-	            gameItemEls = document.querySelectorAll('.lottery-game-list .lottery-game-item'),
-	            currentItem = gameItemEls[count % 8];
-	
-	        if (count >= lotteryData + defaultTimes) {
-	            clearTimeout(timer)
-	            alert('恭喜你获得' + lotteryData + '奖品')
-	            prevItem.classList.remove('active');
-	            
+	            gameItemEls = $('.lottery-game-list .lottery-game-item'),
+	            currentItem = gameItemEls[rollCount % 8];
+
+	        if (rollCount >= lotteryIndex + defaultTimes) {
+	            clearTimeout(timer);
+	            /* 重置 */
+	            rollCount = 0;
+            	$(prevItem).removeClass('active');
+            	isStartLottery = false;
+            	lotteryIndex = -1;
+
+	            if (isPushEmail) {
+	            	$(".go_re").hide();
+	            	$(".mask").hide();
+		            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品', '三秒后将自动注册');
+		            lotteryData = null;
+		            setTimeout(function() {
+		            	// alert('注册中')
+		            	window.location.reload();
+		            }, 3000)
+	            } else {
+	            	alert('抽奖失败，请重新尝试！')
+	            }
 	        } else {
-	            speed = count <= defaultTimes ? speed - 5 : speed + 20;
+	            speed = rollCount <= defaultTimes ? speed - 5 : speed + 20;
 	
-	            prevItem && prevItem.classList.remove('active');
-	            currentItem.classList.add('active');
+	            prevItem && $(prevItem).removeClass('active');
+	            $(currentItem).addClass('active');
 	            prevItem = currentItem;
-	            count += 1;
-	
+	            rollCount += 1;
+
 	            timer = setTimeout(startGame, speed);
 	        }
 	    }
-	
-	    function getLotteryData() {
-	    	setTimeout(function(){
-				/* if (get_cookie("popped")==""){
-					document.cookie="popped=yes"; */
-					$.ajax({
-			            url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByLuckDrawType',
-			            type: 'post',
-			            dataType: 'JSON',
-			            contentType: 'application/json',
-			            success: function (data) {
-			            	var data = JSON.parse(data)
-			            	if (data.code === 100) {
-			            		console.log(data)
-			            		go_re.show();
-								$(".mask").show();
-			            	}
-			            }
-			        })
-					
-				/* } */
-			},2000);
-			$(".close").click(function(){
-				go_re.hide();
-				$(".mask").hide();
-			})
-	        return parseInt(Math.random() * 8) + 1
+
+	    function getLotteryIndex() {
+	    	var couponArr = [],
+    			couponList = [],
+    			lotteryRequest = null;
+
+	    	$.ajax({
+	            url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByLuckDrawType',
+	            type: 'post',
+	            dataType: 'json',
+	            contentType: 'application/json',
+	            async: false,
+	            success: function (data) {
+	            	if (data.code === 100) {
+	            		lotteryRequest = data
+	            	}
+	            }
+	        });
+
+	        couponList = lotteryRequest.extend.mlbackCouponResList;
+			lotteryData = lotteryRequest.extend.luckDrawDate;
+
+			if (lotteryCount < 1) {
+				var htmlStr = '',
+					lotteryGameListEl = document.querySelector('.lottery-game-list');
+
+				for (var item in couponList) {
+					var itemData = couponList[item];
+					couponArr.push(itemData.couponId);
+					htmlStr += '<div class="lottery-game-item">' + couponList[item].couponId +'</div>'
+				}
+
+		    	setTimeout(function() {
+					lotteryGameListEl.innerHTML = htmlStr;
+					$(".go_re").show();
+					$(".mask").show();
+				}, 2000);
+
+				$(".close").click(function(){
+					$(".go_re").hide();
+					$(".mask").hide();
+				});
+			}
+
+	        return couponArr.indexOf(lotteryData.luckDrawCouponId) + 1;
 	    }
-	
-	    var emailEl = document.querySelector('.lottery-email input'),
-	        gameStartEl = document.querySelector('.lottery-startgame'),
-	        isStart = false,
+
+	    function checkUserEmail(email) {
+	    	var isUsed = false;
+	    	$.ajax({
+	            url: '${APP_PATH}/MlbackCoupon/checkCouponLuckDrawResultAndUserEmail',
+	            type: 'post',
+	            dataType: 'json',
+	            data: {
+	            	userEmail: email,
+	            	couponId: String(lotteryData.luckDrawCouponId)
+	            },
+	            async: false,
+	            success: function (data) {
+	            	if (data.code === 100) {
+	            		isUsed = data.extend.emailIsNew ? true : false
+	            	}
+	            	console.log(data, isUsed)
+	            },
+	            fail: function() {
+	            	alert('邮箱验证失败，请重试')
+	            }
+	        });
+
+	    	return isUsed;
+	    }
+
+	    var emailEl = $('.lottery-email input'),
+	        gameStartEl = $('.lottery-startgame'),
+	        isPushEmail = false,
+	        lotteryCount = 0,
 	        defaultTimes = 16,
-	        count = 0,
-	        lotteryData = getLotteryData();
+	        rollCount = 0,
+	        lotteryData = null,
+	        isStartLottery = false,
+	    	lotteryIndex = getLotteryIndex(),
 	        prevItem = null;
-	    
-	    gameStartEl.addEventListener('click', function(e) {
-	        if (!isStart) {
-	            var timer = null
-	            isStart = true;
-	            if (!gameStartEl.classList.contains('active')) {
-	                gameStartEl.classList.add('active');
+
+	    gameStartEl.on('click', function(e) {
+            var timer = null;
+ 
+			if (!isStartLottery) {
+				if (isValidEmail(emailEl.val())) {
+	            	isStartLottery = true;
+	            	// 判断是否使用过
+	            	if (!checkUserEmail(emailEl.val())) {
+	            		startGame();
+	            	} else {
+	            		alert('该邮箱已使用过！');
+	            		isStartLottery = false;
+	            	}
+	            } else {
+	                alert('请先输入合法的email');
+	            }
+
+				if (!gameStartEl.hasClass('active')) {
+	                gameStartEl.addClass('active');
 	                timer = setTimeout(function() {
-	                    gameStartEl.classList.remove('active');
+	                    gameStartEl.removeClass('active');
 	                    clearTimeout(timer)
 	                }, 300);
 	            }
-	            if (isValidEmail(emailEl.value)) {
-	
-	                startGame()
-	            } else {
-	                alert('请先输入合法的email')
-	            }
-	        }
-	    })
-	  	
+			} else {
+				alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
+			}
+	    });
   	</script>
 </body>
 
