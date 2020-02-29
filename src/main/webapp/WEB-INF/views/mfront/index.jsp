@@ -433,6 +433,9 @@
 		 		html += '<div class="swiper-slide last_top"> <div class="product-item"><a href="${APP_PATH}/search/top-selling.html" style="width:100%;;dispaly:block" class="morelink"></a><img src="' + data[1].productMainimgurl + '" alt=""> <div class="word-desc"></div> </div></div>'
 				html += '<div class="swiper-slide last_new"><div class="product-item"><a href="${APP_PATH}/search/New-Arrival.html" style="width:100%;;dispaly:block" class="morelink"> </a><img src="' + data[1].productMainimgurl + '" alt=""><div class="word-desc"></div></div></div>'
 		 		parent.html(html);
+				var heightno = $(".product-desc").height();
+                $(".word-desc").css("height",heightno)				
+				
 		 }
 		 /*******排序*****************/
 		  		function orderProListBySaleNum(reqData) {

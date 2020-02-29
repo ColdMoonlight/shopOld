@@ -94,7 +94,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .morelink{position:absolute;top: 0; left: 0;width: 100%; height: 100%; z-index: 2; display: block;font-size:30px; background:url(../../pc/img/more.jpg) no-repeat; background-size:100% 100%; color: #fff;font-weight: 600;}
 .last_top img{width: 100%; height: 100%; opacity: 0;}
 .last_new img{width: 100%; height: 100%; opacity: 0;}
-.word-desc{height:93px;}
+.word-desc{margin: 5%;}
 .new_box_product_cont .swiper-slide .product-item{transform:scale(1)}
 .hot_box_product_cont .swiper-slide .product-item{transform: scale(1);}
 .product-img{height: auto;}
