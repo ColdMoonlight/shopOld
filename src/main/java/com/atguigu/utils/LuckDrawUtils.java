@@ -20,7 +20,7 @@ public class LuckDrawUtils {
 		
 		double d = (int)(Math.random()*num+1);//因为不需要0，所以需要加1
 		
-		System.out.println(d);
+		//System.out.println(d);
 
 		List<LuckDrawDate> LuckDrawDateList = new ArrayList<LuckDrawDate>();
 		
@@ -42,12 +42,12 @@ public class LuckDrawUtils {
 			}
 		}
 		
-		System.out.println("LuckDrawDateList.size():"+LuckDrawDateList.size());
+		//System.out.println("LuckDrawDateList.size():"+LuckDrawDateList.size());
 		
 		Integer num = getRandomNumber();
 		
 		LuckDrawDate luckDrawDateRes = LuckDrawDateList.get(num-1);
-		System.out.println("luckDrawDateRes:"+luckDrawDateRes.toString());
+		//System.out.println("luckDrawDateRes:"+luckDrawDateRes.toString());
 		
 		return luckDrawDateRes;
 	}
@@ -56,7 +56,7 @@ public class LuckDrawUtils {
 		
 		Random r = new Random();
 		int d = r.nextInt(num)+1;
-		System.out.println(d);
+		//System.out.println(d);
 		
 		return d;
 	}
