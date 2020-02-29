@@ -784,10 +784,9 @@
 	        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	        return reg.test(email)
 	    }
-	
+
 	    function startGame() {
-	    	if (isPushEmail) {
-	    		isPushEmail = false;
+	    	if (!isPushEmail) {
 		    	$.ajax({
 		            url: '${APP_PATH}/MlbackCoupon/getCouponLuckDrawResultAndUserEmail',
 		            type: 'post',
@@ -798,8 +797,8 @@
 		            },
 		            /* contentType: 'application/json', */
 		            success: function (data) {
-		            	if (data.code === 100 && data.extend.luckDrawLoginYes) {
-		            		isLotterySuccess = true
+		            	if (data.code === 100) {
+		            		isPushEmail = true
 		            	}
 		            }
 		        });
@@ -811,18 +810,15 @@
 
 	        if (rollCount >= lotteryIndex + defaultTimes) {
 	            clearTimeout(timer);
-	            if (!isLotterySuccess) {
-	            	lotteryCount -= 1;
-	            	alert('抽奖失败，请重新抽奖！')
-	            } else {
-	            	isStartLottery = false;
-	            	lotteryIndex = -1;
-
-		            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
-	            }
 	            /* 重置 */
 	            rollCount = 0;
             	$(prevItem).removeClass('active');
+            	isStartLottery = false;
+            	lotteryIndex = -1;
+
+	            if (isPushEmail) {
+		            alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
+	            }
 	        } else {
 	            speed = rollCount <= defaultTimes ? speed - 5 : speed + 20;
 	
@@ -895,8 +891,9 @@
 	            async: false,
 	            success: function (data) {
 	            	if (data.code === 100) {
-	            		isUsed = data.extend.emailIsNew ? false : true
+	            		isUsed = data.extend.emailIsNew ? true : false
 	            	}
+	            	console.log(data, isUsed)
 	            },
 	            fail: function() {
 	            	alert('邮箱验证失败，请重试')
@@ -908,8 +905,7 @@
 
 	    var emailEl = $('.lottery-email input'),
 	        gameStartEl = $('.lottery-startgame'),
-	        isPushEmail = true,
-	        isLotterySuccess = false,
+	        isPushEmail = false,
 	        lotteryCount = 0,
 	        defaultTimes = 16,
 	        rollCount = 0,
@@ -917,7 +913,7 @@
 	        isStartLottery = false,
 	    	lotteryIndex = getLotteryIndex(),
 	        prevItem = null;
-		
+
 	    gameStartEl.on('click', function(e) {
             var timer = null;
  
@@ -925,7 +921,6 @@
 				if (isValidEmail(emailEl.val())) {
 	            	isStartLottery = true;
 	            	// 判断是否使用过
-	            	console.log(checkUserEmail(emailEl.val()))
 	            	if (!checkUserEmail(emailEl.val())) {
 	            		startGame();
 	            	} else {
@@ -944,7 +939,7 @@
 	                }, 300);
 	            }
 			} else {
-				alert('本次抽奖结束，请稍后再来！')
+				alert('恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品');
 			}
 	    });
   	</script>
