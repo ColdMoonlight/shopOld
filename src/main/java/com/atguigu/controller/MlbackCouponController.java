@@ -329,6 +329,7 @@ public class MlbackCouponController {
 		mlfrontUserreq.setUserEmail(userEmail);
 		List<MlfrontUser> mlfrontUserList= mlfrontUserService.selectMlfrontUserWhenFirst(mlfrontUserreq);
 		
+		String nowtime = DateUtil.strTime14s();
 		
 		//能进来说明是老账户，但是名下没有这个券，
 		if(mlfrontUserList.size()>0){
@@ -341,6 +342,8 @@ public class MlbackCouponController {
 			
 			//把这个优惠券字段地算补充进去
 			mlfrontUserres.setUserCouponidstr(couponidstr);
+
+			mlfrontUserreq.setUserMotifytime(nowtime);
 			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserres);
 			
 		}else{
@@ -350,6 +353,10 @@ public class MlbackCouponController {
 			String couponidstr = "1,2,3,"+couponId+"";
 			//把优惠券写入账号中
 			mlfrontUserreq.setUserCouponidstr(couponidstr);
+			
+			mlfrontUserreq.setUserCreatetime(nowtime);
+			mlfrontUserreq.setUserMotifytime(nowtime);
+			
 			//新增本条数据
 			mlfrontUserService.insertSelective(mlfrontUserreq);
 		}
