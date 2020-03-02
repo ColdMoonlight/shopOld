@@ -342,6 +342,8 @@ public class MlbackCouponController {
 			//把这个优惠券字段地算补充进去
 			mlfrontUserres.setUserCouponidstr(couponidstr);
 			
+			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserres);
+			
 		}else{
 			//1,不存在的话，补全默认信息，新增此条账号数据，强制登陆
 			mlfrontUserreq.setUserEmail(userEmail);
@@ -349,6 +351,8 @@ public class MlbackCouponController {
 			String couponidstr = "1,2,3,"+couponId+"";
 			//把优惠券写入账号中
 			mlfrontUserreq.setUserCouponidstr(couponidstr);
+			//新增本条数据
+			mlfrontUserService.insertSelective(mlfrontUserreq);
 		}
 		//session中记录客户登录信息,即把客户信息放置在客户中
 		session.setAttribute("loginUser", mlfrontUserreq);
