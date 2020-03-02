@@ -103,7 +103,11 @@
 	   <div class="lottery">
 	        <!-- div class="lottery-close">x</div> -->
 	        <div class="lottery-email">
-	            <h4>Enter your email to join the game！</h4>
+	        	<div class="lottery-title">
+	        		<span>MEGALOOK</span>
+	        		<span>Your Hair Your Surprise</span>
+	            	<span>Enter your email to join the game！</span>
+	        	</div>
 	            <input type="text" placeholder="Email address">
 	            <div class="lottery-email-tip"></div>
 	        </div>
@@ -111,10 +115,10 @@
 	        <div class="lottery-game-box">
 	            <div class="lottery-game">
 	                <div class="lottery-startgame">
-	                    <div class="lottery-game-item">
+	                    <!-- <div class="lottery-game-item">
 	                        <span>Start</span>
 	                        <span>GAME</span>
-	                    </div>
+	                    </div> -->
 	                </div>
 	                <div class="lottery-game-list"></div>
 	            </div>
@@ -869,6 +873,7 @@
 	            success: function (data) {
 	            	if (data.code === 100) {
 	            		lotteryRequest = data;
+	            		console.log(data)
 	            	}
 	            }
 	        });
@@ -883,7 +888,7 @@
 				for (var item in couponList) {
 					var itemData = couponList[item];
 					couponArr.push(itemData.couponId);
-					htmlStr += '<div class="lottery-game-item">' + couponList[item].couponId +'</div>';
+					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgwapurl + '"/></div>';
 				}
 
 		    	setTimeout(function() {
