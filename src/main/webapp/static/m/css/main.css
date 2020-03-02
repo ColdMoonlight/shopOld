@@ -2896,6 +2896,7 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
     z-index: 9999;
     margin: 0 auto;
     background-color: #008fd3;
+    cursor: pointer;
 }
 .lottery-game-list {
     position: relative;
@@ -2974,7 +2975,6 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
     left: -80px;
 }
 .lottery-result {
-	position: absolute;
 	width: 100%;
 	height: auto;
 	padding: 20px;
