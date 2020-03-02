@@ -944,7 +944,7 @@ margin: 10px 0;
 	margin-left: .25em;
 }
 
-/**购物车列表***/
+/**璐墿杞﹀垪琛�***/
 .cart-item {
   display: flex;
   align-items: flex-start;
@@ -981,7 +981,7 @@ margin: 10px 0;
 
 /* .cart-item>input:checked::after,
 .checkbox:checked::after {
-  content: '✓';
+  content: '鉁�';
   position: absolute;
   top: 0;
   left: 0;
@@ -1004,7 +1004,7 @@ margin: 10px 0;
 } */
 .cart-item>input.active:checked::after,
 .checkbox.active:checked::after {
-  content: '✓';
+  content: '鉁�';
   position: absolute;
   top: 0;
   left: 0;
@@ -1784,4 +1784,158 @@ width: 100%;
 
 .page-info-area.product_list .pagination {
 	justify-content: flex-end;
+}
+
+.go_re{z-index: 9999999999; width: 750px; height: auto; position:fixed;top:50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
+.go_re .close{z-index: 9999999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff;}
+.maskindex {
+	z-index: 9999999999;
+  	background-color: rgba(0, 0, 0, .6);
+}
+/* lottery */
+.lottery {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    box-shadow: 0 0 8px #000;
+    border-radius: 12px;
+}
+.lottery-email {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    background-color: #00b3ff;
+}
+.lottery-email>h4 {
+    font-size: 14px;
+    color: #fff;
+}
+.lottery-email>input {
+    display: inline-block;
+    width: 340px;
+    padding: 8px 12px;
+    margin-top: 12px;
+    font-size: 14px;
+    background-color: #fff;
+    border-style: none;
+    border-radius: 6px;
+}
+.lottery-email-tip {
+	height: 20px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #ff0000;
+}
+.lottery-game-box {
+    padding: 20px;
+    background-color: #fff;
+}
+.lottery-game {
+    width: 340px;
+    /* padding-top: 70px; */
+    padding-top: 116px;
+    padding-bottom: 36px;
+    margin: 0 auto;
+    background-color: #e7e7e7;
+    border-radius: 6px;;
+}
+.lottery-game-list,
+.lottery-startgame,
+.lottery-game-item {
+    width: 90px;
+    height: 90px;
+    border-radius: 6px;
+}
+.lottery-startgame {
+    position: relative;
+    z-index: 9999;
+    margin: 0 auto;
+    background-color: #008fd3;
+}
+.lottery-game-list {
+    position: relative;
+    top: -90px;
+    margin: 0 auto;
+}
+.lottery-startgame > .lottery-game-item {
+    box-sizing: border-box;
+    width: 100%;
+    height: 88%;
+    margin: 8px 0;
+    background-color: #00b3ff;
+    -webkit-transition: all .6s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.lottery-startgame.active > .lottery-game-item {
+    height: 90px;
+    padding-top: 10px;
+}
+.lottery-startgame > .lottery-game-item span {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+.lottery-startgame > .lottery-game-item span:first-of-type {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.lottery-startgame > .lottery-game-item span:last-of-type {
+    font-size: 16px;
+    font-weight: bolder
+}
+.lottery-game-list > .lottery-game-item {
+    position: absolute;
+    background-color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid transparent;
+}
+.lottery-game-list > .lottery-game-item.active {
+    border-color: red;
+    box-shadow: 0 0 6px red;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(1) {
+    top: -100px;
+    left: -100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(2) {
+    top: -100px;
+    left: 0;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(3) {
+    top: -100px;
+    left: 100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(4) {
+    top: 0;
+    left: 100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(5) {
+    top: 100px;
+    left: 100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(6) {
+    top: 100px;
+    left: 0;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(7) {
+    top: 100px;
+    left: -100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(8) {
+    top: 0;
+    left: -100px;
+}
+.lottery-result {
+	position: absolute;
+	width: 100%;
+	height: auto;
+	padding: 20px;
+}
+.lottery-container {
+	text-align: center;
 }
