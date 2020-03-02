@@ -341,7 +341,6 @@ public class MlbackCouponController {
 			
 			//把这个优惠券字段地算补充进去
 			mlfrontUserres.setUserCouponidstr(couponidstr);
-			
 			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserres);
 			
 		}else{
