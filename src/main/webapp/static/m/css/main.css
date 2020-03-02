@@ -2865,6 +2865,12 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
     border-style: none;
     border-radius: 6px;
 }
+.lottery-email-tip {
+	height: 20px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #ff0000;
+}
 .lottery-game-box {
     padding: 20px;
     background-color: #fff;
