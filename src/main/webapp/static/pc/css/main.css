@@ -1852,6 +1852,7 @@ width: 100%;
     z-index: 9999;
     margin: 0 auto;
     background-color: #008fd3;
+    cursor: pointer;
 }
 .lottery-game-list {
     position: relative;
@@ -1931,7 +1932,6 @@ width: 100%;
     left: -100px;
 }
 .lottery-result {
-	position: absolute;
 	width: 100%;
 	height: auto;
 	padding: 20px;
