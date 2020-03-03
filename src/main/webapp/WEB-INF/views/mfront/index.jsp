@@ -852,7 +852,6 @@
 	    }
 	    
 	    function renderLotterySuccess() {
-	    	console.log(lotteryData)
 	    	var lotteryResultHtml = '';
         	lotteryResultHtml += '<div class="lottery-result">'
         		+ '<div class="lottery-container">'
