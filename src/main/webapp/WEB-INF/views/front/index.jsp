@@ -731,7 +731,7 @@
 	        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	        return reg.test(email);
 	    }
-
+	
 	    function startGame() {
 	    	if (!isPushEmail) {
 		    	$.ajax({
@@ -740,7 +740,7 @@
 		            dataType: 'json',
 		            data: {
 		            	userEmail: emailEl.val(),
-		            	couponId: String(lotteryData.luckDrawCouponId)
+		            	couponId: String(lotteryData.couponId)
 		            },
 		            /* contentType: 'application/json', */
 		            success: function (data) {
@@ -754,15 +754,15 @@
 	            speed = 100,
 	            gameItemEls = $('.lottery-game-list .lottery-game-item'),
 	            currentItem = gameItemEls[rollCount % 8];
-
+	
 	        if (rollCount >= lotteryIndex + defaultTimes) {
 	            clearTimeout(timer);
 	            /* 重置 */
 	            rollCount = 0;
-            	$(prevItem).removeClass('active');
-            	isStartLottery = false;
-            	lotteryIndex = -1;
-
+	        	$(prevItem).removeClass('active');
+	        	isStartLottery = false;
+	        	lotteryIndex = -1;
+	
 	            if (isPushEmail) {
 	            	$(".lottery").hide();
 	            	/* $(".mask").hide(); */
@@ -771,12 +771,12 @@
 		            /* 5s后， 转盘出现 */
 		            var date = new Date();
 		            document.cookie = "isHideLottery=true;expires=" + (date.setTime(date.getTime() + 30 * 60 * 1000), date.toGMTString());
-		            setTimeout(function() {
+		            /* setTimeout(function() {
 		            	// alert('注册中')
 		            	window.location.reload();
-		            }, 3000);
+		            }, 10000); */
 	            } else {
-	            	$('.lottery-email-tip').text('抽奖失败，请重新尝试！');
+	            	$('.lottery-email-tip').text('Lucky draw failed, please try again!');
 	            }
 	        } else {
 	            speed = rollCount <= defaultTimes ? speed - 5 : speed + 20;
@@ -785,24 +785,42 @@
 	            $(currentItem).addClass('active');
 	            prevItem = currentItem;
 	            rollCount += 1;
-
+	
 	            timer = setTimeout(startGame, speed);
 	        }
 	    }
 	    
 	    function renderLotterySuccess() {
 	    	var lotteryResultHtml = '';
-        	lotteryResultHtml += '<div class="lottery-result">'
-        		+ '<div class="lottery-container"> 恭喜你获得' + lotteryData.luckDrawCouponCode + ': ' + lotteryData.luckDrawCouponId + '奖品 </br>' + '三秒后将自动注册'
-        		+ '</div></div>';
-        	$('.go_re').append(lotteryResultHtml);
+	    	lotteryResultHtml += '<div class="lottery-result">'
+	    		+ '<div class="lottery-container">'
+	    		+ '<div class="lottery-result-title">Congratulations!</div>'
+	    		+ '<div class="lottery-card">'
+	    		+ '<div class ="card-item card-price"><span>Discount</span><span>';
+	    	if (lotteryData.couponType) {
+	    		lotteryResultHtml += parseInt(lotteryData.couponPriceOff) + '%';
+	    	} else {
+	    		lotteryResultHtml += '$' + lotteryData.couponPrice;
+	    	}
+	    	lotteryResultHtml += '</span></div><div class="card-item card-name"><span>Name</span><span>' + lotteryData.couponName + '</span></div>'
+	    		+ '<div class="card-item card-code"><span>Code</span><span>' + lotteryData.couponCode + '</span></div>'
+	    		+ '<div class="card-use">'
+	    		+ (lotteryData.couponPriceBaseline ? 'Upon Order $' + lotteryData.couponPriceBaseline : 'No limit!') + '.</div>'
+	    		+ '</div>'
+	    		+ '<div class="card-tip">you can check it on your personal center!</div>'
+	    		+ '<div class="card-op">'
+	    		+ '<a class="btn" href="${APP_PATH}/MlfrontUser/tomCouponPage">Immediate Use</a>'
+	    		+ '<a class="btn" href="javascript: window.location.reload();">HOME</a>'
+	    		+ '</div></div></div>';
+	    	$('.go_re').append(lotteryResultHtml);
 	    }
-
+	
 	    function getLotteryIndex() {
 	    	var couponArr = [],
-    			couponList = [],
-    			lotteryRequest = null;
-
+				couponList = [],
+				index = 0,
+				lotteryRequest = null;
+	
 	    	$.ajax({
 	            url: '${APP_PATH}/MlbackCoupon/getMlbackCouponShowByLuckDrawType',
 	            type: 'post',
@@ -815,35 +833,36 @@
 	            	}
 	            }
 	        });
-
+	
 	        couponList = lotteryRequest.extend.mlbackCouponResList;
-			lotteryData = lotteryRequest.extend.luckDrawDate;
-
+	
 			if (lotteryCount < 1) {
 				var htmlStr = '',
 					lotteryGameListEl = document.querySelector('.lottery-game-list');
-
+	
 				for (var item in couponList) {
 					var itemData = couponList[item];
 					couponArr.push(itemData.couponId);
-					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgpcurl +'"/></div>';
+					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgwapurl + '"/></div>';
 				}
-
+	
 		    	setTimeout(function() {
 					lotteryGameListEl.innerHTML = htmlStr;
 					$(".go_re").show();
 					$(".mask").show();
 				}, 2000);
-
+	
 				$(".close").click(function(){
 					$(".go_re").hide();
 					$(".mask").hide();
 				});
 			}
-
-	        return couponArr.indexOf(lotteryData.luckDrawCouponId) + 1;
+			index = couponArr.indexOf(lotteryRequest.extend.luckDrawDate && lotteryRequest.extend.luckDrawDate.luckDrawCouponId);
+			lotteryData = couponList[index];
+	
+	        return index + 1;
 	    }
-
+	
 	    function checkUserEmail(email) {
 	    	var isUsed = false;
 	    	$.ajax({
@@ -852,7 +871,7 @@
 	            dataType: 'json',
 	            data: {
 	            	userEmail: email,
-	            	couponId: String(lotteryData.luckDrawCouponId)
+	            	couponId: String(lotteryData.couponId)
 	            },
 	            async: false,
 	            success: function (data) {
@@ -861,10 +880,10 @@
 	            	}
 	            },
 	            fail: function() {
-	            	$('.lottery-email-tip').text('邮箱验证失败，请重试');
+	            	$('.lottery-email-tip').text('The email address validation failed, please try again!');
 	            }
 	        });
-
+	
 	    	return isUsed;
 	    }
 	    
@@ -877,7 +896,7 @@
 	        else
 	            return null;
 	    }
-
+	
 	    var emailEl = $('.lottery-email input'),
 	        gameStartEl = $('.lottery-startgame'),
 	        isPushEmail = false,
@@ -893,8 +912,8 @@
 			$('.lottery-email-tip').text('');
 		});
 	    gameStartEl.on('click', function(e) {
-            var timer = null;
- 
+	        var timer = null;
+	
 			if (!isStartLottery) {
 				if (isValidEmail(emailEl.val())) {
 	            	isStartLottery = true;
@@ -902,13 +921,13 @@
 	            	if (!checkUserEmail(emailEl.val())) {
 	            		startGame();
 	            	} else {
-	            		$('.lottery-email-tip').text('该邮箱已使用过！');
+	            		$('.lottery-email-tip').text('This email address has been used!');
 	            		isStartLottery = false;
 	            	}
 	            } else {
-	            	$('.lottery-email-tip').text('请先输入合法的email');
+	            	$('.lottery-email-tip').text('Please enter a valid email address first!');
 	            }
-
+	
 				if (!gameStartEl.hasClass('active')) {
 	                gameStartEl.addClass('active');
 	                timer = setTimeout(function() {

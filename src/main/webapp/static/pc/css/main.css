@@ -1962,10 +1962,72 @@ width: 100%;
     left: -100px;
 }
 .lottery-result {
-	width: 100%;
+	width: 80%;
 	height: auto;
-	padding: 20px;
+	padding: 30px;
+	margin: 0 auto;
 }
 .lottery-container {
 	text-align: center;
+}
+
+.lottery-result-title {
+	font-size: 16px;
+	font-weight: bolder;
+}
+.lottery-card {
+	padding: 10px 16px;
+	margin-top: 28px;
+	margin-bottom: 16px;
+	background: url('') no-repeat;
+	border-radius: 6px;
+	box-shadow: 0 0 8px #000;
+	text-align: justify;
+}
+.lottery-card .card-item {
+	overflow: auto;
+}
+.lottery-card .card-item>span:nth-of-type(1) {
+	float: left;
+}
+.lottery-card .card-item>span:nth-of-type(2) {
+	float: right;
+}
+.lottery-card .card-price {
+	font-size: 14px;
+	color: #ff000;
+}
+.lottery-card .card-name {
+	font-size: 14px;
+}
+.lottery-card .card-code {
+	font-size: 16px;
+}
+.lottery-card .card-use {
+	font-style: italic;
+	color: #fe186e;
+}
+.card-tip {
+	font-size: 12px;
+	font-weight: bolder;
+}
+.card-op {
+	padding: 0 10px;
+	margin-top: 16px;
+	overflow: auto;
+}
+.card-op>.btn {
+	width: 40%;
+	padding: 6px 2px;
+	border: 1px solid #ccc;
+}
+.card-op>.btn:nth-of-type(1) {
+	float: left;
+	background-color: #000;
+	color: #fff;
+}
+.card-op>.btn:nth-of-type(2) {
+	float: right;
+	background-color: #fff;
+	color: #000;
 }
