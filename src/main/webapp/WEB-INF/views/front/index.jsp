@@ -768,9 +768,8 @@
 	            	/* $(".mask").hide(); */
 	            	renderLotterySuccess();
 		            lotteryData = null;
+		            logStatus();
 		            /* 5s后， 转盘出现 */
-		            var date = new Date();
-		            document.cookie = "isHideLottery=true;expires=" + (date.setTime(date.getTime() + 30 * 60 * 1000), date.toGMTString());
 		            /* setTimeout(function() {
 		            	// alert('注册中')
 		            	window.location.reload();
@@ -788,6 +787,11 @@
 	
 	            timer = setTimeout(startGame, speed);
 	        }
+	    }
+	    
+	    function logStatus() {
+	    	 var date = new Date();
+	         document.cookie = "isHideLottery=true;expires=" + (date.setTime(date.getTime() + 30 * 60 * 1000), date.toGMTString());
 	    }
 	    
 	    function renderLotterySuccess() {
@@ -855,6 +859,7 @@
 				$(".close").click(function(){
 					$(".go_re").hide();
 					$(".mask").hide();
+		            logStatus();
 				});
 			}
 			index = couponArr.indexOf(lotteryRequest.extend.luckDrawDate && lotteryRequest.extend.luckDrawDate.luckDrawCouponId);
