@@ -813,7 +813,7 @@
 	    		+ '</div>'
 	    		+ '<div class="card-tip">you can check it on your personal center!</div>'
 	    		+ '<div class="card-op">'
-	    		+ '<a class="btn" href="${APP_PATH}/MlfrontUser/topcCouponPage">Immediate Use</a>'
+	    		+ '<a class="btn" href="${APP_PATH}/MlfrontUser/toCouponPage">Immediate Use</a>'
 	    		+ '<a class="btn" href="javascript: window.location.reload();">HOME</a>'
 	    		+ '</div></div></div>';
 	    	$('.go_re').append(lotteryResultHtml);
