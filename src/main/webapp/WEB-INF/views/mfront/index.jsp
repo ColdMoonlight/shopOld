@@ -859,23 +859,22 @@
 	    	var lotteryResultHtml = '';
         	lotteryResultHtml += '<div class="lottery-result">'
         		+ '<div class="lottery-container">'
-        		+ '<div class="lottery-result-title">Congratulations!</div>'
+        		+ '<div class="lottery-result-title"><span>Congratulations!</span><span>You got a</span></div>'
         		+ '<div class="lottery-card">'
-        		+ '<div class ="card-item card-price"><span>Discount</span><span>';
+        		+ '<div class ="card-item card-price"><span>';
         	if (lotteryData.couponType) {
         		lotteryResultHtml += parseInt(lotteryData.couponPriceOff) + '%';
         	} else {
         		lotteryResultHtml += '$' + lotteryData.couponPrice;
         	}
-        	lotteryResultHtml += '</span></div><div class="card-item card-name"><span>Name</span><span>' + lotteryData.couponName + '</span></div>'
-        		+ '<div class="card-item card-code"><span>Code</span><span>' + lotteryData.couponCode + '</span></div>'
+        	lotteryResultHtml += '</span><span>Discount</span></div><div class="card-item card-code"><span>Your Discount Code is:</span><span>' + lotteryData.couponCode + '</span></div>'
         		+ '<div class="card-use">'
         		+ (lotteryData.couponPriceBaseline ? 'Upon Order $' + lotteryData.couponPriceBaseline : 'No limit!') + '.</div>'
         		+ '</div>'
-        		+ '<div class="card-tip">you can check it on your personal center!</div>'
+        		+ '<div class="card-tip">in order to use this discount add it to the relevant field in checkout!</div>'
         		+ '<div class="card-op">'
-        		+ '<a class="btn" href="${APP_PATH}/MlfrontUser/toCouponPage">Immediate Use</a>'
-        		+ '<a class="btn" href="javascript: window.location.reload();">HOME</a>'
+        		+ '<a class="btn" href="${APP_PATH}/MlfrontUser/toCouponPage">Use Discount</a>'
+        		/* + '<a class="btn" href="javascript: window.location.reload();">HOME</a>' */
         		+ '</div></div></div>';
         	$('.go_re').append(lotteryResultHtml);
 	    }

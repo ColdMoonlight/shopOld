@@ -3006,43 +3006,76 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .lottery-result {
 	width: 100%;
 	height: auto;
-	padding: 20px;
-	margin: 0 auto;
+	overflow: hidden;
+	border-radius: 6px;
 }
 .lottery-container {
+	width: 100%;
+	height: auto;
+	padding: 30px;
+	margin: 0 auto;
 	text-align: center;
+	background: url('http://5b0988e595225.cdn.sohucs.com/images/20170910/d80500036ffe48b596664d3c30ed84a0.jpeg') no-repeat;
+	background-size: 100% auto;
 }
-.lottery-result-title {
-	font-size: 16px;
+.lottery-result-title>span {
+	display: block;
+}
+.lottery-result-title>span:nth-of-type(1) {
+	font-size: 18px;
 	font-weight: bolder;
+}
+
+.lottery-result-title>span:nth-of-type(2) {
+	font-size: 12px;
 }
 .lottery-card {
 	padding: 10px 16px;
-	margin-top: 28px;
-	margin-bottom: 16px;
-	background: url('') no-repeat;
-	border-radius: 6px;
-	box-shadow: 0 0 8px #000;
-	text-align: justify;
+	margin: 16px 0;
+	border-radius: 16px;
+	box-shadow: 0 0 8px #dc81e2;
+	text-align: center;
+	background-color: #fff;
 }
 .lottery-card .card-item {
 	overflow: auto;
 }
-.lottery-card .card-item>span:nth-of-type(1) {
+.lottery-card .card-item>span {
+	display: block
+}
+/* .lottery-card .card-item>span:nth-of-type(1) {
 	float: left;
 }
 .lottery-card .card-item>span:nth-of-type(2) {
 	float: right;
-}
-.lottery-card .card-price {
-	font-size: 14px;
-	color: #ff000;
-}
-.lottery-card .card-name {
-	font-size: 14px;
-}
+} */
+.lottery-card .card-price,
 .lottery-card .card-code {
+	margin-bottom: 18px;
+}
+.lottery-card .card-price>span:nth-of-type(1) {
+	font-size: 26px;
+	font-weight: bolder;
+	color: #f30927;
+}
+.lottery-card .card-price>span:nth-of-type(2) {
 	font-size: 16px;
+	color: #383838;
+}
+/* .lottery-card .card-name {
+	font-size: 14px;
+} */
+.lottery-card .card-code>span {
+	display: block;
+}
+.lottery-card .card-code>span:nth-of-type(1) {
+	font-size: 16px;
+	color: #383838;
+}
+.lottery-card .card-code>span:nth-of-type(2) {
+	font-size: 26px;
+	font-weight: bolder;
+	color: #000;
 }
 .lottery-card .card-use {
 	font-style: italic;
@@ -3050,19 +3083,26 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 }
 .card-tip {
 	font-size: 12px;
-	font-weight: bolder;
+	/* font-weight: bolder; */
+	color: #fe186e;
 }
 .card-op {
 	padding: 0 10px;
 	margin-top: 16px;
 	overflow: auto;
+	text-align: center;
 }
 .card-op>.btn {
-	width: 40%;
-	padding: 6px 2px;
+	position: relative;
+	display: inline-block;
+	width: 50%;
+	padding: 8px;
+	font-size: 14px;
+	color: #fff;
 	border: 1px solid #ccc;
+	background-color: #f30927;
 }
-.card-op>.btn:nth-of-type(1) {
+/* .card-op>.btn:nth-of-type(1) {
 	float: left;
 	background-color: #000;
 	color: #fff;
@@ -3071,4 +3111,4 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 	float: right;
 	background-color: #fff;
 	color: #000;
-}
+} */
