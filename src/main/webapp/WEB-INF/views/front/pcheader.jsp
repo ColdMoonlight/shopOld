@@ -95,12 +95,15 @@
 		
 	</header>
 	<div class="kongbai"></div>
-	<div class="fix_iconnav">
+<!-- 	<div class="fix_iconnav">
 		<ul class="icon_nav">
 			<li id="cart_icon" class="cart_icon"><a href="###"></a><span class="cart_num">0</span></li>
 			<li class="go_top"><a href="###"></a></li>
 		</ul>
-	</div>
+	</div> -->
+	<div id="cart_icon" class="cart_icon liman"><a href="###"></a><span class="cart_num">0</span></div>
+	<div class="go_top liman"><a href="###"></a></div>
+	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>

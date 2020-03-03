@@ -8,7 +8,8 @@
  %>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
-	
+	<link rel="shortcut icon" sizes="120x120" href="${APP_PATH }/static/m/img/index/micon1.png">
+		<link rel="shortcut icon" sizes="180x180" href="${APP_PATH }/static/m/img/index/micon2.png">
 	
 	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
 	<script>
