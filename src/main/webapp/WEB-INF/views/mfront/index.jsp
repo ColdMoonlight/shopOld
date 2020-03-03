@@ -873,8 +873,9 @@
         		+ '</div>'
         		+ '<div class="card-tip">in order to use this discount add it to the relevant field in checkout!</div>'
         		+ '<div class="card-op">'
-        		+ '<a class="btn" href="${APP_PATH}/MlfrontUser/toCouponPage">Use Discount</a>'
-        		/* + '<a class="btn" href="javascript: window.location.reload();">HOME</a>' */
+        		+ '<a class="btn" href="javascript: window.location.reload();">Use Discount</a>'
+        		/* + '<a class="btn" href="${APP_PATH}/MlfrontUser/toCouponPage">Use Discount</a>'
+        		+ '<a class="btn" href="javascript: window.location.reload();">HOME</a>' */
         		+ '</div></div></div>';
         	$('.go_re').append(lotteryResultHtml);
 	    }
