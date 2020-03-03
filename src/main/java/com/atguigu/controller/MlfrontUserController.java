@@ -25,6 +25,7 @@ import com.atguigu.service.MlfrontUserService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
+import com.atguigu.utils.IfMobileUtils;
 
 @Controller
 @RequestMapping("/MlfrontUser")
@@ -422,23 +423,32 @@ public class MlfrontUserController {
 	 * @param jsp
 	 * @return  
 	 * */
-	@RequestMapping("/tomCouponPage")
-	public String tomCouponPage() throws Exception{
+	@RequestMapping("/toCouponPage")
+	public String toCouponPage(HttpServletResponse rep,HttpServletRequest res,HttpSession session) throws Exception{
+		
+		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
+		
+		 if(ifMobile.equals("1")){
+			  //return "mfront/index";
+			  return "mfront/myCoupon";
+		  }else{
+			  //return "front/index";
+			  return "front/pcmyCoupon";
+		  }
 	
-		return "mfront/myCoupon";
 	}
-	/**
-	 * 15.1	useOn	0505
-	 * to	topcCouponPage列表页面
-	 * @param jsp
-	 * @return  
-	 * */
-	@RequestMapping("/topcCouponPage")
-	public String topcCouponPage() throws Exception{
-	
-		return "front/pcmyCoupon";
-	}
-	
+//	/**
+//	 * 15.1	useOn	0505
+//	 * to	topcCouponPage列表页面
+//	 * @param jsp
+//	 * @return  
+//	 * */
+//	@RequestMapping("/topcCouponPage")
+//	public String topcCouponPage() throws Exception{
+//	
+//		return "front/pcmyCoupon";
+//	}
+//	
 	/**
 	 * 16.0	useOn	0505
 	 * to	tommyOrderPage列表页面
