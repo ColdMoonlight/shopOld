@@ -3007,6 +3007,7 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 	width: 100%;
 	height: auto;
 	padding: 20px;
+	margin: 0 auto;
 }
 .lottery-container {
 	text-align: center;
@@ -3059,6 +3060,7 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .card-op>.btn {
 	width: 40%;
 	padding: 6px 2px;
+	border: 1px solid #ccc;
 }
 .card-op>.btn:nth-of-type(1) {
 	float: left;
