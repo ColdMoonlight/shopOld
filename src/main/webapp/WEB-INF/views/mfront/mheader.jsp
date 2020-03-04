@@ -125,6 +125,17 @@
 <div class="kongbai"></div>
   <script>
 	  $(function(){
+		  var u = navigator.userAgent, app = navigator.appVersion;
+		     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+		     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		  if (isAndroid) {
+		  			 $("#addindex").remove();
+		  }
+		  if (isIOS) {
+			  $(".add_phone").show();
+		  }
+		  
+		  
 		  $(".add_phone").click(function(){
 		  			 $("#addindex").show(); 
 		  })
