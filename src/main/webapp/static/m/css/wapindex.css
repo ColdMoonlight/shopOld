@@ -68,7 +68,6 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .hot_index_product .swiper-button-prev.swiper-button-disabled{opacity:1;pointer-events:auto;background: url(../../pc/img/left.png) no-repeat; cursor: pointer;}
 
 
-
 /**/
 .newbtn_next,.newbtn_prev {z-index: 99; margin:-80px 0 0; width: 48px; height: 48px; position: absolute; top: 50%;}
 .newbtn_prev{left: 5px;background: url(../../pc/img/left.png) no-repeat;}
