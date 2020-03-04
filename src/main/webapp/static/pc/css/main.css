@@ -1786,7 +1786,7 @@ width: 100%;
 	justify-content: flex-end;
 }
 
-.go_re{z-index: 9999999999; width: 750px; height: auto; position:fixed;top:50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
+.go_re{z-index: 9999999999; width: 700px; height: auto; position:fixed;top:50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
 .go_re .close{z-index: 9999999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff; cursor: pointer;}
 .maskindex {
 	z-index: 9999999999;
@@ -1970,26 +1970,29 @@ width: 100%;
 .lottery-container {
 	width: 100%;
 	height: auto;
-	padding: 30px 160px;
+	padding: 60px 0;
 	margin: 0 auto;
 	text-align: center;
-	background: url('http://5b0988e595225.cdn.sohucs.com/images/20170910/d80500036ffe48b596664d3c30ed84a0.jpeg') no-repeat;
+    background: url('../../common/lottery-coupon-pc.jpg') no-repeat;
 	background-size: 100% auto;
 }
 .lottery-result-title>span {
 	display: block;
 }
 .lottery-result-title>span:nth-of-type(1) {
-	font-size: 20px;
+	font-size: 24px;
 	font-weight: bolder;
+	color: #fff;
 }
 
 .lottery-result-title>span:nth-of-type(2) {
 	font-size: 14px;
+	color: #fff;
 }
 .lottery-card {
-	padding: 10px 16px;
-	margin: 16px 0;
+	width: 340px;
+	padding: 30px 16px;
+	margin: 16px auto;
 	border-radius: 16px;
 	box-shadow: 0 0 8px #dc81e2;
 	text-align: center;
@@ -2019,6 +2022,7 @@ width: 100%;
 .lottery-card .card-price>span:nth-of-type(2) {
 	font-size: 16px;
 	color: #383838;
+	margin-top: 8px;
 }
 /* .lottery-card .card-name {
 	font-size: 14px;
@@ -2034,6 +2038,7 @@ width: 100%;
 	font-size: 26px;
 	font-weight: bolder;
 	color: #000;
+	margin-top: 8px;
 }
 .lottery-card .card-use {
 	font-style: italic;
