@@ -20,8 +20,8 @@
   <!-- uc 字体放大-->
   <meta name="wap-font-scale" content="no">
   <meta name="aplus-touch" content="1"> 
-  <link rel="shortcut icon" sizes="120x120" href="${APP_PATH }/static/m/img/index/micon1.png">
-  	<link rel="shortcut icon" sizes="180x180" href="${APP_PATH }/static/m/img/index/micon2.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="${APP_PATH }/static/m/img/index/micon1.png">
+  	<link rel="apple-touch-icon" sizes="180x180" href="${APP_PATH }/static/m/img/index/micon2.png">
   <!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
 	<script>
 	  !function(f,b,e,v,n,t,s)
