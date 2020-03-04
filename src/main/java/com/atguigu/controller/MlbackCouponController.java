@@ -338,13 +338,31 @@ public class MlbackCouponController {
 			MlfrontUser mlfrontUserres = mlfrontUserList.get(0);
 			String couponidstr= mlfrontUserres.getUserCouponidstr();
 			
-			couponidstr = couponidstr+","+couponId;
+			String[] couponidArr = couponidstr.split(",");
 			
-			//把这个优惠券字段地算补充进去
-			mlfrontUserres.setUserCouponidstr(couponidstr);
-
+			Integer isHave = 0; 
+			
+			for(int i=0;i<couponidArr.length;i++){
+				String couponOne = couponidArr[i];
+				if(couponOne.equals(couponId)){
+					isHave = 1;
+					break;
+				}
+			}
+			if(isHave==1){
+				//已经有老此优惠券了
+				System.out.println("该账户已经有此优惠券,无需要");
+			}else{
+				couponidstr = couponidstr+","+couponId;
+				
+				//把这个优惠券字段地算补充进去
+				mlfrontUserres.setUserCouponidstr(couponidstr);
+				
+			}
 			mlfrontUserreq.setUserMotifytime(nowtime);
+			mlfrontUserreq.setUserLastonlinetime(nowtime);
 			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserres);
+			
 			
 		}else{
 			//1,不存在的话，补全默认信息，新增此条账号数据，强制登陆
