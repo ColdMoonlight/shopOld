@@ -7,4 +7,5 @@ public interface DownPayEcppDateMapper {
 
 	List<DownPayEcppDate> selectHighPayEcppList(DownPayEcppDate downPayEcppDateReq);
     
+	
 }
