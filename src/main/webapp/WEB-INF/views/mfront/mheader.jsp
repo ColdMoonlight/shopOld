@@ -131,6 +131,12 @@
 		  $("#addindex p span").click(function(){
 		  	 $("#addindex").hide(); 
 		  })
+		  var u = navigator.userAgent, app = navigator.appVersion;
+		  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+		  if (isAndroid) {
+		     $(".add_phone").remove();
+			 $(".addindex").remove();
+		  }
 		  $(window).scroll(function(){
 			   var scrollhead=$(window).scrollTop();
 			   if(scrollhead>1000){
