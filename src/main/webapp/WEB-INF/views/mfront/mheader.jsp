@@ -125,18 +125,23 @@
 <div class="kongbai"></div>
   <script>
 	  $(function(){
+		  var u = navigator.userAgent, app = navigator.appVersion;
+		     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+		     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		  if (isAndroid) {
+		  			 $("#addindex").remove();
+		  }
+		  if (isIOS) {
+			  $(".add_phone").show();
+		  }
+		  
+		  
 		  $(".add_phone").click(function(){
 		  			 $("#addindex").show(); 
 		  })
 		  $("#addindex p span").click(function(){
 		  	 $("#addindex").hide(); 
 		  })
-		  var u = navigator.userAgent, app = navigator.appVersion;
-		  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
-		  if (isAndroid) {
-		     $(".add_phone").remove();
-			 $(".addindex").remove();
-		  }
 		  $(window).scroll(function(){
 			   var scrollhead=$(window).scrollTop();
 			   if(scrollhead>1000){
