@@ -3015,7 +3015,7 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 	padding: 30px;
 	margin: 0 auto;
 	text-align: center;
-	background: url('http://5b0988e595225.cdn.sohucs.com/images/20170910/d80500036ffe48b596664d3c30ed84a0.jpeg') no-repeat;
+    background: url('../../common/lottery-coupon-wap.jpg') no-repeat;
 	background-size: 100% auto;
 }
 .lottery-result-title>span {
@@ -3024,10 +3024,12 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .lottery-result-title>span:nth-of-type(1) {
 	font-size: 18px;
 	font-weight: bolder;
+	color: #fff;
 }
 
 .lottery-result-title>span:nth-of-type(2) {
 	font-size: 12px;
+	color: #fff;
 }
 .lottery-card {
 	padding: 10px 16px;
