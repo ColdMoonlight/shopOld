@@ -64,6 +64,7 @@ public class DownPayIFDate {
 	public DownPayIFDate() {
 		super();
 	}
+	
 	public DownPayIFDate(Integer payinfoId, Integer payinfoOid, BigDecimal payinfoMoney, Integer payinfoStatus,
 			String payinfoCreatetime, String payinfoMotifytime, MlfrontOrder mlfrontOrder,
 			MlfrontAddress mlfrontAddress) {
@@ -77,6 +78,7 @@ public class DownPayIFDate {
 		this.mlfrontOrder = mlfrontOrder;
 		this.mlfrontAddress = mlfrontAddress;
 	}
+	
 	@Override
 	public String toString() {
 		return "DownPayIFDate [payinfoId=" + payinfoId + ", payinfoOid=" + payinfoOid + ", payinfoMoney=" + payinfoMoney
