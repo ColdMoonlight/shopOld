@@ -864,7 +864,7 @@
         		+ '<div class="lottery-result-title"><span>Congratulations!</span><span>You got a</span></div>'
         		+ '<div class="lottery-card">'
         		+ '<div class ="card-item card-price"><span>';
-        	if (lotteryData.couponType) {
+        	if (parseInt(lotteryData.couponType)) {
         		lotteryResultHtml += parseInt(lotteryData.couponPriceOff) + '%';
         	} else {
         		lotteryResultHtml += '$' + lotteryData.couponPrice;
