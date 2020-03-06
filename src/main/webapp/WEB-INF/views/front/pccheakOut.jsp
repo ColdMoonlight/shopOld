@@ -1391,8 +1391,11 @@
 			var len = data.length;
 			var allSubtotalPrice = 0;
 			var allOriginPrice = 0;
-			if (len === 0) {
-				return 0;
+			if (len == 0) {
+				return {
+					allOriginPrice: 0,
+					allSubtotalPrice: 0
+				};
 			}
 			// console.log(data);
 			for (var i = 0; i < len; i += 1) {
