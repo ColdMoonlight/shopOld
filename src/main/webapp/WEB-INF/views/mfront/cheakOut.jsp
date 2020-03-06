@@ -904,11 +904,12 @@
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
 						<div class="sale_copen">
-							<p> Happy Valentine's Day! Megalook Hair For Your Lover! </p>
+							<p> Megalook Hair Spring Clearance Sale! You Buy, You Earn! </p>
 							<ul>
-							  <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li>
-							  <li>Extra<span>15%</span> off upon order $199 with code: <b>VA15</b></li>
+							  <!-- <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li> -->
+							  <li>Extra<span>15%</span> off upon order $99 with code: <b>MS15</b></li>
 							</ul>
+							
 						</div>
 						<div class="group-details coupons active"></div>
 					</li>
