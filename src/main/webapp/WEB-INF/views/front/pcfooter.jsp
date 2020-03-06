@@ -17,7 +17,17 @@
 			<div class="row">
 				<div class="tt-footer-logo col-lg-2 col-md-12">
 					<img src="${APP_PATH }/static/pc/img/dblogo.png" alt="" style="width:150px">
-		      <div >Our Hair Your Glory</div>
+					<div style="margin-top:6px;">Our Hair Your Glory</div>
+					<div class="follow-us">
+						<ul class="follow-us-list">
+							<li class="follow-icon facebook" title="facebook"><a href="https://www.facebook.com/MegalookHairCompany/"></a></li>
+							<li class="follow-icon instagram" title="instagram"><a href="https://www.instagram.com/megalookhair/"></a></li>
+							<li class="follow-icon pinterest" title="pinterest"><a href="https://www.pinterest.com/amegalook/"></a></li>
+							<li class="follow-icon snapchat" title="snapchat"><a href="https://www.snapchat.com/add/megalook-hair"></a></li>
+							<li class="follow-icon youtube" title="youtube"><a href="https://www.youtube.com/channel/UCbbrYL1KabTMlXFmQhFWtmw?view_as=subscriber"></a></li>
+							<!-- <li class="follow-icon twitter" title="twitter"><a href="https://twitter.com/megalookhair"></a></li> -->
+						</ul>
+					</div>
 				</div>
 				<div class="tt-footer-nav col-lg-10 col-md-12"></div>
 			</div>

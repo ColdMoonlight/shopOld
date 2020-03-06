@@ -904,11 +904,12 @@
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
 						<div class="sale_copen">
-							<p> Happy Chinese New Year! 2020 To Be Better Woman! </p>
+							<p> Megalook Hair Spring Clearance Sale! You Buy, You Earn! </p>
 							<ul>
-							  <li>Extra<span>10%</span> off No Limit with code: <b>SF10</b></li>
-							  <li>Extra<span>13%</span> off upon order $180 with code: <b>SF13</b></li>
+							  <!-- <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li> -->
+							  <li>Extra<span>15%</span> off upon order $99 with code: <b>MS15</b></li>
 							</ul>
+							
 						</div>
 						<div class="group-details coupons active"></div>
 					</li>
@@ -1320,7 +1321,7 @@
 						if(orginalItemNum>0){
 							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
 						}else{
-							renderSysMsg('The shopping cart is empty, return to the shopping cart page after 5s.');
+							renderSysMsg('The order is empty, return to the shopping cart page after 5s.');
 							setTimeout(function() {
 								window.location.href = '${APP_PATH}/myCart.html';
 							}, 5000);

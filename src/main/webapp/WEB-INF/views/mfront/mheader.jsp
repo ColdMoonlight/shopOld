@@ -58,6 +58,9 @@
 	
 	  gtag('config', 'UA-148326913-1');
 	</script>
+	<style type="text/css">
+		#addindex{z-index: 9999999999999 !important;}
+	</style>
 </head>
 
 <body>
@@ -65,6 +68,10 @@
   <!--header  -->
   <!-- <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a> <span class="close"></span></div> -->
     <!-- <div class="fixed_small"><a href="javascript:;"></a></div> -->
+	<div id="addindex">
+	    <p><span>x</span></p>
+	    <img src="${APP_PATH }/static/m/img/index/add.gif" /></a>	
+	</div>
   <div class="header bd-b">
 	  <div class="img_show">
 	  <a href="javascript:;"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
@@ -88,6 +95,7 @@
 	        <img src="${APP_PATH }/static/m/img/index/logo.png" alt="">
 	      </div>
       </a>
+	   <span class="icon add_phone"></span>
       <span class="icon cart"><span class="num hide">0</span></span>
       <span class="icon search"></span>
     </div>
@@ -117,9 +125,26 @@
 <div class="kongbai"></div>
   <script>
 	  $(function(){
+		  var u = navigator.userAgent, app = navigator.appVersion;
+		     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+		     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		  if (isAndroid) {
+		  			 $("#addindex").remove();
+		  }
+		  if (isIOS) {
+			  $(".add_phone").show();
+		  }
+		  
+		  
+		  $(".add_phone").click(function(){
+		  			 $("#addindex").show(); 
+		  })
+		  $("#addindex p span").click(function(){
+		  	 $("#addindex").hide(); 
+		  })
 		  $(window).scroll(function(){
 			   var scrollhead=$(window).scrollTop();
-			   if(scrollhead>5){
+			   if(scrollhead>1000){
 				   $(".header").addClass("headActive")
 				   $(".show_ul").hide();
 			   }else{

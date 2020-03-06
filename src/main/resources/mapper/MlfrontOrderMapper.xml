@@ -243,7 +243,7 @@
   </update>
   
   <!-- insert -->
-  <insert id="insertSelective" parameterType="com.atguigu.bean.MlfrontOrder">
+  <insert id="insertSelective"  keyProperty="orderId" useGeneratedKeys="true" parameterType="com.atguigu.bean.MlfrontOrder">
     insert into tb_mlfront_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">

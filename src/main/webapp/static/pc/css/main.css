@@ -248,6 +248,52 @@ header .tt-account .tt-dropdown-menu {
   text-align: center;
 }
 
+/* follow-us */
+.follow-us {
+  width:100%;
+  /* background: #000; */
+}
+/* .follow-us h3 {
+  padding: 16px 0;
+  text-align: center;
+  color: #fff;
+} */
+.follow-us-list {
+  padding: 10px 0;
+  text-align: center;
+}
+.follow-us .follow-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 0 6px;
+}
+.follow-us .follow-icon>a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.follow-us .follow-icon.facebook {
+  background-image: url(../img/facebook.png);
+}
+.follow-us .follow-icon.instagram {
+  background-image: url(../img/instagram.png);
+}
+.follow-us .follow-icon.pinterest {
+  background-image: url(../img/pinterest.png);
+}
+.follow-us .follow-icon.snapchat {
+  background-image: url(../img/snapchat.png);
+}
+.follow-us .follow-icon.youtube {
+  background-image: url(../img/youtube.png);
+}
+/* .follow-us .follow-icon.twitter {
+  background-image: url(../img/twitter.png);
+} */
+
 .banner {
 	text-align: center;
 }
@@ -898,7 +944,7 @@ margin: 10px 0;
 	margin-left: .25em;
 }
 
-/**购物车列表***/
+/**璐墿杞﹀垪琛�***/
 .cart-item {
   display: flex;
   align-items: flex-start;
@@ -935,7 +981,7 @@ margin: 10px 0;
 
 /* .cart-item>input:checked::after,
 .checkbox:checked::after {
-  content: '✓';
+  content: '鉁�';
   position: absolute;
   top: 0;
   left: 0;
@@ -958,7 +1004,7 @@ margin: 10px 0;
 } */
 .cart-item>input.active:checked::after,
 .checkbox.active:checked::after {
-  content: '✓';
+  content: '鉁�';
   position: absolute;
   top: 0;
   left: 0;
@@ -1739,3 +1785,294 @@ width: 100%;
 .page-info-area.product_list .pagination {
 	justify-content: flex-end;
 }
+
+.go_re{z-index: 9999999999; width: 700px; height: auto; position:fixed;top:50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
+.go_re .close{z-index: 9999999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff; cursor: pointer;}
+.maskindex {
+	z-index: 9999999999;
+  	background-color: rgba(0, 0, 0, .6);
+}
+/* lottery */
+.lottery {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    box-shadow: 0 0 8px #000;
+    border-radius: 12px;
+}
+.lottery-email {
+    width: 100%;
+    padding: 30px 0;
+    text-align: center;
+    /* background-color: #00b3ff; */
+    background: url('../../common/lottery-wap.jpg') no-repeat;
+    background-size: 100% 100%;
+}
+.lottery-title {
+	width: 100%;
+	color: #fff;
+	text-align: center;
+}
+.lottery-title>span {
+	display: block;
+}
+.lottery-title>span:nth-of-type(1) {
+	font-size: 30px;
+    font-weight: bolder;
+	font-family: monospace;
+}
+.lottery-title>span:nth-of-type(2) {
+	margin-top: 4px;
+	font-size: 14px;
+	font-weight: bolder;
+}
+.lottery-title>span:nth-of-type(3) {
+    margin-top: 20px;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: normal;
+    color: #fff;
+}
+.lottery-email>input {
+    display: inline-block;
+    width: 340px;
+    padding: 8px 24px;
+    font-size: 14px;
+    background-color: #fff;
+    border-style: none;
+    border-radius: 30px;
+}
+.lottery-email-tip {
+	height: 20px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #fff;
+	font-style: italic;
+}
+.lottery-game-box {
+    padding: 20px;
+    background-color: #fff;
+}
+.lottery-game {
+    width: 340px;
+    /* padding-top: 70px; */
+    padding-top: 126px;
+    padding-bottom: 36px;
+    margin: 0 auto;
+    background-color: #d7d6d6;
+    border-radius: 6px;;
+}
+.lottery-game-list,
+.lottery-startgame,
+.lottery-game-item {
+    width: 90px;
+    height: 90px;
+    border-radius: 6px;
+    box-shadow: 0 0 6px #cdcdcd;
+}
+.lottery-startgame {
+    position: relative;
+    z-index: 9999;
+    margin: 0 auto;
+    cursor: pointer;
+    background: url('../../common/start-game.png') no-repeat;
+    background-size: 100% 100%;
+}
+.lottery-game-list {
+    position: relative;
+    top: -90px;
+    margin: 0 auto;
+}
+/* .lottery-startgame > .lottery-game-item {
+    box-sizing: border-box;
+    width: 100%;
+    height: 88%;
+    margin: 8px 0;
+    background-color: #00b3ff;
+    -webkit-transition: all .6s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.lottery-startgame.active > .lottery-game-item {
+    height: 90px;
+    padding-top: 10px;
+}
+.lottery-startgame > .lottery-game-item span {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+.lottery-startgame > .lottery-game-item span:first-of-type {
+    margin-top: 10px;
+    font-size: 14px;
+}
+.lottery-startgame > .lottery-game-item span:last-of-type {
+    font-size: 16px;
+    font-weight: bolder
+} */
+.lottery-game-list > .lottery-game-item {
+    position: absolute;
+    overflow: hidden;
+    background-color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid transparent;
+}
+.lottery-game-list > .lottery-game-item > img {
+	width: 100%;
+	height: 100%;
+}
+.lottery-game-list > .lottery-game-item.active {
+    border-color: red;
+    box-shadow: 0 0 6px red;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(1) {
+    top: -100px;
+    left: -100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(2) {
+    top: -100px;
+    left: 0;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(3) {
+    top: -100px;
+    left: 100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(4) {
+    top: 0;
+    left: 100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(5) {
+    top: 100px;
+    left: 100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(6) {
+    top: 100px;
+    left: 0;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(7) {
+    top: 100px;
+    left: -100px;
+}
+.lottery-game-list > .lottery-game-item:nth-of-type(8) {
+    top: 0;
+    left: -100px;
+}
+.lottery-result {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	border-radius: 6px;
+}
+.lottery-container {
+	width: 100%;
+	height: auto;
+	padding: 60px 0;
+	margin: 0 auto;
+	text-align: center;
+    background: url('../../common/lottery-coupon-pc.jpg') no-repeat;
+	background-size: 100% auto;
+}
+.lottery-result-title>span {
+	display: block;
+}
+.lottery-result-title>span:nth-of-type(1) {
+	font-size: 24px;
+	font-weight: bolder;
+	color: #fff;
+}
+
+.lottery-result-title>span:nth-of-type(2) {
+	font-size: 14px;
+	color: #fff;
+}
+.lottery-card {
+	width: 340px;
+	padding: 30px 16px;
+	margin: 16px auto;
+	border-radius: 16px;
+	box-shadow: 0 0 8px #dc81e2;
+	text-align: center;
+	background-color: #fff;
+}
+/* .lottery-card .card-item {
+	overflow: auto;
+} */
+.lottery-card .card-item>span {
+	display: block
+}
+/* .lottery-card .card-item>span:nth-of-type(1) {
+	float: left;
+}
+.lottery-card .card-item>span:nth-of-type(2) {
+	float: right;
+} */
+.lottery-card .card-price,
+.lottery-card .card-code {
+	margin-bottom: 18px;
+}
+.lottery-card .card-price>span:nth-of-type(1) {
+	font-size: 26px;
+	font-weight: bolder;
+	color: #f30927;
+}
+.lottery-card .card-price>span:nth-of-type(2) {
+	font-size: 16px;
+	color: #383838;
+	margin-top: 8px;
+}
+/* .lottery-card .card-name {
+	font-size: 14px;
+} */
+.lottery-card .card-code>span {
+	display: block;
+}
+.lottery-card .card-code>span:nth-of-type(1) {
+	font-size: 16px;
+	color: #383838;
+}
+.lottery-card .card-code>span:nth-of-type(2) {
+	font-size: 26px;
+	font-weight: bolder;
+	color: #000;
+	margin-top: 8px;
+}
+.lottery-card .card-use {
+	font-style: italic;
+	color: #fe186e;
+}
+.card-tip {
+	font-size: 12px;
+	/* font-weight: bolder; */
+	color: #fe186e;
+}
+.card-op {
+	padding: 0 10px;
+	margin-top: 16px;
+	overflow: auto;
+	text-align: center;
+}
+.card-op>.btn {
+	position: relative;
+	display: inline-block;
+	width: 50%;
+	padding: 8px;
+	font-size: 16px;
+    line-height: 1.4;
+	color: #fff;
+	border: 1px solid #ccc;
+	background-color: #f30927;
+}
+/* .card-op>.btn:nth-of-type(1) {
+	float: left;
+	background-color: #000;
+	color: #fff;
+}
+.card-op>.btn:nth-of-type(2) {
+	float: right;
+	background-color: #fff;
+	color: #000;
+} */

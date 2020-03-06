@@ -35,5 +35,7 @@ public interface MlfrontPayInfoMapper {
 	List<MlfrontPayInfo> selectMlfrontPayInfoGetAll();
 	//通过时间查询全部登陆用户00
 	List<MlfrontPayInfo> selectMlfrontPayInfoByDate(MlfrontPayInfo mlfrontPayInfo);
+	//高级查询,多条件筛选
+	List<MlfrontPayInfo> selectHighPayInfoListBySearch(MlfrontPayInfo mlfrontPayInfoReq);
     
 }

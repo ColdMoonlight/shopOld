@@ -19,6 +19,10 @@ public class MlbackCoupon {
     
     private String couponType;  //优惠码类型  0满减的,1百分比折扣的    手动输入
     
+    private Integer couponLuckDrawType;		//优惠码是否支持抽奖  0不支持抽奖,1支持抽奖    手动输入
+    
+    private Integer couponLuckDrawWeight;	//优惠码抽奖权重 0--100%    手动输入
+    
     private Integer couponTimes;  //优惠码已经使用次数  如  999,998次
     
     private Integer couponAllTimes;  //优惠码可以使用总次数  如  999,998次
@@ -103,6 +107,22 @@ public class MlbackCoupon {
 
 	public void setCouponType(String couponType) {
 		this.couponType = couponType == null ? null : couponType.trim();
+	}
+	
+	public Integer getCouponLuckDrawType() {
+		return couponLuckDrawType;
+	}
+
+	public void setCouponLuckDrawType(Integer couponLuckDrawType) {
+		this.couponLuckDrawType = couponLuckDrawType;
+	}
+
+	public Integer getCouponLuckDrawWeight() {
+		return couponLuckDrawWeight;
+	}
+
+	public void setCouponLuckDrawWeight(Integer couponLuckDrawWeight) {
+		this.couponLuckDrawWeight = couponLuckDrawWeight;
 	}
 
 	public Integer getCouponTimes() {
@@ -192,5 +212,20 @@ public class MlbackCoupon {
 	public void setCouponAreaNum(Integer couponAreaNum) {
 		this.couponAreaNum = couponAreaNum;
 	}
+
+	@Override
+	public String toString() {
+		return "MlbackCoupon [couponId=" + couponId + ", couponName=" + couponName + ", couponPrice=" + couponPrice
+				+ ", couponPriceOff=" + couponPriceOff + ", couponPriceBaseline=" + couponPriceBaseline
+				+ ", couponStatus=" + couponStatus + ", couponCode=" + couponCode + ", couponType=" + couponType
+				+ ", couponLuckDrawType=" + couponLuckDrawType + ", couponLuckDrawWeight=" + couponLuckDrawWeight
+				+ ", couponTimes=" + couponTimes + ", couponAllTimes=" + couponAllTimes + ", couponAdminId="
+				+ couponAdminId + ", couponAdminOperatorname=" + couponAdminOperatorname + ", couponCreatetime="
+				+ couponCreatetime + ", couponMotifytime=" + couponMotifytime + ", couponStarttime=" + couponStarttime
+				+ ", couponEndtime=" + couponEndtime + ", couponImgwapurl=" + couponImgwapurl + ", couponImgpcurl="
+				+ couponImgpcurl + ", couponAreaNum=" + couponAreaNum + "]";
+	}
+	
+	
     
 }

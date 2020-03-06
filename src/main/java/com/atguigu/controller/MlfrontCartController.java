@@ -74,10 +74,10 @@ public class MlfrontCartController {
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//1手机0PC
 		if(ifMobile.equals("1")){
-			System.out.println("操作说明:进入wap-CheakOut页面");
+//			System.out.println("操作说明:进入wap-CheakOut页面");
 			return "mfront/cheakOut";
 		}else{
-			System.out.println("操作说明:进入PC-CheakOut页面");
+//			System.out.println("操作说明:进入PC-CheakOut页面");
 			return "front/pccheakOut";
 		}
 	}
@@ -182,8 +182,11 @@ public class MlfrontCartController {
 							Integer accoff =  mlfrontCartItem.getCartitemProductActoff();
 							mlfrontCartItem.setCartitemProductActoff(accoff*10);
 							mlfrontCartItemService.insertSelective(mlfrontCartItem);
-							List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
-							Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+							
+//							List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
+//							Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+							Integer cartItemId = mlfrontCartItem.getCartitemId();
+
 							String cartItemIdStrnew = cartItemId+"";
 							cartitemIdstrUser=cartitemIdstrUser+","+cartItemIdStrnew;
 							MlfrontCart mlfrontCartAfter = new MlfrontCart();
@@ -207,8 +210,12 @@ public class MlfrontCartController {
 				mlfrontCartItem.setCartitemMotifytime(nowTime);
 				mlfrontCartItem.setCartitemStatus(0);
 				mlfrontCartItemService.insertSelective(mlfrontCartItem);
-				List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
-				Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+				
+//				List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
+//				Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+				
+				Integer cartItemId = mlfrontCartItem.getCartitemId();
+
 				//拿回来主键ID		mlfrontCartItem
 				MlfrontCart MlfrontCartItemReturn = new MlfrontCart();
 				String cartItemIdStr = cartItemId+"";
@@ -221,8 +228,11 @@ public class MlfrontCartController {
 				Integer accoff =  mlfrontCartItem.getCartitemProductActoff();
 				mlfrontCartItem.setCartitemProductActoff(accoff*10);
 				mlfrontCartService.insertSelective(MlfrontCartItemReturn);
-				List<MlfrontCart> mlfrontCartInsertAfterList= mlfrontCartService.selectMlfrontCartGetAll();
-				Integer cartAfterId = mlfrontCartInsertAfterList.get(0).getCartId();
+//				List<MlfrontCart> mlfrontCartInsertAfterList= mlfrontCartService.selectMlfrontCartGetAll();
+//				Integer cartAfterId = mlfrontCartInsertAfterList.get(0).getCartId();
+				
+				Integer cartAfterId = MlfrontCartItemReturn.getCartId();
+
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
@@ -309,8 +319,12 @@ public class MlfrontCartController {
 							Integer accoff =  mlfrontCartItem.getCartitemProductActoff();
 							mlfrontCartItem.setCartitemProductActoff(accoff*10);
 							mlfrontCartItemService.insertSelective(mlfrontCartItem);
-							List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
-							Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+							
+//							List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
+//							Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+							
+							Integer cartItemId = mlfrontCartItem.getCartitemId();
+
 							String cartItemIdStrnew = cartItemId+"";
 							cartitemIdstrUser=cartitemIdstrUser+","+cartItemIdStrnew;
 							MlfrontCart mlfrontCartAfter = new MlfrontCart();
@@ -337,8 +351,12 @@ public class MlfrontCartController {
 				Integer accoff =  mlfrontCartItem.getCartitemProductActoff();
 				mlfrontCartItem.setCartitemProductActoff(accoff*10);
 				mlfrontCartItemService.insertSelective(mlfrontCartItem);
-				List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
-				Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+				
+//				List<MlfrontCartItem> mlfrontCartItemList = mlfrontCartItemService.selectMlfrontCartItemGetAll();
+//				Integer cartItemId = mlfrontCartItemList.get(0).getCartitemId();
+				
+				Integer cartItemId = mlfrontCartItem.getCartitemId();
+
 				//拿回来主键ID		mlfrontCartItem
 				MlfrontCart MlfrontCartItemReturn = new MlfrontCart();
 				String cartItemIdStr = cartItemId+"";
@@ -348,8 +366,12 @@ public class MlfrontCartController {
 				MlfrontCartItemReturn.setCartCreatetime(nowTime);
 				MlfrontCartItemReturn.setCartMotifytime(nowTime);
 				mlfrontCartService.insertSelective(MlfrontCartItemReturn);
-				List<MlfrontCart> mlfrontCartInsertAfterList= mlfrontCartService.selectMlfrontCartGetAll();
-				Integer cartAfterId = mlfrontCartInsertAfterList.get(0).getCartId();
+				
+//				List<MlfrontCart> mlfrontCartInsertAfterList= mlfrontCartService.selectMlfrontCartGetAll();
+//				Integer cartAfterId = mlfrontCartInsertAfterList.get(0).getCartId();
+				
+				Integer cartAfterId = MlfrontCartItemReturn.getCartId();
+
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
@@ -413,7 +435,7 @@ public class MlfrontCartController {
 					String[] aa = cartitemIdStr.split(",");
 					number=aa.length;
 				}
-				System.out.println(number);
+				//System.out.println(number);
 			}else{
 				number = 0;
 			}
@@ -428,7 +450,7 @@ public class MlfrontCartController {
 					String[] aa = cartitemIdStr.split(",");
 					number=aa.length;
 				}
-				System.out.println(number);
+				//System.out.println(number);
 			}else{
 				number = 0;
 			}
@@ -508,7 +530,7 @@ public class MlfrontCartController {
 		//计算cart到boynow的加购次数
 		calcFormCartListToCheakoutPage(mlfrontCartItemList,session);
 		//接收传递进来的参数
-		System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
+		//System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
 		//从其中一个中获取cartId
 		Integer cartId = 0;
 		String sessionId = session.getId();
@@ -1145,7 +1167,7 @@ public class MlfrontCartController {
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
-				System.out.println(mlfrontCartItem);
+				//System.out.println(mlfrontCartItem);
 				mlfrontCartItemListBuyNow.add(mlfrontCartItem);
 			}
 			//loginUser加购已完毕,准备生成订单	

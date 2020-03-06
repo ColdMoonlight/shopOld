@@ -118,7 +118,7 @@
 	})
 
 	$('#coupon_info').on('click', function () {
-		window.location.href = "${APP_PATH }/MlfrontUser/topcCouponPage";
+		window.location.href = "${APP_PATH }/MlfrontUser/toCouponPage";
 	})
 
 	$('#personal_info').on('click', function () {

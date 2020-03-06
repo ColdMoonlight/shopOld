@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="google-site-verification" content="SAL4KVmok7Gucsll1buOMRYO2RQVPPNdF163maxOVSU" />
 <title></title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());
@@ -14,8 +15,6 @@
 		http://localhost:3306/crud
 -->
 <script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
-
-
 
 </head>
 <body>
@@ -28,4 +27,5 @@
 	}) 
 </script>
 </body>
+
 </html>

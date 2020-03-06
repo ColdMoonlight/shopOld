@@ -190,5 +190,51 @@ public class MlfrontUser {
 	public void setUserStr(String userStr) {
 		this.userStr = userStr == null ? null : userStr.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "MlfrontUser [userId=" + userId + ", userEmail=" + userEmail + ", userPassword=" + userPassword
+				+ ", userTelephone=" + userTelephone + ", userAddressCountry=" + userAddressCountry
+				+ ", userAddressProvince=" + userAddressProvince + ", userAddressCity=" + userAddressCity
+				+ ", userAddressStreetaddress=" + userAddressStreetaddress + ", userAddressPostalcode="
+				+ userAddressPostalcode + ", userFirstname=" + userFirstname + ", userLastname=" + userLastname
+				+ ", userCreatetime=" + userCreatetime + ", userMotifytime=" + userMotifytime + ", userLastonlinetime="
+				+ userLastonlinetime + ", userPoint=" + userPoint + ", userCouponidstr=" + userCouponidstr
+				+ ", userTimes=" + userTimes + ", userVipLevel=" + userVipLevel + ", userStr=" + userStr + "]";
+	}
+
+	public MlfrontUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public MlfrontUser(Integer userId, String userEmail, String userPassword, String userTelephone,
+			String userAddressCountry, String userAddressProvince, String userAddressCity,
+			String userAddressStreetaddress, String userAddressPostalcode, String userFirstname, String userLastname,
+			String userCreatetime, String userMotifytime, String userLastonlinetime, Integer userPoint,
+			String userCouponidstr, Integer userTimes, Integer userVipLevel, String userStr) {
+		super();
+		this.userId = userId;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.userTelephone = userTelephone;
+		this.userAddressCountry = userAddressCountry;
+		this.userAddressProvince = userAddressProvince;
+		this.userAddressCity = userAddressCity;
+		this.userAddressStreetaddress = userAddressStreetaddress;
+		this.userAddressPostalcode = userAddressPostalcode;
+		this.userFirstname = userFirstname;
+		this.userLastname = userLastname;
+		this.userCreatetime = userCreatetime;
+		this.userMotifytime = userMotifytime;
+		this.userLastonlinetime = userLastonlinetime;
+		this.userPoint = userPoint;
+		this.userCouponidstr = userCouponidstr;
+		this.userTimes = userTimes;
+		this.userVipLevel = userVipLevel;
+		this.userStr = userStr;
+	}
+	
+	
 	
 }
