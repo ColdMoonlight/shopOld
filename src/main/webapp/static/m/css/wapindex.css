@@ -48,7 +48,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .grid_cont{width: 100%; height: auto; text-align: center;}
 .grid_cont li{float: left;margin: 1% 0 1%;width: 100%;}
 .grid_cont a{display: inline-block; float: left; width: 100%;}
-.grid_cont a img{max-width:100%;}
+.grid_cont a img{width:100%;}
 /**********/
 .hot_index_product{width: 98%; height:auto;padding: 2% 1%; margin:0 auto}
 .new_index_product{width: 98%; height:auto;padding: 2% 1%; margin:0 auto}
