@@ -6,7 +6,8 @@
 	<meta charset="UTF-8">
 	<title>Checkout</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
-	<meta name="viewport"	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -21,29 +22,33 @@
 	<meta name="aplus-touch" content="1">
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
-	
+
 	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
 	<script>
-	  !function(f,b,e,v,n,t,s)
-	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-	  n.queue=[];t=b.createElement(e);t.async=!0;
-	  t.src=v;s=b.getElementsByTagName(e)[0];
-	  s.parentNode.insertBefore(t,s)}(window, document,'script',
-	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+		!function (f, b, e, v, n, t, s) {
+			if (f.fbq) return; n = f.fbq = function () {
+				n.callMethod ?
+				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+			};
+			if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+			n.queue = []; t = b.createElement(e); t.async = !0;
+			t.src = v; s = b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t, s)
+		}(window, document, 'script',
+			'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '246433859565492');
+		//fbq('init', '667403967094866');
+		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<noscript><img height="1" width="1" style="display:none"
+			src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript>
 	<!-- End Facebook Pixel Code -->
-	
+
 	<script>
-  		fbq('track', 'ViewContent');
+		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
-	
+
 </head>
 
 <body>
@@ -83,7 +88,8 @@
 					<div class="form-group">
 						<label for="addressEmail" class="form-label required">Email Adress</label>
 						<div class="form-input">
-							<input type="text" name="addressEmail" placeholder="eg:@gmail.com,and so on" class="form-control email">
+							<input type="text" name="addressEmail" placeholder="eg:@gmail.com,and so on"
+								class="form-control email">
 						</div>
 					</div>
 					<!-- telephone -->
@@ -98,7 +104,8 @@
 						<label for="addressDetail" class="form-label required">Address</label>
 						<span class="label-exp">Don't forget the apartment No.</span>
 						<div class="form-input">
-							<input type="text" name="addressDetail" placeholder="street address (Dont't forget the apartment)"
+							<input type="text" name="addressDetail"
+								placeholder="street address (Dont't forget the apartment)"
 								class="form-control address addreNo">
 						</div>
 					</div>
@@ -849,7 +856,7 @@
 							</select>
 						</div>
 					</div>
-<!-- 					State/Province
+					<!-- 					State/Province
 					<div class="form-group form-group_inp">
 						<label for="addressProvince" class="form-label required">State/Province</label>
 						<div class="form-input">
@@ -881,9 +888,10 @@
 						</div>
 					</div>
 				</form>
-				<div class="errortips"><span>A match of the shipping Address city,State and Postal Code failed.</span></div>
+				<div class="errortips"><span>A match of the shipping Address city,State and Postal Code failed.</span>
+				</div>
 			</div>
-		<!-- 	<div class="win-box-title">
+			<!-- 	<div class="win-box-title">
 				<span class="cancel">cancel</span>
 				<span class="save">save it</span>
 			</div> -->
@@ -902,29 +910,30 @@
 				<div class="list-group">
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
-						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>	
+						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>
 						<div class="sale_copen">
 							<p> Happy Valentine's Day! Megalook Hair For Your Lover! </p>
 							<ul>
-							  <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li>
-							  <li>Extra<span>15%</span> off upon order $199 with code: <b>VA15</b></li>
+								<li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li>
+								<li>Extra<span>15%</span> off upon order $199 with code: <b>VA15</b></li>
 							</ul>
 						</div>
 						<div class="group-details coupons active"></div>
 					</li>
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>PAYMENT METHOD</span></div> -->
-						<div class="tit_numtt"><span>4</span><b>PAYMENT METHOD</b></div>	
+						<div class="tit_numtt"><span>4</span><b>PAYMENT METHOD</b></div>
 						<div class="group-details pay-method active">
 							<div class="coupon-item">
-								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox active">
+								<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)"
+									class="checkbox active">
 								<img src="${APP_PATH }/static/m/img/other/paypal.jpg">
 							</div>
 						</div>
 					</li>
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Buyer messages</span></div> -->
-						<div class="tit_numtt"><span>5</span><b>ADDITIONAL INFORMATION</b></div>	
+						<div class="tit_numtt"><span>5</span><b>ADDITIONAL INFORMATION</b></div>
 						<div class="group-details customer-message active">
 							<textarea placeholder="Buyer message"></textarea>
 						</div>
@@ -956,7 +965,9 @@
 		</div>
 	</div>
 	<div class="loading">
-		<div class="boxload"> <div class="loader-14"></div></div>
+		<div class="boxload">
+			<div class="loader-14"></div>
+		</div>
 	</div>
 	<jsp:include page="mfooter.jsp"></jsp:include>
 	<script type="text/javascript">
@@ -971,28 +982,24 @@
 			seconds_zsh = "0" + seconds_zsh;
 		}
 		var newDate_zsh = year_zsh + "-" + month_zsh + "-" + day_zsh + " " + hours_zsh + ":" + minutes_zsh + ":" +
-		seconds_zsh;
+			seconds_zsh;
 		$("#newDate_zsh").html(newDate_zsh);
 	</script>
 	<script>
-	
-	    var tips;
-	 	var PaypalErrorName = '${sessionScope.PaypalErrorName}';
+		var tips;
+		var PaypalErrorName = '${sessionScope.PaypalErrorName}';
 		// PAYMENT_ALREADY_DONE
-		   tips=PaypalErrorName;
-		   console.log(tips)
-	    if(tips==="VALIDATION_ERROR"){
+		tips = PaypalErrorName;
+		console.log(tips)
+		if (tips === "VALIDATION_ERROR") {
 			$(".errortips").show();
-		}else{
+		} else {
 			$(".errortips").hide();
 		}
-		$(".select-province,.form-group .city,.form-group .code").click(function(){
+		$(".select-province,.form-group .city,.form-group .code").click(function () {
 			$(".errortips").hide();
 		})
-         
-		 
-		
-	
+
 		var totalPrice = 0;
 		var resDataMoney = 0; // 邮费
 		// var totalPriceText = $('.total-price').find('.text');
@@ -1007,200 +1014,200 @@
 		var orderItemArr = [];
 		var productNumArr = [];
 		var payplate = 0;
-		var couponPriceOld =0;
+		var couponPriceOld = 0;
 		var addressIdIntInt;
 		var jiecountry;
 		var resttt;
 
 		/*******************/
-				function renderAddressDetail(data) {
-					// console.log("renderAddressDetail")		
-					// console.log(data)
-					// console.log("renderAddressDetail")	
-			    $("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
-					$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
-					$("input.email").val(data.addressEmail ? data.addressEmail : '');
-					$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
-					$("input.address").val(data.addressDetail ? data.addressDetail : '');
-					$("input.code").val(data.addressPost ? data.addressPost : '');
-					$("input.city").val(data.addressCity ? data.addressCity : '');
-					
-					// $("input.province").val(data.addressProvince ? data.addressProvince : '');
-					// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-					var dataprov =data.addressProvince;
-					// var datacountry =data.addressCountryAll;
-					 jiecountry =data.addressCountry;
-					$("#country option:checked").attr("value",jiecountry);
-					$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : ''); 
-					$("#country").attr("data-name",jiecountry);
-					// $("#country").attr("data-country",datacountry);
-					var dataname =$("#country").data("name");
-					datalocation (dataname)
-					// console.log("***dataprov***");
-					// console.log(dataprov);
-					// console.log("***dataprov****");
-					if(dataprov==null||dataprov==""){
-						 $(".form-group_select").hide();
-						 $(".form-group_select").removeClass("selectActive")
-						 $(".form-groupcountry").css("width","100%")
-					}else{
-						$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : ''); 
-						$(".select-province option:checked").attr("value",dataprov);
-						$(".select-province").val(data.addressProvince ? data.addressProvince : ''); 
-						$(".form-group_select").addClass("selectActive");
-						$(".form-groupcountry").css("width","50%");
+		function renderAddressDetail(data) {
+			// console.log("renderAddressDetail")		
+			// console.log(data)
+			// console.log("renderAddressDetail")	
+			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
+			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
+			$("input.email").val(data.addressEmail ? data.addressEmail : '');
+			$("input.phone").val(data.addressTelephone ? data.addressTelephone : '');
+			$("input.address").val(data.addressDetail ? data.addressDetail : '');
+			$("input.code").val(data.addressPost ? data.addressPost : '');
+			$("input.city").val(data.addressCity ? data.addressCity : '');
+
+			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
+			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
+			var dataprov = data.addressProvince;
+			// var datacountry =data.addressCountryAll;
+			jiecountry = data.addressCountry;
+			$("#country option:checked").attr("value", jiecountry);
+			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
+			$("#country").attr("data-name", jiecountry);
+			// $("#country").attr("data-country",datacountry);
+			var dataname = $("#country").data("name");
+			datalocation(dataname)
+			// console.log("***dataprov***");
+			// console.log(dataprov);
+			// console.log("***dataprov****");
+			if (dataprov == null || dataprov == "") {
+				$(".form-group_select").hide();
+				$(".form-group_select").removeClass("selectActive")
+				$(".form-groupcountry").css("width", "100%")
+			} else {
+				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : '');
+				$(".select-province option:checked").attr("value", dataprov);
+				$(".select-province").val(data.addressProvince ? data.addressProvince : '');
+				$(".form-group_select").addClass("selectActive");
+				$(".form-groupcountry").css("width", "50%");
+			}
+			$("#country").val(data.addressCountry ? data.addressCountry : '');
+		}
+		/* 初始化地址模块 */
+		$.ajax({
+			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
+			type: 'post',
+			async: false,
+			success: function (data) {
+				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+				// console.log(data)
+				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+				var resDataAddress = data.extend.mlfrontAddressOne;
+				resttt = resDataAddress;
+				// console.log("resDataAddress")
+				// console.log(resDataAddress)/******/
+				// console.log("resDataAddress")
+				var resDataUserType = data.extend.usertype;
+				addressId = resDataAddress ? resDataAddress.addressId : null;
+				resDataMoney = data.extend.areafreightMoney;
+				var addressBox = $('.address');
+				var couponBox = $('.coupons');
+				// console.log(data)
+				renderCoupons(couponBox, resDataUserType);
+				if (resDataAddress) {
+					renderAddressDetail(resDataAddress);
+
+					$('.address-id').val(resDataAddress.addressId);
+					// console.log(resDataAddress.addressId)/******/
+					$('.shipping').find('span').text(' of $' + resDataMoney);
+					shippingPriceText.text('$' + resDataMoney)
+					$(".address").addClass("active")
+					var addProvince = resDataAddress.addressProvince;
+					var addProvinceCode = resDataAddress.addressProvinceCode;
+					// console.log("addProvince:"+addProvince);
+					// console.log("addProvinceCode:"+addProvinceCode);
+					if (!addProvinceCode) {
+						$(".form-groupcountry").css("width", "100%");
 					}
-					$("#country").val(data.addressCountry ? data.addressCountry : ''); 
+				} else {
+					// renderAddressAdd(addressBox);
+					$('.shipping').find('span').text(' of $' + resDataMoney);
+					shippingPriceText.text('$' + resDataMoney)
 				}
-				/* 初始化地址模块 */
-				$.ajax({
-					url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
-					type: 'post',
-					async: false,
-					success: function (data) {
-						// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-						// console.log(data)
-						// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-						var resDataAddress = data.extend.mlfrontAddressOne;
-						resttt=resDataAddress;
-						// console.log("resDataAddress")
-						// console.log(resDataAddress)/******/
-						// console.log("resDataAddress")
-						var resDataUserType = data.extend.usertype;
-						addressId = resDataAddress ? resDataAddress.addressId : null;
-						resDataMoney = data.extend.areafreightMoney;
-						var addressBox = $('.address');
-						var couponBox = $('.coupons');
-						// console.log(data)
-						renderCoupons(couponBox, resDataUserType);
-						if (resDataAddress) {
-							renderAddressDetail(resDataAddress);
-							
-							$('.address-id').val(resDataAddress.addressId);
-							// console.log(resDataAddress.addressId)/******/
-							$('.shipping').find('span').text(' of $' + resDataMoney);
-							shippingPriceText.text('$' + resDataMoney)
-							$(".address").addClass("active")
-							var addProvince = resDataAddress.addressProvince;
-							var addProvinceCode = resDataAddress.addressProvinceCode;
-							// console.log("addProvince:"+addProvince);
-							// console.log("addProvinceCode:"+addProvinceCode);
-							if(!addProvinceCode){
-								 $(".form-groupcountry").css("width","100%");
-							}
-						} else {
-							// renderAddressAdd(addressBox);
-							$('.shipping').find('span').text(' of $' + resDataMoney);
-							shippingPriceText.text('$' + resDataMoney)
-						}
-		
-						var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-		
-						subtotalPriceText.text('$' + subtotalText);
-						
-					}
-				});
-			  if(resttt==null){
-				var dataname="US";
-				datalocation (dataname)  
-			  }
-		function datalocation (dataname){
+
+				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+
+				subtotalPriceText.text('$' + subtotalText);
+
+			}
+		});
+		if (resttt == null) {
+			var dataname = "US";
+			datalocation(dataname)
+		}
+		function datalocation(dataname) {
 			$.ajax({
-				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
-				  data: JSON.stringify({
+				url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
+				data: JSON.stringify({
 					"addressCountry": dataname
-				  }),
-				  async: false,
-				  type: 'post',
-				  dataType: 'JSON',
-				  contentType: 'application/json',
-				  success: function (data) {
+				}),
+				async: false,
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
 					// console.log(mlPaypalStateprovinceList)
 					// console.log(mlPaypalStateprovinceList.length)
-                    if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
-						$(".form-groupcountry").css("width","50%")
-					  } else {
-					   $(".form-group_select").hide();
-					   $(".form-groupcountry").css("width","100%")
-					  }				
+						$(".form-groupcountry").css("width", "50%")
+					} else {
+						$(".form-group_select").hide();
+						$(".form-groupcountry").css("width", "100%")
+					}
 					// console.log("resareafreightMoney:"+resareafreightMoney)
 					// $('.shipping').find('span').text(' of $' + resareafreightMoney);
 					// shippingPriceText.text('$' + resareafreightMoney)
-							couponPriceText.text('-$' + 0);
+					couponPriceText.text('-$' + 0);
 					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
 					resDataMoney = resareafreightMoney;
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPrice);
-				  }
-				});
+				}
+			});
 		}
-		
-		$("#country").bind("change",function(){
-			var radio_zt =$(".coupons .coupon-item input[type='radio']");
+
+		$("#country").bind("change", function () {
+			var radio_zt = $(".coupons .coupon-item input[type='radio']");
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
-			   couponPriceText.text('-$' + 0);
-			   $(".coed_inp").val("");
-			   $(".without-data").text("Enter coupon code to get a discount!");
-			 var dataname = $(this).val();
-			 $.ajax({
-				  url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
-				  data: JSON.stringify({
+			couponPriceText.text('-$' + 0);
+			$(".coed_inp").val("");
+			$(".without-data").text("Enter coupon code to get a discount!");
+			var dataname = $(this).val();
+			$.ajax({
+				url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
+				data: JSON.stringify({
 					"addressCountry": dataname
-				  }),
-				  type: 'post',
-				  dataType: 'JSON',
-				  contentType: 'application/json',
-				  success: function (data) {
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
 					// console.log(data)
 					var resData = JSON.parse(data);
 					var resareafreightMoney = resData.extend.areafreightMoney;
 					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
 					// console.log(mlPaypalStateprovinceList)
 					// console.log(mlPaypalStateprovinceList.length)
-					if(null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList){
+					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-group_select").addClass("selectActive")
-						$(".form-groupcountry").css("width","50%")
-					  } else {
-					   $(".form-group_select").hide();
-					    $(".form-group_select").removeClass("selectActive")
-					   $(".form-groupcountry").css("width","100%")
-					  }	
+						$(".form-groupcountry").css("width", "50%")
+					} else {
+						$(".form-group_select").hide();
+						$(".form-group_select").removeClass("selectActive")
+						$(".form-groupcountry").css("width", "100%")
+					}
 					$('.shipping').find('span').text(' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
-					var prototalnum =$(".c-prototal .cal-price-num").text().slice(1)
+					var prototalnum = $(".c-prototal .cal-price-num").text().slice(1)
 					resDataMoney = resareafreightMoney;
-					var  totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
+					var totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPriceselect);
 					couponPriceOld = 0;
-				  }
-				});
+				}
+			});
 		});
-/*******************/
+		/*******************/
 
-			
+
 		$('.address-box .cancel').on('click', function () {
 			$('.address-box').hide();
 		});
-		 
+
 		function renderCondition(parent, data, defaultHtml) {
 			var html = defaultHtml || '';
 			html += ''
-			html =html+'<option value="" selected="selected">province</option>';
+			html = html + '<option value="" selected="selected">province</option>';
 			for (var i = 0, len = data.length; i < len; i += 1) {
-					html =  html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
+				html = html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
 			}
-		    
+
 			parent.html(html);
 		}
-       
+
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
 			var html = '';
@@ -1210,7 +1217,7 @@
 				productNumArr.push(data[i].orderitemPskuNumber);
 
 				// html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' + data[i].orderitemPid + ')">' +
-				   html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '">' +
+				html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '">' +
 					'<img class="img" src="' + data[i].orderitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
 					'<div class="text">' +
@@ -1243,8 +1250,8 @@
 			}
 			parent.html(html)
 		}
-       var shopidlist;
-  
+		var shopidlist;
+
 		$.ajax({
 			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
 			type: 'get',
@@ -1259,8 +1266,8 @@
 				// console.log(typeof totalPrice)
 				var allPriceObj = calAllProductPrice(resData);
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
-				
-				var resDataMoneym =shippingPriceText.text().slice(1)*1;
+
+				var resDataMoneym = shippingPriceText.text().slice(1) * 1;
 				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
 
 				subtotalPriceText.text('$' + totalPrice);
@@ -1291,14 +1298,14 @@
 				}
 			});
 		}
-		
+
 		function deleteOrderItem(e) {
 			e.stopPropagation();
 			var orderItem = $(e.target).parents('.cart-item');
 			var reqData = {
 				orderitemId: orderItem.data('orderitemid')
 			};
-			
+
 			// console.table(reqData);
 
 			$.ajax({
@@ -1311,17 +1318,17 @@
 					//renderSysMsg('Delete success.');
 					var jsondate = JSON.parse(data);
 					// console.log(JSON.parse(data));
-					
+
 					var isDelSuccess = jsondate.extend.isDelSuccess;
 					var orginalItemNum = jsondate.extend.orginalItemNum;
-					if(isDelSuccess==0){
+					if (isDelSuccess == 0) {
 						renderSysMsg('Delete error.');
-					}else{
-						if(orginalItemNum>0){
+					} else {
+						if (orginalItemNum > 0) {
 							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
-						}else{
+						} else {
 							renderSysMsg('The shopping cart is empty, return to the shopping cart page after 5s.');
-							setTimeout(function() {
+							setTimeout(function () {
 								window.location.href = '${APP_PATH}/myCart.html';
 							}, 5000);
 						}
@@ -1385,7 +1392,7 @@
 
 		function renderCoupons(parent, userType, data) {
 			var html = '';
-			if (userType === 0||userType === 1) {
+			if (userType === 0 || userType === 1) {
 				html = '<div class="input-group">' +
 					'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
@@ -1418,31 +1425,31 @@
 					// console.log(resData);
 					if (resData) {
 						var couponType = resData.couponType;
-						if(couponType==0){
-							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-							var  totalPricecou =c_prototalnum*1+shopingnum*1;
+						if (couponType == 0) {
+							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1);
+							var shopingnum = $(".c-shipping .cal-price-num").text().slice(1);
+							var totalPricecou = c_prototalnum * 1 + shopingnum * 1;
 							if (totalPricecou >= resData.couponPriceBaseline) {
 								couponPriceText.text('-$' + resData.couponPrice);
 								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
 								couponPriceOld = resData.couponPrice;
-								console.log("满减券查回的couponPriceOld:"+couponPriceOld);
+								console.log("满减券查回的couponPriceOld:" + couponPriceOld);
 								couponId = resData.couponId;
 								couponCode = couponCode2;
 								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 							} else {
-								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
+								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline)
 								$(".coed_inp").val("");
 							}
-						}else{
-							var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-							var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-							var  totalPricecou =(c_prototalnum*1+shopingnum*1).toFixed(2);
+						} else {
+							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1);
+							var shopingnum = $(".c-shipping .cal-price-num").text().slice(1);
+							var totalPricecou = (c_prototalnum * 1 + shopingnum * 1).toFixed(2);
 							if (totalPricecou >= resData.couponPriceBaseline) {
 								//取出折扣
 								var offcoup = resData.couponPriceOff;
 								//计算减免力度(总价*折扣比)
-								var downPrice = (totalPricecou*offcoup/100).toFixed(2);
+								var downPrice = (totalPricecou * offcoup / 100).toFixed(2);
 								couponPriceText.text('-$' + downPrice);
 								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
 								couponPriceOld = downPrice;
@@ -1451,9 +1458,9 @@
 								couponCode = couponCode2;
 								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
 							} else {
-								renderErrorMsg(couponErrorBox,'The minimum usage price of this coupon is'+ resData.couponPriceBaseline )
+								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline)
 								$(".coed_inp").val("");
-								
+
 							}
 						}
 					} else {
@@ -1462,10 +1469,10 @@
 				}
 			})
 		}
-		
+
 		function addNum(e) {
 			e.stopPropagation();
-			var item  = $(e.target);
+			var item = $(e.target);
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			productNumText += 1;
@@ -1473,10 +1480,10 @@
 			reCalPrice(item, true);
 			updateOrderItemNum(item, productNumText);
 		}
-		
+
 		function subNum(e) {
 			e.stopPropagation();
-			var item  = $(e.target);
+			var item = $(e.target);
 			var productNum = item.parent().parent().find('input');
 			var productNumText = parseInt(productNum.val());
 			// console.log("productNumText-early:"+productNumText);
@@ -1488,9 +1495,8 @@
 				updateOrderItemNum(item, productNumText);
 			}
 		}
-		
+
 		function reCalPrice(item, flag) {
-			
 			var parentEl = $(item).parents('.num');
 			var prototalEl = $('.c-prototal>.cal-price-num');
 			var subtotalEl = $('.c-subtotal>.cal-price-num');
@@ -1500,7 +1506,7 @@
 				// console.log("获取当前的add");
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
 				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) + currentPrice);
-				var nowtotalPrice=subtotalEl.text().slice(1);
+				var nowtotalPrice = subtotalEl.text().slice(1);
 				// console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
 				// console.log("获取当前的currentPrice:"+currentPrice);
 				// console.log("获取当前的couponPriceOld:"+couponPriceOld);
@@ -1521,7 +1527,7 @@
 				// console.log("获取当前的currentPrice:"+currentPrice);
 				// console.log("获取当前的couponPriceOld:"+couponPriceOld);
 				// console.log("获取当前的subtotalEl.text().slice(1):"+subtotalEl.text().slice(1));
-				var nowtotalPrice=subtotalEl.text().slice(1);
+				var nowtotalPrice = subtotalEl.text().slice(1);
 				// console.log("获取当前的nowtotalPrice:"+nowtotalPrice);
 				//totalPrice = (parseFloat(subtotalEl.text().slice(1)) - currentPrice+couponPriceOld);
 				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
@@ -1532,10 +1538,10 @@
 				$(".without-data").text("Enter coupon code to get a discount!");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				$(".coupons .coupon-item input[type=radio]").removeClass("active");
-				
+
 			}
 		}
-		
+
 		//MlfrontOrder/orderToPayInfo
 		//这5个参数，json格式
 		/*  private Integer orderId;  //1  都一样，随便从一条取出就行了
@@ -1547,124 +1553,121 @@
 		$('.place-order').on('click', function () {
 			if (orderItemArr.length <= 0) {
 				renderSysMsg('Invalid order, will return to the Home Page three seconds later');
-				setTimeout(function() {
+				setTimeout(function () {
 					window.location.href = "${APP_PATH }/index.html"
 				}, 3000);
-				return ;
+				return;
 			}
-			if (!inputCheck9()){
+			if (!inputCheck9()) {
 				$(".loading").show();
 				// savr_address();  // addres 保存
 				// function savr_address(){
-					var returnaddressId;
-					var formData = $('.address-box form').serializeArray();
-					var reqData = formData.reduce(function (obj, item) {
-						obj[item.name] = item.value;
-						return obj
-					}, {});
-					//if (!inputCheck(reqData)) return;
-					// console.log("*****savr_address*******")
-					console.log(reqData)
-					reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
-					 $.ajax({
-						url: '${APP_PATH}/MlfrontAddress/save',
-						type: 'post',
-						dataType: 'JSON',
-						data: JSON.stringify(reqData),
-						contentType: 'application/json',
-						success: function (data) {
-							// console.log(data)
-							var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-							addressId = resDataAddress.addressId;
-							// console.log("addressId:"+addressId);
-							addressIdIntInt = resDataAddress.addressId;
-							returnaddressId = addressIdIntInt;
-							// console.log("addressIdIntInt:"+addressIdIntInt);
-							var addressBox = $('.address');
-							$('.address-id').val(resDataAddress.addressId);
-							/******/
-							var addressIdInt = $('.address-id').val();
-							 // console.log("addressIdInt:"+addressIdInt);
-							  // console.log(returnaddressId);
-							var reqData = {
-								"orderId": orderId,
-								"orderOrderitemidstr": orderItemArr.join(','),
-								"orderCouponId": couponId,
-								"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-								"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-								"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-								"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-								"addressinfoId": addressIdInt,
-							};
-							// console.log(reqData)
-							var reqDataUp = {
-									"orderId": orderId,
-									"orderOrderitemidstr": orderItemArr.join(','),
-									"orderCouponId": couponId,
-									"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
-									"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
-									"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
-									"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-									"addressinfoId": addressIdInt,
-								};
-			// console.log(reqDataUp)
-			
-							// console.log(reqData)
-			 // console.log(reqDataUp)
-							// console.log(checkAddress(reqDataUp))
-							if (checkAddress(reqDataUp)) {
-								//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
-								
-								stridsContent=shopidlist;
-								orderMoney = subtotalPriceText.text().slice(1)
-								
-								console.log(stridsContent)
-								fbq('track', 'AddPaymentInfo', {
-								              content_ids: [stridsContent],
-								              //contents: [strContent],
-								              content_type: 'product',
-								              value: orderMoney,
-								              currency: 'USD'
-								            });
-								console.log("----------------------");
-								console.log(stridsContent);
-								console.log("=========================");
-								$.ajax({
-									url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
-									data: JSON.stringify(reqData),
-									type: 'post',
-									dataType: 'JSON',
-									contentType: 'application/json',
-									success: function (data) {
-										var resData = JSON.parse(data).extend;
-										// console.log(data)
-										window.location.href = '${APP_PATH }/paypal/mpay';
-										// window.location.href = '${APP_PATH }/index.html';
-									}
-								})
-							} else {
-								renderSysMsg('Please fill in the shipping address And save it ')
-							 }
-							
+				var returnaddressId;
+				var formData = $('.address-box form').serializeArray();
+				var reqData = formData.reduce(function (obj, item) {
+					obj[item.name] = item.value;
+					return obj
+				}, {});
+				//if (!inputCheck(reqData)) return;
+				// console.log("*****savr_address*******")
+				console.log(reqData)
+				reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+				$.ajax({
+					url: '${APP_PATH}/MlfrontAddress/save',
+					type: 'post',
+					dataType: 'JSON',
+					data: JSON.stringify(reqData),
+					contentType: 'application/json',
+					success: function (data) {
+						// console.log(data)
+						var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
+						addressId = resDataAddress.addressId;
+						// console.log("addressId:"+addressId);
+						addressIdIntInt = resDataAddress.addressId;
+						returnaddressId = addressIdIntInt;
+						// console.log("addressIdIntInt:"+addressIdIntInt);
+						var addressBox = $('.address');
+						$('.address-id').val(resDataAddress.addressId);
+						/******/
+						var addressIdInt = $('.address-id').val();
+						// console.log("addressIdInt:"+addressIdInt);
+						// console.log(returnaddressId);
+						var reqData = {
+							"orderId": orderId,
+							"orderOrderitemidstr": orderItemArr.join(','),
+							"orderCouponId": couponId,
+							"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+							"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+							"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+							"addressinfoId": addressIdInt,
+						};
+						// console.log(reqData)
+						var reqDataUp = {
+							"orderId": orderId,
+							"orderOrderitemidstr": orderItemArr.join(','),
+							"orderCouponId": couponId,
+							"orderCouponCode": (couponCode ? couponCode : null), //传递真的code码
+							"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+							"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
+							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
+							"addressinfoId": addressIdInt,
+						};
+						// console.log(reqDataUp)
+
+						// console.log(reqData)
+						// console.log(reqDataUp)
+						// console.log(checkAddress(reqDataUp))
+						if (checkAddress(reqDataUp)) {
+							//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+
+							stridsContent = shopidlist;
+							orderMoney = subtotalPriceText.text().slice(1)
+
+							console.log(stridsContent)
+							fbq('track', 'AddPaymentInfo', {
+								content_ids: [stridsContent],
+								//contents: [strContent],
+								content_type: 'product',
+								value: orderMoney,
+								currency: 'USD'
+							});
+							console.log("----------------------");
+							console.log(stridsContent);
+							console.log("=========================");
+							$.ajax({
+								url: '${APP_PATH}/MlfrontOrder/orderToPayInfo',
+								data: JSON.stringify(reqData),
+								type: 'post',
+								dataType: 'JSON',
+								contentType: 'application/json',
+								success: function (data) {
+									var resData = JSON.parse(data).extend;
+									// console.log(data)
+									window.location.href = '${APP_PATH }/paypal/mpay';
+									// window.location.href = '${APP_PATH }/index.html';
+								}
+							})
+						} else {
+							renderSysMsg('Please fill in the shipping address And save it ')
 						}
-					})
-				// }
-				
+
+					}
+				})
 			}
-			
 		})
-/******************************************************/
-       function toFbidsPurchase(resData){
-       	var infoStrlids = '';
-       	var infoRelids = '';
-       	for(var i=0;i<resData.length;i++){
-       		infoStrlids=infoStrlids+resData[i].orderitemPid+',';
-       	}
-       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
-       	//console.log("infoRelids:"+infoRelids);
-       	return infoRelids;
-       }
-/******************************************************/
+		/******************************************************/
+		function toFbidsPurchase(resData) {
+			var infoStrlids = '';
+			var infoRelids = '';
+			for (var i = 0; i < resData.length; i++) {
+				infoStrlids = infoStrlids + resData[i].orderitemPid + ',';
+			}
+			infoRelids = infoStrlids.substr(0, infoStrlids.length - 1);
+			//console.log("infoRelids:"+infoRelids);
+			return infoRelids;
+		}
+		/******************************************************/
 		function checkAddress(reqDataUp) {
 			var flag = false;
 			$.ajax({
@@ -1678,9 +1681,9 @@
 					if (resData.mlfrontAddressOne) {
 						flag = true;
 					} else {
-						falg = false;						
+						falg = false;
 						var addressinfoIdss = reqDataUp.addressinfoId;
-						if(addressinfoIdss!=null){
+						if (addressinfoIdss != null) {
 							flag = true;
 						}
 					}
@@ -1717,9 +1720,8 @@
 
 			return flag;
 		}
-		
+
 		function inputCheck9() {
-			
 			var flag = 0;
 			var firstnamestr = $(".firstname").val();
 			// console.log("firstnamestr:"+firstnamestr);
@@ -1731,106 +1733,105 @@
 			var codestr = $(".code").val();
 			var citystr = $(".city").val();
 			// var countrystr = $("#country").val();
-			var countrystr=$('#country option:checked').text()
+			var countrystr = $('#country option:checked').text()
 			// var provincestr = $(".province").val();
 			// var provincestr = $(".selectActive .select-province option:checked").text();
 			// var provincestr = $("body").find(".selectActive").val();
 			var provincestr = $(".selectActive .select-province option:checked").text();
-			
-			
-			if(firstnamestr==null||firstnamestr==''){
+
+			if (firstnamestr == null || firstnamestr == '') {
 				flag = 1;
 				// alert("firstnamestr is empty");
 				renderSysMsg('firstnamestr is empty')
 				$(".firstname").addClass("error_br");
-				$(".firstname").focus(function(){
+				$(".firstname").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(lastnamestr==null||lastnamestr==''){
+			} else if (lastnamestr == null || lastnamestr == '') {
 				flag = 1;
 				// alert("lastnamestr is empty");
 				renderSysMsg('lastnamestr is empty')
 				$(".lastname").addClass("error_br");
-				$(".lastname").focus(function(){
+				$(".lastname").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(emailstr==null||emailstr==''){
+			} else if (emailstr == null || emailstr == '') {
 				flag = 1;
 				// alert("emailstr is empty");
 				renderSysMsg('emailstr is empty')
 				$(".email").addClass("error_br");
-				$(".email").focus(function(){
+				$(".email").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(phonestr==null||phonestr==''){
+			} else if (phonestr == null || phonestr == '') {
 				flag = 1;
 				// alert("phonestr is empty");
 				renderSysMsg('phonestr is empty')
 				$(".phone").addClass("error_br");
-				$(".phone").focus(function(){
+				$(".phone").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(addressstr==null||addressstr==''){
+			} else if (addressstr == null || addressstr == '') {
 				flag = 1;
 				// alert("addressstr is empty");
 				renderSysMsg('addressstr is empty')
 				$(".addreNo").addClass("error_br");
-				$(".addreNo").focus(function(){
+				$(".addreNo").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(addressstr.length>100){
+			} else if (addressstr.length > 100) {
 				flag = 1;
 				// alert("addressstr is empty");
 				renderSysMsg('Street Address length must less than 100 characters !')
 				$(".addreNo").addClass("error_br");
-				$(".addreNo").focus(function(){
+				$(".addreNo").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(codestr==null||codestr==''){
+			} else if (codestr == null || codestr == '') {
 				flag = 1;
 				// alert("codestr is empty");
 				renderSysMsg('codestr is empty')
 				$(".codestr").addClass("error_br");
-				$(".codestr").focus(function(){
+				$(".codestr").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(citystr==null||citystr==''){
+			} else if (citystr == null || citystr == '') {
 				flag = 1;
 				// alert("citystr is empty");
 				renderSysMsg('citystr is empty')
 				$(".city").addClass("error_br");
-				$(".city").focus(function(){
+				$(".city").focus(function () {
 					$(this).removeClass("error_br")
-				})	
-			}else if(countrystr==null||countrystr==''||countrystr=='select the Country'){
+				})
+			} else if (countrystr == null || countrystr == '' || countrystr == 'select the Country') {
 				flag = 1;
 				// alert("countrystr is empty");
 				renderSysMsg('countrystr is empty')
 				$("#country").addClass("error_br");
-				$("#country").focus(function(){
+				$("#country").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			}else if(provincestr=='province'){
+			} else if (provincestr == 'province') {
 				flag = 1;
 				// alert("provincestr is empty");
 				renderSysMsg('provincestr is empty')
 				$(".selectActive").addClass("error_br");
-				$(".selectActive").focus(function(){
+				$(".selectActive").focus(function () {
 					$(this).removeClass("error_br")
 				})
 			}
-			
+
 			return flag;
 		}
-		
+
 	</script>
-	
+
 	<!-- megalook-->
-  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-  	<!-- huashuohair -->
-  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
+	<!-- huashuohair -->
+	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>
