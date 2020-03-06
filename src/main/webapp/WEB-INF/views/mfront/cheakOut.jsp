@@ -1320,7 +1320,7 @@
 						if(orginalItemNum>0){
 							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
 						}else{
-							renderSysMsg('The shopping cart is empty, return to the shopping cart page after 5s.');
+							renderSysMsg('The order is empty, return to the shopping cart page after 5s.');
 							setTimeout(function() {
 								window.location.href = '${APP_PATH}/myCart.html';
 							}, 5000);
