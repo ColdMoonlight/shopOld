@@ -363,7 +363,7 @@ public class MlbackCouponController {
 			mlfrontUserreq.setUserLastonlinetime(nowtime);
 			mlfrontUserService.updateByPrimaryKeySelective(mlfrontUserres);
 			
-			
+			session.setAttribute("loginUser", mlfrontUserres);
 		}else{
 			//1,不存在的话，补全默认信息，新增此条账号数据，强制登陆
 			mlfrontUserreq.setUserEmail(userEmail);
@@ -377,9 +377,10 @@ public class MlbackCouponController {
 			
 			//新增本条数据
 			mlfrontUserService.insertSelective(mlfrontUserreq);
+
+			session.setAttribute("loginUser", mlfrontUserreq);
 		}
 		//session中记录客户登录信息,即把客户信息放置在客户中
-		session.setAttribute("loginUser", mlfrontUserreq);
 		return Msg.success().add("resMsg", "获取完毕抽奖客户邮箱完毕，强制注册完成");
 		
 	}

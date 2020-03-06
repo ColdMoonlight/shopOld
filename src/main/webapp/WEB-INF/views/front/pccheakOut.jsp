@@ -1774,7 +1774,6 @@
 			}
 			return flag;
 		}
-
 	</script>
 	<!-- megalook-->
 	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>

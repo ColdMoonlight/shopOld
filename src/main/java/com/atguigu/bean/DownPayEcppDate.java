@@ -3,7 +3,7 @@ package com.atguigu.bean;
 import java.math.BigDecimal;
 
 public class DownPayEcppDate {
-//	
+
 //	SELECT tpay.payInfo_id, tpay.payInfo_createTime,tpay.payInfo_plateNum,taddress.address_userFirstName,taddress.address_userLastName,
 //	taddress.address_email,taddress.address_detail,taddress.address_province,taddress.address_city,taddress.address_post, taddress.address_countryAll,taddress.address_country,taddress.address_telephone,
 //	torderitem.orderItem_pSku_nameStr,tpro.product_seo,torderitem.orderItem_pSku_number,tpay.payInfo_money,torder.order_buy_mess

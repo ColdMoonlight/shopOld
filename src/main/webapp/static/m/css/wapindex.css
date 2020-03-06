@@ -1,6 +1,6 @@
 @charset "utf-8";
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, q, em, ul, li, ol, dl, dt, dd, form, article, aside, embed, table, td, th, input, button, legend, fieldlset, blockquote, textarea, label, strong, img, cite { margin: 0; padding: 0; outline: none; }
-body {background: #f2f2f2; font-family:"微软雅黑","Microsoft YaHei"; font-size:0.12rem;color:#333;}
+body {background: #f2f2f2; font-family:"微软雅黑","Microsoft YaHei";color:#333;}
 h1, h2, h3, h4, h5, h6 { font-weight: normal; font-size: 100%;}
 table { border-collapse: collapse; }
 ul, li , ol, li{ list-style: none; }
@@ -66,9 +66,6 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .hotbtn_next{right: 5px;background: url(../../pc/img/right.png) no-repeat;}
 .hot_index_product .swiper-button-next.swiper-button-disabled{opacity:1;pointer-events:auto; background: url(../../pc/img/righth.png) no-repeat; cursor: pointer;}
 .hot_index_product .swiper-button-prev.swiper-button-disabled{opacity:1;pointer-events:auto;background: url(../../pc/img/left.png) no-repeat; cursor: pointer;}
-
-
-
 /**/
 .newbtn_next,.newbtn_prev {z-index: 99; margin:-80px 0 0; width: 48px; height: 48px; position: absolute; top: 50%;}
 .newbtn_prev{left: 5px;background: url(../../pc/img/left.png) no-repeat;}
