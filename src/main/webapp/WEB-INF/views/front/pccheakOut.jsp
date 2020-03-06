@@ -27,8 +27,7 @@
 	<script>
 		!function (f, b, e, v, n, t, s) {
 			if (f.fbq) return; n = f.fbq = function () {
-				n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+				n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
 			};
 			if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
 			n.queue = []; t = b.createElement(e); t.async = !0;
@@ -903,10 +902,10 @@
 									<!-- <iclass="icon right"></i> -->
 								</div>
 								<div class="sale_copen">
-									<p> Happy Valentine's Day! Megalook Hair For Your Lover! </p>
+									<p> Megalook Hair Spring Clearance Sale! You Buy, You Earn! </p>
 									<ul>
-										<li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li>
-										<li>Extra<span>15%</span> off upon order $199 with code: <b>VA15</b></li>
+										<!-- <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li> -->
+										<li>Extra<span>15%</span> off upon order $99 with code: <b>MS15</b></li>
 									</ul>
 								</div>
 								<div class="group-details coupons"></div>
@@ -980,56 +979,57 @@
 	</div>
 	<jsp:include page="pcfooter.jsp"></jsp:include>
 	<script type="text/javascript">
-		var myDate = new Date();
-		var year_zsh = myDate.getFullYear(); // 获取完整的年份(4位,1970-????)
-		var month_zsh = myDate.getMonth() + 1; // 获取当前月份(0-11,0代表1月)
-		var day_zsh = myDate.getDate(); // 获取当前日(1-31)
-		var hours_zsh = myDate.getHours(); // 获取当前小时数(0-23)
-		var minutes_zsh = myDate.getMinutes(); // 获取当前分钟数(0-59)
-		var seconds_zsh = myDate.getSeconds(); // 获取当前秒数(0-59)
+		var myDate = new Date(),
+			year_zsh = myDate.getFullYear(), // 获取完整的年份(4位,1970-????)
+			month_zsh = myDate.getMonth() + 1, // 获取当前月份(0-11,0代表1月)
+			day_zsh = myDate.getDate(), // 获取当前日(1-31)
+			hours_zsh = myDate.getHours(), // 获取当前小时数(0-23)
+			minutes_zsh = myDate.getMinutes(), // 获取当前分钟数(0-59)
+			seconds_zsh = myDate.getSeconds(), // 获取当前秒数(0-59)
+			newDate_zsh = '';
 		if (seconds_zsh < 10) {
 			seconds_zsh = "0" + seconds_zsh;
 		}
-		var newDate_zsh = year_zsh + "-" + month_zsh + "-" + day_zsh + " " + hours_zsh + ":" + minutes_zsh + ":" +
-			seconds_zsh;
+		newDate_zsh = year_zsh + "-" + month_zsh + "-" + day_zsh + " " + hours_zsh + ":" + minutes_zsh + ":" + seconds_zsh;
 		$("#newDate_zsh").html(newDate_zsh);
 	</script>
 	<script>
-		var totalPrice = 0;
-		var resDataMoney = 0; // 邮费
-		var totalPriceText = $('.total-price').find('.text');
-		var subtotalPriceText = $('.cal-price-item.c-subtotal').find('.cal-price-num');
-		var prototalPriceText = $('.cal-price-item.c-prototal').find('.cal-price-num');
-		var shippingPriceText = $('.cal-price-item.c-shipping').find('.cal-price-num');
-		var couponPriceText = $('.cal-price-item.c-coupon').find('.cal-price-num');
-		var couponId;
-		var couponCode = '';
-		var addressId;
-		var orderId;
-		var orderItemArr = [];
-		var productNumArr = [];
-		var payplate = 0;
-		var addressIdIntInt;
-		var couponPriceOld = 0;
-		var jiecountry;
-		var resttt;
+		var totalPrice = 0,
+			resDataMoney = 0,
+			totalPriceText = $('.total-price').find('.text'),
+			subtotalPriceText = $('.cal-price-item.c-subtotal').find('.cal-price-num'),
+			prototalPriceText = $('.cal-price-item.c-prototal').find('.cal-price-num'),
+			shippingPriceText = $('.cal-price-item.c-shipping').find('.cal-price-num'),
+			couponPriceText = $('.cal-price-item.c-coupon').find('.cal-price-num'),
+			couponId,
+			couponCode = '',
+			addressId,
+			orderId,
+			orderItemArr = [],
+			productNumArr = [],
+			payplate = 0,
+			addressIdIntInt,
+			couponPriceOld = 0,
+			jiecountry,
+			resttt,
+			counponDataList = {},
+			couponPriceold2 = 0,
+			PaypalErrorName = '${sessionScope.PaypalErrorName}',
+			shopidlist;
 
-		var tips;
-		var PaypalErrorName = '${sessionScope.PaypalErrorName}';
-		tips = PaypalErrorName;
-		console.log(tips)
-		if (tips === "VALIDATION_ERROR") {
+		if (PaypalErrorName == "VALIDATION_ERROR") {
 			$(".errortips").show();
 		} else {
 			$(".errortips").hide();
 		}
 		$(".select-province,.form-group .city,.form-group .code").click(function () {
 			$(".errortips").hide();
-		})
-
+		});
 
 		/*********************/
 		function renderAddressDetail(data) {
+			var dataprov = data.addressProvince,
+				dataname = $("#country").data("name");
 			// console.log("renderAddressDetail")		
 			// console.log(data)
 			// console.log("renderAddressDetail")	
@@ -1043,14 +1043,12 @@
 
 			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
 			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-			var dataprov = data.addressProvince;
 			// var datacountry =data.addressCountryAll;
 			jiecountry = data.addressCountry;
 			$("#country option:checked").attr("value", jiecountry);
 			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
 			$("#country").attr("data-name", jiecountry);
 			// $("#country").attr("data-country",datacountry);
-			var dataname = $("#country").data("name");
 			datalocation(dataname)
 			// console.log("***dataprov****");
 			// console.log(dataprov);
@@ -1077,16 +1075,17 @@
 				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
 				// console.log(data)
 				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				var resDataAddress = data.extend.mlfrontAddressOne;
+				var resDataAddress = data.extend.mlfrontAddressOne,
+					resDataUserType = data.extend.usertype,
+					addressBox = $('.address'),
+					couponBox = $('.coupons'),
+					subtotalText = '';
 				resttt = resDataAddress;
 				// console.log("resDataAddress")
 				// console.log(resDataAddress)/******/
 				// console.log("resDataAddress")
-				var resDataUserType = data.extend.usertype;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
 				resDataMoney = data.extend.areafreightMoney;
-				var addressBox = $('.address');
-				var couponBox = $('.coupons');
 				// console.log(data)
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
@@ -1097,8 +1096,8 @@
 					$('.shipping').find('span').text(' of $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 					$(".address").addClass("active")
-					var addProvince = resDataAddress.addressProvince;
-					var addProvinceCode = resDataAddress.addressProvinceCode;
+					var addProvince = resDataAddress.addressProvince,
+						addProvinceCode = resDataAddress.addressProvinceCode;
 					// console.log("addProvince:"+addProvince);
 					// console.log("addProvinceCode:"+addProvinceCode);
 					if (!addProvinceCode) {
@@ -1110,15 +1109,14 @@
 					shippingPriceText.text('$' + resDataMoney)
 				}
 
-				var subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+				subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
 
 				subtotalPriceText.text('$' + subtotalText);
 
 			}
 		});
 		if (resttt == null) {
-			var dataname = "US";
-			datalocation(dataname)
+			datalocation("US")
 		}
 		function datalocation(dataname) {
 			var dataname = $("#country").val();
@@ -1129,15 +1127,12 @@
 				}),
 				async: false,
 				type: 'post',
-				dataType: 'text',
+				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
 					// console.log(data)
-					var resData = JSON.parse(data);
-					var resareafreightMoney = resData.extend.areafreightMoney;
-					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
-					console.log(mlPaypalStateprovinceList)
-					console.log(mlPaypalStateprovinceList.length)
+					var resareafreightMoney = data.extend.areafreightMoney,
+						mlPaypalStateprovinceList = data.extend.mlPaypalStateprovinceList;
 					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
@@ -1172,15 +1167,15 @@
 					"addressCountry": dataname
 				}),
 				type: 'post',
-				dataType: 'text',
+				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
 					// console.log(data)
-					var resData = JSON.parse(data);
-					var resareafreightMoney = resData.extend.areafreightMoney;
-					var mlPaypalStateprovinceList = resData.extend.mlPaypalStateprovinceList;
-					console.log(mlPaypalStateprovinceList)
-					console.log(mlPaypalStateprovinceList.length)
+					var resareafreightMoney = data.extend.areafreightMoney,
+						mlPaypalStateprovinceList = data.extend.mlPaypalStateprovinceList,
+						prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
+						totalPriceselect = 0;
+
 					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
 						renderCondition($('.select-province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
@@ -1194,9 +1189,8 @@
 
 					$('.shipping').find('span').text(' of $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney)
-					var prototalnum = $(".c-prototal .cal-price-num").text().slice(1)
 					resDataMoney = resareafreightMoney;
-					var totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
+					totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPriceselect);
 					couponPriceold2 = 0;
 					couponPriceOld = 0;
@@ -1205,11 +1199,8 @@
 			});
 		});
 
-
-
 		function renderAddressAdd(parent) {
-			parent.html(
-				'<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
+			parent.html('<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
 		}
 		/*****************************************/
 		function renderCondition(parent, data, defaultHtml) {
@@ -1222,12 +1213,15 @@
 			parent.html(html);
 		}
 
-
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
 			var html = '';
 			// console.log(data)
 			for (var i = 0, len = data.length; i < len; i += 1) {
+				var skuIdNameArr = data[i].orderitemPskuIdnamestr.split(','),
+					skuNameArr = data[i].orderitemPskuNamestr.split(','),
+					skuMoneyArr = data[i].orderitemPskuMoneystr.split(','),
+					len2 = skuNameArr.length;
 				orderItemArr.push(data[i].orderitemId);
 				productNumArr.push(data[i].orderitemPskuNumber);
 				// html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +data[i].orderitemPid + ')">' +
@@ -1237,10 +1231,6 @@
 					'<div class="text">' +
 					'<div class="title">' + data[i].orderitemPname + '</div>' +
 					'<div class="condition">';
-				var skuIdNameArr = data[i].orderitemPskuIdnamestr.split(',');
-				var skuNameArr = data[i].orderitemPskuNamestr.split(',');
-				var skuMoneyArr = data[i].orderitemPskuMoneystr.split(',');
-				var len2 = skuNameArr.length;
 				for (var j = 0; j < len2; j += 1) {
 					html += '<span class="c-item">' + skuIdNameArr[j] + ': ' + skuNameArr[j] + '</span>'
 				}
@@ -1264,23 +1254,22 @@
 			}
 			parent.html(html)
 		}
-		var shopidlist;
 		$.ajax({
 			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
 			type: 'get',
 			success: function (data) {
-				var resData = data.extend.mlfrontOrderItemList;
+				var resData = data.extend.mlfrontOrderItemList,
+					cartList = $('.cart-list'),
+					allPriceObj = calAllProductPrice(resData),
+					resDataMoneym = shippingPriceText.text().slice(1) * 1;
 				// console.log(resData);/*2222*/
 				shopidlist = toFbidsPurchase(resData);
 				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
-				var cartList = $('.cart-list');
 				cartList.attr('data-id', resData.orderId);
 				renderCartList(cartList, resData)
 				// console.log(typeof totalPrice)
-				var allPriceObj = calAllProductPrice(resData);
 				// console.log(allPriceObj);
 				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
-				var resDataMoneym = shippingPriceText.text().slice(1) * 1;
 				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
 
 				subtotalPriceText.text('$' + totalPrice);
@@ -1289,9 +1278,9 @@
 
 		function addNum(e) {
 			e.stopPropagation();
-			var item = $(e.target);
-			var productNum = item.parent().parent().find('input');
-			var productNumText = parseInt(productNum.val());
+			var item = $(e.target),
+				productNum = item.parent().parent().find('input'),
+				productNumText = parseInt(productNum.val());
 			productNumText += 1;
 			productNum.val(productNumText);
 
@@ -1302,9 +1291,9 @@
 
 		function subNum(e) {
 			e.stopPropagation();
-			var item = $(e.target);
-			var productNum = item.parent().parent().find('input');
-			var productNumText = parseInt(productNum.val());
+			var item = $(e.target),
+				productNum = item.parent().parent().find('input'),
+				productNumText = parseInt(productNum.val());
 
 			if (productNumText > 1) {
 				productNumText -= 1;
@@ -1315,13 +1304,13 @@
 		}
 
 		function reCalPrice(item, flag) {
-			var parentEl = $(item).parents('.num');
-			var prototalEl = $('.c-prototal>.cal-price-num');
-			var subtotalEl = $('.c-subtotal>.cal-price-num');
-			var currentPrice = parseFloat(parentEl.find('.price').text());
+			var parentEl = $(item).parents('.num'),
+				prototalEl = $('.c-prototal>.cal-price-num'),
+				subtotalEl = $('.c-subtotal>.cal-price-num'),
+				currentPrice = parseFloat(parentEl.find('.price').text());
 			if (flag) {
-				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
 				var nowtotalPrice = subtotalEl.text().slice(1);
+				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) + currentPrice).toFixed(2));
 				totalPrice = (parseFloat(nowtotalPrice) + currentPrice + parseFloat(couponPriceOld));
 				$(".coed_inp").val("");
 				couponPriceOld = 0;
@@ -1329,8 +1318,8 @@
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				$(".without-data").text("Enter coupon code to get a discount!");
 			} else {
-				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
 				var nowtotalPrice = subtotalEl.text().slice(1);
+				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
 				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
 				couponPriceOld = 0;
 				couponPriceText.text('-$' + 0);
@@ -1342,17 +1331,17 @@
 		}
 
 		function updateOrderItemNum(el, num) {
-			var orderItem = el.parents('.cart-item');
-			var reqData = {
-				orderitemId: orderItem.data('orderitemid'),
-				orderitemPskuNumber: num
-			}
+			var orderItem = el.parents('.cart-item'),
+				reqData = {
+					orderitemId: orderItem.data('orderitemid'),
+					orderitemPskuNumber: num
+				}
 			// console.table(reqData);
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
 				type: "POST",
-				dataType: 'JSON',
+				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
 					console.info('success')
@@ -1365,26 +1354,24 @@
 
 		function deleteOrderItem(e) {
 			e.stopPropagation();
-			var orderItem = $(e.target).parents('.cart-item');
-			var reqData = {
-				orderitemId: orderItem.data('orderitemid')
-			};
-
+			var orderItem = $(e.target).parents('.cart-item'),
+				reqData = {
+					orderitemId: orderItem.data('orderitemid')
+				};
 			// console.table(reqData);
 
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/delOrderItem',
 				data: JSON.stringify(reqData),
 				type: "POST",
-				dataType: 'JSON',
+				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
 					//renderSysMsg('Delete success.');
-					var jsondate = data;
 					// console.log(JSON.parse(data));
 
-					var isDelSuccess = jsondate.extend.isDelSuccess;
-					var orginalItemNum = jsondate.extend.orginalItemNum;
+					var isDelSuccess = data && data.extend.isDelSuccess,
+						orginalItemNum = data && data.extend.orginalItemNum;
 					if (isDelSuccess == 0) {
 						renderSysMsg('Delete error.');
 					} else {
@@ -1406,9 +1393,9 @@
 
 		/* all */
 		function calAllProductPrice(data) {
-			var len = data.length;
-			var allSubtotalPrice = 0;
-			var allOriginPrice = 0;
+			var len = data.length,
+				allSubtotalPrice = 0,
+				allOriginPrice = 0;
 			if (len == 0) {
 				return {
 					allOriginPrice: 0,
@@ -1417,16 +1404,18 @@
 			}
 			// console.log(data);
 			for (var i = 0; i < len; i += 1) {
-				var singPrice = 0;
-				var originalPrice = parseFloat(data[i].orderitemProductOriginalprice);
-				var discount = parseFloat(data[i].orderitemProductAccoff) / 100;
-				var skuPriceArr = data[i].orderitemPskuMoneystr.split(',');
+				var singPrice = 0,
+					originalPrice = parseFloat(data[i].orderitemProductOriginalprice),
+					discount = parseFloat(data[i].orderitemProductAccoff) / 100,
+					skuPriceArr = data[i].orderitemPskuMoneystr.split(','),
+					originSinglePrice = 0,
+					currentSinglePrice = 0;
 				singlePrice = skuPriceArr.reduce(function (price, item) {
 					return (price + parseFloat(item))
 				}, originalPrice);
 				// console.log(data[i])
-				var originSinglePrice = parseFloat(singlePrice.toFixed(2));
-				var currentSinglePrice = parseFloat((singlePrice * discount).toFixed(2));
+				originSinglePrice = parseFloat(singlePrice.toFixed(2));
+				currentSinglePrice = parseFloat((singlePrice * discount).toFixed(2));
 				allOriginPrice = parseFloat((allOriginPrice + originSinglePrice * data[i].orderitemPskuNumber).toFixed(2));
 				allSubtotalPrice = parseFloat((allSubtotalPrice + currentSinglePrice * data[i].orderitemPskuNumber).toFixed(2));
 			}
@@ -1453,125 +1442,63 @@
 		//MlbackCoupon/getOneMlbackCouponDetailByCode
 		 字段，String couponCode
 		 */
-		var counponDataList = {};
 		function renderCoupons(parent, userType, data) {
 			var html = '';
-			if (userType === 0 || userType === 1) {
+			if (userType == 0 || userType == 1) {
 				html = '<div class="input-group">' +
 					'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
 					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
 					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
 			}
-			/* MlbackCoupon/getOneMlbackCouponDetailByUId
-			无参数  post */
-			// if (userType === 1) {
-			// 	$.ajax({
-			// 		url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByUId',
-			// 		type: 'post',
-			// 		dataType: 'text',
-			// 		async: false,
-			// 		success: function (data) {
-			// 			// console.log(data);
-			// 			var resData = JSON.parse(data).extend.mlbackCouponReturnList;
-			// 			var len = resData.length
-			// 			for (var i = 0; i < len; i += 1) {
-			// 				counponDataList[resData[i].couponId] = resData[i];
-			// 				html += '<div class="coupon-item">' +
-			// 					'<input type="radio" name="coupon" data-couponid="' + resData[i].couponId +
-			// 					'" onclick="selectCoupon(event)" class="checkbox">' +
-			// 					'<span class="price">$' + resData[i].couponPrice + '</span>' +
-			// 					'<span class="name">' + resData[i].couponName + '</span>' +
-			// 					
-			// 					'</div>';
-			// 			}
-			// 		}
-			// 	});
-			// }
 			parent.html(html);
 		}
-		var couponPriceold2 = 0;
-
-		// 		function selectCoupon(e) {
-		// 			var targetEl = $(e.target);
-		// 			var id = targetEl.data('couponid');
-		// 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
-		// 			targetEl.addClass("active");
-		// 			var priceInfo = targetEl.parent().parent().parent().find('.price-info');
-		// 			var c_prototalnum =$(".c-prototal .cal-price-num").text().slice(1);
-		// 			// console.log(abwq);
-		// 			var shopingnum =$(".c-shipping .cal-price-num").text().slice(1);
-		// 			// console.log(shopnum);
-		// 			var  totalPricecou2 =c_prototalnum*1+shopingnum*1;
-		//             // console.log(totalPricecou2)			
-		// 			if (parseFloat(totalPricecou2) >= counponDataList[id].couponPriceBaseline) {
-		// 				var couponPrice = counponDataList[id].couponPrice;
-		// 				couponPriceold2 =couponPrice;
-		// 				priceInfo.text('-$' + couponPrice);
-		// 				
-		// 				couponPriceText.text('-$' + couponPrice);
-		// 				subtotalPriceText.text('$' + (totalPricecou2 - couponPrice).toFixed(2));
-		//                 // console.log(totalPricecou2);
-		// 
-		// 
-		// 				couponCode = counponDataList[id].couponCode;
-		// 				couponId = counponDataList[id].couponId;
-		// 			} else {
-		// 				targetEl[0].checked = false;   
-		// 				priceInfo.text("Cann't use this Coupon!");
-		// 				couponPriceText.text('-$' + 0);
-		// 				subtotalPriceText.text('$' + totalPricecou2);
-		// 			}
-		// 		}
-
-
 
 		function selectPay(e) {
-			var targetEl = $(e.target);
-			payplate = targetEl.data('payid');
+			payplate = $(e.target).data('payid');
 		}
 		function checkCouponCode(event) {
-			var couponCode2 = $(event.target).prev('input').val();
-			var data = {
-				couponCode: couponCode2
-			}; // MEGA12	couponCode	
+			var couponCode2 = $(event.target).prev('input').val(),
+				data = {
+					couponCode: couponCode2
+				}; // MEGA12	couponCode	
 			$.ajax({
 				url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByCode',
 				data: JSON.stringify({
 					"couponCode": couponCode2
 				}),
 				type: 'post',
-				dataType: 'text',
+				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					var resData = JSON.parse(data).extend.mlbackCouponOne;
-					var couponErrorBox = $('.coupon-error');
+					var resData = data && data.extend.mlbackCouponOne,
+						couponErrorBox = $('.coupon-error');
 					if (resData) {
 						var couponType = resData.couponType;
 						if (couponType == 0) {
-							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1);
-							var shopingnum = $(".c-shipping .cal-price-num").text().slice(1);
-							var totalPricecou = c_prototalnum * 1 + shopingnum * 1;
+							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
+								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
+								totalPricecou = c_prototalnum * 1 + shopingnum * 1;
 							if (totalPricecou >= resData.couponPriceBaseline) {
 								couponPriceText.text('-$' + resData.couponPrice);
 								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
 								couponPriceOld = resData.couponPrice;
-								console.log("满减券查回的couponPriceOld:" + couponPriceOld);
+								// console.log("满减券查回的couponPriceOld:" + couponPriceOld);
 								couponId = resData.couponId;
 								couponCode = couponCode2;
-								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!')
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
 							} else {
-								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline)
+								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
 								$(".coed_inp").val("");
 							}
 						} else {
-							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1);
-							var shopingnum = $(".c-shipping .cal-price-num").text().slice(1);
-							var totalPricecou = (c_prototalnum * 1 + shopingnum * 1).toFixed(2);
+							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
+								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
+								totalPricecou = (c_prototalnum * 1 + shopingnum * 1).toFixed(2);
 							if (totalPricecou >= resData.couponPriceBaseline) {
 								//取出折扣
-								var offcoup = resData.couponPriceOff;
+								var offcoup = resData.couponPriceOff,
+									downPrice = (totalPricecou * offcoup / 100).toFixed(2);
 								//计算减免力度(总价*折扣比)
-								var downPrice = (totalPricecou * offcoup / 100).toFixed(2);
 								couponPriceText.text('-$' + downPrice);
 								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
 								couponPriceOld = downPrice;
@@ -1614,31 +1541,27 @@
 			if (!inputCheck9()) {
 				$(".loading").show();
 				// savr_address();  // addres 保存
-				var formData = $('.address-box form').serializeArray();
-				var reqData = formData.reduce(function (obj, item) {
-					obj[item.name] = item.value;
-					return obj
-				}, {});
-				reqData.addressId = reqData.addressId === '' ? null : parseInt(reqData.addressId);
+				var formData = $('.address-box form').serializeArray(),
+					reqData = formData.reduce(function (obj, item) {
+						obj[item.name] = item.value;
+						return obj
+					}, {});
+				reqData.addressId = reqData.addressId == '' ? null : parseInt(reqData.addressId);
 				$.ajax({
 					url: '${APP_PATH}/MlfrontAddress/save',
 					type: 'post',
-					dataType: 'text',
+					dataType: 'json',
 					data: JSON.stringify(reqData),
 					contentType: 'application/json',
 					success: function (data) {
 						// console.log(data)
-						var resDataAddress = JSON.parse(data).extend.mlfrontAddress;
-						// var resDataAddress = data.extend.mlfrontAddress;
-						// console.log(resDataAddress)
+						var resDataAddress = data && data.extend.mlfrontAddress,
+							addressBox = $('.address'),
+							reqData = {},
+							reqDataUp = {};
 						addressId = resDataAddress.addressId;
-						addressIdIntInt = resDataAddress.addressId;
-						returnaddressId = addressIdIntInt;
-						// console.log("addressIdIntInt:"+addressIdIntInt);
-						var addressBox = $('.address');
-						$('.address-id').val(resDataAddress.addressId);
-						var addressIdInt = $('.address-id').val();
-						var reqData = {
+						$('.address-id').val(addressId);
+						reqData = {
 							"orderId": orderId,
 							"orderOrderitemidstr": orderItemArr.join(','),
 							"orderCouponId": couponId,
@@ -1646,10 +1569,9 @@
 							"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
 							"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
 							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-							"addressinfoId": addressIdInt,
+							"addressinfoId": addressId,
 						};
-
-						var reqDataUp = {
+						reqDataUp = {
 							"orderId": orderId,
 							"orderOrderitemidstr": orderItemArr.join(','),
 							"orderCouponId": couponId,
@@ -1657,7 +1579,7 @@
 							"orderPayPlate": payplate, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
 							"orderProNumStr": productNumArr.join(','), //就这样,,zheli你传给我了，但是我接到之后，再处理的话，要同时动4张表。。所以，能早处理早处理。早处理的话，就动一张
 							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
-							"addressinfoId": addressIdInt,
+							"addressinfoId": addressId,
 						};
 
 						// console.log(reqData)
@@ -1668,7 +1590,7 @@
 							stridsContent = shopidlist;
 							orderMoney = subtotalPriceText.text().slice(1)
 
-							console.log(stridsContent)
+							// console.log(stridsContent)
 							fbq('track', 'AddPaymentInfo', {
 								content_ids: [stridsContent],
 								//contents: [strContent],
@@ -1700,8 +1622,8 @@
 
 		/******************************************************/
 		function toFbidsPurchase(resData) {
-			var infoStrlids = '';
-			var infoRelids = '';
+			var infoStrlids = '',
+				infoRelids = '';
 			for (var i = 0; i < resData.length; i++) {
 				infoStrlids = infoStrlids + resData[i].orderitemPid + ',';
 			}
@@ -1719,9 +1641,8 @@
 				success: function (data) {
 					// console.log("/MlfrontAddress/getOneMlfrontAddressDetailByUinfo");
 					// console.log(data)
-					var resData = data.extend;
 					//console.log(resData.mlfrontAddressOne)
-					if (resData.mlfrontAddressOne) {
+					if (data.extend.mlfrontAddressOne) {
 						flag = true;
 					} else {
 						falg = false;
@@ -1741,14 +1662,14 @@
 			//2验证格式
 			for (var key in data) {
 				// console.log(key)
-				if (key === 'addressEmail') {
+				if (key == 'addressEmail') {
 					var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 					if (!pattern.test(data[key])) {
 						flag = !flag;
 						renderSysMsg('Email address format is incorrect');
 						break;
 					}
-				} else if (key === "addressId") {
+				} else if (key == "addressId") {
 					continue;
 				} else {
 					if (data[key].trim().length < 1) {
@@ -1763,27 +1684,21 @@
 			return flag;
 		}
 		function inputCheck9() {
-			var flag = 0;
-			var firstnamestr = $(".firstname").val();
-			// console.log("firstnamestr:"+firstnamestr);
-			var lastnamestr = $(".lastname").val();
-			// console.log("lastnamestr:"+lastnamestr);
-			var emailstr = $(".email").val();
-			var phonestr = $(".phone").val();
-			var addressstr = $(".addreNo").val();
-			var codestr = $(".code").val();
-			var citystr = $(".city").val();
-			// var countrystr = $("#country").val();
-			// var provincestr = $(".province").val();
-			var provincestr = $(".selectActive .select-province option:checked").text();
-			var country_address = $("#country option:checked").text();
+			var flag = 0,
+				firstnamestr = $(".firstname").val(),
+				lastnamestr = $(".lastname").val(),
+				emailstr = $(".email").val(),
+				phonestr = $(".phone").val(),
+				addressstr = $(".addreNo").val(),
+				codestr = $(".code").val(),
+				citystr = $(".city").val(),
+				provincestr = $(".selectActive .select-province option:checked").text(),
+				country_address = $("#country option:checked").text();
 			// var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
 			// if(radio_zt_copn==null||radio_zt_copn==''){
 			// 	flag = 1;
 			// 	alert("优惠券未使用")
 			// }
-
-
 			if (firstnamestr == null || firstnamestr == '') {
 				flag = 1;
 				// alert("firstnamestr is empty");
