@@ -1586,6 +1586,13 @@
 		$('.place-order').on('click', function () {
 			// var val=$('input:radio[name="sex"]:checked').val();
 			// var no_check_copn =radio_zt.
+			if (orderItemArr.length <= 0) {
+				renderSysMsg('Invalid order, will return to the Home Page three seconds later');
+				setTimeout(function() {
+					window.location.href = "${APP_PATH }/index.html"
+				}, 3000);
+				return ;
+			}
 			if (inputCheck9()==1){
 				return ;
 			} else{

@@ -1545,6 +1545,13 @@
 		    private Integer addressinfoId;//1	地址id 就一处
 		 */
 		$('.place-order').on('click', function () {
+			if (orderItemArr.length <= 0) {
+				renderSysMsg('Invalid order, will return to the Home Page three seconds later');
+				setTimeout(function() {
+					window.location.href = "${APP_PATH }/index.html"
+				}, 3000);
+				return ;
+			}
 			if (inputCheck9()==1){
 				return;
 			} else{
