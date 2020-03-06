@@ -1593,9 +1593,7 @@
 				}, 3000);
 				return ;
 			}
-			if (inputCheck9()==1){
-				return ;
-			} else{
+			if (!inputCheck9()){
 				$(".loading").show();
 				// savr_address();  // addres 保存
 					var formData = $('.address-box form').serializeArray();
