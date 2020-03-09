@@ -267,13 +267,13 @@
 			jiecountry,
 			counponDataList = {},
 			couponPriceold2 = 0,
-			PaypalErrorName = '${sessionScope.PaypalErrorName}',
 			shopidlist,
-			totalPriceText = $('.total-price').find('.text'),
-			subtotalPriceText = $('.cal-price-item.c-subtotal').find('.cal-price-num'),
-			prototalPriceText = $('.cal-price-item.c-prototal').find('.cal-price-num'),
-			shippingPriceText = $('.cal-price-item.c-shipping').find('.cal-price-num'),
-			couponPriceText = $('.cal-price-item.c-coupon').find('.cal-price-num');
+			PaypalErrorName = '${sessionScope.PaypalErrorName}',
+			shippingTipPriceEl = $('.shipping').find('span'),
+			subtotalPriceEl = $('.cal-price-item.c-subtotal').find('.cal-price-num'),
+			prototalPriceEl = $('.cal-price-item.c-prototal').find('.cal-price-num'),
+			shippingPriceEl = $('.cal-price-item.c-shipping').find('.cal-price-num'),
+			couponPriceEl = $('.cal-price-item.c-coupon').find('.cal-price-num');
 
 		if (PaypalErrorName == "VALIDATION_ERROR") {
 			$(".errortips").show();
@@ -346,8 +346,8 @@
 
 					$('.address-id').val(resDataAddress.addressId);
 					// console.log(resDataAddress.addressId)/******/
-					$('.shipping').find('span').text(' $' + resDataMoney);
-					shippingPriceText.text('$' + resDataMoney)
+					shippingTipPriceEl.text(' $' + resDataMoney);
+					shippingPriceEl.text('$' + resDataMoney)
 					$(".address").addClass("active")
 					var addProvince = resDataAddress.addressProvince,
 						addProvinceCode = resDataAddress.addressProvinceCode;
@@ -358,14 +358,12 @@
 					}
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text(' $' + resDataMoney);
-					shippingPriceText.text('$' + resDataMoney)
+					shippingTipPriceEl.text(' $' + resDataMoney);
+					shippingPriceEl.text('$' + resDataMoney)
 				}
 
 				subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-
-				subtotalPriceText.text('$' + subtotalText);
-
+				subtotalPriceEl.text('$' + subtotalText);
 			}
 		});
 
@@ -394,14 +392,14 @@
 					}
 					// console.log(resareafreightMoney)/***sdfsdfsdf*/
 					// console.log("resareafreightMoney:"+resareafreightMoney)
-					$('.shipping').find('span').text(' $' + resareafreightMoney);
-					shippingPriceText.text('$' + resareafreightMoney);
-					couponPriceText.text('-$' + 0);
+					shippingTipPriceEl.text(' $' + resareafreightMoney);
+					shippingPriceEl.text('$' + resareafreightMoney);
+					couponPriceEl.text('-$' + 0);
 
 					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
 					resDataMoney = resareafreightMoney;
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
-					subtotalPriceText.text('$' + totalPrice);
+					subtotalPriceEl.text('$' + totalPrice);
 				}
 			});
 		}
@@ -495,7 +493,7 @@
 				var resData = data.extend.mlfrontOrderItemList,
 					cartList = $('.cart-list'),
 					allPriceObj = calAllProductPrice(resData),
-					resDataMoneym = shippingPriceText.text().slice(1) * 1;
+					resDataMoneym = shippingPriceEl.text().slice(1) * 1;
 				// console.log(resData);/*2222*/
 				shopidlist = toFbidsPurchase(resData);
 				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
@@ -503,10 +501,10 @@
 				renderCartList(cartList, resData)
 				// console.log(typeof totalPrice)
 				// console.log(allPriceObj);
-				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
-				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
 
-				subtotalPriceText.text('$' + totalPrice);
+				prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
+				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
+				subtotalPriceEl.text('$' + totalPrice);
 			}
 		})
 
@@ -548,7 +546,7 @@
 				totalPrice = (parseFloat(nowtotalPrice) + currentPrice + parseFloat(couponPriceOld));
 				$(".coed_inp").val("");
 				couponPriceOld = 0;
-				couponPriceText.text('-$' + 0);
+				couponPriceEl.text('-$' + 0);
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				$(".without-data").text("Enter coupon code to get a discount!");
 			} else {
@@ -556,7 +554,7 @@
 				prototalEl.text('$' + (parseFloat(prototalEl.text().slice(1)) - currentPrice).toFixed(2));
 				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
 				couponPriceOld = 0;
-				couponPriceText.text('-$' + 0);
+				couponPriceEl.text('-$' + 0);
 				$(".coed_inp").val("");
 				$(".without-data").text("Enter coupon code to get a discount!");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
@@ -713,8 +711,8 @@
 								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
 								totalPricecou = c_prototalnum * 1 + shopingnum * 1;
 							if (totalPricecou >= resData.couponPriceBaseline) {
-								couponPriceText.text('-$' + resData.couponPrice);
-								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+								couponPriceEl.text('-$' + resData.couponPrice);
+								subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
 								couponPriceOld = resData.couponPrice;
 								// console.log("满减券查回的couponPriceOld:" + couponPriceOld);
 								couponId = resData.couponId;
@@ -733,8 +731,8 @@
 								var offcoup = resData.couponPriceOff,
 									downPrice = (totalPricecou * offcoup / 100).toFixed(2);
 								//计算减免力度(总价*折扣比)
-								couponPriceText.text('-$' + downPrice);
-								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
+								couponPriceEl.text('-$' + downPrice);
+								subtotalPriceEl.text('$' + (totalPricecou - downPrice).toFixed(2));
 								couponPriceOld = downPrice;
 								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
 								couponId = resData.couponId;
@@ -822,7 +820,7 @@
 						if (checkAddress(reqDataUp)) {
 							// fbq('track', 'AddPaymentInfo');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 							stridsContent = shopidlist;
-							orderMoney = subtotalPriceText.text().slice(1)
+							orderMoney = subtotalPriceEl.text().slice(1)
 
 							// console.log(stridsContent)
 							fbq('track', 'AddPaymentInfo', {

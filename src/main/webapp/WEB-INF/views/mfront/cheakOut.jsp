@@ -254,10 +254,11 @@
 			shopidlist,
 			counponDataList = {},
 			PaypalErrorName = '${sessionScope.PaypalErrorName}',
-			subtotalPriceText = $('.cal-price-item.c-subtotal').find('.cal-price-num'),
-			prototalPriceText = $('.cal-price-item.c-prototal').find('.cal-price-num'),
-			shippingPriceText = $('.cal-price-item.c-shipping').find('.cal-price-num'),
-			couponPriceText = $('.cal-price-item.c-coupon').find('.cal-price-num');
+			shippingTipPriceEl = $('.shipping').find('span'),
+			subtotalPriceEl = $('.cal-price-item.c-subtotal').find('.cal-price-num'),
+			prototalPriceEl = $('.cal-price-item.c-prototal').find('.cal-price-num'),
+			shippingPriceEl = $('.cal-price-item.c-shipping').find('.cal-price-num'),
+			couponPriceEl = $('.cal-price-item.c-coupon').find('.cal-price-num');
 
 		// PAYMENT_ALREADY_DONE
 		// console.log(tips)
@@ -330,8 +331,8 @@
 					renderAddressDetail(resDataAddress);
 					$('.address-id').val(resDataAddress.addressId);
 					// console.log(resDataAddress.addressId)/******/
-					$('.shipping').find('span').text(' $' + resDataMoney);
-					shippingPriceText.text('$' + resDataMoney)
+					shippingTipPriceEl.text(' $' + resDataMoney);
+					shippingPriceEl.text('$' + resDataMoney)
 					$(".address").addClass("active")
 					// console.log("addProvince:"+addProvince);
 					// console.log("addProvinceCode:"+addProvinceCode);
@@ -340,12 +341,12 @@
 					}
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text(' $' + resDataMoney);
-					shippingPriceText.text('$' + resDataMoney);
+					shippingTipPriceEl.text(' $' + resDataMoney);
+					shippingPriceEl.text('$' + resDataMoney);
 				}
 
 				subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-				subtotalPriceText.text('$' + subtotalText);
+				subtotalPriceEl.text('$' + subtotalText);
 			}
 		});
 		function getProvinceData(dataname) {
@@ -376,13 +377,13 @@
 						$(".form-group_select").removeClass("selectActive")
 						$(".form-groupcountry").css("width", "100%")
 					}
-					$('.shipping').find('span').text(' $' + resareafreightMoney);
-					shippingPriceText.text('$' + resareafreightMoney);
-					couponPriceText.text('-$' + 0);
+					shippingTipPriceEl.text(' $' + resareafreightMoney);
+					shippingPriceEl.text('$' + resareafreightMoney);
+					couponPriceEl.text('-$' + 0);
 
 					resDataMoney = resareafreightMoney;
 					totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
-					subtotalPriceText.text('$' + totalPriceselect);
+					subtotalPriceEl.text('$' + totalPriceselect);
 					couponPriceOld = 0;
 				}
 			});
@@ -480,18 +481,17 @@
 				var resData = data.extend.mlfrontOrderItemList,
 					cartList = $('.cart-list'),
 					allPriceObj = calAllProductPrice(resData),
-					resDataMoneym = shippingPriceText.text().slice(1) * 1;
+					resDataMoneym = shippingPriceEl.text().slice(1) * 1;
 				// console.log(resData);
 				shopidlist = toFbidsPurchase(resData);
 				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
 				cartList.attr('data-id', resData.orderId);
 				renderCartList(cartList, resData)
 				// console.log(typeof totalPrice)
-				prototalPriceText.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
+				prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
 
 				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
-
-				subtotalPriceText.text('$' + totalPrice);
+				subtotalPriceEl.text('$' + totalPrice);
 			}
 		})
 
@@ -646,8 +646,8 @@
 								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
 								totalPricecou = c_prototalnum * 1 + shopingnum * 1;
 							if (totalPricecou >= resData.couponPriceBaseline) {
-								couponPriceText.text('-$' + resData.couponPrice);
-								subtotalPriceText.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+								couponPriceEl.text('-$' + resData.couponPrice);
+								subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
 								couponPriceOld = resData.couponPrice;
 								// console.log("满减券查回的couponPriceOld:" + couponPriceOld);
 								couponId = resData.couponId;
@@ -664,8 +664,8 @@
 							if (totalPricecou >= resData.couponPriceBaseline) {
 								var offcoup = resData.couponPriceOff, // 取出折扣
 									downPrice = (totalPricecou * offcoup / 100).toFixed(2); // 计算减免力度(总价*折扣比)
-								couponPriceText.text('-$' + downPrice);
-								subtotalPriceText.text('$' + (totalPricecou - downPrice).toFixed(2));
+								couponPriceEl.text('-$' + downPrice);
+								subtotalPriceEl.text('$' + (totalPricecou - downPrice).toFixed(2));
 								couponPriceOld = downPrice;
 								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
 								couponId = resData.couponId;
@@ -730,7 +730,7 @@
 				$(".coed_inp").val("");
 				//变量归0显示
 				couponPriceOld = 0;
-				couponPriceText.text('-$' + 0);
+				couponPriceEl.text('-$' + 0);
 				//显示未折扣的钱
 				subtotalEl.text('$' + totalPrice.toFixed(2));
 				$(".without-data").text("Enter coupon code to get a discount!");
@@ -746,7 +746,7 @@
 				totalPrice = (nowtotalPrice - currentPrice + parseFloat(couponPriceOld));
 				// console.log("获取当前的totalPrice:"+totalPrice);
 				couponPriceOld = 0;
-				couponPriceText.text('-$' + 0);
+				couponPriceEl.text('-$' + 0);
 				$(".coed_inp").val("");
 				$(".without-data").text("Enter coupon code to get a discount!");
 				subtotalEl.text('$' + totalPrice.toFixed(2));
@@ -824,7 +824,7 @@
 						if (checkAddress(reqDataUp)) {
 							//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 							stridsContent = shopidlist;
-							orderMoney = subtotalPriceText.text().slice(1);
+							orderMoney = subtotalPriceEl.text().slice(1);
 							fbq('track', 'AddPaymentInfo', {
 								content_ids: [stridsContent],
 								//contents: [strContent],
