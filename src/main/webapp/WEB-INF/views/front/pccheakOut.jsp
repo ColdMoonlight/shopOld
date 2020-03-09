@@ -76,8 +76,7 @@
 									<div class="form-group">
 										<label for="addressUserfirstname" class="form-label required">First Name</label>
 										<div class="form-input">
-											<input type="text" name="addressUserfirstname"
-												class="form-control firstname">
+											<input type="text" name="addressUserfirstname" class="form-control firstname">
 										</div>
 									</div>
 									<!-- last name -->
@@ -91,8 +90,7 @@
 									<div class="form-group">
 										<label for="addressEmail" class="form-label required">Email Adress</label>
 										<div class="form-input">
-											<input type="text" placeholder="eg:@gmail.com,and so on" name="addressEmail"
-												class="form-control email">
+											<input type="text" placeholder="eg:@gmail.com,and so on" name="addressEmail" class="form-control email">
 										</div>
 									</div>
 									<!-- telephone -->
@@ -301,9 +299,6 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 
-			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
-			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
-			// var datacountry =data.addressCountryAll;
 			jiecountry = data.addressCountry ? data.addressCountry : '';
 			$("#country option:checked").attr("value", jiecountry);
 			$("#country").attr("data-name", jiecountry);
@@ -352,7 +347,7 @@
 
 					$('.address-id').val(resDataAddress.addressId);
 					// console.log(resDataAddress.addressId)/******/
-					$('.shipping').find('span').text('$' + resDataMoney);
+					$('.shipping').find('span').text(' $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 					$(".address").addClass("active")
 					var addProvince = resDataAddress.addressProvince,
@@ -364,7 +359,7 @@
 					}
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text('$' + resDataMoney);
+					$('.shipping').find('span').text(' $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 				}
 
@@ -400,9 +395,10 @@
 					}
 					// console.log(resareafreightMoney)/***sdfsdfsdf*/
 					// console.log("resareafreightMoney:"+resareafreightMoney)
-					$('.shipping').find('span').text('$' + resareafreightMoney);
-					// shippingPriceText.text('$' + resareafreightMoney)
+					$('.shipping').find('span').text(' $' + resareafreightMoney);
+					shippingPriceText.text('$' + resareafreightMoney);
 					couponPriceText.text('-$' + 0);
+
 					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
 					resDataMoney = resareafreightMoney;
 					totalPrice = (parseFloat(totalPrice) + resDataMoney).toFixed(2);
@@ -431,7 +427,6 @@
 		$("#country").on("change", function () {
 			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
 				dataname = $(this).val();
-			couponPriceText.text('-$' + 0);
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");

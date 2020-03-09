@@ -325,7 +325,7 @@
 				// console.log(resDataAddress);
 				resDataMoney = data.extend.areafreightMoney;
 				addressId = resDataAddress ? resDataAddress.addressId : null;
-				// console.log(data)
+
 				renderCoupons(couponBox, resDataUserType);
 				if (resDataAddress) {
 					var addProvince = resDataAddress.addressProvince,
@@ -334,7 +334,7 @@
 					renderAddressDetail(resDataAddress);
 					$('.address-id').val(resDataAddress.addressId);
 					// console.log(resDataAddress.addressId)/******/
-					$('.shipping').find('span').text(' of $' + resDataMoney);
+					$('.shipping').find('span').text(' $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 					$(".address").addClass("active")
 					// console.log("addProvince:"+addProvince);
@@ -344,7 +344,7 @@
 					}
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text(' of $' + resDataMoney);
+					$('.shipping').find('span').text(' $' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney);
 				}
 
@@ -380,8 +380,10 @@
 						$(".form-group_select").removeClass("selectActive")
 						$(".form-groupcountry").css("width", "100%")
 					}
-					$('.shipping').find('span').text(' of $' + resareafreightMoney);
+					$('.shipping').find('span').text(' $' + resareafreightMoney);
 					shippingPriceText.text('$' + resareafreightMoney);
+					couponPriceText.text('-$' + 0);
+
 					resDataMoney = resareafreightMoney;
 					totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
 					subtotalPriceText.text('$' + totalPriceselect);
@@ -411,7 +413,6 @@
 		$("#country").on("change", function () {
 			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
 				dataname = $(this).val();
-			couponPriceText.text('-$' + 0);
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");
