@@ -369,30 +369,31 @@
 					subtotalPriceEl.text('$' + subtotalText);
 				}
 			});
+
+			// 订单列表数据
+			$.ajax({
+				url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
+				type: 'get',
+				success: function (data) {
+					var resData = data.extend.mlfrontOrderItemList,
+						cartList = $('.cart-list'),
+						allPriceObj = calAllProductPrice(resData),
+						resDataMoneym = shippingPriceEl.text().slice(1) * 1;
+					// console.log(resData);/*2222*/
+					shopidlist = toFbidsPurchase(resData);
+					orderId = resData && resData.length > 0 ? resData[0].orderId : null;
+					cartList.attr('data-id', resData.orderId);
+					renderCartList(cartList, resData)
+					// console.log(typeof totalPrice)
+					// console.log(allPriceObj);
+
+					prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
+					totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
+					subtotalPriceEl.text('$' + totalPrice);
+				}
+			});
 		}
 
-		// 订单列表数据
-		$.ajax({
-			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
-			type: 'get',
-			success: function (data) {
-				var resData = data.extend.mlfrontOrderItemList,
-					cartList = $('.cart-list'),
-					allPriceObj = calAllProductPrice(resData),
-					resDataMoneym = shippingPriceEl.text().slice(1) * 1;
-				// console.log(resData);/*2222*/
-				shopidlist = toFbidsPurchase(resData);
-				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
-				cartList.attr('data-id', resData.orderId);
-				renderCartList(cartList, resData)
-				// console.log(typeof totalPrice)
-				// console.log(allPriceObj);
-
-				prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
-				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
-				subtotalPriceEl.text('$' + totalPrice);
-			}
-		});
 
 		function getProvinceData(dataname) {
 			var dataname = $("#country").val();
