@@ -253,7 +253,6 @@
 			jiecountry,
 			shopidlist,
 			counponDataList = {},
-			PaypalErrorName = '${sessionScope.PaypalErrorName}',
 			shippingTipPriceEl = $('.shipping').find('span'),
 			subtotalPriceEl = $('.cal-price-item.c-subtotal').find('.cal-price-num'),
 			prototalPriceEl = $('.cal-price-item.c-prototal').find('.cal-price-num'),
@@ -261,13 +260,13 @@
 			couponPriceEl = $('.cal-price-item.c-coupon').find('.cal-price-num');
 
 		// PAYMENT_ALREADY_DONE
-		if (PaypalErrorName == "VALIDATION_ERROR") {
+		if ('${sessionScope.PaypalErrorName}' == "VALIDATION_ERROR") {
 			$(".errortips").show();
 		} else {
 			$(".errortips").hide();
 		}
 
-		$("#province,.form-group .city,.form-group .code").click(function () {
+		$(".phone, #country, #province, .city, .code").click(function () {
 			$(".errortips").hide();
 		})
 
