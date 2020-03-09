@@ -275,7 +275,7 @@
 			// console.log("renderAddressDetail")		
 			// console.log(data)
 			// console.log("renderAddressDetail")
-			var dataprov = data.addressProvince;	
+			var dataprov = data.addressProvince ? data.addressProvince : '';	
 			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -284,9 +284,6 @@
 			$("input.code").val(data.addressPost ? data.addressPost : '');
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 
-			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
-			// $("select option:checked").text(data.addressCountry ? data.addressCountry : '');
-			// var datacountry =data.addressCountryAll;
 			jiecountry = data.addressCountry ? data.addressCountry : '';
 			$("#country").val();
 			$("#country").attr("data-name", jiecountry);
@@ -299,10 +296,9 @@
 				$(".form-group_select").removeClass("selectActive")
 				$(".form-groupcountry").css("width", "100%")
 			} else {
-				var provinceVal = data.addressProvince ? data.addressProvince : '';
 				$("#province").val();
-				$("#province option").eq(0).val(provinceVal);
-				$("#province option").eq(0).text(provinceVal);
+				$("#province option:checked").val(dataprov);
+				$("#province option:checked").text(dataprov);
 
 				$(".form-group_select").addClass("selectActive");
 				$(".form-groupcountry").css("width", "50%");
