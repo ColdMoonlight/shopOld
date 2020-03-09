@@ -994,5 +994,61 @@ public class MlfrontOrderController {
 
 		return Msg.success().add("Msg", "更新成功");
 	}
+	
+	/**
+	 * 13.0	UseNow	200309
+	 * to	订单-发送弃购按钮
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/updateOrderAbandoningPurchase",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderAbandoningPurchase(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
+		//接手参数
+		Integer orderId = mlfrontOrder.getOrderId();
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();//此处使用OrderCouponId字段暂时存储的payInfoId
+		//更新order为退款状态
+		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		mlfrontOrderReq.setOrderId(orderId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontOrderReq.setOrderStatus(6);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款//6发送弃购//7重复单关闭
+		mlfrontOrderReq.setOrderSendtime(nowTime);
+		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		//更新PayInfo为弃购状态
+		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+		mlfrontPayInfoReq.setPayinfoId(payInfoId);
+		mlfrontPayInfoReq.setPayinfoStatus(5);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款//5发送弃购//6重复单关闭
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoReq);
+
+		return Msg.success().add("Msg", "更新成功");
+	}
+	
+	/**
+	 * 14.0	UseNow	200309
+	 * to	订单-退款
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/updateOrderClose",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderClose(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
+		//接手参数
+		Integer orderId = mlfrontOrder.getOrderId();
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();//此处使用OrderCouponId字段暂时存储的payInfoId
+		//更新order为退款状态
+		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		mlfrontOrderReq.setOrderId(orderId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontOrderReq.setOrderStatus(7);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款//6发送弃购//7重复单关闭
+		mlfrontOrderReq.setOrderSendtime(nowTime);
+		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		//更新PayInfo为重复单关闭状态
+		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+		mlfrontPayInfoReq.setPayinfoId(payInfoId);
+		mlfrontPayInfoReq.setPayinfoStatus(6);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款//5发送弃购//6重复单关闭
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoReq);
+
+		return Msg.success().add("Msg", "更新成功");
+	}
 
 }
