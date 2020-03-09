@@ -122,12 +122,11 @@
 										</div>
 									</div>
 									<!-- stateprovinceName -->
-									<div class="form-group form-group_select selectActive" style="display: none;">
+									<div class="form-group form-group_select selectActive">
 										<label for="addressProvince" class="form-label required">State/Province</label>
 										<div class="form-input">
-											<select name="addressProvince" class="select-province form-control">
-												<!-- <optgroup label="province"> </optgroup> -->
-												<!-- <optgroup label="province" class="qwqw"> </optgroup> -->
+											<select name="addressProvince" class="form-control" id="province">
+												<option value="Alabama" selected="selected">Alabama</option>
 											</select>
 										</div>
 									</div>
@@ -273,7 +272,6 @@
 			addressIdIntInt,
 			couponPriceOld = 0,
 			jiecountry,
-			resttt,
 			counponDataList = {},
 			couponPriceold2 = 0,
 			PaypalErrorName = '${sessionScope.PaypalErrorName}',
@@ -284,7 +282,7 @@
 		} else {
 			$(".errortips").hide();
 		}
-		$(".select-province,.form-group .city,.form-group .code").click(function () {
+		$("#province,.form-group .city,.form-group .code").click(function () {
 			$(".errortips").hide();
 		});
 
@@ -306,12 +304,11 @@
 			// $("input.province").val(data.addressProvince ? data.addressProvince : '');
 			// $("select option:checked").text(data.addressCountry ? data.addressCountry : ''); 
 			// var datacountry =data.addressCountryAll;
-			jiecountry = data.addressCountry;
+			jiecountry = data.addressCountry ? data.addressCountry : '';
 			$("#country option:checked").attr("value", jiecountry);
-			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
 			$("#country").attr("data-name", jiecountry);
-			// $("#country").attr("data-country",datacountry);
-			datalocation(dataname)
+			$("#country").val(jiecountry);
+			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
 			// console.log("***dataprov****");
 			// console.log(dataprov);
 			// console.log("***dataprov****");
@@ -320,13 +317,14 @@
 				$(".form-group_select").removeClass("selectActive")
 				$(".form-groupcountry").css("width", "100%")
 			} else {
-				$(".select-province option:checked").text(data.addressProvince ? data.addressProvince : '');
-				$(".select-province option:checked").attr("value", dataprov);
-				$(".select-province").val(data.addressProvince ? data.addressProvince : '');
+				var provinceVal = data.addressProvince ? data.addressProvince : '';
+				$("#province").val();
+				$("#province option:checked").attr("value", dataprov);
+				$("#province option:checked").text(provinceVal);
+
 				$(".form-group_select").addClass("selectActive");
 				$(".form-groupcountry").css("width", "50%");
 			}
-			$("#country").val(data.addressCountry ? data.addressCountry : '');
 		}
 		/* 初始化地址模块 */
 		$.ajax({
@@ -342,7 +340,6 @@
 					addressBox = $('.address'),
 					couponBox = $('.coupons'),
 					subtotalText = '';
-				resttt = resDataAddress;
 				// console.log("resDataAddress")
 				// console.log(resDataAddress)/******/
 				// console.log("resDataAddress")
@@ -355,7 +352,7 @@
 
 					$('.address-id').val(resDataAddress.addressId);
 					// console.log(resDataAddress.addressId)/******/
-					$('.shipping').find('span').text(' of $' + resDataMoney);
+					$('.shipping').find('span').text('$' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 					$(".address").addClass("active")
 					var addProvince = resDataAddress.addressProvince,
@@ -367,7 +364,7 @@
 					}
 				} else {
 					// renderAddressAdd(addressBox);
-					$('.shipping').find('span').text(' of $' + resDataMoney);
+					$('.shipping').find('span').text('$' + resDataMoney);
 					shippingPriceText.text('$' + resDataMoney)
 				}
 
@@ -377,10 +374,8 @@
 
 			}
 		});
-		if (resttt == null) {
-			datalocation("US")
-		}
-		function datalocation(dataname) {
+
+		function getProvinceData(dataname) {
 			var dataname = $("#country").val();
 			$.ajax({
 				url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -396,7 +391,7 @@
 					var resareafreightMoney = data.extend.areafreightMoney,
 						mlPaypalStateprovinceList = data.extend.mlPaypalStateprovinceList;
 					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
-						renderCondition($('.select-province'), mlPaypalStateprovinceList)
+						renderProvince($('#province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-groupcountry").css("width", "50%")
 					} else {
@@ -405,7 +400,7 @@
 					}
 					// console.log(resareafreightMoney)/***sdfsdfsdf*/
 					// console.log("resareafreightMoney:"+resareafreightMoney)
-					// $('.shipping').find('span').text(' of $' + resareafreightMoney+'w1');
+					$('.shipping').find('span').text('$' + resareafreightMoney);
 					// shippingPriceText.text('$' + resareafreightMoney)
 					couponPriceText.text('-$' + 0);
 					totalPrice = (parseFloat(totalPrice) - resDataMoney).toFixed(2);
@@ -429,63 +424,32 @@
 			}
 		});
 
+		$('#province').on('focus', function() {
+			getProvinceData($('#country').val());
+		});
+
 		$("#country").on("change", function () {
-			var radio_zt = $(".coupons .coupon-item input[type='radio']");
-			$(".coupons .coupon-item input[type=radio]").removeClass("active");
+			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
+				dataname = $(this).val();
 			couponPriceText.text('-$' + 0);
+			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");
-			var dataname = $(this).val();
-			$.ajax({
-				url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
-				data: JSON.stringify({
-					"addressCountry": dataname
-				}),
-				type: 'post',
-				dataType: 'json',
-				contentType: 'application/json',
-				success: function (data) {
-					// console.log(data)
-					var resareafreightMoney = data.extend.areafreightMoney,
-						mlPaypalStateprovinceList = data.extend.mlPaypalStateprovinceList,
-						prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
-						totalPriceselect = 0;
-
-					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
-						renderCondition($('.select-province'), mlPaypalStateprovinceList)
-						$(".form-group_select").show();
-						$(".form-group_select").addClass("selectActive")
-						$(".form-groupcountry").css("width", "50%")
-					} else {
-						$(".form-group_select").hide();
-						$(".form-group_select").removeClass("selectActive")
-						$(".form-groupcountry").css("width", "100%")
-					}
-
-					$('.shipping').find('span').text(' of $' + resareafreightMoney);
-					shippingPriceText.text('$' + resareafreightMoney)
-					resDataMoney = resareafreightMoney;
-					totalPriceselect = (parseFloat(prototalnum) + resDataMoney).toFixed(2);
-					subtotalPriceText.text('$' + totalPriceselect);
-					couponPriceold2 = 0;
-					couponPriceOld = 0;
-
-				}
-			});
+			getProvinceData(dataname);
 		});
 
 		function renderAddressAdd(parent) {
 			parent.html('<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
 		}
 		/*****************************************/
-		function renderCondition(parent, data, defaultHtml) {
-			var html = defaultHtml || '';
-			html += ''
-			html = html + '<option value="" selected="selected">province</option>';
+		function renderProvince(el, data) {
+			var htmlStr = '',
+				defaultValue = $(el).val();
 			for (var i = 0, len = data.length; i < len; i += 1) {
-				html = html + '<option value="' + data[i].stateprovinceName + '">' + data[i].stateprovinceName + '</option>';
+				htmlStr += '<option value="' + data[i].stateprovinceName + '"'+ (defaultValue == data[i].stateprovinceName ? "selected" : "") +'>' + data[i].stateprovinceName + '</option>';
 			}
-			parent.html(html);
+
+			el.html(htmlStr);
 		}
 
 		/* 所购商品列表 */
@@ -967,7 +931,7 @@
 				addressstr = $(".addreNo").val(),
 				codestr = $(".code").val(),
 				citystr = $(".city").val(),
-				provincestr = $(".selectActive .select-province option:checked").text(),
+				provincestr = $(".selectActive #province option:checked").text(),
 				country_address = $("#country option:checked").text();
 			// var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
 			// if(radio_zt_copn==null||radio_zt_copn==''){

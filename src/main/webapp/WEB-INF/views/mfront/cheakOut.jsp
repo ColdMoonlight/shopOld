@@ -122,7 +122,7 @@
 					<div class="form-group form-group_select selectActive">
 						<label for="addressProvince" class="form-label required">State/Province</label>
 						<div class="form-input">
-							<select name="addressProvince" class="select-province form-control" id="province">
+							<select name="addressProvince" class="form-control" id="province">
 								<option value="Alabama" selected="selected">Alabama</option>
 							</select>
 						</div>
@@ -266,7 +266,7 @@
 		} else {
 			$(".errortips").hide();
 		}
-		$(".select-province,.form-group .city,.form-group .code").click(function () {
+		$("#province,.form-group .city,.form-group .code").click(function () {
 			$(".errortips").hide();
 		})
 
@@ -371,7 +371,7 @@
 					// console.log(mlPaypalStateprovinceList)
 					// console.log(mlPaypalStateprovinceList.length)
 					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
-						renderProvince($('.select-province'), mlPaypalStateprovinceList);
+						renderProvince($('#province'), mlPaypalStateprovinceList);
 						$(".form-group_select").show();
 						$(".form-group_select").addClass("selectActive")
 						$(".form-groupcountry").css("width", "50%")
@@ -928,7 +928,7 @@
 				codestr = $(".code").val(),
 				citystr = $(".city").val(),
 				countrystr = $('#country option:checked').text(),
-				provincestr = $(".selectActive .select-province option:checked").text();
+				provincestr = $(".selectActive #province option:checked").text();
 
 			if (firstnamestr == null || firstnamestr == '') {
 				flag = 1;
