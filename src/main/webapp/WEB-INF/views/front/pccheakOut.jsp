@@ -284,6 +284,8 @@
 			$(".errortips").hide();
 		});
 
+		initialData(); // 初始化 checkout data
+
 		/*********************/
 		function renderAddressDetail(data) {
 			var dataprov = data.addressProvince ? data.addressProvince : '',
@@ -320,50 +322,76 @@
 				$(".form-groupcountry").css("width", "50%");
 			}
 		}
-		/* 初始化地址模块 */
-		$.ajax({
-			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
-			type: 'post',
-			async: false,
-			success: function (data) {
-				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				// console.log(data)
-				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				var resDataAddress = data.extend.mlfrontAddressOne,
-					resDataUserType = data.extend.usertype,
-					addressBox = $('.address'),
-					couponBox = $('.coupons'),
-					subtotalText = '';
-				// console.log("resDataAddress")
-				// console.log(resDataAddress)/******/
-				// console.log("resDataAddress")
-				addressId = resDataAddress ? resDataAddress.addressId : null;
-				resDataMoney = data.extend.areafreightMoney;
-				// console.log(data)
-				renderCoupons(couponBox, resDataUserType);
-				if (resDataAddress) {
-					renderAddressDetail(resDataAddress);
 
-					$('.address-id').val(resDataAddress.addressId);
-					// console.log(resDataAddress.addressId)/******/
-					shippingTipPriceEl.text(' $' + resDataMoney);
-					shippingPriceEl.text('$' + resDataMoney)
-					$(".address").addClass("active")
-					var addProvince = resDataAddress.addressProvince,
-						addProvinceCode = resDataAddress.addressProvinceCode;
-					// console.log("addProvince:"+addProvince);
-					// console.log("addProvinceCode:"+addProvinceCode);
-					if (!addProvinceCode) {
-						$(".form-groupcountry").css("width", "100%");
+		function initialData() {
+			// 用户信息
+			$.ajax({
+				url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
+				type: 'post',
+				async: false,
+				success: function (data) {
+					// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+					// console.log(data)
+					// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+					var resDataAddress = data.extend.mlfrontAddressOne,
+						resDataUserType = data.extend.usertype,
+						addressBox = $('.address'),
+						couponBox = $('.coupons'),
+						subtotalText = '';
+					// console.log("resDataAddress")
+					// console.log(resDataAddress)/******/
+					// console.log("resDataAddress")
+					addressId = resDataAddress ? resDataAddress.addressId : null;
+					resDataMoney = data.extend.areafreightMoney;
+					// console.log(data)
+					renderCoupons(couponBox, resDataUserType);
+					if (resDataAddress) {
+						renderAddressDetail(resDataAddress);
+
+						$('.address-id').val(resDataAddress.addressId);
+						// console.log(resDataAddress.addressId)/******/
+						shippingTipPriceEl.text(' $' + resDataMoney);
+						shippingPriceEl.text('$' + resDataMoney)
+						$(".address").addClass("active")
+						var addProvince = resDataAddress.addressProvince,
+							addProvinceCode = resDataAddress.addressProvinceCode;
+						// console.log("addProvince:"+addProvince);
+						// console.log("addProvinceCode:"+addProvinceCode);
+						if (!addProvinceCode) {
+							$(".form-groupcountry").css("width", "100%");
+						}
+					} else {
+						// renderAddressAdd(addressBox);
+						shippingTipPriceEl.text(' $' + resDataMoney);
+						shippingPriceEl.text('$' + resDataMoney)
 					}
-				} else {
-					// renderAddressAdd(addressBox);
-					shippingTipPriceEl.text(' $' + resDataMoney);
-					shippingPriceEl.text('$' + resDataMoney)
-				}
 
-				subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-				subtotalPriceEl.text('$' + subtotalText);
+					subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+					subtotalPriceEl.text('$' + subtotalText);
+				}
+			});
+		}
+
+		// 订单列表数据
+		$.ajax({
+			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
+			type: 'get',
+			success: function (data) {
+				var resData = data.extend.mlfrontOrderItemList,
+					cartList = $('.cart-list'),
+					allPriceObj = calAllProductPrice(resData),
+					resDataMoneym = shippingPriceEl.text().slice(1) * 1;
+				// console.log(resData);/*2222*/
+				shopidlist = toFbidsPurchase(resData);
+				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
+				cartList.attr('data-id', resData.orderId);
+				renderCartList(cartList, resData)
+				// console.log(typeof totalPrice)
+				// console.log(allPriceObj);
+
+				prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
+				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
+				subtotalPriceEl.text('$' + totalPrice);
 			}
 		});
 
@@ -486,27 +514,6 @@
 			}
 			parent.html(html)
 		}
-		$.ajax({
-			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
-			type: 'get',
-			success: function (data) {
-				var resData = data.extend.mlfrontOrderItemList,
-					cartList = $('.cart-list'),
-					allPriceObj = calAllProductPrice(resData),
-					resDataMoneym = shippingPriceEl.text().slice(1) * 1;
-				// console.log(resData);/*2222*/
-				shopidlist = toFbidsPurchase(resData);
-				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
-				cartList.attr('data-id', resData.orderId);
-				renderCartList(cartList, resData)
-				// console.log(typeof totalPrice)
-				// console.log(allPriceObj);
-
-				prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
-				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
-				subtotalPriceEl.text('$' + totalPrice);
-			}
-		})
 
 		function addNum(e) {
 			e.stopPropagation();

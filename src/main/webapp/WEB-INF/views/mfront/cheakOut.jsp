@@ -261,15 +261,17 @@
 			couponPriceEl = $('.cal-price-item.c-coupon').find('.cal-price-num');
 
 		// PAYMENT_ALREADY_DONE
-		// console.log(tips)
 		if (PaypalErrorName == "VALIDATION_ERROR") {
 			$(".errortips").show();
 		} else {
 			$(".errortips").hide();
 		}
+
 		$("#province,.form-group .city,.form-group .code").click(function () {
 			$(".errortips").hide();
 		})
+
+		initialData(); // 初始化 checkout data
 
 		/*******************/
 		function renderAddressDetail(data) {
@@ -305,50 +307,77 @@
 				$(".form-groupcountry").css("width", "50%");
 			}
 		}
-		/* 初始化地址模块 */
-		$.ajax({
-			url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
-			type: 'post',
-			async: false,
-			success: function (data) {
-				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				// console.log(data)
-				// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-				var resDataAddress = data.extend.mlfrontAddressOne,
-					resDataUserType = data.extend.usertype,
-					addressBox = $('.address'),
-					couponBox = $('.coupons'),
-					subtotalText = '';
-				// console.log(resDataAddress);
-				resDataMoney = data.extend.areafreightMoney;
-				addressId = resDataAddress ? resDataAddress.addressId : null;
 
-				renderCoupons(couponBox, resDataUserType);
-				if (resDataAddress) {
-					var addProvince = resDataAddress.addressProvince,
-						addProvinceCode = resDataAddress.addressProvinceCode;
+		function initialData() {
+			// 用户信息
+			$.ajax({
+				url: '${APP_PATH}/MlfrontAddress/getOneMlfrontAddressDetailByUinfo',
+				type: 'post',
+				async: false,
+				success: function (data) {
+					// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+					// console.log(data)
+					// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
+					var resDataAddress = data.extend.mlfrontAddressOne,
+						resDataUserType = data.extend.usertype,
+						addressBox = $('.address'),
+						couponBox = $('.coupons'),
+						subtotalText = '';
+					// console.log(resDataAddress);
+					resDataMoney = data.extend.areafreightMoney;
+					addressId = resDataAddress ? resDataAddress.addressId : null;
 
-					renderAddressDetail(resDataAddress);
-					$('.address-id').val(resDataAddress.addressId);
-					// console.log(resDataAddress.addressId)/******/
-					shippingTipPriceEl.text(' $' + resDataMoney);
-					shippingPriceEl.text('$' + resDataMoney)
-					$(".address").addClass("active")
-					// console.log("addProvince:"+addProvince);
-					// console.log("addProvinceCode:"+addProvinceCode);
-					if (!addProvinceCode) {
-						$(".form-groupcountry").css("width", "100%");
+					renderCoupons(couponBox, resDataUserType);
+					if (resDataAddress) {
+						var addProvince = resDataAddress.addressProvince,
+							addProvinceCode = resDataAddress.addressProvinceCode;
+
+						renderAddressDetail(resDataAddress);
+						$('.address-id').val(resDataAddress.addressId);
+						// console.log(resDataAddress.addressId)/******/
+						shippingTipPriceEl.text(' $' + resDataMoney);
+						shippingPriceEl.text('$' + resDataMoney)
+						$(".address").addClass("active")
+						// console.log("addProvince:"+addProvince);
+						// console.log("addProvinceCode:"+addProvinceCode);
+						if (!addProvinceCode) {
+							$(".form-groupcountry").css("width", "100%");
+						}
+					} else {
+						// renderAddressAdd(addressBox);
+						shippingTipPriceEl.text(' $' + resDataMoney);
+						shippingPriceEl.text('$' + resDataMoney);
 					}
-				} else {
-					// renderAddressAdd(addressBox);
-					shippingTipPriceEl.text(' $' + resDataMoney);
-					shippingPriceEl.text('$' + resDataMoney);
-				}
 
-				subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
-				subtotalPriceEl.text('$' + subtotalText);
-			}
-		});
+					subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
+					subtotalPriceEl.text('$' + subtotalText);
+				}
+			});
+
+			// 订单列表数据
+			$.ajax({
+				url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
+				type: 'GET',
+				dataType: 'json',
+				success: function (data) {
+					var resData = data.extend.mlfrontOrderItemList,
+						cartList = $('.cart-list'),
+						allPriceObj = calAllProductPrice(resData),
+						resDataMoneym = shippingPriceEl.text().slice(1) * 1;
+					// console.log(resData);
+					shopidlist = toFbidsPurchase(resData);
+					orderId = resData && resData.length > 0 ? resData[0].orderId : null;
+					cartList.attr('data-id', resData.orderId);
+					renderCartList(cartList, resData)
+					// console.log(typeof totalPrice)
+					prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
+
+					totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
+					subtotalPriceEl.text('$' + totalPrice);
+				}
+			});
+		}
+
 		function getProvinceData(dataname) {
 			$.ajax({
 				url: '${APP_PATH}/MlfrontAddress/getAreafreightMoney',
@@ -473,27 +502,6 @@
 			}
 			parent.html(html)
 		}
-
-		$.ajax({
-			url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
-			type: 'get',
-			success: function (data) {
-				var resData = data.extend.mlfrontOrderItemList,
-					cartList = $('.cart-list'),
-					allPriceObj = calAllProductPrice(resData),
-					resDataMoneym = shippingPriceEl.text().slice(1) * 1;
-				// console.log(resData);
-				shopidlist = toFbidsPurchase(resData);
-				orderId = resData && resData.length > 0 ? resData[0].orderId : null;
-				cartList.attr('data-id', resData.orderId);
-				renderCartList(cartList, resData)
-				// console.log(typeof totalPrice)
-				prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
-
-				totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
-				subtotalPriceEl.text('$' + totalPrice);
-			}
-		})
 
 		function updateOrderItemNum(el, num) {
 			var orderItem = el.parents('.cart-item'),
