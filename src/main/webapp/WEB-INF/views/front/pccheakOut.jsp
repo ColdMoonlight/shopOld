@@ -175,8 +175,7 @@
 								</div>
 								<div class="group-details pay-method active">
 									<div class="coupon-item">
-										<input type="radio" name="payment" data-payid="0" checked
-											onclick="selectPay(event)" class="checkbox active">
+										<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox active">
 										<img src="${APP_PATH }/static/m/img/other/paypal.jpg">
 									</div>
 								</div>
@@ -394,7 +393,6 @@
 						} else {
 							renderSysMsg('Please fill in the shipping address ')
 						}
-
 					}
 				})
 			}
@@ -404,9 +402,7 @@
 		function renderAddressDetail(data) {
 			var dataprov = data.addressProvince ? data.addressProvince : '',
 				dataname = $("#country").data("name");
-			// console.log("renderAddressDetail")		
-			// console.log(data)
-			// console.log("renderAddressDetail")	
+
 			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -420,10 +416,8 @@
 			$("#country option:checked").val(jiecountry);
 			$("#country").attr("data-name", jiecountry);
 			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
-			// console.log("***dataprov****");
-			// console.log(dataprov);
-			// console.log("***dataprov****");
-			if (dataprov == null || dataprov == "") {
+
+			if (dataprov == "") {
 				$(".form-group_select").hide();
 				$(".form-group_select").removeClass("selectActive")
 				$(".form-groupcountry").css("width", "100%")
@@ -444,38 +438,29 @@
 				type: 'post',
 				async: false,
 				success: function (data) {
-					// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
 					// console.log(data)
-					// console.log("MlfrontAddress/getOneMlfrontAddressDetailByUinfo")
-					var resDataAddress = data.extend.mlfrontAddressOne,
-						resDataUserType = data.extend.usertype,
+					var resDataAddress = data && data.extend.mlfrontAddressOne,
+						resDataUserType = data && data.extend.usertype,
 						addressBox = $('.address'),
 						couponBox = $('.coupons'),
 						subtotalText = '';
-					// console.log("resDataAddress")
-					// console.log(resDataAddress)/******/
-					// console.log("resDataAddress")
+					resDataMoney = data && data.extend.areafreightMoney;
 					addressId = resDataAddress ? resDataAddress.addressId : null;
-					resDataMoney = data.extend.areafreightMoney;
-					// console.log(data)
+
 					renderCoupons(couponBox, resDataUserType);
 					if (resDataAddress) {
 						renderAddressDetail(resDataAddress);
 
 						$('.address-id').val(resDataAddress.addressId);
-						// console.log(resDataAddress.addressId)/******/
 						shippingTipPriceEl.text(' $' + resDataMoney);
 						shippingPriceEl.text('$' + resDataMoney)
 						$(".address").addClass("active")
 						var addProvince = resDataAddress.addressProvince,
 							addProvinceCode = resDataAddress.addressProvinceCode;
-						// console.log("addProvince:"+addProvince);
-						// console.log("addProvinceCode:"+addProvinceCode);
 						if (!addProvinceCode) {
 							$(".form-groupcountry").css("width", "100%");
 						}
 					} else {
-						// renderAddressAdd(addressBox);
 						shippingTipPriceEl.text(' $' + resDataMoney);
 						shippingPriceEl.text('$' + resDataMoney)
 					}
@@ -489,18 +474,17 @@
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',
 				type: 'get',
+				dataType: 'json',
 				success: function (data) {
-					var resData = data.extend.mlfrontOrderItemList,
+					var resData = data && data.extend.mlfrontOrderItemList,
 						cartList = $('.cart-list'),
 						allPriceObj = calAllProductPrice(resData),
 						resDataMoneym = shippingPriceEl.text().slice(1) * 1;
-					// console.log(resData);/*2222*/
+					// console.log(resData);
 					shopidlist = toFbidsPurchase(resData);
 					orderId = resData && resData.length > 0 ? resData[0].orderId : null;
 					cartList.attr('data-id', resData.orderId);
-					renderCartList(cartList, resData)
-					// console.log(typeof totalPrice)
-					// console.log(allPriceObj);
+					renderCartList(cartList, resData);
 
 					prototalPriceEl.text('$' + (allPriceObj.allSubtotalPrice).toFixed(2));
 					totalPrice = (allPriceObj.allSubtotalPrice + resDataMoneym).toFixed(2);
@@ -508,7 +492,6 @@
 				}
 			});
 		}
-
 
 		function getProvinceData(dataname) {
 			var dataname = $("#country").val();
@@ -523,9 +506,10 @@
 				contentType: 'application/json',
 				success: function (data) {
 					// console.log(data)
-					var resareafreightMoney = data.extend.areafreightMoney,
-						mlPaypalStateprovinceList = data.extend.mlPaypalStateprovinceList;
-					if (null != mlPaypalStateprovinceList && "" != mlPaypalStateprovinceList) {
+					var resareafreightMoney = data && data.extend.areafreightMoney,
+						mlPaypalStateprovinceList = data && data.extend.mlPaypalStateprovinceList;
+
+					if (mlPaypalStateprovinceList && mlPaypalStateprovinceList.length > 0) {
 						renderProvince($('#province'), mlPaypalStateprovinceList)
 						$(".form-group_select").show();
 						$(".form-groupcountry").css("width", "50%")
@@ -533,8 +517,7 @@
 						$(".form-group_select").hide();
 						$(".form-groupcountry").css("width", "100%")
 					}
-					// console.log(resareafreightMoney)/***sdfsdfsdf*/
-					// console.log("resareafreightMoney:"+resareafreightMoney)
+
 					shippingTipPriceEl.text(' $' + resareafreightMoney);
 					shippingPriceEl.text('$' + resareafreightMoney);
 					couponPriceEl.text('-$' + 0);
@@ -547,10 +530,6 @@
 			});
 		}
 
-		function renderAddressAdd(parent) {
-			parent.html('<div class="add-address address-trigger" style="display:none"><!--*<i class="icon plus"></i>*--><b> Add address consignee information</b></div>');
-		}
-		/*****************************************/
 		function renderProvince(el, data) {
 			var htmlStr = '',
 				defaultValue = $(el).val();
@@ -564,7 +543,6 @@
 		/* 所购商品列表 */
 		function renderCartList(parent, data) {
 			var html = '';
-			// console.log(data)
 			for (var i = 0, len = data.length; i < len; i += 1) {
 				var skuIdNameArr = data[i].orderitemPskuIdnamestr.split(','),
 					skuNameArr = data[i].orderitemPskuNamestr.split(','),
@@ -572,7 +550,6 @@
 					len2 = skuNameArr.length;
 				orderItemArr.push(data[i].orderitemId);
 				productNumArr.push(data[i].orderitemPskuNumber);
-				// html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '" onclick="toProductItem(' +data[i].orderitemPid + ')">' +
 				html += '<div class="cart-item bd-b" data-orderitemid="' + data[i].orderitemId + '">' +
 					'<img class="img" src="' + data[i].orderitemProductMainimgurl + '" alt="">' +
 					'<div class="content">' +
@@ -585,11 +562,8 @@
 				html += '</div>' +
 					'</div>' +
 					'<div class="num">' +
-					'<span class="price">' + (getPrice(data[i].orderitemProductOriginalprice, skuMoneyArr, data[i]
-						.orderitemProductAccoff).current) + '</span>' +
-					'<span class="original">' + (getPrice(data[i].orderitemProductOriginalprice, skuMoneyArr, data[i]
-						.orderitemProductAccoff).origin) + '</span>' +
-					/* '<span class="p-num">X' + data[i].orderitemPskuNumber + '</span>' + */
+					'<span class="price">' + (getPrice(data[i].orderitemProductOriginalprice, skuMoneyArr, data[i].orderitemProductAccoff).current) + '</span>' +
+					'<span class="original">' + (getPrice(data[i].orderitemProductOriginalprice, skuMoneyArr, data[i].orderitemProductAccoff).origin) + '</span>' +
 					'<div class="input-group">' +
 					'<span class="input-group-addon" id="product-num-sub" onclick="subNum(event)"><i class="icon sub"></i></span>' +
 					'<input type="text" name="cart-product-num" disabled="disabled" class="form-control" value="' + data[i].orderitemPskuNumber + '">' +
@@ -612,7 +586,6 @@
 			productNum.val(productNumText);
 
 			reCalPrice(item, true);
-
 			updateOrderItemNum(item, productNumText);
 		}
 
@@ -624,8 +597,9 @@
 
 			if (productNumText > 1) {
 				productNumText -= 1;
-				reCalPrice(item, false);
 				productNum.val(productNumText);
+
+				reCalPrice(item, false);
 				updateOrderItemNum(item, productNumText);
 			}
 		}
@@ -667,7 +641,7 @@
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
-				type: "POST",
+				type: "post",
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
@@ -682,9 +656,7 @@
 		function deleteOrderItem(e) {
 			e.stopPropagation();
 			var orderItem = $(e.target).parents('.cart-item'),
-				reqData = {
-					orderitemId: orderItem.data('orderitemid')
-				};
+				reqData = { orderitemId: orderItem.data('orderitemid') };
 			// console.table(reqData);
 
 			$.ajax({
@@ -694,9 +666,6 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					//renderSysMsg('Delete success.');
-					// console.log(JSON.parse(data));
-
 					var isDelSuccess = data && data.extend.isDelSuccess,
 						orginalItemNum = data && data.extend.orginalItemNum;
 					if (isDelSuccess == 0) {
@@ -751,7 +720,7 @@
 				allSubtotalPrice: allSubtotalPrice
 			};
 		}
-		/* single */
+
 		/* single */
 		function getPrice(originalePrice, skuPriceArr, discount) {
 			var singlePrice = parseFloat(originalePrice);
@@ -762,32 +731,26 @@
 			return {
 				origin: parseFloat(singlePrice).toFixed(2),
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
-			}
+			};
 		}
-		/* 优惠券 
-		 * 
-		//MlbackCoupon/getOneMlbackCouponDetailByCode
-		 字段，String couponCode
-		 */
-		function renderCoupons(parent, userType, data) {
-			var html = '';
-			if (userType == 0 || userType == 1) {
-				html = '<div class="input-group">' +
-					'<input type="text" name="productNum" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
-					'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
-					'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
-			}
+
+		/* 优惠券 */
+		function renderCoupons(parent, userType) {
+			var html = '<div class="input-group">' +
+				'<input type="text" class="form-control coed_inp" value="" placeholder="Please enter coupon code">' +
+				'<span class="input-group-addon" id="coupon-check" onclick="checkCouponCode(event)">check it</span>' +
+				'</div><div class="coupon-error"><p class="without-data">Enter coupon code to get a discount!</p></div>';
+
 			parent.html(html);
 		}
 
 		function selectPay(e) {
 			payplate = $(e.target).data('payid');
 		}
+
 		function checkCouponCode(event) {
 			var couponCode2 = $(event.target).prev('input').val(),
-				data = {
-					couponCode: couponCode2
-				}; // MEGA12	couponCode	
+				data = { couponCode: couponCode2 }; // MEGA12	couponCode	
 			$.ajax({
 				url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByCode',
 				data: JSON.stringify({
@@ -842,7 +805,6 @@
 					} else {
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 					}
-
 				}
 			})
 		}
@@ -858,6 +820,7 @@
 			//console.log("infoRelids:"+infoRelids);
 			return infoRelids;
 		}
+
 		/******************************************************/
 		function checkAddress(reqDataUp) {
 			var flag = false;
@@ -866,16 +829,12 @@
 				type: 'post',
 				async: false,
 				success: function (data) {
-					// console.log("/MlfrontAddress/getOneMlfrontAddressDetailByUinfo");
 					// console.log(data)
-					//console.log(resData.mlfrontAddressOne)
 					if (data.extend.mlfrontAddressOne) {
 						flag = true;
 					} else {
 						falg = false;
-						var addressinfoIdss = reqDataUp.addressinfoId;
-						// console.log("addressinfoIdss:"+addressinfoIdss);
-						if (addressinfoIdss != null) {
+						if (reqDataUp.addressinfoId != null) {
 							flag = true;
 						}
 					}
@@ -904,12 +863,12 @@
 						$(".save").removeClass("active")
 						renderSysMsg('Required fields with an asterisk cannot be empty. Please check before submitting');
 						break;
-
 					}
 				}
 			}
 			return flag;
 		}
+
 		function inputCheck9() {
 			var flag = 0,
 				firstnamestr = $(".firstname").val(),
@@ -921,11 +880,7 @@
 				citystr = $(".city").val(),
 				provincestr = $(".selectActive #province option:checked").text(),
 				country_address = $("#country option:checked").text();
-			// var radio_zt_copn=$(".coupons .coupon-item input[type='radio']").val();
-			// if(radio_zt_copn==null||radio_zt_copn==''){
-			// 	flag = 1;
-			// 	alert("优惠券未使用")
-			// }
+
 			if (firstnamestr == null || firstnamestr == '') {
 				flag = 1;
 				// alert("firstnamestr is empty");
