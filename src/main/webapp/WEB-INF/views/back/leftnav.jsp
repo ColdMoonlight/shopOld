@@ -287,6 +287,13 @@
             <span class="text">物流管理列表</span></a>
         </div>
       </li>
+      <li>
+        <div class="item">
+          <a href="${APP_PATH }/MlbackAbandonPurchase/toMlbackAbandonPurchasePage">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">弃购邮件列表</span></a>
+        </div>
+      </li>
     </ul>
   </li>
 </ul>
