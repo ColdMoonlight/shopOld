@@ -2384,7 +2384,7 @@ word-break: break-all;width: 98%; float: left; margin: 5px 2% 0 0; font-size: 14
   align-items: center;
   width: calc(100vw - 60px);
   height: calc(100vh - 60px);
-  margin: 0 30px 30px 30px;
+  margin: 30px;
 }
 .img_boxbig{ position: relative;}
 
