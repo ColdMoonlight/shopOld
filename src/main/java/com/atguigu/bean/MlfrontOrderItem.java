@@ -172,4 +172,48 @@ public class MlfrontOrderItem {
     public void setOrderitemMotifytime(String orderitemMotifytime) {
         this.orderitemMotifytime = orderitemMotifytime == null ? null : orderitemMotifytime.trim();
     }
+
+	public MlfrontOrderItem() {
+		super();
+	}
+
+	public MlfrontOrderItem(Integer orderitemId, Integer orderId, Integer orderUid, Integer orderCartItemId,
+			Integer orderitemPid, String orderitemPname, BigDecimal orderitemProductOriginalprice,
+			String orderitemProductMainimgurl, Integer orderitemProductAccoff, String orderitemPskuIdstr,
+			String orderitemPskuIdnamestr, String orderitemPskuNamestr, String orderitemPskuMoneystr,
+			Integer orderitemPskuNumber, String orderitemPskuReamoney, String orderitemCreatetime,
+			String orderitemMotifytime) {
+		super();
+		this.orderitemId = orderitemId;
+		this.orderId = orderId;
+		this.orderUid = orderUid;
+		this.orderCartItemId = orderCartItemId;
+		this.orderitemPid = orderitemPid;
+		this.orderitemPname = orderitemPname;
+		this.orderitemProductOriginalprice = orderitemProductOriginalprice;
+		this.orderitemProductMainimgurl = orderitemProductMainimgurl;
+		this.orderitemProductAccoff = orderitemProductAccoff;
+		this.orderitemPskuIdstr = orderitemPskuIdstr;
+		this.orderitemPskuIdnamestr = orderitemPskuIdnamestr;
+		this.orderitemPskuNamestr = orderitemPskuNamestr;
+		this.orderitemPskuMoneystr = orderitemPskuMoneystr;
+		this.orderitemPskuNumber = orderitemPskuNumber;
+		this.orderitemPskuReamoney = orderitemPskuReamoney;
+		this.orderitemCreatetime = orderitemCreatetime;
+		this.orderitemMotifytime = orderitemMotifytime;
+	}
+
+	@Override
+	public String toString() {
+		return "MlfrontOrderItem [orderitemId=" + orderitemId + ", orderId=" + orderId + ", orderUid=" + orderUid
+				+ ", orderCartItemId=" + orderCartItemId + ", orderitemPid=" + orderitemPid + ", orderitemPname="
+				+ orderitemPname + ", orderitemProductOriginalprice=" + orderitemProductOriginalprice
+				+ ", orderitemProductMainimgurl=" + orderitemProductMainimgurl + ", orderitemProductAccoff="
+				+ orderitemProductAccoff + ", orderitemPskuIdstr=" + orderitemPskuIdstr + ", orderitemPskuIdnamestr="
+				+ orderitemPskuIdnamestr + ", orderitemPskuNamestr=" + orderitemPskuNamestr + ", orderitemPskuMoneystr="
+				+ orderitemPskuMoneystr + ", orderitemPskuNumber=" + orderitemPskuNumber + ", orderitemPskuReamoney="
+				+ orderitemPskuReamoney + ", orderitemCreatetime=" + orderitemCreatetime + ", orderitemMotifytime="
+				+ orderitemMotifytime + "]";
+	}
+    
 }
