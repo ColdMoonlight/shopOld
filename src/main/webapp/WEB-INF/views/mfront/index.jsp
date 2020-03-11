@@ -1004,8 +1004,6 @@
 	                    clearTimeout(timer);
 	                }, 300);
 	            }
-			} else {
-				renderLotterySuccess();
 			}
 	    });
   	</script>
