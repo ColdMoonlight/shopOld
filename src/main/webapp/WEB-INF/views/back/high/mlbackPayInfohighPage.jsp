@@ -27,11 +27,14 @@
 			<div class="main-box nicescroll">
 				<div class="header">
 					<h2>付款页面列表</h2>
-					    <button type="button" id="downPayinfoDate">下载查账数据</button>
-          				<button type="button" id="downEcppDate">下载ecpp数据</button>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
+					<div class="down_box" style="padding: 20px 20px 0;">
+						<button type="button" id="downPayinfoDate">下载查账数据</button>
+						<button type="button" id="downEcppDate">下载ecpp数据</button>
+						<p style="color: red;">(只能下载5天之内的数据)</p>
+					</div>
 					<div class="table-box">
 					    <div class="choose_screen">
 								<div class="c-datepicker-date-editor date-timepicker" style="float: left; margin: 0 20px 0 0;">
@@ -161,22 +164,15 @@
 			 							min: '2018-01-01 06:00:00',
 			 							max: maxDateend,
 			 							isRange: true,
+										between:5,
 			 							shortcutOptions: [{
 			 							 name: '昨天',
 			 							 day: '-1,-1',
 			 							 time: '00:00:00,23:59:59'
 			 							},{
-			 							 name: '最近一周',
-			 							 day: '-7,0',
+			 							 name: '最近5天',
+			 							 day: '-5,0',
 			 							 time:'00:00:00,'
-			 							}, {
-			 							 name: '最近一个月',
-			 							 day: '-30,0',
-			 							 time: '00:00:00,'
-			 							}, {
-			 							 name: '最近三个月',
-			 							 day: '-90, 0',
-			 							 time: '00:00:00,'
 			 							}],
 			 							hide: function (type) {
 											var changestar = this.$input.eq(0).val();
@@ -192,31 +188,31 @@
 				$input.eq(0).val(minDatestar);
 				$input.eq(1).val(maxDateend);
 			}
-			function  datePickerint(){
-				$('.J-datepicker').datePicker({
-				  hasShortcut:true,
-				  min:'2018-01-01 04:00:00',
-				  max:'2050-09-09 20:59:59',
-				  shortcutOptions:[{
-					name: '今天',
-					day: '0'
-				  }, {
-					name: '昨天',
-					day: '-1',
-					time: '00:00:00'
-				  }, {
-					name: '一周前',
-					day: '-7'
-				  }],
-				  hide:function(){
-					console.info(this)
-				  }
-				}); 
-			}
+			// function  datePickerint(){
+			// 	$('.J-datepicker').datePicker({
+			// 	  hasShortcut:true,
+			// 	  min:'2018-01-01 04:00:00',
+			// 	  max:'2050-09-09 20:59:59',
+			// 	  shortcutOptions:[{
+			// 		name: '今天',
+			// 		day: '0'
+			// 	  }, {
+			// 		name: '昨天',
+			// 		day: '-1',
+			// 		time: '00:00:00'
+			// 	  }, {
+			// 		name: '一周前',
+			// 		day: '-7'
+			// 	  }],
+			// 	  hide:function(){
+			// 		console.info(this)
+			// 	  }
+			// 	}); 
+			// }
 			$(function () {
 				initHtml();
 				initJs();
-				 datePickerint()
+				 // datePickerint()
 				
 			});
 /***************************************************************************************/
