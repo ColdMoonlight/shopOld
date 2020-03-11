@@ -959,8 +959,6 @@ public class MlfrontOrderController {
 			mlbackProductDetailList.add(mlbackProductRes);
 		}
 		
-		System.out.println(mlfrontOrderItemDetailList.toString());
-		
 		//查回弃购客服问话
 		MlbackAbandonPurchase mlbackAbandonPurchaseReq = new MlbackAbandonPurchase();
 		mlbackAbandonPurchaseReq.setAbandonpurchaseStatus(1);//生效中
@@ -1001,14 +999,12 @@ public class MlfrontOrderController {
 		Message=Message+"We have noticed you have placed an order before but you gave it up.  Is there anything i can help you?<br><br>";
 		Message=Message+activeStr+"."+couponStr+".<br><br>";
 		
-		String itemPskuNamestrNow = "";
 		String proName = "";
 		String proSeoName = "";
 		
 		for(int i=0;i<mlfrontOrderItemDetailList.size();i++){
 			proName = mlbackProductDetailList.get(i).getProductName();
-			itemPskuNamestrNow = mlfrontOrderItemDetailList.get(i).getOrderitemPskuNamestr();
-			Message=Message+""+proName+"  ("+itemPskuNamestrNow+")<br>";
+			Message=Message+""+proName+"<br>";
 			
 			proSeoName = mlbackProductDetailList.get(i).getProductSeo();
 			
