@@ -275,6 +275,8 @@
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
+		var orderOrderitemidstradd;
+		var orderBuymail; /*取到orderBuymail*/
 		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
@@ -324,6 +326,7 @@
 							
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
+							orderOrderitemidstradd = orderData.orderOrderitemidstr;
 							shipName = orderData.orderLogisticsname;
 							var receiveDataaddress = mlPaypalShipAddressOne;
 							renderPaypaladdress(receiveDataaddress);
@@ -333,6 +336,8 @@
 							console.log(receiveData)
 							receiveData.addressUid = resDataAddressOne.addressUid;
 							userid = receiveData.addressUid;
+							receiveData.addressEmail = resDataAddressOne.addressEmail;
+							orderBuymail = receiveData.addressEmail;
 							
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
@@ -703,7 +708,10 @@
 				var reqData = {
 				  "orderId":orderId,
 				  "orderCouponId":payinfoIdcd,
+				  "orderOrderitemidstr":orderOrderitemidstradd,
+				  "orderBuyMess":orderBuymail,
 				}
+				console.log(reqData)
 				$.ajax({
 				  url: '${APP_PATH}/MlfrontOrder/updateOrderAbandoningPurchase',
 				  data: JSON.stringify(reqData),

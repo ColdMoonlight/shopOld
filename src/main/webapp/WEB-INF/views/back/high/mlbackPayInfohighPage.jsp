@@ -470,6 +470,8 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
+		var orderOrderitemidstradd;
+		var orderBuymail; /*取到orderBuymail*/
 		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
 			$('.box_new_review').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
@@ -523,6 +525,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 							
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
+							orderOrderitemidstradd = orderData.orderOrderitemidstr;
 							shipName = orderData.orderLogisticsname;
 							var receiveDataaddress = mlPaypalShipAddressOne;
 							renderPaypaladdress(receiveDataaddress);
@@ -532,7 +535,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 							console.log(receiveData)
 							receiveData.addressUid = resDataAddressOne.addressUid;
 							userid = receiveData.addressUid;
-							
+							orderBuymail = receiveData.addressEmail;
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
 							receiveData.orderCouponCode = resDataOrderPayOne.orderCouponCode;	//**优惠码****
@@ -921,10 +924,13 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
        	 
        	 /**purchase_send()弃购发送****/
        	  function purchase_send(){
-       		var reqData = {
-       		  "orderId":orderId,
-       		  "orderCouponId":payinfoIdcd,
-       		}
+			var reqData = {
+			  "orderId":orderId,
+			  "orderCouponId":payinfoIdcd,
+			  "orderOrderitemidstr":orderOrderitemidstradd,
+			  "orderBuyMess":orderBuymail,
+			}
+			console.log(reqData)
        		$.ajax({
        		  url: '${APP_PATH}/MlfrontOrder/updateOrderAbandoningPurchase',
        		  data: JSON.stringify(reqData),
