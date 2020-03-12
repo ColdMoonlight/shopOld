@@ -2728,6 +2728,7 @@ background: url(../../pc/img/sdf.png) no-repeat 10px center;}
 .fixed_small.active{ left: 5px;}
 
 .img_show{width: 100%;}
+.img_show>a {display: block;}
 .img_show img{max-width: 100%;min-height: 40px;}
 
 .goback{font-size: 14px; padding: 10px;}
