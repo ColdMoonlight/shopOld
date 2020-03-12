@@ -202,7 +202,7 @@
           $this.toggleClass('active').find('.tt-dropdown-menu').slideToggle(200);
           return;
         };
-        $('.tt-desktop-header .tt-dropdown-obj').each(function () {
+        $('.desktop-header .tt-dropdown-obj').each(function () {
           var $this = $(this);
           if ($this.hasClass('active')) {
             $this.removeClass('active').find('.tt-dropdown-menu').css("display", "none");
