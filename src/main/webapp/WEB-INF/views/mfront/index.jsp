@@ -718,7 +718,7 @@
 											   var resDatalength =resData.length;
 //		                     var lensimg=parseInt(dataimgLength-(dataimgLength%8));
 //		                     var lenslist=parseInt(resDatalength-(resDatalength%8));
-		                     masonryHtml(masonrycont,resData.slice(0,10),resDataimg.slice(0,10));
+		                     masonryHtml(masonrycont,resData.slice(0,8),resDataimg.slice(0,8));
 										  }
 									}
 							  });
