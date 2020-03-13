@@ -58,10 +58,10 @@
 				<div class="name">NAME</div>
 				<input type="text" name="username" placeholder="Enter your name (public)">
 			</div>
-			<div class="review-box-item">
+<!-- 			<div class="review-box-item">
 				<div class="name">EMAIL</div>
 				<input type="text" name="usereamil" placeholder="Enter your eamil (priate)">
-			</div>
+			</div> -->
 			<div class="review-box-item">
 				<div class="name">RANTING</div>
 				<div class="stars-list review-star" data-star="5">
@@ -552,17 +552,17 @@
 				var details = $('.review-details').val().trim();
 				var starNum = parseInt($('.review-star').data('star'), 10);
 				var username = $('input[name="username"]').val().trim();
-				var email = $('input[name="usereamil"]').val();
-				var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				// var email = $('input[name="usereamil"]').val();
+				// var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 				if (username.length < 1) {
 					renderSysMsg('Please enter user name');
 					return;
 				}
 				
-				if (!pattern.test(email)) {
-					renderSysMsg('Please enter the correct email address');
-					return;
-				}
+				// if (!pattern.test(email)) {
+				// 	renderSysMsg('Please enter the correct email address');
+				// 	return;
+				// }
 				
 				if (starNum < 1) {
 					renderSysMsg('Please Rating');
@@ -1076,34 +1076,43 @@
 		// 		deleteReview();
 		// 	}
 		// });
+           function uploadfu(parent, file) {
+           		//实例化一个FormData
+           		$(file).off('change').val('');
+           		$(file).on('change', function() {
+           			 var obj = new FormData();
+           			 var fileObj = file.files[0],
+           				 filesize=fileObj.size;
+           			 if(filesize>=3*1024*1024){
+           				 alert("Maximum upload file size: 3M")
+           				 return false
+           			 }else{
+           				 obj.append('file', fileObj);
+           				 obj.append('reviewId', reviewId);
+           				 obj.append('sort', imgCount);
+           				 $.ajax({
+           					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
+           					type: "post",
+           					dataType: "json",
+           					cache: false,
+           					data: obj,
+           					processData: false, // 不处理数据
+           					contentType: false, // 不设置内容类型
+           					success: function (data) {
+           						if (data.code === 100) {
+           							var returl = data.extend.uploadUrl;
+           							console.log(returl)
+           							var img = $('<img src="${APP_PATH }/static/img/reviewAllImg/'+ returl +'">');
+           							parent.find('.reviews-img-box').append(img);
+           							imgCount++;
+           						}
+           					}
+           				 });	
+           			 }
+           });
+           	}
+
 		
-		function uploadfu(parent, file) {
-			//实例化一个FormData
-			var obj = new FormData();
-			$(file).off('change').val('');
-			$(file).on('change', function() {
-				obj.append('file', file.files[0]);
-				obj.append('reviewId', reviewId);
-				obj.append('sort', imgCount);
-				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadReviewAllImg",
-					type: "post",
-					dataType: "json",
-					cache: false,
-					data: obj,
-					processData: false, // 不处理数据
-					contentType: false, // 不设置内容类型
-					success: function (data) {
-						if (data.code === 100) {
-							var returl = data.extend.uploadUrl;
-							var img = $('<img src="${APP_PATH }/static/img/reviewAllImg/'+ returl +'">');
-							parent.find('.reviews-img-box').append(img);
-							imgCount++;
-						}
-					}
-				});
-			})
-		}
 		
 		function lightbox(imgs) {
 		      var win = $(window);

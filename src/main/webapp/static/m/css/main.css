@@ -1218,7 +1218,9 @@ a:focus {
 	margin-bottom: .5em;
 	font-size: 16px;
 }
-
+.review-box-item .name span{
+	color: #888;font-size: 12px;
+}
 .review-box-item>input {
 	display: block;
 	border: 1px solid #ccc;
@@ -1370,7 +1372,7 @@ a:focus {
 }
 
 .review-imgs>img+img {
-	margin-left: 8px;
+	margin-left: 5px;
 }
 .review-content {
   position: relative;
@@ -2375,7 +2377,7 @@ word-break: break-all;width: 98%; float: left; margin: 5px 2% 0 0; font-size: 14
   /* background: #0000CC; */
   z-index: 333;
 }
-
+/* .light_box-close .close{top: 15px; left: 0;} */
 
 
 .light_box-inner {
