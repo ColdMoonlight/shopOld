@@ -143,9 +143,9 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
-            System.out.println(e.getDetails().getName());
-            PaypalErrorName = e.getDetails().getName();
-            session.setAttribute("PaypalErrorName", PaypalErrorName);
+            System.out.println(e.getDetails());
+            //PaypalErrorName = e.getDetails());
+            //session.setAttribute("PaypalErrorName", PaypalErrorName);
             ListIterator<ErrorDetails> errorDetailslist = null;
             
             errorDetailslist =  e.getDetails().getDetails().listIterator();
@@ -698,6 +698,9 @@ public class PaypalController {
     private ToPaypalInfo getPayInfo(HttpSession session) {
     	//从session中获取对象
     	MlfrontAddress mlfrontAddressToPay = (MlfrontAddress) session.getAttribute("mlfrontAddressToPay");
+    	//从session中获取payinfoId,准备填入Desc中,防止paypal收到钱,却无法查帐
+    	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
+    	String payinfoIdStr = payinfoId+"";
     	BigDecimal totalprice = (BigDecimal) session.getAttribute("totalprice");
     	ToPaypalInfo toPaypalInfo = new ToPaypalInfo();
 		//从对象中获取参数
@@ -718,7 +721,9 @@ public class PaypalController {
 		toPayDesc+=toPayCity+",";
 		toPayDesc+=toPayDetail+",";
 		toPayDesc+=toPayUserfirstname+",";
-		toPayDesc+=toPayUserlastname;
+		toPayDesc+=toPayUserlastname+",opstr";
+		toPayDesc+=payinfoIdStr;
+//		toPayDesc+=toPayUserlastname;
 		toPaypalInfo.setMoneyNum(totalprice);
 		toPaypalInfo.setMoneyType("USD");
 		toPaypalInfo.setPaymentDescription(toPayDesc);
