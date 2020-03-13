@@ -253,7 +253,7 @@ public class MlfrontOrderController {
 		MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
 		String orderitemidArri="";
 		for(int i=0;i<orderitemidArr.length;i++){
-			BigDecimal oneAllprice = new BigDecimal(0);
+			BigDecimal oneAllprice = new BigDecimal(0);//01初始化字段，用来存本sku的钱
 			System.out.println("orderitemidArr[i]:"+orderitemidArr[i]);
 			orderitemidArri = orderitemidArr[i].trim();
 			Integer orderItemId = Integer.parseInt(orderitemidArri);
@@ -270,13 +270,13 @@ public class MlfrontOrderController {
 			for(int j =0;j<PskuMoneystr.length;j++){
 				pskuTrimStr = PskuMoneystr[j].trim();
 				pskuMoneyOne = new BigDecimal(pskuTrimStr);
-				oneAllprice = oneAllprice.add(pskuMoneyOne);
+				oneAllprice = oneAllprice.add(pskuMoneyOne);//02计算本orderItem下的所有sku项的钱
 			}
-			oneAllprice=oneAllprice.add(ItemProductOriginalprice);
+			oneAllprice=oneAllprice.add(ItemProductOriginalprice);//03叠加本品基础价的钱
 			//计算这一项的价格，(基础价格+每个的sku价格的和)*折扣*数量,存入orderitemPskuReamoney字段中;
-			oneAllprice = oneAllprice.multiply(new BigDecimal(number));
-			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));
-			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));
+			oneAllprice = oneAllprice.multiply(new BigDecimal(number));//04乘本品的个数得到总价
+			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));//05乘本品的折扣
+			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));//06还原本品+sku集合的最终价
 			String str = df1.format(oneAllprice);
 			System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
 			System.out.println("存进去的OrderitemPskuReamoney:"+str); //13.15
@@ -354,7 +354,17 @@ public class MlfrontOrderController {
 		}else{
 			mlfrontPayInfoNew.setPayinfoPlatform("bank_Card");
 		}
-		mlfrontPayInfoNew.setPayinfoMoney(totalprice);
+
+		//6获取returnmoney
+		String orderAllMoney = GetOrderTopayinfoMoney(Orderitemidstr);
+		
+		String addressMoneyendStr = addressMoney+"";
+		
+		String amTotal = getamountTotal(orderAllMoney,CouponCodeMoneyStr,addressMoneyendStr);
+		
+		BigDecimal amTotalBig=new BigDecimal(amTotal);  
+		
+		mlfrontPayInfoNew.setPayinfoMoney(amTotalBig);//总钱数排除一分钱后的计算结果
 		mlfrontPayInfoNew.setPayinfoCreatetime(nowTime);
 		mlfrontPayInfoNew.setPayinfoMotifytime(nowTime);
 		mlfrontPayInfoService.insertSelective(mlfrontPayInfoNew);
@@ -369,10 +379,86 @@ public class MlfrontOrderController {
 		Integer orderIdFinally = (Integer) session.getAttribute("orderId");
 		session.setAttribute("orderId", orderIdFinally);
 		//4.0传入orderid,查询其中的orderItemID,找到cartID 找到cartid,移除购物车中的
-		Integer IsUpdate = updateCart(mlfrontOrder);
+		updateCart(mlfrontOrder);
 		//5.0发起支付
 		Integer isSuccess = 0;//返回0，跳支付成功页面;返回1，跳支付失败页面
 		return Msg.success().add("resMsg", "更新成功").add("isSuccess", isSuccess);
+	}
+
+	/**
+	 * 6.1计算折后的筹款价格
+	 * returnMoney
+	 * */
+	private String GetOrderTopayinfoMoney(String orderitemidstr) {
+		
+		String orderitemidArr[] = orderitemidstr.split(",");
+		MlfrontOrderItem mlfrontOrderItemMoneyReq = new MlfrontOrderItem();
+		MlfrontOrderItem mlfrontOrderItemMoneyRes = new MlfrontOrderItem();
+		List<MlfrontOrderItem> mlfrontOrderItemList = new ArrayList<MlfrontOrderItem>();
+		String orderitemidArriReturn="";
+		for(int i=0;i<orderitemidArr.length;i++){
+			//获取便利orderItemId
+			orderitemidArriReturn = orderitemidArr[i].trim();
+			Integer orderItemId = Integer.parseInt(orderitemidArriReturn);
+			mlfrontOrderItemMoneyReq.setOrderitemId(orderItemId);
+			List<MlfrontOrderItem> mlfrontOrderItemMoneyOneList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemMoneyReq);
+			mlfrontOrderItemMoneyRes = mlfrontOrderItemMoneyOneList.get(0);
+			mlfrontOrderItemList.add(mlfrontOrderItemMoneyRes);
+		}
+		String subMoney = "";
+		if(mlfrontOrderItemList.size()>1){
+  			subMoney = getItemListsMoney(mlfrontOrderItemList);
+  		}else{
+  			MlfrontOrderItem mlfrontOrderItem = mlfrontOrderItemList.get(0);
+
+  			Integer skuNum=mlfrontOrderItem.getOrderitemPskuNumber();
+  			String money = mlfrontOrderItem.getOrderitemPskuReamoney();
+  			String oneMoney = getOnemoney(skuNum,money);
+  			money = getOneAllMoney(skuNum,oneMoney);
+  			subMoney = money;
+  		}
+		//此时subMoney为orderItemList的全部价格
+		return subMoney;
+	}
+
+	/**
+	 * 上面方法的子方法
+	 * 获取getItemListsMoney的全部价格
+	 * */
+	private String getItemListsMoney(List<MlfrontOrderItem> mlfrontOrderItemList) {
+		Double MoneyDuball=new Double("0.00");
+		for(MlfrontOrderItem mlfrontOrderItem:mlfrontOrderItemList){
+			Integer skuNum=mlfrontOrderItem.getOrderitemPskuNumber();
+			String money = mlfrontOrderItem.getOrderitemPskuReamoney();
+			String oneMoney =getOnemoney(skuNum,money);
+			money = getOneAllMoney(skuNum,oneMoney);
+			Double MoneyDub=new Double(money);
+			MoneyDuball=MoneyDuball+ MoneyDub;
+        }
+		String OneOrderAllMoney = String.format("%.2f", MoneyDuball);
+		return OneOrderAllMoney;
+	}
+
+	/**
+	 * 上面方法的子方法
+	 * 获取单条OrderItemMoney*num后的总价格
+	 * */
+	private String getOneAllMoney(Integer skuNum, String oneMoney) {
+		Double oneMoneyDou = new Double(oneMoney);
+		Double OneAllM = oneMoneyDou*skuNum;
+		String OneAllMoney = String.format("%.2f", OneAllM);
+		return OneAllMoney;
+	}
+
+	/**
+	 * 上面方法的子方法
+	 * 获取单条OrderItemMoney的总价格
+	 * */
+	private String getOnemoney(Integer skuNum, String money) {
+		Double moneyAll = new Double(money);
+		Double oneM = moneyAll/skuNum;
+		String Onemoney = String.format("%.2f", oneM);
+		return Onemoney;
 	}
 
 	/**
@@ -496,6 +582,25 @@ public class MlfrontOrderController {
 		mlfrontCart.setCartitemIdstr(filallyCartitemStr);
 		mlfrontCartService.updateByPrimaryKeySelective(mlfrontCart);
 		return null;
+	}
+	
+	/**
+	 * 3.4处理一分钱问题
+	 * updateCart
+	 * */
+	private String getamountTotal(String subMoney, String shopdiscount, String addressMoney) {
+		
+		Double subMoneyDou = Double.parseDouble(subMoney);
+		
+		Double shopdiscountDou = Double.parseDouble(shopdiscount);
+		
+		Double addressMoneyDou = Double.parseDouble(addressMoney);
+		
+		Double amountTotalDou = subMoneyDou - shopdiscountDou + addressMoneyDou;
+		
+		String amountTotalDouStr = (String.format("%.2f", amountTotalDou));
+		
+		return amountTotalDouStr;
 	}
 	
 	/**
