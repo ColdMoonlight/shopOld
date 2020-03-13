@@ -202,4 +202,49 @@ public class MlfrontOrder {
     public void setOrderSendtime(String orderSendtime) {
         this.orderSendtime = orderSendtime == null ? null : orderSendtime.trim();
     }
+    
+	public MlfrontOrder() {
+		super();
+	}
+
+	public MlfrontOrder(Integer orderId, Integer orderUid, String orderIp, String orderOrderitemidstr,
+			BigDecimal orderMoney, Integer orderCouponId, String orderCouponCode, String orderProNumStr,
+			Integer orderPayPlate, String orderBuyMess, BigDecimal orderCouponPrice, Integer addressinfoId,
+			Integer orderStatus, String orderCreatetime, String orderMotifytime, String orderPaytime,
+			Integer orderLogisticsid, String orderLogisticsname, String orderLogisticsnumber, String orderSendtime) {
+		super();
+		this.orderId = orderId;
+		this.orderUid = orderUid;
+		this.orderIp = orderIp;
+		this.orderOrderitemidstr = orderOrderitemidstr;
+		this.orderMoney = orderMoney;
+		this.orderCouponId = orderCouponId;
+		this.orderCouponCode = orderCouponCode;
+		this.orderProNumStr = orderProNumStr;
+		this.orderPayPlate = orderPayPlate;
+		this.orderBuyMess = orderBuyMess;
+		this.orderCouponPrice = orderCouponPrice;
+		this.addressinfoId = addressinfoId;
+		this.orderStatus = orderStatus;
+		this.orderCreatetime = orderCreatetime;
+		this.orderMotifytime = orderMotifytime;
+		this.orderPaytime = orderPaytime;
+		this.orderLogisticsid = orderLogisticsid;
+		this.orderLogisticsname = orderLogisticsname;
+		this.orderLogisticsnumber = orderLogisticsnumber;
+		this.orderSendtime = orderSendtime;
+	}
+
+	@Override
+	public String toString() {
+		return "MlfrontOrder [orderId=" + orderId + ", orderUid=" + orderUid + ", orderIp=" + orderIp
+				+ ", orderOrderitemidstr=" + orderOrderitemidstr + ", orderMoney=" + orderMoney + ", orderCouponId="
+				+ orderCouponId + ", orderCouponCode=" + orderCouponCode + ", orderProNumStr=" + orderProNumStr
+				+ ", orderPayPlate=" + orderPayPlate + ", orderBuyMess=" + orderBuyMess + ", orderCouponPrice="
+				+ orderCouponPrice + ", addressinfoId=" + addressinfoId + ", orderStatus=" + orderStatus
+				+ ", orderCreatetime=" + orderCreatetime + ", orderMotifytime=" + orderMotifytime + ", orderPaytime="
+				+ orderPaytime + ", orderLogisticsid=" + orderLogisticsid + ", orderLogisticsname=" + orderLogisticsname
+				+ ", orderLogisticsnumber=" + orderLogisticsnumber + ", orderSendtime=" + orderSendtime + "]";
+	}
+    
 }
