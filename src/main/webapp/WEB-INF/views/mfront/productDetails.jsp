@@ -93,12 +93,14 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
     <div class="mask5" style="display: none;"></div>
-  <script src="${APP_PATH }/static/js/relativetime.min.js"></script>
-  <script src="${APP_PATH }/static/js/countdown.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+  	<script src="${APP_PATH }/static/js/relativetime.min.js"></script>
+  	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script>
 		var imgCount = 1;
 		var reviewId = null;
 		var sessionScopeproductId = '${sessionScope.productDetailId}';
+		var loadProduct2Url = "${APP_PATH }/static/m/img/loading/load-product2.gif"
 		/* load tpl for detail of product */
 		$('.product-details').load('${APP_PATH}/static/tpl/productDetail.html', function () {
 			
@@ -139,6 +141,11 @@
 								clickable: true
 							}
 						});
+						new LazyLoad(swiper.find('img'), {
+							root: null,
+							rootMargin: "10px",
+							threshold: 0
+						});
 					} else {
 						renderErrorMsg(swiper, 'No data for the relevant image was obtained');
 					}
@@ -173,7 +180,7 @@
 				
 				for (var i=0, len=data.length; i < len; i += 1) {
 						html += '<div class="swiper-slide">' +
-						'<img src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
+						'<img src="'+ loadProduct2Url +'" data-src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
 						'</div>';
 				}
 
@@ -944,7 +951,6 @@
 	      }
 	    });
 		/*******hot_box_product********************************/
-		 var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
 		 function rednerProduct(parent, data) {
 		 	var html = '';
 		 		for (var i = 0; i < data.length; i += 1) {
@@ -955,25 +961,25 @@
 		 			var cp_icon = "";
 		 			var showspan = "";
 		 			if(productactoffif == 1){
-		 						  if(productactoffid==1){
-		 							   showspan ="showactive1"
-		 						  }else if(productactoffid==2){
-		 							   showspan ="showactive2"
-		 						  }else if(productactoffid==3){
-		 							   showspan ="showactive3"
-		 						  }else if(productactoffid==4){
-		 							   showspan ="showactive4"
-		 						  }
+ 						  if(productactoffid==1){
+ 							   showspan ="showactive1"
+ 						  }else if(productactoffid==2){
+ 							   showspan ="showactive2"
+ 						  }else if(productactoffid==3){
+ 							   showspan ="showactive3"
+ 						  }else if(productactoffid==4){
+ 							   showspan ="showactive4"
+ 						  }
 		 						  
 		 			}else{
-		 						   showspan ="hideactive"
+		 					showspan ="hideactive"
 		 			}
 		 			html += '<div class="swiper-slide">' +
 		 				'<div class="product-item" data-productid="'+ data[i].productId +'">' +
 		 			    '<span class="hui_icon '+showspan+'"></span>'+
 		 				'<div class="product-img">' +
 		 				'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-		 				'<img src="' + data[i].productMainimgurl + '" alt="">' +
+		 				'<img src="'+ loadProduct2Url +'" data-src="' + data[i].productMainimgurl + '" alt="">' +
 		 				'</a>' +
 		 				'</div>' +
 		 				'<div class="product-desc">' +
@@ -1004,22 +1010,27 @@
 			   "slideArea": 3
 			 }),
 			 type: 'post',
-			 dataType: 'JSON',
+			 dataType: 'json',
 			 contentType: 'application/json',
 			 success: function (data) {
 					// console.log(data)/***data**/
-					if (JSON.parse(data).code === 100) {
-					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					if (data.code == 100) {
+					   var resDataProduct = data.extend.mlbackProductResList;
 					  // console.log(resData);
-					 rednerProduct(hot_pic,resDataProduct);
+					 rednerProduct($('.hot_box_product_cont .swiper-wrapper'), resDataProduct);
+					 new LazyLoad($('.hot_box_product_cont').find('img'), {
+						root: null,
+						rootMargin: "10px",
+						threshold: 0
+					 });
 					 new Swiper('.hot_box_product_cont', {
-					          	  slidesPerView: 2,
+					    slidesPerView: 2,
 					    spaceBetween:5,
 					    freeMode: true,
 						loop:true,
-					   autoplay: {
-					       disableOnInteraction: false,
-					     },
+					   	autoplay: {
+					       	disableOnInteraction: false,
+					    },
 					 	pagination: {
 					 		el: '.swiper-pagination2',
 					 		clickable: true

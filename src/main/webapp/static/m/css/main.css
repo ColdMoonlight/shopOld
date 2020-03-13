@@ -895,9 +895,9 @@ a:focus {
   background-color: #fff;
 }
 
-.product-details .banner {
+.product-details .swiper-wrapper {
   width: 100%;
-  min-height: 270px;
+  min-height: 375px;
 }
 
 .product-details .swiper-slide>img {
