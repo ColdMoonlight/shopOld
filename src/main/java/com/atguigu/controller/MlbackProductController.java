@@ -71,7 +71,7 @@ public class MlbackProductController {
 	@RequestMapping("/toMlbackProductSearchPage")
 	public String toMlbackProductSearchPage() throws Exception{
 	
-		return "back/mlbackProductSearchPage";
+		return "back/high/mlbackProducthighPage";
 	}
 	
 	/**
