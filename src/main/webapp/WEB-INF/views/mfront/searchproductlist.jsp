@@ -49,33 +49,28 @@
 
 	<!-- main -->
 	<div class="main">
-<!-- 		<div class="condition select">
-			<select class="select-item select-category" data-type="category"></select>
-		</div> -->
 		<div class="product-list"></div>
 		<div class="hot_box_product clearfix" style="display:none">
-			   <h3>YOU MIGTH ALSO LIKE</h3>
-			   <div class="swiper-container hot_box_product_cont">
-			   	<div class="swiper-wrapper"></div>
-			   	<div class="swiper-pagination swiper-pagination2"></div>
-				<div class="swiper-button-nextcc"></div>
-				<div class="swiper-button-prevcc"></div>
-			   </div>
+		   <h3>YOU MIGTH ALSO LIKE</h3>
+		   <div class="swiper-container hot_box_product_cont">
+		   	<div class="swiper-wrapper"></div>
+		   	<div class="swiper-pagination swiper-pagination2"></div>
+			<div class="swiper-button-nextcc"></div>
+			<div class="swiper-button-prevcc"></div>
+		   </div>
 		</div>
-		
-		
 	</div>
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script>
+		// 不支持条件
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopeSearchName = '${sessionScope.productName}';
 		var Search;
-		// console.log(sessionScopeSearchName)
-		//var cidA = window.location.href.split('?')[1].split('=');
-		// var cidA = sessionScopecategoryId;
+		var loadProduct2Url = "${APP_PATH }/static/m/img/loading/load-product2.gif"
 
 		/* category condition */
 		$.ajax({
@@ -83,12 +78,11 @@
 			data: "productName=" + sessionScopeSearchName,
 			type: "POST",
 			success: function (data) {
-				console.log(data)
+				// console.log(data)
 				if(data.code==100){
 					var resultlist = data.extend.mlbackProductResList;
-					var  resultlistlength = resultlist.length
-					// console.log(resultlistlength);
-					var name =data.extend.productName;
+					var  resultlistlength = resultlist.length;
+					var name = data.extend.productName;
 					Search = name;
 					// console.log(resultlist);
 					// rednerProductmm(productList,resultlist)
@@ -96,21 +90,23 @@
 					     renderErrorMsg(productList, 'No product-related data was obtained');
 					}else{
 						var DataproListBySaleNum =orderProListBySaleNum(resultlist);
-						rednerProductmm(productList,DataproListBySaleNum);
+						rednerProductmm(productList, DataproListBySaleNum);
+						new LazyLoad(productList.find('img'), {
+							root: null,
+							rootMargin: "10px",
+							threshold: 0
+						});
 					}
-					
-					
 					
 					if(resultlistlength==0){
 						$(".hot_box_product").show();
 					}else{
 						$(".hot_box_product").hide();
 					}
-					
 				}
 			}
 		});
-		   function orderProListBySaleNum(reqData) {
+		function orderProListBySaleNum(reqData) {
 			if(reqData.length>0){
 			   var n = reqData.length;
 			   for(var i=0;i<n;i++){
@@ -125,7 +121,7 @@
 			   }
 			 }
 			return reqData;
-		   }
+		}
 
 		function renderErrorMsg(parent, msg) {
 			parent.html('<p class="notfind">' + msg + '</p>');
@@ -142,25 +138,23 @@
 					var cp_icon = "";
 					var showspan = "";
 					if(productactoffif == 1){
-								  if(productactoffid==1){
-									   showspan ="showactive1"
-								  }else if(productactoffid==2){
-									   showspan ="showactive2"
-								  }else if(productactoffid==3){
-									   showspan ="showactive3"
-								  }else if(productactoffid==4){
-									   showspan ="showactive4"
-								  }
-								  
+						  if(productactoffid==1){
+							   showspan ="showactive1"
+						  }else if(productactoffid==2){
+							   showspan ="showactive2"
+						  }else if(productactoffid==3){
+							   showspan ="showactive3"
+						  }else if(productactoffid==4){
+							   showspan ="showactive4"
+						  }	  
 					}else{
-								   showspan ="hideactive"
+						showspan ="hideactive"
 					}
 					html += '<div class="product-item">' +
 					 '<span class="hui_icon '+showspan+'"></span>'+
 						'<div class="product-img">' +
-						/* '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' + */
 						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-						'<img src="' + data[i].productMainimgurl + '" alt="">' +
+						'<img src="'+ loadProduct2Url +'" data-src="' + data[i].productMainimgurl + '" alt="">' +
 						'</a>' +
 						'</div>' +
 						'<div class="product-desc">' +
@@ -187,25 +181,8 @@
 				renderErrorMsg(parent, 'did not find----- “'+ Search+'”');
 			}
 		}
-
-		function renderCondition(parent, data, defaultHtml) {
-			var html = defaultHtml || '';
-			html += ''
-
-			for (var i = 0, len = data.length; i < len; i += 1) {
-				if (data[i].categoryId === parseInt(cidA[1])) {
-					// console.log("*********")
-					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
-				} else {
-					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
-				}
-			}
-
-			parent.html(html);
-		}
 		
 		/****************/
-		var hot_pic = $('.hot_box_product_cont .swiper-wrapper');
 		 function rednerProduct(parent, data) {
 		 	var html = '';
 		 		for (var i = 0; i < data.length; i += 1) {
@@ -216,25 +193,24 @@
 		 			var cp_icon = "";
 		 			var showspan = "";
 		 			if(productactoffif == 1){
-		 						  if(productactoffid==1){
-		 							   showspan ="showactive1"
-		 						  }else if(productactoffid==2){
-		 							   showspan ="showactive2"
-		 						  }else if(productactoffid==3){
-		 							   showspan ="showactive3"
-		 						  }else if(productactoffid==4){
-		 							   showspan ="showactive4"
-		 						  }
-		 						  
+						  if(productactoffid==1){
+							   showspan ="showactive1"
+						  }else if(productactoffid==2){
+							   showspan ="showactive2"
+						  }else if(productactoffid==3){
+							   showspan ="showactive3"
+						  }else if(productactoffid==4){
+							   showspan ="showactive4"
+						  }
 		 			}else{
-		 						   showspan ="hideactive"
+		 				showspan ="hideactive"
 		 			}
 		 			html += '<div class="swiper-slide">' +
 		 				'<div class="product-item" data-productid="'+ data[i].productId +'">' +
 		 			    '<span class="hui_icon '+showspan+'"></span>'+
 		 				'<div class="product-img">' +
 		 				'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-		 				'<img src="' + data[i].productMainimgurl + '" alt="">' +
+		 				'<img src="'+ loadProduct2Url +'" data-src="' + data[i].productMainimgurl + '" alt="">' +
 		 				'</a>' +
 		 				'</div>' +
 		 				'<div class="product-desc">' +
@@ -265,32 +241,36 @@
 			   "slideArea": 3
 			 }),
 			 type: 'post',
-			 dataType: 'JSON',
+			 dataType: 'json',
 			 contentType: 'application/json',
 			 success: function (data) {
 					// console.log(data)/***data**/
-					if (JSON.parse(data).code === 100) {
-					   var resDataProduct = JSON.parse(data).extend.mlbackProductResList;
+					if (data.code === 100) {
+					   var resDataProduct = data.extend.mlbackProductResList;
 					  // console.log(resData);
-					 rednerProduct(hot_pic,resDataProduct);
+					 rednerProduct($('.hot_box_product_cont .swiper-wrapper'), resDataProduct);
 					 new Swiper('.hot_box_product_cont', {
-					          	  slidesPerView: 2,
+					    slidesPerView: 2,
 					    spaceBetween:5,
 					    freeMode: true,
 						observer: true,//修改swiper自己或子元素时，自动初始化swiper
 						observeParents: true,//修改swiper的父元素时，自动初始化swiper
 						loop:true,
-					   autoplay: {
-					       disableOnInteraction: false,
-					     },
+					   	autoplay: {
+					       	disableOnInteraction: false,
+					    },
 					 	pagination: {
 					 		el: '.swiper-pagination2',
 					 		clickable: true
 					 	}
-					 })
-					 
+					 });
+					 new LazyLoad($('.hot_box_product_cont').find('img'), {
+						root: null,
+						rootMargin: "10px",
+						threshold: 0
+					});
 					} else {
-					  renderErrorMsg(prodcutBox, 'No product-related data was obtained');
+					  	renderErrorMsg(prodcutBox, 'No product-related data was obtained');
 					}
 				  }
 		});	

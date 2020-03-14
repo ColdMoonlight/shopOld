@@ -57,12 +57,14 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script>
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopecategoryId = '${sessionScope.categoryId}';
-		//var cidA = window.location.href.split('?')[1].split('=');
+		
 		var cidA = sessionScopecategoryId;
+		var loadProduct2Url = "${APP_PATH }/static/m/img/loading/load-product2.gif"
 
 		//default codition
 		getProductList({
@@ -86,7 +88,6 @@
 									"productCategoryid": $('.select-category').val() || cidA[1]
 								});
 							})
-
 						}
 					})
 
@@ -100,30 +101,28 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
 				data: JSON.stringify(data),
-				dataType: "JSON",
+				type: "post",
+				dataType: "json",
 				contentType: 'application/json',
-				type: "POST",
 				success: function (data) {
-					// console.log(data.extend.mlbackProductResList);
-//					console.log(JSON.parse(data));
-//					console.log("data.extend.mlbackProductResList");
 					//从类别中获取fb所需要的当前页面的类下产品
-					var shopidlist = toFbidsPurchase((JSON.parse(data)).extend.mlbackProductResList);
+					var shopidlist = toFbidsPurchase(data.extend.mlbackProductResList);
 					fbq('track', 'ViewCategory', {
 			              content_ids: [shopidlist],
 			              content_type: 'product'
 			            });
-					// console.log("shopidlist");
-					// console.log(shopidlist);
-					// console.log("shopidlist");
-					var data = JSON.parse(data);
 					if (data.code === 100) {
 						var productData = data.extend.mlbackProductResList;
 						if(productData==null){
 							renderErrorMsg(productList, 'No product-related data was obtained');
 						}else{
-							var DataproListBySaleNum =orderProListBySaleNum(productData);
-							rednerProduct(productList,DataproListBySaleNum);
+							var DataproListBySaleNum = orderProListBySaleNum(productData);
+							rednerProduct(productList, DataproListBySaleNum);
+							new LazyLoad(productList.find('img'), {
+								root: null,
+								rootMargin: "10px",
+								threshold: 0
+							});
 						}
 						// rednerProduct(productList, productData);
 					} else {
@@ -200,9 +199,8 @@
 					html += '<div class="product-item">' +
 					 '<span class="hui_icon '+showspan+'"></span>'+
 						'<div class="product-img">' +
-						/* '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' + */
 						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-						'<img src="' + data[i].productMainimgurl + '" alt="">' +
+						'<img src="'+ loadProduct2Url +'" data-src="' + data[i].productMainimgurl + '" alt="">' +
 						'</a>' +
 						'</div>' +
 						'<div class="product-desc">' +

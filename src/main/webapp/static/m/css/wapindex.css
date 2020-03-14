@@ -19,7 +19,8 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 *,*:before,*:after{box-sizing:border-box}
 .mask{z-index: 9; display: none; position: fixed; top: 0; left:0;bottom: 0;right: 0; background: rgba(0, 0, 0, .5); z-index: 9;}
 /*************************************/
-.narrow{width: 100%; height: auto; margin: 0 auto 1%;}
+.narrow{width: 100%; height: auto; min-height: 150px; margin: 0 auto 1%;}
+.narrow>img {display: block;width: 100%;}
 .narrow_cont{width: auto; height: auto; margin: 0 auto;}
 .narrow_cont a{display: inline-block;width: 50%; padding:0 1% 1%;float: left;}
 .narrow_cont a img{width: 100%;}
@@ -57,9 +58,8 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .banner_fenlei{width: 100%;}
 .banner_fenlei .bannerpic{width: 100%;}
 .bannerpic img{width: 100%;}
-.hot_index_product .hot_box_product_cont .swiper-slide:last-child{display: none !important;}
-.hot_index_product .hot_box_product_cont .swiper-slide:last-child{display: none !important;}
-.new_index_product .new_box_product_cont .swiper-slide:nth-last-child(2){display: none !important;}
+
+.coupon_cont2 {min-height: 180px;}
 
 .hotbtn_next,.hotbtn_prev {z-index: 99; margin:-80px 0 0; width: 48px; height: 48px; position: absolute; top: 50%;}
 .hotbtn_prev{left: 5px;background: url(../../pc/img/left.png) no-repeat;}
@@ -82,9 +82,8 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .list_ins img{max-width: 100%;}
 .index_tcbox .product-image{width: 100%;}
 .index_tcbox .rightcont{width: 100%;}
-.morelink{position:absolute;top: 0; left: 0;width: 100%; height: 100%; z-index: 2; display: block;font-size:30px; background:url(../../pc/img/more.jpg) no-repeat; background-size:100% 100%; color: #fff;font-weight: 600;}
-.last_top img{width: 100%; height: 100%; opacity: 0;}
-.last_new img{width: 100%; height: 100%; opacity: 0;}
+.morelink{display: block;background:url(../../pc/img/more.jpg) no-repeat; background-size:100% 100%; }
+.morelink>img{width: 100%;}
 .word-desc{margin: 5%;}
 .new_box_product_cont .swiper-slide .product-item{transform:scale(1)}
 .hot_box_product_cont .swiper-slide .product-item{transform: scale(1);}
@@ -98,10 +97,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .list_info li{float: left; margin: 10px 0 0;font-size: 16px; position: relative; padding: 0 10px; line-height: 40px; width: 100%; background: #fff;}
 .list_info li:after{content: ""; position: absolute; right: 0; top: 10px; width: 25px; height: 20px;background:url(../img/other/jtl.png) no-repeat center left; background-size:18px;}
 .list_info li span{ float: left; color:#333;}
-.list_info li em{ float: right; padding: 0 20px 0 0; color: #888;width: 250px; height: 40px; text-align: right; overflow:hidden;
-            text-overflow: ellipsis;
-            /*-webkit-text-overflow:ellipsis;*/
-            white-space: nowrap;}
+.list_info li em{ float: right; padding: 0 20px 0 0; color: #888;width: 250px; height: 40px; text-align: right; overflow:hidden;text-overflow: ellipsis; white-space: nowrap;}
 .list_info li:last-child{margin: 20px 0 0;}
 .tanceng_box{width: 100%; height: 100%; position: fixed; top:100px; left: 0; background: #fff; z-index: 2; display: none;}
 .gb_tang{position: absolute; top: 0; left: 0; width: 30px; text-align: center; line-height: 30px; height: 30px; background: #000; color: #fff;}

@@ -61,11 +61,10 @@
     }
 
     $.ajax({
-			url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAllSimple',
+		url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAllSimple',
       // url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAll',
-      type: 'post',
-      async: false,
-      success: function (data) {
+     	type: 'post',
+      	success: function (data) {
         // console.log(data);
         var resData = data.extend;
         if (resData.isNav === 0) {

@@ -57,12 +57,15 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script>
+		// 支持条件
 		var condition = $('.select');
 		var productList = $('.product-list');
 		var sessionScopecategorySeo = '${sessionScope.categorySeo}';
-		console.log(sessionScopecategorySeo)
 		var categorySeo = sessionScopecategorySeo;
+		var loadProduct2Url = "${APP_PATH }/static/m/img/loading/load-product2.gif";
+
 		getProductList({
 			"categorySeo": categorySeo
 		});
@@ -73,11 +76,10 @@
 				"categorySeo": categorySeo
 			}),
 			type: 'post',
-			dataType: 'JSON',
+			dataType: 'json',
 			contentType: 'application/json',
 			success: function (data) {
-					// console.log(data)
-					var data = JSON.parse(data);
+				// console.log(data)
 				if (data.code === 100) {
 					var resData = data.extend.mlbackCategorydownEr;
 					renderCondition($('.select-item.select-category'), resData)
@@ -101,11 +103,10 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackCategory/searchBycategorySeo',
 				data: JSON.stringify(data),
-				dataType: "JSON",
+				dataType: "json",
 				contentType: 'application/json',
-				type: "POST",
+				type: "post",
 				success: function (data) {
-					var data = JSON.parse(data);
 					// console.log(data)
 					if (data.code === 100) {
 						var resData2 = data.extend.mlbackProductResList;
@@ -114,7 +115,12 @@
 							renderErrorMsg(productList, 'No product-related data was obtained');
 						}else{
 							var DataproListBySaleNum =orderProListBySaleNum(resData2);
-							rednerProduct(productList,DataproListBySaleNum);
+							rednerProduct(productList, DataproListBySaleNum);
+							new LazyLoad(productList.find('img'), {
+								root: null,
+								rootMargin: "10px",
+								threshold: 0
+							});
 						}
 					} else {
 						renderErrorMsg(productList, 'No product-related data was obtained');
@@ -179,9 +185,8 @@
 					html += '<div class="product-item">' +
 					 '<span class="hui_icon '+showspan+'"></span>'+
 						'<div class="product-img">' +
-						/* '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' + */
 						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-						'<img src="' + data[i].productMainimgurl + '" alt="">' +
+						'<img src="'+ loadProduct2Url +'" data-src="' + data[i].productMainimgurl + '" alt="">' +
 						'</a>' +
 						'</div>' +
 						'<div class="product-desc">' +
@@ -209,10 +214,6 @@
 			}else {
 				renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
 			}
-			// if (data.length > 0) {
-			// } else {
-			// 	renderErrorMsg(parent, 'Relevant product classification products have been removed from the shelves!');
-			// }
 		}
 
 		function renderCondition(parent, data, defaultHtml) {
