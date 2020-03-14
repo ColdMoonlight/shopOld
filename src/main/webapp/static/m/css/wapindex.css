@@ -73,11 +73,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 /* .swiper-button-next.swiper-button-disabled, .swiper-button-prev.swiper-button-disabled{opacity:0;background: none;}*/
 .new_index_product .swiper-button-next.swiper-button-disabled{opacity:1;pointer-events:auto; background: url(../../pc/img/righth.png) no-repeat; cursor: pointer;}
 .new_index_product .swiper-button-prev.swiper-button-disabled{opacity:1;pointer-events:auto;background: url(../../pc/img/left.png) no-repeat; cursor: pointer;}
-
 .old-price .price{text-decoration: line-through;}
-
-
-
 
 /************/
 .comment_cont{width: 100%; height: auto;}
@@ -115,13 +111,3 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .sub_ipn{ cursor: pointer; width: 90%;margin: 100px 5% 0; height: 40px; background:#0000CC; color: #fff; text-align: center; line-height: 40px;}
 .form-groupinfo{width: 90%; margin: 0 5%;}
 .boxedit .form-groupinfo label{margin: 15px 0;padding: 0;}
-
-
-
-
-
-
-
-
-
-

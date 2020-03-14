@@ -570,7 +570,7 @@
 				var reqData = {
 						reviewId: reviewId,
 						reviewUname: username,
-						reviewPname: email,
+						// reviewPname: email,
 						reviewPid: pidA,
 						reviewDetailstr: details,
 						reviewProstarnum: starNum
@@ -1031,12 +1031,7 @@
 					}
 				  }
 		});	
-		
-		
-		
-		
 		});
-
 		function deleteReview() {
 			var data = {
 				reviewId: reviewId
@@ -1090,7 +1085,7 @@
            					success: function (data) {
            						if (data.code === 100) {
            							var returl = data.extend.uploadUrl;
-           							console.log(returl)
+           							// console.log(returl)
            							var img = $('<img src="${APP_PATH }/static/img/reviewAllImg/'+ returl +'">');
            							parent.find('.reviews-img-box').append(img);
            							imgCount++;
