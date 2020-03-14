@@ -4,7 +4,7 @@
   var $document = $(document),
     $window = $(window),
     $body = $('body'),
-    $ttHeader = $('header'),
+    $ttHeader = $('.desktop-header'),
 
     /* menu setting*/
     header_menu_timeout = 200,
@@ -189,7 +189,7 @@
       };
 
       function popupObjMobile(obj) {
-        $('header').find('.tt-dropdown-obj.active').removeClass('active');
+        $('.desktop-header').find('.tt-dropdown-obj.active').removeClass('active');
         obj.toggleClass('active').find('.tt-dropdown-menu').removeAttr("style");
         $body.toggleClass('tt-popup-dropdown');
       };

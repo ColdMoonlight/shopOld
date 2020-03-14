@@ -8,25 +8,11 @@
 .nav_boxfirst{width: 100%;position: relative;}
 .navul{ text-align: center;width: 100%;}
 .navul li{line-height: 61px;margin: 0 15px; font-weight: bold; display:inline-block; position: relative;}
-.navul li a{font-size: 14px;}
+.navul li a{position: relative; z-index: 999; display: block; font-size: 14px;}
 .navul li a:hover {color: #ff1671;}
 .navul li a.active{color: #ff1671;}
-.menu_list-wap{ background: #fff; }
 .menu_list-wap::before{content: ""; width: 100%; height: 2px; background: #ff1671; position: absolute; top: 0; left: 0;}
- /* .navul li:nth-of-type(8) .menu_list-wap {opacity: 1 !important; background: #fff;  display: block !important; } */
-.menu_list-wap{opacity: 0;
- -ms-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -webkit-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-        z-index: 3;
-		display: none;
-		-webkit-box-shadow:0 3px 10px rgba(0,0,0,.15);
-		box-shadow:0 3px 10px rgba(0,0,0,.15)
-}
-/*.home-menu_list:nth-of-type(2) .menu_list-wap{display: block;}*/
-.menu_list-wap{padding:0 0 10px;position: absolute;  top: 100%; left: 0;}
+.menu_list-wap{position: absolute;top: 100%; left: 0;padding:0 0 10px; z-index: 1000;display: none;background: #fff;-webkit-box-shadow:0 3px 10px rgba(0,0,0,.15);box-shadow:0 3px 10px rgba(0,0,0,.15);}
 .navul li:nth-of-type(7) .menu_list-wap{left: -250px;}
 .navul li:nth-of-type(2) .home_left_middle{width: 800px;}
 .navul li:nth-of-type(3) .home_left_middle{width: 1000px;}
@@ -98,7 +84,7 @@
 .serch_box input{display: inline-block;width: 360px; height: 40px;font-size: 18px;border: none;}
 .serch_box button{display: inline-block;float: right;width: 40px; height: 40px;padding: 5px;font-size: 30px;background: #ccc;border:none;}
 .serch_box button:before{content: "\e9b4";}
-.show_ul{ display: none;width: 1300px; height: 150px;padding: 2%; position: absolute; top:51px; left:50%; margin: 0 0 0 -650px; background: #fff;box-shadow: 0 0 5px #888;}
+.show_ul{position: absolute; top:51px; left:50%;  z-index: 1001; display: none;width: 1300px; height: 150px;padding: 2%;margin: 0 0 0 -650px; background: #fff;box-shadow: 0 0 5px #888;}
 .show_ul li{background: url(../../m/img/index/hot.png) no-repeat left center; background-size: 20px; height: 20px; line-height: 20px; color: #333; cursor: pointer;float: left; margin: 3px 8px 5px 0; padding: 2px 8px 2px 25px;}
 .main{margin: 185px 0 0;}
 .mainindex{margin:0 auto;}
