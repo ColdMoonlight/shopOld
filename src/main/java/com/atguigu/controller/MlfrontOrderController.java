@@ -227,9 +227,6 @@ public class MlfrontOrderController {
 		}			
 	}
 	
-	
-	
-	
 	/**5.0	useOn	0505
 	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
 	 * @param MlfrontOrder
