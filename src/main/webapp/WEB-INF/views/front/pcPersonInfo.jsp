@@ -159,7 +159,7 @@ ${APP_PATH }/MlfrontUser/update
 	editSave.on('click', function () {
 		var flag = parseInt($(this).data('flag'));
 		if (!flag) {
-			$(this).attr('data-flag', "0").text('dfdf');
+			$(this).attr('data-flag', 1).text('save it');
 			$('.input').each(function (i, item) {
 				$(item).attr('contenteditable', true);
 			});
