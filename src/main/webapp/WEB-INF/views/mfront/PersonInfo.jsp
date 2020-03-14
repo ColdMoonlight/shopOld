@@ -42,27 +42,27 @@
 				<input type="text" id="" value="" class="textinpt userFirstname" placeholder="Please add" />
 				<label for="userLastname" class="span_tip">Last  Name :</label>
 				<input type="text" id="" value="" class="textinpt userLastname" placeholder="Please add" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name="" value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit mailli_box">
 				<label for="userEmail" class="span_tip">Change Mail :</label>
 				<input type="text" id="" value="" class="textinpt userEmail" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit phoneli_box">
 				<label for="userTelephone" class="span_tip">Please add Telphone :</label>
 				<input type="text" id="" value="" class="textinpt userTelephone" placeholder="Please add" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit passwordli_box">
 				<label for="userPassword" class="span_tip">Change Password :</label>
 				<input type="text" id="" value="" class="textinpt userPassword" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit passwordli_box">
 				<label for="userPoint" class="span_tip">Please add UserPoint:</label>
 				<input type="text" id="" value="" class="textinpt userPoint" placeholder="Please add" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit Addressli_box">
 				<label for="address" class="span_tip">Please add Address :</label>
@@ -87,7 +87,7 @@
 							<input type="text" name="addressPost" class="textinpt form-control code userAddressPostalcode" placeholder="Please add" />
 					</div>
 				</div>
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 		</div>
 	 </div>
