@@ -897,7 +897,14 @@ a:focus {
 
 .product-details .swiper-wrapper {
   width: 100%;
-  min-height: 375px;
+}
+
+.product__details-banner .product-details .swiper-wrapper {
+  min-height: 375px;	
+}
+
+.hot_box_product_cont swiper-container-initialized .product-details .swiper-wrapper {
+  min-height: 260px;	
 }
 
 .product-details .swiper-slide>img {
