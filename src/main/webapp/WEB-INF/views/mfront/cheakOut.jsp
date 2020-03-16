@@ -377,7 +377,8 @@
 
 		/*******************/
 		function renderAddressDetail(data) {
-			var dataprov = data.addressProvince ? data.addressProvince : '';	
+			var dataprov = data.addressProvince ? data.addressProvince : '',
+				dataProvinceCode = data.addressProvinceCode;
 			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
 			$("input.email").val(data.addressEmail ? data.addressEmail : '');
@@ -387,23 +388,21 @@
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 
 			jiecountry = data.addressCountry ? data.addressCountry : '';
-			$("#country").val();
-			$("#country").attr("data-name", jiecountry);
+
 			$("#country option:checked").attr("value", jiecountry);
 			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
-			// $("#country").attr("data-country",datacountry);
 
-			if (dataprov == "") {
+			if (dataProvinceCode && dataprov) {
+				$("#province option:checked").val(dataprov);
+				$("#province option:checked").text(dataprov);
+	
+				$(".form-group_select").addClass("selectActive");
+				$(".form-groupcountry").css("width", "50%");
+			} else {
+				$("#province").val('');
 				$(".form-group_select").hide();
 				$(".form-group_select").removeClass("selectActive")
 				$(".form-groupcountry").css("width", "100%")
-			} else {
-				$("#province").val();
-				$("#province option:checked").val(dataprov);
-				$("#province option:checked").text(dataprov);
-
-				$(".form-group_select").addClass("selectActive");
-				$(".form-groupcountry").css("width", "50%");
 			}
 		}
 
@@ -434,9 +433,9 @@
 						shippingTipPriceEl.text(' $' + resDataMoney);
 						shippingPriceEl.text('$' + resDataMoney)
 						$(".address").addClass("active");
-						if (!addProvinceCode) {
+						/* if (!addProvinceCode) {
 							$(".form-groupcountry").css("width", "100%");
-						}
+						} */
 					} else {
 						shippingTipPriceEl.text(' $' + resDataMoney);
 						shippingPriceEl.text('$' + resDataMoney);
