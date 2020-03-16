@@ -42,28 +42,28 @@
 				<input type="text" id="" value="" class="textinpt userFirstname" placeholder="Please add" />
 				<label for="userLastname" class="span_tip">Last  Name :</label>
 				<input type="text" id="" value="" class="textinpt userLastname" placeholder="Please add" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name="" value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit mailli_box">
 				<label for="userEmail" class="span_tip">Change Mail :</label>
 				<input type="text" id="" value="" class="textinpt userEmail" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit phoneli_box">
 				<label for="userTelephone" class="span_tip">Please add Telphone :</label>
 				<input type="text" id="" value="" class="textinpt userTelephone" placeholder="Please add" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 			<div class="boxedit passwordli_box">
 				<label for="userPassword" class="span_tip">Change Password :</label>
 				<input type="text" id="" value="" class="textinpt userPassword" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
-			<div class="boxedit passwordli_box">
+<!-- 			<div class="boxedit passwordli_box">
 				<label for="userPoint" class="span_tip">Please add UserPoint:</label>
 				<input type="text" id="" value="" class="textinpt userPoint" placeholder="Please add" />
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
-			</div>
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
+			</div> -->
 			<div class="boxedit Addressli_box">
 				<label for="address" class="span_tip">Please add Address :</label>
 				<div class="box_newcountry">
@@ -87,7 +87,7 @@
 							<input type="text" name="addressPost" class="textinpt form-control code userAddressPostalcode" placeholder="Please add" />
 					</div>
 				</div>
-				<input type="submit" id="" name="" class="sub_ipn" data-flag="0" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 		</div>
 	 </div>
@@ -98,6 +98,9 @@
 	$(function(){
 		$(".gb_tang").click(function(){
 			$(".tanceng_box").hide()
+		});
+		$(".textinpt").focus(function(){
+			$(this).val("")
 		})
 	})
 	var tyu;
@@ -123,7 +126,7 @@
 			var Lastname=data.userLastname;
 			var Telephone= data.userTelephone;
 			var AddressCity= data.userAddressCountry;
-			var UserPoint= data.userPoint;
+			// var UserPoint= data.userPoint;
 			if(Firstname==null||Lastname==null){
 				html += '<li><span>Name</span><em>Please add</em></li>';
 			}else{
@@ -136,25 +139,25 @@
 				html += '<li><span>Telphone</span><em>'+data.userTelephone+'</em></li>';
 			}
 			html += '<li><span>Password</span><em>'+data.userPassword+'</em></li>';
-			html += '<li><span>UserPoint</span><em></em></li>';
+			// html += '<li><span>UserPoint</span><em></em></li>';
 			if(AddressCity==null){
 				html += '<li><span>Address</span><em>Please add</em></li>';
 			}else{
-				html += '<li><span>Address</span><em>'+data.userAddressCountry+''+data.userAddressProvince+'</em></li>';
+				html += '<li><span>Address</span><em>'+data.userAddressCountry+' '+data.userAddressProvince+'</em></li>';
 			}
 		  html +=  '</ul>';
 		$(".userid").val(data.userId);
 		$("input.userEmail").val(data.userEmail ? data.userEmail : 'Please add');
 		$("input.userPassword").val(data.userPassword ? data.userPassword : 'Please add');
-		$("input.userTelephone").val(data.userTelephone ? data.userTelephone : '');
-		$("input.addressCountry").val(data.userAddressCountry ? data.userAddressCountry : '');
-		$("input.addressProvince").val(data.userAddressProvince ? data.userAddressProvince : '');
-		$("input.userAddressCity").val(data.userAddressCity ? data.userAddressCity : '');
-		$("input.userAddressStreetaddress").val(data.userAddressStreetaddress ? data.userAddressStreetaddress : '');
-		$("input.userAddressPostalcode").val(data.userAddressPostalcode ? data.userAddressPostalcode : '');
-		$("input.userFirstname").val(data.userFirstname ? data.userFirstname : '');
-		$("input.userLastname").val(data.userLastname ? data.userLastname : '');
-		$("input.userPoint").val(data.userPoint ? data.userPoint : '');
+		$("input.userTelephone").val(data.userTelephone ? data.userTelephone : 'Please add');
+		$("input.addressCountry").val(data.userAddressCountry ? data.userAddressCountry : 'Please add');
+		$("input.addressProvince").val(data.userAddressProvince ? data.userAddressProvince : 'Please add');
+		$("input.userAddressCity").val(data.userAddressCity ? data.userAddressCity : 'Please add');
+		$("input.userAddressStreetaddress").val(data.userAddressStreetaddress ? data.userAddressStreetaddress : 'Please add');
+		$("input.userAddressPostalcode").val(data.userAddressPostalcode ? data.userAddressPostalcode : 'Please add');
+		$("input.userFirstname").val(data.userFirstname ? data.userFirstname : 'Please add');
+		$("input.userLastname").val(data.userLastname ? data.userLastname : 'Please add');
+		// $("input.userPoint").val(data.userPoint ? data.userPoint : '');
 		 parent.html(html);
 		 $(".list_info ul li").each(function(){
 			 // getProvinceData($('#country').val());

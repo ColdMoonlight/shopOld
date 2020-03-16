@@ -888,7 +888,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
        		contentType: 'application/json',
        			success: function (reqData) {
        				alert("已审核")
-       				window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+       				window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
        			}
        	});
        	
@@ -909,7 +909,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
        			    contentType: 'application/json',
        			      success: function (reqData) {
        			        // alert("确认退款")
-       			        window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+       			        window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
        			      }
        			  });
 				   return true;
@@ -935,7 +935,8 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
        		  contentType: 'application/json',
        			success: function (reqData) {
        			  alert("已发送")
-       			  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+				  // $(".box_new_review").removeClass("active")
+       			  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
        			}
        		});
        	  }
@@ -955,7 +956,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
        			     contentType: 'application/json',
        			   	success: function (reqData) {
        			   	  // alert("已关闭")
-       			   	  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+       			   	  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
        			   	}
        			   });
        			   return true;
