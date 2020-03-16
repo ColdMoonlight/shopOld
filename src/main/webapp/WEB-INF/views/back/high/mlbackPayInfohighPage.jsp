@@ -44,7 +44,7 @@
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
 								<div class="form-group pinglun_from" style="float: left;">
-								    <label class="control-label" style="float: left;">评论来源</label>
+								    <label class="control-label" style="float: left;">状态：</label>
 								    <div class="" style="float: left;">
 								        <select class="form-control selectpl">
 										  <option value ="999" selected="selected">全部</option>
