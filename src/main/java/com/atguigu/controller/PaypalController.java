@@ -144,7 +144,11 @@ public class PaypalController {
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
             System.out.println(e.getDetails());
-            PaypalErrorName = e.getDetails().getName();
+            if(e.getDetails()==null){
+            	PaypalErrorName = "retry fails..  check log for more information";
+            }else{
+            	PaypalErrorName = e.getDetails().getName();
+            }
             session.setAttribute("PaypalErrorName", PaypalErrorName);
 //            ListIterator<ErrorDetails> errorDetailslist = null;
 //            
@@ -249,7 +253,11 @@ public class PaypalController {
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
             System.out.println(e.getDetails());
-            PaypalErrorName = e.getDetails().getName();
+            if(e.getDetails()==null){
+            	PaypalErrorName = "retry fails..  check log for more information";
+            }else{
+            	PaypalErrorName = e.getDetails().getName();
+            }
             session.setAttribute("PaypalErrorName", PaypalErrorName);
 //            ListIterator<ErrorDetails> errorDetailslist = null;
 //            
