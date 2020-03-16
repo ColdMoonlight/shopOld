@@ -235,7 +235,7 @@ public class MlfrontOrderController {
 	@ResponseBody
 	public Msg orderToPayInfo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder){
 		//0.0接受参数信息
-		System.out.println("mlfrontOrder:"+mlfrontOrder);
+		//System.out.println("mlfrontOrder:"+mlfrontOrder);
 		Integer originalOrderId = mlfrontOrder.getOrderId();
 		String filnanyNumber = mlfrontOrder.getOrderProNumStr();
 		Integer CouponId =mlfrontOrder.getOrderCouponId();

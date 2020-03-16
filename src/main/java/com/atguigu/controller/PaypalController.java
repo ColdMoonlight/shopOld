@@ -146,9 +146,9 @@ public class PaypalController {
             System.out.println(e.getDetails());
             //PaypalErrorName = e.getDetails());
             //session.setAttribute("PaypalErrorName", PaypalErrorName);
-            ListIterator<ErrorDetails> errorDetailslist = null;
+            //ListIterator<ErrorDetails> errorDetailslist = null;
             
-            errorDetailslist =  e.getDetails().getDetails().listIterator();
+            //errorDetailslist =  e.getDetails().getDetails().listIterator();
             String regularName ="";
 //            while(errorDetailslist.hasNext()){//正序遍历     hasNext()：判断集合中是否还有下一个元素
 //            	System.out.print(errorDetailslist.next()+",");//返回值：狗娃,晶晶,亮亮,美美,铁蛋,
@@ -248,12 +248,12 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
-            System.out.println(e.getDetails().getName());
-            PaypalErrorName = e.getDetails().getName();
-            session.setAttribute("PaypalErrorName", PaypalErrorName);
-            ListIterator<ErrorDetails> errorDetailslist = null;
-            
-            errorDetailslist =  e.getDetails().getDetails().listIterator();
+            System.out.println(e.getDetails());
+//            PaypalErrorName = e.getDetails().getName();
+//            session.setAttribute("PaypalErrorName", PaypalErrorName);
+//            ListIterator<ErrorDetails> errorDetailslist = null;
+//            
+//            errorDetailslist =  e.getDetails().getDetails().listIterator();
             String regularName ="";
 //            while(errorDetailslist.hasNext()){//正序遍历     hasNext()：判断集合中是否还有下一个元素
 //            	System.out.print(errorDetailslist.next()+",");//返回值：狗娃,晶晶,亮亮,美美,铁蛋,
