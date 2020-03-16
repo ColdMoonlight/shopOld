@@ -85,7 +85,7 @@ public class MlbackCouponController {
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackCoupon mlbackCoupon){
 		//接受参数信息
-		System.out.println("mlbackCoupon:"+mlbackCoupon);
+		//System.out.println("mlbackCoupon:"+mlbackCoupon);
 		//取出id
 		Integer couponId = mlbackCoupon.getCouponId();
 		String nowTime = DateUtil.strTime14s();
@@ -93,13 +93,13 @@ public class MlbackCouponController {
 		if(couponId==null){
 			//无id，insert
 			mlbackCoupon.setCouponCreatetime(nowTime);
-			int intResult = mlbackCouponService.insertSelective(mlbackCoupon);
-			System.out.println("后台操作:couponId为null,走add+intResult:"+intResult);
+			mlbackCouponService.insertSelective(mlbackCoupon);
+			//System.out.println("后台操作:couponId为null,走add+intResult:"+intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackCouponService.updateByPrimaryKeySelective(mlbackCoupon);
-			System.out.println("后台操作:couponId不为null,走update+intResult:"+intResult);
+			mlbackCouponService.updateByPrimaryKeySelective(mlbackCoupon);
+			//System.out.println("后台操作:couponId不为null,走update+intResult:"+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
