@@ -260,7 +260,7 @@
   </update>
   
   <!-- insert使用中 -->
-  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackCoupon">
+  <insert id="insertSelective"  useGeneratedKeys="true" keyProperty="couponId" parameterType="com.atguigu.bean.MlbackCoupon">
     insert into tb_mlback_coupon
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="couponId != null">
