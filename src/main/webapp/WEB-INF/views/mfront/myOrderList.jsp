@@ -34,7 +34,7 @@
 			<div class="tab-item active" data-id="999">All orders</div>
 			<div class="tab-item" data-id="0">Unpaid</div>
 			<div class="tab-item" data-id="1">Paid</div>
-			<div class="tab-item" data-id="3">TobeShipped</div>
+			<div class="tab-item" data-id="3">Processing</div>
 			<div class="tab-item" data-id="4">Shipped</div>
 			<div class="tab-item" data-id="5">Refund</div>
 		</div>
@@ -55,7 +55,7 @@
 	var orderStatus = {
 		0: 'Unpaid',
 		1: 'Paid',
-		3: 'TobeShipped',
+		3: 'Processing',
 		4: 'Shipped',
 		5:'refund'
 	}
