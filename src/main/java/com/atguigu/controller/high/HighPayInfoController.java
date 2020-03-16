@@ -241,11 +241,11 @@ public class HighPayInfoController {
 	    cell = row.createCell(1);
 		cell.setCellValue("payInfo_id");
 	    cell = row.createCell(2);
-	    cell.setCellValue("payInfo_createTime");
-	    cell = row.createCell(3);
-	    cell.setCellValue("payInfo_plateNum");
-	    cell = row.createCell(4);
 	    cell.setCellValue("payInfo_status");
+	    cell = row.createCell(3);
+	    cell.setCellValue("payInfo_createTime");
+	    cell = row.createCell(4);
+	    cell.setCellValue("payInfo_plateNum");
 	    cell = row.createCell(5);
 	    cell.setCellValue("address_userFirstName");
 	    cell = row.createCell(6);
