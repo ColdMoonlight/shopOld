@@ -27,6 +27,10 @@ public class MlbackCoupon {
     
     private Integer couponAllTimes;  //优惠码可以使用总次数  如  999,998次
     
+//    private Integer couponProductOnlyType;		//优惠码是否支持单品
+//    
+//    private Integer couponProductOnlyPId;		//优惠码支持单品的时候,所绑定的产品
+    
     private Integer couponAdminId;
 
     private String couponAdminOperatorname;
