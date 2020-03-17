@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
-	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
 	<style>
 		tr>td,
 		th>td {
@@ -72,15 +71,11 @@
 
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
-	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
 	
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
 		$("#UEmailSession").html(adminAccname);
 	</script>
-
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		$('.nicescroll').each(function(i, item) {
@@ -133,14 +128,14 @@
 					var cartitemStatus = $("<td class='wzf_bg'></td>").append('<b>未去结算</b>');
 				}
 				
-				var cartitemProductName = $("<td></td>").append(item.cartitemProductName);
-				var imgurl = item.cartitemProductMainimgurl;
-				var image = '<img src=' + imgurl + ' ' + 'width=40 height=40>';
-				var cartitemProductMainimgurl = $("<td></td>").append(image);
-				var cartitemProductskuNamestr = $("<td></td>").append(item.cartitemProductskuNamestr);
-				var cartitemProductNumber = $("<td></td>").append(item.cartitemProductNumber);
-				var cartitemCreatetime = $("<td></td>").append(item.cartitemCreatetime);
-				var cartitemMotifytime = $("<td></td>").append(item.cartitemMotifytime);
+				var cartitemProductName = $("<td></td>").append(item.cartitemProductName),
+					imgurl = item.cartitemProductMainimgurl,
+					image = '<img src=' + imgurl + ' ' + 'width=40 height=40>',
+					cartitemProductMainimgurl = $("<td></td>").append(image),
+					cartitemProductskuNamestr = $("<td></td>").append(item.cartitemProductskuNamestr),
+					cartitemProductNumber = $("<td></td>").append(item.cartitemProductNumber),
+					cartitemCreatetime = $("<td></td>").append(item.cartitemCreatetime),
+					cartitemMotifytime = $("<td></td>").append(item.cartitemMotifytime);
 				var viewBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span> ").addClass("glyphicon glyphicon-eye-open")).append("查看");
 				//为编辑按钮添加一个分类id
@@ -188,7 +183,7 @@
 			});
 			if (pageCurrentNum <= 5) {
 				pageArr = [1, 2, 3, 4, 5];
-			} else if (pageCurrentNum >= pageNums - 5) {
+			} else if (pageCurrentNum > pageNums - 5) {
 				pageArr = [pageNums - 4, pageNums - 3, pageNums - 2, pageNums -1, pageNums];
 			} else {
 				pageArr = [pageCurrentNum - 2, pageCurrentNum - 1, pageCurrentNum, pageCurrentNum + 1, pageCurrentNum + 2];
