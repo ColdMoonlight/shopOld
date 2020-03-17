@@ -316,7 +316,7 @@
 			if (orderItemArr.length <= 0) {
 				renderSysMsg('Invalid order, will return to the Home Page three seconds later');
 				setTimeout(function () {
-					window.location.href = "${APP_PATH }/index.html"
+					window.location.href = "${APP_PATH }/index.html";
 				}, 3000);
 				return;
 			}
@@ -391,7 +391,7 @@
 								}
 							})
 						} else {
-							renderSysMsg('Please fill in the shipping address ')
+							renderSysMsg('Please fill in the shipping address ');
 						}
 					}
 				})
@@ -401,7 +401,7 @@
 		/*********************/
 		function renderAddressDetail(data) {
 			var dataprov = data.addressProvince ? data.addressProvince : '',
-				dataname = $("#country").data("name");
+				dataProvinceCode = data.addressProvinceCode;
 
 			$("input.firstname").val(data.addressUserfirstname ? data.addressUserfirstname : '');
 			$("input.lastname").val(data.addressUserlastname ? data.addressUserlastname : '');
@@ -412,22 +412,21 @@
 			$("input.city").val(data.addressCity ? data.addressCity : '');
 
 			jiecountry = data.addressCountry ? data.addressCountry : '';
-			$("#country").val();
+
 			$("#country option:checked").val(jiecountry);
-			$("#country").attr("data-name", jiecountry);
 			$("#country option:checked").text(data.addressCountryAll ? data.addressCountryAll : '');
 
-			if (dataprov == "") {
-				$(".form-group_select").hide();
-				$(".form-group_select").removeClass("selectActive")
-				$(".form-groupcountry").css("width", "100%")
-			} else {
-				$("#province").val();
+			if (dataProvinceCode && dataprov) {
 				$("#province option:checked").val(dataprov);
 				$("#province option:checked").text(dataprov);
-
+	
 				$(".form-group_select").addClass("selectActive");
 				$(".form-groupcountry").css("width", "50%");
+			} else {
+				$("#province").val('');
+				$(".form-group_select").hide();
+				$(".form-group_select").removeClass("selectActive")
+				$(".form-groupcountry").css("width", "100%");
 			}
 		}
 
@@ -453,16 +452,11 @@
 
 						$('.address-id').val(resDataAddress.addressId);
 						shippingTipPriceEl.text(' $' + resDataMoney);
-						shippingPriceEl.text('$' + resDataMoney)
-						$(".address").addClass("active")
-						var addProvince = resDataAddress.addressProvince,
-							addProvinceCode = resDataAddress.addressProvinceCode;
-						if (!addProvinceCode) {
-							$(".form-groupcountry").css("width", "100%");
-						}
+						shippingPriceEl.text('$' + resDataMoney);
+						$(".address").addClass("active");
 					} else {
 						shippingTipPriceEl.text(' $' + resDataMoney);
-						shippingPriceEl.text('$' + resDataMoney)
+						shippingPriceEl.text('$' + resDataMoney);
 					}
 
 					subtotalText = (parseFloat(resDataMoney) + parseFloat(totalPrice)).toFixed(2);
