@@ -67,5 +67,8 @@ public interface MlbackProductMapper {
 
 	//查询单个产品信息(无富文本描述)
 	List<MlbackProduct> selectMlbackProductSimple(MlbackProduct mlbackProductReq);
+	
+	//查询高级筛选产品信息
+	List<MlbackProduct> selectHighMlbackProduct(MlbackProduct mlbackProductReq);
     
 }
