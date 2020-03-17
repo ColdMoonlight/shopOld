@@ -164,14 +164,14 @@
 			 							min: '2018-01-01 06:00:00',
 			 							max: maxDateend,
 			 							isRange: true,
-										between:5,
+										between:3,
 			 							shortcutOptions: [{
 			 							 name: '昨天',
 			 							 day: '-1,-1',
 			 							 time: '00:00:00,23:59:59'
 			 							},{
-			 							 name: '最近5天',
-			 							 day: '-5,0',
+			 							 name: '最近3天',
+			 							 day: '-3,0',
 			 							 time:'00:00:00,'
 			 							}],
 			 							hide: function (type) {

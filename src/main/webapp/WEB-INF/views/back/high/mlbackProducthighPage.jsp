@@ -44,14 +44,20 @@
 								    <div class="" style="float: left;">
 								        <select class="form-control selectpl">
 										  <option value ="999" selected="selected">全部</option>
-										  <option value ="0">已上架</option>
-										  <option value ="1">未上架</option>
+										  <option value ="1">已上架</option>
+										   <option value ="0">未上架</option>
 										</select>
 								    </div>
 								</div>
-								<div class="form-group pinglun" style="float: left;">
+								<!-- <div class="form-group pinglun" style="float: left;">
 								    <label for="productName" class="control-label" style="float: left;">产品名字：</label>
 								    <input type="text" name="productName" id="productName" value="" />
+								</div> -->
+								<div class="form-group" style="width: 800px;">
+									<label for="productName" style="float: left;" class="control-label">产品名:</label>
+									<div class="" style="float: left;width: 80%;">
+										<input type="text" class="form-control" id="productName" placeholder="产品名" name="productName">
+									</div>
 								</div>
 								   <div class="form-group btn_search">
 									   <input type="submit" id="" value="搜索" name="" />
@@ -61,33 +67,37 @@
 						<div id="wei_num" style="display: none; width: 100%; float: left; background: #fff; text-align:center;min-height: 600px;">
 						  <h3>当前未查到数据</h3>	
 						</div>
-						<div class="table-content" id="allreview" style="padding: 0;">
-							<table class="table table-striped table-hover" id="task_table">
-								<thead>
-									<tr>
-										<th>id</th>
-										<th>产品图</th>
-										<th>产品名</th>
-										<th>产品归类</th>
-										<th>产品定价</th>
-										<th>历史销量</th>
-										<th>上架状态</th>
-										<th>营销标签</th>
-										<th>使用折扣</th>
-										<th>产品评论</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-								<tbody> </tbody>
-							</table>
+						<div class="tabreview " id="allreview">
+							<div class="table-content"  style="padding: 0;">
+								<table class="table table-striped table-hover" id="task_table"  style="margin: 0;">
+									<thead>
+										<tr>
+											<th>id</th>
+											<th>产品图</th>
+											<th width="400">产品名</th>
+											<th>定价</th>
+											<th>历史销量</th>
+											<th>上架状态</th>
+											<th>标签</th>
+											<th>同级别位置</th>
+											<th>折扣</th>
+											<th>折扣图</th>
+											<th>评论num</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody> </tbody>
+								</table>
+							</div>
+							<!-- 显示分页信息 -->
+							<div class="row">
+								<!--分页文字信息  -->
+								<div class="col-md-6 col-sm-6" id="page_info_area"></div>
+								<!-- 分页条信息 -->
+								<div class="col-md-6 col-sm-6" id="page_nav_area"></div>
+							</div>
 						</div>
-						<!-- 显示分页信息 -->
-						<div class="row">
-							<!--分页文字信息  -->
-							<div class="col-md-6 col-sm-6" id="page_info_area"></div>
-							<!-- 分页条信息 -->
-							<div class="col-md-6 col-sm-6" id="page_nav_area"></div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -117,7 +127,7 @@
 		});
 		var totalRecord, currentPage, editid;
 		var productName=999;
-		var productNameval;
+		// var productName =$("#productName").val();
 		var productStatus=999;
 		$(".shangjia .selectpl").change(function(){
 			var reviewFromselect =$(this).val();
@@ -125,20 +135,22 @@
 			console.log(productStatus)
 		});
 		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
-			  to_page(1,productNameval,productStatus)
+		$(function(){
+			var productName =$("#productName").val();
+			to_page(1,productName,productStatus)
 			console.log("productName:"+productName+"初始化"+"pn:"+ 1 + "productStatus:"+productStatus);
+		})
 			$(".btn_search").click(function(){
-				var productNameval =$("#productName").val();
-				console.log("productName:"+productNameval+"初始化"+"pn:"+ 1 + "productStatus:"+productStatus);
-				to_page(1,productNameval,productStatus)
+				var productName =$("#productName").val();
+				console.log("productName:"+productName+"点击"+"pn:"+ 1 + "productStatus:"+productStatus);
+				to_page(1,productName,productStatus)
 			})			
-
-		function to_page(pn,productNameval,productStatus) {
+		function to_page(pn,productName,productStatus) {
 		      $.ajax({
 		        url: "${APP_PATH}/HighProduct/highProductBySearch",
 				data:{
 					"pn": pn,
-					"productName": productNameval,
+					"productName": productName,
 					"productStatus":productStatus,
 				},
 		        type: "POST",
@@ -168,22 +180,29 @@
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
 			$.each(task, function (index, item) {
-				var productLablestate = '未知';
 				if (item.productLable == 1) {
-					productLablestate = '热销';
+					productLablestate = '第1展区';
 				} else if (item.productLable == 2) {
-					productLablestate = '爆款';
+					productLablestate = '第2展区';
 				} else if (item.productLable == 3) {
-					productLablestate = '限时';
+					productLablestate = '第3展区';
+				} else if (item.productLable == 4) {
+					productLablestate = '第4展区';
+				} else if (item.productLable == 5) {
+					productLablestate = '第5展区';
+				} else if (item.productLable == 99) {
+					productLablestate = '第99展区';
 				};
-
 				var productId = $("<td></td>").append(item.productId);
 				var imgurl = item.productMainimgurl;
-				var oraLength = item.productName;
-				if (oraLength.length > 20) {
-					oraLength = oraLength.substring(0, 20);
+				/*var oraLength = item.productName;
+				
+				 if(oraLength.length>50){
+					oraLength = oraLength.substring(0, 50);
 				}
-				var productName = $("<td></td>").append(oraLength + '...');
+				var productName=$("<td></td>").append(oraLength+'...'); */
+
+				var productName = $("<td></td>").append(item.productName);
 				var productCategoryname = $("<td></td>").append(item.productCategoryname);
 				var imgurl = item.productMainimgurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=40 height=40>';
@@ -192,10 +211,17 @@
 
 				var productOriginalprice = $("<td></td>").append(item.productOriginalprice);
 				var productHavesalenum = $("<td></td>").append(item.productHavesalenum);
-				var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
+				// var productStatus = $("<td></td>").append((item.productStatus ? '已上架' : '未上架'));
+				if(item.productStatus ===1){
+					var productStatus = $("<td class='yzf_bg'></td>").append('<b>已上架</b>');
+				}else{
+					var productStatus = $("<td class='wzf_bg'></td>").append('<b>未上架</b>');
+				}
 				var productLable = $("<td></td>").append(productLablestate);
+				var productFirsth = $("<td></td>").append(item.productFirsth);
 				/* var productActoffid = $("<td></td>").append(item.productActoffid); */
 				var productActoffoff = $("<td></td>").append(item.productActoffoff);
+				var productActoffIf = $("<td></td>").append((item.productActoffIf ? '展示' : '不展示'));
 				var productReviewnum = $("<td></td>").append(item.productReviewnum);
 				var productDesc = $("<td></td>").append(item.productDesc);
 
@@ -213,12 +239,14 @@
 				$("<tr></tr>").append(productId)
 					.append(productMainimgurl)
 					.append(productName)
-					.append(productCategoryname)
+					//.append(productCategoryname)
 					.append(productOriginalprice)
 					.append(productHavesalenum)
 					.append(productStatus)
 					.append(productLable)
+					.append(productFirsth)
 					.append(productActoffoff)
+					.append(productActoffIf)
 					.append(productReviewnum)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
@@ -248,10 +276,12 @@
 			} else {
 				//为元素添加点击翻页的事件
 				firstPageLi.click(function () {
-					to_page(1);
+					var productName =$("#productName").val();
+					to_page(1,productName,productStatus)
 				});
 				prePageLi.click(function () {
-					to_page(result.extend.pageInfo.pageNum - 1);
+					var productName =$("#productName").val();
+				to_page(currentPage-1,productName,productStatus)
 				});
 			}
 
@@ -262,10 +292,12 @@
 				lastPageLi.addClass("disabled");
 			} else {
 				nextPageLi.click(function () {
-					to_page(result.extend.pageInfo.pageNum + 1);
+					var productName =$("#productName").val();
+					to_page(currentPage+1,productName,productStatus)
 				});
 				lastPageLi.click(function () {
-					to_page(result.extend.pageInfo.pages);
+					var productName =$("#productName").val();
+					to_page(result.extend.pageInfo.pages,productName,productStatus);
 				});
 			}
 
@@ -279,7 +311,12 @@
 					numLi.addClass("active");
 				}
 				numLi.click(function () {
-					to_page(item);
+					// to_page(item);
+					var productName =$("#productName").val();
+					to_page(item,productName,productStatus);
+					console.log(productName);
+					console.log(productStatus);
+					console.log(item)
 				});
 				ul.append(numLi);
 			});
@@ -504,6 +541,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						var obj = result.extend.mlbackProductOne;
+						console.log(obj)
 						// render data
 						tianchong(obj);
 
@@ -533,6 +571,13 @@
 			$(":input[name='productColor']").val(data.productColor);
 			$(":input[name='productSeo']").val(data.productSeo);
 			$(":input[name='productCategoryid']").val(data.productCategoryid);
+			$(":input[name='productCategoryIdsStr']").val(data.productCategoryIdsStr);
+			$(":input[name='productCategoryNamesStr']").val(data.productCategoryNamesStr);
+			$(":input[name='productMetaDesc']").val(data.productMetaDesc);
+			$(".product-cate-text").html((data.productCategoryNamesStr ? data.productCategoryNamesStr.split(',').join('\n') : '无'));
+			if (data.productCategoryIdsStr && data.productCategoryIdsStr.length) {
+				productCategoryIdArr = data.productCategoryIdsStr.split(',');
+			}
 			if (data.productMainimgurl && data.productMainimgurl.length) {
 				$("#upload-img-main").parent().css("background-image", "url(" + data.productMainimgurl + ")");
 			}
@@ -544,9 +589,13 @@
 			$(":input[name='productHavesalenum']").val(parseFloat(data.productHavesalenum));
 			$(":input[name='productStatus']").val(data.productStatus);
 			$(":input[name='productLable']").val(data.productLable);
+			if (data.productFirsth) {
+				$(":input[name='productFirsth']").val(data.productFirsth);
+			}
 			$(":input[name='productActoffid']").val(data.productActoffid);
 			$(":input[name='productActoffoff']").val(data.productActoffoff);
-			/* $(":input[name='productReviewnum']").val(data.productReviewnum); */
+			$(":input[name='productActoffIf']").val(data.productActoffIf);
+			$(":input[name='productReviewnum']").val(data.productReviewnum);
 			$(".summer-note").html(data.productDesc);
 		}
 
