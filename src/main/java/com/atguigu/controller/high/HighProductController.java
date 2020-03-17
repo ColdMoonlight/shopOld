@@ -34,6 +34,8 @@ public class HighProductController {
 			@RequestParam(value = "productName") String productName,HttpSession session) {
 
 		MlbackProduct mlbackProductReq = new MlbackProduct();
+		
+		mlbackProductReq.setProductName(productName);
 
 		if(productStatus==999){
 			System.out.println("productStatus==999");
