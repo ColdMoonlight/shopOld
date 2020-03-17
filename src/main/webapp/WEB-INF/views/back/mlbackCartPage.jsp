@@ -76,7 +76,6 @@
 	
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 
@@ -110,7 +109,6 @@
 				data: "pn=" + pn,
 				type: "POST",
 				success: function (result) {
-					console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -172,7 +170,6 @@
 		}
 		//解析显示分页条，点击分页要能去下一页....
 		function build_page_nav(result) {
-			console.log(result)
 			$("#page_nav_area").empty();
 			//构建元素
 			var ul = $("<ul></ul>").addClass("pagination"),
