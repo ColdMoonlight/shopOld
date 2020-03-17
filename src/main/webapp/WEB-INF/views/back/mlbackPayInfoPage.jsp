@@ -587,7 +587,7 @@
 						data.list[i].orderitemProductAccoff).current) + '</td>' +
 					'<td>' + data.list[i].orderitemPskuNumber + '</td>' +
 					'<td>' + (getPrice(data.list[i].orderitemProductOriginalprice, data.list[i].orderitemPskuMoneystr.split(','),
-						data.list[i].orderitemProductAccoff).current * data.list[i].orderitemPskuNumber) + '</td>' +
+						data.list[i].orderitemProductAccoff).current * data.list[i].orderitemPskuNumber).toFixed(2) + '</td>' +
 					'</tr>';
 			}
 
@@ -596,7 +596,7 @@
 			var calInfoHtml = '';
 
 			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
-				.orderCouponPrice)) + '</span></div>' +
+				.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
 
