@@ -811,7 +811,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 			var calInfoHtml = '';
 
 			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
-				.orderCouponPrice)) + '</span></div>' +
+				.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
 

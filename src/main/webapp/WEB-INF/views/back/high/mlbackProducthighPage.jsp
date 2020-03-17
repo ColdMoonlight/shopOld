@@ -35,11 +35,33 @@
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品高级管理页面<</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品高级管理页面</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
+						<div class="choose_screen">
+								<div class="form-group shangjia" style="float: left;">
+								    <label class="control-label" style="float: left;">上架状态：</label>
+								    <div class="" style="float: left;">
+								        <select class="form-control selectpl">
+										  <option value ="999" selected="selected">全部</option>
+										  <option value ="0">已上架</option>
+										  <option value ="1">未上架</option>
+										</select>
+								    </div>
+								</div>
+								<div class="form-group pinglun" style="float: left;">
+								    <label for="productName" class="control-label" style="float: left;">产品名字：</label>
+								    <input type="text" name="productName" id="productName" value="" />
+								</div>
+								   <div class="form-group btn_search">
+									   <input type="submit" id="" value="搜索" name="" />
+							       </div>
+							</div>
 						<!-- table-content -->
-						<div class="table-content">
+						<div id="wei_num" style="display: none; width: 100%; float: left; background: #fff; text-align:center;min-height: 600px;">
+						  <h3>当前未查到数据</h3>	
+						</div>
+						<div class="table-content" id="allreview" style="padding: 0;">
 							<table class="table table-striped table-hover" id="task_table">
 								<thead>
 									<tr>
@@ -94,20 +116,44 @@
 	    }).resize()
 		});
 		var totalRecord, currentPage, editid;
-		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
-		$(function () {
-			//去首页
-			to_page(1);
+		var productName=999;
+		var productNameval;
+		var productStatus=999;
+		$(".shangjia .selectpl").change(function(){
+			var reviewFromselect =$(this).val();
+			productStatus=reviewFromselect;
+			console.log(productStatus)
 		});
+		//1、页面加载完成以后，直接去发送ajax请求,要到分页数据
+			  to_page(1,productNameval,productStatus)
+			console.log("productName:"+productName+"初始化"+"pn:"+ 1 + "productStatus:"+productStatus);
+			$(".btn_search").click(function(){
+				var productNameval =$("#productName").val();
+				console.log("productName:"+productNameval+"初始化"+"pn:"+ 1 + "productStatus:"+productStatus);
+				to_page(1,productNameval,productStatus)
+			})			
 
-		function to_page(pn) {
-			$.ajax({
-				url: "${APP_PATH}/MlbackProduct/getMlbackProductByPage",
-				data: "pn=" + pn,
-				type: "GET",
+		function to_page(pn,productNameval,productStatus) {
+		      $.ajax({
+		        url: "${APP_PATH}/HighProduct/highProductBySearch",
+				data:{
+					"pn": pn,
+					"productName": productNameval,
+					"productStatus":productStatus,
+				},
+		        type: "POST",
 				success: function (result) {
-					// console.log(result);
+					 var task = result.extend.pageInfo.list;
+					console.log(result);
 					//1、解析并显示员工数据
+					if(task.length==0){
+					  // alert("没有查到")
+					  $("#allreview").hide();
+					  $("#wei_num").show();
+					}else{
+					   $("#wei_num").hide();
+						$("#allreview").show();
+					}
 					build_task_table(result);
 					//2、解析并显示分页信息
 					build_page_info(result);
