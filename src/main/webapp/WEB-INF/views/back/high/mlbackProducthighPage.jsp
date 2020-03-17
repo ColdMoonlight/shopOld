@@ -28,14 +28,14 @@
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
-					<h2>产品查询管理</h2>
+					<h2>产品高级管理页面</h2>
 					<span class="user">admin</span>
 				</div>
 				<div class="content">
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品查询</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 产品高级管理页面<</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
