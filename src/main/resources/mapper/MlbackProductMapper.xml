@@ -759,4 +759,14 @@
     where product_id = #{productId,jdbcType=INTEGER}
   </select>
   
+  <!-- selectHighMlbackProduct使用中 -->
+  <select id="selectHighMlbackProduct" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
+    select *
+    from tb_mlback_product
+    where product_name like concat(concat("%",#{productName}),"%") 
+      <if test="productStatus != null">
+       and product_status = #{productStatus,jdbcType=INTEGER}
+      </if>
+  </select>
+  
 </mapper>
