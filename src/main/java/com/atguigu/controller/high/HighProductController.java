@@ -12,10 +12,7 @@ import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
-import com.atguigu.service.MlbackProductViewDetailService;
 
 @Controller
 @RequestMapping("/HighProduct")
@@ -23,16 +20,6 @@ public class HighProductController {
 		
 	@Autowired
 	MlbackProductService mlbackProductService;
-	
-	@Autowired
-	MlbackCategoryService mlbackCategoryService;
-	
-	@Autowired
-	MlbackAdminService mlbackAdminService;
-	
-	@Autowired
-	MlbackProductViewDetailService mlbackProductViewDetailService;
-	
 	
 	/**1.0	useOn	200317
 	 * 分类MlbackProduct列表分页list数据
