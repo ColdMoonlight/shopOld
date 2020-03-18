@@ -3,16 +3,13 @@
 .hd_ban img{display: block; margin: 0 auto; max-width: 100%;}
 .con_ban{width: 100%; height: auto; text-align: center; overflow: hidden;}
 .con_ban img{display: block; margin: 0 auto; max-width: 100%;}
-
-
-
-
 .box_con1{width: 100%; height: auto; position: relative;}
 .word1{width: 100%; height: auto;}
 .word1 img{display: block; margin: 0 auto; max-width: 100%;}
 .zs_link{width: 100%; height: auto;}
 .zs_link img{display: block; margin: 0 auto; max-width: 100%;}
 .xia_two{width:100%; height: auto; margin: 0 auto;}
+
 /*******/
 .zss_link{width: 50%; height: auto; float: left;}
 .zss_link img{display: block; margin: 0 auto; max-width: 100%;}

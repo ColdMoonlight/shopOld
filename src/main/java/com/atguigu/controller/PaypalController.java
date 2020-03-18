@@ -143,12 +143,16 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
-            System.out.println(e.getDetails().getName());
-            PaypalErrorName = e.getDetails().getName();
+            System.out.println(e.getDetails());
+            if(e.getDetails()==null){
+            	PaypalErrorName = "retry fails..  check log for more information";
+            }else{
+            	PaypalErrorName = e.getDetails().getName();
+            }
             session.setAttribute("PaypalErrorName", PaypalErrorName);
-            ListIterator<ErrorDetails> errorDetailslist = null;
-            
-            errorDetailslist =  e.getDetails().getDetails().listIterator();
+//            ListIterator<ErrorDetails> errorDetailslist = null;
+//            
+//            errorDetailslist =  e.getDetails().getDetails().listIterator();
             String regularName ="";
 //            while(errorDetailslist.hasNext()){//正序遍历     hasNext()：判断集合中是否还有下一个元素
 //            	System.out.print(errorDetailslist.next()+",");//返回值：狗娃,晶晶,亮亮,美美,铁蛋,
@@ -248,12 +252,16 @@ public class PaypalController {
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
             System.out.println("---------e.getDetails()-----begin------");
-            System.out.println(e.getDetails().getName());
-            PaypalErrorName = e.getDetails().getName();
+            System.out.println(e.getDetails());
+            if(e.getDetails()==null){
+            	PaypalErrorName = "retry fails..  check log for more information";
+            }else{
+            	PaypalErrorName = e.getDetails().getName();
+            }
             session.setAttribute("PaypalErrorName", PaypalErrorName);
-            ListIterator<ErrorDetails> errorDetailslist = null;
-            
-            errorDetailslist =  e.getDetails().getDetails().listIterator();
+//            ListIterator<ErrorDetails> errorDetailslist = null;
+//            
+//            errorDetailslist =  e.getDetails().getDetails().listIterator();
             String regularName ="";
 //            while(errorDetailslist.hasNext()){//正序遍历     hasNext()：判断集合中是否还有下一个元素
 //            	System.out.print(errorDetailslist.next()+",");//返回值：狗娃,晶晶,亮亮,美美,铁蛋,
@@ -698,6 +706,9 @@ public class PaypalController {
     private ToPaypalInfo getPayInfo(HttpSession session) {
     	//从session中获取对象
     	MlfrontAddress mlfrontAddressToPay = (MlfrontAddress) session.getAttribute("mlfrontAddressToPay");
+    	//从session中获取payinfoId,准备填入Desc中,防止paypal收到钱,却无法查帐
+    	Integer payinfoId = (Integer) session.getAttribute("payinfoId");
+    	String payinfoIdStr = payinfoId+"";
     	BigDecimal totalprice = (BigDecimal) session.getAttribute("totalprice");
     	ToPaypalInfo toPaypalInfo = new ToPaypalInfo();
 		//从对象中获取参数
@@ -718,7 +729,9 @@ public class PaypalController {
 		toPayDesc+=toPayCity+",";
 		toPayDesc+=toPayDetail+",";
 		toPayDesc+=toPayUserfirstname+",";
-		toPayDesc+=toPayUserlastname;
+		toPayDesc+=toPayUserlastname+",VIP";
+		toPayDesc+=payinfoIdStr;
+//		toPayDesc+=toPayUserlastname;
 		toPaypalInfo.setMoneyNum(totalprice);
 		toPaypalInfo.setMoneyType("USD");
 		toPaypalInfo.setPaymentDescription(toPayDesc);

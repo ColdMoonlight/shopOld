@@ -136,8 +136,13 @@
 				}else if(item.payinfoStatus ===3){
 					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
 				}else if(item.payinfoStatus ===4){
-					var payinfoStatus = $("<td class='ytk_bg'></td>").append('<b>已退款</b>');//灰
+					var payinfoStatus = $("<td class='ytk_bg'></td>").append('<b>已退款</b>');//紫
+				}else if(item.payinfoStatus ===5){
+				  var payinfoStatus = $("<td class='fg_bg'></td>").append('<b>已通知复购</b>');//紫
+				}else if(item.payinfoStatus ===6){
+				  var payinfoStatus = $("<td class='ygb_bg'></td>").append('<b>已关闭</b>');//紫
 				}
+
 				
 				// console.log(payinfoStatuscd)/**/
 				var payinfoPlateNum = $("<td></td>").append(item.payinfoPlateNum);
@@ -270,6 +275,8 @@
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
+		var orderOrderitemidstradd;
+		var orderBuymail; /*取到orderBuymail*/
 		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
@@ -319,6 +326,7 @@
 							
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
+							orderOrderitemidstradd = orderData.orderOrderitemidstr;
 							shipName = orderData.orderLogisticsname;
 							var receiveDataaddress = mlPaypalShipAddressOne;
 							renderPaypaladdress(receiveDataaddress);
@@ -328,6 +336,8 @@
 							console.log(receiveData)
 							receiveData.addressUid = resDataAddressOne.addressUid;
 							userid = receiveData.addressUid;
+							receiveData.addressEmail = resDataAddressOne.addressEmail;
+							orderBuymail = receiveData.addressEmail;
 							
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
@@ -513,6 +523,14 @@
 				statusDetail = "已退款";
 				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
+			}else if(data.orderStatus == 6){
+				statusDetail = "弃购已发";
+				// colorspan ="colorspan4"
+				ifsend = data.orderLogisticsid;
+			}else if(data.orderStatus == 7){
+				statusDetail = "本单重复-已关闭";
+				// colorspan ="colorspan4"
+				ifsend = data.orderLogisticsid;
 			}
 			
 			var headerHtml = '';
@@ -521,6 +539,9 @@
 //			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 			    '<span class="payyufei_num" num-id="'+ data.payinfoPlateNum + '">支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
+				if(data.orderStatus == 0){
+					headerHtml += '<span class="btn btn-info check_order" onclick="purchase_send()">弃购发送</span><span class="btn btn-danger return_order" onclick="close_order()" >交易关闭</span>';
+				}
 			if(data.orderStatus == 1){
 				headerHtml += '<span class="btn btn-success check_order" onclick="check_order()">审核</span><span class="btn btn-danger return_order" onclick="return_order()" >退款</span>';
 			}
@@ -566,7 +587,7 @@
 						data.list[i].orderitemProductAccoff).current) + '</td>' +
 					'<td>' + data.list[i].orderitemPskuNumber + '</td>' +
 					'<td>' + (getPrice(data.list[i].orderitemProductOriginalprice, data.list[i].orderitemPskuMoneystr.split(','),
-						data.list[i].orderitemProductAccoff).current * data.list[i].orderitemPskuNumber) + '</td>' +
+						data.list[i].orderitemProductAccoff).current * data.list[i].orderitemPskuNumber).toFixed(2) + '</td>' +
 					'</tr>';
 			}
 
@@ -575,7 +596,7 @@
 			var calInfoHtml = '';
 
 			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
-				.orderCouponPrice)) + '</span></div>' +
+				.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
 
@@ -637,6 +658,7 @@
 		// payinfoIdcd=payinfoId;
 		// console.log(payinfoIdcd)/*eeee*/
 		orderCouponId =payinfoIdcd;
+		/**已审核*/
         function check_order(){
 			var reqData = {
 				"orderId":orderId,
@@ -656,29 +678,79 @@
 			});
 			
 		}
-		 
+		 /***退款***/
 		     function return_order(){
-		       var reqData = {
-		         "orderId":orderId,
-		         "orderCouponId":payinfoIdcd,
-		       }
-		       $.ajax({
-		         url: '${APP_PATH}/MlfrontOrder/updateOrderRefund',
-		         data: JSON.stringify(reqData),
-		         type: "POST",
-		         dataType: "json",
-		         contentType: 'application/json',
-		           success: function (reqData) {
-		             alert("确认退款")
-		             window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
-		           }
-		       });
-		       
-		       
+				  var msg = "您真的确定要退款?";
+				   if (confirm(msg)==true){
+					  var reqData = {
+					    "orderId":orderId,
+					    "orderCouponId":payinfoIdcd,
+					  }
+					  $.ajax({
+					    url: '${APP_PATH}/MlfrontOrder/updateOrderRefund',
+					    data: JSON.stringify(reqData),
+					    type: "POST",
+					    dataType: "json",
+					    contentType: 'application/json',
+					      success: function (reqData) {
+					        // alert("确认退款")
+					        window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+					      }
+					  });
+					   return true;
+					  }else{
+					  return false;
+				  }
 		     }
-	  
-
-
+			 
+			 /**purchase_send()弃购发送****/
+			  function purchase_send(){
+				var reqData = {
+				  "orderId":orderId,
+				  "orderCouponId":payinfoIdcd,
+				  "orderOrderitemidstr":orderOrderitemidstradd,
+				  "orderBuyMess":orderBuymail,
+				}
+				console.log(reqData)
+				$.ajax({
+				  url: '${APP_PATH}/MlfrontOrder/updateOrderAbandoningPurchase',
+				  data: JSON.stringify(reqData),
+				  type: "POST",
+				  dataType: "json",
+				  contentType: 'application/json',
+					success: function (reqData) {
+					  alert("已发送")
+					  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+					}
+				});
+			  }
+			  /*****close_order交易关闭****************/
+			  function close_order(){
+				  var msg = "您真的确定要关闭?";
+				   if (confirm(msg)==true){
+					   var reqData = {
+					     "orderId":orderId,
+					     "orderCouponId":payinfoIdcd,
+					   }
+					   $.ajax({
+					     url: '${APP_PATH}/MlfrontOrder/updateOrderClose',
+					     data: JSON.stringify(reqData),
+					     type: "POST",
+					     dataType: "json",
+					     contentType: 'application/json',
+					   	success: function (reqData) {
+					   	  // alert("已关闭")
+					   	  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+					   	}
+					   });
+					   return true;
+					   }else{
+					   return false;
+				  }
+				  
+			  }
+			  
+			  
 
 		/*
 		url: MlfrontOrder/updateOrderDetail

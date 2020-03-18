@@ -27,11 +27,14 @@
 			<div class="main-box nicescroll">
 				<div class="header">
 					<h2>付款页面列表</h2>
-					    <button type="button" id="downPayinfoDate">下载查账数据</button>
-          				<button type="button" id="downEcppDate">下载ecpp数据</button>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
+					<div class="down_box" style="padding: 20px 20px 0;">
+						<button type="button" id="downPayinfoDate">下载查账数据</button>
+						<button type="button" id="downEcppDate">下载ecpp数据</button>
+						<p style="color: red;">(只能下载3天之内的数据)</p>
+					</div>
 					<div class="table-box">
 					    <div class="choose_screen">
 								<div class="c-datepicker-date-editor date-timepicker" style="float: left; margin: 0 20px 0 0;">
@@ -41,7 +44,7 @@
 									<input placeholder="结束日期" name="" value="" class="c-datepicker-data-input">
 								</div>
 								<div class="form-group pinglun_from" style="float: left;">
-								    <label class="control-label" style="float: left;">评论来源</label>
+								    <label class="control-label" style="float: left;">状态：</label>
 								    <div class="" style="float: left;">
 								        <select class="form-control selectpl">
 										  <option value ="999" selected="selected">全部</option>
@@ -50,6 +53,8 @@
 										  <option value ="2">已审核</option>
 										  <option value ="3">已发货</option>
 										  <option value ="4">已退款</option>
+										   <option value ="5">已通知复购</option>
+										    <option value ="6">已关闭</option>
 										</select>
 								    </div>
 								</div>
@@ -159,22 +164,15 @@
 			 							min: '2018-01-01 06:00:00',
 			 							max: maxDateend,
 			 							isRange: true,
+										between:3,
 			 							shortcutOptions: [{
 			 							 name: '昨天',
 			 							 day: '-1,-1',
 			 							 time: '00:00:00,23:59:59'
 			 							},{
-			 							 name: '最近一周',
-			 							 day: '-7,0',
+			 							 name: '最近3天',
+			 							 day: '-3,0',
 			 							 time:'00:00:00,'
-			 							}, {
-			 							 name: '最近一个月',
-			 							 day: '-30,0',
-			 							 time: '00:00:00,'
-			 							}, {
-			 							 name: '最近三个月',
-			 							 day: '-90, 0',
-			 							 time: '00:00:00,'
 			 							}],
 			 							hide: function (type) {
 											var changestar = this.$input.eq(0).val();
@@ -190,31 +188,31 @@
 				$input.eq(0).val(minDatestar);
 				$input.eq(1).val(maxDateend);
 			}
-			function  datePickerint(){
-				$('.J-datepicker').datePicker({
-				  hasShortcut:true,
-				  min:'2018-01-01 04:00:00',
-				  max:'2050-09-09 20:59:59',
-				  shortcutOptions:[{
-					name: '今天',
-					day: '0'
-				  }, {
-					name: '昨天',
-					day: '-1',
-					time: '00:00:00'
-				  }, {
-					name: '一周前',
-					day: '-7'
-				  }],
-				  hide:function(){
-					console.info(this)
-				  }
-				}); 
-			}
+			// function  datePickerint(){
+			// 	$('.J-datepicker').datePicker({
+			// 	  hasShortcut:true,
+			// 	  min:'2018-01-01 04:00:00',
+			// 	  max:'2050-09-09 20:59:59',
+			// 	  shortcutOptions:[{
+			// 		name: '今天',
+			// 		day: '0'
+			// 	  }, {
+			// 		name: '昨天',
+			// 		day: '-1',
+			// 		time: '00:00:00'
+			// 	  }, {
+			// 		name: '一周前',
+			// 		day: '-7'
+			// 	  }],
+			// 	  hide:function(){
+			// 		console.info(this)
+			// 	  }
+			// 	}); 
+			// }
 			$(function () {
 				initHtml();
 				initJs();
-				 datePickerint()
+				 // datePickerint()
 				
 			});
 /***************************************************************************************/
@@ -294,6 +292,10 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 					var payinfoStatus = $("<td class='yfh_bg'></td>").append('<b>已发货</b>');//蓝
 				}else if(item.payinfoStatus ===4){
 					var payinfoStatus = $("<td class='ytk_bg'></td>").append('<b>已退款</b>');//灰
+				}else if(item.payinfoStatus ===5){
+				  var payinfoStatus = $("<td class='fg_bg'></td>").append('<b>已通知复购</b>');//紫
+				}else if(item.payinfoStatus ===6){
+				  var payinfoStatus = $("<td class='ygb_bg'></td>").append('<b>已关闭</b>');//紫
 				}
 				
 				// console.log(payinfoStatuscd)/**/
@@ -464,6 +466,8 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		var shipName;
 		var payinfoIdcd;
 		var payinfoStatus;
+		var orderOrderitemidstradd;
+		var orderBuymail; /*取到orderBuymail*/
 		var userid; /*取到addressUid*/
 		function loadTpl(payid) {
 			$('.box_new_review').load('${APP_PATH}/static/tpl/addPayInfo.html', function () {
@@ -517,6 +521,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 							
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
+							orderOrderitemidstradd = orderData.orderOrderitemidstr;
 							shipName = orderData.orderLogisticsname;
 							var receiveDataaddress = mlPaypalShipAddressOne;
 							renderPaypaladdress(receiveDataaddress);
@@ -526,7 +531,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 							console.log(receiveData)
 							receiveData.addressUid = resDataAddressOne.addressUid;
 							userid = receiveData.addressUid;
-							
+							orderBuymail = receiveData.addressEmail;
 							receiveData.orderCreatetime = resDataOrderPayOne.orderCreatetime;
 							receiveData.orderBuyMess = resDataOrderPayOne.orderBuyMess;
 							receiveData.orderCouponCode = resDataOrderPayOne.orderCouponCode;	//**优惠码****
@@ -733,6 +738,14 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 				statusDetail = "已退款";
 				// colorspan ="colorspan4"
 				ifsend = data.orderLogisticsid;
+			}else if(data.orderStatus == 6){
+				statusDetail = "弃购已发";
+				// colorspan ="colorspan4"
+				ifsend = data.orderLogisticsid;
+			}else if(data.orderStatus == 7){
+				statusDetail = "本单重复-已关闭";
+				// colorspan ="colorspan4"
+				ifsend = data.orderLogisticsid;
 			}
 			
 			var headerHtml = '';
@@ -741,6 +754,9 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 //			    '<span>支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 			    '<span class="payyufei_num" num-id="'+ data.payinfoPlateNum + '">支付运费编号 ：' + data.payinfoPlateNum + '</span>'+
 				'<span class="'+colorspan+'">订单状态 ：' + statusDetail + '</span>';
+			if(data.orderStatus == 0){
+				headerHtml += '<span class="btn btn-info check_order" onclick="purchase_send()">弃购发送</span><span class="btn btn-danger return_order" onclick="close_order()" >交易关闭</span>';
+			}
 			if(data.orderStatus == 1){
 				headerHtml += '<span class="btn btn-success check_order" onclick="check_order()">审核</span><span class="btn btn-danger return_order" onclick="return_order()" >退款</span>';
 			}
@@ -786,7 +802,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 						data.list[i].orderitemProductAccoff).current) + '</td>' +
 					'<td>' + data.list[i].orderitemPskuNumber + '</td>' +
 					'<td>' + (getPrice(data.list[i].orderitemProductOriginalprice, data.list[i].orderitemPskuMoneystr.split(','),
-						data.list[i].orderitemProductAccoff).current * data.list[i].orderitemPskuNumber) + '</td>' +
+						data.list[i].orderitemProductAccoff).current * data.list[i].orderitemPskuNumber).toFixed(2) + '</td>' +
 					'</tr>';
 			}
 
@@ -795,7 +811,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 			var calInfoHtml = '';
 
 			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
-				.orderCouponPrice)) + '</span></div>' +
+				.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
 
@@ -857,46 +873,98 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 		// payinfoIdcd=payinfoId;
 		// console.log(payinfoIdcd)/*eeee*/
 		orderCouponId =payinfoIdcd;
-        function check_order(){
+       /**已审核*/
+       function check_order(){
+       	var reqData = {
+       		"orderId":orderId,
+       		"orderCouponId":payinfoIdcd,
+       	}
+       	// console.log(reqData);
+       	$.ajax({
+       		url: '${APP_PATH}/MlfrontOrder/updateOrderReady',
+       		data: JSON.stringify(reqData),
+       		type: "POST",
+       		dataType: "json",
+       		contentType: 'application/json',
+       			success: function (reqData) {
+       				alert("已审核")
+       				window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
+       			}
+       	});
+       	
+       }
+        /***退款***/
+            function return_order(){
+       		  var msg = "您真的确定要退款?";
+       		   if (confirm(msg)==true){
+       			  var reqData = {
+       			    "orderId":orderId,
+       			    "orderCouponId":payinfoIdcd,
+       			  }
+       			  $.ajax({
+       			    url: '${APP_PATH}/MlfrontOrder/updateOrderRefund',
+       			    data: JSON.stringify(reqData),
+       			    type: "POST",
+       			    dataType: "json",
+       			    contentType: 'application/json',
+       			      success: function (reqData) {
+       			        // alert("确认退款")
+       			        window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
+       			      }
+       			  });
+				   return true;
+       			  }else{
+       			  return false;
+       		  }
+            }
+       	 
+       	 /**purchase_send()弃购发送****/
+       	  function purchase_send(){
 			var reqData = {
-				"orderId":orderId,
-				"orderCouponId":payinfoIdcd,
+			  "orderId":orderId,
+			  "orderCouponId":payinfoIdcd,
+			  "orderOrderitemidstr":orderOrderitemidstradd,
+			  "orderBuyMess":orderBuymail,
 			}
-			// console.log(reqData);
-			$.ajax({
-				url: '${APP_PATH}/MlfrontOrder/updateOrderReady',
-				data: JSON.stringify(reqData),
-				type: "POST",
-				dataType: "json",
-				contentType: 'application/json',
-					success: function (reqData) {
-						alert("已审核")
-						window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
-					}
-			});
-			
-		}
-		 
-		     function return_order(){
-		       var reqData = {
-		         "orderId":orderId,
-		         "orderCouponId":payinfoIdcd,
-		       }
-		       $.ajax({
-		         url: '${APP_PATH}/MlfrontOrder/updateOrderRefund',
-		         data: JSON.stringify(reqData),
-		         type: "POST",
-		         dataType: "json",
-		         contentType: 'application/json',
-		           success: function (reqData) {
-		             alert("确认退款")
-		             window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
-		           }
-		       });
-		       
-		       
-		     }
-	  
+			console.log(reqData)
+       		$.ajax({
+       		  url: '${APP_PATH}/MlfrontOrder/updateOrderAbandoningPurchase',
+       		  data: JSON.stringify(reqData),
+       		  type: "POST",
+       		  dataType: "json",
+       		  contentType: 'application/json',
+       			success: function (reqData) {
+       			  alert("已发送")
+				  // $(".box_new_review").removeClass("active")
+       			  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
+       			}
+       		});
+       	  }
+       	  /*****close_order交易关闭****************/
+       	  function close_order(){
+       		  var msg = "您真的确定要关闭?";
+       		   if (confirm(msg)==true){
+       			   var reqData = {
+       			     "orderId":orderId,
+       			     "orderCouponId":payinfoIdcd,
+       			   }
+       			   $.ajax({
+       			     url: '${APP_PATH}/MlfrontOrder/updateOrderClose',
+       			     data: JSON.stringify(reqData),
+       			     type: "POST",
+       			     dataType: "json",
+       			     contentType: 'application/json',
+       			   	success: function (reqData) {
+       			   	  // alert("已关闭")
+       			   	  window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
+       			   	}
+       			   });
+       			   return true;
+       			   }else{
+       			   return false;
+       		  }
+       		  
+       	  }
 
 
 

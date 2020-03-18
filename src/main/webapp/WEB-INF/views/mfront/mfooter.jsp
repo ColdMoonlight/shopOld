@@ -61,25 +61,24 @@
     }
 
     $.ajax({
-			url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAllSimple',
-      // url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAll',
-      type: 'post',
-      async: false,
-      success: function (data) {
+		url: '${APP_PATH}/MlbackFootNav/getMlfrontFootNavAllSimple',
+     	type: 'post',
+     	async: false,
+      	success: function (data) {
         // console.log(data);
         var resData = data.extend;
-        if (resData.isNav === 0) {
-        	renderSysMsg('没获取到相关数据')
+        if (resData.isNav == 0) {
+        	renderSysMsg('No product-related data was obtained.')
         }
 
-        if (resData.isNav === 1) {
+        if (resData.isNav == 1) {
           for (var key in footerData) {
             var block = map[footerData[key].name];
             var fData = resData[block];
             for (var key2 in fData) {
-              //加一个判断		footnavIfIncome		每条数据都有这个字段
-              //0，不能点		比如有的就纯粹是，联系方式
-              //1,能点进去		有富文本内容的。
+              // 加一个判断		footnavIfIncome		每条数据都有这个字段
+              // 0，不能点		比如有的就纯粹是，联系方式
+              // 1,能点进去		有富文本内容的。
               if (fData[key2].footnavIfIncome) {
                 footerData[key].children.push({
                   "name": fData[key2].footnavName,

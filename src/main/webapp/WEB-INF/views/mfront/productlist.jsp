@@ -20,25 +20,29 @@
 	<!-- uc 字体放大-->
 	<meta name="wap-font-scale" content="no">
 	<meta name="aplus-touch" content="1">
-	
+
 	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
-	
+
 	<script>
-	  !function(f,b,e,v,n,t,s)
-	  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-	  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-	  n.queue=[];t=b.createElement(e);t.async=!0;
-	  t.src=v;s=b.getElementsByTagName(e)[0];
-	  s.parentNode.insertBefore(t,s)}(window, document,'script',
-	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+		!function (f, b, e, v, n, t, s) {
+			if (f.fbq) return; n = f.fbq = function () {
+				n.callMethod ?
+				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+			};
+			if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+			n.queue = []; t = b.createElement(e); t.async = !0;
+			t.src = v; s = b.getElementsByTagName(e)[0];
+			s.parentNode.insertBefore(t, s)
+		}(window, document, 'script',
+			'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '246433859565492');
+		//fbq('init', '667403967094866');
+		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<noscript><img height="1" width="1" style="display:none"
+			src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript>
 	<script>
-  		fbq('track', 'ViewContent');
+		fbq('track', 'ViewContent');
 	</script>
 	<!-- Facebook Pixel Code end -->
 </head>
@@ -57,12 +61,13 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script>
-		var condition = $('.select');
-		var productList = $('.product-list');
-		var sessionScopecategoryId = '${sessionScope.categoryId}';
-		//var cidA = window.location.href.split('?')[1].split('=');
-		var cidA = sessionScopecategoryId;
+		var condition = $('.select'),
+			productList = $('.product-list'),
+			sessionScopecategoryId = '${sessionScope.categoryId}',
+			cidA = sessionScopecategoryId,
+			loadProduct2Url = "${APP_PATH }/static/m/img/loading/load-product2.gif"
 
 		//default codition
 		getProductList({
@@ -72,9 +77,9 @@
 		/* category condition */
 		$.ajax({
 			url: '${APP_PATH}/MlbackCategory/getOneMlbackCategoryParentDetail',
-			type: "GET",
+			type: "get",
 			success: function (data) {
-				if (data.code === 100) {
+				if (data.code == 100) {
 					var resData = data.extend.mlbackCategorydownEr;
 					// console.log(resData);
 					renderCondition($('.select-item.select-category'), resData)
@@ -86,7 +91,6 @@
 									"productCategoryid": $('.select-category').val() || cidA[1]
 								});
 							})
-
 						}
 					})
 
@@ -100,30 +104,28 @@
 			$.ajax({
 				url: '${APP_PATH}/MlbackProduct/getMlbackProductByparentCategoryIdListNew',
 				data: JSON.stringify(data),
-				dataType: "JSON",
+				type: "post",
+				dataType: "json",
 				contentType: 'application/json',
-				type: "POST",
 				success: function (data) {
-					// console.log(data.extend.mlbackProductResList);
-//					console.log(JSON.parse(data));
-//					console.log("data.extend.mlbackProductResList");
 					//从类别中获取fb所需要的当前页面的类下产品
-					var shopidlist = toFbidsPurchase((JSON.parse(data)).extend.mlbackProductResList);
+					var shopidlist = toFbidsPurchase(data.extend.mlbackProductResList);
 					fbq('track', 'ViewCategory', {
-			              content_ids: [shopidlist],
-			              content_type: 'product'
-			            });
-					// console.log("shopidlist");
-					// console.log(shopidlist);
-					// console.log("shopidlist");
-					var data = JSON.parse(data);
-					if (data.code === 100) {
+						content_ids: [shopidlist],
+						content_type: 'product'
+					});
+					if (data.code == 100) {
 						var productData = data.extend.mlbackProductResList;
-						if(productData==null){
+						if (productData == null) {
 							renderErrorMsg(productList, 'No product-related data was obtained');
-						}else{
-							var DataproListBySaleNum =orderProListBySaleNum(productData);
-							rednerProduct(productList,DataproListBySaleNum);
+						} else {
+							var DataproListBySaleNum = orderProListBySaleNum(productData);
+							rednerProduct(productList, DataproListBySaleNum);
+							new LazyLoad(productList.find('img'), {
+								root: null,
+								rootMargin: "10px",
+								threshold: 0
+							});
 						}
 						// rednerProduct(productList, productData);
 					} else {
@@ -131,7 +133,7 @@
 					}
 				},
 				error: function (error) {
-					if (error.status === 400) {
+					if (error.status == 400) {
 						renderErrorMsg(productList, 'There is no relevant product, the page will jump to the home page after 3s!');
 						setTimeout(function () {
 							window.location.href = "${APP_PATH}/index/isMobileOrPc";
@@ -141,32 +143,32 @@
 			});
 		}
 		function orderProListBySaleNum(reqData) {
-				if(reqData.length>0){
-				   var n = reqData.length;
-				   for(var i=0;i<n;i++){
-					 for(var j=0;j<n-1-i;j++){
+			var reqDataLen = reqData.length;
+			if (reqDataLen > 0) {
+				for (var i = 0; i < reqDataLen; i++) {
+					for (var j = 0; j < reqDataLen - 1 - i; j++) {
 						// console.log(reqData[j].productHavesalenum);
-					   if(reqData[j].productHavesalenum<reqData[j+1].productHavesalenum){
-						 var  DateOne = reqData[j];
-						 reqData[j] = reqData[j+1];
-						 reqData[j+1] = DateOne;
-					   }
-					 }
-				   }
-				 }
-				return reqData;
+						if (reqData[j].productHavesalenum < reqData[j + 1].productHavesalenum) {
+							var DateOne = reqData[j];
+							reqData[j] = reqData[j + 1];
+							reqData[j + 1] = DateOne;
+						}
+					}
+				}
 			}
-		
+			return reqData;
+		}
+
 		//计算fb所需要的当前页面的类下产品
-		function toFbidsPurchase(resData){
-	       	var infoStrlids = '';
-	       	var infoRelids = '';
-	       	for(var i=0;i<resData.length;i++){
-	       		infoStrlids=infoStrlids+resData[i].productId+',';
-	       	}
-	       	infoRelids=infoStrlids.substr(0,infoStrlids.length-1);
-	       	return infoRelids;
-	       }
+		function toFbidsPurchase(resData) {
+			var infoStrlids = '',
+				infoRelids = '';
+			for (var i = 0, len = resData.length; i < len; i++) {
+				infoStrlids = infoStrlids + resData[i].productId + ',';
+			}
+			infoRelids = infoStrlids.substr(0, infoStrlids.length - 1);
+			return infoRelids;
+		}
 
 
 		function renderErrorMsg(parent, msg) {
@@ -174,40 +176,41 @@
 		}
 
 		function rednerProduct(parent, data) {
-			var html = '';
-			if (data.length > 0) {
-				for (var i = 0; i < data.length; i += 1) {
-					var productactoffif = data[i].productActoffIf;
+			var html = '',
+				dataLen = data.length;
+
+			if (dataLen > 0) {
+				for (var i = 0; i < dataLen; i += 1) {
+					var productactoffif = data[i].productActoffIf,
+						productactoffid = data[i].productActoffid,
+						cp_icon = "",
+						showspan = "";
 					// console.log(productactoffif)
-					var productactoffid  =  data[i].productActoffid;
-					 // console.log(productactoffid)  
-					var cp_icon = "";
-					var showspan = "";
-					if(productactoffif == 1){
-								  if(productactoffid==1){
-									   showspan ="showactive1"
-								  }else if(productactoffid==2){
-									   showspan ="showactive2"
-								  }else if(productactoffid==3){
-									   showspan ="showactive3"
-								  }else if(productactoffid==4){
-									   showspan ="showactive4"
-								  }
-								  
-					}else{
-								   showspan ="hideactive"
+					// console.log(productactoffid)  
+					if (productactoffif == 1) {
+						if (productactoffid == 1) {
+							showspan = "showactive1"
+						} else if (productactoffid == 2) {
+							showspan = "showactive2"
+						} else if (productactoffid == 3) {
+							showspan = "showactive3"
+						} else if (productactoffid == 4) {
+							showspan = "showactive4"
+						}
+
+					} else {
+						showspan = "hideactive"
 					}
 					html += '<div class="product-item">' +
-					 '<span class="hui_icon '+showspan+'"></span>'+
+						'<span class="hui_icon ' + showspan + '"></span>' +
 						'<div class="product-img">' +
-						/* '<a href="${APP_PATH}/MlbackProduct/tomProductDetailPage?productId=' + data[i].productId + '">' + */
 						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' +
-						'<img src="' + data[i].productMainimgurl + '" alt="">' +
+						'<img src="' + loadProduct2Url + '" data-src="' + data[i].productMainimgurl + '" alt="">' +
 						'</a>' +
 						'</div>' +
 						'<div class="product-desc">' +
 						'<div class="product-title">' +
-						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">'+data[i].productName+'</a>' +
+						'<a href="${APP_PATH}/' + data[i].productSeo + '.html">' + data[i].productName + '</a>' +
 						'</div>' +
 						'<div class="product-type"></div>' +
 						'<div class="product-data">' +
@@ -216,8 +219,7 @@
 						' Review(s)</span>' +
 						'</div>' +
 						'<div class="product-price">' +
-						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
-							.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i].productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
 						'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
 						'</span>' +
 						'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
@@ -232,13 +234,10 @@
 			}
 		}
 
-		function renderCondition(parent, data, defaultHtml) {
-			var html = defaultHtml || '';
-			html += ''
-
+		function renderCondition(parent, data) {
+			var html = '';
 			for (var i = 0, len = data.length; i < len; i += 1) {
-				if (data[i].categoryId === parseInt(cidA[1])) {
-					// console.log("*********")
+				if (data[i].categoryId == parseInt(cidA[1])) {
 					html = '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>' + html;
 				} else {
 					html += '<option value="' + data[i].categoryId + '">' + data[i].categoryName + '</option>';
@@ -249,11 +248,11 @@
 		}
 	</script>
 	<!-- megalook-->
-  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-  	<!-- huashuohair -->
-  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
+	<!-- huashuohair -->
+	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

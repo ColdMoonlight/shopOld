@@ -57,6 +57,13 @@ param:　orderId
 	var reqData = {
 		"orderId": orderId
 	};
+	var orderStatus = {
+		0: 'Unpaid',
+		1: 'Paid',
+		3: 'Processing',
+		4: 'Shipped',
+		5:'refund'
+	};
 	var containerBox = $(".order-list");
 	$.ajax({
 		url: '${APP_PATH }/MlfrontOrder/getOneMlfrontOrderDetail',
@@ -108,6 +115,17 @@ param:　orderId
 			orderItemMap: orderItemMap
 		}
 	}
+	function orderStatus_Top(parent,data){
+		//console.log(map);
+		var html = '';
+		if (data.length) {
+			for (var key in data) {
+				var numstatus= data[key].orderStatus;
+				html += '<span class="order-status status'+numstatus+'">'+ (orderStatus[data[key].orderStatus]) +'</span>'
+			}
+		}
+		parent.html(html);
+	}
 
 	function renderContainer(parent, data, orderItemList,resDataAfterMoney) {
 		var map = orderMap(orderItemList);
@@ -131,7 +149,7 @@ param:　orderId
 						'<div class="sku">' + (item.orderitemPskuNamestr.split(',').join(' ')) + '</div>' +
 						'</div>' +
 						'<div class="order-num">' +
-						'<span class="price">$' + (item.orderitemPskuReamoney / item.orderitemPskuNumber) + '</span>' +
+						'<span class="price">$' + (item.orderitemPskuReamoney / item.orderitemPskuNumber).toFixed(2) + '</span>' +
 						'<span class="num">X' + item.orderitemPskuNumber + '</span>' +
 						'</div>' +
 						'</div>';

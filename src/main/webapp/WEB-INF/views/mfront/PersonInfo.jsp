@@ -27,197 +27,191 @@
 <body>
 
 	<jsp:include page="mheader.jsp"></jsp:include>
-
-	<!-- main -->
-	<div class="main person-info">
-		<div class="form-op"><span class="edit-save" data-flag="0">edit</span></div>
-		<div class="form">
+	<link rel="stylesheet" href="${APP_PATH }/static/m/css/wapindex.css">
+	 <div class="main person-info">
+		<div class="return_prev"><a href="javascript:history.go(-1)"><span>返回</span></a></div>
+		<div class="list_info clearfix">
+			
+		</div>	
+		<div class="tanceng_box">
+			<span class="gb_tang">x</span>
 			<input class="userid" name="userId" type="hidden" />
-			<div class="input-group">
-				<label for="userEmail">e-mail</label>
-				<div class="input userEmail"></div>
+			<div class="boxedit nameli_box">
+				
+				<label for="userFirstname" class="span_tip">First Name :</label>
+				<input type="text" id="" value="" class="textinpt userFirstname" placeholder="Please add" />
+				<label for="userLastname" class="span_tip">Last  Name :</label>
+				<input type="text" id="" value="" class="textinpt userLastname" placeholder="Please add" />
+				<input type="submit" id="" name="" value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
-			<div class="input-group">
-				<label for="userPassword">password</label>
-				<div class="input userPassword"></div>
+			<div class="boxedit mailli_box">
+				<label for="userEmail" class="span_tip">Change Mail :</label>
+				<input type="text" id="" value="" class="textinpt userEmail" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
-			<div class="input-group">
-				<label for="userTelephone">telphone</label>
-				<div class="input userTelephone"></div>
+			<div class="boxedit phoneli_box">
+				<label for="userTelephone" class="span_tip">Please add Telphone :</label>
+				<input type="text" id="" value="" class="textinpt userTelephone" placeholder="Please add" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
-			<div class="input-group">
-				<label for="userFirstname">firstName</label>
-				<div class="input userFirstname"></div>
+			<div class="boxedit passwordli_box">
+				<label for="userPassword" class="span_tip">Change Password :</label>
+				<input type="text" id="" value="" class="textinpt userPassword" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
-			<div class="input-group">
-				<label for="userLastname">lastname</label>
-				<div class="input userLastname"></div>
-			</div>
-			<div class="input-group">
-				<label for="userAddressCountry">country</label>
-				<div class="input userAddressCountry"></div>
-			</div>
-			<div class="input-group">
-				<label for="userAddressProvince">province</label>
-				<div class="input userAddressProvince"></div>
-			</div>
-			<div class="input-group">
-				<label for="userAddressCity">city</label>
-				<div class="input userAddressCity"></div>
-			</div>
-			<div class="input-group">
-				<label for="userAddressStreetaddress">details address</label>
-				<div class="input userAddressStreetaddress"></div>
-			</div>
-			<div class="input-group">
-				<label for="userAddressPostalcode">post code</label>
-				<div class="input userAddressPostalcode"></div>
-			</div>
-			<div class="input-group">
-				<label for="userPoint">user point</label>
-				<div class="input userPoint"></div>
+<!-- 			<div class="boxedit passwordli_box">
+				<label for="userPoint" class="span_tip">Please add UserPoint:</label>
+				<input type="text" id="" value="" class="textinpt userPoint" placeholder="Please add" />
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
+			</div> -->
+			<div class="boxedit Addressli_box">
+				<label for="address" class="span_tip">Please add Address :</label>
+				<div class="box_newcountry">
+					<div class="form-groupinfo form-groupcountry">
+						<label for="addressCountry" class="form-label required">Country</label>
+						<input type="text" id="" value="" class="textinpt addressCountry" id="country" placeholder="Please add" />
+					</div>
+					<!-- stateprovinceName -->
+					<div class="form-groupinfo form-group_select selectActive">
+						<label for="addressProvince" class="form-label required">State/Province</label>
+						<input type="text" id="" value="" class="textinpt addressProvince" id="province" placeholder="Please add" />
+					</div>
+					<!-- city -->
+					<div class="form-groupinfo form-group2">
+						<label for="addressCity" class="form-label required">City</label>
+						<input type="text" name="addressCity" class="textinpt form-control city userAddressCity" placeholder="Please add" />
+					</div>
+					<!-- Zip/Postal code -->
+					<div class="form-groupinfo">
+						<label for="addressPost" class="form-label required">Zip/Postal code</label>
+							<input type="text" name="addressPost" class="textinpt form-control code userAddressPostalcode" placeholder="Please add" />
+					</div>
+				</div>
+				<input type="submit" id="" name=""  value="Refer" class="sub_ipn" data-flag="0" />
 			</div>
 		</div>
-	</div>
-
+	 </div>
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 
 <script>
-	/* 初始化请求这个接口
- ${APP_PATH }/MlfrontUser/getLoginUserDetail
- 
- 
- 无参数，post请求
- 
-$('.btn.signout').on('click', function() {	
-	console.log('*******')
-	$.ajax({
-		url: "${APP_PATH }/MlfrontUser/exit",
-		type:'POST',
-		success:function(data) {
-			console.log(data);
-			var resData = data.extend;
-			
-			if (resData.exitInt === 0) {
-				alert(resData.resMsg)
-				window.location.href="${APP_PATH }/MlfrontUser/toLoginRegisterPage";
-			}
-		}
+	$(function(){
+		$(".gb_tang").click(function(){
+			$(".tanceng_box").hide()
+		});
+		$(".textinpt").focus(function(){
+			$(this).val("")
+		})
 	})
-})
-
-    private Integer userId;
-	private String userEmail;
-    private String userPassword;(明文展示就行)
-    private String userTelephone;
-    private String userAddressCountry;
-    private String userAddressProvince;
-    private String userAddressCity;
-    private String userAddressStreetaddress;
-    private String userAddressPostalcode;
-    private String userFirstname;
-    private String userLastname;
-    // private String userLastonlinetime;
-    private Integer userPoint;
-    // private String userCouponidstr; .split(","),显示成数量s
-    
-点击编辑，修改完走
-
-json格式，post请求
-
-${APP_PATH }/MlfrontUser/update 
-*/
-	// get user info
-	$.ajax({
-		url: "${APP_PATH }/MlfrontUser/getLoginUserDetail",
-		type: 'POST',
-		success: function (data) {
-			//console.log(data);
-			var resData = data.extend.mlfrontUserOne;
-			//console.table(resData)
-			tianchong(resData)
-		}
-	})
-
-	function tianchong(data) {
-		$(".userid").val(data.userId);
-		$(".input.userEmail").text(data.userEmail ? data.userEmail : 'Please add');
-		$(".input.userPassword").text(data.userPassword ? data.userPassword : 'Please add');
-		$(".input.userTelephone").text(data.userTelephone ? data.userTelephone : 'Please add');
-		$(".input.userAddressCountry").text(data.userAddressCountry ? data.userAddressCountry : 'Please add');
-		$(".input.userAddressProvince").text(data.userAddressProvince ? data.userAddressProvince : 'Please add');
-		$(".input.userAddressCity").text(data.userAddressCity ? data.userAddressCity : 'Please add');
-		$(".input.userAddressStreetaddress").text(data.userAddressStreetaddress ? data.userAddressStreetaddress : 'Please add');
-		$(".input.userAddressPostalcode").text(data.userAddressPostalcode ? data.userAddressPostalcode : 'Please add');
-		$(".input.userFirstname").text(data.userFirstname ? data.userFirstname : 'Please add');
-		$(".input.userLastname").text(data.userLastname ? data.userLastname : 'Please add');
-		$(".input.userPoint").text(data.userPoint ? data.userPoint : 'Please add');
-	}
-
-	var editSave = $('.edit-save');
-
-	editSave.on('click', function () {
-		var flag = parseInt($(this).data('flag'));
-		if (!flag) {
-			$(this).attr('data-flag', 1).text('save it');
-			$('.input').each(function (i, item) {
-				$(item).attr('contenteditable', true);
-			});
-			$('.input').eq(0).focus();
-		} else {
-			var reqData = {
-				userId: parseInt($(".userid").val()),
-				userEmail: $(".input.userEmail").text() === "Please add" ? null : $(".input.userEmail").text(),
-				userPassword: $(".input.userPassword").text() === "Please add" ? null : $(".input.userPassword").text(),
-				userTelephone: $(".input.userTelephone").text() === "Please add" ? null : $(".input.userTelephone").text(),
-				userAddressCountry: $(".input.userAddressCountry").text() === "Please add" ? null : $(".input.userAddressCountry")
-					.text(),
-				userAddressProvince: $(".input.userAddressProvince").text() === "Please add" ? null : $(
-					".input.userAddressProvince").text(),
-				userAddressCity: $(".input.userAddressCity").text() === "Please add" ? null : $(".input.userAddressCity").text(),
-				userAddressStreetaddress: $(".input.userAddressStreetaddress").text() === "Please add" ? null : $(
-					".input.userAddressStreetaddress").text(),
-				userAddressPostalcode: $(".input.userAddressPostalcode").text() === "Please add" ? null : $(
-					".input.userAddressPostalcode").text(),
-				userFirstname: $(".input.userFirstname").text() === "Please add" ? null : $(".input.userFirstname").text(),
-				userLastname: $(".input.userLastname").text() === "Please add" ? null : $(".input.userLastname").text(),
-				userPoint: $(".input.userPoint").text() === "Please add" ? null : parseInt($(".input.userPoint").text())
-			}
-			// console.table(reqData)
-			// save
-			$.ajax({
-				url: "${APP_PATH }/MlfrontUser/update",
-				type: 'POST',
-				data: JSON.stringify(reqData),
-				dataType: 'json',
-				contentType: 'application/json',
-				success: function (data) {
-					// console.log(data);
-					if (data.code === 100) {
-						// console.log(data.extend.resMsg);
-
-						$(this).attr('data-flag', 0).text('edit');
-						$('.input').each(function (i, item) {
-							$(item).removeAttr('contenteditable');
-						});
-					}
+	var tyu;
+	initialData()
+	function initialData() {
+		$.ajax({
+			url: "${APP_PATH }/MlfrontUser/getLoginUserDetail",
+			type: 'POST',
+			success: function (data) {
+				// console.log(data);
+				var resData = data.extend.mlfrontUserOne;
+				if(resData){
+					tianchong(list_info,resData);
 				}
-			})
-
-		}
-	})
-
-	$('.input').each(function (i, item) {
-		var flag = editSave.data('flag');
-		$(item).on('click', function () {
-			$(this).attr('contenteditable', true);
-			$(this).focus();
-			if (!flag) {
-				editSave.attr('data-flag', 1).text('save it');
 			}
 		})
-	});
+	}
+   var list_info=$(".list_info");
+	function tianchong(parent,data) {
+		  var html = '';
+		    html += '<ul class="clearfix">';
+			var Firstname=data.userFirstname;
+			var Lastname=data.userLastname;
+			var Telephone= data.userTelephone;
+			var AddressCity= data.userAddressCountry;
+			// var UserPoint= data.userPoint;
+			if(Firstname==null||Lastname==null){
+				html += '<li><span>Name</span><em>Please add</em></li>';
+			}else{
+				html += '<li><span>Name</span><em>'+data.userFirstname+' '+data.userLastname+'</em></li>';
+			}
+			html += '<li><span>E-mail</span><em>'+data.userEmail+'</em></li>';
+			if(Telephone==null){
+			html += '<li><span>Telephone</span><em>Please add</em></li>';	
+			}else{
+				html += '<li><span>Telphone</span><em>'+data.userTelephone+'</em></li>';
+			}
+			html += '<li><span>Password</span><em>'+data.userPassword+'</em></li>';
+			// html += '<li><span>UserPoint</span><em></em></li>';
+			if(AddressCity==null){
+				html += '<li><span>Address</span><em>Please add</em></li>';
+			}else{
+				html += '<li><span>Address</span><em>'+data.userAddressCountry+' '+data.userAddressProvince+'</em></li>';
+			}
+		  html +=  '</ul>';
+		$(".userid").val(data.userId);
+		$("input.userEmail").val(data.userEmail ? data.userEmail : 'Please add');
+		$("input.userPassword").val(data.userPassword ? data.userPassword : 'Please add');
+		$("input.userTelephone").val(data.userTelephone ? data.userTelephone : 'Please add');
+		$("input.addressCountry").val(data.userAddressCountry ? data.userAddressCountry : 'Please add');
+		$("input.addressProvince").val(data.userAddressProvince ? data.userAddressProvince : 'Please add');
+		$("input.userAddressCity").val(data.userAddressCity ? data.userAddressCity : 'Please add');
+		$("input.userAddressStreetaddress").val(data.userAddressStreetaddress ? data.userAddressStreetaddress : 'Please add');
+		$("input.userAddressPostalcode").val(data.userAddressPostalcode ? data.userAddressPostalcode : 'Please add');
+		$("input.userFirstname").val(data.userFirstname ? data.userFirstname : 'Please add');
+		$("input.userLastname").val(data.userLastname ? data.userLastname : 'Please add');
+		// $("input.userPoint").val(data.userPoint ? data.userPoint : '');
+		 parent.html(html);
+		 $(".list_info ul li").each(function(){
+			 // getProvinceData($('#country').val());
+			 $(this).on("click",function(){
+				$(".tanceng_box").show();
+				var index=$(this).index();
+				 $(".tanceng_box div.boxedit").hide();
+				$(".tanceng_box div.boxedit").eq(index) .show();
+			})
+		});
+	}
+	var editSave = $('.sub_ipn');
+	editSave.on('click', function () {
+		var reqData = {
+			userId: parseInt($(".userid").val()),
+			userEmail: $("input.userEmail").val() === "Please add" ? null : $("input.userEmail").val(),
+			userPassword: $("input.userPassword").val() === "Please add" ? null : $("input.userPassword").val(),
+			userTelephone: $("input.userTelephone").val() === "Please add" ? null : $("input.userTelephone").val(),
+			userAddressCountry: $("input.addressCountry").val() === "Please add" ? null : $("input.addressCountry").val(),
+			userAddressProvince: $("input.addressProvince").val() === "Please add" ? null : $("input.addressProvince").val(),
+			userAddressCity: $("input.userAddressCity").val() === "Please add" ? null : $(".userAddressCity").val(),
+			userAddressStreetaddress: $("input.userAddressStreetaddress").val() === "Please add" ? null : $(
+				"input.userAddressStreetaddress").val(),
+			userAddressPostalcode: $("input.userAddressPostalcode").val() === "Please add" ? null : $(
+				"input.userAddressPostalcode").val(),
+			userFirstname: $("input.userFirstname").val() === "Please add" ? null : $("input.userFirstname").val(),
+			userLastname: $("input.userLastname").val() === "Please add" ? null : $("input.userLastname").val(),
+			userPoint: $("input.userPoint").val() === "Please add" ? null : parseInt($("input.userPoint").val())
+		}
+		/*****/
+		// console.table("*****************reqData")
+		// console.table(reqData)
+		// console.table("*****************reqData")
+		// save
+		$.ajax({
+			url: "${APP_PATH }/MlfrontUser/update",
+			type: 'POST',
+			data: JSON.stringify(reqData),
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function (data) {
+				// console.log(data);
+				if (data.code === 100) {
+					console.log(data.extend.resMsg);
+					var timer = null;
+					timer = setInterval(function() {
+						window.location.reload()
+					}, 300);
+				}
+			}
+		})
+	
+	})
+	
 </script>
 
 

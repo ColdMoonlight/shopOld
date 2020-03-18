@@ -241,11 +241,11 @@ public class HighPayInfoController {
 	    cell = row.createCell(1);
 		cell.setCellValue("payInfo_id");
 	    cell = row.createCell(2);
-	    cell.setCellValue("payInfo_createTime");
-	    cell = row.createCell(3);
-	    cell.setCellValue("payInfo_plateNum");
-	    cell = row.createCell(4);
 	    cell.setCellValue("payInfo_status");
+	    cell = row.createCell(3);
+	    cell.setCellValue("payInfo_createTime");
+	    cell = row.createCell(4);
+	    cell.setCellValue("payInfo_plateNum");
 	    cell = row.createCell(5);
 	    cell.setCellValue("address_userFirstName");
 	    cell = row.createCell(6);
@@ -285,9 +285,9 @@ public class HighPayInfoController {
 	        row = sheet.createRow(i+1);
 	        row.createCell(0).setCellValue(i+1);
 	        row.createCell(1).setCellValue(downPayEcppDateOne.getPayinfoId());
-	        row.createCell(2).setCellValue(downPayEcppDateOne.getPayinfoCreatetime());
-	        row.createCell(3).setCellValue(downPayEcppDateOne.getPayinfoPlateNum());
-	        row.createCell(4).setCellValue(downPayEcppDateOne.getPayinfoStatus()+"");
+	        row.createCell(2).setCellValue(downPayEcppDateOne.getPayinfoStatus()+"");
+	        row.createCell(3).setCellValue(downPayEcppDateOne.getPayinfoCreatetime());
+	        row.createCell(4).setCellValue(downPayEcppDateOne.getPayinfoPlateNum());
 	        row.createCell(5).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressUserfirstname());
 	        row.createCell(6).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressUserlastname());
 	        row.createCell(7).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressEmail());
@@ -296,7 +296,7 @@ public class HighPayInfoController {
 	        row.createCell(10).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressCity());
 	        row.createCell(11).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressPost());
 	        row.createCell(12).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressCountryAll());
-	        row.createCell(13).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressCity());
+	        row.createCell(13).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressCountry());
 	        row.createCell(14).setCellValue(downPayEcppDateOne.getMlfrontAddress().getAddressTelephone());
 	        row.createCell(15).setCellValue(downPayEcppDateOne.getMlfrontOrderItem().getOrderitemPskuNamestr());
 	        row.createCell(16).setCellValue(downPayEcppDateOne.getMlbackProduct().getProductSeo());

@@ -423,6 +423,6 @@
   
   <!-- selectReviewListFrom使用中 -->
   <select id="selectReviewListFrom" parameterType="com.atguigu.bean.MlfrontReview" resultMap="BaseResultMap">
-  	select * from tb_mlfront_review where review_status = #{reviewStatus,jdbcType=INTEGER} and review_from = #{reviewFrom,jdbcType=INTEGER}
+  	select * from tb_mlfront_review where review_status = #{reviewStatus,jdbcType=INTEGER} and review_from = #{reviewFrom,jdbcType=INTEGER} order by review_createTime desc
   </select>
 </mapper>

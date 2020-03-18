@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.atguigu.bean.MlbackAbandonPurchase;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackCoupon;
+import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackShipEmail;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontCart;
@@ -32,9 +34,11 @@ import com.atguigu.bean.Msg;
 import com.atguigu.bean.PageTimeVo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.atguigu.service.MlbackAbandonPurchaseService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackCouponService;
+import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackShipEmailService;
 import com.atguigu.service.MlfrontAddressService;
 import com.atguigu.service.MlfrontCartItemService;
@@ -80,6 +84,12 @@ public class MlfrontOrderController {
 	
 	@Autowired
 	MlbackShipEmailService mlbackShipEmailService;
+	
+	@Autowired
+	MlbackAbandonPurchaseService mlbackAbandonPurchaseService;
+	
+	@Autowired
+	MlbackProductService mlbackProductService;
 	
 	/**
 	 * 1.0	onuse	20191225	检查
@@ -217,9 +227,6 @@ public class MlfrontOrderController {
 		}			
 	}
 	
-	
-	
-	
 	/**5.0	useOn	0505
 	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
 	 * @param MlfrontOrder
@@ -228,7 +235,7 @@ public class MlfrontOrderController {
 	@ResponseBody
 	public Msg orderToPayInfo(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder){
 		//0.0接受参数信息
-		System.out.println("mlfrontOrder:"+mlfrontOrder);
+		//System.out.println("mlfrontOrder:"+mlfrontOrder);
 		Integer originalOrderId = mlfrontOrder.getOrderId();
 		String filnanyNumber = mlfrontOrder.getOrderProNumStr();
 		Integer CouponId =mlfrontOrder.getOrderCouponId();
@@ -243,7 +250,7 @@ public class MlfrontOrderController {
 		MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
 		String orderitemidArri="";
 		for(int i=0;i<orderitemidArr.length;i++){
-			BigDecimal oneAllprice = new BigDecimal(0);
+			BigDecimal oneAllprice = new BigDecimal(0);//01初始化字段，用来存本sku的钱
 			System.out.println("orderitemidArr[i]:"+orderitemidArr[i]);
 			orderitemidArri = orderitemidArr[i].trim();
 			Integer orderItemId = Integer.parseInt(orderitemidArri);
@@ -260,13 +267,13 @@ public class MlfrontOrderController {
 			for(int j =0;j<PskuMoneystr.length;j++){
 				pskuTrimStr = PskuMoneystr[j].trim();
 				pskuMoneyOne = new BigDecimal(pskuTrimStr);
-				oneAllprice = oneAllprice.add(pskuMoneyOne);
+				oneAllprice = oneAllprice.add(pskuMoneyOne);//02计算本orderItem下的所有sku项的钱
 			}
-			oneAllprice=oneAllprice.add(ItemProductOriginalprice);
+			oneAllprice=oneAllprice.add(ItemProductOriginalprice);//03叠加本品基础价的钱
 			//计算这一项的价格，(基础价格+每个的sku价格的和)*折扣*数量,存入orderitemPskuReamoney字段中;
-			oneAllprice = oneAllprice.multiply(new BigDecimal(number));
-			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));
-			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));
+			oneAllprice = oneAllprice.multiply(new BigDecimal(number));//04乘本品的个数得到总价
+			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));//05乘本品的折扣
+			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));//06还原本品+sku集合的最终价
 			String str = df1.format(oneAllprice);
 			System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
 			System.out.println("存进去的OrderitemPskuReamoney:"+str); //13.15
@@ -344,7 +351,17 @@ public class MlfrontOrderController {
 		}else{
 			mlfrontPayInfoNew.setPayinfoPlatform("bank_Card");
 		}
-		mlfrontPayInfoNew.setPayinfoMoney(totalprice);
+
+		//6获取returnmoney
+		String orderAllMoney = GetOrderTopayinfoMoney(Orderitemidstr);
+		
+		String addressMoneyendStr = addressMoney+"";
+		
+		String amTotal = getamountTotal(orderAllMoney,CouponCodeMoneyStr,addressMoneyendStr);
+		
+		BigDecimal amTotalBig=new BigDecimal(amTotal);  
+		
+		mlfrontPayInfoNew.setPayinfoMoney(amTotalBig);//总钱数排除一分钱后的计算结果
 		mlfrontPayInfoNew.setPayinfoCreatetime(nowTime);
 		mlfrontPayInfoNew.setPayinfoMotifytime(nowTime);
 		mlfrontPayInfoService.insertSelective(mlfrontPayInfoNew);
@@ -359,10 +376,86 @@ public class MlfrontOrderController {
 		Integer orderIdFinally = (Integer) session.getAttribute("orderId");
 		session.setAttribute("orderId", orderIdFinally);
 		//4.0传入orderid,查询其中的orderItemID,找到cartID 找到cartid,移除购物车中的
-		Integer IsUpdate = updateCart(mlfrontOrder);
+		updateCart(mlfrontOrder);
 		//5.0发起支付
 		Integer isSuccess = 0;//返回0，跳支付成功页面;返回1，跳支付失败页面
 		return Msg.success().add("resMsg", "更新成功").add("isSuccess", isSuccess);
+	}
+
+	/**
+	 * 6.1计算折后的筹款价格
+	 * returnMoney
+	 * */
+	private String GetOrderTopayinfoMoney(String orderitemidstr) {
+		
+		String orderitemidArr[] = orderitemidstr.split(",");
+		MlfrontOrderItem mlfrontOrderItemMoneyReq = new MlfrontOrderItem();
+		MlfrontOrderItem mlfrontOrderItemMoneyRes = new MlfrontOrderItem();
+		List<MlfrontOrderItem> mlfrontOrderItemList = new ArrayList<MlfrontOrderItem>();
+		String orderitemidArriReturn="";
+		for(int i=0;i<orderitemidArr.length;i++){
+			//获取便利orderItemId
+			orderitemidArriReturn = orderitemidArr[i].trim();
+			Integer orderItemId = Integer.parseInt(orderitemidArriReturn);
+			mlfrontOrderItemMoneyReq.setOrderitemId(orderItemId);
+			List<MlfrontOrderItem> mlfrontOrderItemMoneyOneList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemMoneyReq);
+			mlfrontOrderItemMoneyRes = mlfrontOrderItemMoneyOneList.get(0);
+			mlfrontOrderItemList.add(mlfrontOrderItemMoneyRes);
+		}
+		String subMoney = "";
+		if(mlfrontOrderItemList.size()>1){
+  			subMoney = getItemListsMoney(mlfrontOrderItemList);
+  		}else{
+  			MlfrontOrderItem mlfrontOrderItem = mlfrontOrderItemList.get(0);
+
+  			Integer skuNum=mlfrontOrderItem.getOrderitemPskuNumber();
+  			String money = mlfrontOrderItem.getOrderitemPskuReamoney();
+  			String oneMoney = getOnemoney(skuNum,money);
+  			money = getOneAllMoney(skuNum,oneMoney);
+  			subMoney = money;
+  		}
+		//此时subMoney为orderItemList的全部价格
+		return subMoney;
+	}
+
+	/**
+	 * 上面方法的子方法
+	 * 获取getItemListsMoney的全部价格
+	 * */
+	private String getItemListsMoney(List<MlfrontOrderItem> mlfrontOrderItemList) {
+		Double MoneyDuball=new Double("0.00");
+		for(MlfrontOrderItem mlfrontOrderItem:mlfrontOrderItemList){
+			Integer skuNum=mlfrontOrderItem.getOrderitemPskuNumber();
+			String money = mlfrontOrderItem.getOrderitemPskuReamoney();
+			String oneMoney =getOnemoney(skuNum,money);
+			money = getOneAllMoney(skuNum,oneMoney);
+			Double MoneyDub=new Double(money);
+			MoneyDuball=MoneyDuball+ MoneyDub;
+        }
+		String OneOrderAllMoney = String.format("%.2f", MoneyDuball);
+		return OneOrderAllMoney;
+	}
+
+	/**
+	 * 上面方法的子方法
+	 * 获取单条OrderItemMoney*num后的总价格
+	 * */
+	private String getOneAllMoney(Integer skuNum, String oneMoney) {
+		Double oneMoneyDou = new Double(oneMoney);
+		Double OneAllM = oneMoneyDou*skuNum;
+		String OneAllMoney = String.format("%.2f", OneAllM);
+		return OneAllMoney;
+	}
+
+	/**
+	 * 上面方法的子方法
+	 * 获取单条OrderItemMoney的总价格
+	 * */
+	private String getOnemoney(Integer skuNum, String money) {
+		Double moneyAll = new Double(money);
+		Double oneM = moneyAll/skuNum;
+		String Onemoney = String.format("%.2f", oneM);
+		return Onemoney;
 	}
 
 	/**
@@ -486,6 +579,25 @@ public class MlfrontOrderController {
 		mlfrontCart.setCartitemIdstr(filallyCartitemStr);
 		mlfrontCartService.updateByPrimaryKeySelective(mlfrontCart);
 		return null;
+	}
+	
+	/**
+	 * 3.4处理一分钱问题
+	 * updateCart
+	 * */
+	private String getamountTotal(String subMoney, String shopdiscount, String addressMoney) {
+		
+		Double subMoneyDou = Double.parseDouble(subMoney);
+		
+		Double shopdiscountDou = Double.parseDouble(shopdiscount);
+		
+		Double addressMoneyDou = Double.parseDouble(addressMoney);
+		
+		Double amountTotalDou = subMoneyDou - shopdiscountDou + addressMoneyDou;
+		
+		String amountTotalDouStr = (String.format("%.2f", amountTotalDou));
+		
+		return amountTotalDouStr;
 	}
 	
 	/**
@@ -632,112 +744,6 @@ public class MlfrontOrderController {
 					.add("addressInfo", mlfrontAddressRes).add("areafreightMoney", areafreightMoney);
 	}
 	
-	
-//	/**
-//	 * 7.0	UseNow	0505
-//	 * mToMyOrderPage	个人详情，查看历史订单，全部订单MlfrontOrder列表页面
-//	 * @param jsp
-//	 * @return 
-//	 * */
-//	@RequestMapping(value="/mToMyOrderPage",method=RequestMethod.POST)
-//	@ResponseBody
-//	public String mToMyOrderPage(HttpSession session) {
-//
-//		return "mToMyOrderPage";
-//	}
-	
-	
-	
-//	/**
-//	 * 8.0	UseNow	0505
-//	 * to	全部订单
-//	 * @param jsp
-//	 * @return 
-//	 * */
-//	@RequestMapping(value="/getmOrderByUidPage",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getmOrderByUidPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-//
-//		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
-//		Integer Uid = loginUser.getUserId();
-//		MlfrontOrder mlfrontOrder = new MlfrontOrder();
-//		mlfrontOrder.setOrderUid(Uid);
-//		int PagNum = 20;//0未支付 //1支付成功 //2支付失败 //3审单完毕 //4发货完毕//5已退款
-//		PageHelper.startPage(pn, PagNum);
-//		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidOnly(mlfrontOrder);
-//		PageInfo page = new PageInfo(mlfrontOrderList, PagNum);
-//		mlfrontOrderList = page.getList();
-//		//2遍历mlfrontOrderList，3读取每个的orderItemIdStr,4切割，5再遍历产寻单条的获取orderItemId对象
-//		String orderitemidstr="";
-//		MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
-//		MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
-//		List<MlfrontOrderItem> mlfrontOrderItemList = new ArrayList<MlfrontOrderItem>();
-//		List<MlfrontOrderItem> mlfrontOrderItemReturn = new ArrayList<MlfrontOrderItem>();
-//		List<Integer> sizeList = new ArrayList<Integer>();
-//		for(MlfrontOrder mlfrontOrderOne:mlfrontOrderList){
-//			orderitemidstr = mlfrontOrderOne.getOrderOrderitemidstr();
-//			String orderitemidArr[] = orderitemidstr.split(",");
-//			Integer size = orderitemidArr.length;
-//			sizeList.add(size);
-//			for(int i=0;i<orderitemidArr.length;i++){
-//				String orderitemid = orderitemidArr[i];
-//				Integer orderitemidInt = Integer.valueOf(orderitemid);
-//				mlfrontOrderItemReq.setOrderitemId(orderitemidInt); 
-//				mlfrontOrderItemList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemReq);
-//				mlfrontOrderItemRes = mlfrontOrderItemList.get(0);
-//				mlfrontOrderItemReturn.add(mlfrontOrderItemRes);
-//			}
-//		}
-//		return Msg.success().add("pageInfo", page).add("sizeList", sizeList).add("mlfrontOrderItemReturn", mlfrontOrderItemReturn);
-////		}
-//	}
-	
-	
-//	/**
-//	 * 9.0	UseNow	0505
-//	 * to	全部订单中————已付款
-//	 * @param jsp
-//	 * @return 
-//	 * */
-//	@RequestMapping(value="/getmMlfrontOrderPayEndByPage",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getmMlfrontOrderPayEndByPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-//
-//		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
-//		Integer Uid = loginUser.getUserId();
-//		MlfrontOrder mlfrontOrder = new MlfrontOrder();
-//		mlfrontOrder.setOrderUid(Uid);
-//		mlfrontOrder.setOrderStatus(1);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
-//		int PagNum = 20;
-//		PageHelper.startPage(pn, PagNum);
-//		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidAndStatus(mlfrontOrder);
-//		PageInfo page = new PageInfo(mlfrontOrderList, PagNum);
-//		return Msg.success().add("pageInfo", page);
-//	}
-	
-//	/**
-//	 * 10.0	UseNow	0505
-//	 * to	全部订单中————待付款
-//	 * @param jsp
-//	 * @return 
-//	 * */
-//	@RequestMapping(value="/getmMlfrontOrderPayBeginByPage",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getmMlfrontOrderPayBeginByPage(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
-//
-//		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
-//		Integer Uid = loginUser.getUserId();
-//		MlfrontOrder mlfrontOrder = new MlfrontOrder();
-//		mlfrontOrder.setOrderUid(Uid);
-//		mlfrontOrder.setOrderStatus(0);
-//		int PagNum = 20;
-//		PageHelper.startPage(pn, PagNum);
-//		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderByUidAndStatus(mlfrontOrder);
-//		PageInfo page = new PageInfo(mlfrontOrderList, PagNum);
-//		return Msg.success().add("pageInfo", page);
-////		}
-//	}
-	
 	/**
 	 * 11.0 onuse  20200101  检查
 	 * to	填写物流单号-更改为发货状态
@@ -775,7 +781,7 @@ public class MlfrontOrderController {
 		
 		//10.1向afterShip官方发送物流添加按钮
 //		try {
-//			
+//			//向物流中插入物流单号，订单号，Item,价格，
 //			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsnumber,payinfoPlateNum);
 //			
 //			System.out.println(resultStr);
@@ -990,6 +996,157 @@ public class MlfrontOrderController {
 		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
 		mlfrontPayInfoReq.setPayinfoId(payInfoId);
 		mlfrontPayInfoReq.setPayinfoStatus(4);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoReq);
+
+		return Msg.success().add("Msg", "更新成功");
+	}
+	
+	/**
+	 * 13.0	UseNow	200309
+	 * to	订单-发送弃购按钮
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/updateOrderAbandoningPurchase",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderAbandoningPurchase(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
+		//接手参数
+		Integer orderId = mlfrontOrder.getOrderId();
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();//此处使用OrderCouponId字段暂时存储的payInfoId
+		String userEmail = mlfrontOrder.getOrderBuyMess();
+		String orderitemidstr = mlfrontOrder.getOrderOrderitemidstr();
+		//更新order为退款状态
+		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		mlfrontOrderReq.setOrderId(orderId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontOrderReq.setOrderStatus(6);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款//6发送弃购//7重复单关闭
+		mlfrontOrderReq.setOrderSendtime(nowTime);
+		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		//更新PayInfo为弃购状态
+		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+		mlfrontPayInfoReq.setPayinfoId(payInfoId);
+		mlfrontPayInfoReq.setPayinfoStatus(5);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款//5发送弃购//6重复单关闭
+		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoReq);
+		
+		//获取订单信息，OrderItemList
+		
+		MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
+		
+		String[] orderitemidstrArr = orderitemidstr.split(",");
+		
+		List<MlfrontOrderItem> mlfrontOrderItemDetailList = new ArrayList<MlfrontOrderItem>();
+		
+		MlbackProduct mlbackProductReq = new MlbackProduct();
+		
+		List<MlbackProduct> mlbackProductResList = new ArrayList<MlbackProduct>();
+		
+		MlbackProduct mlbackProductRes = new MlbackProduct();
+		
+		List<MlbackProduct> mlbackProductDetailList = new ArrayList<MlbackProduct>();
+		
+		for(int i=0;i<orderitemidstrArr.length;i++){
+			
+			String orderitemIdStr = orderitemidstrArr[i];
+			Integer orderitemIdInt = Integer.parseInt(orderitemIdStr);
+			mlfrontOrderItemReq.setOrderitemId(orderitemIdInt);
+			List<MlfrontOrderItem>  mlfrontOrderItemList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemReq);
+			MlfrontOrderItem mlfrontOrderItemOne = mlfrontOrderItemList.get(0);
+			mlfrontOrderItemDetailList.add(mlfrontOrderItemOne);
+			
+			Integer Pid = mlfrontOrderItemOne.getOrderitemPid();
+			mlbackProductReq.setProductId(Pid);
+			mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
+			mlbackProductRes = mlbackProductResList.get(0);
+			
+			mlbackProductDetailList.add(mlbackProductRes);
+		}
+		
+		//查回弃购客服问话
+		MlbackAbandonPurchase mlbackAbandonPurchaseReq = new MlbackAbandonPurchase();
+		mlbackAbandonPurchaseReq.setAbandonpurchaseStatus(1);//生效中
+		List<MlbackAbandonPurchase> mlbackAbandonPurchaseList = mlbackAbandonPurchaseService.selectMlbackAbandonPurchaseByStatus(mlbackAbandonPurchaseReq);
+		MlbackAbandonPurchase mlbackAbandonPurchaseOne = new MlbackAbandonPurchase();
+		if(mlbackAbandonPurchaseList.size()>0){
+			
+			mlbackAbandonPurchaseOne = mlbackAbandonPurchaseList.get(0);
+		}else{
+			mlbackAbandonPurchaseOne.setAbandonpurchaseActivedetail("null,null");
+			mlbackAbandonPurchaseOne.setAbandonpurchaseCoupondetail("null,null");
+		}
+		
+		//11.1
+		String toCustomerAbandoningPurchaseStr = getToCustomerAbandoningPurchaseEmail(mlfrontOrderItemDetailList,mlbackAbandonPurchaseOne,mlbackProductDetailList);
+		try {
+			//提醒客户准备发货
+			String getToEmail = userEmail;
+			EmailUtilshtml.readyEmailAbandoningPurchaseSuccess(getToEmail, toCustomerAbandoningPurchaseStr);
+			EmailUtilshtmlCustomer.readyEmailAbandoningPurchaseCustomer(getToEmail, toCustomerAbandoningPurchaseStr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Msg.success().add("Msg", "更新成功");
+	}
+	
+	private String getToCustomerAbandoningPurchaseEmail(List<MlfrontOrderItem> mlfrontOrderItemDetailList,MlbackAbandonPurchase mlbackAbandonPurchase,List<MlbackProduct> mlbackProductDetailList) {
+		
+		
+		String activeStr = mlbackAbandonPurchase.getAbandonpurchaseActivedetail();
+		String couponStr = mlbackAbandonPurchase.getAbandonpurchaseCoupondetail();
+		
+		String Message ="";
+		Message=Message+"Hi gorgeous girl"+"<br>";
+		Message=Message+"This is Megalook Hair.<br>";
+		Message=Message+"We have noticed you have placed an order before but you gave it up.  Is there anything i can help you?<br><br>";
+		Message=Message+activeStr+"."+couponStr+".<br><br>";
+		
+		String proName = "";
+		String proSeoName = "";
+		
+		for(int i=0;i<mlfrontOrderItemDetailList.size();i++){
+			proName = mlbackProductDetailList.get(i).getProductName();
+			Message=Message+""+proName+"<br>";
+			
+			proSeoName = mlbackProductDetailList.get(i).getProductSeo();
+			
+			Message=Message+"https://megalook.com/"+proSeoName+".html"+"<br><br>";
+		}
+		
+		Message=Message+"We'll be there if you need help<br>";
+		Message=Message+"Best Regards,<br>";
+		Message=Message+"-----------------------------------<br>";
+		Message=Message+"Megalook hair <br>";
+		Message=Message+"Email:service@megalook.com <br>";
+		Message=Message+"Whatsapp:+86 18903740682 <br>";
+		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+		return Message;
+	}
+
+
+	/**
+	 * 14.0	UseNow	200309
+	 * to	订单-退款
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping(value="/updateOrderClose",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg updateOrderClose(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrder mlfrontOrder) {
+		//接手参数
+		Integer orderId = mlfrontOrder.getOrderId();
+		Integer payInfoId = mlfrontOrder.getOrderCouponId();//此处使用OrderCouponId字段暂时存储的payInfoId
+		//更新order为退款状态
+		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
+		mlfrontOrderReq.setOrderId(orderId);
+		String nowTime = DateUtil.strTime14s();
+		mlfrontOrderReq.setOrderStatus(7);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款//6发送弃购//7重复单关闭
+		mlfrontOrderReq.setOrderSendtime(nowTime);
+		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
+		//更新PayInfo为重复单关闭状态
+		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+		mlfrontPayInfoReq.setPayinfoId(payInfoId);
+		mlfrontPayInfoReq.setPayinfoStatus(6);//0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款//5发送弃购//6重复单关闭
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoReq);
 
 		return Msg.success().add("Msg", "更新成功");

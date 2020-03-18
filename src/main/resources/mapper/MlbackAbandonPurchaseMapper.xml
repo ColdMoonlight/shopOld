@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dao.MlbackAbandonPurchaseMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.bean.MlbackAbandonPurchase">
+    <id column="abandonPurchase_id" jdbcType="INTEGER" property="abandonpurchaseId" />
+    <result column="abandonPurchase_activeDetail" jdbcType="VARCHAR" property="abandonpurchaseActivedetail" />
+    <result column="abandonPurchase_couponDetail" jdbcType="VARCHAR" property="abandonpurchaseCoupondetail" />
+    <result column="abandonPurchase_status" jdbcType="INTEGER" property="abandonpurchaseStatus" />
+    <result column="abandonPurchase_createTime" jdbcType="VARCHAR" property="abandonpurchaseCreatetime" />
+    <result column="abandonPurchase_motifyTime" jdbcType="VARCHAR" property="abandonpurchaseMotifytime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    abandonPurchase_id, abandonPurchase_activeDetail, abandonPurchase_couponDetail, abandonPurchase_status, 
+    abandonPurchase_createTime, abandonPurchase_motifyTime
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.bean.MlbackAbandonPurchaseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_mlblack_abandonpurchase
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_mlblack_abandonpurchase
+    where abandonPurchase_id = #{abandonpurchaseId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByExample" parameterType="com.atguigu.bean.MlbackAbandonPurchaseExample">
+    delete from tb_mlblack_abandonpurchase
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.bean.MlbackAbandonPurchase">
+    insert into tb_mlblack_abandonpurchase (abandonPurchase_id, abandonPurchase_activeDetail, 
+      abandonPurchase_couponDetail, abandonPurchase_status, 
+      abandonPurchase_createTime, abandonPurchase_motifyTime
+      )
+    values (#{abandonpurchaseId,jdbcType=INTEGER}, #{abandonpurchaseActivedetail,jdbcType=VARCHAR}, 
+      #{abandonpurchaseCoupondetail,jdbcType=VARCHAR}, #{abandonpurchaseStatus,jdbcType=INTEGER}, 
+      #{abandonpurchaseCreatetime,jdbcType=VARCHAR}, #{abandonpurchaseMotifytime,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <select id="countByExample" parameterType="com.atguigu.bean.MlbackAbandonPurchaseExample" resultType="java.lang.Long">
+    select count(*) from tb_mlblack_abandonpurchase
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_mlblack_abandonpurchase
+    <set>
+      <if test="record.abandonpurchaseId != null">
+        abandonPurchase_id = #{record.abandonpurchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.abandonpurchaseActivedetail != null">
+        abandonPurchase_activeDetail = #{record.abandonpurchaseActivedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abandonpurchaseCoupondetail != null">
+        abandonPurchase_couponDetail = #{record.abandonpurchaseCoupondetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abandonpurchaseStatus != null">
+        abandonPurchase_status = #{record.abandonpurchaseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.abandonpurchaseCreatetime != null">
+        abandonPurchase_createTime = #{record.abandonpurchaseCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.abandonpurchaseMotifytime != null">
+        abandonPurchase_motifyTime = #{record.abandonpurchaseMotifytime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_mlblack_abandonpurchase
+    set abandonPurchase_id = #{record.abandonpurchaseId,jdbcType=INTEGER},
+      abandonPurchase_activeDetail = #{record.abandonpurchaseActivedetail,jdbcType=VARCHAR},
+      abandonPurchase_couponDetail = #{record.abandonpurchaseCoupondetail,jdbcType=VARCHAR},
+      abandonPurchase_status = #{record.abandonpurchaseStatus,jdbcType=INTEGER},
+      abandonPurchase_createTime = #{record.abandonpurchaseCreatetime,jdbcType=VARCHAR},
+      abandonPurchase_motifyTime = #{record.abandonpurchaseMotifytime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.bean.MlbackAbandonPurchase">
+    update tb_mlblack_abandonpurchase
+    set abandonPurchase_activeDetail = #{abandonpurchaseActivedetail,jdbcType=VARCHAR},
+      abandonPurchase_couponDetail = #{abandonpurchaseCoupondetail,jdbcType=VARCHAR},
+      abandonPurchase_status = #{abandonpurchaseStatus,jdbcType=INTEGER},
+      abandonPurchase_createTime = #{abandonpurchaseCreatetime,jdbcType=VARCHAR},
+      abandonPurchase_motifyTime = #{abandonpurchaseMotifytime,jdbcType=VARCHAR}
+    where abandonPurchase_id = #{abandonpurchaseId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- insertSelective -->
+  <insert id="insertSelective" parameterType="com.atguigu.bean.MlbackAbandonPurchase">
+    insert into tb_mlblack_abandonpurchase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="abandonpurchaseId != null">
+        abandonPurchase_id,
+      </if>
+      <if test="abandonpurchaseActivedetail != null">
+        abandonPurchase_activeDetail,
+      </if>
+      <if test="abandonpurchaseCoupondetail != null">
+        abandonPurchase_couponDetail,
+      </if>
+      <if test="abandonpurchaseStatus != null">
+        abandonPurchase_status,
+      </if>
+      <if test="abandonpurchaseCreatetime != null">
+        abandonPurchase_createTime,
+      </if>
+      <if test="abandonpurchaseMotifytime != null">
+        abandonPurchase_motifyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="abandonpurchaseId != null">
+        #{abandonpurchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="abandonpurchaseActivedetail != null">
+        #{abandonpurchaseActivedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="abandonpurchaseCoupondetail != null">
+        #{abandonpurchaseCoupondetail,jdbcType=VARCHAR},
+      </if>
+      <if test="abandonpurchaseStatus != null">
+        #{abandonpurchaseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="abandonpurchaseCreatetime != null">
+        #{abandonpurchaseCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="abandonpurchaseMotifytime != null">
+        #{abandonpurchaseMotifytime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!-- deleteByPrimaryKey -->
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_mlblack_abandonpurchase
+    where abandonPurchase_id = #{abandonpurchaseId,jdbcType=INTEGER}
+  </delete>
+  <!-- updateByPrimaryKeySelective -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.bean.MlbackAbandonPurchase">
+    update tb_mlblack_abandonpurchase
+    <set>
+      <if test="abandonpurchaseActivedetail != null">
+        abandonPurchase_activeDetail = #{abandonpurchaseActivedetail,jdbcType=VARCHAR},
+      </if>
+      <if test="abandonpurchaseCoupondetail != null">
+        abandonPurchase_couponDetail = #{abandonpurchaseCoupondetail,jdbcType=VARCHAR},
+      </if>
+      <if test="abandonpurchaseStatus != null">
+        abandonPurchase_status = #{abandonpurchaseStatus,jdbcType=INTEGER},
+      </if>
+      <if test="abandonpurchaseCreatetime != null">
+        abandonPurchase_createTime = #{abandonpurchaseCreatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="abandonpurchaseMotifytime != null">
+        abandonPurchase_motifyTime = #{abandonpurchaseMotifytime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where abandonPurchase_id = #{abandonpurchaseId,jdbcType=INTEGER}
+  </update>
+  <!-- selectMlbackAbandonPurchaseById -->
+  <select id="selectMlbackAbandonPurchaseById" parameterType="com.atguigu.bean.MlbackAbandonPurchase"  resultMap="BaseResultMap">
+    select *
+    from tb_mlblack_abandonpurchase
+    where abandonPurchase_id = #{abandonpurchaseId,jdbcType=INTEGER}
+  </select>
+  
+  <!-- selectMlbackAbandonPurchaseGetAll -->
+  <select id="selectMlbackAbandonPurchaseGetAll" parameterType="com.atguigu.bean.MlbackAbandonPurchase"  resultMap="BaseResultMap">
+    select *
+    from tb_mlblack_abandonpurchase order by abandonPurchase_id desc
+  </select>
+  
+  
+  <!-- selectMlbackAbandonPurchaseByStatus -->
+  <select id="selectMlbackAbandonPurchaseByStatus" parameterType="com.atguigu.bean.MlbackAbandonPurchase"  resultMap="BaseResultMap">
+    select *
+    from tb_mlblack_abandonpurchase where abandonPurchase_status = #{abandonpurchaseStatus,jdbcType=INTEGER}
+  </select>
+  
+</mapper>

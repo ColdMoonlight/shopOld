@@ -116,23 +116,22 @@
 				// console.log(slideIfproORcateORpage);
 				if(slideIfinto_click==0){
 					html += '<div class="swiper-slide">' +
-						  '<a href="javascript:;" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+						  '<a href="javascript:;"><img src="'+ data[i].slidePcimgurl +'"/></a>' +
 						'</div>';
 				}else{
 					if(slideIfproORcateORpage==0){
 						html += '<div class="swiper-slide">' +
-								  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+								  '<a href="${APP_PATH}/' + data[i].slideSeoname + '.html"><img src="'+ data[i].slidePcimgurl +'"/></a>' +
 							'</div>';
 					}else if(slideIfproORcateORpage==1){
 						html += '<div class="swiper-slide">' +
-								  '<a href="${APP_PATH}/search/' + data[i].slideCateSeoname + '.html" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+								  '<a href="${APP_PATH}/search/' + data[i].slideCateSeoname + '.html"><img src="'+ data[i].slidePcimgurl +'"/></a>' +
 							'</div>';
 					}else if(slideIfproORcateORpage==2){
 						html += '<div class="swiper-slide">' +
-								  '<a href="${APP_PATH}/' + data[i].slidePageSeoname + '.html" style="background:url('+ data[i].slidePcimgurl +') no-repeat center">' +'</a>' +
+								  '<a href="${APP_PATH}/' + data[i].slidePageSeoname + '.html"><img src="'+ data[i].slidePcimgurl +'"/></a>' +
 							'</div>';
 					}
-					
 				}
 			}
 			parent.html(html);
@@ -802,7 +801,7 @@
         		+ '<div class="lottery-result-title"><span>Congratulations!</span><span>You got a</span></div>'
         		+ '<div class="lottery-card">'
         		+ '<div class ="card-item card-price"><span>';
-        	if (lotteryData.couponType) {
+        	if (parseInt(lotteryData.couponType)) {
         		lotteryResultHtml += parseInt(lotteryData.couponPriceOff) + '%';
         	} else {
         		lotteryResultHtml += '$' + lotteryData.couponPrice;
@@ -941,8 +940,6 @@
 	                    clearTimeout(timer);
 	                }, 300);
 	            }
-			} else {
-				renderLotterySuccess();
 			}
 	    });
   	</script>
