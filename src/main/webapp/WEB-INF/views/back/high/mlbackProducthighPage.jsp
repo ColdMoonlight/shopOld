@@ -156,7 +156,7 @@
 		        type: "POST",
 				success: function (result) {
 					 var task = result.extend.pageInfo.list;
-					console.log(result);
+					// console.log(result);
 					//1、解析并显示员工数据
 					if(task.length==0){
 					  // alert("没有查到")
@@ -375,7 +375,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('操作成功！');
-						window.location.href = "${APP_PATH}/MlbackProduct/toMlbackProductPage";
+						window.location.href = "${APP_PATH}/MlbackProduct/toMlbackProductSearchPage";
 					}
 				}
 			});
@@ -394,7 +394,8 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('删除成功！');
-						to_page(1);
+						window.location.href = "${APP_PATH}/MlbackProduct/toMlbackProductSearchPage";
+						
 					}
 				}
 			});
