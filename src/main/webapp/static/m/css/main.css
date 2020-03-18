@@ -899,11 +899,11 @@ a:focus {
   width: 100%;
 }
 
-.product__details-banner .product-details .swiper-wrapper {
+.product__details-banner .swiper-wrapper {
   min-height: 375px;	
 }
 
-.hot_box_product_cont swiper-container-initialized .product-details .swiper-wrapper {
+.hot_box_product_cont .swiper-container-initialized .swiper-wrapper {
   min-height: 260px;	
 }
 
