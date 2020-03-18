@@ -161,10 +161,11 @@
 									<!-- <iclass="icon right"></i> -->
 								</div>
 								<div class="sale_copen">
-									<p> Megalook Hair Spring Clearance Sale! You Buy, You Earn! </p>
+									<p> Bloom Your Max Beauty With Megalook Hair Buy More Save More  </p>
 									<ul>
-										<!-- <li>Extra<span>12%</span> off No Limit with code: <b>VA12</b></li> -->
-										<li>Extra<span>15%</span> off upon order $99 with code: <b>MS15</b></li>
+										<li>OVER $99 OFF<span>$10</span>with code: <b>MB10</b></li>
+										<li>OVER $180 OFF<span>$20</span>with code: <b>MB20</b></li>
+										<li>OVER $299 OFF<span>$40</span>with code: <b>MB40</b></li>
 									</ul>
 								</div>
 								<div class="group-details coupons"></div>
