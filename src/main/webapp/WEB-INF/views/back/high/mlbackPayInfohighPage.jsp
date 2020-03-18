@@ -33,7 +33,7 @@
 					<div class="down_box" style="padding: 20px 20px 0;">
 						<button type="button" id="downPayinfoDate">下载查账数据</button>
 						<button type="button" id="downEcppDate">下载ecpp数据</button>
-						<p style="color: red;">(只能下载5天之内的数据)</p>
+						<p style="color: red;">(只能下载3天之内的数据)</p>
 					</div>
 					<div class="table-box">
 					    <div class="choose_screen">
