@@ -729,7 +729,7 @@ public class PaypalController {
 		toPayDesc+=toPayCity+",";
 		toPayDesc+=toPayDetail+",";
 		toPayDesc+=toPayUserfirstname+",";
-		toPayDesc+=toPayUserlastname+",opstr";
+		toPayDesc+=toPayUserlastname+",VIP";
 		toPayDesc+=payinfoIdStr;
 //		toPayDesc+=toPayUserlastname;
 		toPaypalInfo.setMoneyNum(totalprice);
