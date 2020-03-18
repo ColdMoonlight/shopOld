@@ -995,7 +995,7 @@ margin: 10px 0;
 } */
 .cart-item>input.active:checked::after,
 .checkbox.active:checked::after {
-  content: '鉁�';
+  content: '✓';
   position: absolute;
   top: 0;
   left: 0;
