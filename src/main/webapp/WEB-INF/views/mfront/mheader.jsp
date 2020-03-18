@@ -70,7 +70,7 @@
     <!-- <div class="fixed_small"><a href="javascript:;"></a></div> -->
 	<div id="addindex">
 	    <p><span>x</span></p>
-	    <img src="" data-src="${APP_PATH }/static/m/img/index/add.gif" /></a>	
+	    <img src="${APP_PATH }/static/m/img/index/add.gif" /></a>	
 	</div>
   <div class="header bd-b">
 	  <div class="img_show">

@@ -494,12 +494,6 @@
 			loadAdUrl = "${APP_PATH }/static/m/img/loading/load-ad.gif",
 			loadCouponUrl = "${APP_PATH }/static/m/img/loading/load-coupon.gif",
 			loadHotUrl = "${APP_PATH }/static/m/img/loading/load-hot.gif";
-		// apple share guide
-		new lazyload($('#addindex').find('img'), {
-			root: null,
-			rootMargin: "10px",
-			threshold: 0			
-		})
 		/* ban_silder */
 		$.ajax({
 			url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
