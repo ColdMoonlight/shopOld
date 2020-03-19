@@ -8,10 +8,10 @@
 input{-webkit-appearance: none;}
 textarea{-webkit-appearance: none;}
 /* select{-webkit-appearance:none} */
-/* @font-face {
-    font-family: Futura;
-    src: url(../../font/Futura-LT-Book.ttf);
-} */
+@font-face {
+    font-family: Calibri;
+    src: url(../../font/Calibri.woff);
+}
 
 
 html {
@@ -1060,6 +1060,10 @@ a:focus {
 .main.article {
   padding: 20px;
   background-color: #fff;
+  font-family: Calibri !important;
+  letter-spacing: 0;
+  line-height: 1.25em;
+  color: #000;
 }
 
 .article-title {
