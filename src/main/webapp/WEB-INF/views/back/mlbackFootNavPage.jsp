@@ -300,8 +300,7 @@
 						// codemirror options
 						mode: 'text/html',
 						htmlMode: true,
-						lineNumbers: true,
-						theme: 'monokai'
+						lineNumbers: true
 					}
 				});
 				if (id) {

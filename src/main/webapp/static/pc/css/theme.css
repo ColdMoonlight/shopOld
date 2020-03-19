@@ -25449,7 +25449,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: color 0.2s linear; }
     h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
       color: #2879fe; }
-
+/* 
 h1:not(.tt-title-subpages):not([class^="tt-title"]):not([class^="tt-collapse"]):not([class^="tt-aside"]) {
   font-size: 46px;
   line-height: 60px;
@@ -25546,7 +25546,7 @@ h6:not([class^="tt-title"]):not([class^="tt-collapse"]):not([class^="tt-aside"])
     h6:not([class^="tt-title"]):not([class^="tt-collapse"]):not([class^="tt-aside"]) {
       font-size: 16px;
       line-height: 26px;
-      padding-bottom: 6px; } }
+      padding-bottom: 6px; } } */
 
 .tt-title-subpages:not(.noborder) {
   border-bottom: 1px solid #e9e7e7;
