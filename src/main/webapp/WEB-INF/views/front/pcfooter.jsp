@@ -16,15 +16,15 @@
 		<div class="container">		
 			<div class="row">
 				<div class="tt-footer-logo col-lg-3 col-md-12">
-					<img src="${APP_PATH }/static/pc/img/dblogo.png" alt="" style="width:150px">
+					<img src="${APP_PATH }/static/pc/img/dblogo.png" alt="" title="megalook" style="width:150px">
 					<div style="margin-top:6px;">Our Hair Your Glory</div>
 					<div class="follow-us">
 						<ul class="follow-us-list">
-							<li class="follow-icon facebook" title="facebook"><a href="https://www.facebook.com/MegalookHairCompany/"></a></li>
-							<li class="follow-icon instagram" title="instagram"><a href="https://www.instagram.com/megalookhair/"></a></li>
-							<li class="follow-icon pinterest" title="pinterest"><a href="https://www.pinterest.com/amegalook/"></a></li>
-							<li class="follow-icon snapchat" title="snapchat"><a href="https://www.snapchat.com/add/megalook-hair"></a></li>
-							<li class="follow-icon youtube" title="youtube"><a href="https://www.youtube.com/channel/UCbbrYL1KabTMlXFmQhFWtmw?view_as=subscriber"></a></li>
+							<li class="follow-icon facebook" title="megalook facebook"><a href="https://www.facebook.com/MegalookHairCompany/"></a></li>
+							<li class="follow-icon instagram" title="megalook instagram"><a href="https://www.instagram.com/megalookhair/"></a></li>
+							<li class="follow-icon pinterest" title="megalook pinterest"><a href="https://www.pinterest.com/amegalook/"></a></li>
+							<li class="follow-icon snapchat" title="megalook snapchat"><a href="https://www.snapchat.com/add/megalook-hair"></a></li>
+							<li class="follow-icon youtube" title="megalook youtube"><a href="https://www.youtube.com/channel/UCbbrYL1KabTMlXFmQhFWtmw?view_as=subscriber"></a></li>
 						</ul>
 					</div>
 				</div>
