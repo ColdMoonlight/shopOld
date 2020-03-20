@@ -170,7 +170,17 @@
 		});
 	}
 	var editSave = $('.sub_ipn');
+	function inputCheck9() {
+		var flag = 0,
+			userPassword = $(".userPassword").val();
+			if (userPassword == null || userPassword == '') {
+				flag = 1;
+			  alert('userPassword is empty')
+			}
+		return flag;	
+	}
 	editSave.on('click', function () {
+		 if (!inputCheck9()) {
 		var reqData = {
 			userId: parseInt($(".userid").val()),
 			userEmail: $("input.userEmail").val() === "Please add" ? null : $("input.userEmail").val(),
@@ -209,7 +219,7 @@
 				}
 			}
 		})
-	
+	 }
 	})
 	
 </script>

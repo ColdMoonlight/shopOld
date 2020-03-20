@@ -55,8 +55,8 @@
 								<li>bob</li>
 								<li>wigs</li>
 								<li>bundle</li>
-								<li>wig 613</li>
-								<li>Water Wave</li>
+								<li>613</li>
+								<li>Water</li>
 							</ul>
 						 </div>
 						 <div class="loginbox">
@@ -308,7 +308,7 @@
 		}
 /*******搜索****************************************/
 		   	$(".serch_cont button").click(function(){
-		     	var seaProductName = $(this).val();
+		     	var seaProductName = $(".tt-search-input").val();
 		     	if(seaProductName==""){
 		         	alert("Please enter keywords;")
 		     	} else {
