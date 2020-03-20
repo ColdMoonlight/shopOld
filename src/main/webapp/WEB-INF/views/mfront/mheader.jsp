@@ -64,28 +64,17 @@
 </head>
 
 <body>
-  <!-- info -->
-  <!--header  -->
-  <!-- <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a> <span class="close"></span></div> -->
-    <!-- <div class="fixed_small"><a href="javascript:;"></a></div> -->
 	<div id="addindex">
 	    <p><span>x</span></p>
 	    <img src="${APP_PATH }/static/m/img/index/add.gif" /></a>	
 	</div>
-  <div class="header bd-b">
+   <div class="header bd-b">
 	  <div class="img_show">
-	  <a href="javascript:;"><img src="${APP_PATH }/static/m/img/shengdan/gh0.jpg" /></a>	
+	  	<div class="alinktop"></div>	
 	  	<div class="img_show_cont">
 	  		<a href="javascript:;"></a>
 	  	</div>
 	  </div>
-<!-- 	  <div class="info_adv">
-	  	<p style="text-align: center;">Free Shipping World Wide.</p>
-	  	<div id="adv_silder">
-	  		<div class="swiper-wrapper">
-	  		</div>
-	  	</div>
-	  </div> -->
     <div class="container">
       <span id="menu" class="icon menu"></span>
       <span class="icon person"></span>
@@ -124,6 +113,41 @@
     </div>
 <div class="kongbai"></div>
   <script>
+	  $.ajax({
+			url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+			data: JSON.stringify({ "slideArea": 5 }),
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function (data) {
+				if (data.code == 100) {
+					var headerData = data.extend.mlbackSlideList;
+					if (data.code == 100 && headerData.length > 0) {
+						renderAlinkTop($('.alinktop'), headerData[0]);
+					}
+				}
+			}
+	  });
+	  function renderAlinkTop(parent, data) {
+			var html = '',
+				slideIfinto_click = data.slideIfinto,
+				slideIfproORcateORpage = data.slideIfproORcateORpage;
+			if (slideIfinto_click == 0) {
+				html += '<a href="javascript:;" style="cursor: default;">' +
+						'<img src="' + data.slideWapimgurl + '" alt="">' +
+					'</a>';
+			} else {
+				if (slideIfproORcateORpage == 0) {
+					html += '<a href="${APP_PATH}/' + data.slideSeoname + '.html">' + '<img src="' + data.slideWapimgurl + '" alt="">' + '</a>';
+				} else if (slideIfproORcateORpage == 1) {
+					html += '<a href="${APP_PATH}/search/' + data.slideCateSeoname + '.html">' + '<img src="' + dat.slideWapimgurl + '" alt="">' + '</a>';
+				} else if (slideIfproORcateORpage == 2) {
+					html += '<a href="${APP_PATH}/' + data.slidePageSeoname + '.html">' + '<img src="' + data.slideWapimgurl + '" alt="">' + '</a>';
+				}
+			}
+			console.log(data)
+			parent.html(html);
+	 }
 	  $(function(){
 		  var u = navigator.userAgent, app = navigator.appVersion;
 		     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
