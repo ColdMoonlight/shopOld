@@ -66,7 +66,8 @@
 		<table tableName="tb_mlback_addpayinfoviewdetail" domainObjectName="MlbackAddPayinfoViewDetail"></table>
 		<table tableName="tb_mlback_videoshowarea" domainObjectName="MlbackVideoShowArea"></table>
 		<table tableName="tb_mlback_video" domainObjectName="MlbackVideo"></table>
-		<table tableName="tb_mlblack_abandonPurchase" domainObjectName="MlbackAbandonPurchase"></table>-->
+		<table tableName="tb_mlblack_abandonPurchase" domainObjectName="MlbackAbandonPurchase"></table>
+		<table tableName="tb_mlback_coupondesctitle" domainObjectName="MlbackCouponDescTitle"></table>-->
 		
 		<!--
 		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>

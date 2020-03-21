@@ -48,7 +48,7 @@
 					var resData = data.extend.MlbackFootNavOne;
 					// console.log(resData);
           var elMain = $('.main');
-          var html = '<div class="article-title">' + resData.footnavName + '</div>' +
+          var html = /* '<div class="article-title">' + resData.footnavName + '</div>' + */
             '<div class="article-content">' + resData.footnavDesc + '</div>';
 
           elMain.html(html);
