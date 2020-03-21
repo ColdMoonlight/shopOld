@@ -160,7 +160,7 @@
 									<!-- <span class="price-info"></span> -->
 									<!-- <iclass="icon right"></i> -->
 								</div>
-								<div class="sale_copen">
+								<div class="sale_copen checkout">
 									<p> Bloom Your Max Beauty With Megalook Hair Buy More Save More  </p>
 									<ul>
 										<li>OVER $99 OFF<span>$10</span>with code: <b>MB10</b></li>
