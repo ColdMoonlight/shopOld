@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.bean.MlbackActShowPro;
 import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackCoupon;
+import com.atguigu.bean.MlbackCouponDescTitle;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductImg;
 import com.atguigu.bean.MlbackReviewImg;
@@ -22,6 +23,7 @@ import com.atguigu.bean.Msg;
 import com.atguigu.service.MlbackActShowProService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
+import com.atguigu.service.MlbackCouponDescTitleService;
 import com.atguigu.service.MlbackCouponService;
 import com.atguigu.service.MlbackProductImgService;
 import com.atguigu.service.MlbackProductService;
@@ -33,6 +35,7 @@ import com.atguigu.service.MlbackVideoShowAreaService;
 import com.atguigu.service.MlfrontReviewService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.URLLocationUtils;
+import com.atguigu.utils.UpCouponTitleImgUtils;
 import com.atguigu.utils.UpImgUtils;
 import com.atguigu.utils.UpVideoImgUtils;
 
@@ -76,6 +79,9 @@ public class UPloadController {
 	
 	@Autowired
 	MlbackVideoShowAreaService mlbackVideoShowAreaService;
+	
+	@Autowired
+	MlbackCouponDescTitleService mlbackCouponDescTitleService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -1030,4 +1036,101 @@ public class UPloadController {
 		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
 	}
 	
+	/**
+	 * 9.1	useOn	200110
+	 * uploadVideoShowAreaWapImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadCouponDescTitleWapImg")
+	@ResponseBody
+	public Msg uploadCouponDescTitleWapImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/CouponDescTitle/";
+		//存储图片
+		String returnUrl = UpCouponTitleImgUtils.keepCouponTitleWapFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String CouponTitleIdstr = aa[1];
+		
+		int CouponTitleIdInt = Integer.parseInt(CouponTitleIdstr);
+		
+		System.out.println("CouponTitleIdstr:"+CouponTitleIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+		
+		//通过id更新本条的w图片
+		MlbackCouponDescTitle mlbackCouponDescTitleReq = new MlbackCouponDescTitle();
+		mlbackCouponDescTitleReq.setCoupondesctieleId(CouponTitleIdInt);
+		mlbackCouponDescTitleReq.setCoupondesctieleWapimgurl(returnReaUrlAll);
+		mlbackCouponDescTitleService.updateByPrimaryKeySelective(mlbackCouponDescTitleReq);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+	
+	/**
+	 * 9.2	useOn	200110
+	 * uploadVideoShowAreaPcImg
+	 * @param jsp
+	 * @return 
+	 * */
+	@RequestMapping("/uploadCouponDescTitlePcImg")
+	@ResponseBody
+	public Msg uploadCouponDescTitlePcImg(HttpServletResponse rep,HttpServletRequest res) throws Exception{
+		
+		String contextPathStr = res.getContextPath();    
+        System.out.println("contextPathStr:"+contextPathStr);
+        String realPathStr = res.getSession().
+                        getServletContext().getRealPath("/");    
+        System.out.println("realPathStr:"+realPathStr);
+        String basePathStr = res.getScheme()+"://"+res.getServerName()+":"+
+        		res.getServerPort()+contextPathStr+"/";
+        
+        System.out.println("basePathStr:"+basePathStr);
+		
+		String pathBig = basePathStr;
+		
+		String path="static/img/CouponDescTitle/";
+		//存储图片
+		String returnUrl = UpCouponTitleImgUtils.keepCouponTitlePcFile(res);
+		
+		String[] aa = returnUrl.split("%");
+		String returnReaUrl =aa[0];
+		String CouponTitleIdstr = aa[1];
+		
+		int CouponTitleIdInt = Integer.parseInt(CouponTitleIdstr);
+		
+		System.out.println("CouponTitleIdstr:"+CouponTitleIdstr);
+		
+		String returnReaUrlAll = pathBig+path+returnReaUrl;
+
+		//通过id更新本条的PC图片
+		MlbackCouponDescTitle mlbackCouponDescTitleReq = new MlbackCouponDescTitle();
+		mlbackCouponDescTitleReq.setCoupondesctieleId(CouponTitleIdInt);
+		mlbackCouponDescTitleReq.setCoupondesctielePcimgurl(returnReaUrlAll);
+		mlbackCouponDescTitleService.updateByPrimaryKeySelective(mlbackCouponDescTitleReq);
+		
+		System.out.println("returnReaUrl:"+returnReaUrl);
+		
+		//把文件存储的url存到数据库中
+		return Msg.success().add("resMsg", "插入成功").add("uploadUrl", returnReaUrl);
+	}
+
 }
