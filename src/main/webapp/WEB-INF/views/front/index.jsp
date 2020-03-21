@@ -312,7 +312,7 @@
 						'<div class="product-title">' + data[i].productName + '</div>' +
 						'<div class="product-type"></div>' +
 						'<div class="product-data">' +
-						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Orders</span>' +
 						'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
 						' Review(s)</span>' +
 						'</div>' +
