@@ -251,24 +251,19 @@ header .tt-account .tt-dropdown-menu {
 /* follow-us */
 .follow-us {
   width:100%;
-  /* background: #000; */
 }
-/* .follow-us h3 {
-  padding: 16px 0;
-  text-align: center;
-  color: #fff;
-} */
 .follow-us-list {
   padding: 10px 0;
   text-align: center;
 }
 .follow-us .follow-icon {
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
   margin: 0 6px;
+  background-image: url(../../common/follow-us.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 .follow-us .follow-icon>a {
   display: block;
@@ -276,24 +271,20 @@ header .tt-account .tt-dropdown-menu {
   height: 100%;
 }
 .follow-us .follow-icon.facebook {
-  background-image: url(../img/facebook.png);
+	background-position: 0 0;
 }
 .follow-us .follow-icon.instagram {
-  background-image: url(../img/instagram.png);
+	background-position: 0 -40px;
 }
 .follow-us .follow-icon.pinterest {
-  background-image: url(../img/pinterest.png);
+	background-position: 0 -80px;
 }
 .follow-us .follow-icon.snapchat {
-  background-image: url(../img/snapchat.png);
+	background-position: 0 -120px;
 }
 .follow-us .follow-icon.youtube {
-  background-image: url(../img/youtube.png);
+	background-position: 0 -160px;
 }
-/* .follow-us .follow-icon.twitter {
-  background-image: url(../img/twitter.png);
-} */
-
 .banner {
 	text-align: center;
 }
@@ -314,7 +305,7 @@ header .tt-account .tt-dropdown-menu {
 .product-list p {
 	display: flex;
 	justify-content: center;
-  align-items: center;
+    align-items: center;
 	width: 100%;
 	align-content: center;
 }
@@ -901,6 +892,35 @@ margin: 10px 0;
   background-color: #ff186e;
   color: #ffd0e5;
 }
+
+.main.article {
+	font-size: 16px;
+	color: #000;
+}
+.main.article ol,
+.main.article ul {
+	padding-left: 2em;
+}
+.main.article ol li {
+	list-style: decimal;
+}
+.main.article ul li {
+	list-style: disc;
+}
+.main.article h1,
+.main.article h2,
+.main.article h3,
+.main.article h4,
+.main.article h5,
+.main.article h6 {
+	margin-top: 16px;
+}
+.main.article p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
  /* pageination */
 .pagination {
 	display: flex;
