@@ -183,10 +183,10 @@
 					htmlStr += '<img src="' + data.title.coupondesctielePcimgurl + '" />';
 				htmlStr += '<div class="sale_coupon-body"><p>' + data.title.coupondesctieleTieledetail + '</p><ul>';
 				for (var i = 0, len = data.couponList.length; i < len; i++) {
-					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '<span>'
-						+ data.couponList[i].coupondescdetailStrength + '</span>'
+					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '&nbsp;<span>&nbsp;'
+						+ data.couponList[i].coupondescdetailStrength + '&nbsp;</span>&nbsp;'
 						+ data.couponList[i].coupondescdetailCodepre
-						+ ' <b>' + data.couponList[i].coupondescdetailCode + '</b></li>';
+						+ '&nbsp;<b>&nbsp;' + data.couponList[i].coupondescdetailCode + '</b></li>';
 				}
 				htmlStr += '</ul></div>';
 				parent.html(htmlStr);
