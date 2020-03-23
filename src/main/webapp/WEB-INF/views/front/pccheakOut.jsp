@@ -459,11 +459,10 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					console.log(data)
 					var saleCouponEl = $('.sale_coupon'),
 						titleData = data.extend.mlbackCouponDescTitleList,
 						couponArrData = data.extend.mlbackCouponDescDetailList;
-					if (data.code == 100 && couponArrData.length > 0) {
+					if (data.code == 100 && titleData.length > 0) {
 						renderSaleCoupon(saleCouponEl, {
 							title: titleData[0],
 							couponList: couponArrData
