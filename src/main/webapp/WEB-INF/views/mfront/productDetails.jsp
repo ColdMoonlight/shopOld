@@ -147,12 +147,12 @@
 			});
 			/* couponlist */
 			$.ajax({
-				url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
-				data: JSON.stringify({ "slideArea": 6 }),
+				url: '${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitlewapListByStatus',
 				type: 'post',
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
+					console.log(data)
 					var headerData = data.extend.mlbackSlideList;
 					if (data.code == 100 && headerData.length > 0) {
 						renderSaleCoupon($('.sale_copen'), headerData[0]);
@@ -160,6 +160,7 @@
 				}
 			});
 			function renderSaleCoupon(parent, data) {
+				parent.css('background-image', 'url(' + data.slideWapimgurl + ')');
 				parent.html('<img src="' + data.slideWapimgurl + '" alt="">');
 			}
 			/* detials of condition（sku） */
