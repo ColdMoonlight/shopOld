@@ -143,37 +143,21 @@
 										</div>
 									</div>
 								</form>
-								<div class="errortips"><span>A match of the shipping Address city,State and Postal Code
-										failed.</span></div>
+								<div class="errortips"><span>A match of the shipping Address city,State and Postal Code failed.</span></div>
 							</div>
 							<div class="shipping">SHIPPING COST: <span>$0</span></div>
 						</div>
-						<!-- 				<div class="win-box-title">
-					<span class="save">  <b>save it</b> </span>
-				</div> -->
 					</div>
 					<!--*********************-->
 					<div class="right_checkout clearfix">
 						<div class="list-group clearfix">
 							<li class="list-group-item">
-								<div class="group-title"><span>Choose Coupons</span>
-									<!-- <span class="price-info"></span> -->
-									<!-- <iclass="icon right"></i> -->
-								</div>
-								<div class="sale_copen checkout">
-									<p> Bloom Your Max Beauty With Megalook Hair Buy More Save More  </p>
-									<ul>
-										<li>OVER $99 OFF<span>$10</span>with code: <b>MB10</b></li>
-										<li>OVER $180 OFF<span>$20</span>with code: <b>MB20</b></li>
-										<li>OVER $299 OFF<span>$40</span>with code: <b>MB40</b></li>
-									</ul>
-								</div>
+								<div class="group-title"><span>Choose Coupons</span></div>
+								<div class="sale_coupon"></div>
 								<div class="group-details coupons"></div>
 							</li>
 							<li class="list-group-item">
-								<div class="group-title"><span>PAYMENT METHOD</span>
-									<!-- <i class="icon bottom"></i> -->
-								</div>
+								<div class="group-title"><span>PAYMENT METHOD</span></div>
 								<div class="group-details pay-method active">
 									<div class="coupon-item">
 										<input type="radio" name="payment" data-payid="0" checked onclick="selectPay(event)" class="checkbox active">
@@ -468,6 +452,41 @@
 				}
 			});
 
+			/* couponlist */
+			$.ajax({
+				url: '${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitlepcListByStatus',
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function (data) {
+					console.log(data)
+					var saleCouponEl = $('.sale_coupon'),
+						titleData = data.extend.mlbackCouponDescTitleList,
+						couponArrData = data.extend.mlbackCouponDescDetailList;
+					if (data.code == 100 && couponArrData.length > 0) {
+						renderSaleCoupon(saleCouponEl, {
+							title: titleData[0],
+							couponList: couponArrData
+						});
+					} else {
+						saleCouponEl.hide();
+					}
+				}
+			});
+			function renderSaleCoupon(parent, data) {
+				var htmlStr = '';
+				if (data.title && data.title.coupondesctielePcstatus)
+					htmlStr += '<img src="' + data.title.coupondesctielePcimgurl + '" />';
+				htmlStr += '<div class="sale_coupon-body"><p>' + data.title.coupondesctieleTieledetail + '</p><ul>';
+				for (var i = 0, len = data.couponList.length; i < len; i++) {
+					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '<span>'
+						+ data.couponList[i].coupondescdetailStrength + '</span>'
+						+ data.couponList[i].coupondescdetailCodepre
+						+ ' <b>' + data.couponList[i].coupondescdetailCode + '</b></li>';
+				}
+				htmlStr += '</ul></div>';
+				parent.html(htmlStr);
+			}
 			// 订单列表数据
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/tomOrderDetailOne',

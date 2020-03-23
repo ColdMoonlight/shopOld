@@ -159,14 +159,7 @@
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>
-						<div class="sale_copen checkout">
-							<p> Bloom Your Max Beauty With Megalook Hair Buy More Save More  </p>
-							<ul>
-								<li>OVER $99 OFF<span>$10</span>with code: <b>MB10</b></li>
-								<li>OVER $180 OFF<span>$20</span>with code: <b>MB20</b></li>
-								<li>OVER $299 OFF<span>$40</span>with code: <b>MB40</b></li>
-							</ul>
-						</div>
+						<div class="sale_coupon"></div>
 						<div class="group-details coupons active"></div>
 					</li>
 					<li class="list-group-item">
@@ -449,6 +442,42 @@
 					subtotalPriceEl.text('$' + subtotalText);
 				}
 			});
+
+			/* couponlist */
+			$.ajax({
+				url: '${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitlewapListByStatus',
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function (data) {
+					console.log(data)
+					var saleCouponEl = $('.sale_coupon'),
+						titleData = data.extend.mlbackCouponDescTitleList,
+						couponArrData = data.extend.mlbackCouponDescDetailList;
+					if (data.code == 100 && couponArrData.length > 0) {
+						renderSaleCoupon(saleCouponEl, {
+							title: titleData[0],
+							couponList: couponArrData
+						});
+					} else {
+						saleCouponEl.hide();
+					}
+				}
+			});
+			function renderSaleCoupon(parent, data) {
+				var htmlStr = '';
+				if (data.title && data.title.coupondesctieleWapstatus)
+					htmlStr += '<img src="' + data.title.coupondesctieleWapimgurl + '" />';
+				htmlStr += '<div class="sale_coupon-body"><p>' + data.title.coupondesctieleTieledetail + '</p><ul>';
+				for (var i = 0, len = data.couponList.length; i < len; i++) {
+					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '<span>'
+						+ data.couponList[i].coupondescdetailStrength + '</span>'
+						+ data.couponList[i].coupondescdetailCodepre
+						+ ' <b>' + data.couponList[i].coupondescdetailCode + '</b></li>';
+				}
+				htmlStr += '</ul></div>';
+				parent.html(htmlStr);
+			}
 
 			// 订单列表数据
 			$.ajax({
