@@ -49,7 +49,12 @@
 
 	<!-- main -->
 	<div class="main">
+		<div class="ban_insimg">
+			<img src="${APP_PATH }/static/pc/img/insimg1.jpg" >
+			<img src="${APP_PATH }/static/pc/img/insimg11.jpg" >
+		</div>
 		<div class="container clearfix">
+			
             <div class="list_pro_cont" id="waterfull">
             	<ul>
             		
