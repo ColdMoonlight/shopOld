@@ -1,0 +1,53 @@
+<div class="op">
+    <a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 新增/编辑</a>
+    <button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
+</div>
+<form class="form-horizontal">
+	<ul id="categoryTab" class="nav nav-tabs">
+		<li class="active"><a data-href="#general" data-toggle="tab">基本</a></li>
+	</ul>
+	<div id="categoryTabContent" class="tab-content">
+		<input type="text" style="display: none;" placeholder="coupondescdetailId" name="coupondescdetailId">
+		<div class="tab-pane in active" id="general">
+		 	<div class="form-group">
+	            <label for="coupondescdetailName" class="col-sm-2 control-label">优惠Code简述:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondescdetailName" name="coupondescdetailName">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="coupondescdetailStrengthpre" class="col-sm-2 control-label">优惠Code力度前置:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondescdetailStrengthpre" name="coupondescdetailStrengthpre">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="coupondescdetailStrength" class="col-sm-2 control-label">优惠Code力度:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondescdetailStrength" name="coupondescdetailStrength">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="coupondescdetailCodepre" class="col-sm-2 control-label">优惠Code码前置:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondescdetailCodepre" name="coupondescdetailCodepre">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="coupondescdetailCode" class="col-sm-2 control-label">优惠Code码:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondescdetailCode" name="coupondescdetailCode">
+	            </div>
+	        </div>
+			<div class="form-group row">
+				<label for="coupondescdetailStatus" class="col-sm-2 control-label">是否有效:</label>
+				<div class="col-sm-4">
+					<select class="form-control footnav-ifincome"  name="coupondescdetailStatus">
+						<option value="0">不生效</option>
+						<option value="1">生效中</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>             
+</form>
