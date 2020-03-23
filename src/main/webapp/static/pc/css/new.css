@@ -622,6 +622,9 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
 .customer_widget_box .review-statics-item .progress{width: 40%;}
 .customer_widget_box .reviews-statics{float: left; width: 70%;}
+.ban_insimg{max-width: 100%; height: auto; text-align: center; overflow: hidden; position: relative;}
+.ban_insimg img{width: 100%; display: inline-block;}
+.review-statics-item .reviews-data2 .icon{display: inline-block;font-size: 22px;width: 24px;height: 24px;}
 
 
 

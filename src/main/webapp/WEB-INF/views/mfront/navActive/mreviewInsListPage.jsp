@@ -50,6 +50,10 @@
 	<!-- main -->
 	<!-- main -->
 	<div class="main">
+		<div class="ban_insimg">
+			<img src="${APP_PATH }/static/pc/img/insimg2.jpg" >
+			<img src="${APP_PATH }/static/pc/img/insimg22.jpg" >
+		</div>
 		<div class="container clearfix" style="margin: 0;">
             <div class="list_pro_cont" id="waterfull">
             	<ul>

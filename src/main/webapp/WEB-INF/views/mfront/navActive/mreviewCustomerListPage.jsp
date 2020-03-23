@@ -68,19 +68,49 @@
 					</div>
 					 <div class="reviews-statics">
 						<div class="review-statics-item five">
-							<div class="stars">5 star</div>
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
 						<div class="progress"><div class="progress-inner" style="width: 93.00%"></div></div><div class="data">93.00%</div></div>
 						<div class="review-statics-item four">
-							<div class="stars">4 star</div>
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
 						<div class="progress"><div class="progress-inner" style="width: 30.00%"></div></div><div class="data">6.00%</div></div>
 						<div class="review-statics-item three">
-							<div class="stars">3 star</div>
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
 						<div class="progress"><div class="progress-inner" style="width: 5.00%"></div></div><div class="data">1.00%</div></div>
 						<div class="review-statics-item two">
-							<div class="stars">2 star</div>
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
 						<div class="progress"><div class="progress-inner" style="width: 0.00%"></div></div><div class="data">0.00%</div></div>
 						<div class="review-statics-item one">
-							<div class="stars">1 star</div>
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
 						<div class="progress"><div class="progress-inner" style="width: 0.00%"></div></div><div class="data">0.00%</div></div>
 					 </div>
 					</div>
