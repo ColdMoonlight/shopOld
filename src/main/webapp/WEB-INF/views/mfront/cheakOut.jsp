@@ -229,8 +229,8 @@
 	<script>
 		var resDataMoney = 0,
 			totalPrice = 0,
-			couponId,
-			couponCode = '',
+			couponId = null,
+			couponCode = null,
 			addressId,
 			orderId,
 			orderItemArr = [],
@@ -283,6 +283,8 @@
 		$("#country").on("change", function () {
 			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
 				dataname = $(this).val();
+			couponCode = null;
+			couponId = null;
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");
@@ -450,7 +452,6 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					console.log(data)
 					var saleCouponEl = $('.sale_coupon'),
 						titleData = data.extend.mlbackCouponDescTitleList,
 						couponArrData = data.extend.mlbackCouponDescDetailList;
