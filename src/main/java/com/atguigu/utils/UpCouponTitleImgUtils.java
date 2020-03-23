@@ -155,7 +155,7 @@ public class UpCouponTitleImgUtils {
            //设置保存上传文件的路径，我们好保存到temp中
            String realPath = request.getServletContext().getRealPath("/") + "temp";
            
-           String toTargetPath =request.getServletContext().getRealPath("/") +"static/img/VideoShowArea";//linux状态下
+           String toTargetPath =request.getServletContext().getRealPath("/") +"static/img/CouponDescTitle";//linux状态下
            
            System.out.println("文件保存路径:"+toTargetPath);
            
@@ -335,7 +335,7 @@ public class UpCouponTitleImgUtils {
             //设置保存上传文件的路径，我们好保存到temp中
             String realPath = request.getServletContext().getRealPath("/") + "temp";
             
-            String toTargetPath =request.getServletContext().getRealPath("/") +"static/img/VideoShowArea";//linux状态下
+            String toTargetPath =request.getServletContext().getRealPath("/") +"static/img/CouponDescTitle";//linux状态下
             
             System.out.println("文件保存路径:"+toTargetPath);
             
