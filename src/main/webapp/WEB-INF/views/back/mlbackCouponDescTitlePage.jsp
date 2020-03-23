@@ -79,7 +79,6 @@
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 
@@ -152,10 +151,10 @@
 				$("<tr></tr>").append(coupondesctieleId)
 					.append(coupondesctieleName)
 					.append(coupondesctieleTieledetail)
-					.append(coupondesctieleWapstatus)
 					.append(coupondesctieleWapimgurl)
-					.append(coupondesctielePcstatus)
+					.append(coupondesctieleWapstatus)
 					.append(coupondesctielePcimgurl)
+					.append(coupondesctielePcstatus)
 					.append(coupondesctieleCreatetime)
 					.append(coupondesctieleMotifytime)
 					.append(btnTd)
@@ -257,12 +256,9 @@
 		});
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
-			var data = {
-				coupondesctieleId: $(this).attr('del-id')
-			};
 			$.ajax({
 				url: "${APP_PATH}/MlbackCouponDescTitle/delete",
-				data: JSON.stringify(data),
+				data: JSON.stringify({ coupondesctieleId: $(this).attr('del-id') }),
 				dataType: "json",
 				contentType: 'application/json',
 				type: "post",
@@ -276,58 +272,51 @@
 		});
 		
 
-		function loadTpl() {
+		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addCouponDescTitle.html', function () {
-				// 设置归属类
+				// fetch data
+				$.ajax({
+					url: "${APP_PATH}/MlbackCouponDescTitle/getOneMlbackCouponDescTitleDetail",
+					data: { "coupondesctieleId": id },
+					type: "POST",
+					success: function (result) {
+						if (result.code == 100) {
+							tianchong(result.extend.mlbackCouponDescTitleOne);
+						} else {
+							alert("联系管理员");
+						}
+					}
+				});
 			});
 		}
 
 		//编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
-			loadTpl()
-			// fetch data
-			data = {
-				"coupondesctieleId": $(this).attr('edit-id')
-			};
-			$.ajax({
-				url: "${APP_PATH}/MlbackCouponDescTitle/getOneMlbackCouponDescTitleDetail",
-				data: data,
-				type: "POST",
-				success: function (result) {
-					if (result.code == 100) {
-						obj = result.extend.mlbackCouponDescTitleOne;
-						// console.log(obj);
-						tianchong(obj);
-					} else {
-						alert("联系管理员");
-					}
-				}
-			});
-
-			function tianchong(data) {
-				$(":input[name='coupondesctieleId']").val(data.coupondesctieleId);
-				$(":input[name='coupondesctieleName']").val(data.coupondesctieleName);
-				$(":input[name='coupondesctieleTieledetail']").val(data.coupondesctieleTieledetail);
-				$(":input[name='coupondesctieleWapstatus']").val(data.coupondesctieleWapstatus);
-				$(":input[name='coupondesctielePcstatus']").val(data.coupondesctielePcstatus);
-				
-				$(":input[name='coupondesctieleCreatetime']").val(data.coupondesctieleCreatetime);
-				$(":input[name='coupondesctieleMotifytime']").val(data.coupondesctieleMotifytime);
-				if (data.coupondesctieleWapimgurl && data.coupondesctieleWapimgurl.length) {
-					var el = $(".upload-img-btn.img");
-					el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el, data.coupondesctieleWapimgurl);
-				}
-				if (data.coupondesctielePcimgurl && data.coupondesctielePcimgurl.length) {
-					var el2 = $(".upload-img-btn.img2");
-					el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-					setImage(el2, data.coupondesctielePcimgurl);
-				}
-				
-			}
-
+			loadTpl($(this).attr('edit-id'));
 		});
+
+		function tianchong(data) {
+			$(":input[name='coupondesctieleId']").val(data.coupondesctieleId);
+			$(":input[name='coupondesctieleName']").val(data.coupondesctieleName);
+			$(":input[name='coupondesctieleTieledetail']").val(data.coupondesctieleTieledetail);
+			$(":input[name='coupondesctieleWapstatus']").val(data.coupondesctieleWapstatus);
+			$(":input[name='coupondesctielePcstatus']").val(data.coupondesctielePcstatus);
+			
+			$(":input[name='coupondesctieleCreatetime']").val(data.coupondesctieleCreatetime);
+			$(":input[name='coupondesctieleMotifytime']").val(data.coupondesctieleMotifytime);
+			if (data.coupondesctieleWapimgurl && data.coupondesctieleWapimgurl.length) {
+				var el = $(".upload-img-btn.img");
+				el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
+				setImage(el, data.coupondesctieleWapimgurl);
+			}
+			if (data.coupondesctielePcimgurl && data.coupondesctielePcimgurl.length) {
+				var el2 = $(".upload-img-btn.img2");
+				el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
+				setImage(el2, data.coupondesctielePcimgurl);
+			}
+			
+		}
 
 		$(document.body).on("change", "#file1", upload);
 		$(document.body).on("change", "#file2", uploadMainFu);
@@ -353,10 +342,8 @@
 					processData: false, // 不处理数据
 					contentType: false, // 不设置内容类型
 					success: function (data) {
-						// 设置背景为我们选择的图片
 						// console.log(data);
 						var returl = data.extend.uploadUrl;
-						// $(self).parent().css({ "background-image": "url("+'${APP_PATH }/static/img/category/'+returl+")" });  
 						setImage($(self).parent(), returl);
 					}
 				});

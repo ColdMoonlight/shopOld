@@ -145,7 +145,24 @@
 					}
 				}
 			});
-
+			/* couponlist */
+			$.ajax({
+				url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
+				data: JSON.stringify({ "slideArea": 6 }),
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function (data) {
+					var headerData = data.extend.mlbackSlideList;
+					if (data.code == 100 && headerData.length > 0) {
+						renderSaleCoupon($('.sale_copen'), headerData[0]);
+					}
+				}
+			});
+			function renderSaleCoupon(parent, data) {
+				parent.html('<img src="' + data.slideWapimgurl + '" alt="">');
+			}
+			/* detials of condition（sku） */
 			$.ajax({
 				url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
 				data: { "productId": pidA },

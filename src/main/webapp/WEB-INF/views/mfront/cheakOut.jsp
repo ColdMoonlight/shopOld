@@ -159,7 +159,7 @@
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>
-						<div class="sale_copen">
+						<div class="sale_copen checkout">
 							<p> Bloom Your Max Beauty With Megalook Hair Buy More Save More  </p>
 							<ul>
 								<li>OVER $99 OFF<span>$10</span>with code: <b>MB10</b></li>
