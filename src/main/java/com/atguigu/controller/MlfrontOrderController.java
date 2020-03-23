@@ -49,7 +49,7 @@ import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
-import com.atguigu.utils.app.shipInformation;
+//import com.atguigu.utils.app.shipInformation;
 
 @Controller
 @RequestMapping("/MlfrontOrder")
@@ -780,16 +780,16 @@ public class MlfrontOrderController {
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
 		
 		//10.1向afterShip官方发送物流添加按钮
-		try {
-			//向物流中插入物流单号，订单号，Item,价格，
-			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsnumber,payinfoPlateNum);
-			System.out.println(resultStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("有异常");
-			System.out.println(e.getMessage());
-		}
-		
+//		try {
+//			//向物流中插入物流单号，订单号，Item,价格，
+//			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsnumber,payinfoPlateNum);
+//			System.out.println(resultStr);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("有异常");
+//			System.out.println(e.getMessage());
+//		}
+//		
 		//10.2
 		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
 		
@@ -1151,22 +1151,22 @@ public class MlfrontOrderController {
 		return Msg.success().add("Msg", "更新成功");
 	}
 	
-	/**
-	 * 14.0	UseNow	200309
-	 * to	订单-退款
-	 * @param jsp
-	 * @return 
-	 * */
-	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
-	@ResponseBody
-	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
-			@RequestParam(value = "trackingNumber") String trackingNumber) {
-		//接收参数
-		
-		String trackingNumCheckpoint = shipInformation.getCheckpointByTrackingNumberFromAfterShip(trackingNumber);
-		System.out.println("trackingNumCheckpoint:"+trackingNumCheckpoint);
-		
-		return Msg.success().add("Msg", "更新成功");
-	}
+//	/**
+//	 * 14.0	UseNow	200309
+//	 * to	订单-退款
+//	 * @param jsp
+//	 * @return 
+//	 * */
+//	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
+//	@ResponseBody
+//	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
+//			@RequestParam(value = "trackingNumber") String trackingNumber) {
+//		//接收参数
+//		
+//		String trackingNumCheckpoint = shipInformation.getCheckpointByTrackingNumberFromAfterShip(trackingNumber);
+//		System.out.println("trackingNumCheckpoint:"+trackingNumCheckpoint);
+//		
+//		return Msg.success().add("Msg", "更新成功");
+//	}
 
 }

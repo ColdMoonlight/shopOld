@@ -5,13 +5,12 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>优惠券title管理</title>
+	<title>优惠券描述管理</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
 	<script type="text/javascript" src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
-	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
 	<style>
 		tr>td:nth-last-of-type(2),
 		th>td:nth-last-of-type(2) {
@@ -28,14 +27,14 @@
 		<div class="main-body">
 			<div class="main-box nicescroll">
 				<div class="header">
-					<h2>优惠券title列表</h2>
+					<h2>优惠券描述管理</h2>
 					<span class="user" id="UEmailSession">*</span>
 				</div>
 				<div class="content">
 					<div class="table-box">
 						<!-- operator -->
 						<div class="op">
-							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>优惠券title列表</a>
+							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 优惠券描述列表</a>
 							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
 									class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
@@ -45,14 +44,14 @@
 								<thead>
 									<tr>
 										<th>id</th>
-										<th>标题name</th>
-										<th>标题namedeatil</th>
-										<th>手机图</th>
-										<th>wap是否有效</th>
-										<th>PC端图</th>
-										<th>pc是否有效</th>
-										<th>创建时间</th>
-										<th>修改时间</th>
+										<th>优惠Code简述</th>
+										<th>优惠Code力度前置</th>
+										<th>优惠Code力度</th>
+										<th>优惠Code码前置</th>
+										<th>优惠Code码</th>
+										<th>生效状态</th>
+										<th>add时间</th>
+										<th>更改时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -65,7 +64,6 @@
 							<div class="col-md-6" id="page_info_area"></div>
 							<!-- 分页条信息 -->
 							<div class="col-md-6" id="page_nav_area">
-
 							</div>
 						</div>
 					</div>
@@ -79,6 +77,7 @@
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
+		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 
@@ -102,7 +101,7 @@
 
 		function to_page(pn) {
 			$.ajax({
-				url: "${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitleByPage",
+				url: "${APP_PATH}/MlbackCouponDescDetail/getMlbackCouponDescDetailByPage",
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
@@ -123,40 +122,35 @@
 			var task = result.extend.pageInfo.list;
 			$.each(task, function (index, item) {
 				
-				var coupondesctieleId = $("<td></td>").append(item.coupondesctieleId);
-				var coupondesctieleName = $("<td></td>").append(item.coupondesctieleName);
-				var coupondesctieleTieledetail = $("<td></td>").append(item.coupondesctieleTieledetail);
-				
-				var coupondesctieleWapstatus = $("<td></td>").append((item.coupondesctieleWapstatus == 1 ? '生效' : '不生效'));
-				var coupondesctielePcstatus = $("<td></td>").append((item.coupondesctielePcstatus == 1 ? '生效' : '不生效'));
-				var imgurl = item.coupondesctieleWapimgurl;
-				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
-				var coupondesctieleWapimgurl = $("<td></td>").append(image);
-				var imgurlpc = item.coupondesctielePcimgurl;
-				var imagepc = '<img src=' + imgurlpc + ' ' + 'width=50 height=50>';
-				var coupondesctielePcimgurl = $("<td></td>").append(imagepc);
-				var coupondesctieleCreatetime = $("<td></td>").append(item.coupondesctieleCreatetime);
-				var coupondesctieleMotifytime = $("<td></td>").append(item.coupondesctieleMotifytime);
-				
+				var coupondescdetailId = $("<td></td>").append(item.coupondescdetailId);
+				var coupondescdetailName = $("<td></td>").append(item.coupondescdetailName);
+				var coupondescdetailStrengthpre = $("<td></td>").append(item.coupondescdetailStrengthpre);
+				var coupondescdetailStrength = $("<td></td>").append(item.coupondescdetailStrength);
+				var coupondescdetailCodepre = $("<td></td>").append(item.coupondescdetailCodepre);
+				var coupondescdetailCode = $("<td></td>").append(item.coupondescdetailCode);
+				var coupondescdetailStatus = $("<td></td>").append((item.coupondescdetailStatus === 1 ? '已生效' : '未生效'));
+				var coupondescdetailCreatetime = $("<td></td>").append(item.coupondescdetailCreatetime);
+				var coupondescdetailMotifytime = $("<td></td>").append(item.coupondescdetailMotifytime);
+
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//为编辑按钮添加一个分类id
-				editBtn.attr("edit-id", item.coupondesctieleId);
+				editBtn.attr("edit-id", item.coupondescdetailId);
 				var delBtn = $("<button></button>").addClass("btn btn-danger btn-xs delete_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-trash")).append("删除");
 				//为删除按钮添加一个分类id
-				delBtn.attr("del-id", item.coupondesctieleId);
+				delBtn.attr("del-id", item.coupondescdetailId);
 				var btnTd = $("<td></td>").append(editBtn).append(" ").append(delBtn).append(" ");
 				//append方法执行完成以后还是返回原来的元素
-				$("<tr></tr>").append(coupondesctieleId)
-					.append(coupondesctieleName)
-					.append(coupondesctieleTieledetail)
-					.append(coupondesctieleWapimgurl)
-					.append(coupondesctieleWapstatus)
-					.append(coupondesctielePcimgurl)
-					.append(coupondesctielePcstatus)
-					.append(coupondesctieleCreatetime)
-					.append(coupondesctieleMotifytime)
+				$("<tr></tr>").append(coupondescdetailId)
+					.append(coupondescdetailName)
+					.append(coupondescdetailStrengthpre)
+					.append(coupondescdetailStrength)
+					.append(coupondescdetailCodepre)
+					.append(coupondescdetailCode)
+					.append(coupondescdetailStatus)
+					.append(coupondescdetailCreatetime)
+					.append(coupondescdetailMotifytime)
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -228,7 +222,7 @@
 			navEle.appendTo("#page_nav_area");
 		}
 		//新建任務
-				
+
 		$('#task_add_modal_btn').click(function () {
 			// 获取分类页面模板
 			loadTpl()
@@ -241,7 +235,7 @@
 				return obj
 			}, {}));
 			$.ajax({
-				url: "${APP_PATH}/MlbackCouponDescTitle/save",
+				url: "${APP_PATH}/MlbackCouponDescDetail/save",
 				data: data,
 				dataType: "json",
 				contentType: 'application/json',
@@ -249,16 +243,19 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('添加成功！');
-						window.location.href = "${APP_PATH}/MlbackCouponDescTitle/toMlbackCouponDescTitlePage";
+						window.location.href = "${APP_PATH}/MlbackCouponDescDetail/toMlbackCouponDescDetailPage";
 					}
 				}
 			});
 		});
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
+			var data = {
+					coupondescdetailId: $(this).attr('del-id')
+			};
 			$.ajax({
-				url: "${APP_PATH}/MlbackCouponDescTitle/delete",
-				data: JSON.stringify({ coupondesctieleId: $(this).attr('del-id') }),
+				url: "${APP_PATH}/MlbackCouponDescDetail/delete",
+				data: JSON.stringify(data),
 				dataType: "json",
 				contentType: 'application/json',
 				type: "post",
@@ -270,145 +267,47 @@
 				}
 			});
 		});
-		
 
-		function loadTpl(id) {
-			$('.table-box').load('${APP_PATH}/static/tpl/addCouponDescTitle.html', function () {
-				// fetch data
-				$.ajax({
-					url: "${APP_PATH}/MlbackCouponDescTitle/getOneMlbackCouponDescTitleDetail",
-					data: { "coupondesctieleId": id },
-					type: "POST",
-					success: function (result) {
-						if (result.code == 100) {
-							tianchong(result.extend.mlbackCouponDescTitleOne);
-						} else {
-							alert("联系管理员");
-						}
-					}
-				});
+		function loadTpl() {
+			$('.table-box').load('${APP_PATH}/static/tpl/addCouponDescDetail.html', function () {
+				// 设置归属类
 			});
 		}
 
 		//编辑任务
 		$("#task_table").on("click", ".edit_btn", function () {
 			// tab tpl
-			loadTpl($(this).attr('edit-id'));
-		});
-
-		function tianchong(data) {
-			$(":input[name='coupondesctieleId']").val(data.coupondesctieleId);
-			$(":input[name='coupondesctieleName']").val(data.coupondesctieleName);
-			$(":input[name='coupondesctieleTieledetail']").val(data.coupondesctieleTieledetail);
-			$(":input[name='coupondesctieleWapstatus']").val(data.coupondesctieleWapstatus);
-			$(":input[name='coupondesctielePcstatus']").val(data.coupondesctielePcstatus);
-			
-			$(":input[name='coupondesctieleCreatetime']").val(data.coupondesctieleCreatetime);
-			$(":input[name='coupondesctieleMotifytime']").val(data.coupondesctieleMotifytime);
-			if (data.coupondesctieleWapimgurl && data.coupondesctieleWapimgurl.length) {
-				var el = $(".upload-img-btn.img");
-				el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-				setImage(el, data.coupondesctieleWapimgurl);
-			}
-			if (data.coupondesctielePcimgurl && data.coupondesctielePcimgurl.length) {
-				var el2 = $(".upload-img-btn.img2");
-				el2.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
-				setImage(el2, data.coupondesctielePcimgurl);
-			}
-			
-		}
-
-		$(document.body).on("change", "#file1", upload);
-		$(document.body).on("change", "#file2", uploadMainFu);
-
-		function upload() {
-			var self = this;
-			var obj = new FormData();
-			obj.append('file', $(this)[0].files[0]);
-			var coupondesctieleIdUP = $(":input[name='coupondesctieleId']").val();
-			//console.log("categoryIdUP:"+categoryIdUP);
-			if (coupondesctieleIdUP == '') {
-				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
-				// console.log("productIdUP:"+productIdUP);
-				alert("请先输入类名，保存后从编辑进入");
-			} else {
-				obj.append('coupondesctieleId', coupondesctieleIdUP);
-				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadCouponDescTitleWapImg",
-					type: "post",
-					dataType: "json",
-					cache: false,
-					data: obj,
-					processData: false, // 不处理数据
-					contentType: false, // 不设置内容类型
-					success: function (data) {
-						// console.log(data);
-						var returl = data.extend.uploadUrl;
-						setImage($(self).parent(), returl);
+			loadTpl()
+			// fetch data
+			data = {
+				"coupondescdetailId": $(this).attr('edit-id')
+			};
+			$.ajax({
+				url: "${APP_PATH}/MlbackCouponDescDetail/getCouponDescDetailById",
+				data: data,
+				type: "POST",
+				success: function (result) {
+					if (result.code == 100) {
+						obj = result.extend.mlbackCouponDescDetailOne;
+						// console.log(obj);
+						tianchong(obj);
+					} else {
+						alert("联系管理员");
 					}
-				});
-			}
-		}
-
-		function setImage(el, url) {
-			var img = new Image();
-			url = url.indexOf('://') > -1 ? url : '${APP_PATH }/static/img/CouponDescTitle/' + url;
-			img.src = url;
-			img.onload = function () {
-				var winW = $('#categoryTabContent').width();
-				var imgW = img.width;
-				var imgH = img.height;
-
-				if (imgW >= winW) {
-					el.css({
-						'width': '100%',
-						'height': Math.floor(img.height * $('#categoryTabContent').width() / img.width) + 'px',
-						'backgroundImage': 'url(' + url + ')',
-						'backgroundSize': '100%'
-					});
-				} else {
-					el.css({
-						'width': imgW + 'px',
-						'height': imgH + 'px',
-						'backgroundImage': 'url(' + url + ')',
-						'backgroundSize': '100%'
-					});
 				}
+			});
+			function tianchong(data) {
+				$(":input[name='coupondescdetailId']").val(data.coupondescdetailId);
+				$(":input[name='coupondescdetailName']").val(data.coupondescdetailName);
+				$(":input[name='coupondescdetailStrengthpre']").val(data.coupondescdetailStrengthpre);
+				$(":input[name='coupondescdetailStrength']").val(data.coupondescdetailStrength);
+				$(":input[name='coupondescdetailCodepre']").val(data.coupondescdetailCodepre);
+				$(":input[name='coupondescdetailCode']").val(data.coupondescdetailCode);
+				$(":input[name='coupondescdetailStatus']").val(data.coupondescdetailStatus);
+				$(":input[name='coupondescdetailCreatetime']").val(data.coupondescdetailCreatetime);
+				$(":input[name='coupondescdetailMotifytime']").val(data.coupondescdetailMotifytime);
 			}
-		}
-
-		function uploadMainFu() {
-			var self = this;
-			//实例化一个FormData
-			var obj = new FormData();
-			obj.append('file', $(this)[0].files[0]);
-			// console.log($(this)[0].files[0])
-			var coupondesctieleIdUP = $(":input[name='coupondesctieleId']").val();
-			if (coupondesctieleIdUP == "") {
-				// 如果没有pid,弹出"请先输入产品名，保存后再次进入"
-				// console.log("productIdUP:"+productIdUP);
-				alert("请先输入产品名，保存后从编辑进入");
-			} else {
-				obj.append('coupondesctieleId', coupondesctieleIdUP);
-				$.ajax({
-					url: "${APP_PATH}/UpImg/uploadCouponDescTitlePcImg",
-					type: "post",
-					dataType: "json",
-					cache: false,
-					data: obj,
-					processData: false, // 不处理数据
-					contentType: false, // 不设置内容类型
-					success: function (data) {
-						//设置背景为我们选择的图片
-						// console.log(data);
-						var returl = data.extend.uploadUrl;
-						// $(self).parent().css({ "background-image": "url("+'${APP_PATH }/static/img/category/'+returl+")" });
-						setImage($(self).parent(), returl);
-					}
-				});
-			}
-		}
+		});
 	</script>
 </body>
-
 </html>

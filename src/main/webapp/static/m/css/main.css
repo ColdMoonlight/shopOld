@@ -2606,9 +2606,10 @@ word-break: break-all;width: 98%; float: left; margin: 5px 2% 0 0; font-size: 14
 			    }
 			}
 /**********************/
-.sale_copen{width:98%;border: 1px dashed #eb8378;margin: 5px 1% 0; padding:5px 0 5px 80px;
-background: url(../../pc/img/sdf.png) no-repeat 10px center;}
-.sale_copen p{font-size: 14px;margin: 0; color:#eb8378;}
+.sale_copen{min-height: 100px;}
+.sale_copen>img{width: 100%;}
+.sale_copen.checkout{min-height: unset;border: 1px dashed #eb8378;padding:5px 0 5px 80px; background: url(../../common/sdf.png) no-repeat 10px center;}
+.sale_copen p{font-size: 14px;margin: 0; color: #eb8378;}
 .sale_copen ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}
 .sale_copen ul li span{ color: #d90b22;}
 
