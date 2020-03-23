@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCategory;
+import com.atguigu.bean.MlbackCouponDescDetail;
 import com.atguigu.bean.MlbackCouponDescTitle;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackSlide;
@@ -25,6 +26,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
+import com.atguigu.service.MlbackCouponDescDetailService;
 import com.atguigu.service.MlbackCouponDescTitleService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackSlideService;
@@ -35,18 +37,14 @@ import com.atguigu.utils.DateUtil;
 @RequestMapping("/MlbackCouponDescTitle")
 public class MlbackCouponDescTitleController {
 	
-	
 	@Autowired
 	MlbackCouponDescTitleService mlbackCouponDescTitleService;
 		
 	@Autowired
-	MlbackProductService mlbackProductService;
+	MlbackCouponDescDetailService mlbackCouponDescDetailService;
 	
 	@Autowired
 	MlbackAdminService mlbackAdminService;
-	
-	@Autowired
-	MlbackCategoryService mlbackCategoryService;
 	
 	/**
 	 * 1.0	onuse	200104
@@ -94,7 +92,6 @@ public class MlbackCouponDescTitleController {
 		//获取类名
 		Integer coupondesctieleId = mlbackCouponDescTitle.getCoupondesctieleId();
 		
-		//mlbackProductService;
 		String nowtime = DateUtil.strTime14s();
 		mlbackCouponDescTitle.setCoupondesctieleMotifytime(nowtime);
 		
@@ -137,6 +134,8 @@ public class MlbackCouponDescTitleController {
 		mlbackCouponDescTitleReq.setCoupondesctieleId(coupondesctieleId);
 		//查询本条
 		MlbackCouponDescTitle mlbackCouponDescTitleOne =mlbackCouponDescTitleService.selectMlbackCouponDescTitleById(mlbackCouponDescTitleReq);
+		
+		
 		return Msg.success().add("resMsg", "查看单条类目的详情细节完毕")
 					.add("mlbackCouponDescTitleOne", mlbackCouponDescTitleOne);
 	}
@@ -157,7 +156,11 @@ public class MlbackCouponDescTitleController {
 		//查询本条
 		List<MlbackCouponDescTitle> mlbackCouponDescTitleList =mlbackCouponDescTitleService.selectMlbackCouponDescTitlewapListByArea(mlbackCouponDescTitleReq);
 		
-		return Msg.success().add("resMsg", "查看该位置的轮播完毕").add("mlbackCouponDescTitleList", mlbackCouponDescTitleList);
+		MlbackCouponDescDetail mlbackCouponDescDetailReq = new MlbackCouponDescDetail();
+		mlbackCouponDescDetailReq.setCoupondescdetailStatus(1);
+		List<MlbackCouponDescDetail> mlbackCouponDescDetailList =   mlbackCouponDescDetailService.selectMlbackCouponDescDetailByStatus(mlbackCouponDescDetailReq);
+		
+		return Msg.success().add("resMsg", "查看该位置的轮播完毕").add("mlbackCouponDescTitleList", mlbackCouponDescTitleList).add("mlbackCouponDescDetailList", mlbackCouponDescDetailList);
 	}
 	
 	/**
