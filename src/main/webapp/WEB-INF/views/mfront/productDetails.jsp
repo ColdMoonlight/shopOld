@@ -147,20 +147,37 @@
 			});
 			/* couponlist */
 			$.ajax({
-				url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
-				data: JSON.stringify({ "slideArea": 6 }),
+				url: '${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitlewapListByStatus',
 				type: 'post',
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					var headerData = data.extend.mlbackSlideList;
-					if (data.code == 100 && headerData.length > 0) {
-						renderSaleCoupon($('.sale_copen'), headerData[0]);
+					var saleCouponEl = $('.sale_coupon'),
+						titleData = data.extend.mlbackCouponDescTitleList,
+						couponArrData = data.extend.mlbackCouponDescDetailList;
+					if (data.code == 100 && titleData.length > 0) {
+						renderSaleCoupon(saleCouponEl, {
+							title: titleData[0],
+							couponList: couponArrData
+						});
+					} else {
+						saleCouponEl.hide();
 					}
 				}
 			});
 			function renderSaleCoupon(parent, data) {
-				parent.html('<img src="' + data.slideWapimgurl + '" alt="">');
+				var htmlStr = '';
+				if (data.title && data.title.coupondesctieleWapstatus)
+					htmlStr += '<img src="' + data.title.coupondesctieleWapimgurl + '" />';
+				htmlStr += '<div class="sale_coupon-body"><p>' + data.title.coupondesctieleTieledetail + '</p><ul>';
+				for (var i = 0, len = data.couponList.length; i < len; i++) {
+					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '<span>'
+						+ data.couponList[i].coupondescdetailStrength + '</span>'
+						+ data.couponList[i].coupondescdetailCodepre
+						+ ' <b>' + data.couponList[i].coupondescdetailCode + '</b></li>';
+				}
+				htmlStr += '</ul></div>';
+				parent.html(htmlStr);
 			}
 			/* detials of condition（sku） */
 			$.ajax({
