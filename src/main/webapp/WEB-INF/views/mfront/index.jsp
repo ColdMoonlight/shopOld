@@ -764,7 +764,7 @@
 				if (result.code == 100) {
 					resData = result.extend.mlfrontReviewList;
 					resDataimg = result.extend.mlfrontReviewImgList;
-					masonryHtml(masonrycont, resData.slice(0, 8), resDataimg.slice(0, 8));
+					masonryHtml(masonrycont, resData.slice(0, 10), resDataimg.slice(0, 10));
 					new LazyLoad(masonrycont.find('img'), {
 						root: null,
 						rootMargin: "0px",
