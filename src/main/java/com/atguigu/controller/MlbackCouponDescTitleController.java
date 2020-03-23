@@ -157,6 +157,7 @@ public class MlbackCouponDescTitleController {
 		List<MlbackCouponDescTitle> mlbackCouponDescTitleList =mlbackCouponDescTitleService.selectMlbackCouponDescTitlewapListByArea(mlbackCouponDescTitleReq);
 		
 		MlbackCouponDescDetail mlbackCouponDescDetailReq = new MlbackCouponDescDetail();
+		
 		mlbackCouponDescDetailReq.setCoupondescdetailStatus(1);
 		List<MlbackCouponDescDetail> mlbackCouponDescDetailList =   mlbackCouponDescDetailService.selectMlbackCouponDescDetailByStatus(mlbackCouponDescDetailReq);
 		
