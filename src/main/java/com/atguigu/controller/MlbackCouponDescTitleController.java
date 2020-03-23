@@ -16,22 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCategory;
 import com.atguigu.bean.MlbackCouponDescDetail;
 import com.atguigu.bean.MlbackCouponDescTitle;
-import com.atguigu.bean.MlbackProduct;
-import com.atguigu.bean.MlbackSlide;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackCouponDescDetailService;
 import com.atguigu.service.MlbackCouponDescTitleService;
-import com.atguigu.service.MlbackProductService;
-import com.atguigu.service.MlbackSlideService;
 import com.atguigu.utils.DateUtil;
-
 
 @Controller
 @RequestMapping("/MlbackCouponDescTitle")
