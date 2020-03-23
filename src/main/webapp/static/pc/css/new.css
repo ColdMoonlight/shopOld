@@ -233,11 +233,11 @@ div.zoomMask{position:absolute;cursor:move;z-index:1;}
 .hot_box_product_cont .product-title{font-weight: normal;line-height: 20px; height: 40px; overflow:hidden; color: #333;}
 .product-list_home .product-title{font-weight: normal;line-height: 20px; height: 40px; overflow:hidden; color: #333;}
 /**************/
-.sale_copen{width: 80%; min-height: 140px;}
-.sale_copen.checkout{min-height: unset; border: 1px dashed #eb8378;padding:5px 0 5px 80px; background: url(../../common/sdf.png) no-repeat 10px center;}
-.sale_copen p{font-size: 14px;margin: 0; color: #eb8378;}
-.sale_copen ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}
-.sale_copen ul li span{ color: #d90b22;}
+.sale_coupon{display: flex; align-items: center; width: 80%; border: 1px dashed #eb8378; padding: 5px; margin-top: 10px;}
+.sale_coupon-body { margin-left: 10px; }
+.sale_coupon .sale_coupon-body p{font-size: 14px;margin: 0; color: #eb8378;}
+.sale_coupon .sale_coupon-body ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}
+.sale_coupon .sale_coupon-body ul li span{ color: #d90b22;}
 
 .errortips{display: none; background: #f9f9f9; width: 96%; margin: 0 2%; border-radius:2px; padding: 8px; border:1px solid #ff1671;font-size: 12px;}
 .errortips span{display: block;padding: 0 0 0 30px; color: #666;background:url(../../m/img/index/cw.png) no-repeat center left; background-size:20px;}
@@ -349,7 +349,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 
 .order-list .content .num{-webkit-box-flex:1;/* min-width:150px; height:100%; position:absolute;right:20px;top:0 */ width: 100%;}
 .order-list .content .num span{height:100%; display: flex;align-items:center;}
-.list-group-item .sale_copen{margin: 0 0 1em;width: 100%;}
+.list-group-item .sale_coupon{margin: 0 0 1em;width: 100%;}
 
 
 /* .cart-item>.content .num{-webkit-box-flex:1;min-width:150px; height:100%; position:absolute;right:0;top:0}
@@ -622,9 +622,6 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
 .customer_widget_box .review-statics-item .progress{width: 40%;}
 .customer_widget_box .reviews-statics{float: left; width: 70%;}
-.ban_insimg{max-width: 100%; height: auto; text-align: center; overflow: hidden; position: relative;}
-.ban_insimg img{width: 100%; display: inline-block;}
-.review-statics-item .reviews-data2 .icon{display: inline-block;font-size: 22px;width: 24px;height: 24px;}
 
 
 
