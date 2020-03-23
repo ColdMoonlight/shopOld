@@ -145,7 +145,6 @@
 					html += '<a href="${APP_PATH}/' + data.slidePageSeoname + '.html">' + '<img src="' + data.slideWapimgurl + '" alt="">' + '</a>';
 				}
 			}
-			console.log(data)
 			parent.html(html);
 	 }
 	  $(function(){
