@@ -79,7 +79,6 @@
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 
@@ -282,7 +281,6 @@
 					type: "POST",
 					success: function (result) {
 						if (result.code == 100) {
-							console.log(result.extend.mlbackCouponDescTitleOne);
 							tianchong(result.extend.mlbackCouponDescTitleOne);
 						} else {
 							alert("联系管理员");
