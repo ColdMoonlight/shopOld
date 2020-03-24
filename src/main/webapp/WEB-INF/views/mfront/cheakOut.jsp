@@ -342,7 +342,6 @@
 							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
 							"addressinfoId": addressId,
 						};
-						console.log(reqData)
 						if (checkAddress(reqDataUp)) {
 							//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 							stridsContent = shopidlist;
@@ -600,6 +599,7 @@
 					orderitemPskuNumber: num
 				};
 			// console.table(reqData);
+			$(".loading").show();
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
@@ -607,12 +607,24 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					// console.log(data);
-					console.info('success')
+					if (data.code == 100) {
+						resetCouponCode();
+						resetProductNumArr();
+					} else {
+						renderSysMsg('handle product fail.');
+					}
+					$(".loading").hide();
 				},
 				error: function () {
-					renderSysMsg('handle product fail.')
+					renderSysMsg('handle product fail.');
 				}
+			});
+		}
+
+		function resetProductNumArr() {
+			productNumArr = [];
+			$('.cart-item').each(function(index, item) {
+				productNumArr.push($(item).find('input[name=cart-product-num]').val());
 			});
 		}
 
@@ -778,7 +790,6 @@
 			productNumText += 1;
 			productNum.val(productNumText);
 
-			resetCouponCode();
 			reCalPrice(item, true);
 			updateOrderItemNum(item, productNumText);
 		}
@@ -792,7 +803,6 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 
-				resetCouponCode();
 				reCalPrice(item, false);
 				updateOrderItemNum(item, productNumText);
 			}

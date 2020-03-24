@@ -294,6 +294,8 @@
 		$("#country").on("change", function () {
 			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
 				dataname = $(this).val();
+
+			resetCouponCode();
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");
@@ -386,6 +388,10 @@
 			}
 		});
 
+		function resetCouponCode() {
+			couponCode = null;
+			couponId = null;
+		}
 		/*********************/
 		function renderAddressDetail(data) {
 			var dataprov = data.addressProvince ? data.addressProvince : '',
@@ -655,6 +661,7 @@
 					orderitemPskuNumber: num
 				}
 			// console.table(reqData);
+			$(".loading").show();
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
@@ -662,11 +669,24 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					console.info('success')
+					if (data.code == 100) {
+						resetCouponCode();
+						resetProductNumArr();
+					} else {
+						renderSysMsg('handle product fail.');
+					}
+					$(".loading").hide();
 				},
 				error: function () {
-					renderSysMsg('handle product fail.')
+					renderSysMsg('handle product fail.');
 				}
+			});
+		}
+
+		function resetProductNumArr() {
+			productNumArr = [];
+			$('.cart-item').each(function(index, item) {
+				productNumArr.push($(item).find('input[name=cart-product-num]').val());
 			});
 		}
 

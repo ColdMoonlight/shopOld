@@ -27,9 +27,13 @@ public class MlbackCoupon {
     
     private Integer couponAllTimes;  //优惠码可以使用总次数  如  999,998次
     
-//    private Integer couponProductOnlyType;		//优惠码是否支持单品
-//    
-//    private Integer couponProductOnlyPId;		//优惠码支持单品的时候,所绑定的产品
+    private Integer couponProductOnlyType;		//优惠码是否支持单品
+    
+    private Integer couponProductOnlyPId;		//优惠码支持单品的时候,所绑定的产品
+    
+    private String couponProductSeoNameOnlyPId;
+    
+    private String couponProductProNameOnlyPId;
     
     private Integer couponAdminId;
 
@@ -144,8 +148,40 @@ public class MlbackCoupon {
 	public void setCouponAllTimes(Integer couponAllTimes) {
 		this.couponAllTimes = couponAllTimes;
 	}
+	
+    public Integer getCouponProductOnlyType() {
+		return couponProductOnlyType;
+	}
 
-    public Integer getCouponAdminId() {
+	public void setCouponProductOnlyType(Integer couponProductOnlyType) {
+		this.couponProductOnlyType = couponProductOnlyType;
+	}
+
+	public Integer getCouponProductOnlyPId() {
+		return couponProductOnlyPId;
+	}
+
+	public void setCouponProductOnlyPId(Integer couponProductOnlyPId) {
+		this.couponProductOnlyPId = couponProductOnlyPId;
+	}
+
+	public String getCouponProductSeoNameOnlyPId() {
+		return couponProductSeoNameOnlyPId;
+	}
+
+	public void setCouponProductSeoNameOnlyPId(String couponProductSeoNameOnlyPId) {
+		this.couponProductSeoNameOnlyPId = couponProductSeoNameOnlyPId == null ? null : couponProductSeoNameOnlyPId.trim();
+	}
+
+	public String getCouponProductProNameOnlyPId() {
+		return couponProductProNameOnlyPId;
+	}
+
+	public void setCouponProductProNameOnlyPId(String couponProductProNameOnlyPId) {
+		this.couponProductProNameOnlyPId = couponProductProNameOnlyPId == null ? null : couponProductProNameOnlyPId.trim();
+	}
+
+	public Integer getCouponAdminId() {
         return couponAdminId;
     }
 
@@ -217,17 +253,59 @@ public class MlbackCoupon {
 		this.couponAreaNum = couponAreaNum;
 	}
 
+	public MlbackCoupon() {
+		super();
+	}
+
+	public MlbackCoupon(Integer couponId, String couponName, BigDecimal couponPrice, BigDecimal couponPriceOff,
+			BigDecimal couponPriceBaseline, Integer couponStatus, String couponCode, String couponType,
+			Integer couponLuckDrawType, Integer couponLuckDrawWeight, Integer couponTimes, Integer couponAllTimes,
+			Integer couponProductOnlyType, Integer couponProductOnlyPId, String couponProductSeoNameOnlyPId,
+			String couponProductProNameOnlyPId, Integer couponAdminId, String couponAdminOperatorname,
+			String couponCreatetime, String couponMotifytime, String couponStarttime, String couponEndtime,
+			String couponImgwapurl, String couponImgpcurl, Integer couponAreaNum) {
+		super();
+		this.couponId = couponId;
+		this.couponName = couponName;
+		this.couponPrice = couponPrice;
+		this.couponPriceOff = couponPriceOff;
+		this.couponPriceBaseline = couponPriceBaseline;
+		this.couponStatus = couponStatus;
+		this.couponCode = couponCode;
+		this.couponType = couponType;
+		this.couponLuckDrawType = couponLuckDrawType;
+		this.couponLuckDrawWeight = couponLuckDrawWeight;
+		this.couponTimes = couponTimes;
+		this.couponAllTimes = couponAllTimes;
+		this.couponProductOnlyType = couponProductOnlyType;
+		this.couponProductOnlyPId = couponProductOnlyPId;
+		this.couponProductSeoNameOnlyPId = couponProductSeoNameOnlyPId;
+		this.couponProductProNameOnlyPId = couponProductProNameOnlyPId;
+		this.couponAdminId = couponAdminId;
+		this.couponAdminOperatorname = couponAdminOperatorname;
+		this.couponCreatetime = couponCreatetime;
+		this.couponMotifytime = couponMotifytime;
+		this.couponStarttime = couponStarttime;
+		this.couponEndtime = couponEndtime;
+		this.couponImgwapurl = couponImgwapurl;
+		this.couponImgpcurl = couponImgpcurl;
+		this.couponAreaNum = couponAreaNum;
+	}
+
 	@Override
 	public String toString() {
 		return "MlbackCoupon [couponId=" + couponId + ", couponName=" + couponName + ", couponPrice=" + couponPrice
 				+ ", couponPriceOff=" + couponPriceOff + ", couponPriceBaseline=" + couponPriceBaseline
 				+ ", couponStatus=" + couponStatus + ", couponCode=" + couponCode + ", couponType=" + couponType
 				+ ", couponLuckDrawType=" + couponLuckDrawType + ", couponLuckDrawWeight=" + couponLuckDrawWeight
-				+ ", couponTimes=" + couponTimes + ", couponAllTimes=" + couponAllTimes + ", couponAdminId="
-				+ couponAdminId + ", couponAdminOperatorname=" + couponAdminOperatorname + ", couponCreatetime="
-				+ couponCreatetime + ", couponMotifytime=" + couponMotifytime + ", couponStarttime=" + couponStarttime
-				+ ", couponEndtime=" + couponEndtime + ", couponImgwapurl=" + couponImgwapurl + ", couponImgpcurl="
-				+ couponImgpcurl + ", couponAreaNum=" + couponAreaNum + "]";
+				+ ", couponTimes=" + couponTimes + ", couponAllTimes=" + couponAllTimes + ", couponProductOnlyType="
+				+ couponProductOnlyType + ", couponProductOnlyPId=" + couponProductOnlyPId
+				+ ", couponProductSeoNameOnlyPId=" + couponProductSeoNameOnlyPId + ", couponProductProNameOnlyPId="
+				+ couponProductProNameOnlyPId + ", couponAdminId=" + couponAdminId + ", couponAdminOperatorname="
+				+ couponAdminOperatorname + ", couponCreatetime=" + couponCreatetime + ", couponMotifytime="
+				+ couponMotifytime + ", couponStarttime=" + couponStarttime + ", couponEndtime=" + couponEndtime
+				+ ", couponImgwapurl=" + couponImgwapurl + ", couponImgpcurl=" + couponImgpcurl + ", couponAreaNum="
+				+ couponAreaNum + "]";
 	}
 	
 	
