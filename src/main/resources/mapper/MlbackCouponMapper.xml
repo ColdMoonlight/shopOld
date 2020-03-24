@@ -15,6 +15,11 @@
     <result column="coupon_times" jdbcType="INTEGER" property="couponTimes" />
     <result column="coupon_alltimes" jdbcType="INTEGER" property="couponAllTimes" />
     
+    <result column="coupon_productonly_type" jdbcType="INTEGER" property="couponProductOnlyType" />
+    <result column="coupon_productonly_pid" jdbcType="INTEGER" property="couponProductOnlyPId" />
+    <result column="coupon_productseonameonly_pid" jdbcType="VARCHAR" property="couponProductSeoNameOnlyPId" />
+    <result column="coupon_productpronameonly_pid" jdbcType="VARCHAR" property="couponProductProNameOnlyPId" />
+    
     <result column="coupon_admin_id" jdbcType="INTEGER" property="couponAdminId" />
     <result column="coupon_admin_operatorName" jdbcType="VARCHAR" property="couponAdminOperatorname" />
     <result column="coupon_createTime" jdbcType="VARCHAR" property="couponCreatetime" />
@@ -88,7 +93,7 @@
   </sql>
   <sql id="Base_Column_List">
     coupon_id, coupon_name, coupon_price, coupon_priceoff, coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_luckdraw_type, coupon_luckdraw_weight, coupon_times, coupon_alltimes,
-    coupon_admin_id, coupon_admin_operatorName, coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum
+    coupon_productonly_type,coupon_productonly_pid,coupon_productseonameonly_pid,coupon_productpronameonly_pid,coupon_admin_id, coupon_admin_operatorName, coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackCouponExample" resultMap="BaseResultMap">
     select
@@ -120,10 +125,11 @@
   <insert id="insert" parameterType="com.atguigu.bean.MlbackCoupon">
     insert into tb_mlback_coupon (coupon_id, coupon_name, coupon_price, coupon_priceoff, 
       coupon_price_baseline, coupon_status, coupon_code, coupon_type, coupon_luckdraw_type, coupon_luckdraw_weight, coupon_times, coupon_alltimes, 
-      coupon_admin_id, coupon_admin_operatorName, 
+      coupon_productonly_type,coupon_productonly_pid,coupon_productseonameonly_pid,coupon_productpronameonly_pid,coupon_admin_id, coupon_admin_operatorName, 
       coupon_createTime, coupon_motifyTime, coupon_startTime, coupon_endtime, couponImg_wapurl, couponImg_pcurl, coupon_AreaNum)
     values (#{couponId,jdbcType=INTEGER}, #{couponName,jdbcType=VARCHAR}, #{couponPrice,jdbcType=DECIMAL}, #{couponPriceOff,jdbcType=DECIMAL},  
       #{couponPriceBaseline,jdbcType=DECIMAL}, #{couponStatus,jdbcType=INTEGER}, #{couponCode,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, #{couponLuckDrawType,jdbcType=INTEGER}, #{couponLuckDrawWeight,jdbcType=INTEGER}, #{couponTimes,jdbcType=INTEGER}, #{couponAllTimes,jdbcType=INTEGER}, 
+      #{couponProductOnlyType,jdbcType=INTEGER}, #{couponProductOnlyPId,jdbcType=INTEGER}, #{couponProductSeoNameOnlyPId,jdbcType=VARCHAR}, #{couponProductProNameOnlyPId,jdbcType=VARCHAR}, 
       #{couponAdminId,jdbcType=INTEGER}, #{couponAdminOperatorname,jdbcType=VARCHAR}, 
       #{couponCreatetime,jdbcType=VARCHAR}, #{couponMotifytime,jdbcType=VARCHAR}, #{couponStarttime,jdbcType=VARCHAR}, #{couponEndtime,jdbcType=VARCHAR}, 
       #{couponImgwapurl,jdbcType=VARCHAR}, #{couponImgpcurl,jdbcType=VARCHAR}, #{couponAreaNum,jdbcType=INTEGER})
@@ -174,6 +180,18 @@
       <if test="record.couponAllTimes != null">
         coupon_alltimes = #{record.couponAllTimes,jdbcType=INTEGER},
       </if>
+      <if test="record.couponProductOnlyType != null">
+        coupon_productonly_type = #{record.couponProductOnlyType,jdbcType=INTEGER},
+      </if>
+      <if test="record.couponProductOnlyPId != null">
+        coupon_productonly_pid = #{record.couponProductOnlyPId,jdbcType=INTEGER},
+      </if>
+      <if test="record.couponProductSeoNameOnlyPId != null">
+        coupon_productseonameonly_pid = #{record.couponProductSeoNameOnlyPId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couponProductProNameOnlyPId != null">
+        coupon_productpronameonly_pid = #{record.couponProductProNameOnlyPId,jdbcType=VARCHAR},
+      </if>
       <if test="record.couponAdminId != null">
         coupon_admin_id = #{record.couponAdminId,jdbcType=INTEGER},
       </if>
@@ -220,6 +238,10 @@
       coupon_luckdraw_weight = #{record.couponLuckDrawWeight,jdbcType=INTEGER},
       coupon_times = #{record.couponTimes,jdbcType=INTEGER},
       coupon_alltimes = #{record.couponAllTimes,jdbcType=INTEGER},
+	  coupon_productonly_type = #{record.couponProductOnlyType,jdbcType=INTEGER},
+	  coupon_productonly_pid = #{record.couponProductOnlyPId,jdbcType=INTEGER},
+	  coupon_productseonameonly_pid = #{record.couponProductSeoNameOnlyPId,jdbcType=VARCHAR},
+	  coupon_productpronameonly_pid = #{record.couponProductProNameOnlyPId,jdbcType=VARCHAR},
       coupon_admin_id = #{record.couponAdminId,jdbcType=INTEGER},
       coupon_admin_operatorName = #{record.couponAdminOperatorname,jdbcType=VARCHAR},
       coupon_createTime = #{record.couponCreatetime,jdbcType=VARCHAR},
@@ -247,6 +269,10 @@
       coupon_luckdraw_weight = #{couponLuckDrawWeight,jdbcType=INTEGER},
       coupon_times = #{couponTimes,jdbcType=INTEGER},
       coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
+      coupon_productonly_type = #{couponProductOnlyType,jdbcType=INTEGER},
+	  coupon_productonly_pid = #{couponProductOnlyPId,jdbcType=INTEGER},
+	  coupon_productseonameonly_pid = #{couponProductSeoNameOnlyPId,jdbcType=VARCHAR},
+	  coupon_productpronameonly_pid = #{couponProductProNameOnlyPId,jdbcType=VARCHAR},
       coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
       coupon_admin_operatorName = #{couponAdminOperatorname,jdbcType=VARCHAR},
       coupon_createTime = #{couponCreatetime,jdbcType=VARCHAR},
@@ -299,6 +325,18 @@
       <if test="couponAllTimes != null">
         coupon_alltimes,
       </if>
+      <if test="couponProductOnlyType != null">
+		coupon_productonly_type,
+	  </if>
+	  <if test="couponProductOnlyPId != null">
+		coupon_productonly_pid,
+	  </if>
+	  <if test="couponProductSeoNameOnlyPId != null">
+		coupon_productseonameonly_pid,
+	  </if>
+	  <if test="couponProductProNameOnlyPId != null">
+		coupon_productpronameonly_pid,
+	  </if>
       <if test="couponAdminId != null">
         coupon_admin_id,
       </if>
@@ -364,6 +402,18 @@
       <if test="couponAllTimes != null">
         #{couponAllTimes,jdbcType=INTEGER},
       </if>
+      <if test="couponProductOnlyType != null">
+		#{couponProductOnlyType,jdbcType=INTEGER},
+	  </if>
+	  <if test="couponProductOnlyPId != null">
+		#{couponProductOnlyPId,jdbcType=INTEGER},
+	  </if>
+	  <if test="couponProductSeoNameOnlyPId != null">
+		#{couponProductSeoNameOnlyPId,jdbcType=VARCHAR},
+	  </if>
+	  <if test="couponProductProNameOnlyPId != null">
+		#{couponProductProNameOnlyPId,jdbcType=VARCHAR},
+	  </if>
       <if test="couponAdminId != null">
         #{couponAdminId,jdbcType=INTEGER},
       </if>
@@ -435,6 +485,18 @@
       <if test="couponAllTimes != null">
         coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
       </if>
+      <if test="couponProductOnlyType != null">
+		coupon_productonly_type = #{couponProductOnlyType,jdbcType=INTEGER},
+      </if>
+      <if test="couponProductOnlyPId != null">
+		coupon_productonly_pid = #{couponProductOnlyPId,jdbcType=INTEGER},
+      </if>
+      <if test="couponProductSeoNameOnlyPId != null">
+		coupon_productseonameonly_pid = #{couponProductSeoNameOnlyPId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponProductProNameOnlyPId != null">
+		coupon_productpronameonly_pid = #{couponProductProNameOnlyPId,jdbcType=VARCHAR},
+      </if>
       <if test="couponAdminId != null">
         coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
       </if>
@@ -502,6 +564,18 @@
       </if>
       <if test="couponAllTimes != null">
         coupon_alltimes = #{couponAllTimes,jdbcType=INTEGER},
+      </if>
+      <if test="couponProductOnlyType != null">
+		coupon_productonly_type = #{couponProductOnlyType,jdbcType=INTEGER},
+      </if>
+      <if test="couponProductOnlyPId != null">
+		coupon_productonly_pid = #{couponProductOnlyPId,jdbcType=INTEGER},
+      </if>
+      <if test="couponProductSeoNameOnlyPId != null">
+		coupon_productseonameonly_pid = #{couponProductSeoNameOnlyPId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponProductProNameOnlyPId != null">
+		coupon_productpronameonly_pid = #{couponProductProNameOnlyPId,jdbcType=VARCHAR},
       </if>
       <if test="couponAdminId != null">
         coupon_admin_id = #{couponAdminId,jdbcType=INTEGER},
