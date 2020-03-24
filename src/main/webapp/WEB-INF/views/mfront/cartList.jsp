@@ -6,8 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Cart List</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -34,8 +33,7 @@
 			n.queue = []; t = b.createElement(e); t.async = !0;
 			t.src = v; s = b.getElementsByTagName(e)[0];
 			s.parentNode.insertBefore(t, s)
-		}(window, document, 'script',
-			'https://connect.facebook.net/en_US/fbevents.js');
+		}(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 		fbq('init', '246433859565492');
 		//fbq('init', '667403967094866');
 		fbq('track', 'PageView');
@@ -51,8 +49,6 @@
 </head>
 
 <body>
-
-
 	<jsp:include page="mheader.jsp"></jsp:include>
 
 	<!-- main -->
@@ -61,9 +57,7 @@
 			<img class="purechase-step" src="${APP_PATH }/static/m/img/other/step_cart.jpg">
 		</div>
 		<!-- purechase step -->
-
 		<div class="cart-list"></div>
-
 		<div class="cart-footer" style="display: none">
 			<div class="show-t-num">
 				<span class="show-t-num-text">NUMTOTAL</span>
@@ -81,7 +75,7 @@
 	</div>
 	<!--*****热品推荐**********************-->
 	<div class="hot_box_product clearfix" style="display: none;">
-		<h3>YOU MIGTH ALSO LIKE</h3>
+		<h3>RECOMMENDATION FOR YOU</h3>
 		<div class="hot_box_product_cont">
 			<div class="swiper-wrapper"></div>
 			<div class="swiper-pagination swiper-pagination2"></div>
@@ -201,7 +195,6 @@
 						async: false,
 						contentType: 'application/json',
 						success: function (data) {
-							// console.log(data)
 							if (data.code != 100) {
 								renderSysMsg('sys error!');
 							} else {
@@ -260,7 +253,6 @@
 				type: "post",
 				success: function (data) {
 					if (data.code == 100) {
-						// console.log(data)
 						var conditionArr = data.extend.mlbackProductSkuResList;
 						for (var i = 0, len = conditionArr.length; i < len; i += 1) {
 							renderCondition(conditionBox, conditionArr[i])
@@ -396,7 +388,6 @@
 			dataType: 'json',
 			contentType: 'application/json',
 			success: function (data) {
-				// console.log(data)
 				if (data.code == 100) {
 					var resDataProduct = data.extend.mlbackProductResList;
 					rednerProduct(hot_pic, resDataProduct);
@@ -466,7 +457,6 @@
 				cartitemProductName: target.data('productname'),
 				cartitemProductNumber: num
 			}
-			// console.table(reqData);
 			$.ajax({
 				url: '${APP_PATH}/MlbackCart/updateCartItemSkuNum	',
 				data: JSON.stringify(reqData),
@@ -524,11 +514,9 @@
 				return infoRelids;
 			}
 			if (cartItemArr.length) {
-				// console.log(cartItemArr)
 				orderMoney = subTotal.text().slice(1);
 				var shopidlist = toFbidsPurchase(cartItemArr);
-				// console.log(shopidlist)
-				//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
+				// 追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 				fbq('track', 'InitiateCheckout', {
 					content_ids: [shopidlist],
 					content_type: 'product',
@@ -568,7 +556,6 @@
 						url: '${APP_PATH}/MlbackCart/getCartitemIdDetails',
 						type: 'post',
 						success: function (data) {
-							// console.log(data);
 							var resData = data.extend.mlfrontCartItemListRes;
 							if (resData.length > 0) {
 								$(".hot_box_product").remove();
@@ -634,7 +621,6 @@
 				data: JSON.stringify(reqData),
 				contentType: 'application/json',
 				success: function (data) {
-					// console.log(data)
 					if (data.code == 100) {
 						var resData = data.extend;
 						if (resData.isDelSuccess == 1) {
