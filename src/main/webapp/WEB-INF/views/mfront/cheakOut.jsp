@@ -600,6 +600,7 @@
 					orderitemPskuNumber: num
 				};
 			// console.table(reqData);
+			$(".loading").show();
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
@@ -607,12 +608,23 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					// console.log(data);
-					console.info('success')
+					if (data.code == 100) {
+						resetProductNumArr();
+					} else {
+						renderSysMsg('handle product fail.');
+					}
+					$(".loading").hide();
 				},
 				error: function () {
-					renderSysMsg('handle product fail.')
+					renderSysMsg('handle product fail.');
 				}
+			});
+		}
+
+		function resetProductNumArr() {
+			productNumArr = [];
+			$('.cart-item').each(function(index, item) {
+				productNumArr.push($(item).find('input[name=cart-product-num]').val());
 			});
 		}
 
