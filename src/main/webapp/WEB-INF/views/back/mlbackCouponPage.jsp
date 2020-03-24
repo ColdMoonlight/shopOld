@@ -261,22 +261,23 @@
 
 		// 新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
-			var data = $('form').serializeArray();
-			data = data.reduce(function (obj, item) {
+			var reqData = $('form').serializeArray();
+			reqData = reqData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			data.couponStatus = $(":input[name='couponStatus']").val();
+			reqData.couponStatus = $(":input[name='couponStatus']").val();
+			console.log(reqData)
 			$.ajax({
 				url: "${APP_PATH}/MlbackCoupon/save",
-				data: JSON.stringify(data),
+				data: JSON.stringify(reqData),
 				dataType: "json",
 				contentType: 'application/json',
 				type: "post",
 				success: function (result) {
 					if (result.code == 100) {
 						alert('新建/编辑成功！');
-						window.location.href = "${APP_PATH}/MlbackCoupon/toMlbackCouponPage";
+						// window.location.href = "${APP_PATH}/MlbackCoupon/toMlbackCouponPage";
 					}
 				}
 			});
@@ -327,6 +328,7 @@
 				$(".open_1").hide();
 				$(".open_0").show();
 			}
+
 			$(":input[name='couponLuckDrawType']").val(data.couponLuckDrawType);
 			$(":input[name='couponLuckDrawWeight']").val(data.couponLuckDrawWeight);
 			$(":input[name='couponTimes']").val(data.couponTimes);
@@ -334,6 +336,7 @@
 			$(":input[name='couponAreaNum']").val(data.couponAreaNum);
 			$(":input[name='couponStarttime']").val(data.couponStarttime);
 			$(":input[name='couponEndtime']").val(data.couponEndtime);
+			$('.binding_product-select').hide();
 
 			if (data.couponImgwapurl && data.couponImgwapurl.length) {
 				var el = $(".upload-img-btn.img");
@@ -353,6 +356,8 @@
 
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addCoupon.html', function () {
+				getProductList();
+
 				$('.coupon-status').find('input').on('change', function () {
 					var spanEl = $(this).parent().find('span');
 					$(this).is(':checked') ? $(this).val(1) && spanEl.text('已生效') : $(this).val(0) && spanEl.text('未生效');
@@ -384,7 +389,38 @@
 						$(".open_0").hide();
 					}
 				});
+				
+				$('.binding-product select').on('change', function() {
+					if($(this).val() == 1) {
+						$('.binding_product-select').show();
+					} else {
+						$('.binding_product-select').hide();
+					}
+				});
 			});
+		}
+
+		function getProductList() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						renderProductList($('#couponProductOnlyPId'), result.extend.mlbackProductResList);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+
+		function renderProductList(el, data) {
+			var html = '<option value="-1">---无绑定产品---</option>';
+			for (var i = 0; i < data.length; i += 1) {
+				html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
+			}
+			el.html(html);
 		}
 
 		$(document.body).on("change", "#file1", upload);
