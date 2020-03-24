@@ -342,7 +342,6 @@
 							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
 							"addressinfoId": addressId,
 						};
-						console.log(reqData)
 						if (checkAddress(reqDataUp)) {
 							//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 							stridsContent = shopidlist;
