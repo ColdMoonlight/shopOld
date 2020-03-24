@@ -609,6 +609,7 @@
 				contentType: 'application/json',
 				success: function (data) {
 					if (data.code == 100) {
+						resetCouponCode();
 						resetProductNumArr();
 					} else {
 						renderSysMsg('handle product fail.');
@@ -790,7 +791,6 @@
 			productNumText += 1;
 			productNum.val(productNumText);
 
-			resetCouponCode();
 			reCalPrice(item, true);
 			updateOrderItemNum(item, productNumText);
 		}
@@ -804,7 +804,6 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 
-				resetCouponCode();
 				reCalPrice(item, false);
 				updateOrderItemNum(item, productNumText);
 			}
