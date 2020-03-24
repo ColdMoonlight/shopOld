@@ -283,8 +283,7 @@
 		$("#country").on("change", function () {
 			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
 				dataname = $(this).val();
-			couponCode = null;
-			couponId = null;
+			resetCouponCode();
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");
@@ -343,6 +342,7 @@
 							"orderBuyMess": $('.customer-message textarea').val(), //买家的留言
 							"addressinfoId": addressId,
 						};
+						console.log(reqData)
 						if (checkAddress(reqDataUp)) {
 							//fbq('track', '');//追踪'发起结账'事件  facebook广告插件可以注释掉，但不要删除
 							stridsContent = shopidlist;
@@ -374,6 +374,10 @@
 			}
 		});
 
+		function resetCouponCode() {
+			couponCode = null;
+			couponId = null;
+		}
 		/*******************/
 		function renderAddressDetail(data) {
 			var dataprov = data.addressProvince ? data.addressProvince : '',
@@ -774,6 +778,7 @@
 			productNumText += 1;
 			productNum.val(productNumText);
 
+			resetCouponCode();
 			reCalPrice(item, true);
 			updateOrderItemNum(item, productNumText);
 		}
@@ -787,6 +792,7 @@
 				productNumText -= 1;
 				productNum.val(productNumText);
 
+				resetCouponCode();
 				reCalPrice(item, false);
 				updateOrderItemNum(item, productNumText);
 			}
