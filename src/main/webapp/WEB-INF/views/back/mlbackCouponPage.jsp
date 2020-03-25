@@ -46,7 +46,7 @@
 										<th>优惠类型</th>
 										<th>抽奖类型</th>
 										<th>抽奖权重比</th>
-										<th>绑定产品id</th>
+										<th>是否绑定产品</th>
 										<th>绑定产品Seo</th>
 										<!-- <th>已用次数</th>
 										<th>可用总次</th> -->
@@ -135,8 +135,8 @@
 				var couponLuckDrawWeight = $("<td></td>").append((item.couponLuckDrawWeight));
 				/* var couponTimes = $("<td></td>").append(item.couponTimes);
 				var couponAllTimes = $("<td></td>").append(item.couponAllTimes); */
-				var couponProductOnlyPId = $("<td></td>").append(item.couponProductOnlyPId);
-				var couponProductSeoNameOnlyPId = $("<td></td>").append(item.couponProductSeoNameOnlyPId);
+				var couponProductOnlyType = $("<td></td>").append(item.couponProductOnlyType ? '是' : '否');
+				var couponProductSeoNameOnlyPId = $("<td></td>").append(item.couponProductOnlyType ? (item.couponProductOnlyPId + ' * ' + item.couponProductSeoNameOnlyPId) : '');
 				var couponStatus = $("<td></td>").append((item.couponStatus == 1 ? '已生效' : '未生效'));
 				var couponAreaNumStr = "";
 
@@ -179,7 +179,7 @@
 					.append(couponType)
 					.append(couponLuckDrawType)
 					.append(couponLuckDrawWeight)
-					.append(couponProductOnlyPId)
+					.append(couponProductOnlyType)
 					.append(couponProductSeoNameOnlyPId)
 					.append(couponAreaNum)
 					.append(couponImgwapurl)
@@ -340,7 +340,14 @@
 			$(":input[name='couponAreaNum']").val(data.couponAreaNum);
 			$(":input[name='couponStarttime']").val(data.couponStarttime);
 			$(":input[name='couponEndtime']").val(data.couponEndtime);
-			$('.binding_product-select').hide();
+
+			if (data.couponProductOnlyType) {
+				$(":input[name='couponProductOnlyType']").val(data.couponProductOnlyType);
+				$(":input[name='couponProductOnlyPId']").val(data.couponProductOnlyPId);
+				$('.binding_product-select').show();
+			} else {
+				$('.binding_product-select').hide();
+			}
 
 			if (data.couponImgwapurl && data.couponImgwapurl.length) {
 				var el = $(".upload-img-btn.img");
