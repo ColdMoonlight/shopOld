@@ -623,6 +623,10 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
 .customer_widget_box .review-statics-item .progress{width: 40%;}
 .customer_widget_box .reviews-statics{float: left; width: 70%;}
+.review-statics-item .reviews-data2 .icon{display: inline-block;font-size:18px;width: 20px;height: 20px;}
+.customer_widget_box .review-statics-item .progress{margin: 0 5px;}
+
+
 
 
 
@@ -647,7 +651,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .statrnum5 span{background: url(../../m/img/index/wx.png) no-repeat 0 -120px}
 /**************************************/
 .videocont{width: 100%;min-height: 600px;}
-.videocont ul{width: 1300px; margin: 0 auto 20px;}
+.videocont ul{width: 1300px; margin: 0 auto;}
 .videocont ul li{width:305px; border: 1px solid #ccc; margin: 20px 10px 0; height: auto; float: left;}
 .videocont ul li a{display: block;background: #f5f5f5;} 
 .videocont ul li img{width:303px; height: 303px;}
@@ -657,6 +661,35 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .videocont ul li a:hover em{color: #333}
 .videocont ul li a:hover span{color: #666}
 .videobox{width: 303px; height: 303px;}
+ .video_discontent_tit{font-size: 26px;font-weight: normal;margin: 33px auto 38px;text-align: center;}
+.video_discontent{width: 980px; margin: 0 auto; overflow: hidden;}
+.video_discontent .video_discontent_item{margin:10px 0 0; padding: 10px; position: relative; float: left; display: inline-block; width: 28.46%; height: 226px; background-color:#f5b3b3; text-align: center; box-sizing: border-box;} 
+.video_discontent .video_discontent_item:nth-child(1){margin:10px 0 0 3%;} 
+.video_discontent_img1{width: 71px; height: 54px; margin-bottom: 10px;} 
+.video_discontent .video_discontent_item .video_discontent_one{font-size: 28px; color: #000; margin-bottom: 10px;} 
+.video_discontent .video_discontent_item .video_discontent_two{font-size: 24px; color: #eb5350; margin-bottom: 10px;} 
+.video_discontent .video_discontent_item .video_discontent_three{text-align: center; margin-bottom: 10px;} 
+.video_discontent .video_discontent_item .video_discontent_three span{display: inline-block; width: 169px; height: 37px; text-align: center; line-height: 37px; background-color: #ffffff; border-radius: 9px;}
+.video_discontent_left{position: absolute; left: -26px; top:0;}
+.video_discontent_left span{text-align: center; position: absolute; top: 10px; left: 8px; font-size: 20px; color: #fff; font-weight: normal; line-height: 22px;} 
+.video_discontent .video_discontent_item:nth-child(2){margin: 10px 5% 0;}
+p.video_discontent2_con{font-size: 17px; color: #000; line-height: 24px;margen:0}
+.video_discontent2_con span{color: #ff6161;}
+.video_discontent .video_discontent_item:nth-child(2) p.video_discontent2_con {margin:0}
+.tipsimg{width: 100%;margin:10px 0 0}
+.tipsimg img{display: block;margin:0 auto}
+.videotop {width:100%}
+.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px 10px 0}
+.videotop li img{width: 100%;}
+.four_hot{margin:20px auto 0}
+.four_hot li{float:left;width:25%;padding:0 1%}
+/* .four_hot ul{margin:0 0 20px} */
+.four_hot li img{width: 100%;}
+.four_hot li a p{margin:0;line-height:30px}
+.four_hot dd{width:50%;float:left;padding:0 1%}
+.four_hot dd img{width: 100%;}
+.banvideo{width: 100%;}
+.banvideo img{width: 100%;}
 /********************************************/
 .maskvideo{position: fixed;top: 0;left: 0;right: 0;bottom: 0;z-index: 99998;background: rgba(0,0,0,.3);/* display: none; */}
 .video_link_products {display: none;}

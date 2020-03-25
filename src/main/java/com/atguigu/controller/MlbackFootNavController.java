@@ -111,31 +111,6 @@ public class MlbackFootNavController {
 	}
 	
 	/**
-	 * 5.0	UseNow	0505
-	 * 查看单条类目的详情细节
-	 * @param MlbackAreafreight
-	 * @return 
-	 */
-//	@RequestMapping(value="/getOneMlbackFootNavDetail",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg getOneMlbackFootNavDetail(@RequestParam(value = "footnavId") Integer footnavId){
-//		
-//		//接受categoryId
-//		MlbackFootNav mlbackFootNavReq = new MlbackFootNav();
-//		mlbackFootNavReq.setFootnavId(footnavId);
-//		//查询本条
-//		List<MlbackFootNav> mlbackFootNavResList =mlbackFootNavService.selectMlbackFootNavById(mlbackFootNavReq);
-//		MlbackFootNav MlbackFootNavOne = new MlbackFootNav();
-//		if(mlbackFootNavResList.size()>0){
-//			MlbackFootNavOne =mlbackFootNavResList.get(0);
-//		}else{
-//			MlbackFootNavOne = null;
-//		}
-//		return Msg.success().add("resMsg", "查看单条MlbackFootNavOne的详情细节完毕")
-//					.add("MlbackFootNavOne", MlbackFootNavOne);
-//	}
-	
-	/**
 	 * 6.0	UseNow	0505
 	 * 查看单条类目的详情细节
 	 * @param MlbackAreafreight
@@ -159,58 +134,6 @@ public class MlbackFootNavController {
 		return Msg.success().add("resMsg", "查看单条MlbackFootNavOne的详情细节完毕")
 					.add("MlbackFootNavOne", MlbackFootNavOne);
 	}
-	
-	
-	/**
-	 * 7.0	UseNow	0505
-	 * 前台查看list		查看foot全部的接口类目的详情细节
-	 * @param MlbackAreafreight
-	 * @return 
-	 */
-//	@RequestMapping(value="/getMlfrontFootNavAll",method=RequestMethod.POST)
-//	@ResponseBody
-//	public Msg selectMlbackFootNavAllIfShow(HttpServletResponse rep,HttpServletRequest res){
-//		
-//		
-//		MlbackFootNav mlbackFootNavReq = new MlbackFootNav();
-//		mlbackFootNavReq.setFootnavIfShow(1);//0不生效	1生效中 
-//		//查询本条
-//		List<MlbackFootNav> mlbackFootNavList = mlbackFootNavService.selectMlbackFootNavAllIfShow(mlbackFootNavReq);
-//		List<MlbackFootNav> mlbackFootNavOneList = new ArrayList<MlbackFootNav>();
-//		List<MlbackFootNav> mlbackFootNavTwoList = new ArrayList<MlbackFootNav>();
-//		List<MlbackFootNav> mlbackFootNavThreeList = new ArrayList<MlbackFootNav>();
-//		List<MlbackFootNav> mlbackFootNavFourList = new ArrayList<MlbackFootNav>();
-//		MlbackFootNav MlbackFootNavOne = new MlbackFootNav();
-//		
-//		Integer isNav = 1;
-//		if(mlbackFootNavList.size()>0){
-//			isNav = 1;
-//			MlbackFootNavOne =mlbackFootNavList.get(0);
-//			for(int i=0;i<mlbackFootNavList.size();i++){
-//				//获取当前
-//				MlbackFootNavOne = mlbackFootNavList.get(i);
-//				if(mlbackFootNavList.get(i).getFootnavLie()==1){
-//					//第1列
-//					mlbackFootNavOneList.add(MlbackFootNavOne);
-//				}else if(mlbackFootNavList.get(i).getFootnavLie()==2){
-//					//第2列
-//					mlbackFootNavTwoList.add(MlbackFootNavOne);
-//				}else if(mlbackFootNavList.get(i).getFootnavLie()==3){
-//					//第3列
-//					mlbackFootNavThreeList.add(MlbackFootNavOne);
-//				}else{
-//					//第4列
-//					mlbackFootNavFourList.add(MlbackFootNavOne);
-//				}
-//			}
-//		}else{
-//			isNav = 0;
-//		}
-//		//4footer里请求这个接口,回去的4列
-//		return Msg.success().add("resMsg", "查看底部导航完毕详情细节完毕").add("isNav", isNav)
-//				.add("mlbackFootNavOneList", mlbackFootNavOneList).add("mlbackFootNavTwoList", mlbackFootNavTwoList)
-//				.add("mlbackFootNavThreeList", mlbackFootNavThreeList).add("mlbackFootNavFourList", mlbackFootNavFourList);
-//	}
 	
 	/**
 	 * 8.0	UseNow	0505
