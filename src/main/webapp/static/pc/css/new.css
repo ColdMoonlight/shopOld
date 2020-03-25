@@ -234,6 +234,7 @@ div.zoomMask{position:absolute;cursor:move;z-index:1;}
 .product-list_home .product-title{font-weight: normal;line-height: 20px; height: 40px; overflow:hidden; color: #333;}
 /**************/
 .sale_coupon{display: flex; align-items: center; width: 80%; border: 1px dashed #eb8378; padding: 5px; margin-top: 10px;}
+.sale_coupon>img { display: inline-block; width: 60px; height: 60px; }
 .sale_coupon-body { margin-left: 10px; }
 .sale_coupon .sale_coupon-body p{font-size: 14px;margin: 0; color: #eb8378;}
 .sale_coupon .sale_coupon-body ul li{font-size: 12px;line-height: 20px; font-weight: normal;margin: 0;color: #333;}

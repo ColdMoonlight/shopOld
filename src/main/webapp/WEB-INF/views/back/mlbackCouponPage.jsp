@@ -281,7 +281,7 @@
 				success: function (result) {
 					if (result.code == 100) {
 						alert('新建/编辑成功！');
-						// window.location.href = "${APP_PATH}/MlbackCoupon/toMlbackCouponPage";
+						window.location.href = "${APP_PATH}/MlbackCoupon/toMlbackCouponPage";
 					}
 				}
 			});
