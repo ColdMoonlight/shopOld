@@ -738,44 +738,58 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					var resData = data && data.extend.mlbackCouponOne,
-						couponErrorBox = $('.coupon-error');
-					// console.log(resData);
-					if (resData) {
-						var couponType = resData.couponType;
-						if (couponType == 0) {
-							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
-								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
-								totalPricecou = c_prototalnum * 1 + shopingnum * 1;
-							if (totalPricecou >= resData.couponPriceBaseline) {
-								couponPriceEl.text('-$' + resData.couponPrice);
-								subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
-								couponPriceOld = resData.couponPrice;
-								// console.log("满减券查回的couponPriceOld:" + couponPriceOld);
-								couponId = resData.couponId;
-								couponCode = couponCode2;
-								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+					var couponErrorBox = $('.coupon-error'),
+						resData = data && data.extend.mlbackCouponOne;
+					// console.log(data);
+					if (data.code == 100 && resData) {
+						var resData = data && data.extend.mlbackCouponOne,
+							couponType = resData.couponType;
+						var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
+							shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
+							totalPricecou = c_prototalnum * 1 + shopingnum * 1;
+						// resData.couponProductOnlyType && data.extend.couponProductOnlyTypeifHave
+						if (resData.couponProductOnlyType) {
+							if (couponType == 0) {
+								if (data.extend.couponProductOnlyTypeifHave) {
+									couponPriceEl.text('-$' + resData.couponPrice);
+									subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+									couponPriceOld = resData.couponPrice;
+									couponId = resData.couponId;
+									couponCode = couponCode2;
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+								} else {
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Code invalid For This Product!');
+								}
 							} else {
-								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
-								$(".coed_inp").val("");
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Code invalid For This Product!');
 							}
 						} else {
-							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
-								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
-								totalPricecou = (c_prototalnum * 1 + shopingnum * 1).toFixed(2);
-							if (totalPricecou >= resData.couponPriceBaseline) {
-								var offcoup = resData.couponPriceOff, // 取出折扣
-									downPrice = (totalPricecou * offcoup / 100).toFixed(2); // 计算减免力度(总价*折扣比)
-								couponPriceEl.text('-$' + downPrice);
-								subtotalPriceEl.text('$' + (totalPricecou - downPrice).toFixed(2));
-								couponPriceOld = downPrice;
-								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
-								couponId = resData.couponId;
-								couponCode = couponCode2;
-								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+							if (couponType == 0) {
+								if (totalPricecou >= resData.couponPriceBaseline) {
+									couponPriceEl.text('-$' + resData.couponPrice);
+									subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+									couponPriceOld = resData.couponPrice;
+									couponId = resData.couponId;
+									couponCode = couponCode2;
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+								} else {
+									renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
+									$(".coed_inp").val("");
+								}
 							} else {
-								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
-								$(".coed_inp").val("");
+								if (totalPricecou >= resData.couponPriceBaseline) {
+									var offcoup = resData.couponPriceOff, // 取出折扣
+										downPrice = (totalPricecou * offcoup / 100).toFixed(2); // 计算减免力度(总价*折扣比)
+									couponPriceEl.text('-$' + downPrice);
+									subtotalPriceEl.text('$' + (totalPricecou - downPrice).toFixed(2));
+									couponPriceOld = downPrice;
+									couponId = resData.couponId;
+									couponCode = couponCode2;
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+								} else {
+									renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
+									$(".coed_inp").val("");
+								}
 							}
 						}
 					} else {
