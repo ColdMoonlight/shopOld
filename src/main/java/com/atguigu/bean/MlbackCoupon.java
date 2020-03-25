@@ -31,9 +31,9 @@ public class MlbackCoupon {
     
     private Integer couponProductOnlyPId;		//优惠码支持单品的时候,所绑定的产品
     
-    private String couponProductSeoNameOnlyPId;
+    private String couponProductSeoNameOnlyPId;	//优惠码支持单品的时候,所绑定的产品的seo
     
-    private String couponProductProNameOnlyPId;
+    private String couponProductProNameOnlyPId;	//优惠码支持单品的时候,所绑定的产品的proname
     
     private Integer couponAdminId;
 
