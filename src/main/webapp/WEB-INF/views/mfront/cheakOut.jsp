@@ -234,6 +234,7 @@
 			addressId,
 			orderId,
 			orderItemArr = [],
+			orderItemPidArr = [],
 			productNumArr = [],
 			payplate = 0,
 			couponPriceOld = 0,
@@ -563,6 +564,7 @@
 					len2 = skuNameArr.length;
 
 				orderItemArr.push(data[i].orderitemId);
+				orderItemPidArr.push(data[i].orderitemPid);
 				productNumArr.push(data[i].orderitemPskuNumber);
 
 				html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '">' +
@@ -725,10 +727,11 @@
 
 		function checkCouponCode(event) {
 			var couponCode2 = $(event.target).prev('input').val(),
-				data = { couponCode: couponCode2 }; // MEGA12	couponCode	
+				data = { couponCode: couponCode2 }; // MEGA12	couponCode
 			$.ajax({
 				url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByCode',
 				data: JSON.stringify({
+					"couponAdminOperatorname": orderItemPidArr.join(','),
 					"couponCode": couponCode2
 				}),
 				type: 'post',
@@ -779,7 +782,7 @@
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 					}
 				}
-			})
+			});
 		}
 
 		function addNum(e) {
