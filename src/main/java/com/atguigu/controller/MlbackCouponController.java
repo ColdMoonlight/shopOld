@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.Vo.LuckDrawDate;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCoupon;
+import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlfrontUser;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCouponService;
+import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlfrontUserService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.LuckDrawUtils;
@@ -40,6 +42,9 @@ public class MlbackCouponController {
 	
 	@Autowired
 	MlfrontUserService mlfrontUserService;
+	
+	@Autowired
+	MlbackProductService mlbackProductService;
 	
 	/**
 	 * 1.0	useOn	0505
@@ -90,6 +95,24 @@ public class MlbackCouponController {
 		Integer couponId = mlbackCoupon.getCouponId();
 		String nowTime = DateUtil.strTime14s();
 		mlbackCoupon.setCouponMotifytime(nowTime);
+		//取出是否绑定单品字段
+		Integer couponProductOnlyType = mlbackCoupon.getCouponProductOnlyType();
+		if(couponProductOnlyType==0){
+			mlbackCoupon.setCouponProductOnlyPId(0);
+			
+		}else{
+			Integer productOnlyPId = mlbackCoupon.getCouponProductOnlyPId();
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			MlbackProduct mlbackProductRes = new MlbackProduct();
+			mlbackProductReq.setProductId(productOnlyPId);
+			List<MlbackProduct> mlbackProductResList = mlbackProductService.selectMlbackProduct(mlbackProductReq);
+			mlbackProductRes = mlbackProductResList.get(0);
+			String Pname = mlbackProductRes.getProductName();
+			String Pseoname = mlbackProductRes.getProductSeo();
+			mlbackCoupon.setCouponProductProNameOnlyPId(Pname);//Pseoname
+			mlbackCoupon.setCouponProductSeoNameOnlyPId(Pseoname);
+		}
+		
 		if(couponId==null){
 			//无id，insert
 			mlbackCoupon.setCouponCreatetime(nowTime);

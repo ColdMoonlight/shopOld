@@ -46,14 +46,16 @@
 										<th>优惠类型</th>
 										<th>抽奖类型</th>
 										<th>抽奖权重比</th>
-										<th>已用次数</th>
-										<th>可用总次</th>
+										<th>绑定产品id</th>
+										<th>绑定产品Seo</th>
+										<!-- <th>已用次数</th>
+										<th>可用总次</th> -->
 										<th>展示位置</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>是否有效</th>
-										<th>适用时间</th>
-										<th>失效时间</th>
+										<!-- <th>适用时间</th>
+										<th>失效时间</th> -->
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -131,8 +133,10 @@
 				var couponType = $("<td></td>").append((type == 1 ? '折扣券' : '满减券'));
 				var couponLuckDrawType = $("<td></td>").append((item.couponLuckDrawType == 1 ? '支持抽奖' : '不支持抽奖'));
 				var couponLuckDrawWeight = $("<td></td>").append((item.couponLuckDrawWeight));
-				var couponTimes = $("<td></td>").append(item.couponTimes);
-				var couponAllTimes = $("<td></td>").append(item.couponAllTimes);
+				/* var couponTimes = $("<td></td>").append(item.couponTimes);
+				var couponAllTimes = $("<td></td>").append(item.couponAllTimes); */
+				var couponProductOnlyPId = $("<td></td>").append(item.couponProductOnlyPId);
+				var couponProductSeoNameOnlyPId = $("<td></td>").append(item.couponProductSeoNameOnlyPId);
 				var couponStatus = $("<td></td>").append((item.couponStatus == 1 ? '已生效' : '未生效'));
 				var couponAreaNumStr = "";
 
@@ -175,14 +179,14 @@
 					.append(couponType)
 					.append(couponLuckDrawType)
 					.append(couponLuckDrawWeight)
-					.append(couponTimes)
-					.append(couponAllTimes)
+					.append(couponProductOnlyPId)
+					.append(couponProductSeoNameOnlyPId)
 					.append(couponAreaNum)
 					.append(couponImgwapurl)
 					.append(couponImgpcurl)
 					.append(couponStatus)
-					.append(couponStarttime)
-					.append(couponEndtime)
+					/* .append(couponStarttime)
+					.append(couponEndtime) */
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
