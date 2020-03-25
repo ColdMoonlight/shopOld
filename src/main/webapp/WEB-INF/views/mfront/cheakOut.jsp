@@ -738,15 +738,19 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
+					function resetCouponPrice() {
+						couponPriceOld = 0;
+						couponPriceEl.text('-$' + 0);
+						subtotalPriceEl.text('$' + (totalPricecou).toFixed(2));
+					}
 					var couponErrorBox = $('.coupon-error'),
-						resData = data && data.extend.mlbackCouponOne;
+						resData = data && data.extend.mlbackCouponOne,
+						c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
+						shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
+						totalPricecou = c_prototalnum * 1 + shopingnum * 1;
 					// console.log(data);
 					if (data.code == 100 && resData) {
-						var resData = data && data.extend.mlbackCouponOne,
-							couponType = resData.couponType;
-						var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
-							shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
-							totalPricecou = c_prototalnum * 1 + shopingnum * 1;
+						var couponType = resData.couponType;
 						// resData.couponProductOnlyType && data.extend.couponProductOnlyTypeifHave
 						if (resData.couponProductOnlyType) {
 							if (couponType == 0) {
@@ -758,9 +762,11 @@
 									couponCode = couponCode2;
 									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
 								} else {
+									resetCouponPrice();
 									renderErrorMsg(couponErrorBox, resData.couponName + '，Code invalid For This Product!');
 								}
 							} else {
+								resetCouponPrice();
 								renderErrorMsg(couponErrorBox, resData.couponName + '，Code invalid For This Product!');
 							}
 						} else {
@@ -773,6 +779,7 @@
 									couponCode = couponCode2;
 									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
 								} else {
+									resetCouponPrice();
 									renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
 									$(".coed_inp").val("");
 								}
@@ -787,12 +794,14 @@
 									couponCode = couponCode2;
 									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
 								} else {
+									resetCouponPrice();
 									renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
 									$(".coed_inp").val("");
 								}
 							}
 						}
 					} else {
+						resetCouponPrice();
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 					}
 				}
