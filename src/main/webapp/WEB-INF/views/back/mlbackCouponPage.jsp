@@ -157,8 +157,8 @@
 				var imgurlpc = item.couponImgpcurl;
 				var imagepc = '<img src=' + imgurlpc + ' ' + 'width=50 height=50>';
 				var couponImgpcurl = $("<td></td>").append(imagepc);
-				var couponStarttime = $("<td></td>").append(item.couponStarttime);
-				var couponEndtime = $("<td></td>").append(item.couponEndtime);
+				/* var couponStarttime = $("<td></td>").append(item.couponStarttime);
+				var couponEndtime = $("<td></td>").append(item.couponEndtime); */
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
