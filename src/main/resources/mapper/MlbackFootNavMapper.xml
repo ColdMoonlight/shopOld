@@ -377,24 +377,22 @@
     from tb_mlback_footnav where footnav_ifShow = #{footnavIfShow,jdbcType=INTEGER} order by footnav_id desc
   </select>
   
-   <!-- selectAll使用中 -->
+   <!-- selectMlbackFootNavAllSimpleIfShow使用中 -->
   <select id="selectMlbackFootNavAllSimpleIfShow" parameterType="com.atguigu.bean.MlbackFootNav" resultMap="BaseResultMap">
     select footnav_id, footnav_name, footnav_hang, footnav_lie, footnav_ifIncome,footnav_ifShow
-    from tb_mlback_footnav where footnav_ifShow = #{footnavIfShow,jdbcType=INTEGER} order by footnav_id desc
+    from tb_mlback_footnav where footnav_ifShow = #{footnavIfShow,jdbcType=INTEGER} order by footnav_lie, footnav_hang,footnav_id
   </select>
   
-  <!-- selectOne使用中 -->
+  <!-- selectMlbackFootNavById使用中 -->
   <select id="selectMlbackFootNavById" parameterType="com.atguigu.bean.MlbackFootNav" resultMap="BaseResultMap">
     select footnav_id, footnav_name, footnav_hang, 
       footnav_lie, footnav_createTime, footnav_motifyTime,footnav_ifIncome,footnav_ifShow
     from tb_mlback_footnav where footnav_id = #{footnavId,jdbcType=INTEGER}
   </select>
-  <!-- selectOne使用中 -->
+  <!-- selectMlbackFootNavOneAllById使用中 -->
   <select id="selectMlbackFootNavOneAllById" parameterType="com.atguigu.bean.MlbackFootNav" resultMap="BaseResultMap">
     select footnav_id, footnav_name, footnav_hang, footnav_lie, footnav_createTime, footnav_motifyTime, footnav_desc,footnav_ifIncome,footnav_ifShow
     from tb_mlback_footnav where footnav_id = #{footnavId,jdbcType=INTEGER}
   </select>
-  
-  
-  
+
 </mapper>
