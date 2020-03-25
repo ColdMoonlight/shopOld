@@ -169,47 +169,47 @@ public class MlbackCouponController {
 	@RequestMapping(value="/getOneMlbackCouponDetailByCode",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg getOneMlbackCouponDetailByCode(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackCoupon mlbackCoupon){
-		
-		String couponCode = mlbackCoupon.getCouponCode();
-		
-		String couponStr =  mlbackCoupon.getCouponAdminOperatorname();
-		//接受信息
-		MlbackCoupon mlbackCouponReq = new MlbackCoupon();
-		mlbackCouponReq.setCouponCode(couponCode);
-		mlbackCouponReq.setCouponStatus(1);//进查询生效的优惠码
-		List<MlbackCoupon> mlbackCouponResList =mlbackCouponService.selectMlbackCouponBYCode(mlbackCouponReq);
-		MlbackCoupon mlbackCouponOne = null;
-		Integer couponProductOnlyTypeifHave = 0;
-		if(mlbackCouponResList.size()>0){
-			//1判断优惠码存在不存在
-			mlbackCouponOne =mlbackCouponResList.get(0);
-			//取出本优惠券中的绑定产品字段，如果未绑定产品0，过，
-			Integer couponProductOnlyType =  mlbackCouponOne.getCouponProductOnlyType();
-			
-			if(couponProductOnlyType==1){
-				Integer couponPid = mlbackCouponOne.getCouponProductOnlyPId();
-				
-				if(couponStr.contains(",")){
-					String couponStrPidsStrArr [] =couponStr.split(",");
-					for(int i=0;i<couponStrPidsStrArr.length;i++){
-						String temPidStr = couponStrPidsStrArr[i];
-						Integer temPidInt = Integer.parseInt(temPidStr);
-						if(couponPid==temPidInt){
-							couponProductOnlyTypeifHave = 1;
-							break;
-						}
-					}
-				}else{
-					Integer temPidInt = Integer.parseInt(couponStr);
-					if(couponPid==temPidInt){
-						couponProductOnlyTypeifHave = 1;
-					}
-				}
-			}
-		}
-		return Msg.success().add("resMsg", "getOneMCouponDetailByCode完毕")
-					.add("mlbackCouponOne", mlbackCouponOne).add("couponProductOnlyTypeifHave", couponProductOnlyTypeifHave);
-	}
+	    
+	    String couponCode = mlbackCoupon.getCouponCode();
+	    
+	    String couponStr =  mlbackCoupon.getCouponAdminOperatorname();
+	    //接受信息
+	    MlbackCoupon mlbackCouponReq = new MlbackCoupon();
+	    mlbackCouponReq.setCouponCode(couponCode);
+	    mlbackCouponReq.setCouponStatus(1);//进查询生效的优惠码
+	    List<MlbackCoupon> mlbackCouponResList =mlbackCouponService.selectMlbackCouponBYCode(mlbackCouponReq);
+	    MlbackCoupon mlbackCouponOne = null;
+	    Integer couponProductOnlyTypeifHave = 0;
+	    if(mlbackCouponResList.size()>0){
+	      //1判断优惠码存在不存在
+	      mlbackCouponOne =mlbackCouponResList.get(0);
+	      //取出本优惠券中的绑定产品字段，如果未绑定产品0，过，
+	      Integer couponProductOnlyType =  mlbackCouponOne.getCouponProductOnlyType();
+	      
+	      if(couponProductOnlyType==1){
+	        Integer couponPid = mlbackCouponOne.getCouponProductOnlyPId();
+	        String couponPidStr = couponPid+"";
+	        String temPidStr="";
+	        if(couponStr.contains(",")){
+	          String couponStrPidsStrArr [] =couponStr.split(",");
+	          for(int i=0;i<couponStrPidsStrArr.length;i++){
+	            temPidStr = couponStrPidsStrArr[i];
+	            if(couponPidStr.equals(temPidStr)){
+	              couponProductOnlyTypeifHave = 1;
+	              break;
+	            }
+	          }
+	        }else{
+	          temPidStr = couponStr;
+	          if(couponPidStr.equals(temPidStr)){
+	            couponProductOnlyTypeifHave = 1;
+	          }
+	        }
+	      }
+	    }
+	    return Msg.success().add("resMsg", "getOneMCouponDetailByCode完毕")
+	          .add("mlbackCouponOne", mlbackCouponOne).add("couponProductOnlyTypeifHave", couponProductOnlyTypeifHave);
+	  }
 	
 	/**
 	 * 7.0	useOn	0505
