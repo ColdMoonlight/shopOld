@@ -12,7 +12,6 @@
     <result column="footnav_motifyTime" jdbcType="VARCHAR" property="footnavMotifytime" />
     <result column="footnav_ifIncome" jdbcType="INTEGER" property="footnavIfIncome" />
     <result column="footnav_ifShow" jdbcType="INTEGER" property="footnavIfShow" />
-    
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.atguigu.bean.MlbackFootNav">
     <result column="footnav_desc" jdbcType="LONGVARCHAR" property="footnavDesc" />
