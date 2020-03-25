@@ -46,14 +46,16 @@
 										<th>优惠类型</th>
 										<th>抽奖类型</th>
 										<th>抽奖权重比</th>
-										<th>已用次数</th>
-										<th>可用总次</th>
+										<th>是否绑定产品</th>
+										<th>绑定产品Seo</th>
+										<!-- <th>已用次数</th>
+										<th>可用总次</th> -->
 										<th>展示位置</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>是否有效</th>
-										<th>适用时间</th>
-										<th>失效时间</th>
+										<!-- <th>适用时间</th>
+										<th>失效时间</th> -->
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -131,8 +133,10 @@
 				var couponType = $("<td></td>").append((type == 1 ? '折扣券' : '满减券'));
 				var couponLuckDrawType = $("<td></td>").append((item.couponLuckDrawType == 1 ? '支持抽奖' : '不支持抽奖'));
 				var couponLuckDrawWeight = $("<td></td>").append((item.couponLuckDrawWeight));
-				var couponTimes = $("<td></td>").append(item.couponTimes);
-				var couponAllTimes = $("<td></td>").append(item.couponAllTimes);
+				/* var couponTimes = $("<td></td>").append(item.couponTimes);
+				var couponAllTimes = $("<td></td>").append(item.couponAllTimes); */
+				var couponProductOnlyType = $("<td></td>").append(item.couponProductOnlyType ? '是' : '否');
+				var couponProductSeoNameOnlyPId = $("<td></td>").append(item.couponProductOnlyType ? (item.couponProductOnlyPId + ' * ' + item.couponProductSeoNameOnlyPId) : '');
 				var couponStatus = $("<td></td>").append((item.couponStatus == 1 ? '已生效' : '未生效'));
 				var couponAreaNumStr = "";
 
@@ -153,8 +157,8 @@
 				var imgurlpc = item.couponImgpcurl;
 				var imagepc = '<img src=' + imgurlpc + ' ' + 'width=50 height=50>';
 				var couponImgpcurl = $("<td></td>").append(imagepc);
-				var couponStarttime = $("<td></td>").append(item.couponStarttime);
-				var couponEndtime = $("<td></td>").append(item.couponEndtime);
+				/* var couponStarttime = $("<td></td>").append(item.couponStarttime);
+				var couponEndtime = $("<td></td>").append(item.couponEndtime); */
 
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
@@ -175,14 +179,14 @@
 					.append(couponType)
 					.append(couponLuckDrawType)
 					.append(couponLuckDrawWeight)
-					.append(couponTimes)
-					.append(couponAllTimes)
+					.append(couponProductOnlyType)
+					.append(couponProductSeoNameOnlyPId)
 					.append(couponAreaNum)
 					.append(couponImgwapurl)
 					.append(couponImgpcurl)
 					.append(couponStatus)
-					.append(couponStarttime)
-					.append(couponEndtime)
+					/* .append(couponStarttime)
+					.append(couponEndtime) */
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -261,22 +265,23 @@
 
 		// 新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
-			var data = $('form').serializeArray();
-			data = data.reduce(function (obj, item) {
+			var reqData = $('form').serializeArray();
+			reqData = reqData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			data.couponStatus = $(":input[name='couponStatus']").val();
+			reqData.couponStatus = $(":input[name='couponStatus']").val();
+			console.log(reqData)
 			$.ajax({
 				url: "${APP_PATH}/MlbackCoupon/save",
-				data: JSON.stringify(data),
+				data: JSON.stringify(reqData),
 				dataType: "json",
 				contentType: 'application/json',
 				type: "post",
 				success: function (result) {
 					if (result.code == 100) {
 						alert('新建/编辑成功！');
-						window.location.href = "${APP_PATH}/MlbackCoupon/toMlbackCouponPage";
+						// window.location.href = "${APP_PATH}/MlbackCoupon/toMlbackCouponPage";
 					}
 				}
 			});
@@ -327,6 +332,7 @@
 				$(".open_1").hide();
 				$(".open_0").show();
 			}
+
 			$(":input[name='couponLuckDrawType']").val(data.couponLuckDrawType);
 			$(":input[name='couponLuckDrawWeight']").val(data.couponLuckDrawWeight);
 			$(":input[name='couponTimes']").val(data.couponTimes);
@@ -334,6 +340,14 @@
 			$(":input[name='couponAreaNum']").val(data.couponAreaNum);
 			$(":input[name='couponStarttime']").val(data.couponStarttime);
 			$(":input[name='couponEndtime']").val(data.couponEndtime);
+
+			if (data.couponProductOnlyType) {
+				$(":input[name='couponProductOnlyType']").val(data.couponProductOnlyType);
+				$(":input[name='couponProductOnlyPId']").val(data.couponProductOnlyPId);
+				$('.binding_product-select').show();
+			} else {
+				$('.binding_product-select').hide();
+			}
 
 			if (data.couponImgwapurl && data.couponImgwapurl.length) {
 				var el = $(".upload-img-btn.img");
@@ -353,6 +367,8 @@
 
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addCoupon.html', function () {
+				getProductList();
+
 				$('.coupon-status').find('input').on('change', function () {
 					var spanEl = $(this).parent().find('span');
 					$(this).is(':checked') ? $(this).val(1) && spanEl.text('已生效') : $(this).val(0) && spanEl.text('未生效');
@@ -384,7 +400,38 @@
 						$(".open_0").hide();
 					}
 				});
+				
+				$('.binding-product select').on('change', function() {
+					if($(this).val() == 1) {
+						$('.binding_product-select').show();
+					} else {
+						$('.binding_product-select').hide();
+					}
+				});
 			});
+		}
+
+		function getProductList() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						renderProductList($('#couponProductOnlyPId'), result.extend.mlbackProductResList);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+
+		function renderProductList(el, data) {
+			var html = '<option value="-1">---无绑定产品---</option>';
+			for (var i = 0; i < data.length; i += 1) {
+				html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
+			}
+			el.html(html);
 		}
 
 		$(document.body).on("change", "#file1", upload);
