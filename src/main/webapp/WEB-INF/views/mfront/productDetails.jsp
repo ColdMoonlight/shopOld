@@ -127,7 +127,13 @@
 				type: "post",
 				success: function (data) {
 					if (data.code == 100) {
-						var resData = data.extend.mbackProductImgResList;
+						console.log(data)
+						var resData = data.extend.mbackProductImgResList,
+							videoData = data.extend.mlbackProductOne;
+						resData.unshift({
+							imgUrl: videoData.productMainFuimgurl,
+							videoUrl: videoData.productColor
+						});
 						renderProductDetailsBanner(swiper, resData);
 						new Swiper('.product__details-banner', {
 							pagination: {
@@ -199,15 +205,33 @@
 			});
 
 			function renderProductDetailsBanner(parent, data) {
-				var html = '';
+				var html = '',
+					hasVideo = false;
 
 				for (var i = 0, len = data.length; i < len; i += 1) {
-					html += '<div class="swiper-slide">' +
-						'<img src="' + loadProduct2Url + '" data-src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
+					if (data[i].videoUrl && data[i].imgUrl) {
+						html += '<div class="swiper-slide">' +
+						'<img class="showVideo" src="' + loadProduct2Url + '" data-src="' + data[i].imgUrl + '" data-video="'+ data[i].videoUrl +'" />' +
 						'</div>';
+						hasVideo = true;
+					} else {
+						html += '<div class="swiper-slide">' +
+							'<img src="' + loadProduct2Url + '" data-src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
+							'</div>';
+					}
 				}
-
+	
 				swiper.html(html);
+				
+				if (hasVideo) showVideo();
+			}
+			
+			function showVideo() {
+				$('.showVideo').on('click', function(e) {
+					var videoUrl = $(this).data('video');
+					if (videoUrl)
+						renderSysMsg('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="260" src="'+ videoUrl +'"></iframe>');
+				});
 			}
 
 			function triggerCondition(parent) {
