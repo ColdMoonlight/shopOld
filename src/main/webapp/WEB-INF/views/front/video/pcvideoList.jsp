@@ -53,7 +53,7 @@
 			<img src="${APP_PATH }/static/pc/img/video/bant.jpg" >
 		</div>
 		<!-- <div class="container clearfix"> -->
-			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt1.jpg" ></div>
+			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt2.jpg" ></div>
 			<ul class="video_discontent container clearfix">
 					<li class="video_discontent_item">
 							<img src="${APP_PATH }/static/pc/img/xj.png" alt="" class="video_discontent_img1">
@@ -97,7 +97,7 @@
 							</p>
 					</li>
 			</ul>
-			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt2.jpg" ></div>
+			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt3.jpg" ></div>
 			<div class="videotop container clearfix">
 				<ul>
 				      <li onclick="clickVideo(event)" videonum-id="157" data-src="https://www.youtube.com/embed/Wdbz0TRf6sI" data-img="${APP_PATH }/static/pc/img/video/v2.jpg"><img src="${APP_PATH }/static/pc/img/video/v1.jpg" ></li>
@@ -110,23 +110,23 @@
 					  <li onclick="clickVideo(event)" videonum-id="26" data-src="https://www.youtube.com/embed/Wdbz0TRf6sI"><img src="${APP_PATH }/static/pc/img/video/v8.jpg" ></li>
 				</ul>
 			</div>
-			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt3.jpg" ></div>
+			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt1.jpg" ></div>
 			<div class="videocont container clearfix">
 				<ul class="clearfix">
 			
 				</ul>
 			</div>
-			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt3.jpg" ></div>
+			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt4.jpg" ></div>
 			<div class="four_hot container clearfix">
 				<ul class="clearfix">
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Straight-Body-Wave-Highlight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
 				</ul>
 				<dl class="clearfix">
-					<dd><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
-					<dd><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
+					<dd><a href="${APP_PATH }/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
+					<dd><a href="${APP_PATH }/13x4-Bob-Wig-1B-30-Color-Straight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
 				</dl>
 			</div>
 		<!-- </div> -->

@@ -53,8 +53,12 @@
 		<div class="banvideo">
 			<img src="${APP_PATH }/static/pc/img/video/ban.jpg" >
 		</div>
+		<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp2.jpg" ></div>
+		<div class="banvideo">
+			<img src="${APP_PATH }/static/pc/img/video/ty.jpg" >
+		</div>
 		<div class="container videobox  clearfix">
-			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp1.jpg" ></div>
+			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp3.jpg" ></div>
             <div class="videotop clearfix">
             	<ul>
             	      <li onclick="clickVideo(event)" videonum-id="157" data-src="https://www.youtube.com/embed/Wdbz0TRf6sI" data-img="${APP_PATH }/static/pc/img/video/v2.jpg"><img src="${APP_PATH }/static/pc/img/video/v1.jpg" ></li>
@@ -73,22 +77,21 @@
 			
 				</ul>
 			</div>
-			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp1.jpg" ></div>
+			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp4.jpg" ></div>
 			<div class="four_hot container clearfix">
 				<ul class="clearfix">
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Straight-Body-Wave-Highlight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
 				</ul>
 				<dl class="clearfix">
-					<dd><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
-					<dd><a href="###"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
+					<dd><a href="${APP_PATH }/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
+					<dd><a href="${APP_PATH }/13x4-Bob-Wig-1B-30-Color-Straight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
 				</dl>
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="../mfooter.jsp"></jsp:include>
 
 	<script>
