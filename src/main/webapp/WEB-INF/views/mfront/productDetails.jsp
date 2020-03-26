@@ -223,7 +223,7 @@
 	
 				swiper.html(html);
 				
-				if (hasVideo) showVideo();
+				hasVideo && showVideo();
 			}
 			
 			function showVideo() {

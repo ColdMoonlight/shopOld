@@ -126,7 +126,12 @@
 				type: "POST",
 				success: function (data) {
 					if (data.code == 100) {
-						var resData = data.extend.mbackProductImgResList;
+						var resData = data.extend.mbackProductImgResList,
+							videoData = data.extend.mlbackProductOne;
+						resData.unshift({
+							imgUrl: videoData.productMainFuimgurl,
+							videoUrl: videoData.productColor
+						});
 						renderProductDetailsBanner(swiper, resData);
 						var galleryleft = new Swiper('.additional_pic', {
 							direction: 'vertical',
@@ -210,21 +215,51 @@
 			});
 
 			function renderProductDetailsBanner(parent, data) {
-				var htmlbig = '';
-				var htmlsmall = '';
+				console.log(data)
+				var htmlbig = '',
+					htmlsmall = '',
+					hasVideo = false;
 				for (var i = 0, len = data.length; i < len; i += 1) {
-					htmlbig += '<div class="swiper-slide">' +
-						'<img src="' + data[i].productimgUrl + '" rel="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '" class="jqzoom">' +
+					if (data[i].videoUrl && data[i].imgUrl) {
+						htmlbig += '<div class="swiper-slide">' +
+						'<img class="showVideo jqzoom" src="' + data[i].imgUrl + '" rel="' + data[i].imgUrl + '" data-video="'+ data[i].videoUrl +'"/>' +
 						'</div>';
+						hasVideo = true;
+					} else {
+						htmlbig += '<div class="swiper-slide">' +
+							'<img src="' + data[i].productimgUrl + '" rel="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '" class="jqzoom">' +
+							'</div>';
+					}
 				}
 				for (var a = 0, len = data.length; a < len; a += 1) {
-					htmlsmall += '<div class="swiper-slide">' +
-						'<img src="' + data[a].productImgsecleturl + '">' +
+					if (data[a].videoUrl && data[a].imgUrl) {
+						htmlsmall += '<div class="swiper-slide">' +
+						'<img class="showVideo" src="' + data[a].imgUrl + '" data-video="'+ data[a].videoUrl +'" />' +
 						'</div>';
+						hasVideo = true;
+					} else {
+						htmlsmall += '<div class="swiper-slide">' +
+							'<img src="' + data[a].productImgsecleturl + '">' +
+							'</div>';
+					}
 				}
 
 				swipersmall.html(htmlsmall);
 				swiper.html(htmlbig);
+				hasVideo && showVideo();
+			}
+			
+			function showVideo() {
+				$('.showVideo').on('click', function(e) {
+					function matchYoutubeUrl(url){
+						/* var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+					    return (url.match(p)) ? RegExp.$1 : false ; */
+					    return url.split("watch?v=")[1];
+				   	}
+					var videoUrl = $(this).data('video');
+					if (videoUrl)
+						renderSysMsg('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="360" src="https://www.youtube.com/embed/'+ matchYoutubeUrl(videoUrl) +'"></iframe>');
+				});
 			}
 
 			function triggerCondition(parent) {
