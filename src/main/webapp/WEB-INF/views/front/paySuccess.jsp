@@ -217,7 +217,7 @@
 		}
 		$('.order-info .product_shop').html(tbodyHtml);
 		var calInfoHtml = '';
-		calInfoHtml = '<div class="listnum"><span>prototal：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)-parseFloat(sessionaddressMoney) ) + '</span></div>' +
+		calInfoHtml = '<div class="listnum"><span>prototal：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)-parseFloat(sessionaddressMoney)).toFixed(2) + '</span></div>' +
 			'<div class="listnum"><span>shipping：</span><span>' + sessionaddressMoney + '</span></div>' +
 			'<div class="listnum"><span>coupon：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 			'<div class="listnum subtotalcont"><span>subtotal：</span><span>$' + data.payinfoMoney + '</span></div>';
