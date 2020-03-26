@@ -53,14 +53,14 @@
 										  <option value ="2">已审核</option>
 										  <option value ="3">已发货</option>
 										  <option value ="4">已退款</option>
-										   <option value ="5">已通知复购</option>
-										    <option value ="6">已关闭</option>
+										  <option value ="5">已通知复购</option>
+										  <option value ="6">已关闭</option>
 										</select>
 								    </div>
 								</div>
-								   <div class="form-group btn_search">
-									   <input type="submit" id="" value="搜索" name="" />
-							       </div>
+								<div class="form-group btn_search">
+									<input type="submit" id="" value="搜索" name="" />
+							    </div>
 							</div>
 						<!-- table-content -->
 						<div id="wei_num" style="display: none; width: 100%; float: left; background: #fff; text-align:center;min-height: 600px;">
