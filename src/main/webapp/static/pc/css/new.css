@@ -618,14 +618,14 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .customer_widget_box{width: 100%; height:auto;margin: 30px 0 0; border-bottom: 1px solid #ccc;}
 .customer_widget_box .review-left{width: 100%;}
 .left_allstatr{float: left; width: 30%;}
-.left_allstatr .review-toal-num{text-align: center;margin: 20px 0; font-size: 18px;}
+.left_allstatr .review-toal-num{text-align: center;margin: 20px 0; font-size: 14px;}
 .left_allstatr .stars-list2{text-align: center;}
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
 .customer_widget_box .review-statics-item .progress{width: 40%;}
 .customer_widget_box .reviews-statics{float: left; width: 70%;}
 .review-statics-item .reviews-data2 .icon{display: inline-block;font-size:18px;width: 20px;height: 20px;}
 .customer_widget_box .review-statics-item .progress{margin: 0 5px;}
-
+.customer_widget_box h3,.customer_widget_box h4{font-size: 16px;}
 
 
 
@@ -679,13 +679,15 @@ p.video_discontent2_con{font-size: 17px; color: #000; line-height: 24px;margen:0
 .tipsimg{width: 100%;margin:10px 0 0}
 .tipsimg img{display: block;margin:0 auto}
 .videotop {width:100%}
-.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px 10px 0}
+.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px}
 .videotop li img{width: 100%;}
 .four_hot{margin:20px auto 0}
 .four_hot li{float:left;width:25%;padding:0 1%}
 /* .four_hot ul{margin:0 0 20px} */
 .four_hot li img{width: 100%;}
-.four_hot li a p{margin:0;line-height:30px}
+.four_hot a p{margin:0;line-height:30px;padding: 10px 0; font-size: 24px; text-align: center;}
+.four_hot a:hover p{color: #333;}
+.four_hot dl{margin: 20px 0 0;}
 .four_hot dd{width:50%;float:left;padding:0 1%}
 .four_hot dd img{width: 100%;}
 .banvideo{width: 100%;}
