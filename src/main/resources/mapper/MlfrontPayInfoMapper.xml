@@ -351,6 +351,9 @@
     <if test="payinfoStatus != null">
       and payInfo_status = #{payinfoStatus,jdbcType=INTEGER}
     </if>
+    <if test="payinfoPlateNum != null">
+      and payInfo_plateNum = #{payinfoPlateNum,jdbcType=VARCHAR}
+    </if>
     order by payInfo_id desc
   </select>
 </mapper>
