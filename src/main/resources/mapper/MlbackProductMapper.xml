@@ -752,7 +752,7 @@
   <!-- select	selectMlbackProductSimple使用中 -->
   <select id="selectMlbackProductSimple" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
     select 	
-	product_id, product_name, product_seo,  product_mainimgurl, product_originalPrice, 
+	product_id, product_name,product_color, product_seo,  product_mainimgurl, product_mainfuimgurl, product_originalPrice, 
     product_haveSaleNum, product_status,  product_actoffId, 
     product_actoffOff, product_actoffif, product_reviewNum	
 	from tb_mlback_product

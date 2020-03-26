@@ -46,31 +46,31 @@
 						</div>
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list num_box_list">
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"  class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
+								<a href="${APP_PATH }/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"  class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
 								</span>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
 								</span>
-								<a href="/ShopTemplate/MlbackAddOrderViewDetail/toMlbackAddOrderViewDetailPage" title="order出品量" class="model-item addorder_num"><div class="model-text">出单产品量</div><div class="model-num">0</div></a>
+								<a href="/MlbackAddOrderViewDetail/toMlbackAddOrderViewDetailPage" title="order出品量" class="model-item addorder_num"><div class="model-text">出单产品量</div><div class="model-num">0</div></a>
 							</div>
 						</div>
 						<hr style="border-color: #ccc;" />
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list num_box_list">
-								<a href="/ShopTemplate/MlbackAddPayinfoViewDetail/toMlbackAddPayinfoViewDetailPage" title="成交金额"  class="model-item PayinfoSuccessNum"><div class="model-text">成交num</div><div class="model-num">0</div></a>
+								<a href="/MlbackAddPayinfoViewDetail/toMlbackAddPayinfoViewDetailPage" title="成交金额"  class="model-item PayinfoSuccessNum"><div class="model-text">成交num</div><div class="model-num">0</div></a>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
 								</span>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
+									<a href="/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
 								</span>
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量" class="model-item accounts"><div class="model-text">结算量</div><div class="model-num">0</div></a>
+								<a href="/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量" class="model-item accounts"><div class="model-text">结算量</div><div class="model-num">0</div></a>
 							</div>
 						</div>
 					</div>

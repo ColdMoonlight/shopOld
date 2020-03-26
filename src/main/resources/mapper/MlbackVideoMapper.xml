@@ -500,7 +500,7 @@
   <!-- selectMlbackVideoGetAll -->
   <select id="selectMlbackVideoGetAll" parameterType="com.atguigu.bean.MlbackVideo" resultMap="BaseResultMap">
     select *
-    from tb_mlback_video order by video_id desc
+    from tb_mlback_video order by video_area desc ,video_orderth_num desc,video_id desc
   </select>
   
   <!-- selectMlbackvideoByVideoAreaCount -->
