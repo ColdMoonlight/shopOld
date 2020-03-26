@@ -119,14 +119,14 @@
 			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt4.jpg" ></div>
 			<div class="four_hot container clearfix">
 				<ul class="clearfix">
-					<li><a href="${APP_PATH }/B-13x4-Straight-Body-Wave-Highlight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
-					<li><a href="${APP_PATH }/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ><p>sdfsdfsdfsdfsdfsdf</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Straight-Body-Wave-Highlight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp1.jpg" ><p>180% Density 13x4 Lace Frontal Wig </p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp2.jpg" ><p>360 Lace Frontal Wigs Body Wave </p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp3.jpg" ><p>13x4 Lace Frontal Wig Straight Hair</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp4.jpg" ><p>13x4 Lace Frontal Wig Water Wave Hair</p></a></li>
 				</ul>
 				<dl class="clearfix">
-					<dd><a href="${APP_PATH }/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
-					<dd><a href="${APP_PATH }/13x4-Bob-Wig-1B-30-Color-Straight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/video/v2.jpg" ></a></dd>
+					<dd><a href="${APP_PATH }/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp5.jpg" ><p>4x4 Bob Wigs All Color Straight Hair</p></a></dd>
+					<dd><a href="${APP_PATH }/13x4-Bob-Wig-1B-30-Color-Straight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp6.jpg" ><p>13x4 1b/30 Bob Lace Frontal Straight Wig</p></a></dd>
 				</dl>
 			</div>
 		<!-- </div> -->

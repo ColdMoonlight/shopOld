@@ -2757,7 +2757,7 @@ word-break: break-all;width: 98%; float: left; margin: 5px 2% 0 0; font-size: 14
 .time_namep2{ padding: 0; margin: 0;}
 .time_namep2 span{display: inline-block; text-align: center;width: 100%;margin: 0 0 10px;}
 .time_namep2 span i{font-style: normal;font-weight: bold; color: #333;}
-.p_contpl{text-align: left;padding: 10px;}
+.p_contpl{text-align: left;padding: 10px;font-size: 14px;line-height: 20px;}
 .btn_shop{display: inline-block;margin: 0 0 10px; background: #000; width: 150px;height: 30px; color: #fff;border-radius:3px; line-height: 30px; text-align: center;}
 .btn_shop:hover{color: #fff;}
 .btnlink{ text-align: center;}
@@ -2811,7 +2811,7 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
 .four_hot{margin:1.5% auto 0}
 .four_hot li{float:left;width:50%;padding:0 1%}
 .four_hot li img{width: 100%;}
-.four_hot li a p{margin:0;line-height:30px}
+.four_hot a p{margin:0;line-height:40px;font-size: 14px; text-align: center;}
 .four_hot dd{width:100%;float:left;padding:0 1%; margin: 0 0 1%;}
 .four_hot dd img{width: 100%;}
 .banvideo{width: 100%;margin: 0 0 1%;}
@@ -3132,7 +3132,7 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
 .customer_widget_box{width: 100%; height:auto;padding: 10px 2%; background: #fff; border-bottom: 1px solid #ccc;}
 .customer_widget_box .review-left{width: 100%;}
 .left_allstatr{float: left; width: 100%;}
-.left_allstatr .review-toal-num{text-align: center;margin: 20px 0; font-size: 18px;}
+.left_allstatr .review-toal-num{text-align: center;margin: 20px 0; font-size: 16px;}
 .left_allstatr .stars-list2{text-align: center;}
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
 .customer_widget_box .review-statics-item .progress{width: 50%;}
