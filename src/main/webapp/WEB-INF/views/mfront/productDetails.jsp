@@ -127,7 +127,7 @@
 				type: "post",
 				success: function (data) {
 					if (data.code == 100) {
-						console.log(data)
+						// console.log(data)
 						var resData = data.extend.mbackProductImgResList,
 							videoData = data.extend.mlbackProductOne;
 						resData.unshift({
@@ -228,9 +228,14 @@
 			
 			function showVideo() {
 				$('.showVideo').on('click', function(e) {
+					function matchYoutubeUrl(url){
+						/* var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+					    return (url.match(p)) ? RegExp.$1 : false ; */
+					    return url.split("watch?v=")[1];
+				   	}
 					var videoUrl = $(this).data('video');
 					if (videoUrl)
-						renderSysMsg('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="260" src="'+ videoUrl +'"></iframe>');
+						renderSysMsg('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="260" src="https://www.youtube.com/embed/'+ matchYoutubeUrl(videoUrl) +'"></iframe>');
 				});
 			}
 
