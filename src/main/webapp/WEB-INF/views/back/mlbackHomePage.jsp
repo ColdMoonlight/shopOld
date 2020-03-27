@@ -467,6 +467,23 @@
 							},
 
 						});
+						/* 出单产品量  */
+						$.ajax({
+							url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
+							data: JSON.stringify({
+								"addorderviewdetailStarttime": startime,
+								"addorderviewdetailEndtime": endtime,
+							}),
+							type: 'post',
+							dataType: 'JSON',
+							contentType: 'application/json',
+							success: function (data) {
+								// console.log(data);
+								var resData = data.extend.toDayNum;
+								$(".addorder_num .model-num").html(resData);
+							},
+
+						});
 
 					}
 				})
