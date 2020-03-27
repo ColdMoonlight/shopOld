@@ -1820,7 +1820,8 @@ width: 100%;
 }
 .lottery-email {
     width: 100%;
-    height: 338px;
+    /* height: 338px; */
+    height: 260px;
     padding-top: 50px;
     text-align: center;
     background: url('../../common/lottery-pc.jpg') no-repeat;
@@ -1874,15 +1875,19 @@ width: 100%;
 	font-style: italic;
 }
 .lottery-game-box {
-    padding: 20px;
+    /* padding: 20px; */
     background-color: #fff;
+    -webkit-transform: scale(.8);
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    transform: scale(.8);
 }
 
 .lottery-inner-box {
 	width: 610px;
 	padding: 10px;
     margin: 0 auto;
-    margin-top: -100px;
+    /* margin-top: -100px; */
 	border-radius: 20px;
 	background-color: #fff;
 	box-shadow: 0 0 8px #bbb;
