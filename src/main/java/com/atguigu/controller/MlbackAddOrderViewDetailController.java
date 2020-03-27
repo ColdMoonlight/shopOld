@@ -3,8 +3,6 @@ package com.atguigu.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.atguigu.bean.MlbackActShowPro;
-import com.atguigu.bean.MlbackAddCartViewDetail;
+import com.atguigu.Vo.SortNumTh;
 import com.atguigu.bean.MlbackAddOrderViewDetail;
 import com.atguigu.bean.MlbackAdmin;
-import com.atguigu.bean.MlbackCoupon;
-import com.atguigu.bean.MlbackProduct;
-import com.atguigu.bean.MlbackProductViewDetail;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.atguigu.service.MlbackActShowProService;
-import com.atguigu.service.MlbackAddCartViewDetailService;
 import com.atguigu.service.MlbackAddOrderViewDetailService;
-import com.atguigu.service.MlbackAdminService;
-import com.atguigu.service.MlbackCategoryService;
-import com.atguigu.service.MlbackProductService;
-import com.atguigu.service.MlbackProductViewDetailService;
-import com.atguigu.utils.DateUtil;
 
 
 @Controller
@@ -161,7 +148,29 @@ public class MlbackAddOrderViewDetailController {
 			}
 		}
 		numList.add(k);
-		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
+		List<SortNumTh> SortNumThList = new ArrayList<SortNumTh>();
+		Integer lenth = SeoStringList.size();
+		SortNumTh[] arrayA = new SortNumTh[lenth];
+		for(int x=0;x<lenth;x++){
+			SortNumTh sortNumThOne = new SortNumTh();
+			String SeoString = SeoStringList.get(x);
+			Integer numCount = numList.get(x);
+			sortNumThOne.setSeoString(SeoString);
+			sortNumThOne.setSeoStringCount(numCount);
+			SortNumThList.add(sortNumThOne);
+			arrayA[x] = sortNumThOne;
+		}
+		//排序
+		for (int m = 0; m < arrayA.length - 1; m++) {				//外循环只需要比较arr.length-1次就可以了
+			for (int n = 0; n < arrayA.length - 1 - m; n++) {		//-1为了防止索引越界,-i为了提高效率
+				if(arrayA[n].getSeoStringCount() < arrayA[n+1].getSeoStringCount()) {
+					SortNumTh temp = arrayA[n];
+					arrayA[n] = arrayA[n + 1];
+					arrayA[n+1] = temp;
+				}
+			}
+		}
+		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList).add("arrayA", arrayA);
 	}
 	
 	/**3.0	UseNow	0505
@@ -231,7 +240,29 @@ public class MlbackAddOrderViewDetailController {
 			}
 		}
 		numList.add(k);
-		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
+		List<SortNumTh> SortNumThList = new ArrayList<SortNumTh>();
+		Integer lenth = SeoStringList.size();
+		SortNumTh[] arrayA = new SortNumTh[lenth];
+		for(int x=0;x<lenth;x++){
+			SortNumTh sortNumThOne = new SortNumTh();
+			String SeoString = SeoStringList.get(x);
+			Integer numCount = numList.get(x);
+			sortNumThOne.setSeoString(SeoString);
+			sortNumThOne.setSeoStringCount(numCount);
+			SortNumThList.add(sortNumThOne);
+			arrayA[x] = sortNumThOne;
+		}
+		//排序
+		for (int m = 0; m < arrayA.length - 1; m++) {				//外循环只需要比较arr.length-1次就可以了
+			for (int n = 0; n < arrayA.length - 1 - m; n++) {		//-1为了防止索引越界,-i为了提高效率
+				if(arrayA[n].getSeoStringCount() < arrayA[n+1].getSeoStringCount()) {
+					SortNumTh temp = arrayA[n];
+					arrayA[n] = arrayA[n + 1];
+					arrayA[n+1] = temp;
+				}
+			}
+		}
+		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList).add("arrayA", arrayA);
 	}
 
 }
