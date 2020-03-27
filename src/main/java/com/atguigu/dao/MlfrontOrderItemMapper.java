@@ -37,5 +37,7 @@ public interface MlfrontOrderItemMapper {
     List<MlfrontOrderItem> selectMlfrontOrderItemByNowTime(String nowTime);
     //查询全部登陆用户00
 	List<MlfrontOrderItem> selectMlfrontOrderItemGetAll();
+	//时间筛选
+	List<MlfrontOrderItem> selectMlfrontOrderItemByMotifyTime(MlfrontOrderItem mlfrontOrderItem);
     
 }
