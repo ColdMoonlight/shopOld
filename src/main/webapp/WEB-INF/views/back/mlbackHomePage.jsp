@@ -90,30 +90,7 @@
 									<div class="model-text">成交num</div>
 									<div class="model-num">0</div>
 								</a>
-								<span class="model-item addcart_box">
-									<a href="${APP_PATH }/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage"
-										title="加购量" class="cart_num addcart">
-										<div class="model-text">加购量</div>
-										<div class="model-num">0</div>
-									</a>
-									<a href="${APP_PATH }/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage"
-										title="buynow加购量" class="cart_num addcart2">
-										<div class="model-text">buynow加购量</div>
-										<div class="model-num">0</div>
-									</a>
-								</span>
-								<span class="model-item addcart_box">
-									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage"
-										title="购物车结算" class="cart_num addcart_num">
-										<div class="model-text">购物车结算</div>
-										<div class="model-num">0</div>
-									</a>
-									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage"
-										title=">buynow结算" class="cart_num buy_nownum">
-										<div class="model-text">buynow结算</div>
-										<div class="model-num">0</div>
-									</a>
-								</span>
+								
 								<a href="${APP_PATH }/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量"
 									class="model-item accounts">
 									<div class="model-text">结算量</div>
