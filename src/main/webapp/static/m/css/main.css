@@ -2858,7 +2858,7 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
     padding: 10px 0;
     text-align: center;
     /* background-color: #00b3ff; */
-    background: url('../../common/lottery-pc.jpg') no-repeat;
+    background: url('../../common/lottery-wap.jpg') no-repeat;
     background-size: 100% 100%;
 }
 .lottery-title {
@@ -2927,7 +2927,7 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
     z-index: 9999;
     margin: 0 auto;
     cursor: pointer;
-    background: url('../../common/start-game.png') no-repeat;
+    background: url('../../common/start-game-wap.png') no-repeat;
     background-size: 100% 100%;
 }
 .lottery-game-list {
