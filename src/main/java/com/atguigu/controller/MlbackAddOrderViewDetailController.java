@@ -325,7 +325,6 @@ public class MlbackAddOrderViewDetailController {
 			MlfrontOrderItem mlfrontOrderItemOne = mlfrontOrderItemList.get(i);
 			if(proSeo.isEmpty()){
 				//System.out.println("第一次来，都不记录");
-				//proSeo = mlfrontOrderItemOne.getOrderitemPid()+"";
 				proSeo = mlfrontOrderItemOne.getOrderitemPname();
 				SeoStringList.add(proSeo);
 			}else{

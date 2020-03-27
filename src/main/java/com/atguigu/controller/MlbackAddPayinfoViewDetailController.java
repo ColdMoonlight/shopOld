@@ -23,6 +23,8 @@ import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackCoupon;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackProductViewDetail;
+import com.atguigu.bean.MlfrontOrderItem;
+import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.Msg;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -34,6 +36,7 @@ import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackCategoryService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackProductViewDetailService;
+import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 
 
@@ -43,6 +46,9 @@ public class MlbackAddPayinfoViewDetailController {
 	
 	@Autowired
 	MlbackAddPayinfoViewDetailService mlbackAddPayinfoViewDetailService;
+	
+	@Autowired
+	MlfrontPayInfoService mlfrontPayInfoService;
 		
 	/**
 	 * 1.0	UseNow	0505
@@ -87,25 +93,25 @@ public class MlbackAddPayinfoViewDetailController {
 //	}
 	
 	
-	/**3.0	UseNow	0505
-	 * 分类MlbackActShowPro列表分页list数据
-	 * @param pn
-	 * @return
-	 */
-	@RequestMapping(value="/getAddPayinfoViewDetailSuccessNum",method=RequestMethod.POST)
-	@ResponseBody
-	public Msg getAddPayinfoViewDetailSuccessNum(HttpSession session,@RequestBody MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetail) {
-		
-		String starttime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailStarttime();
-		String endtime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailEndtime();
-		MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetailreq = new MlbackAddPayinfoViewDetail();
-		mlbackAddPayinfoViewDetailreq.setAddpayinfoviewdetailStarttime(starttime);
-		mlbackAddPayinfoViewDetailreq.setAddpayinfoviewdetailEndtime(endtime);
-		List<MlbackAddPayinfoViewDetail> mlbackAddPayinfoViewDetailList = mlbackAddPayinfoViewDetailService.selectMlbackAddPayinfoViewDetailByTime(mlbackAddPayinfoViewDetailreq);
-		Integer toDayNum=mlbackAddPayinfoViewDetailList.size();
-		return Msg.success().add("mlbackAddPayinfoViewDetailList", mlbackAddPayinfoViewDetailList).add("toDayNum", toDayNum);
-	}
-	
+//	/**3.0	UseNow	0505
+//	 * 分类MlbackActShowPro列表分页list数据
+//	 * @param pn
+//	 * @return
+//	 */
+//	@RequestMapping(value="/getAddPayinfoViewDetailSuccessNum",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Msg getAddPayinfoViewDetailSuccessNum(HttpSession session,@RequestBody MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetail) {
+//		
+//		String starttime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailStarttime();
+//		String endtime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailEndtime();
+//		MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetailreq = new MlbackAddPayinfoViewDetail();
+//		mlbackAddPayinfoViewDetailreq.setAddpayinfoviewdetailStarttime(starttime);
+//		mlbackAddPayinfoViewDetailreq.setAddpayinfoviewdetailEndtime(endtime);
+//		List<MlbackAddPayinfoViewDetail> mlbackAddPayinfoViewDetailList = mlbackAddPayinfoViewDetailService.selectMlbackAddPayinfoViewDetailByTime(mlbackAddPayinfoViewDetailreq);
+//		Integer toDayNum=mlbackAddPayinfoViewDetailList.size();
+//		return Msg.success().add("mlbackAddPayinfoViewDetailList", mlbackAddPayinfoViewDetailList).add("toDayNum", toDayNum);
+//	}
+//	
 	
 //	/**4.0	UseNow	0505
 //	 * 分类MlbackProductViewDetail列表list数据
@@ -227,5 +233,26 @@ public class MlbackAddPayinfoViewDetailController {
 //		numList.add(k);
 //		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
 //	}
+	
+	/**2.0	UseNow	0505
+	 * 分类MlbackActShowPro列表分页list数据
+	 * @param pn
+	 * @return
+	 */
+	@RequestMapping(value="/getAddPayinfoViewDetailSuccessNum",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg getAddPayinfoViewDetailSuccessNum(HttpSession session,@RequestBody MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetail) {
+		
+		String starttime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailStarttime();
+		String endtime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailEndtime();
+		
+		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+		mlfrontPayInfoReq.setPayinfoCreatetime(starttime);
+		mlfrontPayInfoReq.setPayinfoMotifytime(endtime);
+		List<MlfrontPayInfo> mlfrontPayInfoList = mlfrontPayInfoService.selectMlfrontPayInfoByMotifyTime(mlfrontPayInfoReq);
+		
+		Integer toDayNum=mlfrontPayInfoList.size();
+		return Msg.success().add("toDayNum", toDayNum);
+	}
 
 }

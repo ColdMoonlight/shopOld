@@ -81,5 +81,10 @@ public class MlfrontPayInfoService {
 	    List<MlfrontPayInfo>  mlfrontPayInfoList = mlfrontPayInfoMapper.selectHighPayInfoListBySearch(mlfrontPayInfoReq);
 	    return mlfrontPayInfoList;
 	}
+
+	public List<MlfrontPayInfo> selectMlfrontPayInfoByMotifyTime(MlfrontPayInfo mlfrontPayInfoReq) {
+		List<MlfrontPayInfo>  mlfrontPayInfoList = mlfrontPayInfoMapper.selectMlfrontPayInfoByMotifyTime(mlfrontPayInfoReq);
+	    return mlfrontPayInfoList;
+	}
 	
 }
