@@ -59,9 +59,9 @@
 								    </div>
 								</div>
 								<div class="form-group" style="width: 400px;">
-									<label for="productName" style="float: left;" class="control-label">订单编号:</label>
+									<label for="payinfoPlateNum" style="float: left;" class="control-label">订单编号:</label>
 									<div class="" style="float: left;width: 80%;">
-										<input type="text" class="form-control" id="productName" placeholder="订单编号" name="productName">
+										<input type="text" class="form-control" id="payinfoPlateNum" placeholder="订单编号" name="payinfoPlateNum">
 									</div>
 								</div>
 								<div class="form-group btn_search">
@@ -226,17 +226,28 @@
 console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
 /****************************************************************************************/
   		$("#downPayinfoDate").click(function(){
-  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
-  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoIF?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime;
+			var payinfoPlateNum =$("#payinfoPlateNum").val();
+  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime+"payinfoPlateNum:"+payinfoPlateNum);
+  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoIF?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime+"&payinfoPlateNum="+payinfoPlateNum;
   		})
   		
   		$("#downEcppDate").click(function(){
-  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
-  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoEcpp?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime;
+			var payinfoPlateNum =$("#payinfoPlateNum").val();
+  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime+"payinfoPlateNum:"+payinfoPlateNum);
+  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoEcpp?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime+"&payinfoPlateNum="+payinfoPlateNum;
   		})
   		$(".btn_search").click(function(){
-  			console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
-			to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+			var payinfoPlateNum =$("#payinfoPlateNum").val();
+			if(payinfoPlateNum==""||payinfoPlateNum==null){
+				var payinfoPlateNumnull =999;
+				payinfoPlateNum =payinfoPlateNumnull;
+				console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+				to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+			}else{
+				console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+				to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+			}
+			
 		})
   		to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
   	function to_page(pn,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum) {
@@ -357,11 +368,27 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 				//为元素添加点击翻页的事件
 				firstPageLi.click(function () {
 //					to_page(1);
-					to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+                 var payinfoPlateNum =$("#payinfoPlateNum").val();
+				 if(payinfoPlateNum==""||payinfoPlateNum==null){
+				 		var payinfoPlateNumnull =999;
+				 		payinfoPlateNum =payinfoPlateNumnull;
+						to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+						}else{
+							to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+						}
+					
 				});
 				prePageLi.click(function () {
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
 //					to_page(result.extend.pageInfo.pageNum - 1);
-                    to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+							var payinfoPlateNumnull =999;
+							payinfoPlateNum =payinfoPlateNumnull;
+							 to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+                     }else{
+						  to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					 }
+                   
 				});
 			}
 
@@ -372,10 +399,26 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 				lastPageLi.addClass("disabled");
 			} else {
 				nextPageLi.click(function () {
-                     to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+						var payinfoPlateNumnull =999;
+						payinfoPlateNum =payinfoPlateNumnull;
+						 to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}else{
+						to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}
+                    
 				});
 				lastPageLi.click(function () {
-                    to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+						var payinfoPlateNumnull =999;
+						payinfoPlateNum =payinfoPlateNumnull;
+						 to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}else{
+						 to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}
+                   
 				});
 			}
 
@@ -389,7 +432,15 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 					numLi.addClass("active");
 				}
 				numLi.click(function () {
-                    to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+						var payinfoPlateNumnull =999;
+						payinfoPlateNum =payinfoPlateNumnull;
+						 to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}else{
+						 to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}
+                   
 				});
 				ul.append(numLi);
 			});
