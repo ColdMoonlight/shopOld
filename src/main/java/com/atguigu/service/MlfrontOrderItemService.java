@@ -96,5 +96,15 @@ public class MlfrontOrderItemService {
 		return mlfrontOrderItemList;
 	}
 	
-	
+	/**6
+	 * @author Shinelon
+	 * @param 
+	 * @exception time查询
+	 * 
+	 * */
+	public List<MlfrontOrderItem> selectMlfrontOrderItemByMotifyTime(MlfrontOrderItem mlfrontOrderItem) {
+		List<MlfrontOrderItem>  mlfrontOrderItemList = mlfrontOrderItemMapper.selectMlfrontOrderItemByMotifyTime(mlfrontOrderItem);
+		return mlfrontOrderItemList;
+	}
+
 }
