@@ -115,7 +115,11 @@ public class HighPayInfoController {
 		}else{
 			mlfrontPayInfoReq.setPayinfoStatus(payinfoStatus);
 		}
-		mlfrontPayInfoReq.setPayinfoPlateNum(payinfoPlateNum);
+		if("999".equals(payinfoPlateNum)){
+			mlfrontPayInfoReq.setPayinfoPlateNum(null);
+		}else{
+			mlfrontPayInfoReq.setPayinfoPlateNum(payinfoPlateNum);
+		}
 		mlfrontPayInfoReq.setPayinfoCreatetime(payinfoCreatetime);
 		mlfrontPayInfoReq.setPayinfoMotifytime(payinfoMotifytime);
 		int PagNum = 20;
