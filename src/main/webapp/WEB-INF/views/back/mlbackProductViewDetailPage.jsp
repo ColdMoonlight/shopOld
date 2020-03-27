@@ -57,12 +57,7 @@
 										<th>浏览量</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="td_name"></td>
-										<td class="td_num"></td>
-									</tr>
-								</tbody>
+								<tbody id="add-table-body"></tbody>
 							</table>
 						</div>
 						<!-- 显示分页信息 -->
@@ -148,13 +143,21 @@
 			contentType: 'application/json',
 			success: function (data) {
 				// console.log(data);
-				var dataArr = data.extend.arrayA;
-				$.each(dataArr, function (index, item) {
-					$(".td_name").append('<p>产品 --- ' + item.seoString + '.html</p>');
-					$(".td_num").append('<p>' + item.seoStringCount + '</p>');
-				});
+				renderTable($('#add-table-body'), data.extend.arrayA, '产品');
 			}
 		});
+
+		function renderTable(parent, data, type) {
+			var htmlStr = '';
+			$.each(data, function (index, item) {
+				htmlStr += '<tr>'
+					+ '<td>'+ type +' --- ' + item.seoString + '.html</td>'
+					+ '<td>' + item.seoStringCount + '</td>'
+				+ '</tr>';
+			});
+			
+			parent.html(htmlStr);
+		}
 
 		/***********************************************/
 		function initJs() {
@@ -197,14 +200,9 @@
 							contentType: 'application/json',
 							success: function (data) {
 								// console.log(data);
-								var dataArr = data.extend.arrayA;
-								$.each(dataArr, function (index, item) {
-									$(".td_name").append('<p>产品 --- ' + item.seoString + '.html</p>');
-									$(".td_num").append('<p>' + item.seoStringCount + '</p>');
-								});
+								renderTable($('#add-table-body'), data.extend.arrayA, '产品');
 							}
 						});
-
 					}
 				})
 			})

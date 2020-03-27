@@ -53,7 +53,7 @@
 								</span>
 								<span class="model-item addcart_box">
 									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
-									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
+									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title="buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
 								</span>
 								<a href="${APP_PATH }/MlbackAddOrderViewDetail/toMlbackAddOrderViewDetailPage" title="order出品量" class="model-item addorder_num"><div class="model-text">出单产品量</div><div class="model-num">0</div></a>
 							</div>
