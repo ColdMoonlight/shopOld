@@ -76,29 +76,24 @@
    <div class="mask maskindex" style="display: none;"></div>
    <div class="go_re" style="display: none;">
 	   <span class="close">×</span> 
-	   <%-- <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a> --%>
 	   <div class="lottery">
-	        <!-- div class="lottery-close">x</div> -->
 	        <div class="lottery-email">
 	        	<div class="lottery-title">
-	        		<span>MEGALOOK</span>
+	        		<span><b>M</b>EGA<b>L</b>OOK</span>
 	        		<span>Your Hair Your Surprise</span>
-	            	<span>Enter your email to join the game！</span>
 	        	</div>
-	            <input type="text" placeholder="Email address">
+	            <input type="text" placeholder="E-mail address">
+	            <div class="lottery-join-tip">Enter your email, get our gift pack (value 30$) & a barcelet (value 20$), all free！</div>
 	            <div class="lottery-email-tip"></div>
 	        </div>
-	
+			
 	        <div class="lottery-game-box">
-	            <div class="lottery-game">
-	                <div class="lottery-startgame">
-	                    <!-- <div class="lottery-game-item">
-	                        <span>Start</span>
-	                        <span>GAME</span>
-	                    </div> -->
-	                </div>
-	                <div class="lottery-game-list"></div>
-	            </div>
+	        	<div class="lottery-inner-box">
+		            <div class="lottery-game">
+		                <div class="lottery-startgame"></div>
+		                <div class="lottery-game-list"></div>
+		            </div>
+		         </div>
 	        </div>
        </div>
   </div>
@@ -847,7 +842,7 @@
 				for (var item in couponList) {
 					var itemData = couponList[item];
 					couponArr.push(itemData.couponId);
-					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgwapurl + '"/></div>';
+					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgpcurl + '"/></div>';
 				}
 	
 		    	setTimeout(function() {
