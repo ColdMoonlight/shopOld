@@ -12,13 +12,10 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/main.css">
 	<link rel="stylesheet" href="${APP_PATH }/static/back/css/table.css">
-	
+
 	<%-- <link rel="stylesheet" href="${APP_PATH }/static/back/js/datepicker/datepicker.css"> --%>
 	<style>
-		tr>td:nth-last-of-type(2),
-		th>td:nth-last-of-type(2) {
-			max-width: 100px;
-		}
+		tr>td:nth-last-of-type(2), th>td:nth-last-of-type(2) { max-width: 100px; }
 	</style>
 </head>
 
@@ -53,16 +50,11 @@
 							<table class="table table-striped table-hover" id="task_table">
 								<thead>
 									<tr>
-									<th>产品SEO名称</th>
-								    <th>buynow加购量</th>
+										<th>产品SEO名称</th>
+										<th>buynow加购量</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="td_name"></td>
-										<td class="td_num"></td>
-									</tr>
-							    </tbody>
+								<tbody id="add-table-body"></tbody>
 							</table>
 						</div>
 						<!-- 显示分页信息 -->
@@ -75,175 +67,147 @@
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/jquery-nicescroll.min.js"></script>
 	<script type="text/javascript" src="${APP_PATH }/static/back/js/sidenav.js"></script>
 	<!-- <script type="text/javascript" src="${APP_PATH }/static/back/js/nav.js"></script> -->
-    <script src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
+	<script src="${APP_PATH }/static/back/js/datepicker/moment.min.js"></script>
 	<script src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script>
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		// console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
+	<script type="text/javascript">
+		$('.nicescroll').each(function (i, item) {
+			$(item).niceScroll({
+				cursorcolor: "rgba(0,0,0,.3)",
+				cursorwidth: "4px",
+				cursorborder: "none",
+				horizrailenabled: false,
+				enablekeyboard: false,
+			}).resize()
+		});
+		var targetInput = $('.date-timepicker');
+		var date = new Date();
+		var minDate = moment()
+			.set({
+				'date': date.getDate() - 1,
+				'hour': date.getHours(),
+				'minute': date.getMinutes(),
+				'second': date.getSeconds()
+			})
+			.format('YYYY-MM-DD HH:mm:ss');
+		var minDate2 = moment()
+			.set({
+				'date': date.getDate() - 1,
+				'hour': 23,
+				'minute': 59,
+				'second': 59
+			})
+			.format('YYYY-MM-DD HH:mm:ss');
 
+		var minDate22 = moment()
+			.set({
+				'date': date.getDate(),
+				'hour': 0,
+				'minute': 0,
+				'second': 0
+			})
+			.format('YYYY-MM-DD HH:mm:ss');
 
-		<script type="text/javascript">
-				$('.nicescroll').each(function(i, item) {
-					$(item).niceScroll({
-						cursorcolor: "rgba(0,0,0,.3)",
-						cursorwidth: "4px",
-						cursorborder: "none",
-						horizrailenabled: false,
-						enablekeyboard: false,
-			    }).resize()
-				});
-				var targetInput = $('.date-timepicker');
-				var date = new Date();
-				var minDate = moment().set({
-						'date': date.getDate() - 1,
-						'hour': date.getHours(),
-						'minute': date.getMinutes(),
-						'second': date.getSeconds()
-					})
-					.format('YYYY-MM-DD HH:mm:ss');
-				var minDate2 = moment()
-					.set({
-						'date': date.getDate() - 1,
-						'hour': 23,
-						'minute': 59,
-						'second': 59
-					})
-					.format('YYYY-MM-DD HH:mm:ss');
-					
-					/****************************/
-					var minDate22 = moment()
-						.set({
-							'date': date.getDate(),
-							'hour': 0,
-							'minute': 0,
-							'second': 0
-						})
-						.format('YYYY-MM-DD HH:mm:ss');
-					// console.log(minDate22)/*****************************2222222*/
-					
-				var maxDate = moment()
-					.set({
-						'date': date.getDate(),
-						'hour': date.getHours(),
-						'minute': date.getMinutes(),
-						'second': date.getSeconds()
-					})
-					.format('YYYY-MM-DD HH:mm:ss');
-		 // console.log(maxDate);/******1111111******************/
-				function initHtml() {
-					var $input = targetInput.find('input');
-					$input.eq(0).val(minDate22);
-					$input.eq(1).val(maxDate);
-				}
-				
-/*******初始化显示*************/
-              var startime =minDate22;
-              var endtime =maxDate;
-			  console.log(startime);/******startime***********/
-			  console.log(endtime);/**-*******endtime******/
-              $.ajax({
-                      url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
-                      data: JSON.stringify({
-                      "addcartviewdetailStarttime": startime,
-                      "addcartviewdetailEndtime": endtime,
-                      }),
-                      type: 'post',
-                      dataType: 'JSON',
-                      contentType: 'application/json',
-                      success: function (data) {
-                      console.log(data);
-              		var seohtml = data.extend.SeoStringList;
-              		var numhtml = data.extend.numList;
-              		$.each(seohtml, function(index, value){
-              			 var html =".html";
-              			 var index="buynow加购";
-              		     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
-              		 });
-              		$.each(numhtml, function(index, value){
-              		     $(".td_num").append('<p>'+ value + '</p>');
-              		 });
-              		
-                      }
-                    });
+		var maxDate = moment()
+			.set({
+				'date': date.getDate(),
+				'hour': date.getHours(),
+				'minute': date.getMinutes(),
+				'second': date.getSeconds()
+			})
+			.format('YYYY-MM-DD HH:mm:ss');
 
-		/***********************************************/
-				function initJs() {
-					targetInput.each(function (i, item) {
-						$(item).datePicker({
-							hasShortcut: true,
-							min: '2018-01-01 06:00:00',
-							max: maxDate,
-							isRange: true,
-							shortcutOptions: [{
-							 name: '昨天',
-							 day: '-1,-1',
-							 time: '00:00:00,23:59:59'
-							},{
-							 name: '最近一周',
-							 day: '-7,0',
-							 time:'00:00:00,'
-							}, {
-							 name: '最近一个月',
-							 day: '-30,0',
-							 time: '00:00:00,'
-							}, {
-							 name: '最近三个月',
-							 day: '-90, 0',
-							 time: '00:00:00,'
-							}],
-							hide: function (type) {
-								// console.log(1);
-								// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
-								var startime = this.$input.eq(0).val();
-								var endtime = this.$input.eq(1).val();
-								 $(".td_name").empty();
-								 $(".td_num").empty();
-								$.ajax({
-								        url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
-								        data: JSON.stringify({
-								        "addcartviewdetailStarttime": startime,
-								        "addcartviewdetailEndtime": endtime,
-								        }),
-								        type: 'post',
-								        dataType: 'JSON',
-								        contentType: 'application/json',
-								        success: function (data) {
-								        console.log(data);
-										var seohtml = data.extend.SeoStringList;
-										var numhtml = data.extend.numList;
-										 $.each(seohtml, function(index, value){
-											 var html =".html";
-											 var index="buynow加购量";
-										     $(".td_name").append('<p>'+index+"---"+ value + html + '</p>');
-										 });
-										$.each(numhtml, function(index, value){
-										     $(".td_num").append('<p>'+ value + '</p>');
-										 });
-										
-								        }
-								      });
-								
+		function initHtml() {
+			var $input = targetInput.find('input');
+			$input.eq(0).val(minDate22);
+			$input.eq(1).val(maxDate);
+		}
+
+		/*******初始化显示*************/
+		var startime = minDate22;
+		var endtime = maxDate;
+		$.ajax({
+			url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
+			data: JSON.stringify({
+				"addcartviewdetailStarttime": startime,
+				"addcartviewdetailEndtime": endtime,
+			}),
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function (data) {
+				// console.log(data);
+				renderTable($('#add-table-body'), data.extend.arrayA, 'buynow加购');
+			}
+		});
+
+		function renderTable(parent, data, type) {
+			var htmlStr = '';
+			$.each(data, function (index, item) {
+				htmlStr += '<tr>'
+					+ '<td>'+ type +' --- ' + item.seoString + '.html</td>'
+					+ '<td>' + item.seoStringCount + '</td>'
+				+ '</tr>';
+			});
+			
+			parent.html(htmlStr);
+		}
+
+		function initJs() {
+			targetInput.each(function (i, item) {
+				$(item).datePicker({
+					hasShortcut: true,
+					min: '2018-01-01 06:00:00',
+					max: maxDate,
+					isRange: true,
+					shortcutOptions: [{
+						name: '昨天',
+						day: '-1,-1',
+						time: '00:00:00,23:59:59'
+					}, {
+						name: '最近一周',
+						day: '-7,0',
+						time: '00:00:00,'
+					}, {
+						name: '最近一个月',
+						day: '-30,0',
+						time: '00:00:00,'
+					}, {
+						name: '最近三个月',
+						day: '-90, 0',
+						time: '00:00:00,'
+					}],
+					hide: function (type) {
+						var startime = this.$input.eq(0).val();
+						var endtime = this.$input.eq(1).val();
+						$(".td_name").empty();
+						$(".td_num").empty();
+						$.ajax({
+							url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowList',
+							data: JSON.stringify({
+								"addcartviewdetailStarttime": startime,
+								"addcartviewdetailEndtime": endtime,
+							}),
+							type: 'post',
+							dataType: 'json',
+							contentType: 'application/json',
+							success: function (data) {
+								// console.log(data);
+								renderTable($('#add-table-body'), data.extend.arrayA, 'buynow加购');
 							}
-						})
-					})
-				}
-		
-				$(function () {
-					initHtml();
-					initJs();
-				});
-/****************************************/		
+						});
+					}
+				})
+			})
+		}
 
-			
-			
-			
-		
-		
-		
-		
-		
+		$(function () {
+			initHtml();
+			initJs();
+		});
 	</script>
 </body>
 
