@@ -23,8 +23,6 @@
 .topbg img{margin: 0 auto;max-width: 100%; }
 .botbg{width: 100%; margin: 0 auto; }
 .botbg img{margin: 0 auto;max-width: 100%; }
-
-
 .dwbox{ z-index: 3; width: 100%; height: auto; }
 .product_box_cont{width: 100%; height: auto; margin: 0 auto;}
 .kong{width: 100%;min-height: 160px; margin: 0 auto;}
@@ -34,6 +32,7 @@
 .lei_cont ul{width: 100%;height: auto; margin: 0 auto;}
 .lei_cont ul li {width:50%;height: auto;float: left;} 
 .lei_cont ul li a{display: block;}
+
 .lei_cont ul li a img{max-width: 100%;}
 .product_box_cont .product-price{text-align: center;margin: 10px 0;}
 .product_box_cont .product-title{font-weight: normal; color: #000;font-size: 14px; line-height: 20px;}
