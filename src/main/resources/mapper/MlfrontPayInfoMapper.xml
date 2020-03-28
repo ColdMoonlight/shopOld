@@ -357,7 +357,6 @@
     order by payInfo_id desc
   </select>
   
-  
   <!-- selectMlfrontPayInfoByMotifyTime使用中 //0未支付//1支付成功//2审单完毕//3发货完毕 //4已退款//5发送弃购//6重复单关闭 -->
   <select id="selectMlfrontPayInfoByMotifyTime" parameterType="com.atguigu.bean.MlfrontPayInfo" resultMap="BaseResultMap">
     select * from tb_mlfront_payinfo where
