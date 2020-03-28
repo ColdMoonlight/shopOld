@@ -255,6 +255,7 @@ public class MlbackAddPayinfoViewDetailController {
 		return Msg.success().add("toDayNum", toDayNum);
 	}
 	
+	
 	/**4.0	UseNow	0505
 	 * 分类MlbackProductViewDetail列表list数据
 	 * @param
