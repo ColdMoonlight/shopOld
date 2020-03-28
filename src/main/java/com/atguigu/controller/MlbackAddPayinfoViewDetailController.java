@@ -254,5 +254,57 @@ public class MlbackAddPayinfoViewDetailController {
 		Integer toDayNum=mlfrontPayInfoList.size();
 		return Msg.success().add("toDayNum", toDayNum);
 	}
+	
+	
+	/**4.0	UseNow	0505
+	 * 分类MlbackProductViewDetail列表list数据
+	 * @param
+	 * @return
+	 */
+//	@RequestMapping(value="/getAddPayinfoViewDetailList",method=RequestMethod.POST)
+//	@ResponseBody
+//	public Msg getAddPayinfoViewDetailList(HttpSession session,@RequestBody MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetail) {
+//		
+//		String starttime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailStarttime();
+//		String endtime = mlbackAddPayinfoViewDetail.getAddpayinfoviewdetailEndtime();
+//		
+//		MlfrontPayInfo mlfrontPayInfoReq = new MlfrontPayInfo();
+//		mlfrontPayInfoReq.setPayinfoCreatetime(starttime);
+//		mlfrontPayInfoReq.setPayinfoMotifytime(endtime);
+//		List<MlfrontPayInfo> mlfrontPayInfoList = mlfrontPayInfoService.selectMlfrontPayInfoByMotifyTime(mlfrontPayInfoReq);
+//		
+//		String  proSeo = "";
+//		Integer proSeoNum = 0;
+//		Integer k=0;
+//		List<Integer> numList = new ArrayList<Integer>();
+//		List<String> SeoStringList = new ArrayList<String>();
+//		
+//		for(int i=0;i<mlbackAddOrderViewDetailList.size();i++){
+//			k++;
+//			MlbackAddOrderViewDetail mlbackAddOrderViewDetailOne = mlbackAddOrderViewDetailList.get(i);
+//			if(proSeo.isEmpty()){
+//				System.out.println("第一次来，都不记录");
+//				//proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailSeoname();
+//				proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailProname();
+//				SeoStringList.add(proSeo);
+//			}else{
+//				proSeo = mlbackAddOrderViewDetailOne.getAddorderviewdetailProname();
+//				MlbackAddOrderViewDetail mlbackAddOrderViewDetailOneLast =mlbackAddOrderViewDetailList.get(i-1);
+//				//String lastSeo = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailSeoname();
+//				String lastSeo = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailProname();
+//				Integer nowPronum = mlbackAddOrderViewDetailOneLast.getAddorderviewdetailActnum();
+//				if(proSeo.equals(lastSeo)){
+//					proSeoNum=proSeoNum+nowPronum;
+//				}else{
+//					SeoStringList.add(proSeo);
+//					proSeoNum = k-1;
+//					numList.add(proSeoNum);
+//					k=1;
+//				}
+//			}
+//		}
+//		numList.add(k);
+//		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList);
+//	}
 
 }
