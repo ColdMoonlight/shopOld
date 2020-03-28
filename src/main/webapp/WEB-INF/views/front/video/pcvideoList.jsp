@@ -75,7 +75,7 @@
 							<img src="${APP_PATH }/static/pc/img/lk.png" alt="" class="video_discontent_img1">
 							<p class="video_discontent2_con">
 								<!-- Send Email to our Email service@megalook.com, message including the link of the video ,your name and the Right email address that we can contact you. -->
-							Send Email (service@megalook.com) message including the link of the video ,you name and the email address best to contact you.
+							Send Email (service@megalook.com) message including the link of the video ,your name and the email address best to contact you.
 							</p>
 							<p class="video_discontent_left">
 									<img src="${APP_PATH }/static/pc/img/yq.png">
@@ -119,14 +119,15 @@
 			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt4.jpg" ></div>
 			<div class="four_hot container clearfix">
 				<ul class="clearfix">
-					<li><a href="${APP_PATH }/B-13x4-Straight-Body-Wave-Highlight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp1.jpg" ><p>180% Density 13x4 Lace Frontal Wig </p></a></li>
-					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp2.jpg" ><p>360 Lace Frontal Wigs Body Wave </p></a></li>
-					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp3.jpg" ><p>13x4 Lace Frontal Wig Straight Hair</p></a></li>
-					<li><a href="${APP_PATH }/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp4.jpg" ><p>13x4 Lace Frontal Wig Water Wave Hair</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Straight-Body-Wave-Highlight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp1.jpg" ><p>180% Density 13x4 Lace<br /> Frontal Wig </p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp2.jpg" ><p>360 Lace Frontal Wigs<br /> Body Wave </p></a></li>
+					<li><a href="${APP_PATH }/B-360-Body-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp3.jpg" ><p>13x4 Lace Frontal Wig <br />Straight Hair</p></a></li>
+					<li><a href="${APP_PATH }/B-13x4-Water-Wave-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp4.jpg" ><p>13x4 Lace Frontal Wig <br />Water Wave Hair</p></a></li>
 				</ul>
 				<dl class="clearfix">
-					<dd><a href="${APP_PATH }/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp5.jpg" ><p>4x4 Bob Wigs All Color Straight Hair</p></a></dd>
-					<dd><a href="${APP_PATH }/13x4-Bob-Wig-1B-30-Color-Straight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp6.jpg" ><p>13x4 1b/30 Bob Lace Frontal Straight Wig</p></a></dd>
+					<dd><a href="${APP_PATH }/13x4-Bob-Wig-1B-30-Color-Straight-Lace-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp6.jpg" ><p>13x4 1b/30 Bob Lace Frontal <br />Straight Wig</p></a></dd>
+				 	<dd><a href="${APP_PATH }/All-Color-4x4-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp5.jpg" ><p>4x4 Bob Wigs All Color<br /> Straight Hair</p></a></dd>
+				    <dd><a href="${APP_PATH }/2x6-Straight-Wave-Bob-Wig.html"><img src="${APP_PATH }/static/pc/img/pro/cp7.jpg" ><p>Kim K 2x6 Straight Lace<br /> Closure Bob Wig</p></a></dd>
 				</dl>
 			</div>
 		<!-- </div> -->
