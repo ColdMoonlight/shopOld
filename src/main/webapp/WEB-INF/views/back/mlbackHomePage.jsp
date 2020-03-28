@@ -207,128 +207,131 @@
 		/*****初始化时间*****************/
 		var startime = minDate22;
 		var endtime = maxDate;
-		/****************************************************第1行**************************************************/
-		/*****初始调取浏览量*****************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
-			data: JSON.stringify({
-				"proviewdetailStarttime": startime,
-				"proviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.mlbackActShowProList;
-				$(".liulan .model-num").html(resData.length)
-			}
-		});
-		/*****初始调取仅加购量****************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
-			data: JSON.stringify({
-				"addcartviewdetailStarttime": startime,
-				"addcartviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.toDayNum;
+		initData();
+		function initData() {
+			/*****初始调取浏览量*****************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
+				data: JSON.stringify({
+					"proviewdetailStarttime": startime,
+					"proviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.mlbackActShowProList;
+					$(".liulan .model-num").html(resData.length)
+				}
+			});
+			/*****初始调取仅加购量****************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
+				data: JSON.stringify({
+					"addcartviewdetailStarttime": startime,
+					"addcartviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
 
-				$(".addcart .model-num").html(resData);
+					$(".addcart .model-num").html(resData);
 
-			},
+				},
 
-		});
-		/*****初始调取加购量****************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
-			data: JSON.stringify({
-				"addcartviewdetailStarttime": startime,
-				"addcartviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.toDayNum;
-				$(".addcart2 .model-num").html(resData);
-			},
+			});
+			/*****初始调取加购量****************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
+				data: JSON.stringify({
+					"addcartviewdetailStarttime": startime,
+					"addcartviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".addcart2 .model-num").html(resData);
+				},
 
-		});
-		/****************buynow量**************************************************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
-			data: JSON.stringify({
-				"addcheakoutviewdetailStarttime": startime,
-				"addcheakoutviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.toDayNum;
-				$(".buy_nownum .model-num").html(resData);
-			},
+			});
+			/****************buynow量**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
+				data: JSON.stringify({
+					"addcheakoutviewdetailStarttime": startime,
+					"addcheakoutviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".buy_nownum .model-num").html(resData);
+				},
 
-		});
-		/****************购物车结算**************************************************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
-			data: JSON.stringify({
-				"addcheakoutviewdetailStarttime": startime,
-				"addcheakoutviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.toDayNum;
-				$(".addcart_num .model-num").html(resData);
-			},
+			});
+			/****************购物车结算**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
+				data: JSON.stringify({
+					"addcheakoutviewdetailStarttime": startime,
+					"addcheakoutviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".addcart_num .model-num").html(resData);
+				},
 
-		});
-		/****************实际OrderItem出单详情**************************************************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
-			data: JSON.stringify({
-				"addorderviewdetailStarttime": startime,
-				"addorderviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.toDayNum;
-				$(".addorder_num .model-num").html(resData);
-			},
+			});
+			/****************实际OrderItem出单详情**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
+				data: JSON.stringify({
+					"addorderviewdetailStarttime": startime,
+					"addorderviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".addorder_num .model-num").html(resData);
+				},
 
-		});
-		/****************************************************第二行**************************************************/
-		/****************实际OrderItem出单详情**************************************************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
-			data: JSON.stringify({
-				"addorderviewdetailStarttime": startime,
-				"addorderviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				var resData = data.extend.toDayNum;
-				$(".addorder_num .model-num").html(resData);
-			},
+			});
+			/****************************************************第二行**************************************************/
+			/****************实际OrderItem出单详情**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
+				data: JSON.stringify({
+					"addpayinfoviewdetailStarttime": startime,
+					"addpayinfoviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".PayinfoSuccessNum .model-num").html(resData);
+				},
 
-		});
+			});
+		}
+		
 
 
 		/***********************************************/
@@ -357,127 +360,9 @@
 						time: '00:00:00,'
 					}],
 					hide: function (type) {
-						var startime = this.$input.eq(0).val();
-						var endtime = this.$input.eq(1).val();
-						/******根据时间调取浏览量***************************/
-						$.ajax({
-							url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
-							data: JSON.stringify({
-								"proviewdetailStarttime": startime,
-								"proviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								var resData = data.extend.mlbackActShowProList;
-								$(".liulan .model-num").html(resData.length)
-							}
-						});
-						/**********初始调取仅加购量********************************************************/
-						$.ajax({
-							url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
-							data: JSON.stringify({
-								"addcartviewdetailStarttime": startime,
-								"addcartviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								var resData = data.extend.toDayNum;
-								$(".addcart .model-num").html(resData);
-
-							},
-
-						});
-						/***********初始调取加购量****************************************************************/
-						$.ajax({
-							url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
-							data: JSON.stringify({
-								"addcartviewdetailStarttime": startime,
-								"addcartviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								var resData = data.extend.toDayNum;
-								$(".addcart2 .model-num").html(resData);
-							},
-
-						});
-						/****************buynow量**************************************************/
-						$.ajax({
-							url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
-							data: JSON.stringify({
-								"addcheakoutviewdetailStarttime": startime,
-								"addcheakoutviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								var resData = data.extend.toDayNum;
-								$(".buy_nownum .model-num").html(resData);
-							},
-
-						});
-						/****************购物车结算**************************************************/
-						$.ajax({
-							url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
-							data: JSON.stringify({
-								"addcheakoutviewdetailStarttime": startime,
-								"addcheakoutviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								var resData = data.extend.toDayNum;
-								$(".addcart_num .model-num").html(resData);
-							},
-
-						});
-						/* 出单产品量  */
-						$.ajax({
-							url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
-							data: JSON.stringify({
-								"addorderviewdetailStarttime": startime,
-								"addorderviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								var resData = data.extend.toDayNum;
-								$(".addorder_num .model-num").html(resData);
-							},
-
-						});
-						/* 成交量  */
-						$.ajax({
-							url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
-							data: JSON.stringify({
-								"addorderviewdetailStarttime": startime,
-								"addorderviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'JSON',
-							contentType: 'application/json',
-							success: function (data) {
-								console.log(data);
-								var resData = data.extend.toDayNum;
-								$(".addorder_num .model-num").html(resData);
-							},
-
-						});
+						startime = this.$input.eq(0).val();
+						endtime = this.$input.eq(1).val();
+						initData();
 					}
 				})
 			})
