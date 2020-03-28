@@ -404,7 +404,7 @@
 							dataType: 'JSON',
 							contentType: 'application/json',
 							success: function (data) {
-								console.log(data);
+								// console.log(data);
 								var resData = data.extend.toDayNum;
 								$(".addcart2 .model-num").html(resData);
 							},
@@ -461,7 +461,23 @@
 							},
 
 						});
+						/* 成交量  */
+						$.ajax({
+							url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
+							data: JSON.stringify({
+								"addorderviewdetailStarttime": startime,
+								"addorderviewdetailEndtime": endtime,
+							}),
+							type: 'post',
+							dataType: 'JSON',
+							contentType: 'application/json',
+							success: function (data) {
+								console.log(data);
+								var resData = data.extend.toDayNum;
+								$(".addorder_num .model-num").html(resData);
+							},
 
+						});
 					}
 				})
 			})
