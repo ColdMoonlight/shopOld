@@ -89,12 +89,13 @@
 		});
 		var targetInput = $('.date-timepicker');
 		var date = new Date();
-		var minDate = moment().set({
-			'date': date.getDate() - 1,
-			'hour': date.getHours(),
-			'minute': date.getMinutes(),
-			'second': date.getSeconds()
-		})
+		var minDate = moment()
+			.set({
+				'date': date.getDate() - 1,
+				'hour': date.getHours(),
+				'minute': date.getMinutes(),
+				'second': date.getSeconds()
+			})
 			.format('YYYY-MM-DD HH:mm:ss');
 		var minDate2 = moment()
 			.set({
@@ -104,8 +105,6 @@
 				'second': 59
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
-
-		/****************************/
 		var minDate22 = moment()
 			.set({
 				'date': date.getDate(),
@@ -114,7 +113,6 @@
 				'second': 0
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
-
 		var maxDate = moment()
 			.set({
 				'date': date.getDate(),
@@ -123,43 +121,48 @@
 				'second': date.getSeconds()
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
+		var startime = minDate22;
+		var endtime = maxDate;
+
 		function initHtml() {
 			var $input = targetInput.find('input');
 			$input.eq(0).val(minDate22);
 			$input.eq(1).val(maxDate);
 		}
 
-		/*******初始化显示*************/
-		var startime = minDate22;
-		var endtime = maxDate;
-		$.ajax({
-			url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailList',
-			data: JSON.stringify({
-				"proviewdetailStarttime": startime,
-				"proviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'json',
-			contentType: 'application/json',
-			success: function (data) {
-				// console.log(data);
-				renderTable($('#add-table-body'), data.extend.arrayA, '产品');
-			}
-		});
+		function initData() {
+			$.ajax({
+				url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailList',
+				data: JSON.stringify({
+					"proviewdetailStarttime": startime,
+					"proviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					renderTable($('#add-table-body'), data.extend.arrayA, '产品');
+				}
+			});
+		}
 
 		function renderTable(parent, data, type) {
 			var htmlStr = '';
-			$.each(data, function (index, item) {
-				htmlStr += '<tr>'
-					+ '<td>'+ type +' --- ' + item.seoString + '.html</td>'
-					+ '<td>' + item.seoStringCount + '</td>'
-				+ '</tr>';
-			});
+			if (data.length > 0) {
+				$.each(data, function (index, item) {
+					htmlStr += '<tr>'
+						+ '<td>'+ type +' --- ' + item.seoString + '.html</td>'
+						+ '<td>' + item.seoStringCount + '</td>'
+					+ '</tr>';
+				});
+			} else {
+				htmlStr = '未获取到当前时间段内相关数据';
+			}
 			
 			parent.html(htmlStr);
 		}
 
-		/***********************************************/
 		function initJs() {
 			targetInput.each(function (i, item) {
 				$(item).datePicker({
@@ -185,30 +188,16 @@
 						time: '00:00:00,'
 					}],
 					hide: function (type) {
-						var startime = this.$input.eq(0).val();
-						var endtime = this.$input.eq(1).val();
-						$(".td_name").empty();
-						$(".td_num").empty();
-						$.ajax({
-							url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailList',
-							data: JSON.stringify({
-								"proviewdetailStarttime": startime,
-								"proviewdetailEndtime": endtime,
-							}),
-							type: 'post',
-							dataType: 'json',
-							contentType: 'application/json',
-							success: function (data) {
-								// console.log(data);
-								renderTable($('#add-table-body'), data.extend.arrayA, '产品');
-							}
-						});
+						startime = this.$input.eq(0).val();
+						endtime = this.$input.eq(1).val();
+						initData();
 					}
 				})
 			})
 		}
 
 		$(function () {
+			initData();
 			initHtml();
 			initJs();
 		});
