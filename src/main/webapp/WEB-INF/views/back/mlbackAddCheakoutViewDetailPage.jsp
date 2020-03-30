@@ -54,12 +54,7 @@
 										<th>购物车结算量</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td class="td_name"></td>
-										<td class="td_num"></td>
-									</tr>
-								</tbody>
+								<tbody id="add-table-body"></tbody>
 							</table>
 						</div>
 						<!-- 显示分页信息 -->
