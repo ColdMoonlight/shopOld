@@ -128,10 +128,13 @@
 					if (data.code == 100) {
 						var resData = data.extend.mbackProductImgResList,
 							videoData = data.extend.mlbackProductOne;
-						resData.unshift({
-							imgUrl: videoData.productMainFuimgurl,
-							videoUrl: videoData.productColor
-						});
+						
+						if (videoData.productMainFuimgurl && videoData.productColor) {
+							resData.unshift({
+								imgUrl: videoData.productMainFuimgurl,
+								videoUrl: videoData.productColor
+							});
+						}
 						renderProductDetailsBanner(swiper, resData);
 						var galleryleft = new Swiper('.additional_pic', {
 							direction: 'vertical',
@@ -215,7 +218,7 @@
 			});
 
 			function renderProductDetailsBanner(parent, data) {
-				console.log(data)
+				// console.log(data)
 				var htmlbig = '',
 					htmlsmall = '',
 					hasVideo = false;
