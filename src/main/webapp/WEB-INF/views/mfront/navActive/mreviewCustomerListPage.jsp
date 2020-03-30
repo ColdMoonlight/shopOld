@@ -55,7 +55,7 @@
 				<h3>Customer Reviews</h3>
 				<div class="review-left clearfix">
 					<div class="left_allstatr">
-						<div class="review-toal-num">Based on <span class="data">2368</span> Customer Reviews</div>
+						<div class="review-toal-num">Based on <span class="data">1868</span> Customer Reviews</div>
 						<div class="reviews-data2">
 							 <div class="stars-list2">
 								 <i class="icon star2"></i>
@@ -114,9 +114,8 @@
 						<div class="progress"><div class="progress-inner" style="width: 0.00%"></div></div><div class="data">0.00%</div></div>
 					 </div>
 					</div>
-					<!-- <h4>Product Reviews</h4> -->
+					<h4>Product Reviews(659)</h4>
 			</div>
-			<h4 class="tips_Reviews">Product Reviews</h4>
             <div class="list_pro_cont" id="waterfull">
             	<ul>
             		
