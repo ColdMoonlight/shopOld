@@ -253,8 +253,60 @@ public class MlbackProduct {
 		this.productMetaDesc = productMetaDesc == null ? null : productMetaDesc.trim();
 	}
 
+	public MlbackProduct() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public MlbackProduct(Integer productId, String productName, String productColor, String productSeo,
+			Integer productCategoryid, String productCategoryname, String productMainimgurl, String productMainFuimgurl,
+			BigDecimal productOriginalprice, Integer productHavesalenum, Integer productStatus,
+			String productCreatetime, String productMotifytime, Integer productAdminId, String productAdminOperatorname,
+			Integer productLable, Integer productFirsth, Integer productActoffid, Integer productActoffoff,
+			Integer productActoffIf, Integer productReviewnum, String productDesc, String productCategoryIdsStr,
+			String productCategoryNamesStr, String productMetaDesc) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productColor = productColor;
+		this.productSeo = productSeo;
+		this.productCategoryid = productCategoryid;
+		this.productCategoryname = productCategoryname;
+		this.productMainimgurl = productMainimgurl;
+		this.productMainFuimgurl = productMainFuimgurl;
+		this.productOriginalprice = productOriginalprice;
+		this.productHavesalenum = productHavesalenum;
+		this.productStatus = productStatus;
+		this.productCreatetime = productCreatetime;
+		this.productMotifytime = productMotifytime;
+		this.productAdminId = productAdminId;
+		this.productAdminOperatorname = productAdminOperatorname;
+		this.productLable = productLable;
+		this.productFirsth = productFirsth;
+		this.productActoffid = productActoffid;
+		this.productActoffoff = productActoffoff;
+		this.productActoffIf = productActoffIf;
+		this.productReviewnum = productReviewnum;
+		this.productDesc = productDesc;
+		this.productCategoryIdsStr = productCategoryIdsStr;
+		this.productCategoryNamesStr = productCategoryNamesStr;
+		this.productMetaDesc = productMetaDesc;
+	}
+
 	@Override
-    public String toString() {
-    	return super.toString();
-    }
+	public String toString() {
+		return "MlbackProduct [productId=" + productId + ", productName=" + productName + ", productColor="
+				+ productColor + ", productSeo=" + productSeo + ", productCategoryid=" + productCategoryid
+				+ ", productCategoryname=" + productCategoryname + ", productMainimgurl=" + productMainimgurl
+				+ ", productMainFuimgurl=" + productMainFuimgurl + ", productOriginalprice=" + productOriginalprice
+				+ ", productHavesalenum=" + productHavesalenum + ", productStatus=" + productStatus
+				+ ", productCreatetime=" + productCreatetime + ", productMotifytime=" + productMotifytime
+				+ ", productAdminId=" + productAdminId + ", productAdminOperatorname=" + productAdminOperatorname
+				+ ", productLable=" + productLable + ", productFirsth=" + productFirsth + ", productActoffid="
+				+ productActoffid + ", productActoffoff=" + productActoffoff + ", productActoffIf=" + productActoffIf
+				+ ", productReviewnum=" + productReviewnum + ", productDesc=" + productDesc + ", productCategoryIdsStr="
+				+ productCategoryIdsStr + ", productCategoryNamesStr=" + productCategoryNamesStr + ", productMetaDesc="
+				+ productMetaDesc + "]";
+	}
+	
 }

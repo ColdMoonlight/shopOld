@@ -96,7 +96,7 @@ public class MlbackProductController {
 			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
 			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
 			mlbackProductRes.setProductDesc("");
-			session.setAttribute("mlbackProductOne", mlbackProductRes);
+			session.setAttribute("mlbackProductOne", mlbackProductRes.toString());
 		}
 		//返回视图
 		return "mfront/productDetails";
@@ -123,7 +123,7 @@ public class MlbackProductController {
 			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
 			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
 			mlbackProductRes.setProductDesc("");
-			session.setAttribute("mlbackProductOne", mlbackProductRes);
+			session.setAttribute("mlbackProductOne", mlbackProductRes.toString());
 		}
 		
 		//返回视图
@@ -165,7 +165,7 @@ public class MlbackProductController {
 		  //放回session域中
 		  session.setAttribute("productDetailId", productIdReq);
 		  mlbackProductRes.setProductDesc("");
-		  session.setAttribute("mlbackProductOne", mlbackProductRes);
+		  session.setAttribute("mlbackProductOne", mlbackProductRes.toString());
 		  //返回视图
 		  if(ifMobile.equals("1")){
 			  return "mfront/productDetails";
