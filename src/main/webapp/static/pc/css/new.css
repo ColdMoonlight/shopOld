@@ -656,7 +656,7 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .videocont ul li{width:305px; border: 1px solid #ccc; margin: 20px 10px 0; height: auto; float: left;}
 .videocont ul li a{display: block;background: #f5f5f5;} 
 .videocont ul li img{width:303px; height: 303px;}
-.videocont ul li p{width:90%;margin: 0 5%; padding: 0; height: 40px; line-height: 40px;}
+.videocont ul li p{width:90%;margin: 0 5%; padding: 0; height: 40px; line-height: 40px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
 .videocont ul li p em{display: block; float: left;font-style: normal; color: #333;}
 .videocont ul li p span{display: block; float: right;color: #666;}
 .videocont ul li a:hover em{color: #333}
@@ -680,7 +680,7 @@ p.video_discontent2_con{font-size: 17px; color: #000; line-height: 24px;margen:0
 .tipsimg{width: 100%;margin:10px 0 0}
 .tipsimg img{display: block;margin:0 auto}
 .videotop {width:100%}
-.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px}
+.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px; cursor: pointer;}
 .videotop li img{width: 100%;}
 .four_hot{margin:20px auto 0}
 .four_hot li{float:left;width:25%;padding:0 1%}

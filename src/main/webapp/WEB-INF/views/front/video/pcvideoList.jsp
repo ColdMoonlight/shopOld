@@ -86,7 +86,7 @@
 					</li>
 					<li class="video_discontent_item">
 							<img src="${APP_PATH }/static/pc/img/yhj.png" alt="" class="video_discontent_img1">
-							<p class="video_discontent2_con">
+							<p class="video_discontent2_con">          
 								Once we receive your Email Information, $20 coupon code will directly send to your Email .
 							</p>
 							<p class="video_discontent_left">
@@ -101,13 +101,13 @@
 			<div class="videotop container clearfix">
 				<ul>
 				      <li onclick="clickVideo(event)" videonum-id="157" data-src="https://www.youtube.com/embed/zD5dgYYDb08"><img src="${APP_PATH }/static/pc/img/pro/vd1.jpg" ></li>
-					  <li onclick="clickVideo(event)" videonum-id="75" data-src="https://www.youtube.com/embed/IOV8NkSituU"><img src="${APP_PATH }/static/pc/img/pro/vd2.jpg"></li>
+					  <li onclick="clickVideo(event)" videonum-id="109" data-src="https://www.youtube.com/embed/qp91g1hg9nM"><img src="${APP_PATH }/static/pc/img/pro/vd2.jpg"></li>
 					  <li onclick="clickVideo(event)" videonum-id="193" data-src="https://www.youtube.com/embed/u9M_pFxuLOA"><img src="${APP_PATH }/static/pc/img/pro/vd3.jpg"></li>
 					  <li onclick="clickVideo(event)" videonum-id="84" data-src="https://www.youtube.com/embed/2cJvNAYpI6Y"><img src="${APP_PATH }/static/pc/img/pro/vd4.jpg"></li>
-					  <li onclick="clickVideo(event)" videonum-id="78" data-src="https://www.youtube.com/embed/aiUDfS-h-Es"><img src="${APP_PATH }/static/pc/img/pro/vd5.jpg"></li>
+					  <li onclick="clickVideo(event)" videonum-id="110" data-src="https://www.youtube.com/embed/BYgVHjc6P3k"><img src="${APP_PATH }/static/pc/img/pro/vd5.jpg"></li>
 					  <li onclick="clickVideo(event)" videonum-id="80" data-src="https://www.youtube.com/embed/TD4mGC5xNcU"><img src="${APP_PATH }/static/pc/img/pro/vd6.jpg"></li>
 					  <li onclick="clickVideo(event)" videonum-id="140" data-src="https://www.youtube.com/embed/eMXo2VEqUvY"><img src="${APP_PATH }/static/pc/img/pro/vd7.jpg"></li>
-					  <li onclick="clickVideo(event)" videonum-id="251" data-src="https://www.youtube.com/embed/NGrPAnTX5VA"><img src="${APP_PATH }/static/pc/img/pro/vd8.jpg"></li>
+					  <li onclick="clickVideo(event)" videonum-id="251" data-src="https://www.youtube.com/embed/zoZm8cPDLKM"><img src="${APP_PATH }/static/pc/img/pro/vd8.jpg"></li>
 				</ul>
 			</div>
 			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/bt1.jpg" ></div>
@@ -133,25 +133,6 @@
 		<!-- </div> -->
 	</div>
 <!--****************-->
-<!-- <div class="video_enlarge_corver" style="display: none;">
-   <div class="video_enlarge_wrap">
-    <div class="video_enlarge_content">
-     <iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="460" height="370" src="https://www.youtube.com/embed/zD5dgYYDb08"></iframe>
-     <div class="promotion_product_list">
-      <a href="###" class="product-image"><img src="http://39.105.223.81:8090/ShopTemplate/static/img/product/proid157time26113029.jpg" alt="" /></a>
-      <h3 class="product-name"><a href="javascript:;">Bob Wigs 4x4 Lace Wigs T1B/99J Straight 100% Virgin Human Hair Wigs</a></h3>
-      <div class="price-box_promotion">
-       <div class="price-box">
-        <p class="old-price"><span class="price-label">Regular Price:</span><span class="price">$150.8</span></p>
-        <p class="special-price span12"><span class="price-label">SALE PRICE:</span><span class="price">$75.40</span></p>
-       </div>
-      </div>
-      <a class="video_link_buyBtn" href="/ShopTemplate/4x4-T1B-99J-Straight-Wave-Bob-Wig.html">Buy Now </a>
-     </div>
-    </div>
-    <button class="video_enlarge_close">X</button>
-   </div>
-  </div> -->
 <!--****************-->
 	<jsp:include page="../pcfooter.jsp"></jsp:include>
 

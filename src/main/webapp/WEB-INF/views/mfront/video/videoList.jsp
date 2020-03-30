@@ -60,16 +60,16 @@
 		<div class="container videobox  clearfix">
 			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp3.jpg" ></div>
            <div class="videotop container clearfix">
-           	<ul>
-           	      <li onclick="clickVideo(event)" videonum-id="157" data-src="https://www.youtube.com/embed/zD5dgYYDb08"><img src="${APP_PATH }/static/pc/img/pro/vd1.jpg" ></li>
-           		  <li onclick="clickVideo(event)" videonum-id="75" data-src="https://www.youtube.com/embed/IOV8NkSituU"><img src="${APP_PATH }/static/pc/img/pro/vd2.jpg"></li>
-           		  <li onclick="clickVideo(event)" videonum-id="193" data-src="https://www.youtube.com/embed/u9M_pFxuLOA"><img src="${APP_PATH }/static/pc/img/pro/vd3.jpg"></li>
-           		  <li onclick="clickVideo(event)" videonum-id="84" data-src="https://www.youtube.com/embed/2cJvNAYpI6Y"><img src="${APP_PATH }/static/pc/img/pro/vd4.jpg"></li>
-           		  <li onclick="clickVideo(event)" videonum-id="78" data-src="https://www.youtube.com/embed/aiUDfS-h-Es"><img src="${APP_PATH }/static/pc/img/pro/vd5.jpg"></li>
-           		  <li onclick="clickVideo(event)" videonum-id="80" data-src="https://www.youtube.com/embed/TD4mGC5xNcU"><img src="${APP_PATH }/static/pc/img/pro/vd6.jpg"></li>
-           		  <li onclick="clickVideo(event)" videonum-id="140" data-src="https://www.youtube.com/embed/eMXo2VEqUvY"><img src="${APP_PATH }/static/pc/img/pro/vd7.jpg"></li>
-           		  <li onclick="clickVideo(event)" videonum-id="251" data-src="https://www.youtube.com/embed/NGrPAnTX5VA"><img src="${APP_PATH }/static/pc/img/pro/vd8.jpg"></li>
-           	</ul>
+           <ul>
+                 <li onclick="clickVideo(event)" videonum-id="157" data-src="https://www.youtube.com/embed/zD5dgYYDb08"><img src="${APP_PATH }/static/pc/img/pro/vd1.jpg" ></li>
+           	  <li onclick="clickVideo(event)" videonum-id="109" data-src="https://www.youtube.com/embed/qp91g1hg9nM"><img src="${APP_PATH }/static/pc/img/pro/vd2.jpg"></li>
+           	  <li onclick="clickVideo(event)" videonum-id="193" data-src="https://www.youtube.com/embed/u9M_pFxuLOA"><img src="${APP_PATH }/static/pc/img/pro/vd3.jpg"></li>
+           	  <li onclick="clickVideo(event)" videonum-id="84" data-src="https://www.youtube.com/embed/2cJvNAYpI6Y"><img src="${APP_PATH }/static/pc/img/pro/vd4.jpg"></li>
+           	  <li onclick="clickVideo(event)" videonum-id="110" data-src="https://www.youtube.com/embed/BYgVHjc6P3k"><img src="${APP_PATH }/static/pc/img/pro/vd5.jpg"></li>
+           	  <li onclick="clickVideo(event)" videonum-id="80" data-src="https://www.youtube.com/embed/TD4mGC5xNcU"><img src="${APP_PATH }/static/pc/img/pro/vd6.jpg"></li>
+           	  <li onclick="clickVideo(event)" videonum-id="140" data-src="https://www.youtube.com/embed/eMXo2VEqUvY"><img src="${APP_PATH }/static/pc/img/pro/vd7.jpg"></li>
+           	  <li onclick="clickVideo(event)" videonum-id="251" data-src="https://www.youtube.com/embed/zoZm8cPDLKM"><img src="${APP_PATH }/static/pc/img/pro/vd8.jpg"></li>
+           </ul>
            </div>
 			<div class="tipsimg clearfix"><img src="${APP_PATH }/static/pc/img/video/wp1.jpg" ></div>
 			<div class="videocont clearfix">
