@@ -114,11 +114,11 @@
 			<!-- div class="lottery-close">x</div> -->
 			<div class="lottery-email">
 				<div class="lottery-title">
-					<span>MEGALOOK</span>
+					<span><b>M</b>EGA<b>L</b>OOK</span>
 					<span>Your Hair Your Surprise</span>
-					<span>Enter your email to join the game！</span>
 				</div>
 				<input type="text" placeholder="Email address">
+	            <div class="lottery-join-tip">Enter Your Email, Get Gift Pack 30$ & Barcelet 25$ ,Free ！！！</div>
 				<div class="lottery-email-tip"></div>
 			</div>
 
