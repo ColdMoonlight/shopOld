@@ -83,7 +83,7 @@
 	        		<span>Your Hair Your Surprise</span>
 	        	</div>
 	            <input type="text" placeholder="E-mail address">
-	            <div class="lottery-join-tip">Enter your email, get our gift pack (value 30$) & a barcelet (value 20$), all free！</div>
+	            <div class="lottery-join-tip">Enter your email, get our gift pack (value 30$) & a barcelet (value 25$), all free！</div>
 	            <div class="lottery-email-tip"></div>
 	        </div>
 			
