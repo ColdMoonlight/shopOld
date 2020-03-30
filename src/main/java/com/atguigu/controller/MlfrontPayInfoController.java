@@ -68,12 +68,12 @@ public class MlfrontPayInfoController {
 	
 	@Autowired
 	MlPaypalShipAddressService mlPaypalShipAddressService;
-	
-	@Autowired
-	MlbackAddPayinfoViewDetailService mlbackAddPayinfoViewDetailService;
-	
-	@Autowired
-	MlbackAddOrderViewDetailService mlbackAddOrderViewDetailService;
+//	
+//	@Autowired
+//	MlbackAddPayinfoViewDetailService mlbackAddPayinfoViewDetailService;
+//	
+//	@Autowired
+//	MlbackAddOrderViewDetailService mlbackAddOrderViewDetailService;
 	
 	/**
 	 * 1.0	UseNow	0505
@@ -236,7 +236,7 @@ public class MlfrontPayInfoController {
 		if(mlfrontPayInfoResList.size()>0){
 			mlfrontPayInfoOne =mlfrontPayInfoResList.get(0);
 			//8.01统计PayInfo成交单数
-			calcAddPayInfoView(mlfrontPayInfoOne);
+			//calcAddPayInfoView(mlfrontPayInfoOne);
 		}else{
 			mlfrontPayInfoOne = null;
 		}
@@ -248,7 +248,7 @@ public class MlfrontPayInfoController {
 		List<MlfrontOrder> mlfrontOrderPayResList= mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderPay);
 		MlfrontOrder mlfrontOrderPayOneRes = mlfrontOrderPayResList.get(0);
 		//8.02统计PayInfo中的orderitem成交单数
-		calcAddOrderView(mlfrontOrderPayOneRes);
+		//calcAddOrderView(mlfrontOrderPayOneRes);现在从支付结果中查询，不再要这个了
 		//2.2从详情中拿到addressid;
 		Integer addressinfoId = mlfrontOrderPayOneRes.getAddressinfoId();
 		MlfrontAddress MlfrontAddressReq = new MlfrontAddress();
@@ -367,81 +367,81 @@ public class MlfrontPayInfoController {
 	/**8.01
 	 * 记录实际成交单的结算情况(成家单id+成交金额)
 	 * */
-	private void calcAddPayInfoView(MlfrontPayInfo mlfrontPayInfoOne) {
-		
-		String nowTime = DateUtil.strTime14s();
-
-		Integer payinfoId = mlfrontPayInfoOne.getPayinfoId();
-		String payinfoIdStr = payinfoId+"";
-		BigDecimal payinfoMoney = mlfrontPayInfoOne.getPayinfoMoney();
-		DecimalFormat df1 = new DecimalFormat("0.00");
-		String payinfoMoneyStr = df1.format(payinfoMoney);
-		//准备参数信息
-		MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetailReq = new MlbackAddPayinfoViewDetail();
-		
-		
-		//先查询该是否已经被记录过,没查到新增;查到跳过;
-		mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailPayinfoid(payinfoIdStr);
-		
-		List<MlbackAddPayinfoViewDetail> MlbackAddPayinfoViewDetailList = mlbackAddPayinfoViewDetailService.selectMlbackAddPayinfoViewDetailByPayinfoid(mlbackAddPayinfoViewDetailReq);
-		
-		if(MlbackAddPayinfoViewDetailList.size()>0){
-			System.out.println("客户违规操作,说明一下,不在执行payinfo的插入操作了");
-		}else{
-			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailPayinfomoney(payinfoMoneyStr);
-			//时间信息
-			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailCreatetime(nowTime);
-			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailMotifytime(nowTime);
-			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailStarttime(nowTime);
-			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailEndtime(nowTime);
-			mlbackAddPayinfoViewDetailService.insertSelective(mlbackAddPayinfoViewDetailReq);
-		}
-	}
+//	private void calcAddPayInfoView(MlfrontPayInfo mlfrontPayInfoOne) {
+//		
+//		String nowTime = DateUtil.strTime14s();
+//
+//		Integer payinfoId = mlfrontPayInfoOne.getPayinfoId();
+//		String payinfoIdStr = payinfoId+"";
+//		BigDecimal payinfoMoney = mlfrontPayInfoOne.getPayinfoMoney();
+//		DecimalFormat df1 = new DecimalFormat("0.00");
+//		String payinfoMoneyStr = df1.format(payinfoMoney);
+//		//准备参数信息
+//		MlbackAddPayinfoViewDetail mlbackAddPayinfoViewDetailReq = new MlbackAddPayinfoViewDetail();
+//		
+//		
+//		//先查询该是否已经被记录过,没查到新增;查到跳过;
+//		mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailPayinfoid(payinfoIdStr);
+//		
+//		List<MlbackAddPayinfoViewDetail> MlbackAddPayinfoViewDetailList = mlbackAddPayinfoViewDetailService.selectMlbackAddPayinfoViewDetailByPayinfoid(mlbackAddPayinfoViewDetailReq);
+//		
+//		if(MlbackAddPayinfoViewDetailList.size()>0){
+//			System.out.println("客户违规操作,说明一下,不在执行payinfo的插入操作了");
+//		}else{
+//			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailPayinfomoney(payinfoMoneyStr);
+//			//时间信息
+//			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailCreatetime(nowTime);
+//			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailMotifytime(nowTime);
+//			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailStarttime(nowTime);
+//			mlbackAddPayinfoViewDetailReq.setAddpayinfoviewdetailEndtime(nowTime);
+//			mlbackAddPayinfoViewDetailService.insertSelective(mlbackAddPayinfoViewDetailReq);
+//		}
+//	}
 	
 	/**8.02
 	 * 记录实际计算购买品的结算情况(成交单id+成交金额)
 	 * */
-	private void calcAddOrderView(MlfrontOrder mlfrontOrderPayOneRes) {
-		
-		String nowTime = DateUtil.strTime14s();
-		//从详情中拿到orderItemIDStr;
-		String orderItemIdsStr = mlfrontOrderPayOneRes.getOrderOrderitemidstr();
-		List<MlfrontOrderItem>  mlfrontOrderItemList = new ArrayList<MlfrontOrderItem>();
-		MlfrontOrderItem mlfrontOrderItemOne = new MlfrontOrderItem();
-		MlfrontOrderItem mlfrontOrderItemOneReq = new MlfrontOrderItem();
-		String orderItemIdStrArr [] = orderItemIdsStr.split(",");
-		String orderItemIdStr = "";
-		Integer orderItemIdInt = 0;
-		for(int i =0;i<orderItemIdStrArr.length;i++){
-			orderItemIdStr = orderItemIdStrArr[i];
-			orderItemIdInt = Integer.parseInt(orderItemIdStr);
-			mlfrontOrderItemOneReq.setOrderitemId(orderItemIdInt);
-			List<MlfrontOrderItem> mlfrontOrderItemResList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemOneReq);
-			mlfrontOrderItemOne = mlfrontOrderItemResList.get(0);
-			mlfrontOrderItemList.add(mlfrontOrderItemOne);
-			
-			MlbackAddOrderViewDetail mlbackAddOrderViewDetailReq = new MlbackAddOrderViewDetail();
-			mlbackAddOrderViewDetailReq.setAddorderviewdetailProItemid(mlfrontOrderItemOne.getOrderitemId());//
-			
-			//查询接口
-			List<MlbackAddOrderViewDetail> mlbackAddOrderViewDetailList = mlbackAddOrderViewDetailService.selectMlbackAddOrderViewDetailByoItemid(mlbackAddOrderViewDetailReq);
-			
-			if(mlbackAddOrderViewDetailList.size()>0){
-				System.out.println("本条已经被插入过,无需重复insert了");
-			}else{
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailProid(mlfrontOrderItemOne.getOrderId());
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailProname(mlfrontOrderItemOne.getOrderitemPname());
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailProskunamestr(mlfrontOrderItemOne.getOrderitemPskuNamestr());
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailActnum(mlfrontOrderItemOne.getOrderitemPskuNumber());
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailCreatetime(nowTime);
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailMotifytime(nowTime);
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailStarttime(nowTime);
-				mlbackAddOrderViewDetailReq.setAddorderviewdetailEndtime(nowTime);
-				
-				mlbackAddOrderViewDetailService.insertSelective(mlbackAddOrderViewDetailReq);
-			}
-		}
-		
-	}
+//	private void calcAddOrderView(MlfrontOrder mlfrontOrderPayOneRes) {
+//		
+//		String nowTime = DateUtil.strTime14s();
+//		//从详情中拿到orderItemIDStr;
+//		String orderItemIdsStr = mlfrontOrderPayOneRes.getOrderOrderitemidstr();
+//		List<MlfrontOrderItem>  mlfrontOrderItemList = new ArrayList<MlfrontOrderItem>();
+//		MlfrontOrderItem mlfrontOrderItemOne = new MlfrontOrderItem();
+//		MlfrontOrderItem mlfrontOrderItemOneReq = new MlfrontOrderItem();
+//		String orderItemIdStrArr [] = orderItemIdsStr.split(",");
+//		String orderItemIdStr = "";
+//		Integer orderItemIdInt = 0;
+//		for(int i =0;i<orderItemIdStrArr.length;i++){
+//			orderItemIdStr = orderItemIdStrArr[i];
+//			orderItemIdInt = Integer.parseInt(orderItemIdStr);
+//			mlfrontOrderItemOneReq.setOrderitemId(orderItemIdInt);
+//			List<MlfrontOrderItem> mlfrontOrderItemResList = mlfrontOrderItemService.selectMlfrontOrderItemById(mlfrontOrderItemOneReq);
+//			mlfrontOrderItemOne = mlfrontOrderItemResList.get(0);
+//			mlfrontOrderItemList.add(mlfrontOrderItemOne);
+//			
+//			MlbackAddOrderViewDetail mlbackAddOrderViewDetailReq = new MlbackAddOrderViewDetail();
+//			mlbackAddOrderViewDetailReq.setAddorderviewdetailProItemid(mlfrontOrderItemOne.getOrderitemId());//
+//			
+//			//查询接口
+//			List<MlbackAddOrderViewDetail> mlbackAddOrderViewDetailList = mlbackAddOrderViewDetailService.selectMlbackAddOrderViewDetailByoItemid(mlbackAddOrderViewDetailReq);
+//			
+//			if(mlbackAddOrderViewDetailList.size()>0){
+//				System.out.println("本条已经被插入过,无需重复insert了");
+//			}else{
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailProid(mlfrontOrderItemOne.getOrderId());
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailProname(mlfrontOrderItemOne.getOrderitemPname());
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailProskunamestr(mlfrontOrderItemOne.getOrderitemPskuNamestr());
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailActnum(mlfrontOrderItemOne.getOrderitemPskuNumber());
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailCreatetime(nowTime);
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailMotifytime(nowTime);
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailStarttime(nowTime);
+//				mlbackAddOrderViewDetailReq.setAddorderviewdetailEndtime(nowTime);
+//				
+//				mlbackAddOrderViewDetailService.insertSelective(mlbackAddOrderViewDetailReq);
+//			}
+//		}
+//		
+//	}
 	
 }
