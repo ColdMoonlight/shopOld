@@ -130,10 +130,12 @@
 						// console.log(data)
 						var resData = data.extend.mbackProductImgResList,
 							videoData = data.extend.mlbackProductOne;
-						resData.unshift({
-							imgUrl: videoData.productMainFuimgurl,
-							videoUrl: videoData.productColor
-						});
+						if (videoData.productMainFuimgurl && videoData.productColor) {
+							resData.unshift({
+								imgUrl: videoData.productMainFuimgurl,
+								videoUrl: videoData.productColor
+							});
+						}
 						renderProductDetailsBanner(swiper, resData);
 						new Swiper('.product__details-banner', {
 							pagination: {
