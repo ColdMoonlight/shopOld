@@ -754,7 +754,7 @@
     select 	
 	product_id, product_name,product_color, product_seo,  product_mainimgurl, product_mainfuimgurl, product_originalPrice, 
     product_haveSaleNum, product_status,  product_actoffId, 
-    product_actoffOff, product_actoffif, product_reviewNum	
+    product_actoffOff, product_actoffif, product_reviewNum ,product_meta_desc
 	from tb_mlback_product
     where product_id = #{productId,jdbcType=INTEGER}
   </select>

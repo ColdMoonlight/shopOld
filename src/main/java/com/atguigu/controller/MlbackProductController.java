@@ -88,6 +88,16 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//放回session域中
 		session.setAttribute("productDetailId", productIdReq);
+		
+		
+		if(productIdReq!=null){
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			mlbackProductReq.setProductId(productId);
+			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
+			mlbackProductRes.setProductDesc("");
+			session.setAttribute("mlbackProductOne", mlbackProductRes);
+		}
 		//返回视图
 		return "mfront/productDetails";
 	}
@@ -106,6 +116,16 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//放回session域中
 		session.setAttribute("productDetailId", productIdReq);
+		
+		if(productIdReq!=null){
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			mlbackProductReq.setProductId(productId);
+			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
+			mlbackProductRes.setProductDesc("");
+			session.setAttribute("mlbackProductOne", mlbackProductRes);
+		}
+		
 		//返回视图
 		return "front/pcproductDetails";
 	}
@@ -144,6 +164,8 @@ public class MlbackProductController {
 		  res.setAttribute("productId", productIdReq);
 		  //放回session域中
 		  session.setAttribute("productDetailId", productIdReq);
+		  mlbackProductRes.setProductDesc("");
+		  session.setAttribute("mlbackProductOne", mlbackProductRes);
 		  //返回视图
 		  if(ifMobile.equals("1")){
 			  return "mfront/productDetails";
@@ -865,6 +887,8 @@ public class MlbackProductController {
 		res.setAttribute("productName", seaProductNameReq);
 		//放回session域中
 		session.setAttribute("productName", seaProductNameReq);
+		
+		
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		
