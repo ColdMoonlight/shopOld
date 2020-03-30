@@ -49,7 +49,7 @@ import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
-//import com.atguigu.utils.app.shipInformation;
+import com.atguigu.utils.app.shipInformation;
 
 @Controller
 @RequestMapping("/MlfrontOrder")
@@ -140,8 +140,8 @@ public class MlfrontOrderController {
 //		}
 	}
 	
-	/**3.0	useOn	0505
-	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
+	/**3.0	useOn	200323
+	 * Cheekout页面,加减更新order表中的OrderItem数量。
 	 * @param MlfrontOrder
 	 */
 	@RequestMapping(value="/updateOrderItemNum",method=RequestMethod.POST)
@@ -171,11 +171,12 @@ public class MlfrontOrderController {
 	@ResponseBody
 	public Msg delOrderItem(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrderItem mlfrontOrderItem) throws Exception{
 		//接收传递进来的参数
-		System.out.println(mlfrontOrderItem);
+		//System.out.println(mlfrontOrderItem);
 		Integer orderitemIdOriginal = mlfrontOrderItem.getOrderitemId();
 		int isDelSuccess = 0;
 		if(orderitemIdOriginal==null){
-			return Msg.success().add("resMsg", "删除失败，主建为null，请联系管理员").add("isDelSuccess", isDelSuccess);//isDelSuccess0删除失败，alert	resMsg/1,删除成功
+			//前台传递异常,没有把订单项的id值传进来
+			return Msg.success().add("resMsg", "删除失败,主建为null,请联系管理员").add("isDelSuccess", isDelSuccess);//isDelSuccess0删除失败，alert	resMsg/1,删除成功
 		}else{
 			//通过cartitem的之间查回该条信息，从中取出cartId
 			MlfrontOrderItem mlfrontOrderItemReq  =new MlfrontOrderItem();
@@ -214,7 +215,7 @@ public class MlfrontOrderController {
 					mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderreqE);
 				}else{
 					//1.2如果只有一个，删掉购物车
-					Integer result = mlfrontOrderService.deleteByPrimaryKey(orderId);
+					mlfrontOrderService.deleteByPrimaryKey(orderId);
 				}
 				//2删除该条CartItem信息
 				mlfrontOrderItemService.deleteByPrimaryKey(orderitemIdOriginal);
@@ -227,8 +228,8 @@ public class MlfrontOrderController {
 		}			
 	}
 	
-	/**5.0	useOn	0505
-	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
+	/**5.0	useOn	200323
+	 * 更新order表中的:地址字段,优惠券字段,优惠券折扣。
 	 * @param MlfrontOrder
 	 */
 	@RequestMapping(value="/orderToPayInfo",method=RequestMethod.POST)
@@ -239,12 +240,13 @@ public class MlfrontOrderController {
 		Integer originalOrderId = mlfrontOrder.getOrderId();
 		String filnanyNumber = mlfrontOrder.getOrderProNumStr();
 		Integer CouponId =mlfrontOrder.getOrderCouponId();
-		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();
+		System.out.println("点结算按钮的时候,接收到的CouponId:"+CouponId);
+		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();//客户选择的支付方式，0paypal,1待定
 		String buyMessStr = mlfrontOrder.getOrderBuyMess();
 		//1.0用order查orderItem,遍历orderItem,计算每个Item的价格，再加在一起；
 		String Orderitemidstr = mlfrontOrder.getOrderOrderitemidstr();
 		String orderitemidArr[] = Orderitemidstr.split(",");
-		BigDecimal totalprice = new BigDecimal(0);
+		BigDecimal totalprice = new BigDecimal(0);	//初始化最终价格参数
 		DecimalFormat df1 = new DecimalFormat("0.00");
 		MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
 		MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
@@ -269,13 +271,13 @@ public class MlfrontOrderController {
 				pskuMoneyOne = new BigDecimal(pskuTrimStr);
 				oneAllprice = oneAllprice.add(pskuMoneyOne);//02计算本orderItem下的所有sku项的钱
 			}
-			oneAllprice=oneAllprice.add(ItemProductOriginalprice);//03叠加本品基础价的钱
+			oneAllprice=oneAllprice.add(ItemProductOriginalprice);//03叠加本品基础价的钱(now：该条的allPskumoney+该条Pro的基础价)
 			//计算这一项的价格，(基础价格+每个的sku价格的和)*折扣*数量,存入orderitemPskuReamoney字段中;
 			oneAllprice = oneAllprice.multiply(new BigDecimal(number));//04乘本品的个数得到总价
 			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));//05乘本品的折扣
 			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));//06还原本品+sku集合的最终价
 			String str = df1.format(oneAllprice);
-			System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
+			//System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
 			System.out.println("存进去的OrderitemPskuReamoney:"+str); //13.15
 			MlfrontOrderItem mlfrontOrderItemMoneyBlack = new MlfrontOrderItem();
 			mlfrontOrderItemMoneyBlack.setOrderitemId(orderItemId);
@@ -283,7 +285,7 @@ public class MlfrontOrderController {
 			//更新本条，存入orderitemPskuReamoney字段
 			mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemMoneyBlack);
 			//一个字段存储总价格
-			totalprice = totalprice.add(oneAllprice);
+			totalprice = totalprice.add(oneAllprice);//07总价字段累加该条的全部价格
 		}
 		/*		加		单个的	(基础价格+每个的sku价格的和)*折扣*数量,
 		 * 		加				地址运费
@@ -296,7 +298,7 @@ public class MlfrontOrderController {
 		if(AddressId==null){
 			AddressId= (Integer) session.getAttribute("realAddressId");
 		}
-		//查询英文名,查询该英文名的价格运费价格
+		//2.2查询英文名,查询该英文名的价格运费价格
 		Integer addressMoney = getAddressMoney(AddressId);
 		
 		String addressMoneyStr= df1.format(addressMoney);
@@ -789,7 +791,7 @@ public class MlfrontOrderController {
 //			System.out.println("有异常");
 //			System.out.println(e.getMessage());
 //		}
-//		
+		
 		//10.2
 		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
 		
@@ -1151,12 +1153,12 @@ public class MlfrontOrderController {
 		return Msg.success().add("Msg", "更新成功");
 	}
 	
-//	/**
-//	 * 14.0	UseNow	200309
-//	 * to	订单-退款
-//	 * @param jsp
-//	 * @return 
-//	 * */
+	/**
+	 * 14.0	UseNow	200309
+	 * to	订单-退款
+	 * @param jsp
+	 * @return 
+	 * */
 //	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
 //	@ResponseBody
 //	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
