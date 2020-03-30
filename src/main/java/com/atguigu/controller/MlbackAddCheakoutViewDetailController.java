@@ -205,7 +205,6 @@ public class MlbackAddCheakoutViewDetailController {
 		return Msg.success().add("mlbackAddCheakoutViewDetailList", mlbackAddCheakoutViewDetailList).add("toDayNum", toDayNum);
 	}
 	
-	
 	/**6.0	UseNow	0505
 	 * 分类MlbackProductViewDetail列表list数据
 	 * @param
