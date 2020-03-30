@@ -264,5 +264,4 @@ public class MlbackAddPayinfoViewDetailController {
 		}
 		return Msg.success().add("SeoStringList", SeoStringList).add("numList", numList).add("arrayA", arrayA);
 	}
-
 }

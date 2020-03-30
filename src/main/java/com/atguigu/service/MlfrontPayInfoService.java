@@ -72,7 +72,6 @@ public class MlfrontPayInfoService {
 	}
 
 	public List<MlfrontPayInfo> selectMlfrontPayInfoByDate(MlfrontPayInfo mlfrontPayInfo) {
-		// TODO Auto-generated method stub
 		List<MlfrontPayInfo>  mlfrontPayInfoList = mlfrontPayInfoMapper.selectMlfrontPayInfoByDate(mlfrontPayInfo);
 		return mlfrontPayInfoList;
 	}
