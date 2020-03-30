@@ -717,7 +717,7 @@
   <!-- select	BySeo使用中 -->
   <select id="selectMlbackProductBySeo" parameterType="com.atguigu.bean.MlbackProduct" resultMap="BaseResultMap">
     select 
-	product_id, product_name,  product_seo
+	product_id, product_name,  product_seo ,product_meta_desc
  	from tb_mlback_product
     where product_seo = #{productSeo,jdbcType=VARCHAR}
   </select>
