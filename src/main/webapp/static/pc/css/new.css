@@ -680,7 +680,7 @@ p.video_discontent2_con{font-size: 17px; color: #000; line-height: 24px;margen:0
 .tipsimg{width: 100%;margin:10px 0 0}
 .tipsimg img{display: block;margin:0 auto}
 .videotop {width:100%}
-.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px}
+.videotop li{width:305px;height:305px;float:left;background:#000;margin:10px; cursor: pointer;}
 .videotop li img{width: 100%;}
 .four_hot{margin:20px auto 0}
 .four_hot li{float:left;width:25%;padding:0 1%}

@@ -2806,7 +2806,7 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
 .video_discontent .video_discontent_item:nth-child(2) p.video_discontent2_con {margin:0}
 /******/
 .videotop {width:100%;margin: 0 0 .5%;}
-.videotop li{width:48%;float:left;margin: 1% 1% 0;}
+.videotop li{width:48%;float:left;margin: 1% 1% 0; cursor: pointer;}
 .videotop li img{width: 100%;}
 .four_hot{margin:1.5% auto 0}
 .four_hot li{float:left;width:50%;padding:0 1%}
