@@ -3129,18 +3129,20 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
 #addindex p span{display: inline-block; width: 25px;font-size: 16px; height: 25px;margin: 20px; background: #000; color: #fff; text-align: center; line-height: 22px}
 #addindex img{display:inline-block;width: 100vw;height: 100vh;}
 /*****2020-03-20 新增修改**************/
-.customer_widget_box{width: 100%; height:auto;padding: 10px 2%; background: #fff; border-bottom: 1px solid #ccc;}
+.customer_widget_box{width: 100%; height:auto; background: #fff; border-bottom: 1px solid #ccc;}
 .customer_widget_box .review-left{width: 100%;}
-.left_allstatr{float: left; width: 100%;}
-.left_allstatr .review-toal-num{text-align: center;margin: 20px 0; font-size: 16px;}
-.left_allstatr .stars-list2{text-align: center;}
+.left_allstatr{float: left; width: 100%;  padding: 0 1.5%;}
+.left_allstatr .review-toal-num{text-align: left;margin: 20px 0; font-size: 16px;}
+.left_allstatr .stars-list2{text-align: left;}
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
-.customer_widget_box .review-statics-item .progress{width: 50%;}
-.customer_widget_box .reviews-statics{float: left; width: 100%;}
+.customer_widget_box .review-statics-item .progress{width: 48%;}
+.customer_widget_box h3{text-align: center; padding: 15px 0;margin: 0 10%;width: 80%;border-bottom:1px solid #ccc;}
+.customer_widget_box h4{font-weight:normal;font-size: 16px;padding: 1em 1.5% }
+.customer_widget_box .reviews-statics{float: left; width: 100%;padding: 0 1.5%;margin:.5em 0;}
 .tips_Reviews{padding: 20px 2% 0;}
 .ban_insimg{max-width: 100%; height: auto; text-align: center; overflow: hidden; position: relative;}
 .ban_insimg img{width: 100%; display: inline-block;}
-.review-statics-item .reviews-data2 .icon{display: inline-block;font-size:18px;width: 20px;height: 20px;}
+.review-statics-item .reviews-data2 .icon{display: inline-block;font-size:16px;width: 18px;height: 18px;}
 .customer_widget_box .review-statics-item .progress{margin: 0 5px;}
 
 

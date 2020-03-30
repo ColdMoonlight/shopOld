@@ -619,14 +619,15 @@ p.error_tips{display: none; position: absolute;font-size: 12px; top: 30px; right
 .customer_widget_box{width: 100%; height:auto;margin: 30px 0 0; border-bottom: 1px solid #ccc;}
 .customer_widget_box .review-left{width: 100%;}
 .left_allstatr{float: left; width: 30%;}
-.left_allstatr .review-toal-num{text-align: center;margin: 20px 0; font-size: 14px;}
-.left_allstatr .stars-list2{text-align: center;}
+.left_allstatr .review-toal-num{text-align: left;margin: 20px 0; font-size: 16px;}
+.left_allstatr .stars-list2{text-align: left;}
 .left_allstatr .stars-list2 .icon{display: inline-block;font-size: 28px;}
 .customer_widget_box .review-statics-item .progress{width: 40%;}
 .customer_widget_box .reviews-statics{float: left; width: 70%;}
 .review-statics-item .reviews-data2 .icon{display: inline-block;font-size:18px;width: 20px;height: 20px;}
 .customer_widget_box .review-statics-item .progress{margin: 0 5px;}
-.customer_widget_box h3,.customer_widget_box h4{font-size: 16px;}
+.customer_widget_box h3{font-size: 30px; line-height: 60px;}
+.customer_widget_box h4{font-size: 16px;font-weight: normal;}
 
 
 
