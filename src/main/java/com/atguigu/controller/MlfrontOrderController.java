@@ -49,7 +49,7 @@ import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
-import com.atguigu.utils.app.shipInformation;
+//import com.atguigu.utils.app.shipInformation;
 
 @Controller
 @RequestMapping("/MlfrontOrder")
