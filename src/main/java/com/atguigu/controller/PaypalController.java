@@ -398,8 +398,8 @@ public class PaypalController {
 		}
 		String payInfoTime = DateUtil.getDateTime();
 		//  ML(megalook)	HS(huashuohair)
-		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
-//		String payinfoPlateNum = "HSH"+payInfoTime+payinfoIdStr;
+//		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
+		String payinfoPlateNum = "HSH"+payInfoTime+payinfoIdStr;
 		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
 		session.setAttribute("mlfrontPayInfoIOne", mlfrontPayInfoIOne);

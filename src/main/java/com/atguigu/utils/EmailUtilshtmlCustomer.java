@@ -77,8 +77,10 @@ public class EmailUtilshtmlCustomer {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+            final String username = "sales@megalook.com";//huashuohair
+            final String password = "megalook123.";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -100,7 +102,8 @@ public class EmailUtilshtmlCustomer {
             MimeMessage  msg = new MimeMessage(session);
             //设置发件人
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+            msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setSubject("Welcome to Register Megalook.");
@@ -145,8 +148,10 @@ public class EmailUtilshtmlCustomer {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+            final String username = "sales@megalook.com";//huashuohair
+            final String password = "megalook123.";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -198,7 +203,8 @@ public class EmailUtilshtmlCustomer {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //            msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+            msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setSubject("Order Confirmation From Megalook Hair.");
@@ -253,8 +259,10 @@ public class EmailUtilshtmlCustomer {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+            final String username = "sales@megalook.com";//huashuohair
+            final String password = "megalook123.";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -267,7 +275,8 @@ public class EmailUtilshtmlCustomer {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //                  msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+            msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setSubject("Order preparing from Megalook hair.");
@@ -312,8 +321,10 @@ public class EmailUtilshtmlCustomer {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+            final String username = "sales@megalook.com";//huashuohair
+            final String password = "megalook123.";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -326,7 +337,8 @@ public class EmailUtilshtmlCustomer {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //                  msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+            msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setSubject("Shipping notice from Megalook hair.");
@@ -365,8 +377,10 @@ public class EmailUtilshtmlCustomer {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+            final String username = "sales@megalook.com";//huashuohair
+            final String password = "megalook123.";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -379,7 +393,8 @@ public class EmailUtilshtmlCustomer {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //                  msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+            msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
             msg.setSubject("Customer help from Megalook hair.");
