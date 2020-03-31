@@ -77,7 +77,6 @@ a:focus {
 .icon.cart:before {
   content: "\e627";
 }
-
 .icon.star:before {
   content: "\e62b";
   color: #FDDA05;
