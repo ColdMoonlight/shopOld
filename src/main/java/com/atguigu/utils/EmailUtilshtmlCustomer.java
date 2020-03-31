@@ -24,7 +24,6 @@ import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.MlfrontUser;
-import com.atguigu.bean.ToPaypalInfo;
 public class EmailUtilshtmlCustomer {
 	
 	/**
@@ -80,7 +79,7 @@ public class EmailUtilshtmlCustomer {
 //          final String username = "service@megalook.com";//megalook
 //          final String password = "DfcorpKXl6CbH1It";         
             final String username = "sales@megalook.com";//huashuohair
-            final String password = "megalook123.";
+            final String password = "qPVGjvIM6wXVSsFn";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -151,7 +150,7 @@ public class EmailUtilshtmlCustomer {
 //          final String username = "service@megalook.com";//megalook
 //          final String password = "DfcorpKXl6CbH1It";         
             final String username = "sales@megalook.com";//huashuohair
-            final String password = "megalook123.";
+            final String password = "qPVGjvIM6wXVSsFn";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -262,7 +261,7 @@ public class EmailUtilshtmlCustomer {
 //          final String username = "service@megalook.com";//megalook
 //          final String password = "DfcorpKXl6CbH1It";         
             final String username = "sales@megalook.com";//huashuohair
-            final String password = "megalook123.";
+            final String password = "qPVGjvIM6wXVSsFn";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -324,7 +323,7 @@ public class EmailUtilshtmlCustomer {
 //          final String username = "service@megalook.com";//megalook
 //          final String password = "DfcorpKXl6CbH1It";         
             final String username = "sales@megalook.com";//huashuohair
-            final String password = "megalook123.";
+            final String password = "qPVGjvIM6wXVSsFn";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -380,7 +379,7 @@ public class EmailUtilshtmlCustomer {
 //          final String username = "service@megalook.com";//megalook
 //          final String password = "DfcorpKXl6CbH1It";         
             final String username = "sales@megalook.com";//huashuohair
-            final String password = "megalook123.";
+            final String password = "qPVGjvIM6wXVSsFn";
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
