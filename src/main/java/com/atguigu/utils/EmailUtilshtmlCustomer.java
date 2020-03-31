@@ -93,10 +93,15 @@ public class EmailUtilshtmlCustomer {
             "Wishing you a pleasant shopping trip. <br><br>"+
             "Best Regards,<br>"+
             "------------------------------------------<br>"+
-            "Megalook team.<br>"+
-            "Email:service@megalook.com <br>"+
-            "Whatsapp:+86 18903740682<br>"+
-            "Telephone/SMS:+1 5017226336<br>";
+//            "Megalook team.<br>"+
+//            "Email:service@megalook.com <br>"+
+//            "Whatsapp:+86 18903740682<br>"+
+//            "Telephone/SMS:+1 5017226336<br>";
+    		//huashuohair
+    		"Megalook Hair wholesale.<br>"+
+    		"Email:sales@megalook.com <br>"+
+    		"Whatsapp:+86 18903742581;+86 18539085153;+86 18903740859;+86 18937439387;+86 18539085130;<br>"+
+    		"Telephone/SMS:+1 5017226336<br>";
             //通过会话,得到一个邮件,用于发送
             MimeMessage  msg = new MimeMessage(session);
             //设置发件人
@@ -193,10 +198,15 @@ public class EmailUtilshtmlCustomer {
             "Sub-Total: $"+mlfrontPayInfoIOne.getPayinfoMoney()+" <br><br><br>"+
             "Best Regards,<br>"+
             "------------------------------------------<br>"+
-            "Megalook team.<br>"+
-            "Email:service@megalook.com <br>"+
-            "Whatsapp:+86 18903740682<br>"+
-            "Telephone/SMS:+1 5017226336<br>";
+//          "Megalook team.<br>"+
+//          "Email:service@megalook.com <br>"+
+//          "Whatsapp:+86 18903740682<br>"+
+//          "Telephone/SMS:+1 5017226336<br>";
+	  		//huashuohair
+	  		"Megalook Hair wholesale.<br>"+
+	  		"Email:sales@megalook.com <br>"+
+	  		"Whatsapp:+86 18903742581;+86 18539085153;+86 18903740859;+86 18937439387;+86 18539085130;<br>"+
+	  		"Telephone/SMS:+1 5017226336<br>";
             
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
