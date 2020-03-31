@@ -242,7 +242,7 @@
 				for (var a = 0, len = data.length; a < len; a += 1) {
 					if (data[a].videoUrl && data[a].imgUrl) {
 						htmlsmall += '<div class="swiper-slide">' +
-						'<img class="showVideo" src="' + data[a].imgUrl + '" data-video="'+ data[a].videoUrl +'" />' +
+						'<img src="' + data[a].imgUrl + '" data-video="'+ data[a].videoUrl +'" />' +
 						'</div>';
 						hasVideo = true;
 					} else {
