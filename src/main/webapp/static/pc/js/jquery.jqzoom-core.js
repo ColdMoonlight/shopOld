@@ -1,8 +1,8 @@
 (function($) {
     $.fn.imagezoom = function(options) {
         var settings = {
-            xzoom: 500,
-            yzoom: 500,
+            xzoom: 300,
+            yzoom: 300,
             offset:0,
             position: "BTR",
             // preload: 1
