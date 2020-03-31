@@ -937,10 +937,15 @@ public class MlfrontOrderController {
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
 		Message=Message+"Best Regards,<br><br>";
 		Message=Message+"-----------------------------------<br><br>";
-		Message=Message+"Megalook hair <br>";
-		Message=Message+"Email:service@megalook.com <br>";
-		Message=Message+"Whatsapp:+86 18903740682 <br>";
-		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+//		Message=Message+"Megalook hair <br>";
+//		Message=Message+"Email:service@megalook.com <br>";
+//		Message=Message+"Whatsapp:+86 18903740682 <br>";
+//		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+		//huashuohair
+		Message=Message+"Megalook Hair wholesale  <br>";
+		Message=Message+"Email:sales@megalook.com  <br>";
+		Message=Message+"Whatsapp:+86 18903742581;+86 18539085153;+86 18903740859;+86 18937439387;+86 18539085130;<br>";
+		Message=Message+"Telephone/SMS:+15017226336<br>";
 		return Message;
 	}
 	
@@ -1111,16 +1116,23 @@ public class MlfrontOrderController {
 			
 			proSeoName = mlbackProductDetailList.get(i).getProductSeo();
 			
-			Message=Message+"https://megalook.com/"+proSeoName+".html"+"<br><br>";
+//			Message=Message+"https://megalook.com/"+proSeoName+".html"+"<br><br>";
+			
+			Message=Message+"https://www.huashuohair.com/"+proSeoName+".html"+"<br><br>";
 		}
 		
 		Message=Message+"We'll be there if you need help<br>";
 		Message=Message+"Best Regards,<br>";
 		Message=Message+"-----------------------------------<br>";
-		Message=Message+"Megalook hair <br>";
-		Message=Message+"Email:service@megalook.com <br>";
-		Message=Message+"Whatsapp:+86 18903740682 <br>";
-		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+//		Message=Message+"Megalook hair <br>";
+//		Message=Message+"Email:service@megalook.com <br>";
+//		Message=Message+"Whatsapp:+86 18903740682 <br>";
+//		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+		//huashuohair
+		Message=Message+"Megalook Hair wholesale  <br>";
+		Message=Message+"Email:sales@megalook.com  <br>";
+		Message=Message+"Whatsapp:+86 18903742581;+86 18539085153;+86 18903740859;+86 18937439387;+86 18539085130;<br>";
+		Message=Message+"Telephone/SMS:+15017226336<br>";
 		return Message;
 	}
 
