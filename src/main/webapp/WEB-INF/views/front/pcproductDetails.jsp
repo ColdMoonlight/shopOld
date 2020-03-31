@@ -261,7 +261,7 @@
 				   	}
 					var videoUrl = $(this).data('video');
 					if (videoUrl)
-						renderSysMsg('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="360" src="https://www.youtube.com/embed/'+ matchYoutubeUrl(videoUrl) +'"></iframe>');
+						$(this).parent().html('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="500" src="https://www.youtube.com/embed/'+ matchYoutubeUrl(videoUrl) +'"></iframe>');
 				});
 			}
 
