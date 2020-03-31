@@ -35,12 +35,14 @@
 			s.parentNode.insertBefore(t, s)
 		}(window, document, 'script',
 			'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '246433859565492');
-		//fbq('init', '667403967094866');
+		fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
 		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"
-			src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<!-- End Facebook Pixel Code -->
 
 	<script>
