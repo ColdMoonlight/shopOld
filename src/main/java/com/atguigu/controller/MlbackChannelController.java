@@ -86,13 +86,13 @@ public class MlbackChannelController {
 		if(channelId==null){
 			mlbackChannel.setChannelCreatetime(nowtime);
 			//无id，insert
-			int intResult = mlbackChannelService.insertSelective(mlbackChannel);
-			System.out.println("Channel insert success+intResult:"+intResult);
+			mlbackChannelService.insertSelective(mlbackChannel);
+			//System.out.println("Channel insert success+intResult:"+intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackChannelService.updateByPrimaryKeySelective(mlbackChannel);
-			System.out.println("Channel update success+intResult:"+intResult);
+			mlbackChannelService.updateByPrimaryKeySelective(mlbackChannel);
+			//System.out.println("Channel update success+intResult:"+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}
@@ -106,8 +106,8 @@ public class MlbackChannelController {
 	public Msg delete(@RequestBody MlbackChannel mlbackChannel){
 		//接收id信息
 		Integer channelId = mlbackChannel.getChannelId();
-		int intResult = mlbackChannelService.deleteByPrimaryKey(channelId);
-		System.out.println("delete success+intResult:"+intResult);
+		mlbackChannelService.deleteByPrimaryKey(channelId);
+		//System.out.println("delete success+intResult:"+intResult);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	

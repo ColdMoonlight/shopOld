@@ -88,16 +88,16 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//放回session域中
 		session.setAttribute("productDetailId", productIdReq);
-//		
-//		
-//		if(productIdReq!=null){
-//			MlbackProduct mlbackProductReq = new MlbackProduct();
-//			mlbackProductReq.setProductId(productId);
-//			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
-//			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
-//			session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
-//			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
-//		}
+		
+		
+		if(productIdReq!=null){
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			mlbackProductReq.setProductId(productId);
+			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
+			session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
+			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
+		}
 		//返回视图
 		return "mfront/productDetails";
 	}
@@ -116,16 +116,16 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//放回session域中
 		session.setAttribute("productDetailId", productIdReq);
-//		
-//		if(productIdReq!=null){
-//			MlbackProduct mlbackProductReq = new MlbackProduct();
-//			mlbackProductReq.setProductId(productId);
-//			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
-//			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
-//			session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
-//			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
-//		}
-//		
+		
+		if(productIdReq!=null){
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			mlbackProductReq.setProductId(productId);
+			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
+			session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
+			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
+		}
+		
 		//返回视图
 		return "front/pcproductDetails";
 	}
@@ -164,8 +164,8 @@ public class MlbackProductController {
 		  res.setAttribute("productId", productIdReq);
 		  //放回session域中
 		  session.setAttribute("productDetailId", productIdReq);
-//		  session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
-//		  session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
+		  session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
+		  session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
 		  //返回视图
 		  if(ifMobile.equals("1")){
 			  return "mfront/productDetails";
@@ -465,7 +465,7 @@ public class MlbackProductController {
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne.toString());
+		//System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne);
 		return Msg.success().add("resMsg", "查看单个产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
@@ -491,7 +491,7 @@ public class MlbackProductController {
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne.toString());
+		//System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne);
 		return Msg.success().add("resMsg", "查看单个产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
@@ -512,7 +512,7 @@ public class MlbackProductController {
 		if(mlbackProductResList.size()>0){
 			mlbackProductOne =mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：通过产品名查询单个产品-mlbackProductOne:"+mlbackProductOne.toString());
+		//System.out.println("操作说明：通过产品名查询单个产品-mlbackProductOne:"+mlbackProductOne);
 		return Msg.success().add("resMsg", "查-单条产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	

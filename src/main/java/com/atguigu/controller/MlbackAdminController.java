@@ -17,7 +17,6 @@ import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.Msg;
 import com.atguigu.service.MlbackAdminService;
 
-
 @Controller
 @RequestMapping("/MlbackAdmin")
 public class MlbackAdminController {
