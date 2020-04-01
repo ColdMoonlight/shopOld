@@ -326,17 +326,9 @@
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
 			}
 		}
-	
-	
-	
-	
+
+		addTidio();
 </script>
-<!-- megalook-->
-    <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-  <!-- megalookhair 
-    <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-    <!-- huashuohair -->
-    <!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

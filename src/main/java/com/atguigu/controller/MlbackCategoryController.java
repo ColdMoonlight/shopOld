@@ -72,6 +72,19 @@ public class MlbackCategoryController {
 		res.setAttribute("categoryId", categoryIdReq);
 		//放回session域中
 		session.setAttribute("categoryId", categoryId);
+		
+		MlbackCategory mlbackCategoryReq = new MlbackCategory();
+		
+		mlbackCategoryReq.setCategoryId(categoryId);
+		
+		MlbackCategory mlbackCategoryRes = mlbackCategoryService.selectMlbackCategoryById(mlbackCategoryReq);
+		
+		String categorySeo = mlbackCategoryRes.getCategorySeo();
+		String categoryDesc = mlbackCategoryRes.getCategoryDesc();
+		
+		session.setAttribute("productlistCategorySeo", categorySeo);
+		session.setAttribute("productlistCategoryDesc", categoryDesc);
+		
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
@@ -158,8 +171,8 @@ public class MlbackCategoryController {
 	public Msg delete(@RequestBody MlbackCategory mlbackCategory){
 		//接收id信息
 		int categoryIdInt = mlbackCategory.getCategoryId();
-		int intResult = mlbackCategoryService.deleteByPrimaryKey(categoryIdInt);
-		System.out.println("后台操作:category delete success+intResult:"+intResult);
+		mlbackCategoryService.deleteByPrimaryKey(categoryIdInt);
+		//System.out.println("后台操作:category delete success+intResult:"+intResult);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -232,7 +245,7 @@ public class MlbackCategoryController {
 		
 		//查询全部的category信息，便于下拉选择
 		List<MlbackCategory> mlbackCategorydownList = mlbackCategoryService.selectMlbackCategoryGetAllByParentId();
-		System.out.println("操作说明:管理员查-categorydownList菜单");
+		//System.out.println("操作说明:管理员查-categorydownList菜单");
 		
 		List<MlbackCategory> mlbackCategorydownEr =new ArrayList<MlbackCategory>();
 		for(MlbackCategory mlbackCategoryOne :mlbackCategorydownList){
@@ -286,6 +299,18 @@ public class MlbackCategoryController {
 		res.setAttribute("categorySeo", categorySeoReq);
 		//放回session域中
 		session.setAttribute("categorySeo", categorySeoReq);
+		
+		MlbackCategory mlbackCategoryReq = new MlbackCategory();
+		
+		mlbackCategoryReq.setCategorySeo(categorySeoReq);
+		
+		List<MlbackCategory> mlbackCategoryResList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
+		MlbackCategory mlbackCategoryRes = mlbackCategoryResList.get(0);
+		String productlistCategorySeo = mlbackCategoryRes.getCategorySeo();
+		String productlistCategoryDesc = mlbackCategoryRes.getCategoryDesc();
+		
+		session.setAttribute("productlistCategorySeo", productlistCategorySeo);
+		session.setAttribute("productlistCategoryDesc", productlistCategoryDesc);
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
@@ -331,7 +356,7 @@ public class MlbackCategoryController {
 		 }
 		 
 		 MlbackCategory mlbackCategoryres = mlbackCategoryList.get(0);
-		 System.out.println("操作说明:客户点击类菜单-searchBycategorySeo");
+		 //System.out.println("操作说明:客户点击类菜单-searchBycategorySeo");
 	 
 		 String CategoryProductIdsStr = mlbackCategoryres.getCategoryProductIds();
 		 

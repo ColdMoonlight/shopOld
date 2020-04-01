@@ -87,13 +87,13 @@ public class MlbackAreafreightController {
 		if(areafreightId==null){
 			//无id，insert
 			mlbackAreafreight.setAreafreightCreatetime(nowTime);
-			int intResult = mlbackAreafreightService.insertSelective(mlbackAreafreight);
-			System.out.println("后台操作:insert,mlbackAreafreight,success+intResult："+intResult);
+			mlbackAreafreightService.insertSelective(mlbackAreafreight);
+			//System.out.println("后台操作:insert,mlbackAreafreight,success+intResult："+intResult);
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
-			int intResult = mlbackAreafreightService.updateByPrimaryKeySelective(mlbackAreafreight);
-			System.out.println("后台操作:update,mlbackAreafreight,success+intResult："+intResult);
+			mlbackAreafreightService.updateByPrimaryKeySelective(mlbackAreafreight);
+			//System.out.println("后台操作:update,mlbackAreafreight,success+intResult："+intResult);
 			return Msg.success().add("resMsg", "更新成功");
 			
 		}		

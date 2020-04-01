@@ -775,14 +775,8 @@
 				}
 			}
 		});
+		addTidio();
 	</script>
-	<!-- megalook-->
-	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-	<!-- megalookhair 
-  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-	<!-- huashuohair -->
-	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
-	<!-- lottery -->
 	<script>
 		function isValidEmail(email) {
 			var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;

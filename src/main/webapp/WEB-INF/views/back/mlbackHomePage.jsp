@@ -91,8 +91,7 @@
 									<div class="model-num">0</div>
 								</a>
 								
-								<a href="${APP_PATH }/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量"
-									class="model-item accounts">
+								<a href="javascript:;" title="结算量" class="model-item accounts">
 									<div class="model-text">结算量</div>
 									<div class="model-num">0</div>
 								</a>

@@ -32,30 +32,6 @@ public class HomePageController {
 	}
 	
 //	
-//	@RequestMapping("/moneyOutApplySuccess")
-//	public String moneyOutApplySuccess() throws Exception{
-//		
-//		System.out.println("进入moneyOutApplySuccess");
-//	
-//		return "moneyOutApplySuccess";
-//	}
-//	
-//	@RequestMapping("/toMoneyOutApplyPage")
-//	public String toMoneyOutApplyPage() throws Exception{
-//		
-//		System.out.println("进入toMoneyOutApplyPage");
-//	
-//		return "moneyOutApply";
-//	}
-//	
-//	@RequestMapping("/toAllEndTaskPage")
-//	public String toAllEndTaskPage() throws Exception{
-//		
-//		System.out.println("进入toAllEndTaskPage");
-//	
-//		return "allEndTask";
-//	}
-//	
 //	@RequestMapping("/getUrlPage")
 //	public String getUrl() throws Exception{
 //		

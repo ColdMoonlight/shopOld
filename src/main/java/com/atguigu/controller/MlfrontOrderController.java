@@ -50,6 +50,7 @@ import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
 //import com.atguigu.utils.app.shipInformation;
+import com.atguigu.utils.PropertiesUtil;
 
 @Controller
 @RequestMapping("/MlfrontOrder")
@@ -115,7 +116,6 @@ public class MlfrontOrderController {
 		//返回视图
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontOrderItemList", mlfrontOrderItemList).add("orderId", orderId).add("usertype", usertype);
 	}
-	
 	
 	/**2.0	useOn	0505
 	 * 分类MlfrontOrder列表分页list数据
@@ -240,7 +240,7 @@ public class MlfrontOrderController {
 		Integer originalOrderId = mlfrontOrder.getOrderId();
 		String filnanyNumber = mlfrontOrder.getOrderProNumStr();
 		Integer CouponId =mlfrontOrder.getOrderCouponId();
-		System.out.println("点结算按钮的时候,接收到的CouponId:"+CouponId);
+		//System.out.println("点结算按钮的时候,接收到的CouponId:"+CouponId);
 		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();//客户选择的支付方式，0paypal,1待定
 		String buyMessStr = mlfrontOrder.getOrderBuyMess();
 		//1.0用order查orderItem,遍历orderItem,计算每个Item的价格，再加在一起；
@@ -935,17 +935,17 @@ public class MlfrontOrderController {
 		Message=Message+"The hair you ordered is in stock and is expected to be shipped within 24-48 hours .<br><br>";
 		Message=Message+"We will send the parcel tracking number to you through email & SMS after delivery, and you can also view it on the PayPal bill.<br><br><br>";
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
-		Message=Message+"Best Regards,<br><br>";
-		Message=Message+"-----------------------------------<br><br>";
-//		Message=Message+"Megalook hair <br>";
-//		Message=Message+"Email:service@megalook.com <br>";
-//		Message=Message+"Whatsapp:+86 18903740682 <br>";
-//		Message=Message+"Telephone/SMS:+1 5017226336<br>";
-		//huashuohair
-		Message=Message+"Megalook Hair wholesale  <br>";
-		Message=Message+"Email:sales@megalook.com  <br>";
-		Message=Message+"Whatsapp:+86 18903742581;+86 18539085153;+86 18903740859;+86 18937439387;+86 18539085130;<br>";
-		Message=Message+"Telephone/SMS:+15017226336<br>";
+		Message=Message+"Best Regards,<br>";
+		Message=Message+"-----------------------------------<br>";
+		String team = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.team");
+		String email = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.email");
+		String whatsapp = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.whatsapp");
+		String Telephone = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.Telephone");
+		//读取配置文件
+		Message=Message+team+"<br>";
+		Message=Message+"Email:"+email+"<br>";
+		Message=Message+"Whatsapp:"+whatsapp+"<br>";
+		Message=Message+"Telephone/SMS:"+Telephone+"<br>";
 		return Message;
 	}
 	
@@ -1115,27 +1115,26 @@ public class MlfrontOrderController {
 			Message=Message+""+proName+"<br>";
 			
 			proSeoName = mlbackProductDetailList.get(i).getProductSeo();
+			//从配置文件中读取weblink字段(https://www.megalook.com/)
+			String weblink = (String) PropertiesUtil.getProperty("megalook.properties", "weblink");
 			
-//			Message=Message+"https://megalook.com/"+proSeoName+".html"+"<br><br>";
-			
-			Message=Message+"https://www.huashuohair.com/"+proSeoName+".html"+"<br><br>";
+			Message=Message+weblink+proSeoName+".html"+"<br><br>";
 		}
 		
 		Message=Message+"We'll be there if you need help<br>";
 		Message=Message+"Best Regards,<br>";
 		Message=Message+"-----------------------------------<br>";
-//		Message=Message+"Megalook hair <br>";
-//		Message=Message+"Email:service@megalook.com <br>";
-//		Message=Message+"Whatsapp:+86 18903740682 <br>";
-//		Message=Message+"Telephone/SMS:+1 5017226336<br>";
-		//huashuohair
-		Message=Message+"Megalook Hair wholesale  <br>";
-		Message=Message+"Email:sales@megalook.com  <br>";
-		Message=Message+"Whatsapp:+86 18903742581;+86 18539085153;+86 18903740859;+86 18937439387;+86 18539085130;<br>";
-		Message=Message+"Telephone/SMS:+15017226336<br>";
+		String team = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.team");
+		String email = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.email");
+		String whatsapp = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.whatsapp");
+		String Telephone = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.Telephone");
+		//读取配置文件
+		Message=Message+team+"<br>";
+		Message=Message+"Email:"+email+"<br>";
+		Message=Message+"Whatsapp:"+whatsapp+"<br>";
+		Message=Message+"Telephone/SMS:"+Telephone+"<br>";
 		return Message;
 	}
-
 
 	/**
 	 * 14.0	UseNow	200309
