@@ -221,8 +221,8 @@ public class MlfrontAddressController {
 		String nowtime = DateUtil.strTime14s();
 		mlfrontAddress.setAddressMotifytime(nowtime);
 		//更新本条状态
-		int intResult = mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
-		System.out.println(intResult);
+		mlfrontAddressService.updateByPrimaryKeySelective(mlfrontAddress);
+		//System.out.println(intResult);
 		return Msg.success().add("resMsg", "更新成功");
 	}
 	
