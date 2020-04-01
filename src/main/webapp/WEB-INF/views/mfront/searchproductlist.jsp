@@ -35,9 +35,9 @@
 		fbq('init', '246433859565492');//huashuohair
 		//fbq('init', '667403967094866');//megalook
 		fbq('track', 'PageView');
-		
-		var title = '${sessionScope.mlbackProductSeo}';
-		var description = '${sessionScope.mlbackProductMeteDesc}';
+
+		var title = '${sessionScope.productlistCategorySeo}';
+		var description = '${sessionScope.productlistCategoryDesc}';
 		function addMetaKeyword() {
 			var meta = document.createElement('meta');
 			meta.name = "keyword";
@@ -51,7 +51,7 @@
 			meta.content = description;
 			document.head.appendChild(meta);
 		}
-
+		
 		document.title = title;
 		addMetaKeyword();
 		addMetaDescription();
