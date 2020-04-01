@@ -270,7 +270,6 @@ public class MlfrontUserController {
 		mlfrontUserReq.setUserCreatetime(beginTime);
 		mlfrontUserReq.setUserMotifytime(endTime);
 		
-		
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
 //		if(mlbackAdmin==null){
 //			//SysUsers对象为空
@@ -319,7 +318,6 @@ public class MlfrontUserController {
 //		}
 	}
 	
-	
 	/**10.0	useOn	0505
 	 * MlfrontUser	delete
 	 * @param id
@@ -329,8 +327,7 @@ public class MlfrontUserController {
 	public Msg delete(@RequestBody MlfrontUser mlfrontUser){
 		//接收id信息
 		Integer UserIdInt = mlfrontUser.getUserId();
-		int intResult = mlfrontUserService.deleteByPrimaryKey(UserIdInt);
-		System.out.println(intResult);
+		mlfrontUserService.deleteByPrimaryKey(UserIdInt);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -348,7 +345,7 @@ public class MlfrontUserController {
 		mlfrontUser.setUserLastonlinetime(nowtime);
 		//更新本条状态
 		mlfrontUserService.updateByPrimaryKeySelective(mlfrontUser);
-		System.out.println(mlfrontUser);
+		//System.out.println(mlfrontUser);
 		return Msg.success().add("resMsg", "Update Successful").add("mlfrontUser", mlfrontUser);
 	}
 	
@@ -382,6 +379,7 @@ public class MlfrontUserController {
 	
 		return "mfront/PersonInfo";
 	}
+	
 	/**
 	 * 13.1	useOn	0505
 	 * to	toPersonInfoPage列表页面
@@ -393,7 +391,6 @@ public class MlfrontUserController {
 	
 		return "front/pcPersonInfo";
 	}
-	
 	
 	/**
 	 * 14.0	useOn	0505
@@ -429,26 +426,12 @@ public class MlfrontUserController {
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		
 		 if(ifMobile.equals("1")){
-			  //return "mfront/index";
 			  return "mfront/myCoupon";
 		  }else{
-			  //return "front/index";
 			  return "front/pcmyCoupon";
 		  }
-	
 	}
-//	/**
-//	 * 15.1	useOn	0505
-//	 * to	topcCouponPage列表页面
-//	 * @param jsp
-//	 * @return  
-//	 * */
-//	@RequestMapping("/topcCouponPage")
-//	public String topcCouponPage() throws Exception{
-//	
-//		return "front/pcmyCoupon";
-//	}
-//	
+
 	/**
 	 * 16.0	useOn	0505
 	 * to	tommyOrderPage列表页面
