@@ -38,6 +38,7 @@ import com.atguigu.service.PaypalService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
+import com.atguigu.utils.PropertiesUtil;
 import com.atguigu.utils.URLUtils;
 import com.paypal.api.payments.ErrorDetails;
 import com.paypal.api.payments.Links;
@@ -179,14 +180,14 @@ public class PaypalController {
     //从session中获取地址运费
     private String getAddressMoney(HttpSession session) {
     	String addressMoney = (String) session.getAttribute("addressMoney");
-    	System.out.println("addressMoney:"+addressMoney);
+    	System.out.println("从session中获取地址运费-addressMoney:"+addressMoney);
 		return addressMoney;
 	}
     
     //从session中获取优惠券减去额度
 	private String getCouponMoney(HttpSession session) {
     	String Shopdiscount = (String) session.getAttribute("CouponCodeMoney");
-    	System.out.println("Shopdiscount:"+Shopdiscount);
+    	System.out.println("从session中获取优惠券减去额度-Shopdiscount:"+Shopdiscount);
 		return Shopdiscount;
 	}
 
@@ -397,9 +398,9 @@ public class PaypalController {
 			payinfoIdStr = "000000"+payinfoIdStr;
 		}
 		String payInfoTime = DateUtil.getDateTime();
-		//  ML(megalook)	HS(huashuohair)
-//		String payinfoPlateNum = "ML"+payInfoTime+payinfoIdStr;
-		String payinfoPlateNum = "HSH"+payInfoTime+payinfoIdStr;
+		String teamLogo = (String) PropertiesUtil.getProperty("megalook.properties", "teamLogo");
+		//  ML(megalook)	HSH(huashuohair)
+		String payinfoPlateNum = teamLogo+payInfoTime+payinfoIdStr;
 		mlfrontPayInfoIOne.setPayinfoPlateNum(payinfoPlateNum);
 		mlfrontPayInfoService.updateByPrimaryKeySelective(mlfrontPayInfoIOne);
 		session.setAttribute("mlfrontPayInfoIOne", mlfrontPayInfoIOne);
@@ -418,7 +419,7 @@ public class PaypalController {
     	String lastSuccessPayinfoid = (String) session.getAttribute("lastSuccessPayinfoid");
     	if(lastSuccessPayinfoid==null){
     		//如果这个字段不存在,第一次来
-    		System.out.println("如果这个字段不存在,说明是第一次执行");
+    		System.out.println("判断是否客户第一次成功页面执行-如果这个字段不存在,说明是第一次执行");
     		String paymentId = (String) session.getAttribute("successpaymentId");
         	String payerId = (String) session.getAttribute("successpayerId");
         	//
@@ -628,7 +629,7 @@ public class PaypalController {
     		List<MlfrontAddress> mlfrontAddressResList = mlfrontAddressService.selectMlfrontAddressById(mlfrontAddressReq);
     		
     		mlfrontAddressRes = mlfrontAddressResList.get(0);
-    		System.out.println(mlfrontAddressRes.toString());
+    		//System.out.println(mlfrontAddressRes.toString());
     		String userEmail = mlfrontAddressRes.getAddressEmail();
     		
 			//测试方法
