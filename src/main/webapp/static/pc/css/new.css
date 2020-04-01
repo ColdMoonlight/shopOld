@@ -773,7 +773,7 @@ p.video_discontent2_con{font-size: 17px; color: #000; line-height: 24px;margen:0
 
 .index_tcbox .product-image{width: 100%;}
 .index_tcbox .rightcont{width: 100%;}
-.new_index_product .product-title {height: 48px; line-height:24px; overflow: hidden;}
+.new_index_product .product-title {height: 48px; line-height:24px; overflow: hidden;font-weight: normal; }
 .hot_index_product .product-title {height: 48px; line-height:24px; overflow: hidden;}
 .hot_index_product .hot_box_product_cont .swiper-slide:last-child{display: none !important;}
 .new_index_product .new_box_product_cont .swiper-slide:nth-last-child(2){display: none !important;}
