@@ -72,6 +72,19 @@ public class MlbackCategoryController {
 		res.setAttribute("categoryId", categoryIdReq);
 		//放回session域中
 		session.setAttribute("categoryId", categoryId);
+		
+		MlbackCategory mlbackCategoryReq = new MlbackCategory();
+		
+		mlbackCategoryReq.setCategoryId(categoryId);
+		
+		MlbackCategory mlbackCategoryRes = mlbackCategoryService.selectMlbackCategoryById(mlbackCategoryReq);
+		
+		String categorySeo = mlbackCategoryRes.getCategorySeo();
+		String categoryDesc = mlbackCategoryRes.getCategoryDesc();
+		
+		session.setAttribute("productlistCategorySeo", categorySeo);
+		session.setAttribute("productlistCategoryDesc", categoryDesc);
+		
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
@@ -286,6 +299,18 @@ public class MlbackCategoryController {
 		res.setAttribute("categorySeo", categorySeoReq);
 		//放回session域中
 		session.setAttribute("categorySeo", categorySeoReq);
+		
+		MlbackCategory mlbackCategoryReq = new MlbackCategory();
+		
+		mlbackCategoryReq.setCategorySeo(categorySeoReq);
+		
+		List<MlbackCategory> mlbackCategoryResList = mlbackCategoryService.selectMlbackCategoryBySeo(mlbackCategoryReq);
+		MlbackCategory mlbackCategoryRes = mlbackCategoryResList.get(0);
+		String productlistCategorySeo = mlbackCategoryRes.getCategorySeo();
+		String productlistCategoryDesc = mlbackCategoryRes.getCategoryDesc();
+		
+		session.setAttribute("productlistCategorySeo", productlistCategorySeo);
+		session.setAttribute("productlistCategoryDesc", productlistCategoryDesc);
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
