@@ -907,7 +907,7 @@
 					$(".mask").show();
 				}, 2000);
 
-				$(".close").click(function () {
+				$(".close, .mask").click(function () {
 					$(".go_re").hide();
 					$(".mask").hide();
 					logStatus();
