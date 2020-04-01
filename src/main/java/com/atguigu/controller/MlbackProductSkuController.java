@@ -44,12 +44,12 @@ public class MlbackProductSkuController {
 			//无id，insert
 			mlbackProductSku.setProductskuCreatetime(nowTime);
 			mlbackProductSkuService.insertSelective(mlbackProductSku);
-			System.out.println("productSku,insert,success");
+			//System.out.println("productSku,insert,success");
 			return Msg.success().add("resMsg", "插入成功");
 		}else{
 			//有id，update
 			mlbackProductSkuService.updateByPrimaryKeySelective(mlbackProductSku);
-			System.out.println("productSku,update,success");
+			//System.out.println("productSku,update,success");
 			return Msg.success().add("resMsg", "更新成功");
 		}		
 	}

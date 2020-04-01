@@ -888,8 +888,8 @@ public class MlfrontCartController {
 	@ResponseBody
 	public Msg toBuyNow(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontCartItem mlfrontCartItem) throws Exception{
 		
-		String nowViewTime = DateUtil.strTime14s();
-		System.out.println("nowViewTime:"+nowViewTime);
+		//String nowViewTime = DateUtil.strTime14s();
+		//System.out.println("nowViewTime:"+nowViewTime);
 		//记录加购数量
 		insertAddCartViewBuyNow(mlfrontCartItem,session);
 		
@@ -1167,7 +1167,6 @@ public class MlfrontCartController {
 				mlfrontCartItem.setCartitemId(cartItemId);
 				mlfrontCartItem.setCartitemCartId(cartAfterId);
 				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItem);
-				//System.out.println(mlfrontCartItem);
 				mlfrontCartItemListBuyNow.add(mlfrontCartItem);
 			}
 			//loginUser加购已完毕,准备生成订单	
