@@ -148,22 +148,13 @@
 				});
 				/******************/
 				
-			}
-
-
-			
-			
-			
-			
-				
-				
+			}		
 		})
 		
-		
-		
+		addTidio();
 	</script>
   	<!-- megalook-->
-  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+  	<!-- <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script> -->
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
   	<!-- huashuohair -->

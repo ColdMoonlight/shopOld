@@ -97,6 +97,21 @@
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 	<script>
+		var config = {
+			// megalook
+			"tidio": '//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js',
+			// megalookhair
+			// "tidio": '//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js'
+			// huashuohair
+			// "tidio": '//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js'
+		}
+	
+		function addTidio() {
+			var script = document.createElement('script');
+			script.async = true;
+			script.src = config.tidio;
+			document.body.appendChild(script);
+		}
 	  $.ajax({
 			url: '${APP_PATH}/MlbackSlide/getMlbackSlidepcListByArea',
 			data: JSON.stringify({ "slideArea": 5 }),
