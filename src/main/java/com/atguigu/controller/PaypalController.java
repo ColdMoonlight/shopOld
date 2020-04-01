@@ -602,8 +602,14 @@ public class PaypalController {
 			MlfrontUser mlfrontUserByEmailres = mlfrontUserByEmailListres.get(0);
 			Integer uid = mlfrontUserByEmailres.getUserId();
 			Integer userTimesOld = mlfrontUserByEmailres.getUserTimes();
+			if(userTimesOld==null){
+				userTimesOld = 0;
+			}
 			Integer userTimesafter =userTimesOld+1;
 			Integer userVipLevelOld =mlfrontUserByEmailres.getUserVipLevel();
+			if(userVipLevelOld==null){
+				userVipLevelOld = 0;
+			}
 			Integer userVipLevelafter = userVipLevelOld+1;
 			
 			mlfrontUserByEmailres.setUserId(uid);
