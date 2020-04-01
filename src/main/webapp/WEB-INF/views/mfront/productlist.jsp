@@ -41,6 +41,7 @@
 		
 		var title = '${sessionScope.productlistCategorySeo}';
 		var description = '${sessionScope.productlistCategoryDesc}';
+		console.log(title, description)
 		function addMetaKeyword() {
 			var meta = document.createElement('meta');
 			meta.name = "keyword";
@@ -55,9 +56,12 @@
 			document.head.appendChild(meta);
 		}
 
-		document.title = title;
-		addMetaKeyword();
-		addMetaDescription();
+		if (title) {
+			document.title = title;
+			addMetaKeyword();
+		}
+		
+		description && addMetaDescription();
 	</script>
 	<!--huashuohair-->
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
