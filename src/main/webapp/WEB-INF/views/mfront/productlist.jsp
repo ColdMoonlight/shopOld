@@ -38,6 +38,30 @@
 		fbq('init', '246433859565492');//huashuohair
 		//fbq('init', '667403967094866');//megalook
 		fbq('track', 'PageView');
+		
+		var title = '${sessionScope.productlistCategorySeo}';
+		var description = '${sessionScope.productlistCategoryDesc}';
+		console.log(title, description)
+		function addMetaKeyword() {
+			var meta = document.createElement('meta');
+			meta.name = "keyword";
+			meta.content = title + ',' + title.replace(/-/g, ' ');
+			document.head.appendChild(meta);
+		}
+		
+		function addMetaDescription() {
+			var meta = document.createElement('meta');
+			meta.name = "description";
+			meta.content = description;
+			document.head.appendChild(meta);
+		}
+
+		if (title) {
+			document.title = title;
+			addMetaKeyword();
+		}
+		
+		description && addMetaDescription();
 	</script>
 	<!--huashuohair-->
 	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
