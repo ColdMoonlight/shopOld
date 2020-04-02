@@ -200,16 +200,16 @@ public class MlbackProductController {
 	@ResponseBody
 	public Msg getMlbackProductWithJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpSession session) {
 		MlbackAdmin mlbackAdmin =(MlbackAdmin) session.getAttribute("adminuser");
-		if(mlbackAdmin==null){
-			//SysUsers对象为空
-			return Msg.fail().add("resMsg", "session中adminuser对象为空");
-		}else{
+//		if(mlbackAdmin==null){
+//			//SysUsers对象为空
+//			return Msg.fail().add("resMsg", "session中adminuser对象为空");
+//		}else{
 			int PagNum = 50;
 			PageHelper.startPage(pn, PagNum);
 			List<MlbackProduct> mlbackProductList = mlbackProductService.selectMlbackProductGetAll();
 			PageInfo page = new PageInfo(mlbackProductList, PagNum);
 			return Msg.success().add("pageInfo", page);
-		}
+//		}
 	}
 	
 	/**5.0	onuse	200104
