@@ -19,6 +19,9 @@
     <result column="category_product_ids" jdbcType="VARCHAR" property="categoryProductIds" />
     <result column="category_product_names" jdbcType="VARCHAR" property="categoryProductNames" />
     <result column="category_imgpcurl" jdbcType="VARCHAR" property="categoryImgPcurl" />
+    <result column="category_metaTitle" jdbcType="VARCHAR" property="categoryMetaTitle" />
+    <result column="category_metaKeyWords" jdbcType="VARCHAR" property="categoryMetaKeyWords" />
+    <result column="category_metaDesc" jdbcType="VARCHAR" property="categoryMetaDesc" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -82,6 +85,7 @@
     category_id, category_name, category_imgurl, category_parent_id, category_parent_name, 
     category_status, category_lable, category_seo, category_sort_order, category_admin_id, category_admin_operaterName, 
     category_createTime, category_motifyTime, category_desc,category_product_ids,category_product_names,category_imgpcurl
+    ,category_metaTitle,category_metaKeyWords,category_metaDesc
   </sql>
   <select id="selectByExample" parameterType="com.atguigu.bean.MlbackCategoryExample" resultMap="BaseResultMap">
     select
@@ -115,13 +119,15 @@
       category_parent_id, category_parent_name, category_status, category_lable, 
       category_seo, category_sort_order, category_admin_id, 
       category_admin_operaterName, category_createTime, 
-      category_motifyTime, category_desc, category_product_ids, category_product_names,category_imgpcurl)
+      category_motifyTime, category_desc, category_product_ids, category_product_names,category_imgpcurl,
+      category_metaTitle,category_metaKeyWords,category_metaDesc)
     values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryImgurl,jdbcType=VARCHAR}, 
       #{categoryParentId,jdbcType=INTEGER}, #{categoryParentName,jdbcType=VARCHAR}, #{categoryStatus,jdbcType=INTEGER}, #{categoryLable,jdbcType=INTEGER}, 
       #{categorySeo,jdbcType=VARCHAR}, #{categorySortOrder,jdbcType=INTEGER}, #{categoryAdminId,jdbcType=INTEGER}, 
       #{categoryAdminOperatername,jdbcType=VARCHAR}, #{categoryCreatetime,jdbcType=TIMESTAMP}, 
       #{categoryMotifytime,jdbcType=TIMESTAMP}, #{categoryDesc,jdbcType=VARCHAR}), 
-      #{categoryProductIds,jdbcType=VARCHAR}), #{categoryProductNames,jdbcType=VARCHAR}, #{categoryImgPcurl,jdbcType=VARCHAR})
+      #{categoryProductIds,jdbcType=VARCHAR}), #{categoryProductNames,jdbcType=VARCHAR}, #{categoryImgPcurl,jdbcType=VARCHAR},
+      #{categoryMetaTitle,jdbcType=VARCHAR}), #{categoryMetaKeyWords,jdbcType=VARCHAR}, #{categoryMetaDesc,jdbcType=VARCHAR})
   </insert>
   
   <select id="countByExample" parameterType="com.atguigu.bean.MlbackCategoryExample" resultType="java.lang.Long">
@@ -184,6 +190,15 @@
       <if test="record.categoryImgPcurl != null">
         category_imgpcurl = #{record.categoryImgPcurl,jdbcType=VARCHAR},
       </if>
+      <if test="record.categoryMetaTitle != null">
+        category_metaTitle = #{record.categoryMetaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryMetaKeyWords != null">
+        category_metaKeyWords = #{record.categoryMetaKeyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryMetaDesc != null">
+        category_metaDesc = #{record.categoryMetaDesc,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,7 +222,10 @@
       category_desc = #{record.categoryDesc,jdbcType=VARCHAR},
       category_product_ids = #{record.categoryProductIds,jdbcType=VARCHAR},
       category_product_names = #{record.categoryProductNames,jdbcType=VARCHAR},
-      category_imgpcurl = #{record.categoryImgPcurl,jdbcType=VARCHAR}
+      category_imgpcurl = #{record.categoryImgPcurl,jdbcType=VARCHAR},
+      category_metaTitle = #{record.categoryMetaTitle,jdbcType=VARCHAR},
+      category_metaKeyWords = #{record.categoryMetaKeyWords,jdbcType=VARCHAR},
+      category_metaDesc = #{record.categoryMetaDesc,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -230,7 +248,10 @@
       category_desc = #{categoryDesc,jdbcType=VARCHAR},
       category_product_ids = #{categoryProductIds,jdbcType=VARCHAR},
       category_product_names = #{categoryProductNames,jdbcType=VARCHAR},
-      category_imgpcurl = #{categoryImgPcurl,jdbcType=VARCHAR}
+      category_imgpcurl = #{categoryImgPcurl,jdbcType=VARCHAR},
+      category_metaTitle = #{categoryMetaTitle,jdbcType=VARCHAR},
+      category_metaKeyWords = #{categoryMetaKeyWords,jdbcType=VARCHAR},
+      category_metaDesc = #{categoryMetaDesc,jdbcType=VARCHAR}
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>
   
@@ -288,6 +309,15 @@
       <if test="categoryImgPcurl != null">
         category_imgpcurl = #{categoryImgPcurl,jdbcType=VARCHAR},
       </if>
+      <if test="categoryMetaTitle != null">
+        category_metaTitle = #{categoryMetaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaKeyWords != null">
+        category_metaKeyWords = #{categoryMetaKeyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaDesc != null">
+        category_metaDesc = #{categoryMetaDesc,jdbcType=VARCHAR},
+      </if>
   </select>
   <!-- 使用中 -->
   <select id="selectMlbackCategoryById" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
@@ -302,12 +332,14 @@
   </select>
   <!-- 使用中 -->
   <select id="selectMlbackCategoryGetAllByParentId" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
-    select category_id,category_name,category_seo,category_lable,category_imgurl,category_parent_id,category_desc,category_imgpcurl
+    select category_id,category_name,category_seo,category_lable,category_imgurl,category_parent_id,category_desc,category_imgpcurl,
+    category_metaTitle,category_metaKeyWords,category_metaDesc
     from tb_mlback_category order by category_parent_id,category_id
   </select>
   <!-- 使用中 -->
   <select id="selectMenuMlbackCategoryGetAll" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
-    select category_id,category_name,category_lable,category_imgurl,category_parent_id,category_seo,category_desc,category_imgpcurl,category_sort_order
+    select category_id,category_name,category_lable,category_imgurl,category_parent_id,category_seo,category_desc,category_imgpcurl,category_sort_order,
+    category_metaTitle,category_metaKeyWords,category_metaDesc
     from tb_mlback_category where category_status = 1 order by category_parent_id,category_sort_order
   </select>
   
@@ -366,6 +398,15 @@
       <if test="categoryImgPcurl != null">
         category_imgpcurl,
       </if>
+      <if test="categoryMetaTitle != null">
+        category_metaTitle,
+      </if>
+      <if test="categoryMetaKeyWords != null">
+        category_metaKeyWords,
+      </if>
+      <if test="categoryMetaDesc != null">
+        category_metaDesc,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="categoryId != null">
@@ -418,6 +459,15 @@
       </if>
       <if test="categoryImgPcurl != null">
         #{categoryImgPcurl,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaTitle != null">
+        #{categoryMetaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaKeyWords != null">
+       #{categoryMetaKeyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaDesc != null">
+        #{categoryMetaDesc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -473,6 +523,15 @@
       <if test="categoryImgPcurl != null">
         category_imgpcurl = #{categoryImgPcurl,jdbcType=VARCHAR},
       </if>
+      <if test="categoryMetaTitle != null">
+        category_metaTitle = #{categoryMetaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaKeyWords != null">
+        category_metaKeyWords = #{categoryMetaKeyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryMetaDesc != null">
+        category_metaDesc = #{categoryMetaDesc,jdbcType=VARCHAR},
+      </if>
     </set>
     where category_id = #{categoryId,jdbcType=INTEGER}
   </update>
@@ -489,7 +548,7 @@
   </select>
   <!-- 使用中selectCategorylistByParam -->
   <select id="selectCategorylistByParam" parameterType="com.atguigu.bean.MlbackCategory" resultMap="BaseResultMap">
-  	select category_id, category_name, category_parent_id, category_parent_name, category_status, category_lable, category_seo, category_sort_order
+  	select category_id, category_name, category_parent_id, category_parent_name, category_status, category_lable, category_seo, category_sort_order,category_metaTitle,category_metaKeyWords,category_metaDesc
   	from tb_mlback_category where category_status = 1
     <if test="categoryId != null">
       and category_id = #{categoryId,jdbcType=INTEGER}
