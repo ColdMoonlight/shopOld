@@ -52,6 +52,10 @@ public class MlbackProduct {
     private String productCategoryNamesStr;
     
     private String productMetaDesc;
+    
+    private String productMetaTitle;
+    
+    private String productMetaKeyWords;
 
     public Integer getProductId() {
         return productId;
@@ -253,9 +257,40 @@ public class MlbackProduct {
 		this.productMetaDesc = productMetaDesc == null ? null : productMetaDesc.trim();
 	}
 
+	public String getProductCategoryname() {
+		return productCategoryname;
+	}
+
+	public void setProductCategoryname(String productCategoryname) {
+		this.productCategoryname = productCategoryname == null ? null : productCategoryname.trim();
+	}
+
+	public String getProductMainFuimgurl() {
+		return productMainFuimgurl;
+	}
+
+	public void setProductMainFuimgurl(String productMainFuimgurl) {
+		this.productMainFuimgurl = productMainFuimgurl == null ? null : productMainFuimgurl.trim();
+	}
+
+	public String getProductMetaTitle() {
+		return productMetaTitle;
+	}
+
+	public void setProductMetaTitle(String productMetaTitle) {
+		this.productMetaTitle = productMetaTitle == null ? null : productMetaTitle.trim();
+	}
+
+	public String getProductMetaKeyWords() {
+		return productMetaKeyWords;
+	}
+
+	public void setProductMetaKeyWords(String productMetaKeyWords) {
+		this.productMetaKeyWords = productMetaKeyWords == null ? null : productMetaKeyWords.trim();
+	}
+
 	public MlbackProduct() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public MlbackProduct(Integer productId, String productName, String productColor, String productSeo,
@@ -264,7 +299,8 @@ public class MlbackProduct {
 			String productCreatetime, String productMotifytime, Integer productAdminId, String productAdminOperatorname,
 			Integer productLable, Integer productFirsth, Integer productActoffid, Integer productActoffoff,
 			Integer productActoffIf, Integer productReviewnum, String productDesc, String productCategoryIdsStr,
-			String productCategoryNamesStr, String productMetaDesc) {
+			String productCategoryNamesStr, String productMetaDesc, String productMetaTitle,
+			String productMetaKeyWords) {
 		super();
 		this.productId = productId;
 		this.productName = productName;
@@ -291,6 +327,8 @@ public class MlbackProduct {
 		this.productCategoryIdsStr = productCategoryIdsStr;
 		this.productCategoryNamesStr = productCategoryNamesStr;
 		this.productMetaDesc = productMetaDesc;
+		this.productMetaTitle = productMetaTitle;
+		this.productMetaKeyWords = productMetaKeyWords;
 	}
 
 	@Override
@@ -306,7 +344,8 @@ public class MlbackProduct {
 				+ productActoffid + ", productActoffoff=" + productActoffoff + ", productActoffIf=" + productActoffIf
 				+ ", productReviewnum=" + productReviewnum + ", productDesc=" + productDesc + ", productCategoryIdsStr="
 				+ productCategoryIdsStr + ", productCategoryNamesStr=" + productCategoryNamesStr + ", productMetaDesc="
-				+ productMetaDesc + "]";
+				+ productMetaDesc + ", productMetaTitle=" + productMetaTitle + ", productMetaKeyWords="
+				+ productMetaKeyWords + "]";
 	}
 	
 }
