@@ -76,30 +76,31 @@
 	    </div>-->
   	<!--</div>-->
   <!--</div>-->
-   <div class="mask maskindex" style="display: none;"></div>
-   <div class="go_re" style="display: none;">
-	   <span class="close">×</span> 
-	   <div class="lottery">
-	        <div class="lottery-email">
-	        	<div class="lottery-title">
-	        		<span><b>M</b>EGA<b>L</b>OOK</span>
-	        		<span>Your Hair Your Surprise</span>
-	        	</div>
-	            <input type="text" placeholder="E-mail address">
-	            <div class="lottery-join-tip">Enter your email, get our gift pack (value 30$) & a barcelet (value 25$), all free！</div>
-	            <div class="lottery-email-tip"></div>
-	        </div>
-			
-	        <div class="lottery-game-box">
-	        	<div class="lottery-inner-box">
-		            <div class="lottery-game">
-		                <div class="lottery-startgame"></div>
-		                <div class="lottery-game-list"></div>
-		            </div>
-		         </div>
-	        </div>
-       </div>
-  </div>
+   <div class="mask maskindex" style="display: none;">
+	   <div class="go_re">
+		   <span class="close">×</span> 
+		   <div class="lottery">
+		        <div class="lottery-email">
+		        	<div class="lottery-title">
+		        		<span><b>M</b>EGA<b>L</b>OOK</span>
+		        		<span>Your Hair Your Surprise</span>
+		        	</div>
+		            <input type="text" placeholder="E-mail address">
+		            <div class="lottery-join-tip">Enter your email, get our gift pack (value 30$) & a barcelet (value 25$), all free！</div>
+		            <div class="lottery-email-tip"></div>
+		        </div>
+				
+		        <div class="lottery-game-box">
+		        	<div class="lottery-inner-box">
+			            <div class="lottery-game">
+			                <div class="lottery-startgame"></div>
+			                <div class="lottery-game-list"></div>
+			            </div>
+			         </div>
+		        </div>
+	       </div>
+	  </div>
+   </div>
   <jsp:include page="pcfooter.jsp"></jsp:include>
  	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
@@ -781,12 +782,12 @@
 	            timer = setTimeout(startGame, speed);
 	        }
 	    }
-	    
+
 	    function logStatus() {
 	    	 var date = new Date();
 	         document.cookie = "isHideLottery=true;expires=" + (date.setTime(date.getTime() + 30 * 60 * 1000), date.toGMTString());
 	    }
-	    
+
 	    function renderLotterySuccess() {
 	    	var lotteryResultHtml = '';
         	lotteryResultHtml += '<div class="lottery-result">'
@@ -832,7 +833,9 @@
 	        });
 	
 	        couponList = lotteryRequest.extend.mlbackCouponResList;
-	
+			if (couponList.length != 8) {
+				return 0;
+			}
 			if (lotteryCount < 1) {
 				var htmlStr = '',
 					lotteryGameListEl = document.querySelector('.lottery-game-list');
@@ -845,20 +848,28 @@
 	
 		    	setTimeout(function() {
 					lotteryGameListEl.innerHTML = htmlStr;
-					$(".go_re").show();
 					$(".mask").show();
+					$(document.body).css('overflow', 'hidden');
 				}, 2000);
 	
-				$(".close, .mask").click(function(){
-					$(".go_re").hide();
+				$(".go_re .close").click(function(e){
 					$(".mask").hide();
+					$(document.body).css('overflow', 'unset');
 		            logStatus();
+				});
+				
+				$(".mask").click(function(e){
+					if (e.target == this) {
+						$(".mask").hide();
+						$(document.body).css('overflow', 'unset');
+			            logStatus();
+					}
 				});
 			}
 			index = couponArr.indexOf(lotteryRequest.extend.luckDrawDate && lotteryRequest.extend.luckDrawDate.luckDrawCouponId);
 			lotteryData = couponList[index];
 	
-	        return index + 1;
+	        return index > -1 ? index + 1 : 0;
 	    }
 	
 	    function checkUserEmail(email) {
@@ -894,7 +905,44 @@
 	        else
 	            return null;
 	    }
-	
+	    
+	    function isShowLottery() {
+	    	return !isHideLottery && lotteryIndex
+	    }
+		
+	    function startLotteryGame() {
+	    	$('.lottery-email>input').on('change', function() {
+				$('.lottery-email-tip').text('');
+			});
+			
+		    gameStartEl.on('click', function(e) {
+		        var timer = null;
+		
+				if (!isStartLottery) {
+					if (isValidEmail(emailEl.val())) {
+		            	isStartLottery = true;
+		            	// 判断是否使用过
+		            	if (!checkUserEmail(emailEl.val())) {
+		            		startGame();
+		            	} else {
+		            		$('.lottery-email-tip').text('This email address has been used!');
+		            		isStartLottery = false;
+		            	}
+		            } else {
+		            	$('.lottery-email-tip').text('Please enter a valid email address first!');
+		            }
+		
+					if (!gameStartEl.hasClass('active')) {
+		                gameStartEl.addClass('active');
+		                timer = setTimeout(function() {
+		                    gameStartEl.removeClass('active');
+		                    clearTimeout(timer);
+		                }, 300);
+		            }
+				}
+		    });
+	    }
+
 	    var emailEl = $('.lottery-email input'),
 	        gameStartEl = $('.lottery-startgame'),
 	        isPushEmail = false,
@@ -906,35 +954,7 @@
 	        isHideLottery = getCookie('isHideLottery') || false;
 	    	lotteryIndex = isHideLottery ? undefined : getLotteryIndex(),
 	        prevItem = null;
-		$('.lottery-email>input').on('change', function() {
-			$('.lottery-email-tip').text('');
-		});
-	    gameStartEl.on('click', function(e) {
-	        var timer = null;
-	
-			if (!isStartLottery) {
-				if (isValidEmail(emailEl.val())) {
-	            	isStartLottery = true;
-	            	// 判断是否使用过
-	            	if (!checkUserEmail(emailEl.val())) {
-	            		startGame();
-	            	} else {
-	            		$('.lottery-email-tip').text('This email address has been used!');
-	            		isStartLottery = false;
-	            	}
-	            } else {
-	            	$('.lottery-email-tip').text('Please enter a valid email address first!');
-	            }
-	
-				if (!gameStartEl.hasClass('active')) {
-	                gameStartEl.addClass('active');
-	                timer = setTimeout(function() {
-	                    gameStartEl.removeClass('active');
-	                    clearTimeout(timer);
-	                }, 300);
-	            }
-			}
-	    });
+	    if (isShowLottery()) startLotteryGame();
   	</script>
 </body>
 

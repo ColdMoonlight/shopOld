@@ -890,7 +890,9 @@
 			});
 
 			couponList = lotteryRequest.extend.mlbackCouponResList;
-
+			if (couponList.length != 8) {
+				return 0;
+			}
 			if (lotteryCount < 1) {
 				var htmlStr = '',
 					lotteryGameListEl = document.querySelector('.lottery-game-list');
@@ -953,6 +955,42 @@
 				return null;
 		}
 
+		function isShowLottery() {
+	    	return !isHideLottery && lotteryIndex
+	    }
+		
+	    function startLotteryGame() {
+	    	$('.lottery-email>input').on('change', function () {
+				$('.lottery-email-tip').text('');
+			});
+			gameStartEl.on('click', function (e) {
+				var timer = null;
+
+				if (!isStartLottery) {
+					if (isValidEmail(emailEl.val())) {
+						isStartLottery = true;
+						// 判断是否使用过
+						if (!checkUserEmail(emailEl.val())) {
+							startGame();
+						} else {
+							$('.lottery-email-tip').text('This email address has been used!');
+							isStartLottery = false;
+						}
+					} else {
+						$('.lottery-email-tip').text('Please enter a valid email address first!');
+					}
+
+					if (!gameStartEl.hasClass('active')) {
+						gameStartEl.addClass('active');
+						timer = setTimeout(function () {
+							gameStartEl.removeClass('active');
+							clearTimeout(timer);
+						}, 300);
+					}
+				}
+			});
+	    }
+
 		var emailEl = $('.lottery-email input'),
 			gameStartEl = $('.lottery-startgame'),
 			isPushEmail = false,
@@ -961,38 +999,10 @@
 			rollCount = 0,
 			lotteryData = null,
 			isStartLottery = false,
-			isHideLottery = getCookie('isHideLottery') || false;
-		lotteryIndex = isHideLottery ? undefined : getLotteryIndex(),
+			isHideLottery = getCookie('isHideLottery') || false,
+			lotteryIndex = isHideLottery ? undefined : getLotteryIndex(),
 			prevItem = null;
-		$('.lottery-email>input').on('change', function () {
-			$('.lottery-email-tip').text('');
-		});
-		gameStartEl.on('click', function (e) {
-			var timer = null;
-
-			if (!isStartLottery) {
-				if (isValidEmail(emailEl.val())) {
-					isStartLottery = true;
-					// 判断是否使用过
-					if (!checkUserEmail(emailEl.val())) {
-						startGame();
-					} else {
-						$('.lottery-email-tip').text('This email address has been used!');
-						isStartLottery = false;
-					}
-				} else {
-					$('.lottery-email-tip').text('Please enter a valid email address first!');
-				}
-
-				if (!gameStartEl.hasClass('active')) {
-					gameStartEl.addClass('active');
-					timer = setTimeout(function () {
-						gameStartEl.removeClass('active');
-						clearTimeout(timer);
-					}, 300);
-				}
-			}
-		});
+		if (isShowLottery()) startLotteryGame();
 	</script>
 </body>
 
