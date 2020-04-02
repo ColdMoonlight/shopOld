@@ -17,7 +17,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .fl{float:left;}
 .fr{float:right;}
 *,*:before,*:after{box-sizing:border-box}
-.mask{z-index: 9; display: none; position: fixed; top: 0; left:0;bottom: 0;right: 0; background: rgba(0, 0, 0, .5); z-index: 9;}
+.mask{display: none; position: fixed; top: 0; left:0;bottom: 0;right: 0; background: rgba(0, 0, 0, .5); z-index: 9999999999;}
 /*************************************/
 .narrow{width: 100%; height: auto; min-height: 150px; margin: 0 auto 1%;}
 .narrow>img {display: block;width: 100%;}

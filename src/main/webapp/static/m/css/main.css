@@ -2501,15 +2501,14 @@ word-break: break-all;width: 98%; float: left; margin: 5px 2% 0 0; font-size: 14
 .form-input>input.error_br, .form-input>select.error_br{border-color:#ff6f5e;}
 
 
-.go_re{z-index: 9999999; width: 300px; height: auto; position:fixed; top:50%; left: 50%;  -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
+.go_re{position: relative;display: inline-block; vertical-align: middle; width: 300px; height: auto; background: #fff; border-radius:5px;}
 .go_re a{display: block; position:relative;}
 .go_re a img{max-width: 100%;border-radius:3px;}
 .coupon_cont{width: 100%; min-height: 150px;}
 .coup_img{width:33.33%; float: left;}
 .close{z-index: 99999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff;}
-.maskindex {
-  background-color: rgba(0, 0, 0, .6);
-}
+.maskindex {background-color: rgba(0, 0, 0, .6);overflow-y: scroll; text-align: center; padding: 30px 0; box-sizing: border-box; }
+.maskindex:after { content: ""; display: inline-block; width: 0; height: 100vh; vertical-align: middle; }
 .login-register .btn.go_home{border-color:#fe186e; display: block;width: 100%;height:40px;background-color:#fe186e;color: #fff;padding: 0; line-height:40px;text-align:center;}
 .home_box{margin:0 20px;}
 .bannerfirst{min-height: 150px;margin:100px 0 0;}
