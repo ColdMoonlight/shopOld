@@ -93,7 +93,8 @@ public class MlbackProductController {
 			mlbackProductReq.setProductId(productId);
 			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
 			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
-			session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
+			session.setAttribute("mlbackProductMetaTitle", mlbackProductRes.getProductMetaTitle());
+			session.setAttribute("mlbackProductMetaKeyWords", mlbackProductRes.getProductMetaKeyWords());
 			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
 		}
 		//返回视图
@@ -120,7 +121,8 @@ public class MlbackProductController {
 			mlbackProductReq.setProductId(productId);
 			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
 			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
-			session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
+			session.setAttribute("mlbackProductMetaTitle", mlbackProductRes.getProductMetaTitle());
+			session.setAttribute("mlbackProductMetaKeyWords", mlbackProductRes.getProductMetaKeyWords());
 			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
 		}
 		
@@ -161,7 +163,8 @@ public class MlbackProductController {
 		  res.setAttribute("productId", productIdReq);
 		  //放回session域中
 		  session.setAttribute("productDetailId", productIdReq);
-		  session.setAttribute("mlbackProductSeo", mlbackProductRes.getProductSeo());
+		  session.setAttribute("mlbackProductMetaTitle", mlbackProductRes.getProductMetaTitle());
+		  session.setAttribute("mlbackProductMetaKeyWords", mlbackProductRes.getProductMetaKeyWords());
 		  session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
 		  //返回视图
 		  if(ifMobile.equals("1")){
