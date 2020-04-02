@@ -424,6 +424,9 @@ public class MlbackCouponController {
 			
 			mlfrontUserreq.setUserCreatetime(nowtime);
 			mlfrontUserreq.setUserMotifytime(nowtime);
+			mlfrontUserreq.setUserLastonlinetime(nowtime);
+			mlfrontUserreq.setUserVipLevel(0);
+			mlfrontUserreq.setUserTimes(0);
 			
 			//新增本条数据
 			mlfrontUserService.insertSelective(mlfrontUserreq);

@@ -41,7 +41,6 @@
 		
 		var title = '${sessionScope.productlistCategorySeo}';
 		var description = '${sessionScope.productlistCategoryDesc}';
-		console.log(title, description)
 		function addMetaKeyword() {
 			var meta = document.createElement('meta');
 			meta.name = "keyword";
