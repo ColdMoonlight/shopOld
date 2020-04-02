@@ -40,12 +40,13 @@
 		//fbq('init', '667403967094866');//megalook
 		fbq('track', 'PageView');
 		
-		var title = '${sessionScope.mlbackProductSeo}';
+		var title = '${sessionScope.mlbackProductMetaTitle}';
 		var description = '${sessionScope.mlbackProductMeteDesc}';
+		var keywords = '${sessionScope.mlbackProductMetaKeyWords}';
 		function addMetaKeyword() {
 			var meta = document.createElement('meta');
 			meta.name = "keyword";
-			meta.content = title + ',' + title.replace(/-/g, ' ');
+			meta.content = keywords;
 			document.head.appendChild(meta);
 		}
 		
@@ -56,11 +57,8 @@
 			document.head.appendChild(meta);
 		}
 
-		if (title) {
-			document.title = title;
-			addMetaKeyword();
-		}
-		
+		title && (document.title = title);
+		keywords &&	addMetaKeyword();
 		description && addMetaDescription();
 	</script>
 	<!--huashuohair-->
