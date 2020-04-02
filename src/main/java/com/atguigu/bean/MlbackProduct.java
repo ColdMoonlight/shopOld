@@ -257,21 +257,21 @@ public class MlbackProduct {
 		this.productMetaDesc = productMetaDesc == null ? null : productMetaDesc.trim();
 	}
 
-	public String getProductCategoryname() {
-		return productCategoryname;
-	}
-
-	public void setProductCategoryname(String productCategoryname) {
-		this.productCategoryname = productCategoryname == null ? null : productCategoryname.trim();
-	}
-
-	public String getProductMainFuimgurl() {
-		return productMainFuimgurl;
-	}
-
-	public void setProductMainFuimgurl(String productMainFuimgurl) {
-		this.productMainFuimgurl = productMainFuimgurl == null ? null : productMainFuimgurl.trim();
-	}
+//	public String getProductCategoryname() {
+//		return productCategoryname;
+//	}
+//
+//	public void setProductCategoryname(String productCategoryname) {
+//		this.productCategoryname = productCategoryname == null ? null : productCategoryname.trim();
+//	}
+//
+//	public String getProductMainFuimgurl() {
+//		return productMainFuimgurl;
+//	}
+//
+//	public void setProductMainFuimgurl(String productMainFuimgurl) {
+//		this.productMainFuimgurl = productMainFuimgurl == null ? null : productMainFuimgurl.trim();
+//	}
 
 	public String getProductMetaTitle() {
 		return productMetaTitle;
