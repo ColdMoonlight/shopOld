@@ -1797,11 +1797,21 @@ width: 100%;
 	justify-content: flex-end;
 }
 
-.go_re{z-index: 9999999999; width: 700px; height: auto; position:fixed;top:50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
+.go_re{position: relative; display:inline-block; width: 700px; height: auto;background: #fff; border-radius:5px; vertical-align: middle;}
 .go_re .close{z-index: 9999999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff; cursor: pointer;}
 .maskindex {
 	z-index: 9999999999;
   	background-color: rgba(0, 0, 0, .6);
+	overflow-y: scroll;
+	text-align: center;
+	padding: 30px 0;
+}
+.maskindex:after {
+	content: "";
+	display: inline-block;
+	width: 0;
+	height: 100vh;
+	vertical-align: middle;
 }
 /* lottery */
 @font-face {
