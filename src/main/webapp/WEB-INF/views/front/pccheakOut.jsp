@@ -424,6 +424,7 @@
 				$(".form-group_select").hide();
 				$(".form-group_select").removeClass("selectActive")
 				$(".form-groupcountry").css("width", "100%");
+				$('#province').val('');
 			}
 		}
 
