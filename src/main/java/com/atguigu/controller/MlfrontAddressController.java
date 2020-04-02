@@ -79,6 +79,8 @@ public class MlfrontAddressController {
 		}
 		//将省份code放入地址对象中
 		mlfrontAddress.setAddressProvinceCode(stateprovinceNameCode);
+		
+		//这里需要判断省份
 		//取出id
 		Integer addressId = mlfrontAddress.getAddressId();
 		String nowTime = DateUtil.strTime14s();
