@@ -847,9 +847,11 @@
 				}
 	
 		    	setTimeout(function() {
-					lotteryGameListEl.innerHTML = htmlStr;
-					$(".mask").show();
-					$(document.body).css('overflow', 'hidden');
+		    		if (index > - 1) {
+						lotteryGameListEl.innerHTML = htmlStr;
+						$(".mask").show();
+						$(document.body).css('overflow', 'hidden');		    			
+		    		}
 				}, 2000);
 	
 				$(".go_re .close").click(function(e){
@@ -868,7 +870,6 @@
 			}
 			index = couponArr.indexOf(lotteryRequest.extend.luckDrawDate && lotteryRequest.extend.luckDrawDate.luckDrawCouponId);
 			lotteryData = couponList[index];
-	
 	        return index > -1 ? index + 1 : 0;
 	    }
 	
