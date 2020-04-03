@@ -15,7 +15,7 @@
     var createItem = function(data) {
       return '<li>' +
           '<a href="' + data.link + '">' +
-            '<span class="text">' + data.name + '</span>' +
+            '<span class="text">' + (data.name.replace(/\_/g, ' ')) + '</span>' +
             '<i class="icon ' + data.icon + '"></i>' +
           '</a>' +
         '</li>';
