@@ -129,7 +129,7 @@ function renderFooterNav(parent, data) {
 	for (var i=0, len=data.length; i<len; i+=1) {
 		html += '<div class="col-md-6 col-lg-'+ Math.floor(12/len) +'">' +
 			'<div class="tt-mobile-collapse">' +
-			'<h4 class="tt-collapse-title">'+ data[i].name +'</h4>';
+			'<h4 class="tt-collapse-title">'+ (data[i].name.replace(/\_/g, ' ')) +'</h4>';
 			var children = data[i].children;
 			var len2 = (children && data[i].children.length) || 0;
 			if (len2) {
