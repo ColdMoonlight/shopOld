@@ -97,6 +97,11 @@ public class MlbackCouponController {
 		mlbackCoupon.setCouponMotifytime(nowTime);
 		//取出是否绑定单品字段
 		Integer couponProductOnlyType = mlbackCoupon.getCouponProductOnlyType();
+		
+		Integer CouponProductOnlyType = mlbackCoupon.getCouponProductOnlyType();
+		if(CouponProductOnlyType==null){
+			mlbackCoupon.setCouponProductOnlyType(0);
+		}
 		if(couponProductOnlyType==0){
 			mlbackCoupon.setCouponProductOnlyPId(0);
 			
@@ -185,6 +190,9 @@ public class MlbackCouponController {
 	      mlbackCouponOne =mlbackCouponResList.get(0);
 	      //取出本优惠券中的绑定产品字段，如果未绑定产品0，过，
 	      Integer couponProductOnlyType =  mlbackCouponOne.getCouponProductOnlyType();
+	      if(couponProductOnlyType==null){
+	    	  couponProductOnlyType = 0;
+	      }
 	      
 	      if(couponProductOnlyType==1){
 	        Integer couponPid = mlbackCouponOne.getCouponProductOnlyPId();
