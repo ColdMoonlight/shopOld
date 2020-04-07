@@ -885,7 +885,6 @@ public class MlfrontOrderController {
 		mlfrontOrderReq.setOrderSendtime(nowTime);
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
 		
-		
 		//通过orderId查询用户地址信息
 		mlfrontOrderReq2.setOrderId(orderId);
 		List<MlfrontOrder> mlfrontOrderResList = mlfrontOrderService.selectMlfrontOrderById(mlfrontOrderReq2);
