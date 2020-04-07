@@ -178,7 +178,6 @@
 				'second': 59
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
-		/****************************/
 		var minDate22 = moment()
 			.set({
 				'date': date.getDate(),
@@ -187,8 +186,6 @@
 				'second': 0
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
-		// console.log(minDate22)/*****************************2222222*/
-
 		var maxDate = moment()
 			.set({
 				'date': date.getDate(),
@@ -197,16 +194,17 @@
 				'second': date.getSeconds()
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
+		/*****初始化时间*****************/
+		var storage = window.localStorage;
+		var startime = storage.getItem('startTime') || minDate22;
+		var endtime = storage.getItem('endTime') || maxDate;
 
 		function initHtml() {
 			var $input = targetInput.find('input');
-			$input.eq(0).val(minDate22);
-			$input.eq(1).val(maxDate);
+			$input.eq(0).val(startime);
+			$input.eq(1).val(endtime);
 		}
-		/*****初始化时间*****************/
-		var startime = minDate22;
-		var endtime = maxDate;
-		initData();
+
 		function initData() {
 			/*****初始调取浏览量*****************/
 			$.ajax({
@@ -330,8 +328,6 @@
 
 			});
 		}
-		
-
 
 		/***********************************************/
 		function initJs() {
@@ -361,13 +357,20 @@
 					hide: function (type) {
 						startime = this.$input.eq(0).val();
 						endtime = this.$input.eq(1).val();
+						storageTime();
 						initData();
 					}
 				})
 			})
 		}
+		
+		function storageTime() {
+			storage.setItem('startTime', startime);
+			storage.setItem('endTime', endtime);
+		}
 
 		$(function () {
+			initData();
 			initHtml();
 			initJs();
 		});

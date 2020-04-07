@@ -117,13 +117,14 @@
 				'second': date.getSeconds()
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
-		var startime = minDate22;
-		var endtime = maxDate;
+		var storage = window.localStorage;
+		var startime = storage.getItem('startTime') || minDate22;
+		var endtime = storage.getItem('endTime') || maxDate;
 
 		function initHtml() {
 			var $input = targetInput.find('input');
-			$input.eq(0).val(minDate22);
-			$input.eq(1).val(maxDate);
+			$input.eq(0).val(startime);
+			$input.eq(1).val(endtime);
 		}
 
 		function initData() {
@@ -186,10 +187,16 @@
 					hide: function (type) {
 						startime = this.$input.eq(0).val();
 						endtime = this.$input.eq(1).val();
+						storageTime();
 						initData();
 					}
 				})
 			})
+		}
+
+		function storageTime() {
+			storage.setItem('startTime', startime);
+			storage.setItem('endTime', endtime);
 		}
 
 		$(function () {
