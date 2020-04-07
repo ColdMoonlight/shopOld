@@ -65,7 +65,7 @@
 			<em><span class="icon cart"></span></em> <em>Show order summary</em> <b></b>
 		</div> 
 	</div>
-		<div class="order-info clearfix" style="display: none;">
+		<div class="order-info clearfix">
 			<div class="product_shop clearfix">
 			</div>
 			<div class="cal-info clearfix">
