@@ -7,6 +7,7 @@ ul, li , ol, li{ list-style: none; }
 img{ border: none; vertical-align:top; }
 em, cite, address,i ,strong{ font-style: normal; font-weight: normal; }
 a { text-decoration:none; }
+
 input { outline:none; border:none; background-color:transparent;}
 input::-ms-clear { display:none; }
 textarea { outline:none; resize:none; ;overflow:auto;border:none;background: transparent;}
