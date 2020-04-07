@@ -174,7 +174,6 @@ public class MlbackCategoryController {
 		//接收id信息
 		int categoryIdInt = mlbackCategory.getCategoryId();
 		mlbackCategoryService.deleteByPrimaryKey(categoryIdInt);
-		//System.out.println("后台操作:category delete success+intResult:"+intResult);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
