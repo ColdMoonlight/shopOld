@@ -193,7 +193,6 @@ public class MlbackCouponController {
 	      if(couponProductOnlyType==null){
 	    	  couponProductOnlyType = 0;
 	      }
-	      
 	      if(couponProductOnlyType==1){
 	        Integer couponPid = mlbackCouponOne.getCouponProductOnlyPId();
 	        String couponPidStr = couponPid+"";
