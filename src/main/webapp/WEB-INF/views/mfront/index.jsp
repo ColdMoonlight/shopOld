@@ -653,12 +653,16 @@
 				if (data.code == 100) {
 					console.log(data)
 					var resData = data.extend.mlbackActShowProList;
-					classNavigation($('#class_nav'), resData);
-					new LazyLoad($('#class_nav').find('img'), {
-						root: null,
-						rootMargin: "0px",
-						threshold: 0
-					});
+					if(resData.length==0){
+						$("#class_nav").hide();
+					}else{
+						classNavigation($('#class_nav'), resData);
+						new LazyLoad($('#class_nav').find('img'), {
+							root: null,
+							rootMargin: "0px",
+							threshold: 0
+						});
+					}
 				} else {
 					renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
 				}

@@ -20,7 +20,7 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 *,*:before,*:after{box-sizing:border-box}
 .mask{display: none; position: fixed; top: 0; left:0;bottom: 0;right: 0; background: rgba(0, 0, 0, .5); z-index: 9999999999;}
 /*************************************/
-.narrow{width: 100%; height: auto; min-height: 150px; margin: 0 auto 1%;}
+.narrow{width: 100%; height: auto; min-height: 150px; margin: 2% auto 1%;}
 .narrow>img {display: block;width: 100%;}
 .narrow_cont{width: auto; height: auto; margin: 0 auto;}
 .narrow_cont a{display: inline-block;width: 50%; padding:0 1% 1%;float: left;}
