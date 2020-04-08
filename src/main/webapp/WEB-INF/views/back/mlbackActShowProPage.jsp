@@ -147,9 +147,9 @@
 		        } else if (item.actshowproActnum == 7) {
 		          actshowproActStr = '第7-首页adv_four';
 		        } else if (item.actshowproActnum == 8) {
-		          actshowproActStr = '第8-首banner下边_adv';
+		          actshowproActStr = '第8-首分类导航下2个图';
 		        }else if (item.actshowproActnum == 9) {
-		          actshowproActStr = 'banner下边_adv5';
+		          actshowproActStr = '第9-首banner下边分类导航5个图';
 		        }else if (item.actshowproActnum == 99) {
 		          actshowproActStr = '第99活动';
 		        };
