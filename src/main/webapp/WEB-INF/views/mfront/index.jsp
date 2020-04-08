@@ -69,18 +69,15 @@
 			<div class="swiper-pagination"></div>
 		</div>
 	</div>
-	<div class="quick-links clearfix">
-		<div class="links_cont clearfix">
-			<ul class="clearfix">
-				<li><a href="${APP_PATH }/search/4x4-Closure-Wig.html">4x4 WIG</a></li>
-				<li><a href="${APP_PATH }/search/13x4-Lace-Frontal-Wig.html">13x4 WIG </a></li>
-				<li><a href="${APP_PATH }/search/13x6-Lace-Frontal-Wig.html">13x6 WIG</a></li>
-				<li><a href="${APP_PATH }/search/360-Lace-Frontal-Wig.html">360 WIG</a></li>
-				<li><a href="${APP_PATH }/search/Bob-Wig.html">BOB WIG</a></li>
-				<li><a href="${APP_PATH }/search/Full-Lace-Wig.html">FULL WIG</a></li>
-			</ul>
-		</div>
-	</div>
+   <div class="links_contimg clearfix" id="class_nav">
+<!-- 	   <ul class="clearfix">
+			<li><a href="###"><img src="${APP_PATH }/static/m/img/index/bt_02.jpg" /></a></li>
+			<li><a href="###"><img src="${APP_PATH }/static/m/img/index/bt_04.jpg" /></a></li>
+			<li><a href="###"><img src="${APP_PATH }/static/m/img/index/bt_08.jpg" /></a></li>
+			<li><a href="###"><img src="${APP_PATH }/static/m/img/index/bt_10.jpg" /></a></li>
+			<li><a href="###"><img src="${APP_PATH }/static/m/img/index/bt_06.jpg" /></a></li>
+	   </ul> -->
+   </div>
 	<div class="narrow clearfix" id="hot-two">
 		<img src="${APP_PATH }/static/m/img/loading/load-product2.gif" />
 	</div>
@@ -377,6 +374,37 @@
 			}
 			parent.html(html);
 		}
+		/******分类导航*******************/
+         function classNavigation(parent, data) {
+         	var html = '';
+         	html += '<ul class="clearfix">';
+         	for (var i = 0; i < data.length; i += 1) {
+         		var actshowprolei = data[i].actshowproIfproORcate;
+         		if (actshowprolei == 0) {
+         			html += '<li>' +
+         				'<a href="${APP_PATH}/' + data[i].actshowproSeoname + '.html">' +
+         				'<img src="'+ loadProductUrl +'" data-src="' + data[i].actshowproImgwapurl + '" alt="">' +
+         				'</a>' +
+         				'</li>';
+         		} else if (actshowprolei == 1) {
+         			html += '<li>' +
+         				'<a href="${APP_PATH}/search/' + data[i].actshowproCateSeoname + '.html">' +
+         				'<img src="'+ loadProductUrl +'" data-src="' + data[i].actshowproImgwapurl + '" alt="">' +
+         				'</a>' +
+         				'</li>';
+         		} else if (actshowprolei == 2) {
+         			html += '<li>' +
+         				'<a href="${APP_PATH}/' + data[i].actshowproPageSeoname + '.html">' +
+         				'<img src="'+ loadProductUrl +'" data-src="' + data[i].actshowproImgwapurl + '" alt="">' +
+         				'</a>' +
+         				'</li>';
+         		}
+         	}
+         	html += '</ul>';
+         
+         	parent.html(html);
+         }
+
 
 		/*******优惠券*************************/
 		function renderCoupon(parent, data) {
@@ -616,6 +644,29 @@
 				}
 			}
 		});
+		
+		$.ajax({
+			url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
+			data: "actshowproActnum=" + 12,
+			type: "post",
+			success: function (data) {
+				if (data.code == 100) {
+					console.log(data)
+					var resData = data.extend.mlbackActShowProList;
+					classNavigation($('#class_nav'), resData);
+					new LazyLoad($('#class_nav').find('img'), {
+						root: null,
+						rootMargin: "0px",
+						threshold: 0
+					});
+				} else {
+					renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
+				}
+			}
+		});
+		
+		
+		
 		/* banner_fl_1 */
 		$.ajax({
 			url: '${APP_PATH}/MlbackShowArea/getMlbackShowAreaOne',
