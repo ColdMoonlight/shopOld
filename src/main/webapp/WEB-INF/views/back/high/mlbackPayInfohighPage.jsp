@@ -577,7 +577,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
-							
+							orderData.areafreightMoney = result.extend.areafreightMoney;
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							orderOrderitemidstradd = orderData.orderOrderitemidstr;
@@ -756,21 +756,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 						}
 					}
 				})
-			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			});	
 		}
 
 		function renderOrderInfo(data) {//红
@@ -869,7 +855,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 
 			var calInfoHtml = '';
 
-			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
+			calInfoHtml = '<div><span>预计总价（含运费 $'+  data.areafreightMoney +'）：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
 				.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
