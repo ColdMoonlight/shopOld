@@ -148,11 +148,11 @@
 		          actshowproActStr = '第7-首页adv_four';
 		        } else if (item.actshowproActnum == 8) {
 		          actshowproActStr = '第8-首banner下边_adv';
+		        }else if (item.actshowproActnum == 9) {
+		          actshowproActStr = 'banner下边_adv5';
 		        }else if (item.actshowproActnum == 99) {
 		          actshowproActStr = '第99活动';
 		        };
-				
-				
 				
 
 				var actshowproId = $("<td></td>").append(item.actshowproId);
