@@ -287,7 +287,7 @@ public class PaypalController {
             session.setAttribute("successpayerId", payerId);
             session.setAttribute("successpayment", payment);
             //99.1.1wap+pc端处理toUpdatePayInfoStateSuccess
-            //仅仅生成支付号+更改payinfo的状态
+            //1生成支付号,2更改payinfo的状态
         	toUpdatePayInfoStateSuccess(session,payerId,paymentId);
             
             System.out.println(payment.toJSON());
@@ -299,9 +299,9 @@ public class PaypalController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
-            System.out.println("----wap端返回成功/Exception-----e.getMessage()-----begin------");
+            System.out.println("----wap端返回成功接口的Exception-----e.getMessage()-----begin------");
             System.out.println(e.getMessage());
-            System.out.println("----wap端返回成功/Exception-----e.getMessage()-----end------");
+            System.out.println("----wap端返回成功接口的Exception-----e.getMessage()-----end------");
         }
     	return "redirect:/MlbackCart/toCheakOut";
     }
