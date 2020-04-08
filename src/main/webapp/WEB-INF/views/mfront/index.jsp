@@ -647,7 +647,7 @@
 		
 		$.ajax({
 			url: '${APP_PATH}/MlbackActShowPro/getMlbackActShowProListByActnum',
-			data: "actshowproActnum=" + 12,
+			data: "actshowproActnum=" + 9,
 			type: "post",
 			success: function (data) {
 				if (data.code == 100) {
