@@ -46,9 +46,9 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .links_cont ul li:nth-of-type(even){padding:0 0 0 1%}
 .links_cont ul li a{width: 100%; height: 100%;display: block; background: #000; color: #fff;font-size: 16px; text-align: center; line-height:50px;}
 /**********/
-.links_contimg{width: 100%; height:220px;padding: 0 1% 2%;}
+.links_contimg{width: 100%; height:220px;padding: 0 1% 2%; margin: 2% 0 0;}
 .links_contimg ul{text-align: center;width: 100%;height:220px; position: relative;}
-.links_contimg ul li {float: left;border: 1px solid #ccc;box-sizing: border-box;}
+.links_contimg ul li {float: left;box-sizing: border-box;}
 .links_contimg ul li:first-of-type,.links_contimg ul li:last-of-type {width: 25%;height: 100%;}
 .links_contimg ul li:nth-of-type(2) {width: 50%;height: 50%;}
 .links_contimg ul li:nth-of-type(3),.links_contimg ul li:nth-of-type(4) {position: absolute;top: 50%;width: 25%;height: 50%;}
