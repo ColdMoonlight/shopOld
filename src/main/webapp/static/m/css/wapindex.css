@@ -46,17 +46,18 @@ textarea { outline:none; resize:none; ;overflow:auto;border:none;background: tra
 .links_cont ul li:nth-of-type(even){padding:0 0 0 1%}
 .links_cont ul li a{width: 100%; height: 100%;display: block; background: #000; color: #fff;font-size: 16px; text-align: center; line-height:50px;}
 /**********/
-.links_contimg{width: 100%; height:220px;padding: 0 1% 2%; margin: 2% 0 0;}
-.links_contimg ul{text-align: center;width: 100%;height:220px; position: relative;}
+.links_contimg{width: 100%; height:auto; margin: 2% 0 0; overflow:hidden;}
+.links_contimg ul{text-align: center;width: 100%;height:auto; position: relative;}
 .links_contimg ul li {float: left;box-sizing: border-box;}
-.links_contimg ul li:first-of-type,.links_contimg ul li:last-of-type {width: 25%;height: 100%;}
-.links_contimg ul li:nth-of-type(2) {width: 50%;height: 50%;}
-.links_contimg ul li:nth-of-type(3),.links_contimg ul li:nth-of-type(4) {position: absolute;top: 50%;width: 25%;height: 50%;}
-.links_contimg ul li:nth-of-type(3) {left: 25%;}
-.links_contimg ul li:nth-of-type(4) { right: 25%; }
+.links_contimg ul li:first-of-type,.links_contimg ul li:last-of-type {width: 32%;height: 100%;}
+.links_contimg ul li:first-of-type{float: left; padding: 0 1% 0 0 ;}
+.links_contimg ul li:last-of-type{float: right; padding: 0 0 0 1%;}
+.links_contimg ul li:nth-of-type(2) {width: 36%;height: 50%; position: absolute; top: 0; left:32%;margin: 0 0 1%;}
+.links_contimg ul li:nth-of-type(3),.links_contimg ul li:nth-of-type(4) {position: absolute;top: 50%;width:18%;height: 50%;margin: 1% 0 0;}
+.links_contimg ul li:nth-of-type(3) {left:32%;padding: 0 .5% 0 0;}
+.links_contimg ul li:nth-of-type(4) {right:32%;padding: 0 0 0 .5%}
 .links_contimg ul li a{display: block;width: 100%; height: 100%;}
-.links_contimg ul li a img{width: 100%;height:100%;display: block;}
-
+.links_contimg ul li a img{width: 100%; display: block;}
 
 
 
