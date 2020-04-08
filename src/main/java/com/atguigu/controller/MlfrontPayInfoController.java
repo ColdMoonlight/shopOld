@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.atguigu.bean.MlPaypalShipAddress;
 import com.atguigu.bean.MlbackAddOrderViewDetail;
 import com.atguigu.bean.MlbackAddPayinfoViewDetail;
+import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlfrontAddress;
 import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontOrderItem;
@@ -255,6 +256,18 @@ public class MlfrontPayInfoController {
 		MlfrontAddressReq.setAddressId(addressinfoId);
 		List<MlfrontAddress> MlfrontAddressList = mlfrontAddressService.selectMlfrontAddressById(MlfrontAddressReq);
 		MlfrontAddress mlfrontAddressOne = MlfrontAddressList.get(0);
+		//2.2.1从地址中取出国家字段	addressCountry: "US"	addressCountryAll: "United States"
+		//拿到国家的code
+		String areafreightCountryEnglish = mlfrontAddressOne.getAddressCountry();
+		//封装国家code
+		MlbackAreafreight mlbackAreafreightReq = new MlbackAreafreight();
+		mlbackAreafreightReq.setAreafreightCountryEnglish(areafreightCountryEnglish);
+		//查询该国家的全称
+		List<MlbackAreafreight> mlbackAreafreightResList =mlbackAreafreightService.selectMlbackAreafreightByEng(mlbackAreafreightReq);
+		Integer areafreightMoney = 0;
+		if(mlbackAreafreightResList.size()>0){
+			areafreightMoney =mlbackAreafreightResList.get(0).getAreafreightPrice();	//拿到国家运费
+		}
 		//2.3从详情中拿到orderItemIDStr;
 		String orderItemIdsStr = mlfrontOrderPayOneRes.getOrderOrderitemidstr();
 		List<MlfrontOrderItem>  mlfrontOrderItemList = new ArrayList<MlfrontOrderItem>();
@@ -297,7 +310,7 @@ public class MlfrontPayInfoController {
 		return Msg.success().add("resMsg", "查看单条mlfrontPayInfoOne的详情细节完毕")
 					.add("mlfrontPayInfoOne", mlfrontPayInfoOne).add("mlfrontOrderPayOneRes", mlfrontOrderPayOneRes)
 					.add("mlfrontAddressOne", mlfrontAddressOne).add("mlfrontOrderItemList", mlfrontOrderItemList)
-					.add("mlfrontUserOne", mlfrontUserOne).add("mlPaypalShipAddressOne", mlPaypalShipAddressRes);
+					.add("mlfrontUserOne", mlfrontUserOne).add("mlPaypalShipAddressOne", mlPaypalShipAddressRes).add("areafreightMoney", areafreightMoney);
 	}
 	
 	
