@@ -49,10 +49,8 @@ public class MlfrontAddressController {
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontAddress mlfrontAddress){
 		//接受参数信息
 		System.out.println("客户点击结算按钮的时候,接收到的mlfrontAddress:"+mlfrontAddress);
-		
 		//拿到国家的code
 		String areafreightCountryEnglish = mlfrontAddress.getAddressCountry();
-		
 		//封装国家code
 		MlbackAreafreight mlbackAreafreightReq = new MlbackAreafreight();
 		mlbackAreafreightReq.setAreafreightCountryEnglish(areafreightCountryEnglish);
