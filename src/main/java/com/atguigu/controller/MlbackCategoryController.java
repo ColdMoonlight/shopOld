@@ -87,6 +87,8 @@ public class MlbackCategoryController {
 			session.setAttribute("categoryMetaTitle", categoryMetaTitle);
 			session.setAttribute("categoryMetaKeyWords", categoryMetaKeyWords);
 			session.setAttribute("categoryMetaDesc", categoryMetaDesc);
+		}else{
+			return "redirect:https://www.megalook.com";
 		}
 		
 		
@@ -320,6 +322,10 @@ public class MlbackCategoryController {
 			session.setAttribute("categoryMetaTitle", categoryMetaTitle);
 			session.setAttribute("categoryMetaKeyWords", categoryMetaKeyWords);
 			session.setAttribute("categoryMetaDesc", categoryMetaDesc);
+		}else{
+			
+			return "redirect:https://www.megalook.com";
+			
 		}
 		
 		//判断请求设备
