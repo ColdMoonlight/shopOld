@@ -1069,7 +1069,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinf
 								});
 							}
 							 updatepayinfostu(postData)
-							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}
