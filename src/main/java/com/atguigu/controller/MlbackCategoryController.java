@@ -91,7 +91,6 @@ public class MlbackCategoryController {
 			return "redirect:https://www.megalook.com";
 		}
 		
-		
 		//判断请求设备
 		String ifMobile = IfMobileUtils.isMobileOrPc(rep, res);
 		//返回视图
@@ -242,7 +241,7 @@ public class MlbackCategoryController {
 	/**
 	 * 7.0	onuse	20191225	检查
 	 * 获取全部类目，以便于下拉选择
-	 * @param 无
+	 * @param 无参
 	 * @return 
 	 */
 	@RequestMapping(value="/getOneMlbackCategoryParentDetail",method=RequestMethod.GET)

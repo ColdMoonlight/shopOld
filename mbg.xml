@@ -70,6 +70,7 @@
 		<table tableName="tb_mlback_coupondesctitle" domainObjectName="MlbackCouponDescTitle"></table>
 		<table tableName="tb_mlback_coupondescdetail" domainObjectName="MlbackCouponDescDetail"></table>-->
 		
+		
 		<!--
 		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>
 		<table tableName="tb_mlfront_userTemporary" domainObjectName="MlfrontUserTemporary"></table>
