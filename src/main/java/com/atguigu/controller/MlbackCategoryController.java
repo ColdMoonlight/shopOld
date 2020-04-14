@@ -43,8 +43,7 @@ public class MlbackCategoryController {
 	/**
 	 * 1.0	onuse	20191225	检查
 	 * to后台分类MlbackCategory列表页面
-	 * @param jsp
-	 * @return 
+	 * @return jsp
 	 * */
 	@RequestMapping("/toMlbackCategoryPage")
 	public String tologin(HttpSession session) throws Exception{
