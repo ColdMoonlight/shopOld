@@ -997,7 +997,15 @@
 				$(".codestr").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			} else if (country_address == null || country_address == '' || country_address == 'select the Country') {
+			} else if (citystr == null || citystr == '') {
+				flag = 1;
+				// alert("citystr is empty");
+				renderSysMsg('citystr is empty')
+				$(".city").addClass("error_br");
+				$(".city").focus(function () {
+					$(this).removeClass("error_br")
+				})
+			}else if (countrystr == null || countrystr == '' || countrystr == 'select the Country') {
 				flag = 1;
 				// alert("countrystr is empty");
 				renderSysMsg('countrystr is empty')
