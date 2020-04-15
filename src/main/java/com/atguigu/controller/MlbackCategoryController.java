@@ -60,7 +60,7 @@ public class MlbackCategoryController {
 	/**
 	 * 1.1	onuse	20191225	检查
 	 * 前台获取Category下的产品产品list页面详情-toproductlist
-	 * @param categoryId
+	 * @param categoryId	GET
 	 * @return 
 	 * */
 	@RequestMapping(value="/toproductlist",method=RequestMethod.GET)
