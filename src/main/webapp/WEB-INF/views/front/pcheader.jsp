@@ -12,14 +12,14 @@
 	<link rel="stylesheet" href="${APP_PATH }/static/pc/css/new.css">
 	
 	<!-- Global site tag (gtag.js) - Google Analytics 生产-->
- 	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
+ 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-145178467-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 	
 	  gtag('config', 'UA-145178467-1');
-	</script> -->
+	</script>
 	
 	<!-- Global site tag (gtag.js) - Google Analytics huashuohair-->
 	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128377932-1"></script>
@@ -31,7 +31,7 @@
 	  gtag('config', 'UA-128377932-1');
 	</script> -->
 	
-	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
+	<!-- Global site tag (gtag.js) - Google Analytics 测试
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326913-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
@@ -39,10 +39,10 @@
 	  gtag('js', new Date());
 	
 	  gtag('config', 'UA-148326913-1');
-	</script>
+	</script>-->
 	
-	<!-- google-site-verification 网站地图所需 上线时打开 
-	<meta name="google-site-verification" content="S_nwEF7Oc2MiSJHmAoJ8M8QA8vIA9QxyUrFDSTq1-YI" />-->
+	<!-- google-site-verification 网站地图所需 上线时打开 -->
+	<meta name="google-site-verification" content="S_nwEF7Oc2MiSJHmAoJ8M8QA8vIA9QxyUrFDSTq1-YI" />
 	
 </head>
 <body>
