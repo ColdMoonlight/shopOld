@@ -29,9 +29,9 @@ public class PaypalService {
 	
 	
 	//开发环境-shaohua
-//	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
-//	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
-//	String mode="sandbox";
+	String clientId = "AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj";
+	String clientSecret = "EO5N6EtaEiIQXF18UWWZJGGeB8VL4qMxC-jR4tvHoXJD0RBdZGzcCguUBuRgWNBR8Lk-ge8XRK379NCl";
+	String mode="sandbox";
 	
 	//开发环境-boss
 //	String clientId = "AZTtkPd6LowZG2KewtB3TAHIu3WeqcM6VCgp2xB4ShixmnAgOxskEgwdWEM9Qv0fc3Ln2DLVy6xPLPFN";
@@ -39,9 +39,9 @@ public class PaypalService {
 //	String mode="sandbox";
 	
 	//mogalook-live环境
-	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
-	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
-    String mode="live";
+//	String clientId="Ad0_fWFpJ2XCHI4xZY3mywHctvdm0rNIvltKnN3bxE_1j56ZK7b-HOzyhrw07ZZWFZRIBzUPJajU-CGW";
+//	String clientSecret="ECTB6nSnyAo0S7W7rNiZCsiKMTG5qEOCRYO6wYDEO7sBsVU5rpAHDqVXwzqKhPriWGn39JfFXcmq1biq";
+//    String mode="live";
     
 	//陈鹏账户
 //    String clientId="AbYhYseSfoEHsp02nyg6O3A1NowoKN00tWYvwAYErFKy0T7FDUkHENMMP7TTDqn0bP9LKISVJILgx3G5";
@@ -75,21 +75,15 @@ public class PaypalService {
   		System.out.println(totalStr);
   		System.out.println(description);
 
-  		
-
   		// ###Transaction
   		// A transaction defines the contract of a
   		// payment - what is the payment for and who
   		// is fulfilling it. Transaction is created with
   		// a `Payee` and `Amount` types
   		Transaction transaction = new Transaction();
-//  		transaction
-//  				.setDescription("This is the payment transaction description.");
+//  	transaction.setDescription("This is the payment transaction description.");
   		
-  		transaction
-			.setDescription(description);
-  		
-
+  		transaction.setDescription(description);
   		
   		String subMoney = "";
   		
@@ -109,7 +103,7 @@ public class PaypalService {
   			String skuNumStr = skuNum+"";
   			String money = mlfrontOrderItem.getOrderitemPskuReamoney();
   			String oneMoney = getOnemoney(skuNum,money);
-//  			item.setName(name).setQuantity("1").setCurrency("USD").setPrice(money);
+//  		demo:	item.setName(name).setQuantity("1").setCurrency("USD").setPrice(money);
   			item.setName(name).setQuantity(skuNumStr).setCurrency("USD").setPrice(oneMoney);
   			money = getOneAllMoney(skuNum,oneMoney);
   			subMoney = money;
@@ -164,7 +158,6 @@ public class PaypalService {
   		payment.setPayer(payer);
   		payment.setTransactions(transactions);
   		System.out.println(payment.getTransactions().get(0).getAmount().toJSON());
-  		
   		
   		RedirectUrls redirectUrls = new RedirectUrls();
   		redirectUrls.setCancelUrl(cancelUrl);
@@ -280,17 +273,18 @@ public class PaypalService {
 		return shippingAddress;
 	}
 	
-	private ShippingAddress getShippingAddressSDK(MlfrontAddress mlfrontAddress) {
-		ShippingAddress shippingAddress = new ShippingAddress();
-		shippingAddress.setRecipientName("Thomas Miller");
-		shippingAddress.setLine1("4th Floor, One Lagoon Drive");
-		shippingAddress.setLine2("Unit #34");
-		shippingAddress.setCity("Redwood City");
-		shippingAddress.setState("CA");
-		shippingAddress.setPhone("011862212345678");
-		shippingAddress.setPostalCode("94065");
-        shippingAddress.setCountryCode("US");
-		return shippingAddress;
-	}
+	//这是个地址对象的封装demo,往PayPal传参所需
+//	private ShippingAddress getShippingAddressSDK(MlfrontAddress mlfrontAddress) {
+//		ShippingAddress shippingAddress = new ShippingAddress();
+//		shippingAddress.setRecipientName("Thomas Miller");
+//		shippingAddress.setLine1("4th Floor, One Lagoon Drive");
+//		shippingAddress.setLine2("Unit #34");
+//		shippingAddress.setCity("Redwood City");
+//		shippingAddress.setState("CA");
+//		shippingAddress.setPhone("011862212345678");
+//		shippingAddress.setPostalCode("94065");
+//        shippingAddress.setCountryCode("US");
+//		return shippingAddress;
+//	}
 
 }

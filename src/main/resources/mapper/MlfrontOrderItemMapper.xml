@@ -435,4 +435,10 @@
     from tb_mlfront_orderitem order by orderItem_id desc
   </select>
   
+  <!-- selectMlfrontOrderItemByMotifyTime -->
+  <select id="selectMlfrontOrderItemByMotifyTime" parameterType="com.atguigu.bean.MlfrontOrderItem" resultMap="BaseResultMap">
+  	select * from tb_mlfront_orderitem where
+   	orderItem_motifyTime between #{orderitemCreatetime,jdbcType=VARCHAR} and #{orderitemMotifytime,jdbcType=VARCHAR} order by orderItem_motifyTime desc
+   </select>
+  
 </mapper>

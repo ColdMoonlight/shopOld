@@ -28,7 +28,6 @@ import com.atguigu.service.MlbackProductViewDetailService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.IfMobileUtils;
 
-
 @Controller
 @RequestMapping("/MlbackProduct")
 public class MlbackProductController {
@@ -88,6 +87,16 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//放回session域中
 		session.setAttribute("productDetailId", productIdReq);
+		
+		if(productIdReq!=null){
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			mlbackProductReq.setProductId(productId);
+			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
+			session.setAttribute("mlbackProductMetaTitle", mlbackProductRes.getProductMetaTitle());
+			session.setAttribute("mlbackProductMetaKeyWords", mlbackProductRes.getProductMetaKeyWords());
+			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
+		}
 		//返回视图
 		return "mfront/productDetails";
 	}
@@ -106,6 +115,17 @@ public class MlbackProductController {
 		res.setAttribute("productId", productIdReq);
 		//放回session域中
 		session.setAttribute("productDetailId", productIdReq);
+		
+		if(productIdReq!=null){
+			MlbackProduct mlbackProductReq = new MlbackProduct();
+			mlbackProductReq.setProductId(productId);
+			List<MlbackProduct> mlbackProductResList =  mlbackProductService.selectMlbackProductSimple(mlbackProductReq);
+			MlbackProduct mlbackProductRes = mlbackProductResList.get(0);
+			session.setAttribute("mlbackProductMetaTitle", mlbackProductRes.getProductMetaTitle());
+			session.setAttribute("mlbackProductMetaKeyWords", mlbackProductRes.getProductMetaKeyWords());
+			session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
+		}
+		
 		//返回视图
 		return "front/pcproductDetails";
 	}
@@ -120,8 +140,7 @@ public class MlbackProductController {
 	 public String tomfbProductDetailPageByhtml(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestParam(value = "productSeo") String productSeo) throws Exception{
 	  
 	  String nowTime = DateUtil.strTime14s();
-	  System.out.println("访客通过productSeo进入落地页-productSeo:"+productSeo+" ,nowTime:"+nowTime);
-	  
+	  //System.out.println("访客通过productSeo进入落地页-productSeo:"+productSeo+" ,nowTime:"+nowTime);
 	  //准备封装参数
 	  MlbackProduct mlbackProductrepBySeo = new MlbackProduct();
 	  mlbackProductrepBySeo.setProductSeo(productSeo);
@@ -144,6 +163,9 @@ public class MlbackProductController {
 		  res.setAttribute("productId", productIdReq);
 		  //放回session域中
 		  session.setAttribute("productDetailId", productIdReq);
+		  session.setAttribute("mlbackProductMetaTitle", mlbackProductRes.getProductMetaTitle());
+		  session.setAttribute("mlbackProductMetaKeyWords", mlbackProductRes.getProductMetaKeyWords());
+		  session.setAttribute("mlbackProductMeteDesc", mlbackProductRes.getProductMetaDesc());
 		  //返回视图
 		  if(ifMobile.equals("1")){
 			  return "mfront/productDetails";
@@ -416,7 +438,7 @@ public class MlbackProductController {
 		//接收id信息
 		Integer productIdInt = mlbackProduct.getProductId();
 		mlbackProductService.deleteByPrimaryKey(productIdInt);
-		System.out.println("操作说明：管理员delete success-productIdInt:"+productIdInt);
+		//System.out.println("操作说明：管理员delete success-productIdInt:"+productIdInt);
 		return Msg.success().add("resMsg", "delete success");
 	}
 	
@@ -443,7 +465,7 @@ public class MlbackProductController {
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne.toString());
+		//System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne);
 		return Msg.success().add("resMsg", "查看单个产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
@@ -469,7 +491,7 @@ public class MlbackProductController {
 			mlbackProductResList = mlbackProductService.selectMlbackProductGetAll();
 			mlbackProductOne = mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne.toString());
+		//System.out.println("操作说明：查询-mlbackProductOne:"+mlbackProductOne);
 		return Msg.success().add("resMsg", "查看单个产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
@@ -490,7 +512,7 @@ public class MlbackProductController {
 		if(mlbackProductResList.size()>0){
 			mlbackProductOne =mlbackProductResList.get(0);
 		}
-		System.out.println("操作说明：通过产品名查询单个产品-mlbackProductOne:"+mlbackProductOne.toString());
+		//System.out.println("操作说明：通过产品名查询单个产品-mlbackProductOne:"+mlbackProductOne);
 		return Msg.success().add("resMsg", "查-单条产品详情完毕").add("mlbackProductOne", mlbackProductOne);
 	}
 	
@@ -610,7 +632,7 @@ public class MlbackProductController {
 		MlbackCategory mlbackCategoryOne = new MlbackCategory();
 		
 		Integer categoryIdInt = categoryId;
-		System.out.println("categoryIdInt:"+categoryIdInt);
+		//System.out.println("categoryIdInt:"+categoryIdInt);
 		
 		mlbackCategoryReq.setCategoryId(categoryIdInt);
 		
@@ -889,11 +911,11 @@ public class MlbackProductController {
 	  //接受信息
 	  MlbackProduct mlbackProductReq = new MlbackProduct();
 	  mlbackProductReq.setProductName(productName);
-	  System.out.println("操作说明:客户搜索的产品名字productName:"+productName);
+	  //System.out.println("操作说明:客户搜索的产品名字productName:"+productName);
 	  List<MlbackProduct> mlbackProductResList =mlbackProductService.selectMlbackProductLike(mlbackProductReq);
 	  List<MlbackProduct> mlbackProductResListnum =mlbackProductService.selectMlbackProductLikeNum(mlbackProductReq);
 	  Integer num = mlbackProductResListnum.size();
-	  System.out.println("操作说明:客户搜索的产品名,查询结果mlbackProductResListnum:"+num);
+	  //System.out.println("操作说明:客户搜索的产品名,查询结果mlbackProductResListnum:"+num);
 	  return Msg.success().add("resMsg", "产品名模糊搜索完毕")
 	     .add("mlbackProductResList", mlbackProductResList).add("mlbackProductResListnum", num).add("productName", productName);
 	 }

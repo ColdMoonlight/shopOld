@@ -82,7 +82,7 @@
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -323,7 +323,7 @@
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
-							
+							orderData.areafreightMoney = result.extend.areafreightMoney;
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							orderOrderitemidstradd = orderData.orderOrderitemidstr;
@@ -483,20 +483,6 @@
 					}
 				})
 			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		}
 
 		function renderOrderInfo(data) {//红
@@ -595,8 +581,7 @@
 
 			var calInfoHtml = '';
 
-			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
-				.orderCouponPrice)).toFixed(2) + '</span></div>' +
+			calInfoHtml = '<div><span>预计总价（含运费 $'+  data.areafreightMoney +'）：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
 
@@ -836,7 +821,7 @@
 				'<div><span>收货人电话：</span><span id="fzc_txt">' + data.addressTelephone + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzc" value="复制文本" /></div>' +
 				'<div><span>收货人详细地址：</span><span id="fzd_txt">' + data.addressDetail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzd" value="复制文本" /></div>' +
 				'<div><span>收货人城市：</span><span id="fze_txt">' + data.addressCity + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fze" value="复制文本" /></div>' +
-				'<div><span>收货人省份：</span><span id="fzf_txt">' + data.addressProvince + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzf" value="复制文本" /></div>' +
+				'<div><span>收货人省份：</span><span id="fzf_txt">' + (data.addressProvince ? data.addressProvince : '<i>不存在</i>') + '</span><input ' + (data.addressProvince ? '' : 'disabled') +' class="btn_fz btn btn-info" type="button" name="" id="fzf" value="复制文本" /></div>' +
 				'<div><span>收货人国家：</span><span id="fzg_txt">' + data.addressCountryAll + '</span> 简称：' + data.addressCountry +'  <input class="btn_fz btn btn-info" type="button" name="" id="fzg" value="复制文本" /></div>' +
 				'<div><span>邮编：</span><span id="fzh_txt">' + data.addressPost + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzh" value="复制文本" /></div>' +
 				'<div><span>邮箱：</span><span id="fzi_txt">' + data.addressEmail + '</span><input class="btn_fz btn btn-info" type="button" name="" id="fzi" value="复制文本" /></div>' +

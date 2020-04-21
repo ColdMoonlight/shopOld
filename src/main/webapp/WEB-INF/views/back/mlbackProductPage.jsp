@@ -93,14 +93,13 @@
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 	<script type="text/javascript">
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -402,7 +401,7 @@
 
 						$('.check-container').niceScroll({
 							cursorcolor: "rgba(0,0,0,.3)",
-							cursorwidth: "4px",
+							cursorwidth: "14px",
 							cursorborder: "none",
 							horizrailenabled: false,
 							enablekeyboard: false,
@@ -581,6 +580,8 @@
 			$(":input[name='productName']").val(data.productName);
 			$(":input[name='productColor']").val(data.productColor);
 			$(":input[name='productSeo']").val(data.productSeo);
+			$(":input[name='productMetaTitle']").val(data.productMetaTitle);
+			$(":input[name='productMetaKeyWords']").val(data.productMetaKeyWords);
 			$(":input[name='productCategoryid']").val(data.productCategoryid);
 			$(":input[name='productCategoryIdsStr']").val(data.productCategoryIdsStr);
 			$(":input[name='productCategoryNamesStr']").val(data.productCategoryNamesStr);
@@ -613,7 +614,6 @@
 
 		// 编辑-回显-数据（仅图片）
 		function tianchongImg(data) {
-			console.log(data);
 			var elImgs = $('.sub-img').find('.upload-img-btn');
 			for (var i = 0; i < data.length; i += 1) {
 				$(elImgs[data[i].productimgSortOrder - 1]).css("background-image", "url(" + data[i].productimgUrl + ")");
@@ -790,7 +790,6 @@
 					nData.productskuId = productskuId;
 					nData.productskuName = productskuName;
 					nData.productskuStatus = productskuStatus;
-					console.log(nData);
 					$.ajax({
 						url: "${APP_PATH}/MlbackProductSku/save",
 						data: JSON.stringify(nData),
@@ -853,7 +852,7 @@
 
 				$('.product-container').niceScroll({
 					cursorcolor: "rgba(0,0,0,.3)",
-					cursorwidth: "4px",
+					cursorwidth: "14px",
 					cursorborder: "none",
 					horizrailenabled: false,
 					enablekeyboard: false,
@@ -869,7 +868,6 @@
 
 		function productSave(e) {
 			var reqData = ({ productId: productId });
-			console.log(reqData)
 			if (productId) {
 				var productBox = $(e.target).parents('.product-box');
 				$.ajax({

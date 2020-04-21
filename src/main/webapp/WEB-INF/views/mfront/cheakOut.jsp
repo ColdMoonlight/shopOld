@@ -36,12 +36,14 @@
 			s.parentNode.insertBefore(t, s)
 		}(window, document, 'script',
 			'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '246433859565492');
-		//fbq('init', '667403967094866');
+		fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
 		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"
-			src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<!-- End Facebook Pixel Code -->
 
 	<script>
@@ -159,14 +161,7 @@
 					<li class="list-group-item">
 						<!-- <div class="group-title"><span>Choose Coupons</span> <span class="price-info"></span></i></div> -->
 						<div class="tit_numtt"><span>3</span><b>DISCOUNT CODES</b></div>
-						<div class="sale_copen">
-							<p> Bloom Your Max Beauty With Megalook Hair Buy More Save More  </p>
-							<ul>
-								<li>OVER $99 OFF<span>$10</span>with code: <b>MB10</b></li>
-								<li>OVER $180 OFF<span>$20</span>with code: <b>MB20</b></li>
-								<li>OVER $299 OFF<span>$40</span>with code: <b>MB40</b></li>
-							</ul>
-						</div>
+						<div class="sale_coupon"></div>
 						<div class="group-details coupons active"></div>
 					</li>
 					<li class="list-group-item">
@@ -236,11 +231,12 @@
 	<script>
 		var resDataMoney = 0,
 			totalPrice = 0,
-			couponId,
-			couponCode = '',
+			couponId = null,
+			couponCode = null,
 			addressId,
 			orderId,
 			orderItemArr = [],
+			orderItemPidArr = [],
 			productNumArr = [],
 			payplate = 0,
 			couponPriceOld = 0,
@@ -252,7 +248,6 @@
 			prototalPriceEl = $('.cal-price-item.c-prototal').find('.cal-price-num'),
 			shippingPriceEl = $('.cal-price-item.c-shipping').find('.cal-price-num'),
 			couponPriceEl = $('.cal-price-item.c-coupon').find('.cal-price-num'),
-			hasCountry = false,
 			hasProvince = false;
 
 		// PAYMENT_ALREADY_DONE
@@ -267,29 +262,11 @@
 		})
 
 		initialData(); // 初始化 checkout data
-		
-		$('#country').on('focus', function(e) {
-			var targetEl = e.target,
-				defaultValue = $(targetEl).val();
-			if (targetEl.options.length < 2 && !hasCountry) {
-				var htmlStr = '',
-					countryList = [ {name:"Afghanistan", nickname:"AF"}, {name:"Åland Islands", nickname:"AX"}, {name:"Albania", nickname:"AL"}, {name:"Algeria", nickname:"DZ"}, {name:"American Samoa", nickname:"AS"}, {name:"Andorra", nickname:"AD"}, {name:"Angola", nickname:"AO"}, {name:"Anguilla", nickname:"AI"}, {name:"Antarctica", nickname:"AQ"}, {name:"Antigua and Barbuda", nickname:"AG"}, {name:"Argentina", nickname:"AR"}, {name:"Armenia", nickname:"AM"}, {name:"Aruba", nickname:"AW"}, {name:"Australia", nickname:"AU"}, {name:"Austria", nickname:"AT"}, {name:"Azerbaijan", nickname:"AZ"}, {name:"Bahamas", nickname:"BS"}, {name:"Bahrain", nickname:"BH"}, {name:"Bangladesh", nickname:"BD"}, {name:"Barbados", nickname:"BB"}, {name:"Belarus", nickname:"BY"}, {name:"Belgium", nickname:"BE"}, {name:"Belize", nickname:"BZ"}, {name:"Benin", nickname:"BJ"}, {name:"Bermuda", nickname:"BM"}, {name:"Bhutan", nickname:"BT"}, {name:"Bolivia", nickname:"BO"}, {name:"Bosnia and Herzegovina", nickname:"BA"}, {name:"Botswana", nickname:"BW"}, {name:"Bouvet Island", nickname:"BV"}, {name:"Brazil", nickname:"BR"}, {name:"British Indian Ocean Territory", nickname:"IO"}, {name:"British Virgin Islands", nickname:"VG"}, {name:"Brunei", nickname:"BN"}, {name:"Bulgaria", nickname:"BG"}, {name:"Burkina Faso", nickname:"BF"}, {name:"Burundi", nickname:"BI"}, {name:"Cambodia", nickname:"KH"}, {name:"Cameroon", nickname:"CM"}, {name:"Canada", nickname:"CA"}, {name:"Cape Verde", nickname:"CV"}, {name:"Cayman Islands", nickname:"KY"}, {name:"Central African Republic", nickname:"CF"}, {name:"Chad", nickname:"TD"}, {name:"Chile", nickname:"CL"}, {name:"China", nickname:"CN"}, {name:"Christmas Island", nickname:"CX"}, {name:"Cocos (Keeling) Islands", nickname:"CC"}, {name:"Colombia", nickname:"CO"}, {name:"Comoros", nickname:"KM"}, {name:"Congo - Brazzaville", nickname:"CG"}, {name:"Congo - Kinshasa", nickname:"CD"}, {name:"Cook Islands", nickname:"CK"}, {name:"Costa Rica", nickname:"CR"}, {name:"Côte d’Ivoire", nickname:"CI"}, {name:"Croatia", nickname:"HR"}, {name:"Cuba", nickname:"CU"}, {name:"Cyprus", nickname:"CY"}, {name:"Czech Republic", nickname:"CZ"}, {name:"Denmark", nickname:"DK"}, {name:"Djibouti", nickname:"DJ"}, {name:"Dominica", nickname:"DM"}, {name:"Dominican Republic", nickname:"DO"}, {name:"Ecuador", nickname:"EC"}, {name:"Egypt", nickname:"EG"}, {name:"El Salvador", nickname:"SV"}, {name:"Equatorial Guinea", nickname:"GQ"}, {name:"Eritrea", nickname:"ER"}, {name:"Estonia", nickname:"EE"}, {name:"Ethiopia", nickname:"ET"}, {name:"Falkland Islands", nickname:"FK"}, {name:"Faroe Islands", nickname:"FO"}, {name:"Fiji", nickname:"FJ"}, {name:"Finland", nickname:"FI"}, {name:"France", nickname:"FR"}, {name:"French Guiana", nickname:"GF"}, {name:"French Polynesia", nickname:"PF"}, {name:"French Southern Territories", nickname:"TF"}, {name:"Gabon", nickname:"GA"}, {name:"Gambia", nickname:"GM"}, {name:"Georgia", nickname:"GE"}, {name:"Germany", nickname:"DE"}, {name:"Ghana", nickname:"GH"}, {name:"Gibraltar", nickname:"GI"}, {name:"Greece", nickname:"GR"}, {name:"Greenland", nickname:"GL"}, {name:"Grenada", nickname:"GD"}, {name:"Guadeloupe", nickname:"GP"}, {name:"Guam", nickname:"GU"}, {name:"Guatemala", nickname:"GT"}, {name:"Guernsey", nickname:"GG"}, {name:"Guinea", nickname:"GN"}, {name:"Guinea-Bissau", nickname:"GW"}, {name:"Guyana", nickname:"GY"}, {name:"Haiti", nickname:"HT"}, {name:"Heard &amp; McDonald Islands", nickname:"HM"}, {name:"Honduras", nickname:"HN"}, {name:"Hong Kong SAR China", nickname:"HK"}, {name:"Hungary", nickname:"HU"}, {name:"Iceland", nickname:"IS"}, {name:"India", nickname:"IN"}, {name:"Indonesia", nickname:"ID"}, {name:"Iran", nickname:"IR"}, {name:"Iraq", nickname:"IQ"}, {name:"Ireland", nickname:"IE"}, {name:"Isle of Man", nickname:"IM"}, {name:"Israel", nickname:"IL"}, {name:"Italy", nickname:"IT"}, {name:"Jamaica", nickname:"JM"}, {name:"Japan", nickname:"JP"}, {name:"Jersey", nickname:"JE"}, {name:"Jordan", nickname:"JO"}, {name:"Kazakhstan", nickname:"KZ"}, {name:"Kenya", nickname:"KE"}, {name:"Kiribati", nickname:"KI"}, {name:"Kuwait", nickname:"KW"}, {name:"Kyrgyzstan", nickname:"KG"}, {name:"Laos", nickname:"LA"}, {name:"Latvia", nickname:"LV"}, {name:"Lebanon", nickname:"LB"}, {name:"Lesotho", nickname:"LS"}, {name:"Liberia", nickname:"LR"}, {name:"Libya", nickname:"LY"}, {name:"Liechtenstein", nickname:"LI"}, {name:"Lithuania", nickname:"LT"}, {name:"Luxembourg", nickname:"LU"}, {name:"Macau SAR China", nickname:"MO"}, {name:"Macedonia", nickname:"MK"}, {name:"Madagascar", nickname:"MG"}, {name:"Malawi", nickname:"MW"}, {name:"Malaysia", nickname:"MY"}, {name:"Maldives", nickname:"MV"}, {name:"Mali", nickname:"ML"}, {name:"Malta", nickname:"MT"}, {name:"Marshall Islands", nickname:"MH"}, {name:"Martinique", nickname:"MQ"}, {name:"Mauritania", nickname:"MR"}, {name:"Mauritius", nickname:"MU"}, {name:"Mayotte", nickname:"YT"}, {name:"Mexico", nickname:"MX"}, {name:"Micronesia", nickname:"FM"}, {name:"Moldova", nickname:"MD"}, {name:"Monaco", nickname:"MC"}, {name:"Mongolia", nickname:"MN"}, {name:"Montenegro", nickname:"ME"}, {name:"Montserrat", nickname:"MS"}, {name:"Morocco", nickname:"MA"}, {name:"Mozambique", nickname:"MZ"}, {name:"Myanmar (Burma)", nickname:"MM"}, {name:"Namibia", nickname:"NA"}, {name:"Nauru", nickname:"NR"}, {name:"Nepal", nickname:"NP"}, {name:"Netherlands", nickname:"NL"}, {name:"Netherlands Antilles", nickname:"AN"}, {name:"New Caledonia", nickname:"NC"}, {name:"New Zealand", nickname:"NZ"}, {name:"Nicaragua", nickname:"NI"}, {name:"Niger", nickname:"NE"}, {name:"Nigeria", nickname:"NG"}, {name:"Niue", nickname:"NU"}, {name:"Norfolk Island", nickname:"NF"}, {name:"Northern Mariana Islands", nickname:"MP"}, {name:"North Korea", nickname:"KP"}, {name:"Norway", nickname:"NO"}, {name:"Oman", nickname:"OM"}, {name:"Pakistan", nickname:"PK"}, {name:"Palau", nickname:"PW"}, {name:"Palestinian Territories", nickname:"PS"}, {name:"Panama", nickname:"PA"}, {name:"Papua New Guinea", nickname:"PG"}, {name:"Paraguay", nickname:"PY"}, {name:"Peru", nickname:"PE"}, {name:"Philippines", nickname:"PH"}, {name:"Pitcairn Islands", nickname:"PN"}, {name:"Poland", nickname:"PL"}, {name:"Portugal", nickname:"PT"}, {name:"Puerto Rico", nickname:"PR"}, {name:"Qatar", nickname:"QA"}, {name:"Réunion", nickname:"RE"}, {name:"Romania", nickname:"RO"}, {name:"Russia", nickname:"RU"}, {name:"Rwanda", nickname:"RW"}, {name:"Saint Barthélemy", nickname:"BL"}, {name:"Saint Helena", nickname:"SH"}, {name:"Saint Kitts and Nevis", nickname:"KN"}, {name:"Saint Lucia", nickname:"LC"}, {name:"Saint Martin", nickname:"MF"}, {name:"Saint Pierre and Miquelon", nickname:"PM"}, {name:"Samoa", nickname:"WS"}, {name:"San Marino", nickname:"SM"}, {name:"São Tomé and Príncipe", nickname:"ST"}, {name:"Saudi Arabia", nickname:"SA"}, {name:"Senegal", nickname:"SN"}, {name:"Serbia", nickname:"RS"}, {name:"Seychelles", nickname:"SC"}, {name:"Sierra Leone", nickname:"SL"}, {name:"Singapore", nickname:"SG"}, {name:"Slovakia", nickname:"SK"}, {name:"Slovenia", nickname:"SI"}, {name:"Solomon Islands", nickname:"SB"}, {name:"Somalia", nickname:"SO"}, {name:"South Africa", nickname:"ZA"}, {name:"South Georgia &amp; South Sandwich Islands", nickname:"GS"}, {name:"South Korea", nickname:"KR"}, {name:"Spain", nickname:"ES"}, {name:"Sri Lanka", nickname:"LK"}, {name:"St. Vincent &amp; Grenadines", nickname:"VC"}, {name:"Sudan", nickname:"SD"}, {name:"Suriname", nickname:"SR"}, {name:"Svalbard and Jan Mayen", nickname:"SJ"}, {name:"Swaziland", nickname:"SZ"}, {name:"Sweden", nickname:"SE"}, {name:"Switzerland", nickname:"CH"}, {name:"Syria", nickname:"SY"}, {name:"Taiwan", nickname:"TW"}, {name:"Tajikistan", nickname:"TJ"}, {name:"Tanzania", nickname:"TZ"}, {name:"Thailand", nickname:"TH"}, {name:"Timor-Leste", nickname:"TL"}, {name:"Togo", nickname:"TG"}, {name:"Tokelau", nickname:"TK"}, {name:"Tonga", nickname:"TO"}, {name:"Trinidad and Tobago", nickname:"TT"}, {name:"Tunisia", nickname:"TN"}, {name:"Turkey", nickname:"TR"}, {name:"Turkmenistan", nickname:"TM"}, {name:"Turks and Caicos Islands", nickname:"TC"}, {name:"Tuvalu", nickname:"TV"}, {name:"Uganda", nickname:"UG"}, {name:"Ukraine", nickname:"UA"}, {name:"United Arab Emirates", nickname:"AE"}, {name:"United Kingdom", nickname:"GB"}, {name:"United States", nickname:"US"}, {name:"Uruguay", nickname:"UY"}, {name:"U.S. Outlying Islands", nickname:"UM"}, {name:"U.S. Virgin Islands", nickname:"VI"}, {name:"Uzbekistan", nickname:"UZ"}, {name:"Vanuatu", nickname:"VU"}, {name:"Vatican City", nickname:"VA"}, {name:"Venezuela", nickname:"VE"}, {name:"Vietnam", nickname:"VN"}, {name:"Wallis and Futuna", nickname:"WF"}, {name:"Western Sahara", nickname:"EH"}, {name:"Yemen", nickname:"YE"}, {name:"Zambia", nickname:"ZM"}, {name:"Zimbabwe", nickname:"ZW"} ];
-				for (var i = 0, len = countryList.length; i < len; i++) {
-					htmlStr += '<option value="' + countryList[i].nickname + '"'+ (countryList[i].nickname == defaultValue ? "selected" : "") +'>' + countryList[i].name + '</option>';
-				}
-
-				$(targetEl).html(htmlStr);
-				hasCountry = true;
-			}
-		});
-
-		$('#province').on('focus', function() {
-			!hasProvince && getProvinceData($('#country').val());
-		});
 
 		$("#country").on("change", function () {
 			var radio_zt = $(".coupons .coupon-item input[type='radio']"),
 				dataname = $(this).val();
+			resetCouponCode();
 			$(".coupons .coupon-item input[type=radio]").removeClass("active");
 			$(".coed_inp").val("");
 			$(".without-data").text("Enter coupon code to get a discount!");
@@ -379,6 +356,10 @@
 			}
 		});
 
+		function resetCouponCode() {
+			couponCode = null;
+			couponId = null;
+		}
 		/*******************/
 		function renderAddressDetail(data) {
 			var dataprov = data.addressProvince ? data.addressProvince : '',
@@ -406,7 +387,7 @@
 				$("#province").val('');
 				$(".form-group_select").hide();
 				$(".form-group_select").removeClass("selectActive")
-				$(".form-groupcountry").css("width", "100%")
+				$(".form-groupcountry").css("width", "100%");
 			}
 		}
 
@@ -437,9 +418,6 @@
 						shippingTipPriceEl.text(' $' + resDataMoney);
 						shippingPriceEl.text('$' + resDataMoney)
 						$(".address").addClass("active");
-						/* if (!addProvinceCode) {
-							$(".form-groupcountry").css("width", "100%");
-						} */
 					} else {
 						shippingTipPriceEl.text(' $' + resDataMoney);
 						shippingPriceEl.text('$' + resDataMoney);
@@ -449,6 +427,41 @@
 					subtotalPriceEl.text('$' + subtotalText);
 				}
 			});
+
+			/* couponlist */
+			$.ajax({
+				url: '${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitlewapListByStatus',
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function (data) {
+					var saleCouponEl = $('.sale_coupon'),
+						titleData = data.extend.mlbackCouponDescTitleList,
+						couponArrData = data.extend.mlbackCouponDescDetailList;
+					if (data.code == 100 && titleData.length > 0) {
+						renderSaleCoupon(saleCouponEl, {
+							title: titleData[0],
+							couponList: couponArrData
+						});
+					} else {
+						saleCouponEl.hide();
+					}
+				}
+			});
+			function renderSaleCoupon(parent, data) {
+				var htmlStr = '';
+				if (data.title && data.title.coupondesctieleWapstatus)
+					htmlStr += '<img src="' + data.title.coupondesctieleWapimgurl + '" />';
+				htmlStr += '<div class="sale_coupon-body"><p>' + data.title.coupondesctieleTieledetail + '</p><ul>';
+				for (var i = 0, len = data.couponList.length; i < len; i++) {
+					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '&nbsp;<span>&nbsp;'
+						+ data.couponList[i].coupondescdetailStrength + '&nbsp;</span>&nbsp;'
+						+ data.couponList[i].coupondescdetailCodepre
+						+ '&nbsp;<b>&nbsp;' + data.couponList[i].coupondescdetailCode + '</b></li>';
+				}
+				htmlStr += '</ul></div>';
+				parent.html(htmlStr);
+			}
 
 			// 订单列表数据
 			$.ajax({
@@ -472,6 +485,20 @@
 					subtotalPriceEl.text('$' + totalPrice);
 				}
 			});
+
+			getCountry($('#country'));
+			getProvinceData($('#country').val());
+		}
+
+		function getCountry(parent) {
+			var defaultValue = parent.val(),
+				htmlStr = '',
+				countryList = [{name:"United States",nickname:"US"},{name:"United Kingdom",nickname:"GB"},{name:"Canada",nickname:"CA"},{name:"Nigeria",nickname:"NG"},{name:"Australia",nickname:"AU"},{name:"South Africa",nickname:"ZA"},{name:"Germany",nickname:"DE"},{name:"Kenya",nickname:"KE"},{name:"Spain",nickname:"ES"},{name:"United Arab Emirates",nickname:"AE"},{name:"Afghanistan",nickname:"AF"},{name:"France",nickname:"FR"},{name:"Åland Islands",nickname:"AX"},{name:"Albania",nickname:"AL"},{name:"Algeria",nickname:"DZ"},{name:"American Samoa",nickname:"AS"},{name:"Andorra",nickname:"AD"},{name:"Angola",nickname:"AO"},{name:"Anguilla",nickname:"AI"},{name:"Antarctica",nickname:"AQ"},{name:"Antigua and Barbuda",nickname:"AG"},{name:"Argentina",nickname:"AR"},{name:"Armenia",nickname:"AM"},{name:"Aruba",nickname:"AW"},{name:"Austria",nickname:"AT"},{name:"Azerbaijan",nickname:"AZ"},{name:"Bahamas",nickname:"BS"},{name:"Bahrain",nickname:"BH"},{name:"Bangladesh",nickname:"BD"},{name:"Barbados",nickname:"BB"},{name:"Belarus",nickname:"BY"},{name:"Belgium",nickname:"BE"},{name:"Belize",nickname:"BZ"},{name:"Benin",nickname:"BJ"},{name:"Bermuda",nickname:"BM"},{name:"Bhutan",nickname:"BT"},{name:"Bolivia",nickname:"BO"},{name:"Bosnia and Herzegovina",nickname:"BA"},{name:"Botswana",nickname:"BW"},{name:"Bouvet Island",nickname:"BV"},{name:"Brazil",nickname:"BR"},{name:"British Indian Ocean Territory",nickname:"IO"},{name:"British Virgin Islands",nickname:"VG"},{name:"Brunei",nickname:"BN"},{name:"Bulgaria",nickname:"BG"},{name:"Burkina Faso",nickname:"BF"},{name:"Burundi",nickname:"BI"},{name:"Cambodia",nickname:"KH"},{name:"Cameroon",nickname:"CM"},{name:"Cape Verde",nickname:"CV"},{name:"Cayman Islands",nickname:"KY"},{name:"Central African Republic",nickname:"CF"},{name:"Chad",nickname:"TD"},{name:"Chile",nickname:"CL"},{name:"China",nickname:"CN"},{name:"Christmas Island",nickname:"CX"},{name:"Cocos (Keeling) Islands",nickname:"CC"},{name:"Colombia",nickname:"CO"},{name:"Comoros",nickname:"KM"},{name:"Congo - Brazzaville",nickname:"CG"},{name:"Congo - Kinshasa",nickname:"CD"},{name:"Cook Islands",nickname:"CK"},{name:"Costa Rica",nickname:"CR"},{name:"Côte d’Ivoire",nickname:"CI"},{name:"Croatia",nickname:"HR"},{name:"Cuba",nickname:"CU"},{name:"Cyprus",nickname:"CY"},{name:"Czech Republic",nickname:"CZ"},{name:"Denmark",nickname:"DK"},{name:"Djibouti",nickname:"DJ"},{name:"Dominica",nickname:"DM"},{name:"Dominican Republic",nickname:"DO"},{name:"Ecuador",nickname:"EC"},{name:"Egypt",nickname:"EG"},{name:"El Salvador",nickname:"SV"},{name:"Equatorial Guinea",nickname:"GQ"},{name:"Eritrea",nickname:"ER"},{name:"Estonia",nickname:"EE"},{name:"Ethiopia",nickname:"ET"},{name:"Falkland Islands",nickname:"FK"},{name:"Faroe Islands",nickname:"FO"},{name:"Fiji",nickname:"FJ"},{name:"Finland",nickname:"FI"},{name:"French Guiana",nickname:"GF"},{name:"French Polynesia",nickname:"PF"},{name:"French Southern Territories",nickname:"TF"},{name:"Gabon",nickname:"GA"},{name:"Gambia",nickname:"GM"},{name:"Georgia",nickname:"GE"},{name:"Ghana",nickname:"GH"},{name:"Gibraltar",nickname:"GI"},{name:"Greece",nickname:"GR"},{name:"Greenland",nickname:"GL"},{name:"Grenada",nickname:"GD"},{name:"Guadeloupe",nickname:"GP"},{name:"Guam",nickname:"GU"},{name:"Guatemala",nickname:"GT"},{name:"Guernsey",nickname:"GG"},{name:"Guinea",nickname:"GN"},{name:"Guinea-Bissau",nickname:"GW"},{name:"Guyana",nickname:"GY"},{name:"Haiti",nickname:"HT"},{name:"Heard &amp; McDonald Islands",nickname:"HM"},{name:"Honduras",nickname:"HN"},{name:"Hong Kong SAR China",nickname:"HK"},{name:"Hungary",nickname:"HU"},{name:"Iceland",nickname:"IS"},{name:"India",nickname:"IN"},{name:"Indonesia",nickname:"ID"},{name:"Iran",nickname:"IR"},{name:"Iraq",nickname:"IQ"},{name:"Ireland",nickname:"IE"},{name:"Isle of Man",nickname:"IM"},{name:"Israel",nickname:"IL"},{name:"Italy",nickname:"IT"},{name:"Jamaica",nickname:"JM"},{name:"Japan",nickname:"JP"},{name:"Jersey",nickname:"JE"},{name:"Jordan",nickname:"JO"},{name:"Kazakhstan",nickname:"KZ"},{name:"Kiribati",nickname:"KI"},{name:"Kuwait",nickname:"KW"},{name:"Kyrgyzstan",nickname:"KG"},{name:"Laos",nickname:"LA"},{name:"Latvia",nickname:"LV"},{name:"Lebanon",nickname:"LB"},{name:"Lesotho",nickname:"LS"},{name:"Liberia",nickname:"LR"},{name:"Libya",nickname:"LY"},{name:"Liechtenstein",nickname:"LI"},{name:"Lithuania",nickname:"LT"},{name:"Luxembourg",nickname:"LU"},{name:"Macau SAR China",nickname:"MO"},{name:"Macedonia",nickname:"MK"},{name:"Madagascar",nickname:"MG"},{name:"Malawi",nickname:"MW"},{name:"Malaysia",nickname:"MY"},{name:"Maldives",nickname:"MV"},{name:"Mali",nickname:"ML"},{name:"Malta",nickname:"MT"},{name:"Marshall Islands",nickname:"MH"},{name:"Martinique",nickname:"MQ"},{name:"Mauritania",nickname:"MR"},{name:"Mauritius",nickname:"MU"},{name:"Mayotte",nickname:"YT"},{name:"Mexico",nickname:"MX"},{name:"Micronesia",nickname:"FM"},{name:"Moldova",nickname:"MD"},{name:"Monaco",nickname:"MC"},{name:"Mongolia",nickname:"MN"},{name:"Montenegro",nickname:"ME"},{name:"Montserrat",nickname:"MS"},{name:"Morocco",nickname:"MA"},{name:"Mozambique",nickname:"MZ"},{name:"Myanmar (Burma)",nickname:"MM"},{name:"Namibia",nickname:"NA"},{name:"Nauru",nickname:"NR"},{name:"Nepal",nickname:"NP"},{name:"Netherlands",nickname:"NL"},{name:"Netherlands Antilles",nickname:"AN"},{name:"New Caledonia",nickname:"NC"},{name:"New Zealand",nickname:"NZ"},{name:"Nicaragua",nickname:"NI"},{name:"Niger",nickname:"NE"},{name:"Niue",nickname:"NU"},{name:"Norfolk Island",nickname:"NF"},{name:"Northern Mariana Islands",nickname:"MP"},{name:"North Korea",nickname:"KP"},{name:"Norway",nickname:"NO"},{name:"Oman",nickname:"OM"},{name:"Pakistan",nickname:"PK"},{name:"Palau",nickname:"PW"},{name:"Palestinian Territories",nickname:"PS"},{name:"Panama",nickname:"PA"},{name:"Papua New Guinea",nickname:"PG"},{name:"Paraguay",nickname:"PY"},{name:"Peru",nickname:"PE"},{name:"Philippines",nickname:"PH"},{name:"Pitcairn Islands",nickname:"PN"},{name:"Poland",nickname:"PL"},{name:"Portugal",nickname:"PT"},{name:"Puerto Rico",nickname:"PR"},{name:"Qatar",nickname:"QA"},{name:"Réunion",nickname:"RE"},{name:"Romania",nickname:"RO"},{name:"Russia",nickname:"RU"},{name:"Rwanda",nickname:"RW"},{name:"Saint Barthélemy",nickname:"BL"},{name:"Saint Helena",nickname:"SH"},{name:"Saint Kitts and Nevis",nickname:"KN"},{name:"Saint Lucia",nickname:"LC"},{name:"Saint Martin",nickname:"MF"},{name:"Saint Pierre and Miquelon",nickname:"PM"},{name:"Samoa",nickname:"WS"},{name:"San Marino",nickname:"SM"},{name:"São Tomé and Príncipe",nickname:"ST"},{name:"Saudi Arabia",nickname:"SA"},{name:"Senegal",nickname:"SN"},{name:"Serbia",nickname:"RS"},{name:"Seychelles",nickname:"SC"},{name:"Sierra Leone",nickname:"SL"},{name:"Singapore",nickname:"SG"},{name:"Slovakia",nickname:"SK"},{name:"Slovenia",nickname:"SI"},{name:"Solomon Islands",nickname:"SB"},{name:"Somalia",nickname:"SO"},{name:"South Georgia &amp; South Sandwich Islands",nickname:"GS"},{name:"South Korea",nickname:"KR"},{name:"Sri Lanka",nickname:"LK"},{name:"St. Vincent &amp; Grenadines",nickname:"VC"},{name:"Sudan",nickname:"SD"},{name:"Suriname",nickname:"SR"},{name:"Svalbard and Jan Mayen",nickname:"SJ"},{name:"Swaziland",nickname:"SZ"},{name:"Sweden",nickname:"SE"},{name:"Switzerland",nickname:"CH"},{name:"Syria",nickname:"SY"},{name:"Taiwan",nickname:"TW"},{name:"Tajikistan",nickname:"TJ"},{name:"Tanzania",nickname:"TZ"},{name:"Thailand",nickname:"TH"},{name:"Timor-Leste",nickname:"TL"},{name:"Togo",nickname:"TG"},{name:"Tokelau",nickname:"TK"},{name:"Tonga",nickname:"TO"},{name:"Trinidad and Tobago",nickname:"TT"},{name:"Tunisia",nickname:"TN"},{name:"Turkey",nickname:"TR"},{name:"Turkmenistan",nickname:"TM"},{name:"Turks and Caicos Islands",nickname:"TC"},{name:"Tuvalu",nickname:"TV"},{name:"Uganda",nickname:"UG"},{name:"Ukraine",nickname:"UA"},{name:"Uruguay",nickname:"UY"},{name:"U.S. Outlying Islands",nickname:"UM"},{name:"U.S. Virgin Islands",nickname:"VI"},{name:"Uzbekistan",nickname:"UZ"},{name:"Vanuatu",nickname:"VU"},{name:"Vatican City",nickname:"VA"},{name:"Venezuela",nickname:"VE"},{name:"Vietnam",nickname:"VN"},{name:"Wallis and Futuna",nickname:"WF"},{name:"Western Sahara",nickname:"EH"},{name:"Yemen",nickname:"YE"},{name:"Zambia",nickname:"ZM"},{name:"Zimbabwe",nickname:"ZW"}];
+			for (var i = 0, len = countryList.length; i < len; i++) {
+				htmlStr += '<option value="' + countryList[i].nickname + '"'+ (countryList[i].nickname == defaultValue ? "selected" : "") +'>' + countryList[i].name + '</option>';
+			}
+
+			parent.html(htmlStr);
 		}
 
 		function getProvinceData(dataname) {
@@ -490,14 +517,17 @@
 						prototalnum = $(".c-prototal .cal-price-num").text().slice(1);
 					// console.log(mlPaypalStateprovinceList)
 					if (mlPaypalStateprovinceList && mlPaypalStateprovinceList.length > 0) {
+						hasProvince = true;
 						renderProvince($('#province'), mlPaypalStateprovinceList);
 						$(".form-group_select").show();
 						$(".form-group_select").addClass("selectActive")
 						$(".form-groupcountry").css("width", "50%");
 					} else {
+						hasProvince = false;
 						$(".form-group_select").hide();
 						$(".form-group_select").removeClass("selectActive");
 						$(".form-groupcountry").css("width", "100%");
+						$('#province').val('');
 					}
 					shippingTipPriceEl.text(' $' + resareafreightMoney);
 					shippingPriceEl.text('$' + resareafreightMoney);
@@ -519,7 +549,6 @@
 			}
 
 			el.html(htmlStr);
-			hasProvince = true;
 		}
 
 		/* 所购商品列表 */
@@ -533,6 +562,7 @@
 					len2 = skuNameArr.length;
 
 				orderItemArr.push(data[i].orderitemId);
+				orderItemPidArr.push(data[i].orderitemPid);
 				productNumArr.push(data[i].orderitemPskuNumber);
 
 				html += '<div class="cart-item" data-orderitemid="' + data[i].orderitemId + '">' +
@@ -569,6 +599,7 @@
 					orderitemPskuNumber: num
 				};
 			// console.table(reqData);
+			$(".loading").show();
 			$.ajax({
 				url: '${APP_PATH}/MlfrontOrder/updateOrderItemNum',
 				data: JSON.stringify(reqData),
@@ -576,12 +607,24 @@
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					// console.log(data);
-					console.info('success')
+					if (data.code == 100) {
+						resetCouponCode();
+						resetProductNumArr();
+					} else {
+						renderSysMsg('handle product fail.');
+					}
+					$(".loading").hide();
 				},
 				error: function () {
-					renderSysMsg('handle product fail.')
+					renderSysMsg('handle product fail.');
 				}
+			});
+		}
+
+		function resetProductNumArr() {
+			productNumArr = [];
+			$('.cart-item').each(function(index, item) {
+				productNumArr.push($(item).find('input[name=cart-product-num]').val());
 			});
 		}
 
@@ -682,61 +725,85 @@
 
 		function checkCouponCode(event) {
 			var couponCode2 = $(event.target).prev('input').val(),
-				data = { couponCode: couponCode2 }; // MEGA12	couponCode	
+				data = { couponCode: couponCode2 }; // MEGA12	couponCode
 			$.ajax({
 				url: '${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailByCode',
 				data: JSON.stringify({
+					"couponAdminOperatorname": orderItemPidArr.join(','),
 					"couponCode": couponCode2
 				}),
 				type: 'post',
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function (data) {
-					var resData = data && data.extend.mlbackCouponOne,
-						couponErrorBox = $('.coupon-error');
-					// console.log(resData);
-					if (resData) {
+					function resetCouponPrice() {
+						couponPriceOld = 0;
+						couponPriceEl.text('-$' + 0);
+						subtotalPriceEl.text('$' + (totalPricecou).toFixed(2));
+					}
+					var couponErrorBox = $('.coupon-error'),
+						resData = data && data.extend.mlbackCouponOne,
+						c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
+						shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
+						totalPricecou = c_prototalnum * 1 + shopingnum * 1;
+					// console.log(data);
+					if (data.code == 100 && resData) {
 						var couponType = resData.couponType;
-						if (couponType == 0) {
-							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
-								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
-								totalPricecou = c_prototalnum * 1 + shopingnum * 1;
-							if (totalPricecou >= resData.couponPriceBaseline) {
-								couponPriceEl.text('-$' + resData.couponPrice);
-								subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
-								couponPriceOld = resData.couponPrice;
-								// console.log("满减券查回的couponPriceOld:" + couponPriceOld);
-								couponId = resData.couponId;
-								couponCode = couponCode2;
-								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+						// resData.couponProductOnlyType && data.extend.couponProductOnlyTypeifHave
+						if (resData.couponProductOnlyType) {
+							if (couponType == 0) {
+								if (data.extend.couponProductOnlyTypeifHave) {
+									couponPriceEl.text('-$' + resData.couponPrice);
+									subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+									couponPriceOld = resData.couponPrice;
+									couponId = resData.couponId;
+									couponCode = couponCode2;
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+								} else {
+									resetCouponPrice();
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Code invalid For This Product!');
+								}
 							} else {
-								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
-								$(".coed_inp").val("");
+								resetCouponPrice();
+								renderErrorMsg(couponErrorBox, resData.couponName + '，Code invalid For This Product!');
 							}
 						} else {
-							var c_prototalnum = $(".c-prototal .cal-price-num").text().slice(1),
-								shopingnum = $(".c-shipping .cal-price-num").text().slice(1),
-								totalPricecou = (c_prototalnum * 1 + shopingnum * 1).toFixed(2);
-							if (totalPricecou >= resData.couponPriceBaseline) {
-								var offcoup = resData.couponPriceOff, // 取出折扣
-									downPrice = (totalPricecou * offcoup / 100).toFixed(2); // 计算减免力度(总价*折扣比)
-								couponPriceEl.text('-$' + downPrice);
-								subtotalPriceEl.text('$' + (totalPricecou - downPrice).toFixed(2));
-								couponPriceOld = downPrice;
-								// console.log("折扣券查回的couponPriceOld:"+couponPriceOld);
-								couponId = resData.couponId;
-								couponCode = couponCode2;
-								renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+							if (couponType == 0) {
+								if (totalPricecou >= resData.couponPriceBaseline) {
+									couponPriceEl.text('-$' + resData.couponPrice);
+									subtotalPriceEl.text('$' + (totalPricecou - resData.couponPrice).toFixed(2));
+									couponPriceOld = resData.couponPrice;
+									couponId = resData.couponId;
+									couponCode = couponCode2;
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+								} else {
+									resetCouponPrice();
+									renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
+									$(".coed_inp").val("");
+								}
 							} else {
-								renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
-								$(".coed_inp").val("");
+								if (totalPricecou >= resData.couponPriceBaseline) {
+									var offcoup = resData.couponPriceOff, // 取出折扣
+										downPrice = (totalPricecou * offcoup / 100).toFixed(2); // 计算减免力度(总价*折扣比)
+									couponPriceEl.text('-$' + downPrice);
+									subtotalPriceEl.text('$' + (totalPricecou - downPrice).toFixed(2));
+									couponPriceOld = downPrice;
+									couponId = resData.couponId;
+									couponCode = couponCode2;
+									renderErrorMsg(couponErrorBox, resData.couponName + '，Has been used!');
+								} else {
+									resetCouponPrice();
+									renderErrorMsg(couponErrorBox, 'The minimum usage price of this coupon is' + resData.couponPriceBaseline);
+									$(".coed_inp").val("");
+								}
 							}
 						}
 					} else {
+						resetCouponPrice();
 						renderErrorMsg(couponErrorBox, "Coupons don't exist!");
 					}
 				}
-			})
+			});
 		}
 
 		function addNum(e) {
@@ -872,8 +939,8 @@
 				addressstr = $(".addreNo").val(),
 				codestr = $(".code").val(),
 				citystr = $(".city").val(),
-				countrystr = $('#country option:checked').text(),
-				provincestr = $(".selectActive #province option:checked").text();
+				countrystr = $('#country').val(),
+				provincestr = $("#province").val();
 
 			if (firstnamestr == null || firstnamestr == '') {
 				flag = 1;
@@ -947,7 +1014,7 @@
 				$("#country").focus(function () {
 					$(this).removeClass("error_br")
 				})
-			} else if (provincestr == 'province') {
+			} else if (hasProvince && !provincestr) {
 				flag = 1;
 				// alert("provincestr is empty");
 				renderSysMsg('provincestr is empty')
@@ -959,14 +1026,8 @@
 
 			return flag;
 		}
+		addTidio();
 	</script>
-
-	<!-- megalook-->
-	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-	<!-- megalookhair 
-  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-	<!-- huashuohair -->
-	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

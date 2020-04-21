@@ -96,7 +96,7 @@
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -300,8 +300,7 @@
 						// codemirror options
 						mode: 'text/html',
 						htmlMode: true,
-						lineNumbers: true,
-						theme: 'monokai'
+						lineNumbers: true
 					}
 				});
 				if (id) {

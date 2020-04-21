@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="google-site-verification" content="SAL4KVmok7Gucsll1buOMRYO2RQVPPNdF163maxOVSU" />
+<!-- google-site-verification 网站地图所需 上线时打开
+	<meta name="google-site-verification" content="S_nwEF7Oc2MiSJHmAoJ8M8QA8vIA9QxyUrFDSTq1-YI" /> -->
 <title></title>
 <%
 	pageContext.setAttribute("APP_PATH", request.getContextPath());

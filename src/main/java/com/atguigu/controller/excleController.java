@@ -33,7 +33,6 @@ public class excleController {
 	public void export(HttpServletResponse rep,HttpServletRequest res,HttpSession session){
 		rep.setContentType("application/octet-stream");
 		
-		//String nowTime = DateUtil.strTime8();
 		String nowTime = DateUtil.strDate8();
 		//rep.setHeader("Content-Disposition", "attachment;filename=export.xls");
 		rep.setHeader("Content-Disposition", "attachment;filename="+nowTime+"payinfo.xls");
@@ -47,10 +46,6 @@ public class excleController {
 		
 		HSSFCell cell = row.createCell(0);
 		
-//		List<MLbackEcppVO> EcppVOList = new ArrayList<MLbackEcppVO>();
-//		String starttime="";
-//		String endtime="";
-//		EcppVOList = getEcppVOList(starttime,endtime);
 		List<MlfrontPayInfo> list = mlfrontPayInfoService.selectMlfrontPayInfoAll();
 		
 		cell.setCellValue("number");
@@ -78,64 +73,6 @@ public class excleController {
 		}
 		
 	}
-
-
-//	private List<MLbackEcppVO> getEcppVOList(String starttime, String endtime) {
-//		List<MLbackEcppVO> EcppVOList = new ArrayList<MLbackEcppVO>();
-//		
-//		
-//		//封装参数String starttime, String endtime
-//		return EcppVOList;
-//	}
-//	
-	
-	/**7.0
-	 * @author Shinelon
-	 * @exception 导出单一发布任务执行明细
-	 * @param MlbackAreafreight
-	 * @return 
-	 * */
-//	@ResponseBody
-//	@RequestMapping("/exportFile")
-//	public String exportFile(HttpServletRequest request,HttpServletResponse response) throws IOException {
-//		response.reset(); 
-//		// 接收请求相应
-//	    //准备请求头参数
-//		String authstatus =request.getParameter("authStatus");
-//		String userworkGroupdisplayId =request.getParameter("userworkGroupdisplayId");
-//		int authStatus =Integer.parseInt(authstatus);
-//		int userworkGroupdisplayIdId =Integer.parseInt(userworkGroupdisplayId);
-//		Date date =new Date();
-//		SimpleDateFormat sdf =new SimpleDateFormat("yyyyMMddHHmmss");
-//		String time =sdf.format(date);
-//		response.setHeader("Content-Disposition", "attachment;filename=File" + time +".xlsx");
-//		response.setContentType("application/vnd.ms-excel;charset=UTF-8");
-//		response.setHeader("Pragma", "no-cache");
-//		response.setHeader("Cache-Control", "no-cache");
-//		response.setDateHeader("Expires", 0);
-//	    XSSFWorkbook workbook = null;
-//	    try {
-//	    	UserWork userWork= new UserWork();
-//	    	userWork.setUserworkGroupdisplayId(userworkGroupdisplayIdId);
-//	    	if(authStatus==1) {	    		
-//	    		List<UserWork> UserWorkList = userWorkService.getUserWorkByConditions(userWork);
-//	            workbook = ExcelUtils.exportContactsGroupDisplay(UserWorkList);
-//	        }
-//	        OutputStream output;
-//	        try {
-//	        	output = response.getOutputStream();
-//	            BufferedOutputStream bufferedOutPut = new BufferedOutputStream(output);
-//	            bufferedOutPut.flush();
-//	            workbook.write(bufferedOutPut);
-//	            bufferedOutPut.close();
-//	            } catch (Exception e) {
-//	                e.printStackTrace();
-//	            }
-//	        } catch (Exception e1) {
-//	            e1.printStackTrace();
-//	        }
-//	        return null;
-//	}
 	
 	/**1.1	useOn
 	 * 远程调用url,name,pimageUrl
@@ -158,7 +95,6 @@ public class excleController {
 ////			iosNeedMap.put("trackName", (String) JSONObjectStr2.get("trackName"));
 //			iosNeedMap.put("bundleId", (String) JSONObjectStr2.get("bundleId"));
 //		} catch (Exception e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //		return iosNeedMap;

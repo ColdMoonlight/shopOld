@@ -3,10 +3,11 @@
 <html>
 
 <head>
-  <%
-	pageContext.setAttribute("APP_PATH", request.getContextPath());
- %>
+  <% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  	<title>Megalook Hair - Megalook Offical Store</title>
+  	<meta name="keyword" content="Megalook,MegaLook Hair,Human Hair Wig,Full Lace Wig, 360 Lace Front Wig, Lace Front Wig,Bundles with Closure,straight Human Hair,Body Wave Human Hair,Water Wave Human Hair,Deep Wave Wig,Loose Wave Wig,kinky Curly Wig,Jerry Curly Wig,Bob Wig,Yaki Straight Wig,Full Lace Wig,Transparent Lace Wig,613 Blonde Wig,Ombre Color Wig,613 blonde hair">
+  	<meta name="description" content="Megalook Hair Official Website Sells Best Virgin Hair, Full Lace Wig, Transparent Lace Wig, 360 Lace Wig, Frontal Lace Wig, Closure Lace Wig, Bundles with Closure, Bundles with Frontal, Free Wig Making Service. Hottest Products, Free Gifts, Free & Fast Shipping. No Shedding, No Tangles, Save Big! Lowest Price For U.">
 	<link rel="stylesheet" href="${APP_PATH }/static/common/swiper/swiper.min.css">
 	<link rel="apple-touch-icon" sizes="120x120" href="${APP_PATH }/static/m/img/index/micon1.png">
     <link rel="apple-touch-icon" sizes="180x180" href="${APP_PATH }/static/m/img/index/micon2.png">
@@ -21,11 +22,14 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+	  fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
+		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<!-- End Facebook Pixel Code -->
 	
 	<script>
@@ -73,35 +77,31 @@
 	    </div>-->
   	<!--</div>-->
   <!--</div>-->
-   <div class="mask maskindex" style="display: none;"></div>
-   <div class="go_re" style="display: none;">
-	   <span class="close">×</span> 
-	   <%-- <a href="${APP_PATH }/MlfrontUser/toLoginRegisterPage"><img src="${APP_PATH }/static/pc/img/sdd.jpg"></a> --%>
-	   <div class="lottery">
-	        <!-- div class="lottery-close">x</div> -->
-	        <div class="lottery-email">
-	        	<div class="lottery-title">
-	        		<span>MEGALOOK</span>
-	        		<span>Your Hair Your Surprise</span>
-	            	<span>Enter your email to join the game！</span>
-	        	</div>
-	            <input type="text" placeholder="Email address">
-	            <div class="lottery-email-tip"></div>
-	        </div>
-	
-	        <div class="lottery-game-box">
-	            <div class="lottery-game">
-	                <div class="lottery-startgame">
-	                    <!-- <div class="lottery-game-item">
-	                        <span>Start</span>
-	                        <span>GAME</span>
-	                    </div> -->
-	                </div>
-	                <div class="lottery-game-list"></div>
-	            </div>
-	        </div>
-       </div>
-  </div>
+   <div class="mask maskindex" style="display: none;">
+	   <div class="go_re">
+		   <span class="close">×</span> 
+		   <div class="lottery">
+		        <div class="lottery-email">
+		        	<div class="lottery-title">
+		        		<span><b>M</b>EGA<b>L</b>OOK</span>
+		        		<span>Your Hair Your Surprise</span>
+		        	</div>
+		            <input type="text" placeholder="E-mail address">
+		            <div class="lottery-join-tip">Enter your email, get our gift pack (value 30$) & a barcelet (value 25$), all free！</div>
+		            <div class="lottery-email-tip"></div>
+		        </div>
+				
+		        <div class="lottery-game-box">
+		        	<div class="lottery-inner-box">
+			            <div class="lottery-game">
+			                <div class="lottery-startgame"></div>
+			                <div class="lottery-game-list"></div>
+			            </div>
+			         </div>
+		        </div>
+	       </div>
+	  </div>
+   </div>
   <jsp:include page="pcfooter.jsp"></jsp:include>
  	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
 	<script src="${APP_PATH }/static/common/swiper/swiper.min.js"></script>
@@ -312,7 +312,7 @@
 						'<div class="product-title">' + data[i].productName + '</div>' +
 						'<div class="product-type"></div>' +
 						'<div class="product-data">' +
-						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Payment</span>' +
+						'<span class="pay-num">' + (data[i].productHavesalenum ? data[i].productHavesalenum : 0) + ' Orders</span>' +
 						'<span class="review-num">' + (data[i].productReviewnum ? data[i].productReviewnum : 0) +
 						' Review(s)</span>' +
 						'</div>' +
@@ -717,15 +717,10 @@
 	   							  renderErrorMsg(prodcutBox, 'No product-related data was obtained.');
 	   							}
 	   						  }
-	   	   });	
+	   	   });
+
+	   	 addTidio();
   </script>
-  	<!-- megalook-->
-  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-	<!-- megalookhair 
-  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-  	<!-- huashuohair -->
-  	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
-  	<!-- lottery -->
   	<script>
 	  	function isValidEmail(email) {
 	        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -788,12 +783,12 @@
 	            timer = setTimeout(startGame, speed);
 	        }
 	    }
-	    
+
 	    function logStatus() {
 	    	 var date = new Date();
 	         document.cookie = "isHideLottery=true;expires=" + (date.setTime(date.getTime() + 30 * 60 * 1000), date.toGMTString());
 	    }
-	    
+
 	    function renderLotterySuccess() {
 	    	var lotteryResultHtml = '';
         	lotteryResultHtml += '<div class="lottery-result">'
@@ -839,7 +834,9 @@
 	        });
 	
 	        couponList = lotteryRequest.extend.mlbackCouponResList;
-	
+			if (couponList.length != 8) {
+				return 0;
+			}
 			if (lotteryCount < 1) {
 				var htmlStr = '',
 					lotteryGameListEl = document.querySelector('.lottery-game-list');
@@ -847,25 +844,34 @@
 				for (var item in couponList) {
 					var itemData = couponList[item];
 					couponArr.push(itemData.couponId);
-					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgwapurl + '"/></div>';
+					htmlStr += '<div class="lottery-game-item"><img src="' + couponList[item].couponImgpcurl + '"/></div>';
 				}
 	
 		    	setTimeout(function() {
-					lotteryGameListEl.innerHTML = htmlStr;
-					$(".go_re").show();
-					$(".mask").show();
+		    		if (index > - 1) {
+						lotteryGameListEl.innerHTML = htmlStr;
+						$(".mask").show();
+						$(document.body).css('overflow', 'hidden');		    			
+		    		}
 				}, 2000);
 	
-				$(".close").click(function(){
-					$(".go_re").hide();
+				$(".go_re .close").click(function(e){
 					$(".mask").hide();
+					$(document.body).css('overflow', 'unset');
 		            logStatus();
+				});
+				
+				$(".mask").click(function(e){
+					if (e.target == this) {
+						$(".mask").hide();
+						$(document.body).css('overflow', 'unset');
+			            logStatus();
+					}
 				});
 			}
 			index = couponArr.indexOf(lotteryRequest.extend.luckDrawDate && lotteryRequest.extend.luckDrawDate.luckDrawCouponId);
 			lotteryData = couponList[index];
-	
-	        return index + 1;
+	        return index > -1 ? index + 1 : 0;
 	    }
 	
 	    function checkUserEmail(email) {
@@ -901,7 +907,44 @@
 	        else
 	            return null;
 	    }
-	
+	    
+	    function isShowLottery() {
+	    	return !isHideLottery && lotteryIndex
+	    }
+		
+	    function startLotteryGame() {
+	    	$('.lottery-email>input').on('change', function() {
+				$('.lottery-email-tip').text('');
+			});
+			
+		    gameStartEl.on('click', function(e) {
+		        var timer = null;
+		
+				if (!isStartLottery) {
+					if (isValidEmail(emailEl.val())) {
+		            	isStartLottery = true;
+		            	// 判断是否使用过
+		            	if (!checkUserEmail(emailEl.val())) {
+		            		startGame();
+		            	} else {
+		            		$('.lottery-email-tip').text('This email address has been used!');
+		            		isStartLottery = false;
+		            	}
+		            } else {
+		            	$('.lottery-email-tip').text('Please enter a valid email address first!');
+		            }
+		
+					if (!gameStartEl.hasClass('active')) {
+		                gameStartEl.addClass('active');
+		                timer = setTimeout(function() {
+		                    gameStartEl.removeClass('active');
+		                    clearTimeout(timer);
+		                }, 300);
+		            }
+				}
+		    });
+	    }
+
 	    var emailEl = $('.lottery-email input'),
 	        gameStartEl = $('.lottery-startgame'),
 	        isPushEmail = false,
@@ -913,35 +956,7 @@
 	        isHideLottery = getCookie('isHideLottery') || false;
 	    	lotteryIndex = isHideLottery ? undefined : getLotteryIndex(),
 	        prevItem = null;
-		$('.lottery-email>input').on('change', function() {
-			$('.lottery-email-tip').text('');
-		});
-	    gameStartEl.on('click', function(e) {
-	        var timer = null;
-	
-			if (!isStartLottery) {
-				if (isValidEmail(emailEl.val())) {
-	            	isStartLottery = true;
-	            	// 判断是否使用过
-	            	if (!checkUserEmail(emailEl.val())) {
-	            		startGame();
-	            	} else {
-	            		$('.lottery-email-tip').text('This email address has been used!');
-	            		isStartLottery = false;
-	            	}
-	            } else {
-	            	$('.lottery-email-tip').text('Please enter a valid email address first!');
-	            }
-	
-				if (!gameStartEl.hasClass('active')) {
-	                gameStartEl.addClass('active');
-	                timer = setTimeout(function() {
-	                    gameStartEl.removeClass('active');
-	                    clearTimeout(timer);
-	                }, 300);
-	            }
-			}
-	    });
+	    if (isShowLottery()) startLotteryGame();
   	</script>
 </body>
 

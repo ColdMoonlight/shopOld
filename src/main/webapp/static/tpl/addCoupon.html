@@ -137,16 +137,33 @@
 					</select>
 	             </div>
 	        </div>
+	        <div class="form-group binding-product">
+	            	<label for="couponProductOnlyType" class="col-sm-2 control-label">是否绑定产品:</label>
+	             <div class="col-sm-6">
+			  	    <select name="couponProductOnlyType" class="form-control">
+					  <option value ="0" selected="selected">不绑定</option>
+					  <option value ="1">绑定</option>
+					</select>
+	             </div>
+	        </div>
+	        <div class="form-group binding_product-select">
+	             <label for="couponProductOnlyPId" class="col-sm-2 control-label">产品名字:</label>
+	             <div class="col-sm-10">
+	                 <select id="couponProductOnlyPId" name="couponProductOnlyPId" class="form-control"></select>
+	             </div>
+	         </div>
 		</div>
 		<div class="tab-pane" id="pic">
-		<h3>活动管理图片：</h3>
+			<h3>活动管理图片：</h3>
 		    <div>
-		         <span>手机图:</span>
 		    	 <div class="upload-img-btn img">
+		    	 	<span>手机图:</span>
+		        	<div>尺寸：140 * 140</div>
 		            <input class="uploadImg" type="file" name="file" id="file1">
 		        </div>
-		        <span>pc图:</span>
 		        <div class="upload-img-btn img2">
+		        	<span>pc图:</span>
+		        	<div>尺寸：180 * 140</div>
 		            <input class="uploadImg" type="file" name="file" id="file2">
 		        </div>
 		    </div>

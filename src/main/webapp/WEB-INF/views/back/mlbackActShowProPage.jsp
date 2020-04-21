@@ -92,7 +92,7 @@
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -147,12 +147,12 @@
 		        } else if (item.actshowproActnum == 7) {
 		          actshowproActStr = '第7-首页adv_four';
 		        } else if (item.actshowproActnum == 8) {
-		          actshowproActStr = '第8-首banner下边_adv';
+		          actshowproActStr = '第8-首分类导航下2个图';
+		        }else if (item.actshowproActnum == 9) {
+		          actshowproActStr = '第9-首banner下边分类导航5个图';
 		        }else if (item.actshowproActnum == 99) {
 		          actshowproActStr = '第99活动';
 		        };
-				
-				
 				
 
 				var actshowproId = $("<td></td>").append(item.actshowproId);

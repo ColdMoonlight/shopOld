@@ -36,11 +36,35 @@
 			s.parentNode.insertBefore(t, s)
 		}(window, document, 'script',
 			'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
+		fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
+		fbq('track', 'PageView');
+		
+		var title = '${sessionScope.mlbackProductMetaTitle}';
+		var description = '${sessionScope.mlbackProductMeteDesc}';
+		var keywords = '${sessionScope.mlbackProductMetaKeyWords}';
+		function addMetaKeyword() {
+			var meta = document.createElement('meta');
+			meta.name = "keyword";
+			meta.content = keywords;
+			document.head.appendChild(meta);
+		}
+		
+		function addMetaDescription() {
+			var meta = document.createElement('meta');
+			meta.name = "description";
+			meta.content = description;
+			document.head.appendChild(meta);
+		}
+
+		title && (document.title = title);
+		keywords &&	addMetaKeyword();
+		description && addMetaDescription();
 	</script>
-	<noscript><img height="1" width="1" style="display:none"
-			src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<!-- End Facebook Pixel Code -->
 </head>
 
@@ -127,7 +151,15 @@
 				type: "post",
 				success: function (data) {
 					if (data.code == 100) {
-						var resData = data.extend.mbackProductImgResList;
+						// console.log(data)
+						var resData = data.extend.mbackProductImgResList,
+							videoData = data.extend.mlbackProductOne;
+						if (videoData.productMainFuimgurl && videoData.productColor) {
+							resData.unshift({
+								imgUrl: videoData.productMainFuimgurl,
+								videoUrl: videoData.productColor
+							});
+						}
 						renderProductDetailsBanner(swiper, resData);
 						new Swiper('.product__details-banner', {
 							pagination: {
@@ -145,7 +177,41 @@
 					}
 				}
 			});
-
+			/* couponlist */
+			$.ajax({
+				url: '${APP_PATH}/MlbackCouponDescTitle/getMlbackCouponDescTitlewapListByStatus',
+				type: 'post',
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function (data) {
+					var saleCouponEl = $('.sale_coupon'),
+						titleData = data.extend.mlbackCouponDescTitleList,
+						couponArrData = data.extend.mlbackCouponDescDetailList;
+					if (data.code == 100 && titleData.length > 0) {
+						renderSaleCoupon(saleCouponEl, {
+							title: titleData[0],
+							couponList: couponArrData
+						});
+					} else {
+						saleCouponEl.hide();
+					}
+				}
+			});
+			function renderSaleCoupon(parent, data) {
+				var htmlStr = '';
+				if (data.title && data.title.coupondesctieleWapstatus)
+					htmlStr += '<img src="' + data.title.coupondesctieleWapimgurl + '" />';
+				htmlStr += '<div class="sale_coupon-body"><p>' + data.title.coupondesctieleTieledetail + '</p><ul>';
+				for (var i = 0, len = data.couponList.length; i < len; i++) {
+					htmlStr += '<li>' + data.couponList[i].coupondescdetailStrengthpre + '&nbsp;<span>&nbsp;'
+						+ data.couponList[i].coupondescdetailStrength + '&nbsp;</span>&nbsp;'
+						+ data.couponList[i].coupondescdetailCodepre
+						+ '&nbsp;<b>&nbsp;' + data.couponList[i].coupondescdetailCode + '</b></li>';
+				}
+				htmlStr += '</ul></div>';
+				parent.html(htmlStr);
+			}
+			/* detials of condition（sku） */
 			$.ajax({
 				url: '${APP_PATH}/MlbackProductSku/getfrontOneProductAllSku', //这个是只查yes的sku
 				data: { "productId": pidA },
@@ -165,15 +231,38 @@
 			});
 
 			function renderProductDetailsBanner(parent, data) {
-				var html = '';
+				var html = '',
+					hasVideo = false;
 
 				for (var i = 0, len = data.length; i < len; i += 1) {
-					html += '<div class="swiper-slide">' +
-						'<img src="' + loadProduct2Url + '" data-src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
+					if (data[i].videoUrl && data[i].imgUrl) {
+						html += '<div class="swiper-slide">' +
+						'<img class="showVideo" src="' + loadProduct2Url + '" data-src="' + data[i].imgUrl + '" data-video="'+ data[i].videoUrl +'" />' +
 						'</div>';
+						hasVideo = true;
+					} else {
+						html += '<div class="swiper-slide">' +
+							'<img src="' + loadProduct2Url + '" data-src="' + data[i].productimgUrl + '" alt="' + data[i].productimgName + '">' +
+							'</div>';
+					}
 				}
-
+	
 				swiper.html(html);
+				
+				hasVideo && showVideo();
+			}
+			
+			function showVideo() {
+				$('.showVideo').on('click', function(e) {
+					function matchYoutubeUrl(url){
+						/* var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+					    return (url.match(p)) ? RegExp.$1 : false ; */
+					    return url.split("watch?v=")[1];
+				   	}
+					var videoUrl = $(this).data('video');
+					if (videoUrl)
+						$(this).parent().html('<iframe frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media" title="YouTube video player" width="100%" height="375" src="https://www.youtube.com/embed/'+ matchYoutubeUrl(videoUrl) +'"></iframe>');
+				});
 			}
 
 			function triggerCondition(parent) {
@@ -1080,13 +1169,8 @@
 				})
 			}
 		}
+		addTidio();
 	</script>
-	<!-- megalook-->
-	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-	<!-- megalookhair 
-  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-	<!-- huashuohair -->
-	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

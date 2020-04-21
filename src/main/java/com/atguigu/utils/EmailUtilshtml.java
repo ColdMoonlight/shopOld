@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -19,12 +18,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import com.atguigu.bean.MlfrontOrder;
 import com.atguigu.bean.MlfrontOrderItem;
 import com.atguigu.bean.MlfrontPayInfo;
 import com.atguigu.bean.MlfrontUser;
-import com.atguigu.bean.ToPaypalInfo;
 public class EmailUtilshtml {
 	
 	/**
@@ -45,7 +42,6 @@ public class EmailUtilshtml {
 	
 	public static void readyEmailPaySuccess(String getToEmail, String Message,List<MlfrontOrderItem> mlfrontOrderItemList,MlfrontPayInfo mlfrontPayInfoIOne, MlfrontOrder mlfrontOrderResOne, String addressMoney)  throws Exception{
 		sendEmilPay(getToEmail, Message, mlfrontOrderItemList,mlfrontPayInfoIOne,mlfrontOrderResOne,addressMoney);
-		
 	}
 	
 	public static void readyEmailSendSuccess(String getToEmail, String Message, String toCustomerInfoStr, Integer orderId,String payinfoPlateNum) {
@@ -76,9 +72,13 @@ public class EmailUtilshtml {
             props.setProperty("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
-            final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+            final String password = "发送者邮箱密码或者邮箱授权码";*/          
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+//          final String username = "sales@megalook.com";//huashuohair
+//          final String password = "qPVGjvIM6wXVSsFn";
+            String username = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            String password = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.userhighpwd");
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -94,8 +94,11 @@ public class EmailUtilshtml {
             //通过会话,得到一个邮件,用于发送
             MimeMessage  msg = new MimeMessage(session);
             //设置发件人
-//            msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("发件人邮箱"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+//          msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
+            String sendEmail = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            msg.setFrom(new InternetAddress(sendEmail));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
@@ -141,8 +144,12 @@ public class EmailUtilshtml {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+//          final String username = "sales@megalook.com";//huashuohair
+//          final String password = "qPVGjvIM6wXVSsFn";
+            String username = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            String password = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.userhighpwd");
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -155,7 +162,10 @@ public class EmailUtilshtml {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //          msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+//          msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
+            String sendEmail = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            msg.setFrom(new InternetAddress(sendEmail));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
@@ -201,8 +211,12 @@ public class EmailUtilshtml {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+//          final String username = "sales@megalook.com";//huashuohair
+//          final String password = "qPVGjvIM6wXVSsFn";
+            String username = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            String password = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.userhighpwd");
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -246,8 +260,11 @@ public class EmailUtilshtml {
             //通过会话,得到一个邮件,用于发送
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
-//            msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("发件人邮箱"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+//          msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
+            String sendEmail = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            msg.setFrom(new InternetAddress(sendEmail));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
@@ -303,8 +320,12 @@ public class EmailUtilshtml {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+//          final String username = "sales@megalook.com";//huashuohair
+//          final String password = "qPVGjvIM6wXVSsFn";
+            String username = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            String password = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.userhighpwd");
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -317,7 +338,10 @@ public class EmailUtilshtml {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //          msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+//          msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
+            String sendEmail = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            msg.setFrom(new InternetAddress(sendEmail));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));
@@ -359,8 +383,12 @@ public class EmailUtilshtml {
             props.put("mail.smtp.auth", "true");
             /*final String username = "发送者邮箱用户名";
             final String password = "发送者邮箱密码或者邮箱授权码";*/
-            final String username = "service@megalook.com";
-            final String password = "DfcorpKXl6CbH1It";
+//          final String username = "service@megalook.com";//megalook
+//          final String password = "DfcorpKXl6CbH1It";         
+//          final String username = "sales@megalook.com";//huashuohair
+//          final String password = "qPVGjvIM6wXVSsFn";
+            String username = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            String password = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.userhighpwd");
             //获取到邮箱会话,利用匿名内部类的方式,将发送者邮箱用户名和密码授权给jvm
             Session session = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -373,7 +401,10 @@ public class EmailUtilshtml {
             MimeMessage msg = new MimeMessage(session);
             //设置发件人
 //          msg.setFrom(new InternetAddress("发件人邮箱"));
-            msg.setFrom(new InternetAddress("service@megalook.com"));
+//          msg.setFrom(new InternetAddress("service@megalook.com"));//megalook
+//          msg.setFrom(new InternetAddress("sales@megalook.com"));//huashuohair
+            String sendEmail = (String) PropertiesUtil.getProperty("megalook.properties", "sendEmil.username");
+            msg.setFrom(new InternetAddress(sendEmail));
             //设置收件人,to为收件人,cc为抄送,bcc为密送
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mingyueqingl@163.com", false));
 //            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse("megalookweb@outlook.com", false));

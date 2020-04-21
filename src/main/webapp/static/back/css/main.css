@@ -143,6 +143,21 @@ html,body {
 	margin-right: .5em;
 }
 
+.link-dialog.modal .modal-body {
+	padding: 1rem;
+}
+
+.link-dialog.modal .form-group {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.link-dialog.modal .checkbox {
+	width: auto;
+	border-radius: unset;
+    border-color: #fff;
+}
+
 
 /* editor */
 .editor {

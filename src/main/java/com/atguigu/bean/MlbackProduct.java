@@ -52,6 +52,10 @@ public class MlbackProduct {
     private String productCategoryNamesStr;
     
     private String productMetaDesc;
+    
+    private String productMetaTitle;
+    
+    private String productMetaKeyWords;
 
     public Integer getProductId() {
         return productId;
@@ -253,8 +257,95 @@ public class MlbackProduct {
 		this.productMetaDesc = productMetaDesc == null ? null : productMetaDesc.trim();
 	}
 
+//	public String getProductCategoryname() {
+//		return productCategoryname;
+//	}
+//
+//	public void setProductCategoryname(String productCategoryname) {
+//		this.productCategoryname = productCategoryname == null ? null : productCategoryname.trim();
+//	}
+//
+//	public String getProductMainFuimgurl() {
+//		return productMainFuimgurl;
+//	}
+//
+//	public void setProductMainFuimgurl(String productMainFuimgurl) {
+//		this.productMainFuimgurl = productMainFuimgurl == null ? null : productMainFuimgurl.trim();
+//	}
+
+	public String getProductMetaTitle() {
+		return productMetaTitle;
+	}
+
+	public void setProductMetaTitle(String productMetaTitle) {
+		this.productMetaTitle = productMetaTitle == null ? null : productMetaTitle.trim();
+	}
+
+	public String getProductMetaKeyWords() {
+		return productMetaKeyWords;
+	}
+
+	public void setProductMetaKeyWords(String productMetaKeyWords) {
+		this.productMetaKeyWords = productMetaKeyWords == null ? null : productMetaKeyWords.trim();
+	}
+
+	public MlbackProduct() {
+		super();
+	}
+
+	public MlbackProduct(Integer productId, String productName, String productColor, String productSeo,
+			Integer productCategoryid, String productCategoryname, String productMainimgurl, String productMainFuimgurl,
+			BigDecimal productOriginalprice, Integer productHavesalenum, Integer productStatus,
+			String productCreatetime, String productMotifytime, Integer productAdminId, String productAdminOperatorname,
+			Integer productLable, Integer productFirsth, Integer productActoffid, Integer productActoffoff,
+			Integer productActoffIf, Integer productReviewnum, String productDesc, String productCategoryIdsStr,
+			String productCategoryNamesStr, String productMetaDesc, String productMetaTitle,
+			String productMetaKeyWords) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productColor = productColor;
+		this.productSeo = productSeo;
+		this.productCategoryid = productCategoryid;
+		this.productCategoryname = productCategoryname;
+		this.productMainimgurl = productMainimgurl;
+		this.productMainFuimgurl = productMainFuimgurl;
+		this.productOriginalprice = productOriginalprice;
+		this.productHavesalenum = productHavesalenum;
+		this.productStatus = productStatus;
+		this.productCreatetime = productCreatetime;
+		this.productMotifytime = productMotifytime;
+		this.productAdminId = productAdminId;
+		this.productAdminOperatorname = productAdminOperatorname;
+		this.productLable = productLable;
+		this.productFirsth = productFirsth;
+		this.productActoffid = productActoffid;
+		this.productActoffoff = productActoffoff;
+		this.productActoffIf = productActoffIf;
+		this.productReviewnum = productReviewnum;
+		this.productDesc = productDesc;
+		this.productCategoryIdsStr = productCategoryIdsStr;
+		this.productCategoryNamesStr = productCategoryNamesStr;
+		this.productMetaDesc = productMetaDesc;
+		this.productMetaTitle = productMetaTitle;
+		this.productMetaKeyWords = productMetaKeyWords;
+	}
+
 	@Override
-    public String toString() {
-    	return super.toString();
-    }
+	public String toString() {
+		return "MlbackProduct [productId=" + productId + ", productName=" + productName + ", productColor="
+				+ productColor + ", productSeo=" + productSeo + ", productCategoryid=" + productCategoryid
+				+ ", productCategoryname=" + productCategoryname + ", productMainimgurl=" + productMainimgurl
+				+ ", productMainFuimgurl=" + productMainFuimgurl + ", productOriginalprice=" + productOriginalprice
+				+ ", productHavesalenum=" + productHavesalenum + ", productStatus=" + productStatus
+				+ ", productCreatetime=" + productCreatetime + ", productMotifytime=" + productMotifytime
+				+ ", productAdminId=" + productAdminId + ", productAdminOperatorname=" + productAdminOperatorname
+				+ ", productLable=" + productLable + ", productFirsth=" + productFirsth + ", productActoffid="
+				+ productActoffid + ", productActoffoff=" + productActoffoff + ", productActoffIf=" + productActoffIf
+				+ ", productReviewnum=" + productReviewnum + ", productDesc=" + productDesc + ", productCategoryIdsStr="
+				+ productCategoryIdsStr + ", productCategoryNamesStr=" + productCategoryNamesStr + ", productMetaDesc="
+				+ productMetaDesc + ", productMetaTitle=" + productMetaTitle + ", productMetaKeyWords="
+				+ productMetaKeyWords + "]";
+	}
+	
 }

@@ -15,21 +15,20 @@
 	<div class="tt-footer-col tt-color-scheme-01">
 		<div class="container">		
 			<div class="row">
-				<div class="tt-footer-logo col-lg-2 col-md-12">
-					<img src="${APP_PATH }/static/pc/img/dblogo.png" alt="" style="width:150px">
+				<div class="tt-footer-logo col-lg-3 col-md-12">
+					<img src="${APP_PATH }/static/pc/img/dblogo.png" alt="" title="megalook" style="width:150px">
 					<div style="margin-top:6px;">Our Hair Your Glory</div>
 					<div class="follow-us">
 						<ul class="follow-us-list">
-							<li class="follow-icon facebook" title="facebook"><a href="https://www.facebook.com/MegalookHairCompany/"></a></li>
-							<li class="follow-icon instagram" title="instagram"><a href="https://www.instagram.com/megalookhair/"></a></li>
-							<li class="follow-icon pinterest" title="pinterest"><a href="https://www.pinterest.com/amegalook/"></a></li>
-							<li class="follow-icon snapchat" title="snapchat"><a href="https://www.snapchat.com/add/megalook-hair"></a></li>
-							<li class="follow-icon youtube" title="youtube"><a href="https://www.youtube.com/channel/UCbbrYL1KabTMlXFmQhFWtmw?view_as=subscriber"></a></li>
-							<!-- <li class="follow-icon twitter" title="twitter"><a href="https://twitter.com/megalookhair"></a></li> -->
+							<li class="follow-icon facebook" title="megalook facebook"><a href="https://www.facebook.com/MegalookHairCompany/"></a></li>
+							<li class="follow-icon instagram" title="megalook instagram"><a href="https://www.instagram.com/megalookhair/"></a></li>
+							<li class="follow-icon pinterest" title="megalook pinterest"><a href="https://www.pinterest.com/amegalook/"></a></li>
+							<li class="follow-icon snapchat" title="megalook snapchat"><a href="https://www.snapchat.com/add/megalook-hair"></a></li>
+							<li class="follow-icon youtube" title="megalook youtube"><a href="https://www.youtube.com/channel/UCbbrYL1KabTMlXFmQhFWtmw?view_as=subscriber"></a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="tt-footer-nav col-lg-10 col-md-12"></div>
+				<div class="tt-footer-nav col-lg-9 col-md-12"></div>
 			</div>
 		</div>
 	</div>
@@ -126,11 +125,11 @@ $.ajax({
 
 function renderFooterNav(parent, data) {
 	var html = '';
-	html += '<div class="container"><div class="row">';
+	html += '<div class="row">';
 	for (var i=0, len=data.length; i<len; i+=1) {
 		html += '<div class="col-md-6 col-lg-'+ Math.floor(12/len) +'">' +
 			'<div class="tt-mobile-collapse">' +
-			'<h4 class="tt-collapse-title">'+ data[i].name +'</h4>';
+			'<h4 class="tt-collapse-title">'+ (data[i].name.replace(/\_/g, ' ')) +'</h4>';
 			var children = data[i].children;
 			var len2 = (children && data[i].children.length) || 0;
 			if (len2) {
@@ -154,7 +153,7 @@ function renderFooterNav(parent, data) {
 
 			html += '</div></div>';
 	}
-	html += '</div></div>';
+	html += '</div>';
 	
 	parent.html(html);
 }

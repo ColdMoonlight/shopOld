@@ -50,6 +50,7 @@ import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
 //import com.atguigu.utils.app.shipInformation;
+import com.atguigu.utils.PropertiesUtil;
 
 @Controller
 @RequestMapping("/MlfrontOrder")
@@ -116,7 +117,6 @@ public class MlfrontOrderController {
 		return Msg.success().add("resMsg", "更新成功").add("mlfrontOrderItemList", mlfrontOrderItemList).add("orderId", orderId).add("usertype", usertype);
 	}
 	
-	
 	/**2.0	useOn	0505
 	 * 分类MlfrontOrder列表分页list数据
 	 * @param pn
@@ -140,8 +140,8 @@ public class MlfrontOrderController {
 //		}
 	}
 	
-	/**3.0	useOn	0505
-	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
+	/**3.0	useOn	200323
+	 * Cheekout页面,加减更新order表中的OrderItem数量。
 	 * @param MlfrontOrder
 	 */
 	@RequestMapping(value="/updateOrderItemNum",method=RequestMethod.POST)
@@ -171,11 +171,12 @@ public class MlfrontOrderController {
 	@ResponseBody
 	public Msg delOrderItem(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody MlfrontOrderItem mlfrontOrderItem) throws Exception{
 		//接收传递进来的参数
-		System.out.println(mlfrontOrderItem);
+		//System.out.println(mlfrontOrderItem);
 		Integer orderitemIdOriginal = mlfrontOrderItem.getOrderitemId();
 		int isDelSuccess = 0;
 		if(orderitemIdOriginal==null){
-			return Msg.success().add("resMsg", "删除失败，主建为null，请联系管理员").add("isDelSuccess", isDelSuccess);//isDelSuccess0删除失败，alert	resMsg/1,删除成功
+			//前台传递异常,没有把订单项的id值传进来
+			return Msg.success().add("resMsg", "删除失败,主建为null,请联系管理员").add("isDelSuccess", isDelSuccess);//isDelSuccess0删除失败，alert	resMsg/1,删除成功
 		}else{
 			//通过cartitem的之间查回该条信息，从中取出cartId
 			MlfrontOrderItem mlfrontOrderItemReq  =new MlfrontOrderItem();
@@ -214,7 +215,7 @@ public class MlfrontOrderController {
 					mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderreqE);
 				}else{
 					//1.2如果只有一个，删掉购物车
-					Integer result = mlfrontOrderService.deleteByPrimaryKey(orderId);
+					mlfrontOrderService.deleteByPrimaryKey(orderId);
 				}
 				//2删除该条CartItem信息
 				mlfrontOrderItemService.deleteByPrimaryKey(orderitemIdOriginal);
@@ -227,8 +228,8 @@ public class MlfrontOrderController {
 		}			
 	}
 	
-	/**5.0	useOn	0505
-	 * 更新order表中的，地址字段，优惠券字段，优惠券折扣。
+	/**5.0	useOn	200323
+	 * 更新order表中的:地址字段,优惠券字段,优惠券折扣。
 	 * @param MlfrontOrder
 	 */
 	@RequestMapping(value="/orderToPayInfo",method=RequestMethod.POST)
@@ -239,12 +240,13 @@ public class MlfrontOrderController {
 		Integer originalOrderId = mlfrontOrder.getOrderId();
 		String filnanyNumber = mlfrontOrder.getOrderProNumStr();
 		Integer CouponId =mlfrontOrder.getOrderCouponId();
-		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();
+		//System.out.println("点结算按钮的时候,接收到的CouponId:"+CouponId);
+		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();//客户选择的支付方式，0paypal,1待定
 		String buyMessStr = mlfrontOrder.getOrderBuyMess();
 		//1.0用order查orderItem,遍历orderItem,计算每个Item的价格，再加在一起；
 		String Orderitemidstr = mlfrontOrder.getOrderOrderitemidstr();
 		String orderitemidArr[] = Orderitemidstr.split(",");
-		BigDecimal totalprice = new BigDecimal(0);
+		BigDecimal totalprice = new BigDecimal(0);	//初始化最终价格参数
 		DecimalFormat df1 = new DecimalFormat("0.00");
 		MlfrontOrderItem mlfrontOrderItemReq = new MlfrontOrderItem();
 		MlfrontOrderItem mlfrontOrderItemRes = new MlfrontOrderItem();
@@ -269,13 +271,13 @@ public class MlfrontOrderController {
 				pskuMoneyOne = new BigDecimal(pskuTrimStr);
 				oneAllprice = oneAllprice.add(pskuMoneyOne);//02计算本orderItem下的所有sku项的钱
 			}
-			oneAllprice=oneAllprice.add(ItemProductOriginalprice);//03叠加本品基础价的钱
+			oneAllprice=oneAllprice.add(ItemProductOriginalprice);//03叠加本品基础价的钱(now：该条的allPskumoney+该条Pro的基础价)
 			//计算这一项的价格，(基础价格+每个的sku价格的和)*折扣*数量,存入orderitemPskuReamoney字段中;
 			oneAllprice = oneAllprice.multiply(new BigDecimal(number));//04乘本品的个数得到总价
 			oneAllprice = oneAllprice.multiply(new BigDecimal(accoff));//05乘本品的折扣
 			oneAllprice = oneAllprice.multiply(new BigDecimal(0.01));//06还原本品+sku集合的最终价
 			String str = df1.format(oneAllprice);
-			System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
+			//System.out.println("OrderitemPskuReamoney原始值:"+oneAllprice);
 			System.out.println("存进去的OrderitemPskuReamoney:"+str); //13.15
 			MlfrontOrderItem mlfrontOrderItemMoneyBlack = new MlfrontOrderItem();
 			mlfrontOrderItemMoneyBlack.setOrderitemId(orderItemId);
@@ -283,7 +285,7 @@ public class MlfrontOrderController {
 			//更新本条，存入orderitemPskuReamoney字段
 			mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemMoneyBlack);
 			//一个字段存储总价格
-			totalprice = totalprice.add(oneAllprice);
+			totalprice = totalprice.add(oneAllprice);//07总价字段累加该条的全部价格
 		}
 		/*		加		单个的	(基础价格+每个的sku价格的和)*折扣*数量,
 		 * 		加				地址运费
@@ -296,7 +298,7 @@ public class MlfrontOrderController {
 		if(AddressId==null){
 			AddressId= (Integer) session.getAttribute("realAddressId");
 		}
-		//查询英文名,查询该英文名的价格运费价格
+		//2.2查询英文名,查询该英文名的价格运费价格
 		Integer addressMoney = getAddressMoney(AddressId);
 		
 		String addressMoneyStr= df1.format(addressMoney);
@@ -783,7 +785,6 @@ public class MlfrontOrderController {
 //		try {
 //			//向物流中插入物流单号，订单号，Item,价格，
 //			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsnumber,payinfoPlateNum);
-//			
 //			System.out.println(resultStr);
 //		} catch (Exception e) {
 //			e.printStackTrace();
@@ -850,7 +851,7 @@ public class MlfrontOrderController {
 		String shipemailTeamtelphone = mlbackShipEmailOne.getShipemailTeamtelphone();
 		Message =Message+"Hi,"+"<br><br>";
 		Message=Message+"This is Megalook Hair. Your order # ("+payinfoPlateNum+") has been shipped, And the tracking number is "+shipemailName+" : ("+orderLogisticsnumber+").<br><br><br>";
-		Message=Message+"Expected to be delivered within "+shipemailDay+" working days.<br><br>";
+		Message=Message+" "+shipemailDay+" .<br><br>";
 		Message=Message+"You can track the parcel through this link on "+shipemailName+"( "+shipemailWwwlink+" )<br><br><br>";
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
 		Message=Message+"Nice Day!<br><br>";
@@ -883,7 +884,6 @@ public class MlfrontOrderController {
 		mlfrontOrderReq.setOrderStatus(3);//0未支付//1支付成功//2支付失败//3审单完毕 //4发货完毕//5已退款
 		mlfrontOrderReq.setOrderSendtime(nowTime);
 		mlfrontOrderService.updateByPrimaryKeySelective(mlfrontOrderReq);
-		
 		
 		//通过orderId查询用户地址信息
 		mlfrontOrderReq2.setOrderId(orderId);
@@ -934,12 +934,17 @@ public class MlfrontOrderController {
 		Message=Message+"The hair you ordered is in stock and is expected to be shipped within 24-48 hours .<br><br>";
 		Message=Message+"We will send the parcel tracking number to you through email & SMS after delivery, and you can also view it on the PayPal bill.<br><br><br>";
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
-		Message=Message+"Best Regards,<br><br>";
-		Message=Message+"-----------------------------------<br><br>";
-		Message=Message+"Megalook hair <br>";
-		Message=Message+"Email:service@megalook.com <br>";
-		Message=Message+"Whatsapp:+86 18903740682 <br>";
-		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+		Message=Message+"Best Regards,<br>";
+		Message=Message+"-----------------------------------<br>";
+		String team = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.team");
+		String email = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.email");
+		String whatsapp = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.whatsapp");
+		String Telephone = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.Telephone");
+		//读取配置文件
+		Message=Message+team+"<br>";
+		Message=Message+"Email:"+email+"<br>";
+		Message=Message+"Whatsapp:"+whatsapp+"<br>";
+		Message=Message+"Telephone/SMS:"+Telephone+"<br>";
 		return Message;
 	}
 	
@@ -1109,20 +1114,26 @@ public class MlfrontOrderController {
 			Message=Message+""+proName+"<br>";
 			
 			proSeoName = mlbackProductDetailList.get(i).getProductSeo();
+			//从配置文件中读取weblink字段(https://www.megalook.com/)
+			String weblink = (String) PropertiesUtil.getProperty("megalook.properties", "weblink");
 			
-			Message=Message+"https://megalook.com/"+proSeoName+".html"+"<br><br>";
+			Message=Message+weblink+proSeoName+".html"+"<br><br>";
 		}
 		
 		Message=Message+"We'll be there if you need help<br>";
 		Message=Message+"Best Regards,<br>";
 		Message=Message+"-----------------------------------<br>";
-		Message=Message+"Megalook hair <br>";
-		Message=Message+"Email:service@megalook.com <br>";
-		Message=Message+"Whatsapp:+86 18903740682 <br>";
-		Message=Message+"Telephone/SMS:+1 5017226336<br>";
+		String team = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.team");
+		String email = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.email");
+		String whatsapp = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.whatsapp");
+		String Telephone = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.Telephone");
+		//读取配置文件
+		Message=Message+team+"<br>";
+		Message=Message+"Email:"+email+"<br>";
+		Message=Message+"Whatsapp:"+whatsapp+"<br>";
+		Message=Message+"Telephone/SMS:"+Telephone+"<br>";
 		return Message;
 	}
-
 
 	/**
 	 * 14.0	UseNow	200309
@@ -1151,5 +1162,23 @@ public class MlfrontOrderController {
 
 		return Msg.success().add("Msg", "更新成功");
 	}
+	
+	/**
+	 * 14.0	UseNow	200309
+	 * to	订单-退款
+	 * @param jsp
+	 * @return 
+	 * */
+//	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
+//	@ResponseBody
+//	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
+//			@RequestParam(value = "trackingNumber") String trackingNumber) {
+//		//接收参数
+//		
+//		String trackingNumCheckpoint = shipInformation.getCheckpointByTrackingNumberFromAfterShip(trackingNumber);
+//		System.out.println("trackingNumCheckpoint:"+trackingNumCheckpoint);
+//		
+//		return Msg.success().add("Msg", "更新成功");
+//	}
 
 }

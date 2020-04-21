@@ -9,7 +9,6 @@
 .zs_link{width: 100%; height: auto;}
 .zs_link img{display: block; margin: 0 auto; max-width: 100%;}
 .xia_two{width:100%; height: auto; margin: 0 auto;}
-
 /*******/
 .zss_link{width: 50%; height: auto; float: left;}
 .zss_link img{display: block; margin: 0 auto; max-width: 100%;}
@@ -23,9 +22,8 @@
 .topbg{width: 100%; margin: 0 auto; }
 .topbg img{margin: 0 auto;max-width: 100%; }
 .botbg{width: 100%; margin: 0 auto; }
+
 .botbg img{margin: 0 auto;max-width: 100%; }
-
-
 .dwbox{ z-index: 3; width: 100%; height: auto; }
 .product_box_cont{width: 100%; height: auto; margin: 0 auto;}
 .kong{width: 100%;min-height: 160px; margin: 0 auto;}

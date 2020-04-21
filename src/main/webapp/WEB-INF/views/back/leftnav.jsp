@@ -139,6 +139,24 @@
         </div>
       </li>
     </ul>
+    <ul class="children">
+      <li>
+        <div class="item">
+          <a href="${APP_PATH }/MlbackCouponDescTitle/toMlbackCouponDescTitlePage">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">优惠券Title列表</span></a>
+        </div>
+      </li>
+    </ul>
+    <ul class="children">
+      <li>
+        <div class="item">
+          <a href="${APP_PATH }/MlbackCouponDescDetail/toMlbackCouponDescDetailPage">
+            <i class="glyphicon glyphicon-stats"></i>
+            <span class="text">优惠Code简述</span></a>
+        </div>
+      </li>
+    </ul>
   </li>
   <li>
     <div class="item">

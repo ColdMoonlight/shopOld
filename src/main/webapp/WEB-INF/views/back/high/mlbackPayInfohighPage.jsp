@@ -53,14 +53,20 @@
 										  <option value ="2">已审核</option>
 										  <option value ="3">已发货</option>
 										  <option value ="4">已退款</option>
-										   <option value ="5">已通知复购</option>
-										    <option value ="6">已关闭</option>
+										  <option value ="5">已通知复购</option>
+										  <option value ="6">已关闭</option>
 										</select>
 								    </div>
 								</div>
-								   <div class="form-group btn_search">
-									   <input type="submit" id="" value="搜索" name="" />
-							       </div>
+								<div class="form-group" style="width: 400px;">
+									<label for="payinfoPlateNum" style="float: left;" class="control-label">订单编号:</label>
+									<div class="" style="float: left;width: 80%;">
+										<input type="text" class="form-control" id="payinfoPlateNum" placeholder="订单编号" name="payinfoPlateNum">
+									</div>
+								</div>
+								<div class="form-group btn_search">
+									<input type="submit" id="" value="搜索" name="" />
+							    </div>
 							</div>
 						<!-- table-content -->
 						<div id="wei_num" style="display: none; width: 100%; float: left; background: #fff; text-align:center;min-height: 600px;">
@@ -119,7 +125,7 @@
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -131,6 +137,7 @@
 		var payinfoStatus=999;/**订单状态**/
 		var totalRecord, currentPage, editid;
 		var count = 1;
+		var payinfoPlateNum=999;
 		$(".pinglun_from .selectpl").change(function(){
 			var reviewFromselect =$(this).val();
 			payinfoStatus=reviewFromselect;
@@ -216,23 +223,34 @@
 				
 			});
 /***************************************************************************************/
-console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
 /****************************************************************************************/
   		$("#downPayinfoDate").click(function(){
-  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
-  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoIF?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime;
+			var payinfoPlateNum =$("#payinfoPlateNum").val();
+  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime+"payinfoPlateNum:"+payinfoPlateNum);
+  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoIF?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime+"&payinfoPlateNum="+payinfoPlateNum;
   		})
   		
   		$("#downEcppDate").click(function(){
-  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
-  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoEcpp?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime;
+			var payinfoPlateNum =$("#payinfoPlateNum").val();
+  			console.log("pn"+2151551+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime+"payinfoPlateNum:"+payinfoPlateNum);
+  			window.location.href = "${APP_PATH}/HighPayInfo/exportPayInfoEcpp?payinfoStatus="+payinfoStatus+"&payinfoCreatetime="+payinfoCreatetime+"&payinfoMotifytime="+payinfoMotifytime+"&payinfoPlateNum="+payinfoPlateNum;
   		})
   		$(".btn_search").click(function(){
-  			console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
-			to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+			var payinfoPlateNum =$("#payinfoPlateNum").val();
+			if(payinfoPlateNum==""||payinfoPlateNum==null){
+				var payinfoPlateNumnull =999;
+				payinfoPlateNum =payinfoPlateNumnull;
+				console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+				to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+			}else{
+				console.log("pn"+1+"点击"+"payinfoStatus:"+payinfoStatus+"payinfoPlateNum:"+payinfoPlateNum+"payinfoCreatetime:"+payinfoCreatetime+"payinfoMotifytime:"+payinfoMotifytime);
+				to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+			}
+			
 		})
-  		to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
-  	function to_page(pn,payinfoStatus,payinfoCreatetime,payinfoMotifytime) {
+  		to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+  	function to_page(pn,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum) {
 		      $.ajax({
 		        url: "${APP_PATH}/HighPayInfo/selectHighPayInfoListBySearch",
 				data:{
@@ -240,6 +258,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 					"payinfoStatus":payinfoStatus,
 					"payinfoCreatetime":payinfoCreatetime,
 					"payinfoMotifytime":payinfoMotifytime,
+					"payinfoPlateNum":payinfoPlateNum,
 				},
 		        type: "POST",
 		        success: function (result) {
@@ -349,11 +368,27 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 				//为元素添加点击翻页的事件
 				firstPageLi.click(function () {
 //					to_page(1);
-					to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+                 var payinfoPlateNum =$("#payinfoPlateNum").val();
+				 if(payinfoPlateNum==""||payinfoPlateNum==null){
+				 		var payinfoPlateNumnull =999;
+				 		payinfoPlateNum =payinfoPlateNumnull;
+						to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+						}else{
+							to_page(1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+						}
+					
 				});
 				prePageLi.click(function () {
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
 //					to_page(result.extend.pageInfo.pageNum - 1);
-                    to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+							var payinfoPlateNumnull =999;
+							payinfoPlateNum =payinfoPlateNumnull;
+							 to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+                     }else{
+						  to_page(currentPage-1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					 }
+                   
 				});
 			}
 
@@ -364,10 +399,26 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 				lastPageLi.addClass("disabled");
 			} else {
 				nextPageLi.click(function () {
-                     to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+						var payinfoPlateNumnull =999;
+						payinfoPlateNum =payinfoPlateNumnull;
+						 to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}else{
+						to_page(currentPage+1,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}
+                    
 				});
 				lastPageLi.click(function () {
-                    to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+						var payinfoPlateNumnull =999;
+						payinfoPlateNum =payinfoPlateNumnull;
+						 to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}else{
+						 to_page(result.extend.pageInfo.pages,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}
+                   
 				});
 			}
 
@@ -381,7 +432,15 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 					numLi.addClass("active");
 				}
 				numLi.click(function () {
-                    to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime)
+					var payinfoPlateNum =$("#payinfoPlateNum").val();
+					if(payinfoPlateNum==""||payinfoPlateNum==null){
+						var payinfoPlateNumnull =999;
+						payinfoPlateNum =payinfoPlateNumnull;
+						 to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}else{
+						 to_page(item,payinfoStatus,payinfoCreatetime,payinfoMotifytime,payinfoPlateNum)
+					}
+                   
 				});
 				ul.append(numLi);
 			});
@@ -518,7 +577,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 							var orderData = resDataOrderPayOne;
 							orderData.list = resDataOrderItemList;
 							orderData.payinfoMoney = resDataPayInfoOne.payinfoMoney;
-							
+							orderData.areafreightMoney = result.extend.areafreightMoney;
 							orderData.payinfoPlateNum = resDataPayInfoOne.payinfoPlateNum;
 							orderId = orderData.orderId;
 							orderOrderitemidstradd = orderData.orderOrderitemidstr;
@@ -697,21 +756,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 						}
 					}
 				})
-			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			});	
 		}
 
 		function renderOrderInfo(data) {//红
@@ -810,7 +855,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 
 			var calInfoHtml = '';
 
-			calInfoHtml = '<div><span>预计总价：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
+			calInfoHtml = '<div><span>预计总价（含运费 $'+  data.areafreightMoney +'）：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data
 				.orderCouponPrice)).toFixed(2) + '</span></div>' +
 				'<div><span>优惠券抵扣：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div><span>实际支付金额：</span><span>$' + data.payinfoMoney + '</span></div>';
@@ -1024,7 +1069,7 @@ console.log("初始化"+"payinfoStatus:"+payinfoStatus+"payinfoCreatetime:"+payi
 								});
 							}
 							 updatepayinfostu(postData)
-							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfoList";
+							window.location.href = "${APP_PATH}/MlfrontPayInfo/toMlbackPayInfohighList";
 							// $('.ship-number').text(shipId);
 							// parent.addClass('hide');
 						}

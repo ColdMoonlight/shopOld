@@ -1,0 +1,60 @@
+<div class="op">
+    <a data-href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i> 新增/编辑</a>
+    <button type="button" class="btn btn-primary bianji" id="tasksubmit">保存</button>
+</div>
+<form class="form-horizontal">
+	<ul id="categoryTab" class="nav nav-tabs">
+		<li class="active"><a data-href="#general" data-toggle="tab">基本</a></li>
+		<li><a data-href="#pic" data-toggle="tab">图片</a></li>
+	</ul>
+	<div id="categoryTabContent" class="tab-content">
+		<input type="text" style="display: none;" placeholder="coupondesctieleId" name="coupondesctieleId">
+		<div class="tab-pane in active" id="general">
+		 	<div class="form-group">
+	            <label for="coupondesctieleName" class="col-sm-2 control-label">优惠券标题name:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondesctieleName" name="coupondesctieleName">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="coupondesctieleTieledetail" class="col-sm-2 control-label">优惠券标题name:</label>
+	            <div class="col-sm-4">
+	                <input type="text" class="form-control" placeholder="coupondesctieleTieledetail" name="coupondesctieleTieledetail">
+	            </div>
+	        </div>
+	        <div class="form-group">
+	             <label for="coupondesctieleWapstatus" class="col-sm-2 control-label">手机端状态:</label>
+	             <div class="col-sm-10">
+	                 <select name="coupondesctieleWapstatus" class="form-control">
+					  <option value ="0" selected="selected">不展示</option>
+					  <option value ="1">展示</option>
+					</select>
+	             </div>
+	         </div>
+	         <div class="form-group">
+	             <label for="coupondesctielePcstatus" class="col-sm-2 control-label">pc端状态:</label>
+	             <div class="col-sm-10">
+	                 <select name="coupondesctielePcstatus" class="form-control">
+					  <option value ="0" selected="selected">不展示</option>
+					  <option value ="1">展示</option>
+					</select>
+	             </div>
+	         </div>
+		</div>
+		<div class="tab-pane" id="pic">
+			<h3>手机图/pc图片管理：</h3>
+		    <div>
+		    	 <div class="upload-img-btn img">
+		    	  	<span>手机图:</span>
+		    	  	<div>尺寸：60 * 60</div>
+		            <input class="uploadImg" type="file" name="file" id="file1">
+		        </div>
+		        <div class="upload-img-btn img2">
+		        	<span>pc图:</span>
+		        	<div>尺寸：60 * 60</div>
+		            <input class="uploadImg" type="file" name="file" id="file2">
+		        </div>
+		    </div>
+		</div>
+	</div>             
+</form>

@@ -30,8 +30,7 @@
 						<!-- operator -->
 						<div class="op">
 							<a href="#" class="btn btn-default" role="button"> <i class="glyphicon glyphicon-tasks"></i>优惠券列表</a>
-							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i
-									class="glyphicon glyphicon-plus"></i> 新增</a>
+							<a href="#" id="task_add_modal_btn" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-plus"></i> 新增</a>
 						</div>
 						<!-- table-content -->
 						<div class="table-content">
@@ -47,14 +46,16 @@
 										<th>优惠类型</th>
 										<th>抽奖类型</th>
 										<th>抽奖权重比</th>
-										<th>已用次数</th>
-										<th>可用总次</th>
+										<th>是否绑定产品</th>
+										<th>绑定产品Seo</th>
+										<!-- <th>已用次数</th>
+										<th>可用总次</th> -->
 										<th>展示位置</th>
 										<th>手机图</th>
 										<th>PC端图</th>
 										<th>是否有效</th>
-										<th>适用时间</th>
-										<th>失效时间</th>
+										<!-- <th>适用时间</th>
+										<th>失效时间</th> -->
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -80,18 +81,14 @@
 
 	<script type="text/javascript" type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
-
-	<%-- <script type="text/javascript" src="${APP_PATH }/static/back/js/moment.min.js"></script>
-	<script type="text/javascript" src="${APP_PATH }/static/back/js/datepicker/datepicker.js"></script> --%>
 
 	<script type="text/javascript">
 		$('.nicescroll').each(function (i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -111,7 +108,6 @@
 				data: "pn=" + pn,
 				type: "GET",
 				success: function (result) {
-					console.log(result);
 					//1、解析并显示员工数据
 					build_task_table(result);
 					//2、解析并显示分页信息
@@ -127,23 +123,23 @@
 			$("#task_table tbody").empty();
 			var task = result.extend.pageInfo.list;
 			$.each(task, function (index, item) {
+				var type = item.couponType;
 				var couponId = $("<td></td>").append(item.couponId);
 				var couponName = $("<td></td>").append(item.couponName);
-				var couponPrice = $("<td></td>").append(parseFloat(item.couponPrice));
-				var couponPriceOff = $("<td></td>").append(item.couponPriceOff+'%');
+				var couponPrice = $("<td></td>").append(type == 0 ? parseFloat(item.couponPrice) : '');
+				var couponPriceOff = $("<td></td>").append(type == 1 ? item.couponPriceOff + '%' : '');
 				var couponPriceBaseline = $("<td></td>").append(parseFloat(item.couponPriceBaseline));
 				var couponCode = $("<td></td>").append(item.couponCode);
-				
-				var couponType = $("<td></td>").append((item.couponType == 1 ? '折扣券' : '满减券'));
+				var couponType = $("<td></td>").append((type == 1 ? '折扣券' : '满减券'));
 				var couponLuckDrawType = $("<td></td>").append((item.couponLuckDrawType == 1 ? '支持抽奖' : '不支持抽奖'));
 				var couponLuckDrawWeight = $("<td></td>").append((item.couponLuckDrawWeight));
-				//var couponType = $("<td></td>").append((item.couponType));
-				console.log("item.couponType:"+item.couponType);
-				var couponTimes = $("<td></td>").append(item.couponTimes);
-				var couponAllTimes = $("<td></td>").append(item.couponAllTimes);
-				var couponStatus = $("<td></td>").append((item.couponStatus === 1 ? '已生效' : '未生效'));
-				
+				/* var couponTimes = $("<td></td>").append(item.couponTimes);
+				var couponAllTimes = $("<td></td>").append(item.couponAllTimes); */
+				var couponProductOnlyType = $("<td></td>").append(item.couponProductOnlyType ? '是' : '否');
+				var couponProductSeoNameOnlyPId = $("<td></td>").append(item.couponProductOnlyType ? (item.couponProductOnlyPId + ' * ' + item.couponProductSeoNameOnlyPId) : '');
+				var couponStatus = $("<td></td>").append((item.couponStatus == 1 ? '已生效' : '未生效'));
 				var couponAreaNumStr = "";
+
 				if (item.couponAreaNum == 1) {
 					couponAreaNumStr = '1-请选择';
 				} else if (item.couponAreaNum == 2) {
@@ -152,21 +148,18 @@
 					couponAreaNumStr = '3-详情页';
 				} else if (item.couponAreaNum == 4) {
 					couponAreaNumStr = '4-结算页';
-				} 
-				
+				}
+
 				var couponAreaNum = $("<td></td>").append(couponAreaNumStr);
-				
 				var imgurl = item.couponImgwapurl;
 				var image = '<img src=' + imgurl + ' ' + 'width=50 height=50>';
 				var couponImgwapurl = $("<td></td>").append(image);
 				var imgurlpc = item.couponImgpcurl;
 				var imagepc = '<img src=' + imgurlpc + ' ' + 'width=50 height=50>';
 				var couponImgpcurl = $("<td></td>").append(imagepc);
-				
+				/* var couponStarttime = $("<td></td>").append(item.couponStarttime);
+				var couponEndtime = $("<td></td>").append(item.couponEndtime); */
 
-				var couponStarttime = $("<td></td>").append(item.couponStarttime);
-				var couponEndtime = $("<td></td>").append(item.couponEndtime);
-				
 				var editBtn = $("<button></button>").addClass("btn btn-primary btn-xs edit_btn")
 					.append($("<span></span>").addClass("glyphicon glyphicon-pencil")).append("编辑");
 				//为编辑按钮添加一个分类id
@@ -186,14 +179,14 @@
 					.append(couponType)
 					.append(couponLuckDrawType)
 					.append(couponLuckDrawWeight)
-					.append(couponTimes)
-					.append(couponAllTimes)
+					.append(couponProductOnlyType)
+					.append(couponProductSeoNameOnlyPId)
 					.append(couponAreaNum)
 					.append(couponImgwapurl)
 					.append(couponImgpcurl)
 					.append(couponStatus)
-					.append(couponStarttime)
-					.append(couponEndtime)
+					/* .append(couponStarttime)
+					.append(couponEndtime) */
 					.append(btnTd)
 					.appendTo("#task_table tbody");
 			});
@@ -269,23 +262,22 @@
 			// 获取分类页面模板
 			loadTpl();
 		});
-	
+
 		// 新建/编辑任務提交按钮
 		$(document).on('click', '#tasksubmit', function () {
-			var data = $('form').serializeArray();
-			// console.log(data)
-			data = data.reduce(function (obj, item) {
+			var reqData = $('form').serializeArray();
+			reqData = reqData.reduce(function (obj, item) {
 				obj[item.name] = item.value;
 				return obj
 			}, {});
-			data.couponStatus = $(":input[name='couponStatus']").val();
-			// console.log(data);
+			reqData.couponStatus = $(":input[name='couponStatus']").val();
+			console.log(reqData)
 			$.ajax({
 				url: "${APP_PATH}/MlbackCoupon/save",
-				data: JSON.stringify(data),
+				data: JSON.stringify(reqData),
 				dataType: "json",
 				contentType: 'application/json',
-				type: "POST",
+				type: "post",
 				success: function (result) {
 					if (result.code == 100) {
 						alert('新建/编辑成功！');
@@ -321,36 +313,42 @@
 			loadTpl($(this).attr('edit-id'));
 		});
 
-    // 回显数据
+		// 回显数据
 		function tianchong(data) {
-    	
 			$(":input[name='couponId']").val(data.couponId);
 			$(":input[name='couponName']").val(data.couponName);
 			$(":input[name='couponPrice']").val(data.couponPrice);
 			// $("select[name='couponPriceOff']").val(data.couponPriceOff);
-		    //$("select[name='couponPriceOff'] option:checked").text(data.couponPriceOff+'%'); 
+			//$("select[name='couponPriceOff'] option:checked").text(data.couponPriceOff+'%'); 
 			$(":input[name='couponPriceOff']").val(data.couponPriceOff);
 			$(":input[name='couponPriceBaseline']").val(data.couponPriceBaseline);
 			$(":input[name='couponCode']").val(data.couponCode);
 			$(":input[name='couponType']").val(data.couponType);
 			var couponType = data.couponType;
-			if(couponType==1){
+			if (couponType == 1) {
 				$(".open_1").show();
 				$(".open_0").hide();
-			}else if(couponType==0){
+			} else if (couponType == 0) {
 				$(".open_1").hide();
 				$(".open_0").show();
 			}
+
 			$(":input[name='couponLuckDrawType']").val(data.couponLuckDrawType);
 			$(":input[name='couponLuckDrawWeight']").val(data.couponLuckDrawWeight);
 			$(":input[name='couponTimes']").val(data.couponTimes);
 			$(":input[name='couponAllTimes']").val(data.couponAllTimes);
-			
 			$(":input[name='couponAreaNum']").val(data.couponAreaNum);
-			
 			$(":input[name='couponStarttime']").val(data.couponStarttime);
 			$(":input[name='couponEndtime']").val(data.couponEndtime);
-			
+
+			if (data.couponProductOnlyType) {
+				$(":input[name='couponProductOnlyType']").val(data.couponProductOnlyType);
+				$(":input[name='couponProductOnlyPId']").val(data.couponProductOnlyPId);
+				$('.binding_product-select').show();
+			} else {
+				$('.binding_product-select').hide();
+			}
+
 			if (data.couponImgwapurl && data.couponImgwapurl.length) {
 				var el = $(".upload-img-btn.img");
 				el.attr("style", "background-repeat: no-repeat; background-position: center; background-size: 100%;");
@@ -362,28 +360,28 @@
 				setImage(el2, data.couponImgpcurl);
 			}
 
-			$(":input[name='couponStatus']").prop('checked', (data.couponStatus === 1 ? true : false));
+			$(":input[name='couponStatus']").prop('checked', (data.couponStatus == 1 ? true : false));
 			$(":input[name='couponStatus']").val(data.couponStatus);
-			$(":input[name='couponStatus']").parent().find('span').text((data.couponStatus === 1 ? '已生效' : '未生效'));
+			$(":input[name='couponStatus']").parent().find('span').text((data.couponStatus == 1 ? '已生效' : '未生效'));
 		}
 
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addCoupon.html', function () {
+				getProductList();
+
 				$('.coupon-status').find('input').on('change', function () {
 					var spanEl = $(this).parent().find('span');
 					$(this).is(':checked') ? $(this).val(1) && spanEl.text('已生效') : $(this).val(0) && spanEl.text('未生效');
 				});
-				
+
 				if (id) {
 					// fetch data
 					$.ajax({
 						url: "${APP_PATH}/MlbackCoupon/getOneMlbackCouponDetailById",
-						data: {
-							"couponId": id
-						},
-						type: "POST",
+						data: { "couponId": id },
+						type: "post",
 						success: function (result) {
-							if (result.code === 100) {
+							if (result.code == 100) {
 								var obj = result.extend.mlbackCouponOne;
 								tianchong(obj);
 							} else {
@@ -393,39 +391,59 @@
 					});
 				}
 				/**********************/
-				$(".choose_coup select").change(function() {
-					if($(this).val() == 0 ) {
-							$(".open_1").hide();
-							$(".open_0").show();
-					}else if($(this).val() == 1) {
-							$(".open_1").show();
-							$(".open_0").hide();
+				$(".choose_coup select").change(function () {
+					if ($(this).val() == 0) {
+						$(".open_1").hide();
+						$(".open_0").show();
+					} else if ($(this).val() == 1) {
+						$(".open_1").show();
+						$(".open_0").hide();
 					}
-				})
+				});
 				
-				// console.log(csh_select);
-				// if(csh_select==0){
-				// 	$(".open_1").hide();
-				// }else{
-				// 	$(".open_1").show();
-				// }
-				
-				
+				$('.binding-product select').on('change', function() {
+					if($(this).val() == 1) {
+						$('.binding_product-select').show();
+					} else {
+						$('.binding_product-select').hide();
+					}
+				});
 			});
 		}
-		
+
+		function getProductList() {
+			$.ajax({
+				url: "${APP_PATH}/MlbackProduct/getMlbackProductAllList",
+				type: "GET",
+				async: false,
+				success: function (result) {
+					if (result.code == 100) {
+						renderProductList($('#couponProductOnlyPId'), result.extend.mlbackProductResList);
+					} else {
+						alert("联系管理员");
+					}
+				}
+			});
+		}
+
+		function renderProductList(el, data) {
+			var html = '<option value="-1">---无绑定产品---</option>';
+			for (var i = 0; i < data.length; i += 1) {
+				html += '<option value="' + data[i].productId + '">'+ data[i].productId+"    " + data[i].productName + '</option>';
+			}
+			el.html(html);
+		}
+
 		$(document.body).on("change", "#file1", upload);
 		$(document.body).on("change", "#file2", uploadMainFu);
 
 		function upload() {
 			var self = this;
 			var obj = new FormData();
-			obj.append('file', $(this)[0].files[0]);
 			var couponIdUP = $(":input[name='couponId']").val();
-			//console.log("categoryIdUP:"+categoryIdUP);
+			obj.append('file', $(this)[0].files[0]);
 			if (couponIdUP == '') {
 				//如果没有pid,弹出"请先输入产品名，保存后再次进入"
-				// console.log("productIdUP:"+productIdUP);
 				alert("请先输入类名，保存后从编辑进入");
 			} else {
 				obj.append('couponId', couponIdUP);
@@ -439,9 +457,7 @@
 					contentType: false, // 不设置内容类型
 					success: function (data) {
 						// 设置背景为我们选择的图片
-						// console.log(data);
 						var returl = data.extend.uploadUrl;
-						// $(self).parent().css({ "background-image": "url("+'${APP_PATH }/static/img/category/'+returl+")" });  
 						setImage($(self).parent(), returl);
 					}
 				});
@@ -484,7 +500,6 @@
 			var couponIdUP = $(":input[name='couponId']").val();
 			if (couponIdUP == "") {
 				// 如果没有pid,弹出"请先输入产品名，保存后再次进入"
-				// console.log("productIdUP:"+productIdUP);
 				alert("请先输入产品名，保存后从编辑进入");
 			} else {
 				obj.append('couponId', couponIdUP);
@@ -498,14 +513,12 @@
 					contentType: false, // 不设置内容类型
 					success: function (data) {
 						//设置背景为我们选择的图片
-						// console.log(data);
 						var returl = data.extend.uploadUrl;
-						// $(self).parent().css({ "background-image": "url("+'${APP_PATH }/static/img/category/'+returl+")" });
 						setImage($(self).parent(), returl);
 					}
 				});
 			}
-    }
+		}
 	</script>
 </body>
 

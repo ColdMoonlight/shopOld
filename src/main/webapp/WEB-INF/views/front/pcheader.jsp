@@ -21,6 +21,15 @@
 	  gtag('config', 'UA-145178467-1');
 	</script> -->
 	
+	<!-- Global site tag (gtag.js) - Google Analytics huashuohair-->
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128377932-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-128377932-1');
+	</script> -->
 	
 	<!-- Global site tag (gtag.js) - Google Analytics 测试-->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326913-1"></script>
@@ -31,12 +40,15 @@
 	
 	  gtag('config', 'UA-148326913-1');
 	</script>
+	
+	<!-- google-site-verification 网站地图所需 上线时打开 
+	<meta name="google-site-verification" content="S_nwEF7Oc2MiSJHmAoJ8M8QA8vIA9QxyUrFDSTq1-YI" />-->
+	
 </head>
 <body>
-	<!-- <div class="fixed_link"><a href="${APP_PATH}/Activty.html"></a></div> -->
 	<header class="desktop-header">
 		<!-- tt-desktop-header -->
-			<div class="alinktop"><a href="javascript:;"><img src="${APP_PATH }/static/pc/img/tp.jpg" ></a></div>
+			<div class="alinktop"></div>
 		   	<div class="logo_search">
 			   	<div class="container head_box">
 					<!-- search logo cart -->
@@ -55,8 +67,8 @@
 								<li>bob</li>
 								<li>wigs</li>
 								<li>bundle</li>
-								<li>wig 613</li>
-								<li>Water Wave</li>
+								<li>613</li>
+								<li>Water</li>
 							</ul>
 						 </div>
 						 <div class="loginbox">
@@ -81,19 +93,61 @@
 		
 	</header>
 	<div class="kongbai"></div>
-<!-- 	<div class="fix_iconnav">
-		<ul class="icon_nav">
-			<li id="cart_icon" class="cart_icon"><a href="###"></a><span class="cart_num">0</span></li>
-			<li class="go_top"><a href="###"></a></li>
-		</ul>
-	</div> -->
+
 	<div id="cart_icon" class="cart_icon liman"><a href="###"></a><span class="cart_num">0</span></div>
 	<div class="go_top liman"><a href="###"></a></div>
 	
 	<script src="${APP_PATH }/static/js/jquery-1.12.4.min.js"></script>
 	<script src="${APP_PATH }/static/pc/js/jquery.fly.min.js"></script>
 	<script src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<script>	
+	<script>
+		var config = {
+			// megalook
+			"tidio": '//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js',
+			// megalookhair
+			// "tidio": '//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js'
+			// huashuohair
+			// "tidio": '//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js'
+		}
+	
+		function addTidio() {
+			var script = document.createElement('script');
+			script.async = true;
+			script.src = config.tidio;
+			document.body.appendChild(script);
+		}
+	  $.ajax({
+			url: '${APP_PATH}/MlbackSlide/getMlbackSlidepcListByArea',
+			data: JSON.stringify({ "slideArea": 5 }),
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/json',
+			success: function (data) {
+				var headerData = data.extend.mlbackSlideList;
+				if (data.code == 100 && headerData.length > 0) {
+					renderAlinkTop($('.alinktop'), headerData[0]);
+				}
+			}
+	  });
+	  function renderAlinkTop(parent, data) {
+			var html = '',
+				slideIfinto_click = data.slideIfinto,
+				slideIfproORcateORpage = data.slideIfproORcateORpage;
+			if (slideIfinto_click == 0) {
+				html += '<a href="javascript:;" style="cursor: default;">' +
+						'<img src="' + data.slidePcimgurl + '" alt="">' +
+					'</a>';
+			} else {
+				if (slideIfproORcateORpage == 0) {
+					html += '<a href="${APP_PATH}/' + data.slideSeoname + '.html">' + '<img src="' + data.slidePcimgurl + '" alt="">' + '</a>';
+				} else if (slideIfproORcateORpage == 1) {
+					html += '<a href="${APP_PATH}/search/' + data.slideCateSeoname + '.html">' + '<img src="' + dat.slidePcimgurl + '" alt="">' + '</a>';
+				} else if (slideIfproORcateORpage == 2) {
+					html += '<a href="${APP_PATH}/' + data.slidePageSeoname + '.html">' + '<img src="' + data.slidePcpimgurl + '" alt="">' + '</a>';
+				}
+			}
+			parent.html(html);
+	 }
        $(function(){
 		   	$(".img_show_cont a").click(function(){
 			 	$(".img_show").animate({ 
@@ -308,7 +362,7 @@
 		}
 /*******搜索****************************************/
 		   	$(".serch_cont button").click(function(){
-		     	var seaProductName = $(this).val();
+		     	var seaProductName = $(".tt-search-input").val();
 		     	if(seaProductName==""){
 		         	alert("Please enter keywords;")
 		     	} else {

@@ -31,11 +31,14 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+	  fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
+		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<script>
   		fbq('track', 'ViewContent');
 	</script>
@@ -50,6 +53,71 @@
 	<!-- main -->
 	<div class="main">
 		<div class="container clearfix">
+			<div class="customer_widget_box clearfix">
+				<h3>Customer Reviews</h3>
+				<div class="review-left clearfix">
+					<div class="left_allstatr">
+						<div class="review-toal-num">Based on <span class="data">1868</span> Customer Reviews</div>
+						<div class="reviews-data2">
+							 <div class="stars-list2">
+								 <i class="icon star2"></i>
+								 <i class="icon star2"></i>
+								 <i class="icon star2"></i>
+								 <i class="icon star2"></i>
+								 <i class="icon star2"></i>
+							 </div>
+						</div>
+					</div>
+					 <div class="reviews-statics">
+						<div class="review-statics-item five">
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
+						<div class="progress"><div class="progress-inner" style="width: 93.00%"></div></div><div class="data">93.00%</div></div>
+						<div class="review-statics-item four">
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
+						<div class="progress"><div class="progress-inner" style="width: 30.00%"></div></div><div class="data">6.00%</div></div>
+						<div class="review-statics-item three">
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
+						<div class="progress"><div class="progress-inner" style="width: 5.00%"></div></div><div class="data">1.00%</div></div>
+						<div class="review-statics-item two">
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
+						<div class="progress"><div class="progress-inner" style="width: 0.00%"></div></div><div class="data">0.00%</div></div>
+						<div class="review-statics-item one">
+							<div class="reviews-data2">
+								 <div class="stars-list2">
+									 <i class="icon star2"></i>
+								 </div>
+							</div>
+						<div class="progress"><div class="progress-inner" style="width: 0.00%"></div></div><div class="data">0.00%</div></div>
+					 </div>
+					</div>
+					<h4>Product Reviews(659)</h4>
+			</div>
             <div class="list_pro_cont" id="waterfull">
             	<ul>
             		
@@ -158,22 +226,13 @@
 				});
 				/******************/
 				
-			}
-
-
-			
-			
-			
-			
-				
-				
+			}		
 		})
 		
-		
-		
+		addTidio();
 	</script>
   	<!-- megalook-->
-  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+  	<!-- <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script> -->
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
   	<!-- huashuohair -->

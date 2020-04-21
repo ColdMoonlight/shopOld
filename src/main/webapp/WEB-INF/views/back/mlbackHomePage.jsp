@@ -46,31 +46,55 @@
 						</div>
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list num_box_list">
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"  class="model-item liulan"><div class="model-text">浏览量</div><div class="model-num">0</div></a>
+								<a href="${APP_PATH }/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="浏览量"
+									class="model-item liulan">
+									<div class="model-text">浏览量</div>
+									<div class="model-num">0</div>
+								</a>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
+									<a href="${APP_PATH }/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage"
+										title="加购量" class="cart_num addcart">
+										<div class="model-text">加购量</div>
+										<div class="model-num">0</div>
+									</a>
+									<a href="${APP_PATH }/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage"
+										title="buynow加购量" class="cart_num addcart2">
+										<div class="model-text">buynow加购量</div>
+										<div class="model-num">0</div>
+									</a>
 								</span>
 								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
+									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage"
+										title="购物车结算" class="cart_num addcart_num">
+										<div class="model-text">购物车结算</div>
+										<div class="model-num">0</div>
+									</a>
+									<a href="${APP_PATH }/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage"
+										title="buynow结算" class="cart_num buy_nownum">
+										<div class="model-text">buynow结算</div>
+										<div class="model-num">0</div>
+									</a>
 								</span>
-								<a href="/ShopTemplate/MlbackAddOrderViewDetail/toMlbackAddOrderViewDetailPage" title="order出品量" class="model-item addorder_num"><div class="model-text">出单产品量</div><div class="model-num">0</div></a>
+								<a href="${APP_PATH }/MlbackAddOrderViewDetail/toMlbackAddOrderViewDetailPage"
+									title="order出品量" class="model-item addorder_num">
+									<div class="model-text">出单产品量</div>
+									<div class="model-num">0</div>
+								</a>
 							</div>
 						</div>
 						<hr style="border-color: #ccc;" />
 						<div class="model-b model-pie num_data">
 							<div class="model-pie-data model-pie-list num_box_list">
-								<a href="/ShopTemplate/MlbackAddPayinfoViewDetail/toMlbackAddPayinfoViewDetailPage" title="成交金额"  class="model-item PayinfoSuccessNum"><div class="model-text">成交num</div><div class="model-num">0</div></a>
-								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewDetailPage" title="加购量" class="cart_num addcart"><div class="model-text">加购量</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCartViewDetail/toMlbackAddCartViewbuynowDetailPage" title="buynow加购量" class="cart_num addcart2"><div class="model-text">buynow加购量</div><div class="model-num">0</div></a>
-								</span>
-								<span class="model-item addcart_box">
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutViewDetailPage" title="购物车结算" class="cart_num addcart_num"><div class="model-text">购物车结算</div><div class="model-num">0</div></a>
-									<a href="/ShopTemplate/MlbackAddCheakoutViewDetail/toMlbackAddCheakoutBuyNowViewDetailPage" title=">buynow结算" class="cart_num buy_nownum"><div class="model-text">buynow结算</div><div class="model-num">0</div></a>
-								</span>
-								<a href="/ShopTemplate/MlbackProductViewDetail/toMlbackProductViewDetailPage" title="结算量" class="model-item accounts"><div class="model-text">结算量</div><div class="model-num">0</div></a>
+								<a href="${APP_PATH }/MlbackAddPayinfoViewDetail/toMlbackAddPayinfoViewDetailPage"
+									title="成交金额" class="model-item PayinfoSuccessNum">
+									<div class="model-text">成交num</div>
+									<div class="model-num">0</div>
+								</a>
+								
+								<a href="javascript:;" title="结算量" class="model-item accounts">
+									<div class="model-text">结算量</div>
+									<div class="model-num">0</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -123,18 +147,18 @@
 
 	<script type="text/javascript">
 		var adminAccname = '${sessionScope.AdminUser.adminAccname}';
-		console.log("adminAccname:" + adminAccname);
+		// console.log("adminAccname:" + adminAccname);
 		$("#UEmailSession").html(adminAccname);
 	</script>
 	<script type="text/javascript">
-		$('.nicescroll').each(function(i, item) {
+		$('.nicescroll').each(function (i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
-	    }).resize()
+			}).resize()
 		});
 		var targetInput = $('.date-timepicker');
 		var date = new Date();
@@ -154,17 +178,14 @@
 				'second': 59
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
-			/****************************/
-			var minDate22 = moment()
-				.set({
-					'date': date.getDate(),
-					'hour': 0,
-					'minute': 0,
-					'second': 0
-				})
-				.format('YYYY-MM-DD HH:mm:ss');
-			// console.log(minDate22)/*****************************2222222*/
-			
+		var minDate22 = moment()
+			.set({
+				'date': date.getDate(),
+				'hour': 0,
+				'minute': 0,
+				'second': 0
+			})
+			.format('YYYY-MM-DD HH:mm:ss');
 		var maxDate = moment()
 			.set({
 				'date': date.getDate(),
@@ -173,140 +194,142 @@
 				'second': date.getSeconds()
 			})
 			.format('YYYY-MM-DD HH:mm:ss');
+		/*****初始化时间*****************/
+		var storage = window.localStorage;
+		var startime = storage.getItem('startTime') || minDate22;
+		var endtime = storage.getItem('endTime') || maxDate;
 
 		function initHtml() {
 			var $input = targetInput.find('input');
-			$input.eq(0).val(minDate22);
-			$input.eq(1).val(maxDate);
+			$input.eq(0).val(startime);
+			$input.eq(1).val(endtime);
 		}
-		/*****初始化时间*****************/
-		var startime =minDate22;
-		var endtime =maxDate;
-		/****************************************************第1行**************************************************/
-		/*****初始调取浏览量*****************/
-		$.ajax({
-			url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
-			data: JSON.stringify({
-			"proviewdetailStarttime": startime,
-			"proviewdetailEndtime": endtime,
-			}),
-			type: 'post',
-			dataType: 'JSON',
-			contentType: 'application/json',
-			success: function (data) {
-			// console.log(data);
-			var resData = data.extend.mlbackActShowProList;
-			$(".liulan .model-num").html(resData.length)
-			}
-		  });
-			  /*****初始调取仅加购量****************/
-			  $.ajax({
-				  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
-				  data: JSON.stringify({
-				  "addcartviewdetailStarttime": startime,
-				  "addcartviewdetailEndtime": endtime,
-				  }),
-				  type: 'post',
-				  dataType: 'JSON',
-				  contentType: 'application/json',
-				  success: function (data) {
+
+		function initData() {
+			/*****初始调取浏览量*****************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
+				data: JSON.stringify({
+					"proviewdetailStarttime": startime,
+					"proviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.mlbackActShowProList;
+					$(".liulan .model-num").html(resData.length)
+				}
+			});
+			/*****初始调取仅加购量****************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
+				data: JSON.stringify({
+					"addcartviewdetailStarttime": startime,
+					"addcartviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
 					// console.log(data);
 					var resData = data.extend.toDayNum;
-					
+
 					$(".addcart .model-num").html(resData);
-					
-				  },
-			  
+
+				},
+
 			});
-				/*****初始调取加购量****************/
-				$.ajax({
-					  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
-					  data: JSON.stringify({
-					  "addcartviewdetailStarttime": startime,
-					  "addcartviewdetailEndtime": endtime,
-					  }),
-					  type: 'post',
-					  dataType: 'JSON',
-					  contentType: 'application/json',
-					  success: function (data) {
-						// console.log(data);
-						var resData = data.extend.toDayNum;
-						$(".addcart2 .model-num").html(resData);
-					  },
-				  
-				});
-				/****************buynow量**************************************************/
-				$.ajax({
-					  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
-					  data: JSON.stringify({
-					  "addcheakoutviewdetailStarttime": startime,
-					  "addcheakoutviewdetailEndtime": endtime,
-					  }),
-					  type: 'post',
-					  dataType: 'JSON',
-					  contentType: 'application/json',
-					  success: function (data) {
-						console.log(data);
-						var resData = data.extend.toDayNum;
-						$(".buy_nownum .model-num").html(resData);
-					  },
-				  
-				});
-				/****************购物车结算**************************************************/
-				$.ajax({
-					  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
-					  data: JSON.stringify({
-					  "addcheakoutviewdetailStarttime": startime,
-					  "addcheakoutviewdetailEndtime": endtime,
-					  }),
-					  type: 'post',
-					  dataType: 'JSON',
-					  contentType: 'application/json',
-					  success: function (data) {
-						console.log(data);
-						var resData = data.extend.toDayNum;
-						$(".addcart_num .model-num").html(resData);
-					  },
-				  
-				});
-				/****************实际OrderItem出单详情**************************************************/
-				$.ajax({
-					  url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
-					  data: JSON.stringify({
-					  "addorderviewdetailStarttime": startime,
-				      "addorderviewdetailEndtime": endtime,
-					  }),
-					  type: 'post',
-					  dataType: 'JSON',
-					  contentType: 'application/json',
-					  success: function (data) {
-						console.log(data);
-						var resData = data.extend.toDayNum;
-						$(".addorder_num .model-num").html(resData);
-					  },
-				  
-				});
-				/****************************************************第二行**************************************************/
-				/****************实际OrderItem出单详情**************************************************/
-				$.ajax({
-					  url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
-					  data: JSON.stringify({
-					  "addorderviewdetailStarttime": startime,
-				      "addorderviewdetailEndtime": endtime,
-					  }),
-					  type: 'post',
-					  dataType: 'JSON',
-					  contentType: 'application/json',
-					  success: function (data) {
-						console.log(data);
-						var resData = data.extend.toDayNum;
-						$(".addorder_num .model-num").html(resData);
-					  },
-				  
-				});
-				
-		
-/***********************************************/
+			/*****初始调取加购量****************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
+				data: JSON.stringify({
+					"addcartviewdetailStarttime": startime,
+					"addcartviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".addcart2 .model-num").html(resData);
+				},
+
+			});
+			/****************buynow量**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
+				data: JSON.stringify({
+					"addcheakoutviewdetailStarttime": startime,
+					"addcheakoutviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".buy_nownum .model-num").html(resData);
+				},
+
+			});
+			/****************购物车结算**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
+				data: JSON.stringify({
+					"addcheakoutviewdetailStarttime": startime,
+					"addcheakoutviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".addcart_num .model-num").html(resData);
+				},
+
+			});
+			/****************实际OrderItem出单详情**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddOrderViewDetail/getAddOrderViewDetailNum',
+				data: JSON.stringify({
+					"addorderviewdetailStarttime": startime,
+					"addorderviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".addorder_num .model-num").html(resData);
+				},
+
+			});
+			/****************************************************第二行**************************************************/
+			/****************实际OrderItem出单详情**************************************************/
+			$.ajax({
+				url: '${APP_PATH}/MlbackAddPayinfoViewDetail/getAddPayinfoViewDetailSuccessNum',
+				data: JSON.stringify({
+					"addpayinfoviewdetailStarttime": startime,
+					"addpayinfoviewdetailEndtime": endtime,
+				}),
+				type: 'post',
+				dataType: 'JSON',
+				contentType: 'application/json',
+				success: function (data) {
+					// console.log(data);
+					var resData = data.extend.toDayNum;
+					$(".PayinfoSuccessNum .model-num").html(resData);
+				},
+
+			});
+		}
+
+		/***********************************************/
 		function initJs() {
 			targetInput.each(function (i, item) {
 				$(item).datePicker({
@@ -315,119 +338,39 @@
 					max: maxDate,
 					isRange: true,
 					shortcutOptions: [{
-					 name: '昨天',
-					 day: '-1,-1',
-					 time: '00:00:00,23:59:59'
-					},{
-					 name: '最近一周',
-					 day: '-7,0',
-					 time:'00:00:00,'
+						name: '昨天',
+						day: '-1,-1',
+						time: '00:00:00,23:59:59'
 					}, {
-					 name: '最近一个月',
-					 day: '-30,0',
-					 time: '00:00:00,'
+						name: '最近一周',
+						day: '-7,0',
+						time: '00:00:00,'
 					}, {
-					 name: '最近三个月',
-					 day: '-90, 0',
-					 time: '00:00:00,'
+						name: '最近一个月',
+						day: '-30,0',
+						time: '00:00:00,'
+					}, {
+						name: '最近三个月',
+						day: '-90, 0',
+						time: '00:00:00,'
 					}],
 					hide: function (type) {
-						// console.log(1);
-						// console.info(this.$input.eq(0).val(), this.$input.eq(1).val());
-						var startime = this.$input.eq(0).val();
-						var endtime = this.$input.eq(1).val();
-						/******根据时间调取浏览量***************************/
-						$.ajax({
-						        url: '${APP_PATH}/MlbackProductViewDetail/getProductViewDetailNum',
-						        data: JSON.stringify({
-						        "proviewdetailStarttime": startime,
-						        "proviewdetailEndtime": endtime,
-						        }),
-						        type: 'post',
-						        dataType: 'JSON',
-						        contentType: 'application/json',
-						        success: function (data) {
-						        // console.log(data);
-								var resData = data.extend.mlbackActShowProList;
-								$(".liulan .model-num").html(resData.length)
-						        }
-						      });
-					/**********初始调取仅加购量********************************************************/
-							$.ajax({
-								  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailNum',
-								  data: JSON.stringify({
-								  "addcartviewdetailStarttime": startime,
-								  "addcartviewdetailEndtime": endtime,
-								  }),
-								  type: 'post',
-								  dataType: 'JSON',
-								  contentType: 'application/json',
-								  success: function (data) {
-									// console.log(data);
-									var resData = data.extend.toDayNum;
-									$(".addcart .model-num").html(resData);
-									
-								  },
-							  
-							});
-					/***********初始调取加购量****************************************************************/			
-							$.ajax({
-								  url: '${APP_PATH}/MlbackAddCartViewDetail/getAddCartViewDetailBuyNowNum',
-								  data: JSON.stringify({
-								  "addcartviewdetailStarttime": startime,
-								  "addcartviewdetailEndtime": endtime,
-								  }),
-								  type: 'post',
-								  dataType: 'JSON',
-								  contentType: 'application/json',
-								  success: function (data) {
-									console.log(data);
-									var resData = data.extend.toDayNum;
-									$(".addcart2 .model-num").html(resData);
-								  },
-							  
-							});	
-							/****************buynow量**************************************************/
-							$.ajax({
-								  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailBuyNowNum',
-								  data: JSON.stringify({
-								  "addcheakoutviewdetailStarttime": startime,
-								  "addcheakoutviewdetailEndtime": endtime,
-								  }),
-								  type: 'post',
-								  dataType: 'JSON',
-								  contentType: 'application/json',
-								  success: function (data) {
-									console.log(data);
-									var resData = data.extend.toDayNum;
-									$(".buy_nownum .model-num").html(resData);
-								  },
-							  
-							});
-							/****************购物车结算**************************************************/
-							$.ajax({
-								  url: '${APP_PATH}/MlbackAddCheakoutViewDetail/getAddCheakoutViewDetailNum',
-								  data: JSON.stringify({
-								  "addcheakoutviewdetailStarttime": startime,
-								  "addcheakoutviewdetailEndtime": endtime,
-								  }),
-								  type: 'post',
-								  dataType: 'JSON',
-								  contentType: 'application/json',
-								  success: function (data) {
-									console.log(data);
-									var resData = data.extend.toDayNum;
-									$(".addcart_num .model-num").html(resData);
-								  },
-							  
-							});
-						
+						startime = this.$input.eq(0).val();
+						endtime = this.$input.eq(1).val();
+						storageTime();
+						initData();
 					}
 				})
 			})
 		}
+		
+		function storageTime() {
+			storage.setItem('startTime', startime);
+			storage.setItem('endTime', endtime);
+		}
 
 		$(function () {
+			initData();
 			initHtml();
 			initJs();
 		});
@@ -636,12 +579,12 @@ MlfrontPayInfo/getMlfrontPayInfoByDate
 				var payinfoId = $("<td></td>").append(item.payinfoId);
 				var payinfoOid = $("<td></td>").append(item.payinfoOid);
 				// var payinfoStatus = $("<td></td>").append((item.payinfoStatus ? '已支付' : '未支付'));
-				if(item.payinfoStatus ===1){
+				if (item.payinfoStatus === 1) {
 					var payinfoStatus = $("<td class='yzf_bg'></td>").append('<b>已支付</b>');
-				}else{
+				} else {
 					var payinfoStatus = $("<td class='wzf_bg'></td>").append('<b>未支付</b>');
 				}
-				
+
 				var payinfoMoney = $("<td></td>").append(payinfoMoney);
 				var payinfoPlatform = $("<td></td>").append(item.payinfoPlatform);
 				var payinfoCreatetime = $("<td></td>").append(item.payinfoCreatetime);

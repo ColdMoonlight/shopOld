@@ -91,7 +91,7 @@
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -366,6 +366,9 @@
 			$(":input[name='categoryStatus']").val(data.categoryStatus);
 			$(":input[name='categorySortOrder']").val(data.categorySortOrder);
 			$(":input[name='categorySeo']").val(data.categorySeo);
+			$(":input[name='categoryMetaTitle']").val(data.categoryMetaTitle);
+			$(":input[name='categoryMetaKeyWords']").val(data.categoryMetaKeyWords);
+			$(":input[name='categoryMetaDesc']").val(data.categoryMetaDesc);
 			$(":input[name='categoryDesc']").val(data.categoryDesc);
 			$(":input[name='categoryProductIds']").val(data.categoryProductIds);
 			$(":input[name='categoryProductNames']").val(data.categoryProductNames);

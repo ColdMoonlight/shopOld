@@ -6,8 +6,7 @@
 	<meta charset="UTF-8">
 	<title>Product List</title>
 	<% pageContext.setAttribute("APP_PATH", request.getContextPath()); %>
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -22,25 +21,25 @@
 	<meta name="aplus-touch" content="1">
 
 	<!-- Facebook Pixel Code 这是facebook广告插件可以注释掉，但不要删除-->
-
 	<script>
 		!function (f, b, e, v, n, t, s) {
 			if (f.fbq) return; n = f.fbq = function () {
 				n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+					n.callMethod.apply(n, arguments) : n.queue.push(arguments)
 			};
 			if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
 			n.queue = []; t = b.createElement(e); t.async = !0;
 			t.src = v; s = b.getElementsByTagName(e)[0];
 			s.parentNode.insertBefore(t, s)
-		}(window, document, 'script',
-			'https://connect.facebook.net/en_US/fbevents.js');
-		fbq('init', '246433859565492');
-		//fbq('init', '667403967094866');
+		}(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
 		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"
-			src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<script>
 		fbq('track', 'ViewContent');
 	</script>
@@ -48,14 +47,13 @@
 </head>
 
 <body>
-
 	<jsp:include page="mheader.jsp"></jsp:include>
 
 	<!-- main -->
 	<div class="main">
 		<div class="product-list"></div>
 		<div class="hot_box_product clearfix" style="display:none">
-			<h3>YOU MIGTH ALSO LIKE</h3>
+			<h3>RECOMMENDATION FOR YOU</h3>
 			<div class="swiper-container hot_box_product_cont">
 				<div class="swiper-wrapper"></div>
 				<div class="swiper-pagination swiper-pagination2"></div>
@@ -82,14 +80,11 @@
 			data: "productName=" + sessionScopeSearchName,
 			type: "post",
 			success: function (data) {
-				// console.log(data)
 				if (data.code == 100) {
 					var resultlist = data.extend.mlbackProductResList,
 						resultlistlength = resultlist.length,
 						name = data.extend.productName;
 					Search = name;
-					// console.log(resultlist);
-					// rednerProductmm(productList,resultlist)
 					if (resultlist == null) {
 						renderErrorMsg(productList, 'No product-related data was obtained');
 					} else {
@@ -115,7 +110,6 @@
 			if (reqDataLen > 0) {
 				for (var i = 0; i < reqDataLen; i++) {
 					for (var j = 0; j < reqDataLen - 1 - i; j++) {
-						// console.log(reqData[j].productHavesalenum);
 						if (reqData[j].productHavesalenum < reqData[j + 1].productHavesalenum) {
 							var DateOne = reqData[j];
 							reqData[j] = reqData[j + 1];
@@ -139,9 +133,7 @@
 					var productactoffif = data[i].productActoffIf,
 						productactoffid = data[i].productActoffid,
 						cp_icon = "",
-						showspan = "";
-					// console.log(productactoffif)
-					// console.log(productactoffid)  
+						showspan = ""; 
 					if (productactoffif == 1) {
 						if (productactoffid == 1) {
 							showspan = "showactive1"
@@ -171,8 +163,7 @@
 						' Review(s)</span>' +
 						'</div>' +
 						'<div class="product-price">' +
-						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i]
-							.productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
+						'<span class="product-now-price">$' + (data[i].productOriginalprice && data[i].productActoffoff ? (data[i].productOriginalprice * data[i].productActoffoff / 100).toFixed(2) : 0) + '</span>' +
 						'<span class="product-define-price">$' + (data[i].productOriginalprice ? data[i].productOriginalprice : 0) +
 						'</span>' +
 						'<span class="product-to-cart" data-id="' + data[i].productId + '"><i class="icon cart2"></i></span>' +
@@ -195,8 +186,6 @@
 					productactoffid = data[i].productActoffid,
 					cp_icon = "",
 					showspan = "";
-				// console.log(productactoffif)
-				// console.log(productactoffid)  
 				if (productactoffif == 1) {
 					if (productactoffid == 1) {
 						showspan = "showactive1"
@@ -241,17 +230,13 @@
 		}
 		$.ajax({
 			url: '${APP_PATH}/MlbackSlide/getMlbackSlidewapListByArea',
-			data: JSON.stringify({
-				"slideArea": 3
-			}),
+			data: JSON.stringify({ "slideArea": 3 }),
 			type: 'post',
 			dataType: 'json',
 			contentType: 'application/json',
 			success: function (data) {
-				// console.log(data)/***data**/
-				if (data.code === 100) {
+				if (data.code == 100) {
 					var resDataProduct = data.extend.mlbackProductResList;
-					// console.log(resData);
 					rednerProduct($('.hot_box_product_cont .swiper-wrapper'), resDataProduct);
 					new Swiper('.hot_box_product_cont', {
 						slidesPerView: 2,
@@ -278,15 +263,8 @@
 				}
 			}
 		});
-
-
+		addTidio();
 	</script>
-	<!-- megalook-->
-	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-	<!-- megalookhair 
-  	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-	<!-- huashuohair -->
-	<!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

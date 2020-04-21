@@ -66,7 +66,10 @@
 		<table tableName="tb_mlback_addpayinfoviewdetail" domainObjectName="MlbackAddPayinfoViewDetail"></table>
 		<table tableName="tb_mlback_videoshowarea" domainObjectName="MlbackVideoShowArea"></table>
 		<table tableName="tb_mlback_video" domainObjectName="MlbackVideo"></table>
-		<table tableName="tb_mlblack_abandonPurchase" domainObjectName="MlbackAbandonPurchase"></table>-->
+		<table tableName="tb_mlblack_abandonPurchase" domainObjectName="MlbackAbandonPurchase"></table>
+		<table tableName="tb_mlback_coupondesctitle" domainObjectName="MlbackCouponDescTitle"></table>
+		<table tableName="tb_mlback_coupondescdetail" domainObjectName="MlbackCouponDescDetail"></table>-->
+		
 		
 		<!--
 		<table tableName="tb_mlfront_user" domainObjectName="MlfrontUser"></table>
@@ -79,11 +82,9 @@
 		<table tableName="tb_mlfront_payInfo" domainObjectName="MlfrontPayInfo"></table>
 		<table tableName="tb_mlfront_review" domainObjectName="MlfrontReview"></table>-->
 		
-		
 		<!--
 		<table tableName="tb_paypal_shippingAddress" domainObjectName="MlPaypalShipAddress"></table>
 		<table tableName="tb_paypal_stateprovince" domainObjectName="MlPaypalStateprovince"></table>-->
-
 		
 	</context>
 </generatorConfiguration>

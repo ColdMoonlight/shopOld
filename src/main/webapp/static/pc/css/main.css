@@ -251,24 +251,19 @@ header .tt-account .tt-dropdown-menu {
 /* follow-us */
 .follow-us {
   width:100%;
-  /* background: #000; */
 }
-/* .follow-us h3 {
-  padding: 16px 0;
-  text-align: center;
-  color: #fff;
-} */
 .follow-us-list {
   padding: 10px 0;
   text-align: center;
 }
 .follow-us .follow-icon {
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  width: 40px;
+  height: 40px;
   margin: 0 6px;
+  background-image: url(../../common/follow-us.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 .follow-us .follow-icon>a {
   display: block;
@@ -276,24 +271,20 @@ header .tt-account .tt-dropdown-menu {
   height: 100%;
 }
 .follow-us .follow-icon.facebook {
-  background-image: url(../img/facebook.png);
+	background-position: 0 0;
 }
 .follow-us .follow-icon.instagram {
-  background-image: url(../img/instagram.png);
+	background-position: 0 -40px;
 }
 .follow-us .follow-icon.pinterest {
-  background-image: url(../img/pinterest.png);
+	background-position: 0 -80px;
 }
 .follow-us .follow-icon.snapchat {
-  background-image: url(../img/snapchat.png);
+	background-position: 0 -120px;
 }
 .follow-us .follow-icon.youtube {
-  background-image: url(../img/youtube.png);
+	background-position: 0 -160px;
 }
-/* .follow-us .follow-icon.twitter {
-  background-image: url(../img/twitter.png);
-} */
-
 .banner {
 	text-align: center;
 }
@@ -314,7 +305,7 @@ header .tt-account .tt-dropdown-menu {
 .product-list p {
 	display: flex;
 	justify-content: center;
-  align-items: center;
+    align-items: center;
 	width: 100%;
 	align-content: center;
 }
@@ -901,6 +892,35 @@ margin: 10px 0;
   background-color: #ff186e;
   color: #ffd0e5;
 }
+
+.main.article {
+	font-size: 16px;
+	color: #000;
+}
+.main.article ol,
+.main.article ul {
+	padding-left: 2em;
+}
+.main.article ol li {
+	list-style: decimal;
+}
+.main.article ul li {
+	list-style: disc;
+}
+.main.article h1,
+.main.article h2,
+.main.article h3,
+.main.article h4,
+.main.article h5,
+.main.article h6 {
+	margin-top: 16px;
+}
+.main.article p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
  /* pageination */
 .pagination {
 	display: flex;
@@ -1777,13 +1797,17 @@ width: 100%;
 	justify-content: flex-end;
 }
 
-.go_re{z-index: 9999999999; width: 700px; height: auto; position:fixed;top:50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: #fff; border-radius:5px;}
+.go_re{position: relative; display:inline-block; width: 700px; height: auto;background: #fff; border-radius:5px; vertical-align: middle;}
 .go_re .close{z-index: 9999999999;border-radius:50% ; width: 30px;height: 30px;font-size: 20px;text-align: center; line-height: 30px; position: absolute; top: -15px; right: -15px; background: #000; color: #fff; cursor: pointer;}
-.maskindex {
-	z-index: 9999999999;
-  	background-color: rgba(0, 0, 0, .6);
-}
+.maskindex { z-index: 9999999999; background-color: rgba(0, 0, 0, .6); overflow-y: scroll; text-align: center; padding: 30px 0; box-sizing: border-box; }
+.maskindex:after { content: ""; display: inline-block; width: 0; height: 100vh; vertical-align: middle; }
 /* lottery */
+@font-face {
+	font-family: copperplateGothic;
+	src: url('../../font/copperplateGothic.ttf');
+	font-weight: normal;
+  	font-style: normal;
+}
 .lottery {
     position: relative;
     width: 100%;
@@ -1794,10 +1818,11 @@ width: 100%;
 }
 .lottery-email {
     width: 100%;
-    padding: 30px 0;
+    /* height: 338px; */
+    height: 260px;
+    padding-top: 50px;
     text-align: center;
-    /* background-color: #00b3ff; */
-    background: url('../../common/lottery-wap.jpg') no-repeat;
+    background: url('../../common/lottery-pc.jpg') no-repeat;
     background-size: 100% 100%;
 }
 .lottery-title {
@@ -1809,30 +1834,36 @@ width: 100%;
 	display: block;
 }
 .lottery-title>span:nth-of-type(1) {
-	font-size: 30px;
-    font-weight: bolder;
-	font-family: monospace;
+	font-size: 40px;
+	font-family: copperplateGothic !important;
+	letter-spacing: 3px;
+}
+.lottery-title>span:nth-of-type(1)>b {
+	font-size: 45px;
 }
 .lottery-title>span:nth-of-type(2) {
-	margin-top: 4px;
-	font-size: 14px;
-	font-weight: bolder;
+	margin-top: 16px;
+	font-size: 16px;
+	letter-spacing: 2px;
+    font-weight: 400;
 }
-.lottery-title>span:nth-of-type(3) {
+.lottery-email>input {
+    display: inline-block;
+    width: 500px;
+    padding: 10px 24px;
     margin-top: 20px;
+    font-size: 16px;
+    background-color: #fff;
+    border-style: none;
+    border-radius: 30px;
+}
+.lottery-join-tip {
+    margin-top: 14px;
     margin-bottom: 6px;
     font-size: 16px;
     font-weight: normal;
     color: #fff;
-}
-.lottery-email>input {
-    display: inline-block;
-    width: 340px;
-    padding: 8px 24px;
-    font-size: 14px;
-    background-color: #fff;
-    border-style: none;
-    border-radius: 30px;
+    letter-spacing: 1px;
 }
 .lottery-email-tip {
 	height: 20px;
@@ -1842,68 +1873,50 @@ width: 100%;
 	font-style: italic;
 }
 .lottery-game-box {
-    padding: 20px;
+    /* padding: 20px; */
     background-color: #fff;
+    -webkit-transform: scale(.8);
+    -moz-transform: scale(.8);
+    -ms-transform: scale(.8);
+    transform: scale(.8);
+}
+
+.lottery-inner-box {
+	width: 610px;
+	padding: 10px;
+    margin: 0 auto;
+    /* margin-top: -100px; */
+	border-radius: 20px;
+	background-color: #fff;
+	box-shadow: 0 0 8px #bbb;
 }
 .lottery-game {
-    width: 340px;
-    /* padding-top: 70px; */
-    padding-top: 126px;
-    padding-bottom: 36px;
-    margin: 0 auto;
-    background-color: #d7d6d6;
-    border-radius: 6px;;
+	position: relative;
+    width: 590px;
+    padding: 165px 205px;
+    background-color: #e1e1e1;
+    border-radius: 20px;;
 }
 .lottery-game-list,
 .lottery-startgame,
 .lottery-game-item {
-    width: 90px;
-    height: 90px;
-    border-radius: 6px;
+    width: 180px;
+    height: 140px;
+    border-radius: 16px;
     box-shadow: 0 0 6px #cdcdcd;
 }
 .lottery-startgame {
-    position: relative;
+    position: absolute;
     z-index: 9999;
     margin: 0 auto;
     cursor: pointer;
-    background: url('../../common/start-game.png') no-repeat;
+    background: url('../../common/start-game-pc.png') no-repeat;
     background-size: 100% 100%;
 }
 .lottery-game-list {
     position: relative;
-    top: -90px;
     margin: 0 auto;
 }
-/* .lottery-startgame > .lottery-game-item {
-    box-sizing: border-box;
-    width: 100%;
-    height: 88%;
-    margin: 8px 0;
-    background-color: #00b3ff;
-    -webkit-transition: all .6s ease-in-out;
-    transition: all .3s ease-in-out;
-}
-.lottery-startgame.active > .lottery-game-item {
-    height: 90px;
-    padding-top: 10px;
-}
-.lottery-startgame > .lottery-game-item span {
-    display: inline-block;
-    width: 100%;
-    margin-top: 10px;
-    color: #fff;
-    text-align: center;
-    vertical-align: middle;
-}
-.lottery-startgame > .lottery-game-item span:first-of-type {
-    margin-top: 10px;
-    font-size: 14px;
-}
-.lottery-startgame > .lottery-game-item span:last-of-type {
-    font-size: 16px;
-    font-weight: bolder
-} */
 .lottery-game-list > .lottery-game-item {
     position: absolute;
     overflow: hidden;
@@ -1921,36 +1934,36 @@ width: 100%;
     box-shadow: 0 0 6px red;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(1) {
-    top: -100px;
-    left: -100px;
+    top: -150px;
+    left: -190px;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(2) {
-    top: -100px;
+    top: -150px;
     left: 0;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(3) {
-    top: -100px;
-    left: 100px;
+    top: -150px;
+    left: 190px;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(4) {
     top: 0;
-    left: 100px;
+    left: 190px;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(5) {
-    top: 100px;
-    left: 100px;
+    top: 150px;
+    left: 190px;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(6) {
-    top: 100px;
+    top: 150px;
     left: 0;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(7) {
-    top: 100px;
-    left: -100px;
+    top: 150px;
+    left: -190px;
 }
 .lottery-game-list > .lottery-game-item:nth-of-type(8) {
     top: 0;
-    left: -100px;
+    left: -190px;
 }
 .lottery-result {
 	width: 100%;

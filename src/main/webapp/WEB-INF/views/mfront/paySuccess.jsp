@@ -32,11 +32,14 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+	  fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
+		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<!-- End Facebook Pixel Code -->
 	
 	<script>
@@ -62,7 +65,7 @@
 			<em><span class="icon cart"></span></em> <em>Show order summary</em> <b></b>
 		</div> 
 	</div>
-		<div class="order-info clearfix" style="display: none;">
+		<div class="order-info clearfix">
 			<div class="product_shop clearfix">
 			</div>
 			<div class="cal-info clearfix">
@@ -263,7 +266,7 @@
 			}
 			$('.order-info .product_shop').html(tbodyHtml);
 			var calInfoHtml = '';
-			calInfoHtml = '<div class="listnum"><span>prototal：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)-parseFloat(sessionaddressMoney) ) + '</span></div>' +
+			calInfoHtml = '<div class="listnum"><span>prototal：</span><span>$' + (parseFloat(data.payinfoMoney) + parseFloat(data.orderCouponPrice)-parseFloat(sessionaddressMoney)).toFixed(2) + '</span></div>' +
 				'<div class="listnum"><span>shipping：</span><span>' + sessionaddressMoney + '</span></div>' +
 				'<div class="listnum"><span>coupon：</span><span>-$' + data.orderCouponPrice + '</span></div>' +
 				'<div class="listnum subtotalcont"><span>subtotal：</span><span>$' + data.payinfoMoney + '</span></div>';
@@ -323,17 +326,9 @@
 				current: parseFloat(singlePrice * ((parseFloat(discount) ? parseFloat(discount) : 100) / 100)).toFixed(2)
 			}
 		}
-	
-	
-	
-	
+
+		addTidio();
 </script>
-<!-- megalook-->
-    <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
-  <!-- megalookhair 
-    <script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
-    <!-- huashuohair -->
-    <!-- <script src="//code.tidio.co/folzahtp5vdopiwathysfiyz75dk5vnm.js"></script> -->
 </body>
 
 </html>

@@ -92,7 +92,7 @@
 		$('.nicescroll').each(function(i, item) {
 			$(item).niceScroll({
 				cursorcolor: "rgba(0,0,0,.3)",
-				cursorwidth: "4px",
+				cursorwidth: "14px",
 				cursorborder: "none",
 				horizrailenabled: false,
 				enablekeyboard: false,
@@ -141,9 +141,14 @@
 				} else if (item.slideArea == 4) {
 					slideAreaStr = '4首页广告';
 				} else if (item.slideArea == 5) {
-					slideAreaStr = '第5活动';
+					slideAreaStr = '5HeaderTopImg';
+				} else if (item.slideArea == 6) {
+					slideAreaStr = '6ProDetailCouponDesc';
+				} else if (item.slideArea == 7) {
+					slideAreaStr = '7cheakoutCouponDesc';
+				} else if (item.slideArea == 8) {
+					slideAreaStr = '第8活动待定';
 				};
-				
 				var slideId = $("<td></td>").append(item.slideId);
 				var slideName = $("<td></td>").append(item.slideName);
 				var slideArea = $("<td></td>").append(slideAreaStr);

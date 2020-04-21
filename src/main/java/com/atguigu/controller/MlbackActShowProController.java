@@ -92,7 +92,7 @@ public class MlbackActShowProController {
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg saveSelective(HttpServletResponse rep,HttpServletRequest res,@RequestBody MlbackActShowPro mlbackActShowPro){
-		//接受参数信息
+		//接收参数信息
 		//获取类名
 		
 		Integer actshowproIfproORcate = mlbackActShowPro.getActshowproIfproORcate();

@@ -36,7 +36,13 @@ public class MlbackCategory {
     private String categoryProductIds;
     
     private String categoryProductNames;
+    
+    private String categoryMetaTitle;
+    
+    private String categoryMetaKeyWords;
 
+    private String categoryMetaDesc;
+    
     public Integer getCategoryId() {
         return categoryId;
     }
@@ -172,12 +178,37 @@ public class MlbackCategory {
 	public void setCategoryProductNames(String categoryProductNames) {
 		this.categoryProductNames = categoryProductNames == null ? null : categoryProductNames.trim();
 	}
+	
+	public String getCategoryMetaTitle() {
+		return categoryMetaTitle;
+	}
+
+	public void setCategoryMetaTitle(String categoryMetaTitle) {
+		this.categoryMetaTitle = categoryMetaTitle == null ? null : categoryMetaTitle.trim();
+	}
+
+	public String getCategoryMetaKeyWords() {
+		return categoryMetaKeyWords;
+	}
+
+	public void setCategoryMetaKeyWords(String categoryMetaKeyWords) {
+		this.categoryMetaKeyWords = categoryMetaKeyWords == null ? null : categoryMetaKeyWords.trim();
+	}
+
+	public String getCategoryMetaDesc() {
+		return categoryMetaDesc;
+	}
+
+	public void setCategoryMetaDesc(String categoryMetaDesc) {
+		this.categoryMetaDesc = categoryMetaDesc == null ? null : categoryMetaDesc.trim();
+	}
 
 	public MlbackCategory(Integer categoryId, String categoryName, String categoryImgurl, String categoryImgPcurl,
 			Integer categoryParentId, String categoryParentName, Integer categoryStatus, Integer categoryLable,
 			String categorySeo, Integer categorySortOrder, Integer categoryAdminId, String categoryAdminOperatername,
 			Date categoryCreatetime, Date categoryMotifytime, String categoryDesc, String categoryProductIds,
-			String categoryProductNames) {
+			String categoryProductNames, String categoryMetaTitle, String categoryMetaKeyWords,
+			String categoryMetaDesc) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
@@ -196,6 +227,9 @@ public class MlbackCategory {
 		this.categoryDesc = categoryDesc;
 		this.categoryProductIds = categoryProductIds;
 		this.categoryProductNames = categoryProductNames;
+		this.categoryMetaTitle = categoryMetaTitle;
+		this.categoryMetaKeyWords = categoryMetaKeyWords;
+		this.categoryMetaDesc = categoryMetaDesc;
 	}
 
 	public MlbackCategory() {
@@ -211,7 +245,8 @@ public class MlbackCategory {
 				+ categorySortOrder + ", categoryAdminId=" + categoryAdminId + ", categoryAdminOperatername="
 				+ categoryAdminOperatername + ", categoryCreatetime=" + categoryCreatetime + ", categoryMotifytime="
 				+ categoryMotifytime + ", categoryDesc=" + categoryDesc + ", categoryProductIds=" + categoryProductIds
-				+ ", categoryProductNames=" + categoryProductNames + "]";
+				+ ", categoryProductNames=" + categoryProductNames + ", categoryMetaTitle=" + categoryMetaTitle
+				+ ", categoryMetaKeyWords=" + categoryMetaKeyWords + ", categoryMetaDesc=" + categoryMetaDesc + "]";
 	}
 	
 }

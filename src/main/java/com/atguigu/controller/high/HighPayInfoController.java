@@ -103,6 +103,7 @@ public class HighPayInfoController {
 	public Msg selectHighPayInfoListBySearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
 			@RequestParam(value = "payinfoStatus") Integer payinfoStatus,
 			@RequestParam(value = "payinfoCreatetime") String payinfoCreatetime,
+			@RequestParam(value = "payinfoPlateNum") String payinfoPlateNum,
 			@RequestParam(value = "payinfoMotifytime") String payinfoMotifytime,
 			HttpSession session) {
 		
@@ -113,6 +114,11 @@ public class HighPayInfoController {
 			mlfrontPayInfoReq.setPayinfoStatus(null);
 		}else{
 			mlfrontPayInfoReq.setPayinfoStatus(payinfoStatus);
+		}
+		if("999".equals(payinfoPlateNum)){
+			mlfrontPayInfoReq.setPayinfoPlateNum(null);
+		}else{
+			mlfrontPayInfoReq.setPayinfoPlateNum(payinfoPlateNum);
 		}
 		mlfrontPayInfoReq.setPayinfoCreatetime(payinfoCreatetime);
 		mlfrontPayInfoReq.setPayinfoMotifytime(payinfoMotifytime);
@@ -315,7 +321,5 @@ public class HighPayInfoController {
 		}
 		
 	}
-	
-	
 	
 }

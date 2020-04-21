@@ -31,11 +31,14 @@
 	  t.src=v;s=b.getElementsByTagName(e)[0];
 	  s.parentNode.insertBefore(t,s)}(window, document,'script',
 	  'https://connect.facebook.net/en_US/fbevents.js');
-	  fbq('init', '246433859565492');
-	  //fbq('init', '667403967094866');
-	  fbq('track', 'PageView');
+	  fbq('init', '246433859565492');//huashuohair
+		//fbq('init', '667403967094866');//megalook
+		fbq('track', 'PageView');
 	</script>
-	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1"/></noscript>
+	<!--huashuohair-->
+	<noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=246433859565492&ev=PageView&noscript=1" /></noscript>
+	<!--megalook-->
+	<!-- <noscript><img height="1" width="1" style="display:none"src="https://www.facebook.com/tr?id=667403967094866&ev=PageView&noscript=1" /></noscript> -->
 	<script>
   		fbq('track', 'ViewContent');
 	</script>
@@ -167,11 +170,10 @@
 			     
 	// 	})
 	// }
-
-
+	addTidio();
 	</script>
   	<!-- megalook-->
-  	<script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script>
+  	<!-- <script src="//code.tidio.co/sjcpaqy3xxtkt935ucnyf2gxv1zuh9us.js"></script> -->
 	<!-- megalookhair 
   	<script src="//code.tidio.co/0rpdotjoqewxstfjahkd1ajtxrcp8phh.js"></script>-->
   	<!-- huashuohair -->
