@@ -43,8 +43,7 @@ public class MlbackCategoryController {
 	/**
 	 * 1.0	onuse	20191225	检查
 	 * to后台分类MlbackCategory列表页面
-	 * @param jsp
-	 * @return 
+	 * @return jsp
 	 * */
 	@RequestMapping("/toMlbackCategoryPage")
 	public String tologin(HttpSession session) throws Exception{
@@ -61,7 +60,7 @@ public class MlbackCategoryController {
 	/**
 	 * 1.1	onuse	20191225	检查
 	 * 前台获取Category下的产品产品list页面详情-toproductlist
-	 * @param categoryId
+	 * @param categoryId	GET
 	 * @return 
 	 * */
 	@RequestMapping(value="/toproductlist",method=RequestMethod.GET)

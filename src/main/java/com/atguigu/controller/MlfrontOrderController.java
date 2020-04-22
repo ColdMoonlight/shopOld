@@ -851,7 +851,7 @@ public class MlfrontOrderController {
 		String shipemailTeamtelphone = mlbackShipEmailOne.getShipemailTeamtelphone();
 		Message =Message+"Hi,"+"<br><br>";
 		Message=Message+"This is Megalook Hair. Your order # ("+payinfoPlateNum+") has been shipped, And the tracking number is "+shipemailName+" : ("+orderLogisticsnumber+").<br><br><br>";
-		Message=Message+"Expected to be delivered within "+shipemailDay+" working days.<br><br>";
+		Message=Message+" "+shipemailDay+" .<br><br>";
 		Message=Message+"You can track the parcel through this link on "+shipemailName+"( "+shipemailWwwlink+" )<br><br><br>";
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
 		Message=Message+"Nice Day!<br><br>";
