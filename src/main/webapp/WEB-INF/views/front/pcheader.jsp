@@ -244,7 +244,6 @@
 				    html += '<div class="menu_list-wap">';
 					html += '<div class="home-menu_list_wrap_inner">';
 					html += '<div class="home-menu_list--left_left"></div>';
-<<<<<<< HEAD
 					var html2 = '',
 						isWrap = true;
 					// html += '<div class="home_left_middle">';
@@ -252,12 +251,6 @@
 					for(var j=0;j<data2[i].length;j++){
 						  if(data2[i][j] && data2[i][j].length > 0){
 							  html2 += '<dl>';
-=======
-					html += '<div class="home_left_middle">';
-					for(var j=0;j<data2[i].length;j++){
-						  if(data2[i][j] && data2[i][j].length > 0){
-							  html += '<dl>'; 
->>>>>>> 3cf2552640984fb1c4e11bf8264bbd3af56ebffe
 							   for(var k=0;k<data2[i][j].length;k++){
 								   var categoryLableInt2 = data2[i][j][k].categoryLable;
 								   var	classimg = "";
