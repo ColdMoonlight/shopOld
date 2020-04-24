@@ -956,7 +956,7 @@ public class MlfrontOrderController {
 		String Message ="";
 		Message =Message+"Hi gorgeous girl ,"+"<br><br>";
 		Message=Message+emailOneStr+" # ("+payinfoPlateNum+") "+emailTwoStr+"<br><br>";
-		Message=Message+emailThreeStr+".<br><br>";
+		Message=Message+emailThreeStr+"<br><br>";
 		Message=Message+emailFourStr+"<br><br>";
 		if("".equals(emailFiveStr)){
 			System.out.println("emailFiveStr:"+emailFiveStr+"这句话为空");
