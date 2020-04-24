@@ -289,14 +289,13 @@
 
 		});
 		function tianchong(data) {
-			console.log(data);
-			$(":input[name='orderstateemailId']").val(data.orderStateEmailId);
-			$(":input[name='orderstateemailName']").val(data.orderstateemailName);
-			$(":input[name='orderstateemailOne']").val(data.orderstateemailOne);
-			$(":input[name='orderstateemailTwo']").val(data.orderstateemailTwo);
-			$(":input[name='orderstateemailThree']").val(data.orderstateemailThree);
-			$(":input[name='orderstateemailFour']").val(data.orderstateemailFour);
-			$(":input[name='orderstateemailFive']").val(data.orderstateemailFive);
+			$("input[name='orderstateemailId']").val(data.orderstateemailId);
+			$("input[name='orderstateemailName']").val(data.orderstateemailName);
+			$("input[name='orderstateemailOne']").val(data.orderstateemailOne);
+			$("input[name='orderstateemailTwo']").val(data.orderstateemailTwo);
+			$("input[name='orderstateemailThree']").val(data.orderstateemailThree);
+			$("input[name='orderstateemailFour']").val(data.orderstateemailFour);
+			$("input[name='orderstateemailFive']").val(data.orderstateemailFive);
 		}
 		
 	</script>
