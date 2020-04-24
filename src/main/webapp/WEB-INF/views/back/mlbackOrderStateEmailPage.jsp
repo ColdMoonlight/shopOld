@@ -238,7 +238,7 @@
 		//删除任務
 		$("#task_table").on("click", ".btn-danger", function () {
 			var data = {
-				orderStateEmailId: $(this).attr('del-id')
+				orderstateemailId: $(this).attr('del-id')
 			};
 			$.ajax({
 				url: "${APP_PATH}/MlbackOrderStateEmail/delete",
