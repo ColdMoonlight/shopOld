@@ -254,7 +254,6 @@
 				}
 			});
 		});
-		
 
 		function loadTpl(id) {
 			$('.table-box').load('${APP_PATH}/static/tpl/addOrderStateEmail.html', function () {
