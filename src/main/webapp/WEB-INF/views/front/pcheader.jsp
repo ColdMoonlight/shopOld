@@ -306,34 +306,36 @@
 	 			$('.navbar_itemContent-background').height(menuContentHright);
 	 			var targetEl = $(this).find('.menu_list-wap'),
 			 		outerWidth = 0,
-				 	boxWidth = $(this).outerWidth(),
 				 	clientRect = $(this)[0].getBoundingClientRect(),
-				 	offsetWidth = window.innerWidth > 1300 ? 1300 : window.innerWidth;
+				 	navulClientRect =  $('.navul')[0].getBoundingClientRect();
+				 	offsetWidth = window.innerWidth > 1300 ? 1300 : window.innerWidth,
+				 	offsetLeft = clientRect.left - navulClientRect.left,
+				 	offsetBottom = clientRect.bottom - navulClientRect.top;
 	 			targetEl.addClass('wrap_active');
 	 			outerWidth = targetEl.outerWidth();
 	 			if (outerWidth >= offsetWidth) {
 	 				targetEl.css({
 	 					'width': offsetWidth + 'px',
 	 					'left': '0' + 'px',
+	 					'top': offsetBottom + 'px'
 	 				});
-	 				targetEl.find('.home_left_middle').css('flexWrap', 'wrap');
 	 			} else {
-	 				if (clientRect.left <= (outerWidth - boxWidth) / 2 && (clientRect.left + boxWidth / 2 < offsetWidth / 2)) {
+	 				if (offsetLeft < (outerWidth - clientRect.width) / 2 && (offsetLeft  + clientRect.width / 2 < offsetWidth / 2)) {
 	 					targetEl.css({
-		 					'left': '0',
-		 					'transform': 'none'
+		 					'left': '0px',
+		 					'top': offsetBottom + 'px'
 		 				});	
-	 				} else if(clientRect.left + outerWidth / 2 > offsetWidth && (clientRect.left + boxWidth / 2 >  offsetWidth / 2)) {
+	 				} else if(offsetLeft + clientRect.width +  (outerWidth - clientRect.width) / 2 >= offsetWidth && (offsetLeft + clientRect.width / 2 >  offsetWidth / 2)) {
  						targetEl.css({
  							'left': 'unset',
-		 					'right': '0',
-		 					'transform': 'none'
+		 					'right': '0' + 'px',
+		 					'top': offsetBottom + 'px'
 		 				});
 	 				} else {
-	 					var defaultLeft = clientRect.left - (outerWidth - boxWidth) / 2 - $('.navul')[0].getBoundingClientRect().left;
+	 					var defaultLeft = offsetLeft - (outerWidth - clientRect.width) / 2;
 	 					targetEl.css({
 		 					'left': defaultLeft +'px',
-		 					'transform': 'none'
+		 					'top': offsetBottom + 'px'
 		 				});
 	 				}
 	 			}
