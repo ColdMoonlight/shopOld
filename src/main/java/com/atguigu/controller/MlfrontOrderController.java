@@ -51,7 +51,7 @@ import com.atguigu.service.MlfrontPayInfoService;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
-//import com.atguigu.utils.app.shipInformation;
+import com.atguigu.utils.app.shipInformation;
 import com.atguigu.utils.PropertiesUtil;
 
 @Controller
@@ -763,7 +763,9 @@ public class MlfrontOrderController {
 
 //		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
 		
+		System.out.println(mlfrontOrder.toString());
 		Integer orderId = mlfrontOrder.getOrderId();
+		Integer orderLogisticsid = mlfrontOrder.getOrderLogisticsid();		//物流配置名字
 		String orderLogisticsname =mlfrontOrder.getOrderLogisticsname();	//物流名字
 		String orderLogisticsnumber =  mlfrontOrder.getOrderLogisticsnumber();//物流单号
 		Integer payInfoId = mlfrontOrder.getOrderCouponId();
@@ -773,6 +775,7 @@ public class MlfrontOrderController {
 		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
 		MlfrontOrder mlfrontOrderReq2 = new MlfrontOrder();
 		mlfrontOrderReq.setOrderId(orderId);
+		mlfrontOrderReq.setOrderLogisticsid(orderLogisticsid);
 		mlfrontOrderReq.setOrderLogisticsname(orderLogisticsname);
 		mlfrontOrderReq.setOrderLogisticsnumber(orderLogisticsnumber);
 		String nowTime = DateUtil.strTime14s();
@@ -787,24 +790,24 @@ public class MlfrontOrderController {
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
 		
 		//10.1向afterShip官方发送物流添加按钮
-//		try {
-//			//向物流中插入物流单号，订单号，Item,价格，
-//			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsnumber,payinfoPlateNum);
-//			System.out.println(resultStr);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("有异常");
-//			System.out.println(e.getMessage());
-//		}
+		try {
+			//向物流中插入物流单号，订单号，Item,价格，
+			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsname,orderLogisticsnumber,payinfoPlateNum);
+			System.out.println(resultStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("物流中插入物流单号--有异常");
+			System.out.println(e.getMessage());
+		}
 		
 		//10.2
-		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
+		sendLogisticsnumberEmail(addressId,orderLogisticsid,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
 		
 		return Msg.success().add("Msg", "更新成功");
 	}
 
 	//10.2
-	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId,Integer payInfoId) {
+	private void sendLogisticsnumberEmail(Integer addressId,Integer orderLogisticsid, String orderLogisticsname, String orderLogisticsnumber,Integer orderId,Integer payInfoId) {
 		
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
 		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
@@ -825,11 +828,11 @@ public class MlfrontOrderController {
 		String payinfoPlateNum = mlfrontPayInfoRes.getPayinfoPlateNum();
 		
 		//10.1.1
-		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsname,orderLogisticsnumber,orderId,payinfoPlateNum);
+		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsid,orderLogisticsname,orderLogisticsnumber,orderId,payinfoPlateNum);
 		try {
 			//测试方法
 			String getToEmail = userEmail;
-			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
+			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的"+orderLogisticsname+"快件.";
 			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,toCustomerInfoStr,orderId,payinfoPlateNum);
 			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,toCustomerInfoStr);
 		} catch (Exception e) {
@@ -839,11 +842,11 @@ public class MlfrontOrderController {
 	}
 
 	//10.1.1
-	private String getToCustomerDriverInfo(String orderLogisticsname, String orderLogisticsnumber, Integer orderId,String payinfoPlateNum) {
+	private String getToCustomerDriverInfo(Integer orderLogisticsid,String orderLogisticsname, String orderLogisticsnumber, Integer orderId,String payinfoPlateNum) {
 		
 		String Message ="";
 		MlbackShipEmail mlbackShipEmail = new MlbackShipEmail();
-		mlbackShipEmail.setShipemailNameth(Integer.parseInt(orderLogisticsname));
+		mlbackShipEmail.setShipemailNameth(orderLogisticsid);
 		List<MlbackShipEmail> mlbackShipEmailList = mlbackShipEmailService.selectMlbackShipEmailByshipemailNameth(mlbackShipEmail);
 		MlbackShipEmail mlbackShipEmailOne = mlbackShipEmailList.get(0);
 		
