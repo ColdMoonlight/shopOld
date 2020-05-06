@@ -753,13 +753,15 @@
 		function shipSave(e) {
 			var parent = $(e.target).parents('.ship-box');
 			var shipId = parent.find('.ship-id').val();
-			shipName = parent.find('.ship-name').val();
+			var shiprealid = parent.find('.ship-name').val();
+			shipName = parent.find('.ship-name option:selected').text();
 			var payinfoPlateNum = $('.payyufei_num').attr('num-id');
 			//console.log(payinfoPlateNum)
 			var reqData = {
 				orderCouponId:payinfoIdcd,
 				orderCouponCode:payinfoPlateNum,
 				orderId: parseInt(orderId),
+				orderLogisticsid: parseInt(shiprealid),
 				orderLogisticsname: shipName,
 				orderLogisticsnumber: shipId
 				
