@@ -48,6 +48,7 @@ import com.atguigu.service.MlfrontCartService;
 import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
+import com.atguigu.ship.Classes.Tracking;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
@@ -763,7 +764,6 @@ public class MlfrontOrderController {
 
 //		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
 		
-		System.out.println(mlfrontOrder.toString());
 		Integer orderId = mlfrontOrder.getOrderId();
 		Integer orderLogisticsid = mlfrontOrder.getOrderLogisticsid();		//物流配置名字
 		String orderLogisticsname =mlfrontOrder.getOrderLogisticsname();	//物流名字
@@ -1224,16 +1224,17 @@ public class MlfrontOrderController {
 	 * @param jsp
 	 * @return 
 	 * */
-//	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
-//	@ResponseBody
-//	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
-//			@RequestParam(value = "trackingNumber") String trackingNumber) {
-//		//接收参数
-//		
-//		String trackingNumCheckpoint = shipInformation.getCheckpointByTrackingNumberFromAfterShip(trackingNumber);
-//		System.out.println("trackingNumCheckpoint:"+trackingNumCheckpoint);
-//		
-//		return Msg.success().add("Msg", "更新成功");
-//	}
+	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
+			@RequestParam(value = "trackingNumber") String trackingNumber,@RequestParam(value = "Slug") String Slug) {
+		//接收参数
+		
+		Tracking TrackingRes = shipInformation.getTrackingByTrackingNumberAndSlug(trackingNumber,Slug);
+		System.out.println("-------------------------");
+		System.out.println(TrackingRes);
+		System.out.println("-------------------------");
+		return Msg.success().add("TrackingRes", TrackingRes);
+	}
 
 }
