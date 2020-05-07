@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.json.JSONException;
 
+import com.atguigu.bean.Msg;
 import com.atguigu.ship.Classes.AftershipAPIException;
 import com.atguigu.ship.Classes.Checkpoint;
 import com.atguigu.ship.Classes.ConnectionAPI;
@@ -18,15 +19,13 @@ public class shipInformation {
 	private final static String ConnectionAPIid = "7b04f01f-4f04-4b37-bbb9-5b159af73ee1";
 	
 	public static void main(String[] args) {
-		testTracking("392338333836", "");
+		getTrackingByTrackingNumberAndSlug("392338333836", "");
 	}
 	
 	/**
 	 * 01绑定物流单号进入app
 	 * 
 	 * 02查询物流信息
-	 * 
-	 * 03查询物流信息
 	 * */
 	
 	/**
@@ -82,52 +81,16 @@ public class shipInformation {
 		
 	}
 	
-	
 	/**
      * @param payinfoPlateNum 
 	 * @Method: 02查询物流信息
-     * @Description: 查询物流信息
+     * @Description: 绑定物流单号进入app
      * @Anthor:zsh
      * @param session
      * @return
      * @throws Exception
      */ 
-	public static String getCheckpointByTrackingNumberFromAfterShip(String trackingNumber){
-		
-		String connectionAPIStr = ConnectionAPIid;
-		ConnectionAPI connection = new ConnectionAPI(connectionAPIStr);
-		
-		//First we have to create a Tracking
-		Tracking tracking = new Tracking(trackingNumber);
-		tracking.setSlug("FedEx");
-		
-//		try {
-//			//Checkpoint newCheckpoint = connection.getLastCheckpoint(tracking);
-//			
-//			Tracking checkpointTracking = connection.getTrackingByNumber(tracking);
-//		} catch (Exception e) {
-//
-//			e.printStackTrace();
-//		}
-
-		try {
-			Checkpoint newCheckpoint = connection.getLastCheckpoint(tracking);
-			System.out.println("trackingPosted.getTrackingNumber()------------------------");
-			System.out.println(newCheckpoint.toString());
-			return "0";
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-			return "1";
-		}
-	}
-	
-	/*
-	 * Register通知Customer
-	 * megalookweb@outlook.com
-	 * mingyueqingl@163.com
-	 * */
-	private static void testTracking(String trackingNumber, String payinfoPlateNum) {
+	public static Tracking getTrackingByTrackingNumberAndSlug(String trackingNumber, String Slug) {
 		
 //		ConnectionAPI connection = new ConnectionAPI("7b04f01f-4f04-4b37-bbb9-5b159af73ee1");
 //		Tracking tracking = new Tracking("778708372986");
@@ -137,14 +100,16 @@ public class shipInformation {
 		
 		//First we have to create a Tracking
 		Tracking tracking = new Tracking(trackingNumber);
-		tracking.setSlug("fedex");
+		
+		Tracking trackingRes = new Tracking("");
+		tracking.setSlug(Slug);
 		try {
-			Tracking tracking2 = connection.getTrackingByNumber(tracking);
+			trackingRes = connection.getTrackingByNumber(tracking);
 			System.out.println("------------tracking2------------");
-			System.out.println(tracking2);
+			System.out.println(trackingRes);
 			System.out.println("------------tracking2------------");
 			
-			List<Checkpoint> CheckpointList =  tracking2.getCheckpoints();
+			List<Checkpoint> CheckpointList =  trackingRes.getCheckpoints();
 			
 			int i=0;
 			for(Checkpoint Checkpoint:CheckpointList){
@@ -154,6 +119,8 @@ public class shipInformation {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		} 
+		
+		return trackingRes;
 
 	}
 	
