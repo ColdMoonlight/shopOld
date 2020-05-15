@@ -37,13 +37,22 @@
 		<div class="address bd-t"></div>
 
 		<div class="order-list"></div>
-
+        <div class="open_Logistics_info" onclick="logisticsInfo(event)" style="text-align: center;">
+				查看物流信息
+	   </div>
 		<div class="order-data">
 			<div class="title">Order Time</div>
 			<div class="body"></div>
 		</div>
 	</div>
-
+ <div class="listtrack">
+ 	<span class="close_wllist">X</span>
+ 	<div class="name_logistics">
+ 		
+ 	</div>
+ 	<ul class="clearfix">
+ 	</ul>
+ </div>
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
@@ -178,6 +187,66 @@ param:　orderId
 			'<div><span>Payment time：</span><span>' + data.orderPaytime + '</span></div>';
 		parent.html(html);
 	}
+	
+	
+	function logisticsInfo(event){
+		 event.stopPropagation();//阻止事件冒泡即可
+		var trackingNumber="392338333836";
+		var Slug="FedEx";
+		var reqData = {
+		  "trackingNumber":trackingNumber,
+		  "Slug":Slug,
+		}
+		$.ajax({
+			url: '${APP_PATH }/MlfrontOrder/getCheckpointByTrackingNumber',
+			type: "GET",
+			data: reqData,
+			success: function (data) {
+				console.log(data)
+				$(".listtrack").show();
+				var resDataOrderItemList = data.extend.TrackingRes.checkpoints;
+				renderOrderInfo(listTrack,resDataOrderItemList);
+				var wlname = data.extend.TrackingRes.slug;
+				var wlnum = data.extend.TrackingRes.trackingNumber;
+				var wlphone = data.extend.TrackingRes.smses;
+	            	baseTrack(baseinfo,wlname,wlnum,wlphone)			
+			}
+		});
+	}
+	var baseinfo =$(".name_logistics");
+	function baseTrack (parent,wlname,wlnum,wlphone){
+		var html = '';
+		html += '<dl>'+
+			'<dd>'+wlname+'</dd>'+
+			'<dd>'+wlnum+'</dd>'+
+			'<dd>'+wlphone+'</dd>'+
+			'</dl>'
+		parent.html(html);	
+	}
+	
+	
+	$(".close_wllist").click(function(){
+		$(".listtrack").hide();
+	})
+	var listTrack=$(".listtrack ul");
+	function renderOrderInfo(parent,data){
+		var html = '';
+		for (var i = 0; i < data.length; i += 1) {
+			var timeall= data[i].checkpointTime.split(/[T+-]/);
+			html += '<li>' +
+			'<span><b><i>'+timeall[1]+'</i>-<i>'+timeall[2]+'</i>-<i>'+timeall[0]+'</i></b><em>'+timeall[3]+'</em></span>'+
+			'<div class="rightcont">'+
+			   '<p><b>'+ data[i].message  +' </b></p>'+
+			    '<p>'+ data[i].city  +' </p>'+
+			'</div>'+
+	      '</li>';
+		}
+		
+	parent.html(html);	
+	}
+	
+	
+	
 </script>
 
 </html>

@@ -43,7 +43,14 @@
 			<div class="page-info-area"></div>
 		</div>
 	</div>
-
+    <div class="listtrack">
+		<span class="close_wllist">X</span>
+		<div class="name_logistics">
+			
+		</div>
+    	<ul class="clearfix">
+    	</ul>
+    </div>
 	<jsp:include page="mfooter.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
@@ -127,10 +134,15 @@
 		var html = '';
 		if (data.length) {
 			for (var key in data) {
+				var orderStatusword=orderStatus[data[key].orderStatus];
+				var showspan = "";
+				if(orderStatusword=="Shipped"){
+					showspan = "show"
+				}
 				html += '<div class="order-item" data-orderid="' + data[key].orderId + '" onclick="toDetailPage(event)">' +
 					'<div class="order-item-title">' +
 					'<span class="order-id">order Id: ' + data[key].orderId + '</span>' +
-					'<span class="order-status">' + (orderStatus[data[key].orderStatus]) + '</span>' +
+					'<span class="order-status">' + orderStatusword+ '</span>' +
 					'</div>' +
 					'<div class="order-item-body">';
 				var len = data[key].orderOrderitemidstr.split(',').length;
@@ -150,6 +162,7 @@
 				}
 				html += '</div>' +
 					'<div class="order-item-footer">Total' + len + 'goods，total $ ' + data[key].orderMoney + '$</div>' +
+					'<div class="view_status '+showspan+'"><span onclick="logisticsInfo(event)">View Logistics</span></div>'+
 					'</div>';
 			}
 
@@ -222,6 +235,66 @@
 		//添加下一页和末页 的提示
 		ul.append(nextPageLi).append(lastPageLi).appendTo(pageArea);
 	}
+	
+	
+	
+	function logisticsInfo(event){
+		 event.stopPropagation();//阻止事件冒泡即可
+		var trackingNumber="392338333836";
+		var Slug="FedEx";
+		var reqData = {
+		  "trackingNumber":trackingNumber,
+		  "Slug":Slug,
+		}
+		$.ajax({
+			url: '${APP_PATH }/MlfrontOrder/getCheckpointByTrackingNumber',
+			type: "GET",
+			data: reqData,
+			success: function (data) {
+				console.log(data)
+				$(".listtrack").show();
+				var resDataOrderItemList = data.extend.TrackingRes.checkpoints;
+				renderOrderInfo(listTrack,resDataOrderItemList);
+				var wlname = data.extend.TrackingRes.slug;
+				var wlnum = data.extend.TrackingRes.trackingNumber;
+				var wlphone = data.extend.TrackingRes.smses;
+                	baseTrack(baseinfo,wlname,wlnum,wlphone)			
+			}
+		});
+	}
+	var baseinfo =$(".name_logistics");
+	function baseTrack (parent,wlname,wlnum,wlphone){
+		var html = '';
+		html += '<dl>'+
+			'<dd>'+wlname+'</dd>'+
+			'<dd>'+wlnum+'</dd>'+
+			'<dd>'+wlphone+'</dd>'+
+			'</dl>'
+		parent.html(html);	
+	}
+	
+	
+	$(".close_wllist").click(function(){
+		$(".listtrack").hide();
+	})
+	var listTrack=$(".listtrack ul");
+	function renderOrderInfo(parent,data){
+		var html = '';
+		for (var i = 0; i < data.length; i += 1) {
+			var timeall= data[i].checkpointTime.split(/[T+-]/);
+			html += '<li>' +
+			'<span><b><i>'+timeall[1]+'</i>-<i>'+timeall[2]+'</i>-<i>'+timeall[0]+'</i></b><em>'+timeall[3]+'</em></span>'+
+			'<div class="rightcont">'+
+			   '<p><b>'+ data[i].message  +' </b></p>'+
+			    '<p>'+ data[i].city  +' </p>'+
+			'</div>'+
+	      '</li>';
+		}
+		
+	parent.html(html);	
+	}
+	
+	
 </script>
 
 </html>
