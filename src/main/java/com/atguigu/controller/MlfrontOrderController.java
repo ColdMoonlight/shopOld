@@ -21,6 +21,7 @@ import com.atguigu.bean.MlbackAbandonPurchase;
 import com.atguigu.bean.MlbackAdmin;
 import com.atguigu.bean.MlbackAreafreight;
 import com.atguigu.bean.MlbackCoupon;
+import com.atguigu.bean.MlbackOrderStateEmail;
 import com.atguigu.bean.MlbackProduct;
 import com.atguigu.bean.MlbackShipEmail;
 import com.atguigu.bean.MlfrontAddress;
@@ -38,6 +39,7 @@ import com.atguigu.service.MlbackAbandonPurchaseService;
 import com.atguigu.service.MlbackAdminService;
 import com.atguigu.service.MlbackAreafreightService;
 import com.atguigu.service.MlbackCouponService;
+import com.atguigu.service.MlbackOrderStateEmailService;
 import com.atguigu.service.MlbackProductService;
 import com.atguigu.service.MlbackShipEmailService;
 import com.atguigu.service.MlfrontAddressService;
@@ -46,10 +48,11 @@ import com.atguigu.service.MlfrontCartService;
 import com.atguigu.service.MlfrontOrderItemService;
 import com.atguigu.service.MlfrontOrderService;
 import com.atguigu.service.MlfrontPayInfoService;
+import com.atguigu.ship.Classes.Tracking;
 import com.atguigu.utils.DateUtil;
 import com.atguigu.utils.EmailUtilshtml;
 import com.atguigu.utils.EmailUtilshtmlCustomer;
-//import com.atguigu.utils.app.shipInformation;
+import com.atguigu.utils.app.shipInformation;
 import com.atguigu.utils.PropertiesUtil;
 
 @Controller
@@ -91,6 +94,9 @@ public class MlfrontOrderController {
 	
 	@Autowired
 	MlbackProductService mlbackProductService;
+	
+	@Autowired
+	MlbackOrderStateEmailService mlbackOrderStateEmailService;
 	
 	/**
 	 * 1.0	onuse	20191225	检查
@@ -759,6 +765,7 @@ public class MlfrontOrderController {
 //		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
 		
 		Integer orderId = mlfrontOrder.getOrderId();
+		Integer orderLogisticsid = mlfrontOrder.getOrderLogisticsid();		//物流配置名字
 		String orderLogisticsname =mlfrontOrder.getOrderLogisticsname();	//物流名字
 		String orderLogisticsnumber =  mlfrontOrder.getOrderLogisticsnumber();//物流单号
 		Integer payInfoId = mlfrontOrder.getOrderCouponId();
@@ -768,6 +775,7 @@ public class MlfrontOrderController {
 		MlfrontOrder mlfrontOrderReq = new MlfrontOrder();
 		MlfrontOrder mlfrontOrderReq2 = new MlfrontOrder();
 		mlfrontOrderReq.setOrderId(orderId);
+		mlfrontOrderReq.setOrderLogisticsid(orderLogisticsid);
 		mlfrontOrderReq.setOrderLogisticsname(orderLogisticsname);
 		mlfrontOrderReq.setOrderLogisticsnumber(orderLogisticsnumber);
 		String nowTime = DateUtil.strTime14s();
@@ -782,24 +790,24 @@ public class MlfrontOrderController {
 		Integer addressId = mlfrontOrderRes.getAddressinfoId();
 		
 		//10.1向afterShip官方发送物流添加按钮
-//		try {
-//			//向物流中插入物流单号，订单号，Item,价格，
-//			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsnumber,payinfoPlateNum);
-//			System.out.println(resultStr);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("有异常");
-//			System.out.println(e.getMessage());
-//		}
+		try {
+			//向物流中插入物流单号，订单号，Item,价格，
+			String resultStr =  shipInformation.addTrackingNumberIntoAfterShip(orderLogisticsname,orderLogisticsnumber,payinfoPlateNum);
+			System.out.println(resultStr);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("物流中插入物流单号--有异常");
+			System.out.println(e.getMessage());
+		}
 		
 		//10.2
-		sendLogisticsnumberEmail(addressId,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
+		sendLogisticsnumberEmail(addressId,orderLogisticsid,orderLogisticsname,orderLogisticsnumber,orderId,payInfoId);
 		
 		return Msg.success().add("Msg", "更新成功");
 	}
 
 	//10.2
-	private void sendLogisticsnumberEmail(Integer addressId, String orderLogisticsname, String orderLogisticsnumber,Integer orderId,Integer payInfoId) {
+	private void sendLogisticsnumberEmail(Integer addressId,Integer orderLogisticsid, String orderLogisticsname, String orderLogisticsnumber,Integer orderId,Integer payInfoId) {
 		
 		MlfrontAddress mlfrontAddressReq = new MlfrontAddress();
 		MlfrontAddress mlfrontAddressRes = new MlfrontAddress();
@@ -820,11 +828,11 @@ public class MlfrontOrderController {
 		String payinfoPlateNum = mlfrontPayInfoRes.getPayinfoPlateNum();
 		
 		//10.1.1
-		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsname,orderLogisticsnumber,orderId,payinfoPlateNum);
+		String toCustomerInfoStr = getToCustomerDriverInfo(orderLogisticsid,orderLogisticsname,orderLogisticsnumber,orderId,payinfoPlateNum);
 		try {
 			//测试方法
 			String getToEmail = userEmail;
-			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的,"+orderLogisticsname+"快件.";
+			String Message = "您在Megalook购买的秀发已经发货,请留意关注订单号为"+orderLogisticsnumber+"的"+orderLogisticsname+"快件.";
 			EmailUtilshtml.readyEmailSendSuccess(getToEmail, Message,toCustomerInfoStr,orderId,payinfoPlateNum);
 			EmailUtilshtmlCustomer.readyEmailSendSuccessCustomer(getToEmail, Message,toCustomerInfoStr);
 		} catch (Exception e) {
@@ -834,11 +842,11 @@ public class MlfrontOrderController {
 	}
 
 	//10.1.1
-	private String getToCustomerDriverInfo(String orderLogisticsname, String orderLogisticsnumber, Integer orderId,String payinfoPlateNum) {
+	private String getToCustomerDriverInfo(Integer orderLogisticsid,String orderLogisticsname, String orderLogisticsnumber, Integer orderId,String payinfoPlateNum) {
 		
 		String Message ="";
 		MlbackShipEmail mlbackShipEmail = new MlbackShipEmail();
-		mlbackShipEmail.setShipemailNameth(Integer.parseInt(orderLogisticsname));
+		mlbackShipEmail.setShipemailNameth(orderLogisticsid);
 		List<MlbackShipEmail> mlbackShipEmailList = mlbackShipEmailService.selectMlbackShipEmailByshipemailNameth(mlbackShipEmail);
 		MlbackShipEmail mlbackShipEmailOne = mlbackShipEmailList.get(0);
 		
@@ -908,8 +916,23 @@ public class MlfrontOrderController {
 		mlfrontPayInfoRes = mlfrontPayInfoResList.get(0);
 		String payinfoPlateNum = mlfrontPayInfoRes.getPayinfoPlateNum();
 		
+		String toCustomerVerifyInfoStr = "";
+		
+		//查询
+		MlbackOrderStateEmail mlbackOrderStateEmailReq = new MlbackOrderStateEmail();
+		mlbackOrderStateEmailReq.setOrderstateemailName("Verifyed");
+		//查询本条
+		List<MlbackOrderStateEmail> mlbackOrderStateEmailList =mlbackOrderStateEmailService.selectMlbackOrderStateEmailByName(mlbackOrderStateEmailReq);
+		if(mlbackOrderStateEmailList.size()>0){
+			
+			MlbackOrderStateEmail mlbackOrderStateEmailOne =mlbackOrderStateEmailList.get(0);
+			
+			toCustomerVerifyInfoStr = getToCustomerVerifyEmailManage(mlbackOrderStateEmailOne,payinfoPlateNum);
+		}else{
+			
+			toCustomerVerifyInfoStr = getToCustomerVerifyEmail(payinfoPlateNum);
+		}
 		//11.1
-		String toCustomerVerifyInfoStr = getToCustomerVerifyEmail(payinfoPlateNum);
 		try {
 			//提醒客户准备发货
 			String getToEmail = userEmail;
@@ -926,11 +949,43 @@ public class MlfrontOrderController {
 	}
 
 
+	private String getToCustomerVerifyEmailManage(MlbackOrderStateEmail mlbackOrderStateEmailOne,String payinfoPlateNum) {
+		
+		String emailOneStr =  mlbackOrderStateEmailOne.getOrderstateemailOne();
+		String emailTwoStr =  mlbackOrderStateEmailOne.getOrderstateemailTwo();
+		String emailThreeStr =  mlbackOrderStateEmailOne.getOrderstateemailThree();
+		String emailFourStr =  mlbackOrderStateEmailOne.getOrderstateemailFour();
+		String emailFiveStr =  mlbackOrderStateEmailOne.getOrderstateemailFive();
+		String Message ="";
+		Message =Message+"Hi gorgeous girl ,"+"<br><br>";
+		Message=Message+emailOneStr+" # ("+payinfoPlateNum+") "+emailTwoStr+"<br><br>";
+		Message=Message+emailThreeStr+"<br><br>";
+		Message=Message+emailFourStr+"<br><br>";
+		if("".equals(emailFiveStr)){
+			System.out.println("emailFiveStr:"+emailFiveStr+"这句话为空");
+		}else{
+			Message=Message+emailFiveStr+"<br><br>";
+		}
+		Message=Message+"Best Regards,<br>";
+		Message=Message+"-----------------------------------<br>";
+		String team = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.team");
+		String email = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.email");
+		String whatsapp = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.whatsapp");
+		String Telephone = (String) PropertiesUtil.getProperty("megalook.properties", "delvery.Telephone");
+		//读取配置文件
+		Message=Message+team+"<br>";
+		Message=Message+"Email:"+email+"<br>";
+		Message=Message+"Whatsapp:"+whatsapp+"<br>";
+		Message=Message+"Telephone/SMS:"+Telephone+"<br>";
+		return Message;
+	}
+
 	//11.1
 	private String getToCustomerVerifyEmail(String payinfoPlateNum) {
 		String Message ="";
 		Message =Message+"Hi gorgeous girl ,"+"<br><br>";
-		Message=Message+"This is Megalook Hair . We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
+		Message=Message+"This is Megalook Hair  <br>. ";
+		Message=Message+"We have received your order # ("+payinfoPlateNum+")  and confirmed your payment. <br><br><br>";
 		Message=Message+"The hair you ordered is in stock and is expected to be shipped within 24-48 hours .<br><br>";
 		Message=Message+"We will send the parcel tracking number to you through email & SMS after delivery, and you can also view it on the PayPal bill.<br><br><br>";
 		Message=Message+"Please don't hesitate to call me if you need help. We still here behind Megalook Hair.<br><br>";
@@ -1169,16 +1224,17 @@ public class MlfrontOrderController {
 	 * @param jsp
 	 * @return 
 	 * */
-//	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
-//	@ResponseBody
-//	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
-//			@RequestParam(value = "trackingNumber") String trackingNumber) {
-//		//接收参数
-//		
-//		String trackingNumCheckpoint = shipInformation.getCheckpointByTrackingNumberFromAfterShip(trackingNumber);
-//		System.out.println("trackingNumCheckpoint:"+trackingNumCheckpoint);
-//		
-//		return Msg.success().add("Msg", "更新成功");
-//	}
+	@RequestMapping(value="/getCheckpointByTrackingNumber",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getCheckpointByTrackingNumber(HttpServletResponse rep,HttpServletRequest res,HttpSession session,
+			@RequestParam(value = "trackingNumber") String trackingNumber,@RequestParam(value = "Slug") String Slug) {
+		//接收参数
+		
+		Tracking TrackingRes = shipInformation.getTrackingByTrackingNumberAndSlug(trackingNumber,Slug);
+		System.out.println("-------------------------");
+		System.out.println(TrackingRes);
+		System.out.println("-------------------------");
+		return Msg.success().add("TrackingRes", TrackingRes);
+	}
 
 }

@@ -614,7 +614,8 @@
 					'<option value ="6">TNT</option>' +
 					'<option value ="7">DPEX</option>' +
 					'<option value ="8">华磊</option>' +
-					'<option value ="9">其他(联系技术人员添加)</option>' +
+					'<option value ="9">EMS</option>' +
+					'<option value ="10">其他(联系技术人员添加)</option>' +
 					// '<option value ="挂号">挂号</option>' +
 					// '<option value ="中国邮政挂号小包">天天</option>' +
 					'</select>' +
@@ -752,13 +753,15 @@
 		function shipSave(e) {
 			var parent = $(e.target).parents('.ship-box');
 			var shipId = parent.find('.ship-id').val();
-			shipName = parent.find('.ship-name').val();
+			var shiprealid = parent.find('.ship-name').val();
+			shipName = parent.find('.ship-name option:selected').text();
 			var payinfoPlateNum = $('.payyufei_num').attr('num-id');
 			//console.log(payinfoPlateNum)
 			var reqData = {
 				orderCouponId:payinfoIdcd,
 				orderCouponCode:payinfoPlateNum,
 				orderId: parseInt(orderId),
+				orderLogisticsid: parseInt(shiprealid),
 				orderLogisticsname: shipName,
 				orderLogisticsnumber: shipId
 				
