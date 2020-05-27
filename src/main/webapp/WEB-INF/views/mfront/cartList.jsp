@@ -70,7 +70,7 @@
 				<span class="show-t-price-num"></span>
 			</div>
 			<div class="op">
-				<a href="${APP_PATH}/index.html" class="btn btn-default add-product">Continue Shopping</a>
+				<a href="javascript:;" class="btn btn-default paypal-button">credit</a>
 				<a href="javascript:;" class="btn btn-black calc-price" id="clickCheckoutGooGle">Checkout</a>
 			</div>
 		</div>
@@ -86,6 +86,11 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 
+	<div class="loading">
+		<div class="boxload">
+			<div class="loader-14"></div>
+		</div>
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script>
 		var cartBox = $('.main.cart-box'),
@@ -496,7 +501,7 @@
 			subTotal.text('$ ' + price);
 		}
 
-		function calcTotalPrice() {
+		function calcTotalPrice(isCredit) {
 			var cartItemArr = []
 
 			$('.cart-item').each(function (i, item) {
@@ -525,28 +530,74 @@
 					value: orderMoney,
 					currency: 'USD'
 				});
-				$.ajax({
-					url: '${APP_PATH}/MlbackCart/cartToOrder',
-					data: JSON.stringify(cartItemArr),
-					type: "post",
-					dataType: 'json',
-					contentType: 'application/json',
-					success: function (data) {
-						if (data.code == 100) {
-							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
+
+				if (isCredit) {
+					//  create order id
+					$.ajax({
+						url: '${APP_PATH}/ProPay/cartToOrderPay',
+						data: JSON.stringify(cartItemArr),
+						type: "post",
+						dataType: 'json',
+						contentType: 'application/json',
+						success: function (data) {
+							if (data.code == 100) {
+								console.log(numTotal.text(), 'xx')
+								console.log(data)
+								// create payment id
+								$.ajax({
+									url: '${APP_PATH}/MlfrontOrder/proDetailOrderToPayInfo',
+									data: JSON.stringify({
+										"orderId": data.extend.OrderIdcartToOrderPay,
+										"orderPayPlate": 1, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+										"orderProNumStr": numTotal.text()
+									}),
+									type: 'post',
+									dataType: 'json',
+									contentType: 'application/json',
+									success: function (data) {
+										console.log(data)
+										if (data.code == 100) {								
+											if (data.extend.isSuccess == 0) {
+												window.location.href = '${APP_PATH }/paypalProDetailExpress/mpay';
+											}					
+										}
+									}
+								});
+							}
+						},
+						error: function (data) {
+							cartText.text(num);
 						}
-					},
-					error: function (data) {
-						cartText.text(num);
-					}
-				})
+					});
+				} else {
+					$.ajax({
+						url: '${APP_PATH}/MlbackCart/cartToOrder',
+						data: JSON.stringify(cartItemArr),
+						type: "post",
+						dataType: 'json',
+						contentType: 'application/json',
+						success: function (data) {
+							if (data.code == 100) {
+								window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
+							}
+						},
+						error: function (data) {
+							cartText.text(num);
+						}
+					});
+				}
 			} else {
 				renderSysMsg('Please select the final product to buy!');
 			}
 		}
-
+		// to checkout
 		$('.btn.calc-price').on('click', function () {
 			calcTotalPrice();
+		});
+		// credit
+		$('.paypal-button').on('click', function () {
+			$('.loading').show();
+			calcTotalPrice(true);
 		});
 
 		$.ajax({
