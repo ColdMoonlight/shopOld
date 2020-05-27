@@ -854,7 +854,7 @@
 				buyNow();
 			});
 			
-			$('#paypal-button').on('click', function() {
+			$('.paypal-button').on('click', function() {
 				buyNow(true);
 			});
 
