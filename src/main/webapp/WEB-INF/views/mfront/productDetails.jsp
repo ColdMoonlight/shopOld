@@ -964,12 +964,13 @@
 							console.log(data)
 							// cartText.text(parseInt(cartText.text()) + 1);
 							// window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
-							
 							// create payment id
 							$.ajax({
 								url: '${APP_PATH}/MlfrontOrder/proDetailOrderToPayInfo',
 								data: JSON.stringify({
-									"orderId": data.extend.OrderIdBuyNowPay
+									"orderId": data.extend.OrderIdBuyNowPay,
+									"orderPayPlate": 1, //选择的付款方式,int类型   paypal传0，后来再有信用卡传1
+									"orderProNumStr": productNum.val()
 								}),
 								type: 'post',
 								dataType: 'json',
