@@ -120,6 +120,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script src="${APP_PATH }/static/js/relativetime.min.js"></script>
 	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
+	<script  src="https://www.paypal.com/sdk/js?client-id=AQyXf-N2nNr8QwJsFt7IudPRL-CMGYEXCCzgqOHIA037JLhSFOEchb2kGa_z_BqzKY4CmUPFiGqG_uNj"></script>
 	<script>
 		var imgCount = 1,
 			reviewId = null,
@@ -852,8 +853,12 @@
 			$('.buy-now').on('click', function () {
 				buyNow();
 			});
+			
+			$('#paypal-button').on('click', function() {
+				buyNow(true);
+			});
 
-			function buyNow() {
+			function buyNow(isCredit) {
 				var skuData = getSkuData($('.product-d-length')),
 					reqData = {},
 					InitiateCheckoutMoney = 0,
@@ -916,9 +921,15 @@
 				}
 
 				flag = checkSku(skuCheckData);
-				if (flag) generateOrderNow(reqData);
+				if (flag) {
+					if (isCredit) {
+						generateCreditNow(reqData);
+					} else {						
+						generateOrderNow(reqData);				
+					}
+				}
 			}
-
+			// create order
 			function generateOrderNow(reqData) {
 				$.ajax({
 					url: '${APP_PATH}/MlbackCart/toBuyNow',
@@ -931,6 +942,44 @@
 							// console.log(resData)
 							// cartText.text(parseInt(cartText.text()) + 1);
 							window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
+						}
+					},
+					error: function (data) {
+						cartText.text(num);
+					}
+				});
+			}
+			// create direct paypal
+			function generateCreditNow(reqData) {
+				// create order id
+				$.ajax({
+					/* url: '${APP_PATH}/MlbackCart/toBuyNow', */
+					url: '${APP_PATH}/ProPay/toBuyNowPay',					
+					data: JSON.stringify(reqData),
+					type: "post",
+					dataType: 'json',
+					contentType: 'application/json',
+					success: function (data) {
+						if (data.code == 100) {
+							console.log(data)
+							// cartText.text(parseInt(cartText.text()) + 1);
+							// window.location.href = '${APP_PATH}/MlbackCart/toCheakOut';
+							
+							// create payment id
+							$.ajax({
+								url: '${APP_PATH}/MlfrontOrder/proDetailOrderToPayInfo',
+								data: JSON.stringify({
+									"orderId": data.extend.OrderIdBuyNowPay
+								}),
+								type: 'post',
+								dataType: 'json',
+								contentType: 'application/json',
+								success: function (data) {
+									console.log(data)
+									//window.location.href = '${APP_PATH }/paypal/mpay';
+									// window.location.href = '${APP_PATH }/index.html';
+								}
+							})
 						}
 					},
 					error: function (data) {
