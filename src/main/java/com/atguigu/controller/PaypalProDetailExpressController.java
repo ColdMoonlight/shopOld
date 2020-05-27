@@ -119,7 +119,7 @@ public class PaypalProDetailExpressController {
         	session.removeAttribute("PaypalErrorName");
         }
         try {
-            payment = paypalService.createPayment(
+            payment = paypalService.proDetailCreatePayment(
             		moneyDouble,// 888.00, 
             		moneyTypeStr, //"USD",  
             		mlfrontAddress,//mlfrontAddress

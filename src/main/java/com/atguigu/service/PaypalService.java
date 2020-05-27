@@ -343,9 +343,9 @@ public class PaypalService {
   			itemList.setItems(items);
   		}
   	  	//地址参数
-        ShippingAddress shippingAddress = getShippingAddress(mlfrontAddress);
+//        ShippingAddress shippingAddress = getShippingAddress(mlfrontAddress);
 //  		ShippingAddress shippingAddress = getShippingAddressSDK(mlfrontAddress);
-        itemList.setShippingAddress(shippingAddress); 		
+//        itemList.setShippingAddress(shippingAddress); 		
   		
   		Details details = new Details();
   		details.setShipping("0");
@@ -353,7 +353,7 @@ public class PaypalService {
   		details.setTax("0");//税
   		String shopdiscountMoney = "-"+Shopdiscount;
   		details.setShippingDiscount(shopdiscountMoney);
-  		details.setShipping((addressMoney));
+//  		details.setShipping((addressMoney));
 
   		// ###Amount
   		// Let's you specify a payment amount.
