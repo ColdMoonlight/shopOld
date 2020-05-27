@@ -977,8 +977,10 @@
 								contentType: 'application/json',
 								success: function (data) {
 									console.log(data)
-									//window.location.href = '${APP_PATH }/paypal/mpay';
-									// window.location.href = '${APP_PATH }/index.html';
+									if (data.code == 100) {
+										if (data.extend.isSuccess == 0)
+											window.location.href = '${APP_PATH }/paypalProDetailExpress/mpay';								
+									}
 								}
 							})
 						}
