@@ -117,6 +117,11 @@
 
 	<jsp:include page="mfooter.jsp"></jsp:include>
 	<div class="mask5" style="display: none;"></div>
+	<div class="loading">
+		<div class="boxload">
+			<div class="loader-14"></div>
+		</div>
+	</div>
 	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 	<script src="${APP_PATH }/static/js/relativetime.min.js"></script>
 	<script src="${APP_PATH }/static/js/countdown.min.js"></script>
@@ -855,6 +860,7 @@
 			});
 			
 			$('.paypal-button').on('click', function() {
+				$('.loading').show();
 				buyNow(true);
 			});
 
@@ -977,9 +983,10 @@
 								contentType: 'application/json',
 								success: function (data) {
 									console.log(data)
-									if (data.code == 100) {
-										if (data.extend.isSuccess == 0)
-											window.location.href = '${APP_PATH }/paypalProDetailExpress/mpay';								
+									if (data.code == 100) {								
+										if (data.extend.isSuccess == 0) {
+											window.location.href = '${APP_PATH }/paypalProDetailExpress/mpay';
+										}					
 									}
 								}
 							})
@@ -990,7 +997,9 @@
 					}
 				});
 			}
-
+			$(window).on('unload', function() {
+				console.log(1)
+			})
 			/*---------------countDownArea--------*/
 			function rednerCountDownAreaOne(parent, data) {
 				var html = '';
