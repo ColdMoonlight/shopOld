@@ -667,8 +667,8 @@ public class MlfrontCartProDetailPayController {
 				mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemOldone);
 			}
 		}
-		session.setAttribute("orderId", orderIdFinally);
 		//返回视图
+		session.setAttribute("orderId", orderIdFinally);
 		return Msg.success().add("resMsg", "订单提交成功").add("OrderIdcartToOrderPay", orderIdFinally);
 	}
 	
