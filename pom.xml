@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ShopTem</groupId>
-  <artifactId>ShopTemplate</artifactId>
+  <artifactId>ShopTemplateOLd</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
@@ -226,9 +226,26 @@
 		    <version>1.14.0</version>
 		</dependency>
 		<!-- 第三方登录插件库,github地址https://github.com/justauth/JustAuth -->
+		
+		<dependency>
+		    <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+		</dependency>
+		<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+        <dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.25</version>
+		</dependency>
+		<!-- 第三方登录插件库,github地址https://github.com/justauth/JustAuth -->
 	</dependencies>
 	<build>
-		<finalName>ShopTemplate</finalName>
+		<finalName>ShopTemplateOLd</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

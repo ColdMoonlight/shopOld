@@ -141,7 +141,7 @@
 				if (slideIfproORcateORpage == 0) {
 					html += '<a href="${APP_PATH}/' + data.slideSeoname + '.html">' + '<img src="' + data.slidePcimgurl + '" alt="">' + '</a>';
 				} else if (slideIfproORcateORpage == 1) {
-					html += '<a href="${APP_PATH}/search/' + data.slideCateSeoname + '.html">' + '<img src="' + dat.slidePcimgurl + '" alt="">' + '</a>';
+					html += '<a href="${APP_PATH}/search/' + data.slideCateSeoname + '.html">' + '<img src="' + data.slidePcimgurl + '" alt="">' + '</a>';
 				} else if (slideIfproORcateORpage == 2) {
 					html += '<a href="${APP_PATH}/' + data.slidePageSeoname + '.html">' + '<img src="' + data.slidePcpimgurl + '" alt="">' + '</a>';
 				}
@@ -244,10 +244,13 @@
 				    html += '<div class="menu_list-wap">';
 					html += '<div class="home-menu_list_wrap_inner">';
 					html += '<div class="home-menu_list--left_left"></div>';
-					html += '<div class="home_left_middle">';
+					var html2 = '',
+						isWrap = true;
+					// html += '<div class="home_left_middle">';
+					
 					for(var j=0;j<data2[i].length;j++){
 						  if(data2[i][j] && data2[i][j].length > 0){
-							  html += '<dl>'; 
+							  html2 += '<dl>';
 							   for(var k=0;k<data2[i][j].length;k++){
 								   var categoryLableInt2 = data2[i][j][k].categoryLable;
 								   var	classimg = "";
@@ -267,24 +270,30 @@
 								   if(k==0){
 									    var threenav =data2[i][j][k].categorySeo;
 										if(threenav==""){
-												html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
+												html2 += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/nowig.html">'+ data2[i][j][k].categoryName +'</a></dd>';     
 										}else if(threenav=="Customer-Videos"){
-												html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
+												html2 += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlbackVideoShowArea/toVideoListPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
 										}else if(threenav=="Shop-By-Look"){
-												html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dt>';     
+												html2 += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewCustomer">'+ data2[i][j][k].categoryName +'</a></dt>';     
 										}else if(threenav=="Photo-Gallery"){
-											     html += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
+											     html2 += '<dt class="dljc '+classimg+'"><a href="${APP_PATH}/MlfrontReview/toReviewInsPage">'+ data2[i][j][k].categoryName +'</a></dt>';     
 										}else{
-												html += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dt>';     
-										} 
+												html2 += '<dt class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dt>';     
+										}
 								   }else{
-									  html += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';    
+									  isWrap = false;
+									  html2 += '<dd class="'+classimg+'"><a href="${APP_PATH}/search/' + data2[i][j][k].categorySeo + '.html">'+ data2[i][j][k].categoryName +'</a></dd>';    
 								   }
 							   }
-							  html += '</dl>';	  
+							  html2 += '</dl>';	  
 						  }
-					 }	
-					 html += '</div>';	
+					 }
+					if (isWrap) {						
+						html += '<div class="home_left_middle nowrap">' + html2;
+					} else {
+						html += '<div class="home_left_middle">' + html2;
+					}
+					  html += '</div>';
 					  html += '<div class="home-menu_list--left_right"></div>';
 					  html += '</div>';	
 					 html += '</div>';	
@@ -294,9 +303,42 @@
 			 parent.html(html);
 			 $('.home-menu_list').on('mouseenter', function(e) {
 	 			var menuContentHright = $(this).find('.menu_list-wap').outerHeight();
-
 	 			$('.navbar_itemContent-background').height(menuContentHright);
-	 			$(this).find('.menu_list-wap').addClass('wrap_active');
+	 			var targetEl = $(this).find('.menu_list-wap'),
+			 		outerWidth = 0,
+				 	clientRect = $(this)[0].getBoundingClientRect(),
+				 	navulClientRect =  $('.navul')[0].getBoundingClientRect();
+				 	offsetWidth = window.innerWidth > 1300 ? 1300 : window.innerWidth,
+				 	offsetLeft = clientRect.left - navulClientRect.left,
+				 	offsetBottom = clientRect.bottom - navulClientRect.top;
+	 			targetEl.addClass('wrap_active');
+	 			outerWidth = targetEl.outerWidth();
+	 			if (outerWidth >= offsetWidth) {
+	 				targetEl.css({
+	 					'width': offsetWidth + 'px',
+	 					'left': '0' + 'px',
+	 					'top': offsetBottom + 'px'
+	 				});
+	 			} else {
+	 				if (offsetLeft < (outerWidth - clientRect.width) / 2 && (offsetLeft  + clientRect.width / 2 < offsetWidth / 2)) {
+	 					targetEl.css({
+		 					'left': '0px',
+		 					'top': offsetBottom + 'px'
+		 				});	
+	 				} else if(offsetLeft + clientRect.width +  (outerWidth - clientRect.width) / 2 >= offsetWidth && (offsetLeft + clientRect.width / 2 >  offsetWidth / 2)) {
+ 						targetEl.css({
+ 							'left': 'unset',
+		 					'right': '0' + 'px',
+		 					'top': offsetBottom + 'px'
+		 				});
+	 				} else {
+	 					var defaultLeft = offsetLeft - (outerWidth - clientRect.width) / 2;
+	 					targetEl.css({
+		 					'left': defaultLeft +'px',
+		 					'top': offsetBottom + 'px'
+		 				});
+	 				}
+	 			}
 	            $(this).find('a').addClass('active');
 			 });
 			 $('.home-menu_list').on('mouseleave', function(e) {
