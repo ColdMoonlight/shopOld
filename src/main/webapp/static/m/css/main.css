@@ -3158,5 +3158,50 @@ p.video_discontent2_con{font-size: 12px; color: #000; line-height: 24px;margen:0
 .customer_widget_box .review-statics-item .progress{margin: 0 5px;}
 
 
+/* paypal button */
+.paypal-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 20px;
+}
+.paypal-button {
+	width: 50%;
+	height: 2.4rem;
+    padding: .7rem;
+    border-radius: .1rem;
+    text-align: center;
+    cursor: pointer;
+    flex-grow: 1;
+}
 
+.paypal-button:nth-of-type(2) {
+    margin-left: .2rem;
+}
 
+.paypal-button:hover {
+    filter: brightness(0.95);
+}
+
+.paypal-button:nth-of-type(2):hover {
+    filter: brightness(1.2);
+}
+
+.paypal-button>img {
+    height: 1rem;
+    width: auto;
+}
+
+.paypal-button-space {
+    display: inline-block;
+    white-space: pre;
+    vertical-align: top;
+}
+
+.paypal-button-paypal {
+    background: #ffc439;
+}
+
+.paypal-button-credit {
+    background: #003087;
+}
