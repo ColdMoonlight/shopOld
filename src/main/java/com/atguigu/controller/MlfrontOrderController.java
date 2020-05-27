@@ -1252,6 +1252,7 @@ public class MlfrontOrderController {
 		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();//客户选择的支付方式，0paypal,1待定
 		//1.0用order查orderItem,遍历orderItem,计算每个Item的价格，再加在一起；
 		String Orderitemidstr = mlfrontOrder.getOrderOrderitemidstr();
+		Orderitemidstr+=",";
 		String orderitemidArr[] = Orderitemidstr.split(",");
 		BigDecimal totalprice = new BigDecimal(0);	//初始化最终价格参数
 		DecimalFormat df1 = new DecimalFormat("0.00");
