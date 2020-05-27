@@ -394,6 +394,10 @@ public class PaypalService {
   		redirectUrls.setCancelUrl(cancelUrl);
   		redirectUrls.setReturnUrl(successUrl);
   		payment.setRedirectUrls(redirectUrls);
+  		
+  		System.out.println("paymentcreate,before");
+  		System.out.println(payment.toJSON());
+  		System.out.println("paymentcreate,after");
 
         return payment.create(apiContext);
     }
