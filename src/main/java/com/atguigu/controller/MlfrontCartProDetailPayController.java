@@ -41,7 +41,7 @@ import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/ProPay")
-public class MlfrontProDetailPayController {
+public class MlfrontCartProDetailPayController {
 	
 	@Autowired
 	MlfrontCartService mlfrontCartService;
