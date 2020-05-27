@@ -139,7 +139,7 @@ public class PaypalProDetailExpressController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
-            System.out.println("----------/paypal/mpay/Exception----------");
+            System.out.println("----------/paypalProDetailExpress/mpay/Exception----------");
             System.out.println("---------e.getMessage()-----begin------");
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
@@ -183,7 +183,7 @@ public class PaypalProDetailExpressController {
      * */
     @RequestMapping(method = RequestMethod.GET, value = "ppay")
     public String ppay(HttpServletRequest request,HttpSession session){
-    	System.out.println("into**********/paypal/ppay**********");
+    	System.out.println("into**********/paypalProDetailExpress/ppay**********");
     	//99.1读取getPayInfo参数
     	ToPaypalInfo toPaypalInfo = getPayInfo(session);
     	//99.2从session中获取优惠券减去额度
@@ -234,7 +234,7 @@ public class PaypalProDetailExpressController {
             }
         } catch (PayPalRESTException e) {
             log.error(e.getMessage());
-            System.out.println("----------/paypal/ppay/Exception----------");
+            System.out.println("----------/paypalProDetailExpress/ppay/Exception----------");
             System.out.println("---------e.getMessage()-----begin------");
             System.out.println(e.getMessage());
             System.out.println("---------e.getMessage()------end-------");
