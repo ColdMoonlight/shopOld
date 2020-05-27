@@ -79,6 +79,7 @@
 			</div>
 		</div>
 	</div>
+
 	<!--*****热品推荐**********************-->
 	<div class="hot_box_product clearfix" style="display: none;">
 		<h3>RECOMMENDATION FOR YOU</h3>
