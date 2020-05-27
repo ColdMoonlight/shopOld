@@ -524,4 +524,164 @@ public class MlfrontCartProDetailPayController {
 		return orderIdFinally;
 		//返回视图
 	}
+	
+	/**
+	 * 6.0	0530
+	 * 选择购物车中的产品项，提交生成订单cartToOrder
+	 * 1接住传入的List《cartItem》，遍历 insert订单orderItem。插入order表，返回orderId
+	 * 2遍历，更新orderItem中的orderId归属字段；
+	 * 3从cart中，把cartItemIdstr字段，更新。  这一步骤，不该出现在这，要放在生成订单那里。就没事了
+	 * @param Msg
+	 * @return 
+	 * */
+	@RequestMapping(value="/cartToOrderPay",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg cartToOrder(HttpServletResponse rep,HttpServletRequest res,HttpSession session,@RequestBody List<MlfrontCartItem> mlfrontCartItemList) throws Exception{
+		//接收传递进来的参数
+		//System.out.println("mlfrontCartItemList:"+mlfrontCartItemList.size());
+		//从其中一个中获取cartId
+		Integer cartId = 0;
+		String sessionId = session.getId();
+		Integer orderIdFinally = 0;
+		//获取ip地址
+		String Userip =sessionId;
+		session.setAttribute("Userip", Userip);
+		String nowTime = DateUtil.strTime14s();
+		List<String> cartItemIdStr = new ArrayList<String>();
+		List<String> orderItemIdList = new ArrayList<String>();
+		String orderItemIdStr = "";
+		MlfrontUser loginUser = (MlfrontUser) session.getAttribute("loginUser");
+		MlfrontCartItem mlfrontCartItemGet = new MlfrontCartItem();
+		if(loginUser==null){
+			//loginUser为null
+			MlfrontOrderItem mlfrontOrderItemNew = new MlfrontOrderItem();
+			for(MlfrontCartItem mlfrontCartItem:mlfrontCartItemList){
+				System.out.println(mlfrontCartItem);
+				//取出本条cartItem
+				Integer cartitemIdInt = mlfrontCartItem.getCartitemId();
+				//cartId = mlfrontCartItem.getCartitemCartId();
+				mlfrontCartItemGet.setCartitemId(cartitemIdInt);
+				List<MlfrontCartItem> mlfrontCartItemGetRes =mlfrontCartItemService.selectMlfrontCartItemById(mlfrontCartItemGet);
+				//将该购物项，改成已用
+				mlfrontCartItemGet.setCartitemStatus(1);
+				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItemGet);
+				MlfrontCartItem mlfrontCartItemreturn = mlfrontCartItemGetRes.get(0);
+				cartId = mlfrontCartItemreturn.getCartitemCartId();
+				String cartitemIdIntStrOne = cartitemIdInt+"";
+				cartItemIdStr.add(cartitemIdIntStrOne);
+				//封装mlfrontOrderItem对象，准备insert进入mlfrontOrderItem表
+				mlfrontOrderItemNew.setOrderCartItemId(cartitemIdInt);
+				mlfrontOrderItemNew.setOrderitemPid(mlfrontCartItem.getCartitemProductId());
+				mlfrontOrderItemNew.setOrderitemPname(mlfrontCartItemreturn.getCartitemProductName());
+				mlfrontOrderItemNew.setOrderitemProductMainimgurl(mlfrontCartItemreturn.getCartitemProductMainimgurl());
+				mlfrontOrderItemNew.setOrderitemProductOriginalprice(mlfrontCartItemreturn.getCartitemProductOriginalprice());
+				mlfrontOrderItemNew.setOrderitemProductAccoff(mlfrontCartItemreturn.getCartitemProductActoff());
+				mlfrontOrderItemNew.setOrderitemPskuIdstr(mlfrontCartItemreturn.getCartitemProductskuIdstr());
+				mlfrontOrderItemNew.setOrderitemPskuIdnamestr(mlfrontCartItemreturn.getCartitemProductskuIdnamestr());
+				mlfrontOrderItemNew.setOrderitemPskuNamestr(mlfrontCartItemreturn.getCartitemProductskuNamestr());
+				mlfrontOrderItemNew.setOrderitemPskuMoneystr(mlfrontCartItemreturn.getCartitemProductskuMoneystr());
+				//mlfrontOrderItemNew.setOrderitemPskuReamoney("这个值是需要计算的");
+				mlfrontOrderItemNew.setOrderitemPskuNumber(mlfrontCartItem.getCartitemProductNumber());
+				mlfrontOrderItemNew.setOrderitemCreatetime(nowTime);
+				mlfrontOrderItemNew.setOrderitemMotifytime(nowTime);
+				mlfrontOrderItemService.insertSelective(mlfrontOrderItemNew);
+				//获取新生成的id
+				MlfrontOrderItem MlfrontOrderItemReallOne =mlfrontOrderItemService.selectMlfrontOrderItemAll().get(0);
+				Integer orderItemNewId = MlfrontOrderItemReallOne.getOrderitemId();
+				String orderItemNewIdStr = orderItemNewId+"";
+				//存档便于以后用
+				orderItemIdList.add(orderItemNewIdStr);
+				orderItemIdStr=orderItemIdStr+","+orderItemNewIdStr;
+			}
+			//插入订单对象
+			orderItemIdStr = orderItemIdStr.substring(1);
+			MlfrontOrder mlfrontOrderNew  = new MlfrontOrder();
+			mlfrontOrderNew.setOrderOrderitemidstr(orderItemIdStr);
+			mlfrontOrderNew.setOrderIp(Userip);
+			mlfrontOrderNew.setOrderStatus(0);//cart To Order
+			mlfrontOrderNew.setOrderCreatetime(nowTime);
+			mlfrontOrderNew.setOrderMotifytime(nowTime);
+			mlfrontOrderService.insertSelective(mlfrontOrderNew);
+			//获取新生成的id
+			MlfrontOrder mlfrontOrdergetAllOne = mlfrontOrderService.selectMlfrontOrderAll().get(0);
+			//后更新每个orderItem对象
+			Integer orderId = mlfrontOrdergetAllOne.getOrderId();
+			orderIdFinally = orderId;
+			MlfrontOrderItem mlfrontOrderItemOldone = new MlfrontOrderItem();
+			for(String orderItemIdOld:orderItemIdList){
+				Integer orderItemIdOldInt =  Integer.parseInt(orderItemIdOld);
+				mlfrontOrderItemOldone.setOrderitemId(orderItemIdOldInt);
+				mlfrontOrderItemOldone.setOrderId(orderId);
+				mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemOldone);
+			}
+		}else{
+			//loginUser不为null
+			Integer Uid = loginUser.getUserId();
+			MlfrontOrderItem mlfrontOrderItemNew = new MlfrontOrderItem();
+			for(MlfrontCartItem mlfrontCartItem:mlfrontCartItemList){
+				System.out.println(mlfrontCartItem);
+				//取出本条cartItem
+				Integer cartitemIdInt = mlfrontCartItem.getCartitemId();
+				//cartId = mlfrontCartItem.getCartitemCartId();
+				mlfrontCartItemGet.setCartitemId(cartitemIdInt);
+				List<MlfrontCartItem> mlfrontCartItemGetRes =mlfrontCartItemService.selectMlfrontCartItemById(mlfrontCartItemGet);
+				//将该购物项，改成已用
+				mlfrontCartItemGet.setCartitemStatus(1);
+				mlfrontCartItemService.updateByPrimaryKeySelective(mlfrontCartItemGet);
+				MlfrontCartItem mlfrontCartItemreturn = mlfrontCartItemGetRes.get(0);
+				cartId = mlfrontCartItemreturn.getCartitemCartId();
+				String cartitemIdIntStrOne = cartitemIdInt+"";
+				cartItemIdStr.add(cartitemIdIntStrOne);
+				//封装mlfrontOrderItem对象，准备insert进入mlfrontOrderItem表
+				mlfrontOrderItemNew.setOrderCartItemId(cartitemIdInt);
+				mlfrontOrderItemNew.setOrderitemPid(mlfrontCartItem.getCartitemProductId());
+				mlfrontOrderItemNew.setOrderitemPname(mlfrontCartItemreturn.getCartitemProductName());
+				mlfrontOrderItemNew.setOrderitemProductMainimgurl(mlfrontCartItemreturn.getCartitemProductMainimgurl());
+				mlfrontOrderItemNew.setOrderitemProductOriginalprice(mlfrontCartItemreturn.getCartitemProductOriginalprice());
+				mlfrontOrderItemNew.setOrderitemProductAccoff(mlfrontCartItemreturn.getCartitemProductActoff());
+				mlfrontOrderItemNew.setOrderitemPskuIdstr(mlfrontCartItemreturn.getCartitemProductskuIdstr());
+				mlfrontOrderItemNew.setOrderitemPskuIdnamestr(mlfrontCartItemreturn.getCartitemProductskuIdnamestr());
+				mlfrontOrderItemNew.setOrderitemPskuNamestr(mlfrontCartItemreturn.getCartitemProductskuNamestr());
+				mlfrontOrderItemNew.setOrderitemPskuMoneystr(mlfrontCartItemreturn.getCartitemProductskuMoneystr());
+				//mlfrontOrderItemNew.setOrderitemPskuReamoney("这个值是需要计算的");
+				mlfrontOrderItemNew.setOrderitemPskuNumber(mlfrontCartItem.getCartitemProductNumber());
+				mlfrontOrderItemNew.setOrderitemCreatetime(nowTime);
+				mlfrontOrderItemNew.setOrderitemMotifytime(nowTime);
+				mlfrontOrderItemService.insertSelective(mlfrontOrderItemNew);
+				//获取新生成的id
+				MlfrontOrderItem MlfrontOrderItemReallOne =mlfrontOrderItemService.selectMlfrontOrderItemAll().get(0);
+				Integer orderItemNewId = MlfrontOrderItemReallOne.getOrderitemId();
+				String orderItemNewIdStr = orderItemNewId+"";
+				//存档便于以后用
+				orderItemIdList.add(orderItemNewIdStr);
+				orderItemIdStr=orderItemIdStr+","+orderItemNewIdStr;
+			}
+			
+			//插入订单对象
+			orderItemIdStr = orderItemIdStr.substring(1);
+			MlfrontOrder mlfrontOrderNew  = new MlfrontOrder();
+			mlfrontOrderNew.setOrderOrderitemidstr(orderItemIdStr);
+			mlfrontOrderNew.setOrderUid(Uid);//这是登录用户，存错登录状态
+			mlfrontOrderNew.setOrderStatus(0);//cart To Order
+			mlfrontOrderNew.setOrderCreatetime(nowTime);
+			mlfrontOrderNew.setOrderMotifytime(nowTime);
+			mlfrontOrderService.insertSelective(mlfrontOrderNew);
+			//获取新生成的id
+			MlfrontOrder mlfrontOrdergetAllOne = mlfrontOrderService.selectMlfrontOrderAll().get(0);
+			//后更新每个orderItem对象
+			Integer orderId = mlfrontOrdergetAllOne.getOrderId();
+			orderIdFinally = orderId;
+			MlfrontOrderItem mlfrontOrderItemOldone = new MlfrontOrderItem();
+			for(String orderItemIdOld:orderItemIdList){
+				Integer orderItemIdOldInt =  Integer.parseInt(orderItemIdOld);
+				mlfrontOrderItemOldone.setOrderitemId(orderItemIdOldInt);
+				mlfrontOrderItemOldone.setOrderId(orderId);
+				mlfrontOrderItemService.updateByPrimaryKeySelective(mlfrontOrderItemOldone);
+			}
+		}
+		session.setAttribute("orderId", orderIdFinally);
+		//返回视图
+		return Msg.success().add("resMsg", "订单提交成功").add("OrderIdcartToOrderPay", orderIdFinally);
+	}
+	
 }
