@@ -1251,8 +1251,15 @@ public class MlfrontOrderController {
 		//System.out.println("点结算按钮的时候,接收到的CouponId:"+CouponId);
 		Integer orderPayPlateInt = mlfrontOrder.getOrderPayPlate();//客户选择的支付方式，0paypal,1待定
 		//1.0用order查orderItem,遍历orderItem,计算每个Item的价格，再加在一起；
-		String Orderitemidstr = mlfrontOrder.getOrderOrderitemidstr();
-		Orderitemidstr+=",";
+		
+		MlfrontOrder orderProDetailToPay = new MlfrontOrder();
+		orderProDetailToPay.setOrderId(originalOrderId);
+		
+		List<MlfrontOrder> mlfrontOrderList = mlfrontOrderService.selectMlfrontOrderById(orderProDetailToPay);
+		MlfrontOrder orderProDetailToPayRes = mlfrontOrderList.get(0);
+		
+		String Orderitemidstr = orderProDetailToPayRes.getOrderOrderitemidstr();
+		//Orderitemidstr+=",";
 		String orderitemidArr[] = Orderitemidstr.split(",");
 		BigDecimal totalprice = new BigDecimal(0);	//初始化最终价格参数
 		DecimalFormat df1 = new DecimalFormat("0.00");
