@@ -101,6 +101,7 @@ public class DownPayEcppDate {
 		this.payinfoStatus = payinfoStatus;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "DownPayEcppDate [payinfoId=" + payinfoId + ", payinfoCreatetime=" + payinfoCreatetime
