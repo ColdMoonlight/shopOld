@@ -933,6 +933,8 @@
 					} else {						
 						generateOrderNow(reqData);				
 					}
+				} else {
+					$('.loading').hide();
 				}
 			}
 			// create order
@@ -997,9 +999,6 @@
 					}
 				});
 			}
-			$(window).on('unload', function() {
-				console.log(1)
-			})
 			/*---------------countDownArea--------*/
 			function rednerCountDownAreaOne(parent, data) {
 				var html = '';
